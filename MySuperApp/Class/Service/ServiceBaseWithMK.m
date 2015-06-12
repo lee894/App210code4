@@ -203,7 +203,7 @@
     
     
     
-    //lee999recode 如果是上传图片
+    //lee999recode 如果是上传图片  updata
     if (isuploadDATA) {
         
         NSLog(@"请求的地址是222222：----%@----tag:%d",urlStr,atag);
