@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchpageViewController">
+            <connections>
+                <outlet property="hotSearchbtn" destination="10" id="274-Tg-12A"/>
+                <outlet property="leftJianImage" destination="6" id="92"/>
+                <outlet property="myallView" destination="1" id="ZiA-xW-k0W"/>
+                <outlet property="recentlySearchBtn" destination="9" id="xR8-jA-0gX"/>
+                <outlet property="refreshBut" destination="93" id="94"/>
+                <outlet property="rightJianImage" destination="8" id="91"/>
+                <outlet property="tableViewConetnt" destination="4" id="99"/>
+                <outlet property="view" destination="X5B-oj-SPv" id="rhF-Yo-E7Y"/>
+                <outlet property="viewBut" destination="5" id="96"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="X5B-oj-SPv">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" id="1">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4">
+                            <rect key="frame" x="0.0" y="41" width="320" height="527"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="100"/>
+                                <outlet property="delegate" destination="-1" id="101"/>
+                            </connections>
+                        </tableView>
+                        <view contentMode="scaleToFill" id="5">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="41"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="top3_bg_line.png" id="106">
+                                    <rect key="frame" x="0.0" y="40" width="320" height="3"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="top3_bg.png" id="12">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="41"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="10">
+                                    <rect key="frame" x="0.0" y="0.0" width="160" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                    <inset key="titleEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="imageEdgeInsets" minX="120" minY="12" maxX="20" maxY="14"/>
+                                    <state key="normal" title="热门搜索" image="top3_search_hot.png">
+                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected" title="热门搜索" image="top3_search_hot_press.png">
+                                        <color key="titleColor" red="0.7843137255" green="0.0" blue="0.15686274510000001" alpha="1" colorSpace="deviceRGB"/>
+                                    </state>
+                                    <state key="highlighted" title="热门搜索" image="top3_search_hot_press.png">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="seacheHotAndZuijingButActionChicked:" destination="-1" eventType="touchUpInside" id="97"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9">
+                                    <rect key="frame" x="160" y="0.0" width="160" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <inset key="titleEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="imageEdgeInsets" minX="120" minY="12" maxX="20" maxY="14"/>
+                                    <state key="normal" title="最近搜索" image="top3_search_latest.png">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected" title="最近搜索" image="top3_search_latest_press.png">
+                                        <color key="titleColor" red="0.7843137255" green="0.0" blue="0.15686274510000001" alpha="1" colorSpace="deviceRGB"/>
+                                    </state>
+                                    <state key="highlighted" title="最近搜索" image="top3_search_latest_press.png">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="seacheHotAndZuijingButActionChicked:" destination="-1" eventType="touchUpInside" id="98"/>
+                                    </connections>
+                                </button>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="top3_bg_arrow.png" id="8">
+                                    <rect key="frame" x="73" y="36" width="7" height="7"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="top3_bg_arrow.png" id="6">
+                                    <rect key="frame" x="233" y="36" width="7" height="7"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="93">
+                            <rect key="frame" x="267" y="461" width="33" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal">
+                                <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="refreshButtonActionChicked:" destination="-1" eventType="touchUpInside" id="95"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <point key="canvasLocation" x="135" y="333"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="top3_bg.png" width="10" height="70"/>
+        <image name="top3_bg_arrow.png" width="16" height="12"/>
+        <image name="top3_bg_line.png" width="80" height="4"/>
+        <image name="top3_search_hot.png" width="24" height="22"/>
+        <image name="top3_search_hot_press.png" width="24" height="22"/>
+        <image name="top3_search_latest.png" width="24" height="22"/>
+        <image name="top3_search_latest_press.png" width="24" height="22"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
