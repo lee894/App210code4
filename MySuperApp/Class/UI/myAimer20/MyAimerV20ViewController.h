@@ -9,5 +9,8 @@
 #import "LBaseViewController.h"
 
 @interface MyAimerV20ViewController : LBaseViewController
+{
+//lee123123
 
+}
 @end
