@@ -119,8 +119,8 @@
     
     
     if (!self.isBackBtnClick) {
-        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        [app.aktabBarVerticalController hideTabBar:AKShowHideFromLeft animated:YES];
+//        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        [app.aktabBarVerticalController hideTabBar:AKShowHideFromLeft animated:YES];
     }
 
     

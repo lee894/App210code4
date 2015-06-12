@@ -24,7 +24,7 @@
 #import "UIScrollView+MJRefresh.h"
 #import "LCommentAlertView.h"
 
-#import "AKTabBar.h"
+//#import "AKTabBar.h"
 #import "TalkingData.h"
 #import "ShareUnit.h"
 

@@ -47,8 +47,8 @@
 {
     [super viewWillAppear:animated];
     //隐藏footview
-    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [app.aktabBarVerticalController hideTabBar:AKShowHideFromLeft animated:YES];
+//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    [app.aktabBarVerticalController hideTabBar:AKShowHideFromLeft animated:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -56,8 +56,8 @@
     [self hiddleAllshowView];
 
     //显示footview
-    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [app.aktabBarVerticalController showTabBar:AKShowHideFromLeft animated:YES];
+//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    [app.aktabBarVerticalController showTabBar:AKShowHideFromLeft animated:YES];
 }
 
 

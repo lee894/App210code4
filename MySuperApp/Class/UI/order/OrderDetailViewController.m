@@ -123,8 +123,8 @@
     
     //lee999
     if ([SingletonState sharedStateInstance].isFromCheckOKView == YES) {
-        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        [app.aktabBarVerticalController hideTabBar:AKShowHideFromLeft animated:YES];
+//        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//        [app.aktabBarVerticalController hideTabBar:AKShowHideFromLeft animated:YES];
     }
     //end
     

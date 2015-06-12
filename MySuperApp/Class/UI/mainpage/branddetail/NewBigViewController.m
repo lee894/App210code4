@@ -40,14 +40,14 @@
 //    [self.view bringSubviewToFront:self.btnnavback];
     
     //隐藏footview
-    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [app.aktabBarRightController hideTabBar:AKShowHideFromLeft animated:YES];
+//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    [app.aktabBarRightController hideTabBar:AKShowHideFromLeft animated:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     //显示footview
-    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [app.aktabBarRightController showTabBar:AKShowHideFromLeft animated:YES];
+//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    [app.aktabBarRightController showTabBar:AKShowHideFromLeft animated:YES];
 }
 
 - (void)viewDidLoad

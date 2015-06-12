@@ -78,14 +78,14 @@
 {
     [super viewWillAppear:animated];
     //隐藏footview
-    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [app.aktabBarVerticalController hideTabBar:AKShowHideFromLeft animated:YES];
+//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    [app.aktabBarVerticalController hideTabBar:AKShowHideFromLeft animated:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-    //显示footview
-    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [app.aktabBarVerticalController showTabBar:AKShowHideFromLeft animated:YES];
+//    显示footview
+//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    [app.aktabBarVerticalController showTabBar:AKShowHideFromLeft animated:YES];
 }
 
 #pragma mark 赠品加入购物车

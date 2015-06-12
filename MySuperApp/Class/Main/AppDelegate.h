@@ -11,7 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "YKSplashView.h"
-#import "AKTabBarController.h"
+//#import "AKTabBarController.h"
 #import "SingletonState.h"
 #import "WeixinManager.h"
 #import <ShareSDK/ShareSDK.h>
@@ -40,9 +40,8 @@
 @property(nonatomic, strong) YKSplashView    *splashView;
 
 @property(nonatomic, strong) UINavigationController *navMyaimerVC;
-@property (nonatomic, strong) AKTabBarController *aktabBarVerticalController;
-
-@property (nonatomic, strong) AKTabBarController *aktabBarRightController;
+//@property (nonatomic, strong) AKTabBarController *aktabBarVerticalController;
+//@property (nonatomic, strong) AKTabBarController *aktabBarRightController;
 
 @property (nonatomic, assign) int tablebarType;//  1是横屏  2是竖屏
 

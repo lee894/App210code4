@@ -53,11 +53,11 @@
 
 
 @implementation AppDelegate
-@synthesize aktabBarVerticalController;
+//@synthesize aktabBarVerticalController;
 @synthesize mySingle;
 @synthesize splashView;
 @synthesize navMyaimerVC;
-@synthesize aktabBarRightController;
+//@synthesize aktabBarRightController;
 @synthesize tablebarType;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
