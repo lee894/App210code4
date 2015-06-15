@@ -86,24 +86,40 @@
     
     // Remove in progress downloader from queue
     [manager cancelForDelegate:self];
-    UIImage* image = [UIImage imageNamed:@"aimerLogoDefault"];
-    if(image.size.width > self.frame.size.width)
-    {
-        [self setContentMode:UIViewContentModeScaleAspectFit];
-    }else
-    {
-        [self setContentMode:UIViewContentModeCenter];
-    }
-    self.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0"];
     if(_isBackgroundImage)
     {
         if (placeholder) {
-            [self setBackgroundImage:[UIImage imageNamed:@"aimerLogoDefault"] forState:UIControlStateNormal];
+            [self setBackgroundImage:placeholder forState:UIControlStateNormal];
+        }else
+        {
+            UIImage* image = [UIImage imageNamed:@"aimerLogoDefault"];
+            if(image.size.width > self.frame.size.width)
+            {
+                [self setContentMode:UIViewContentModeScaleAspectFit];
+            }else
+            {
+                [self setContentMode:UIViewContentModeCenter];
+            }
+            self.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0"];
+            [self setBackgroundImage:image forState:UIControlStateNormal];
         }
-        //	    [self setBackgroundImage:placeholder forState:UIControlStateNormal];
     }
     else {
-        [self setImage:[UIImage imageNamed:@"aimerLogoDefault"] forState:UIControlStateNormal];
+        if (placeholder) {
+            [self setImage:placeholder forState:UIControlStateNormal];
+        }else
+        {
+            UIImage* image = [UIImage imageNamed:@"aimerLogoDefault"];
+            if(image.size.width > self.frame.size.width)
+            {
+                [self setContentMode:UIViewContentModeScaleAspectFit];
+            }else
+            {
+                [self setContentMode:UIViewContentModeCenter];
+            }
+            self.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0"];
+            [self setImage:image forState:UIControlStateNormal];
+        }
     }
     
     if (url)
@@ -129,7 +145,7 @@
         }
         if ([sizeArray containsObject:strDest]) {
             NSRange range = [strUrl rangeOfString:strDest];
-            int index = [sizeArray indexOfObject:strDest];
+            NSInteger index = [sizeArray indexOfObject:strDest];
             [strUrl replaceCharactersInRange:range withString:[sizeDestArray objectAtIndex:index]];
         }
     }
@@ -155,109 +171,109 @@
 
 -(UIImage*) getDefaultImage
 {
-    CGSize frameSize = self.frame.size;
-    if(frameSize.width == 24 &&frameSize.height == 32)
-    {
-        return [UIImage  imageNamed:@"pic24_32.png"];
-    }
-    else if(frameSize.width == 90 && frameSize.height == 120){
-        return [UIImage  imageNamed:@"pic90_120.png"];
-    }
-    else if(frameSize.width ==30&&frameSize.height==30){
-        return [UIImage  imageNamed:@"pic30_30.png"];
-    }
-    else if(frameSize.width ==60 &&frameSize.height==30){
-        return [UIImage  imageNamed:@"pic60_30.png"];
-    }
-    else if(frameSize.width ==60&&frameSize.height==80){
-        return [UIImage  imageNamed:@"pic60_80.png"];
-    }
-    else if(frameSize.width ==64&&frameSize.height==64){
-        return [UIImage  imageNamed:@"pic64_64.png"];
-    }
-    else if(frameSize.width ==66&&frameSize.height==66){
-        return [UIImage  imageNamed:@"132-132.png"];
-    }
-    else if(frameSize.width ==80&&frameSize.height==50){
-        return [UIImage  imageNamed:@"pic80_50.png"];
-    }
-    else if(frameSize.width ==100&&frameSize.height==33){
-        return [UIImage  imageNamed:@"pic100_33.png"];
-    }
-    else if(frameSize.width ==101&&frameSize.height==54){
-        return [UIImage  imageNamed:@"pic101_54.png"];
-    }
-    else if(frameSize.width ==130&&frameSize.height==130){
-        return [UIImage  imageNamed:@"260-260.png"];
-    }
-    else if(frameSize.width ==150&&frameSize.height==200){
-        return [UIImage  imageNamed:@"pic150_200.png"];
-    }
-    else if(frameSize.width ==154&&frameSize.height==80){
-        return [UIImage  imageNamed:@"pic310_150.png"];
-    }
-    else if(frameSize.width ==180&&frameSize.height==240){
-        return [UIImage  imageNamed:@"360-480.png"];
-    }
-    else if(frameSize.width ==220&&frameSize.height==300){
-        return [UIImage  imageNamed:@"pic220_300.png"];
-    }
-    else if(frameSize.width ==222&&frameSize.height==211){
-        return [UIImage  imageNamed:@"pic222_211.png"];
-    }
-    else if(frameSize.width ==270&&frameSize.height==361){
-        return [UIImage  imageNamed:@"pic270_360.png"];
-    }
-    else if(frameSize.width ==270&&frameSize.height==70){
-        return [UIImage  imageNamed:@"540-140.png"];
-    }
-    else if(frameSize.width ==305&&frameSize.height==99){
-        return [UIImage  imageNamed:@"pic305_100.png"];
-    }
-    else if(frameSize.width ==305&&frameSize.height==140){
-        return [UIImage  imageNamed:@"pic305_140.png"];
-    }
-    else if(frameSize.width ==310&&frameSize.height==150){
-        return [UIImage  imageNamed:@"pic310_150.png"];
-    }
-    else if(frameSize.width ==310&&frameSize.height==93){
-        return [UIImage  imageNamed:@"pic305_100.png"];
-    }
-    else if(frameSize.width ==76&&frameSize.height==102){
-        return [UIImage  imageNamed:@"pic90_120.png"];
-    }
-    else if(frameSize.width ==55&&frameSize.height==55){
-        return [UIImage  imageNamed:@"55x55.png"];
-    }
-    else if(frameSize.width ==60&&frameSize.height==40){
-        return [UIImage  imageNamed:@"pic60_40.png"];
-    }
-    else if(frameSize.width ==90&&frameSize.height==60){
-        return [UIImage  imageNamed:@"pic90_60.png"];
-    }
-    else if(frameSize.width ==120&&frameSize.height==160){
-        return [UIImage  imageNamed:@"pic120_160.png"];
-    }
-    else if(frameSize.width ==200&&frameSize.height==90){
-        return [UIImage  imageNamed:@"pic200_90.png"];
-    }
-    else if(frameSize.width ==296&&frameSize.height==70){
-        return [UIImage  imageNamed:@"540-140.png"];
-    }
-    else if(frameSize.width ==65&&frameSize.height==85){
-        return [UIImage  imageNamed:@"pic60_80.png"];
-    }
-    
-    else if(frameSize.width ==145&&frameSize.height==93){
-        return [UIImage  imageNamed:@"145x95.png"];
-    }
-    else if(frameSize.width ==145*2&&frameSize.height==93*2){
-        return [UIImage  imageNamed:@"145x95.png"];
-        
-    }else if(frameSize.width ==ScreenWidth&&frameSize.height==150){
-        
-        return [UIImage  imageNamed:@"pic_default_mall_banner.png"];
-    }
+//    CGSize frameSize = self.frame.size;
+//    if(frameSize.width == 24 &&frameSize.height == 32)
+//    {
+//        return [UIImage  imageNamed:@"pic24_32.png"];
+//    }
+//    else if(frameSize.width == 90 && frameSize.height == 120){
+//        return [UIImage  imageNamed:@"pic90_120.png"];
+//    }
+//    else if(frameSize.width ==30&&frameSize.height==30){
+//        return [UIImage  imageNamed:@"pic30_30.png"];
+//    }
+//    else if(frameSize.width ==60 &&frameSize.height==30){
+//        return [UIImage  imageNamed:@"pic60_30.png"];
+//    }
+//    else if(frameSize.width ==60&&frameSize.height==80){
+//        return [UIImage  imageNamed:@"pic60_80.png"];
+//    }
+//    else if(frameSize.width ==64&&frameSize.height==64){
+//        return [UIImage  imageNamed:@"pic64_64.png"];
+//    }
+//    else if(frameSize.width ==66&&frameSize.height==66){
+//        return [UIImage  imageNamed:@"132-132.png"];
+//    }
+//    else if(frameSize.width ==80&&frameSize.height==50){
+//        return [UIImage  imageNamed:@"pic80_50.png"];
+//    }
+//    else if(frameSize.width ==100&&frameSize.height==33){
+//        return [UIImage  imageNamed:@"pic100_33.png"];
+//    }
+//    else if(frameSize.width ==101&&frameSize.height==54){
+//        return [UIImage  imageNamed:@"pic101_54.png"];
+//    }
+//    else if(frameSize.width ==130&&frameSize.height==130){
+//        return [UIImage  imageNamed:@"260-260.png"];
+//    }
+//    else if(frameSize.width ==150&&frameSize.height==200){
+//        return [UIImage  imageNamed:@"pic150_200.png"];
+//    }
+//    else if(frameSize.width ==154&&frameSize.height==80){
+//        return [UIImage  imageNamed:@"pic310_150.png"];
+//    }
+//    else if(frameSize.width ==180&&frameSize.height==240){
+//        return [UIImage  imageNamed:@"360-480.png"];
+//    }
+//    else if(frameSize.width ==220&&frameSize.height==300){
+//        return [UIImage  imageNamed:@"pic220_300.png"];
+//    }
+//    else if(frameSize.width ==222&&frameSize.height==211){
+//        return [UIImage  imageNamed:@"pic222_211.png"];
+//    }
+//    else if(frameSize.width ==270&&frameSize.height==361){
+//        return [UIImage  imageNamed:@"pic270_360.png"];
+//    }
+//    else if(frameSize.width ==270&&frameSize.height==70){
+//        return [UIImage  imageNamed:@"540-140.png"];
+//    }
+//    else if(frameSize.width ==305&&frameSize.height==99){
+//        return [UIImage  imageNamed:@"pic305_100.png"];
+//    }
+//    else if(frameSize.width ==305&&frameSize.height==140){
+//        return [UIImage  imageNamed:@"pic305_140.png"];
+//    }
+//    else if(frameSize.width ==310&&frameSize.height==150){
+//        return [UIImage  imageNamed:@"pic310_150.png"];
+//    }
+//    else if(frameSize.width ==310&&frameSize.height==93){
+//        return [UIImage  imageNamed:@"pic305_100.png"];
+//    }
+//    else if(frameSize.width ==76&&frameSize.height==102){
+//        return [UIImage  imageNamed:@"pic90_120.png"];
+//    }
+//    else if(frameSize.width ==55&&frameSize.height==55){
+//        return [UIImage  imageNamed:@"55x55.png"];
+//    }
+//    else if(frameSize.width ==60&&frameSize.height==40){
+//        return [UIImage  imageNamed:@"pic60_40.png"];
+//    }
+//    else if(frameSize.width ==90&&frameSize.height==60){
+//        return [UIImage  imageNamed:@"pic90_60.png"];
+//    }
+//    else if(frameSize.width ==120&&frameSize.height==160){
+//        return [UIImage  imageNamed:@"pic120_160.png"];
+//    }
+//    else if(frameSize.width ==200&&frameSize.height==90){
+//        return [UIImage  imageNamed:@"pic200_90.png"];
+//    }
+//    else if(frameSize.width ==296&&frameSize.height==70){
+//        return [UIImage  imageNamed:@"540-140.png"];
+//    }
+//    else if(frameSize.width ==65&&frameSize.height==85){
+//        return [UIImage  imageNamed:@"pic60_80.png"];
+//    }
+//    
+//    else if(frameSize.width ==145&&frameSize.height==93){
+//        return [UIImage  imageNamed:@"145x95.png"];
+//    }
+//    else if(frameSize.width ==145*2&&frameSize.height==93*2){
+//        return [UIImage  imageNamed:@"145x95.png"];
+//        
+//    }else if(frameSize.width ==ScreenWidth&&frameSize.height==150){
+//        
+//        return [UIImage  imageNamed:@"pic_default_mall_banner.png"];
+//    }
     
     return [UIImage imageNamed:@"pic_default3.png"];
 }
@@ -293,6 +309,17 @@
     if(_animated)
     {
         [UIView commitAnimations];
+    }
+    if ([NSStringFromCGSize(self.frame.size) isEqualToString:NSStringFromCGSize(CGRectZero.size)]) {
+        if (self.contentMode != UIViewContentModeScaleToFill) {
+            CGRect rcTemp = self.frame;
+            rcTemp.size = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width);
+            self.frame = rcTemp;
+            return;
+        }
+        CGRect rcTemp = self.frame;
+        rcTemp.size = CGSizeMake(lee1fitAllScreen(image.size.width), lee1fitAllScreen(image.size.height));
+        self.frame = rcTemp;
     }
 }
 
