@@ -74,13 +74,13 @@
     [tableList setBackgroundColor:[UIColor clearColor]];
     
     //lee999注释了 设置导航器的位置
-//    [self.navigationController.navigationBar setFrame:CGRectMake(0.0,20.0,320,44)];
+    //    [self.navigationController.navigationBar setFrame:CGRectMake(0.0,20.0,320,44)];
     
     mainSer = [[MainpageServ alloc] init];
     mainSer.delegate = self;
     
-//    arraySectionTwo = [NSArray arrayWithObjects:@"积分优惠",@"我的收藏",@"全部订单",@"查询积分,绑定优惠券",@"管理您的收藏夹",@"查看历史订单记录",nil];
-//    arraySectionThird = [NSArray arrayWithObjects:@"收货地址",@"服务中心",@"修改密码",@"绑定手机",@"清除缓存",@"管理您的收货地址",@"常见问题查询",@"",@"",@"",nil];
+    //    arraySectionTwo = [NSArray arrayWithObjects:@"积分优惠",@"我的收藏",@"全部订单",@"查询积分,绑定优惠券",@"管理您的收藏夹",@"查看历史订单记录",nil];
+    //    arraySectionThird = [NSArray arrayWithObjects:@"收货地址",@"服务中心",@"修改密码",@"绑定手机",@"清除缓存",@"管理您的收货地址",@"常见问题查询",@"",@"",@"",nil];
     
     
     UIButton *photoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -119,18 +119,18 @@
         tableList.hidden  =NO;
     }
     //end
-
+    
     //lee999  重置，默认购车返回首页
     [SingletonState sharedStateInstance].mycarfrom = 1;
-
+    
     [mainSer getUserInfo];
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
     
 }
 
 - (void)successMyziliao {
-
-//    ImproveInformationViewController *iivc = [[ImproveInformationViewController alloc] init];
+    
+    //    ImproveInformationViewController *iivc = [[ImproveInformationViewController alloc] init];
     ModifyInformationViewController * iivc = [[ModifyInformationViewController alloc] init];
     [self.navigationController pushViewController:iivc animated:YES];
 }
@@ -164,18 +164,18 @@
         {
             NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:moreModel.userinfo.username, @"UserName",nil];
             [TalkingData trackEvent:@"5010" label:@"待评价" parameters:dic1];
-        
+            
             OrderViewController *tempOrder = [[OrderViewController alloc] initWithNibName:@"OrderViewController" bundle:nil];
             tempOrder.howEnter = 3;
             tempOrder.ishowHeadView = NO;
-//            tempOrder.userName = moreModel.userinfo.username;
+            //            tempOrder.userName = moreModel.userinfo.username;
             [self.navigationController pushViewController:tempOrder animated:YES];
         }
             break;
         default:
             break;
     }
-
+    
 }
 #pragma mark -- 打电话
 - (IBAction)makeCall:(id)sender//拨打电话
@@ -235,10 +235,10 @@
         {
             //退出登录
             if (!model.errorMessage) {
-            
+                
                 [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"0"] forKey:@"totalNUM"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TotleNumber" object:nil];
-            
+                
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"usersession"];
                 
                 //退出登录，修改icon上的气泡数字
@@ -246,16 +246,16 @@
                 
                 
                 //lee999 设置气泡  退出登录  清空气泡
-                    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                    [[[[app.mytabBarController tabBar] items] objectAtIndex:3] setBadgeValue:@""];
+                AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                [[[[app.mytabBarController tabBar] items] objectAtIndex:3] setBadgeValue:@""];
                 //end
                 
                 
-
+                
                 [SingletonState sharedStateInstance].userHasLogin = NO;
                 
                 [SBPublicAlert hideMBprogressHUD:self.view];
-
+                
                 //lee999 修改退出登录，返回到登录界面。
                 [self changetableBarto:4];
                 
@@ -263,7 +263,7 @@
                 //lee999 返回顶部
                 [tableList setContentOffset:CGPointMake(0, 0)];
                 
-            
+                
             }else{
                 [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:1.0];
             }
@@ -361,7 +361,7 @@
             UIImage *imag = [UIImage imageNamed:@"my_am_user_img@2x.png"];
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn setBackgroundImage:imag forState:UIControlStateNormal];
-            [btn setFrame:CGRectMake((ScreenWidth-imag.size.width)/2, 10, imag.size.width, imag.size.height)];
+            [btn setFrame:CGRectMake((headAllV.width - imag.size.width)/2, 12, imag.size.width, imag.size.height)];
             [headAllV addSubview:btn];
             
             //carma
@@ -376,7 +376,7 @@
             [cell addSubview:imacaV];
             
             //name
-            UILabel * noticeTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, btn.frame.size.height +10, ScreenWidth-20, 30)];
+            UILabel * noticeTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, btn.frame.size.height + 12, headAllV.width - 20, 30)];
             noticeTitle.text = moreModel.userinfo.username;
             noticeTitle.textColor = [UIColor colorWithHexString:@"0xe4a1a1"];//UIColorFromRGB(0xB90023);
             noticeTitle.backgroundColor = [UIColor clearColor];
@@ -386,30 +386,28 @@
             
             
             
-            
-            
-//            AimerHeadCell *headcell = [[[NSBundle mainBundle] loadNibNamed:@"AimerHeadCell" owner:self options:nil] lastObject];
-//            
-//            if ([moreModel.userinfo.userface description].length > 0) {
-//                //[headcell.InfterFaceBut setImageWithURL:[NSURL URLWithString:moreModel.userinfo.userface] placeholderImage:[UIImage imageNamed:@"defaulthead.jpg"]];
-//            }
-//            
-//            
-//            //   图片圆角化  遮罩层的运用
-//            UIImage *roundCorner = [UIImage imageNamed:@"magazine_pic_bg.png"];
-//            CALayer* roundCornerLayer = [CALayer layer];
-//            roundCornerLayer.frame = headcell.InfterFaceBut.bounds;
-//            roundCornerLayer.contents = (id)[roundCorner CGImage];
-//            //lee999 150503 修改头像不显示的bug
-//            //[[headcell.InfterFaceBut layer] setMask:roundCornerLayer];
-//            
-//            [headcell setContent:moreModel.userinfo];
-//            headcell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            
-//            //lee999取消上传头像
-//            //[headcell.InfterFaceBut addTarget:self action:@selector(btnUploadHeardClicked:) forControlEvents:UIControlEventTouchUpInside];
-//            [headcell.changeBut addTarget:self action:@selector(successMyziliao) forControlEvents:UIControlEventTouchUpInside];
-//            [headcell.buttonintegral addTarget:self action:@selector(jifenYouHui) forControlEvents:UIControlEventTouchUpInside];
+            //            AimerHeadCell *headcell = [[[NSBundle mainBundle] loadNibNamed:@"AimerHeadCell" owner:self options:nil] lastObject];
+            //
+            //            if ([moreModel.userinfo.userface description].length > 0) {
+            //                //[headcell.InfterFaceBut setImageWithURL:[NSURL URLWithString:moreModel.userinfo.userface] placeholderImage:[UIImage imageNamed:@"defaulthead.jpg"]];
+            //            }
+            //
+            //
+            //            //   图片圆角化  遮罩层的运用
+            //            UIImage *roundCorner = [UIImage imageNamed:@"magazine_pic_bg.png"];
+            //            CALayer* roundCornerLayer = [CALayer layer];
+            //            roundCornerLayer.frame = headcell.InfterFaceBut.bounds;
+            //            roundCornerLayer.contents = (id)[roundCorner CGImage];
+            //            //lee999 150503 修改头像不显示的bug
+            //            //[[headcell.InfterFaceBut layer] setMask:roundCornerLayer];
+            //
+            //            [headcell setContent:moreModel.userinfo];
+            //            headcell.selectionStyle = UITableViewCellSelectionStyleNone;
+            //
+            //            //lee999取消上传头像
+            //            //[headcell.InfterFaceBut addTarget:self action:@selector(btnUploadHeardClicked:) forControlEvents:UIControlEventTouchUpInside];
+            //            [headcell.changeBut addTarget:self action:@selector(successMyziliao) forControlEvents:UIControlEventTouchUpInside];
+            //            [headcell.buttonintegral addTarget:self action:@selector(jifenYouHui) forControlEvents:UIControlEventTouchUpInside];
             
             
             return cell;
@@ -418,7 +416,7 @@
             
         case 2:
         {
-            //lee999 公用的cell   订单   相关功能
+            //lee999 公用的cell
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             if (cell == nil)
             {
@@ -433,6 +431,7 @@
             [btn1 setFrame:CGRectMake(0,0,ScreenWidth/3,44)];
             btn1.titleLabel.font = [UIFont systemFontOfSize:14];
             [btn1 setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
+            [btn1 addTarget:self action:@selector(shopOrUnhandelOrUnaccess:) forControlEvents:UIControlEventTouchUpInside];
             [cell addSubview:btn1];
             
             UIView *sepV1 = [[UIView alloc] initWithFrame:CGRectMake(ScreenWidth/3, 0, 0.5, 44)];
@@ -444,17 +443,21 @@
             [btn2 setFrame:CGRectMake(ScreenWidth/3,0,ScreenWidth/3,44)];
             btn2.titleLabel.font = [UIFont systemFontOfSize:14];
             [btn2 setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
+            [btn2 setTag:13];
+            [btn2 addTarget:self action:@selector(shopOrUnhandelOrUnaccess:) forControlEvents:UIControlEventTouchUpInside];
             [cell addSubview:btn2];
             
             UIView *sepV2 = [[UIView alloc] initWithFrame:CGRectMake((ScreenWidth/3)*2, 0, 0.5, 44)];
             [sepV2 setBackgroundColor:[UIColor colorWithHexString:@"333333"]];
             [cell addSubview:sepV2];
-
+            
             UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn3 setTitle:[NSString stringWithFormat:@"待处理"] forState:UIControlStateNormal];
             [btn3 setFrame:CGRectMake((ScreenWidth/3)*2,0,ScreenWidth/3,44)];
             btn3.titleLabel.font = [UIFont systemFontOfSize:14];
             [btn3 setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
+            [btn3 setTag:12];
+            [btn3 addTarget:self action:@selector(shopOrUnhandelOrUnaccess:) forControlEvents:UIControlEventTouchUpInside];
             [cell addSubview:btn3];
             
             UIView *sepV3 = [[UIView alloc] initWithFrame:CGRectMake(0, 43.5, ScreenWidth, 0.5)];
@@ -465,7 +468,7 @@
         }
         case 3:
         {
-            //lee999 公用的cell  各种btn  每行4个 一共8个
+            //lee999 公用的cell
             UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
             if (cell == nil)
             {
@@ -473,6 +476,17 @@
                                               reuseIdentifier:identifierUniversal];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+                [cell setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6"]];
+                
+                for (NSInteger i = 0; i < 8; ++i) {
+                    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+                    [btn setFrame:CGRectMake((i % 4) * (68 + 10) + 10, i / 4 * (66 + 10) + 10, 66, 66)];
+                    [btn setTag:i];
+                    NSString* strImgName = [NSString stringWithFormat:@"my_am_ico_%ld", (long)(i + 1)];
+                    [btn setImage:[UIImage imageNamed:strImgName] forState:UIControlStateNormal];
+                    [btn addTarget:self action:@selector(toNextFromThridCell:) forControlEvents:UIControlEventTouchUpInside];
+                    [cell addSubview:btn];
+                }
             }
             
             return cell;
@@ -480,7 +494,7 @@
             
             break;
             
-            //尾部 view btn    XX
+            //尾部
         case 8:
         {
             UITableViewCell *endCell = [[[NSBundle mainBundle] loadNibNamed:@"AimerLastCell" owner:self options:nil] lastObject];
@@ -526,69 +540,69 @@
                 universalCell.labelTitle.text = @"应用评分";
             }
                 break;
-
-//            {
-//                if (indexPath.row == 0) {
-//                    
-//                    universalCell.imgViewBg.image = [UIImage imageNamed:@"list_bg_01.png"];
-//                    
-//                }else if (indexPath.row >0 && indexPath.row < 4){
-//                    
-//                    universalCell.imgViewBg.image = [UIImage imageNamed:@"list_bg_02.png"];
-//                    
-//                }else if(indexPath.row == 4){
-//                    
-//                    UIButton *but = [UIButton buttonWithType:UIButtonTypeCustom];
-//                    [but setFrame:CGRectMake(270, 10, 24, 24)];
-//                    [but setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//                    [but setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-//                    
-//                    [but setTitle:@"关" forState:UIControlStateNormal];
-//                    [but setTitle:@"开" forState:UIControlStateSelected];
-//                    [but setBackgroundImage:[UIImage imageNamed:@"switch_bar.png"] forState:UIControlStateNormal];
-//                    [but setBackgroundImage:[UIImage imageNamed:@"switch_bar.png"] forState:UIControlStateSelected];
-//                    
-//                    [but addTarget:self action:@selector(clearCacheInMemoryCell:) forControlEvents:UIControlEventTouchUpInside];
-//                    
-//                    bgBut = [[UIImageView alloc] initWithFrame:CGRectMake(270-24, 10, 24*2, 24)];
-//                    [bgBut setImage:[UIImage imageNamed:@"switch_on_bg.png"]];
-//                    
-//                    [universalCell addSubview:bgBut];
-//                    
-//                    [universalCell addSubview:but];
-//                    
-//                    universalCell.imgViewBg.image = [UIImage imageNamed:@"list_bg_03.png"];
-//                }
-//                
-//                universalCell.labelTitle.text = [arraySectionThird objectAtIndex:indexPath.row];
-//                universalCell.labelDetail.text = [arraySectionThird objectAtIndex:indexPath.row + 5];
-//                if (indexPath.row == 3) {
-//                    if ([moreModel.userinfo.isbind isEqualToString:@"0"]) {
-//                        universalCell.labelDetail.text = @"未绑定";
-//                    }else if([moreModel.userinfo.isbind isEqualToString:@"1"])
-//                        universalCell.labelDetail.text = @"已绑定";
-//                }
-////            }
-//                break;
-//                
-//            case 3:
-//            {
-//                universalCell.imgViewBg.image = [UIImage imageNamed:@"list_one.png"];
-//                universalCell.labelTitle.text = @"爱慕简介";
-//                universalCell.labelDetail.text = @"爱慕集团简介";
-//            }
-//                break;
-//            case 4:
-//            {
-//                universalCell.imgViewBg.image = [UIImage imageNamed:@"list_one"];
-//                if (indexPath.row == 0) {
-//                    universalCell.labelTitle.text = @"退出登录";
-//                }else{
-//                    universalCell.labelTitle.text = @"应用评分";
-//                    universalCell.labelDetail.text = @"如果你喜欢爱慕，请给我个好评!";
-//                }
-//            }
-//                break;
+                
+                //            {
+                //                if (indexPath.row == 0) {
+                //
+                //                    universalCell.imgViewBg.image = [UIImage imageNamed:@"list_bg_01.png"];
+                //
+                //                }else if (indexPath.row >0 && indexPath.row < 4){
+                //
+                //                    universalCell.imgViewBg.image = [UIImage imageNamed:@"list_bg_02.png"];
+                //
+                //                }else if(indexPath.row == 4){
+                //
+                //                    UIButton *but = [UIButton buttonWithType:UIButtonTypeCustom];
+                //                    [but setFrame:CGRectMake(270, 10, 24, 24)];
+                //                    [but setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                //                    [but setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+                //
+                //                    [but setTitle:@"关" forState:UIControlStateNormal];
+                //                    [but setTitle:@"开" forState:UIControlStateSelected];
+                //                    [but setBackgroundImage:[UIImage imageNamed:@"switch_bar.png"] forState:UIControlStateNormal];
+                //                    [but setBackgroundImage:[UIImage imageNamed:@"switch_bar.png"] forState:UIControlStateSelected];
+                //
+                //                    [but addTarget:self action:@selector(clearCacheInMemoryCell:) forControlEvents:UIControlEventTouchUpInside];
+                //
+                //                    bgBut = [[UIImageView alloc] initWithFrame:CGRectMake(270-24, 10, 24*2, 24)];
+                //                    [bgBut setImage:[UIImage imageNamed:@"switch_on_bg.png"]];
+                //
+                //                    [universalCell addSubview:bgBut];
+                //
+                //                    [universalCell addSubview:but];
+                //
+                //                    universalCell.imgViewBg.image = [UIImage imageNamed:@"list_bg_03.png"];
+                //                }
+                //
+                //                universalCell.labelTitle.text = [arraySectionThird objectAtIndex:indexPath.row];
+                //                universalCell.labelDetail.text = [arraySectionThird objectAtIndex:indexPath.row + 5];
+                //                if (indexPath.row == 3) {
+                //                    if ([moreModel.userinfo.isbind isEqualToString:@"0"]) {
+                //                        universalCell.labelDetail.text = @"未绑定";
+                //                    }else if([moreModel.userinfo.isbind isEqualToString:@"1"])
+                //                        universalCell.labelDetail.text = @"已绑定";
+                //                }
+                ////            }
+                //                break;
+                //
+                //            case 3:
+                //            {
+                //                universalCell.imgViewBg.image = [UIImage imageNamed:@"list_one.png"];
+                //                universalCell.labelTitle.text = @"爱慕简介";
+                //                universalCell.labelDetail.text = @"爱慕集团简介";
+                //            }
+                //                break;
+                //            case 4:
+                //            {
+                //                universalCell.imgViewBg.image = [UIImage imageNamed:@"list_one"];
+                //                if (indexPath.row == 0) {
+                //                    universalCell.labelTitle.text = @"退出登录";
+                //                }else{
+                //                    universalCell.labelTitle.text = @"应用评分";
+                //                    universalCell.labelDetail.text = @"如果你喜欢爱慕，请给我个好评!";
+                //                }
+                //            }
+                //                break;
             default:
                 break;
         }
@@ -626,6 +640,64 @@
     return path ;
 }
 
+-(void)toNextFromThridCell:(UIButton*)sender
+{
+    switch (sender.tag) {
+        case 0:
+        {
+            //积分优惠
+            [self jifenYouHui];
+        }
+            break;
+        case 1:
+        {
+            //会员卡
+        }
+            break;
+        case 2:
+        {
+            //我的收藏
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:moreModel.userinfo.username, @"UserName",nil];
+            [TalkingData trackEvent:@"5010" label:@"收藏" parameters:dic1];
+            
+            MyFavAll20ViewController *favvc = [[MyFavAll20ViewController alloc] init];
+            [self.navigationController pushViewController:favvc animated:YES];
+        }
+            break;
+        case 3:
+        {
+            //地址列表
+            AddressViewController *tempAddress = [[AddressViewController alloc] initWithNibName:@"AddressViewController" bundle:nil];
+            tempAddress.isCar = NO;
+            [self.navigationController pushViewController:tempAddress animated:YES];
+        }
+            break;
+        case 4:
+        {
+            //服务中心
+            AMServerCenterViewController *tempService = [[AMServerCenterViewController alloc] initWithNibName:@"AMServerCenterViewController" bundle:nil];
+            [self.navigationController pushViewController:tempService animated:YES];
+        }
+            break;
+        case 5:
+        {
+            //品牌馆
+        }
+            break;
+        case 6:
+        {
+            //私人衣橱
+        }
+            break;
+        case 7:
+        {
+            //微社区
+        }
+            break;
+        default:
+            break;
+    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -642,7 +714,7 @@
                 //我的收藏
                 NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:moreModel.userinfo.username, @"UserName",nil];
                 [TalkingData trackEvent:@"5010" label:@"收藏" parameters:dic1];
-
+                
                 MyFavAll20ViewController *favvc = [[MyFavAll20ViewController alloc] init];
                 [self.navigationController pushViewController:favvc animated:YES];
             }
@@ -751,19 +823,19 @@
 - (void)btnUploadHeardClicked:(UIButton *)theBtn
 {
     //lee999  IOS8 禁用了  141114
-//    UIActionSheet *tmpActionSheet = [[UIActionSheet alloc] initWithTitle:@"更换头像" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册获取", nil];
-//    [tmpActionSheet showInView:self.view];
+    //    UIActionSheet *tmpActionSheet = [[UIActionSheet alloc] initWithTitle:@"更换头像" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册获取", nil];
+    //    [tmpActionSheet showInView:self.view];
 }
 
 #pragma mark UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     MyImagePickViewController *imagePickerController = [[MyImagePickViewController alloc] init];
-	imagePickerController.delegate = self;
+    imagePickerController.delegate = self;
     imagePickerController.allowsEditing = YES;
     if (buttonIndex == 0) {//拍照
         if([MyImagePickViewController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
             imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-
+            
             [self.navigationController presentModalViewController:imagePickerController animated:YES];
         } else {
             return;
@@ -771,7 +843,7 @@
     } else if (buttonIndex == 1) {//从相册中获取
         imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self.navigationController presentModalViewController:imagePickerController animated:YES];
-
+        
     }
 }
 
