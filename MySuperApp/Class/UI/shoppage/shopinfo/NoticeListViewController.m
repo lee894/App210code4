@@ -79,7 +79,7 @@
                 
                 noticeModel = (NoticesNoticesModel *)model ;
                 NoticesNotice *not = [[noticeModel notice] objectAtIndex:0];
-                [noticeImageView setImageWithURL:[NSURL URLWithString:not.imgUrl] placeholderImage:[UIImage imageNamed:@"pic_default_mall_banner.png"]];
+                [noticeImageView setImageWithURL:[NSURL URLWithString:not.imgUrl] placeholderImage:nil];
                 noticeTextView.text = not.content;
                 [SBPublicAlert hideMBprogressHUD:self.view];
                 

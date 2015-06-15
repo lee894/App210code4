@@ -60,7 +60,7 @@
     
     if (self.arrayImg.count > index) {
         
-        [backgroundimg setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@.jpg",[self.arrayImg objectAtIndex:index]]]  placeholderImage:[UIImage imageNamed:@""]];
+        [backgroundimg setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@.jpg",[self.arrayImg objectAtIndex:index]]]  placeholderImage:nil];
     }
     
     

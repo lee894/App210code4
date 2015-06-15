@@ -179,7 +179,7 @@
 //        return nil;
 //    }
     //lee新增
-    return [UIImage imageNamed:@"aimerLogoDefault"];
+    return nil;
     
 }
 

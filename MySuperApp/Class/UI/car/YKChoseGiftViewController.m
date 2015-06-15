@@ -560,7 +560,7 @@
         YKGiftItem* item = (YKGiftItem*)[array objectAtIndex:indexPath.row];
 
         cell.titleLabel.text = item.productname;
-        [cell.picImgView setImageWithURL:[NSURL URLWithString:item.imageurl] placeholderImage:[UIImage imageNamed:@"pic_default_product_list_03.png"]];
+        [cell.picImgView setImageWithURL:[NSURL URLWithString:item.imageurl] placeholderImage:nil];
         //lee999
         cell.selectBtn.tag = [indexPath section];
         [cell.selectBtn setSelected:item.isSelect];

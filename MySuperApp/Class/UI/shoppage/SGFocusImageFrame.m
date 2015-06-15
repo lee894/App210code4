@@ -136,7 +136,7 @@ static CGFloat SWITCH_FOCUS_PICTURE_INTERVAL = 8.0; //switch interval time
         
         [imageView setImageFromUrl:YES withUrl:item.image];
         
-        [imageView setImageWithURL:[NSURL URLWithString:item.image] placeholderImage:[UIImage imageNamed:@"pic_default_mall_banner.png"]];
+        [imageView setImageWithURL:[NSURL URLWithString:item.image] placeholderImage:nil];
         imageView.userInteractionEnabled = YES;
         
         imageView.tag = item.tag;

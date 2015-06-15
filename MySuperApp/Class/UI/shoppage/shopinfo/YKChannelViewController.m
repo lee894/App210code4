@@ -167,7 +167,7 @@
     UIView *view_header=[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(208))];
     UrlImageView* imageView_back = [[UrlImageView alloc]init];
     CannelChannel *cannel = cannelModel.channel;
-    [imageView_back setImageWithURL:[NSURL URLWithString:[cannel pic]] placeholderImage:[UIImage imageNamed:@"pic_default_notice_banner.png"]];
+    [imageView_back setImageWithURL:[NSURL URLWithString:[cannel pic]] placeholderImage:nil];
 
     imageView_back.frame=CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(208));
     

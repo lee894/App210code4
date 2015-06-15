@@ -57,7 +57,7 @@
     
     if ([favoriteFirst isKindOfClass:[FavoriteFavoritePic class]]) {
         //lee999  收藏
-        [self.collectFirst.imageBackground setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"pic_default_product_list.png"]];
+        [self.collectFirst.imageBackground setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:nil];
 
         self.collectFirst.labelIntroduct.text = [(FavoriteFavoritePic *)favoriteFirst name];
 
@@ -69,7 +69,7 @@
     }else if([favoriteFirst isKindOfClass:[BrandsProductlistPictext class]]) {
 
         //品牌馆列表
-        [self.collectFirst.imageBackground setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:[UIImage imageNamed:@"pic_default_product_list.png"]];
+        [self.collectFirst.imageBackground setImageWithURL:[NSURL URLWithString:imageurl] placeholderImage:nil];
 
         BrandsPrice *favorFirst = (BrandsPrice *)[(BrandsProductlistPictext *)favoriteFirst price];
         BrandsPrice1 *favorFirst1 = (BrandsPrice1 *)[(BrandsProductlistPictext *)favoriteFirst price1];
@@ -88,7 +88,7 @@
     }else {
         //套装
         
-        [self.collectFirst.imageBackground setImageWithURL:[NSURL URLWithString:[self changeimageToSmall:[favoriteFirst image_file_path]]] placeholderImage:[UIImage imageNamed:@"pic_default_product_list.png"]];
+        [self.collectFirst.imageBackground setImageWithURL:[NSURL URLWithString:[self changeimageToSmall:[favoriteFirst image_file_path]]] placeholderImage:nil];
 
         self.collectFirst.labelIntroduct.text = [(SuitListSuitlist *)favoriteFirst name];
         
@@ -114,7 +114,7 @@
         NSString *imageurl2 =[self changeimageToSmall:[favoriteSecond pic]];
         
         if ([favoriteSecond isKindOfClass:[FavoriteFavoritePic class]]) {
-            [self.collectSecond.imageBackground setImageWithURL:[NSURL URLWithString:imageurl2] placeholderImage:[UIImage imageNamed:@"pic_default_product_list.png"]];
+            [self.collectSecond.imageBackground setImageWithURL:[NSURL URLWithString:imageurl2] placeholderImage:nil];
 
             self.collectSecond.labelIntroduct.text = [(FavoriteFavoritePic *)favoriteSecond name];
             
@@ -124,7 +124,7 @@
             self.idProduct2 = [favoriteSecond productid];
             
         }else if([favoriteFirst isKindOfClass:[BrandsProductlistPictext class]]) {
-            [self.collectSecond.imageBackground setImageWithURL:[NSURL URLWithString:imageurl2] placeholderImage:[UIImage imageNamed:@"pic_default_product_list.png"]];
+            [self.collectSecond.imageBackground setImageWithURL:[NSURL URLWithString:imageurl2] placeholderImage:nil];
 
             BrandsPrice *favorSecond = (BrandsPrice *)[(BrandsProductlistPictext *)favoriteSecond price];
             BrandsPrice1 *favorSecond1 = (BrandsPrice1 *)[(BrandsProductlistPictext *)favoriteSecond price1];
@@ -142,7 +142,7 @@
     
         }else{
         
-            [self.collectSecond.imageBackground setImageWithURL:[NSURL URLWithString:[self changeimageToSmall:[favoriteSecond image_file_path]]] placeholderImage:[UIImage imageNamed:@"pic_default_product_list.png"]];
+            [self.collectSecond.imageBackground setImageWithURL:[NSURL URLWithString:[self changeimageToSmall:[favoriteSecond image_file_path]]] placeholderImage:nil];
 
             self.collectSecond.labelIntroduct.text = [(SuitListSuitlist *)favoriteSecond name];
             

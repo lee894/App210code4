@@ -39,7 +39,7 @@
     self.labelName.text = orderList.name;
     self.labelMoney.text = orderList.price?[NSString stringWithFormat:@"￥%@",orderList.price]:@"";
     
-    [_orderImage setImageWithURL:[NSURL URLWithString:orderList.order_pic]  placeholderImage:[UIImage imageNamed:@"pic_default_product_list_03.png"]];
+    [_orderImage setImageWithURL:[NSURL URLWithString:orderList.order_pic]  placeholderImage:nil];
 
     _redBtn.tag = tag;
     _graybtn.tag = tag;

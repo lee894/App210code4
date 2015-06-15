@@ -275,7 +275,7 @@
 //        return [UIImage  imageNamed:@"pic_default_mall_banner.png"];
 //    }
     
-    return [UIImage imageNamed:@"pic_default3.png"];
+    return nil;
 }
 
 

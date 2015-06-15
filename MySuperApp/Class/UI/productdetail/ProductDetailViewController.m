@@ -1588,7 +1588,7 @@
                     
                     UrlImageView *imageView=[[UrlImageView alloc]init];
                     imageView.frame=CGRectMake(0, 0, 91, 111);
-                    [imageView setImageWithURL:[NSURL URLWithString:[self ImageSize:[[productModel.recommendlist objectAtIndex:i*3+j]RecommendPic] Size:ChangeImageURL]] placeholderImage:[UIImage imageNamed:@"pic_default_product_list_02.png"]];
+                    [imageView setImageWithURL:[NSURL URLWithString:[self ImageSize:[[productModel.recommendlist objectAtIndex:i*3+j]RecommendPic] Size:ChangeImageURL]] placeholderImage:nil];
                     [control addSubview:imageView];
                     
                     control.adjustsImageWhenHighlighted = NO;

@@ -529,7 +529,7 @@
 //			[footView addSubview:re_bgView];
 			
 			UrlImageView* shoppingImg = [[UrlImageView alloc] init];
-			[shoppingImg setImageWithURL:[NSURL URLWithString:(NSString *)[self ImageSize:item.imgurl Size:ChangeImageURL]]  placeholderImage:[UIImage imageNamed:@"pic_default_product_list_02.png"]];
+			[shoppingImg setImageWithURL:[NSURL URLWithString:(NSString *)[self ImageSize:item.imgurl Size:ChangeImageURL]]  placeholderImage:nil];
 			shoppingImg.frame = CGRectMake(15+103*(i-3), 190+80, 82, 102);
 			shoppingImg.backgroundColor = [UIColor clearColor];
 			[footView addSubview:shoppingImg];
@@ -547,9 +547,9 @@
 			
 			UrlImageView* shoppingImg = [[UrlImageView alloc] init];
             if (isRetina) {
-                [shoppingImg setImageWithURL:[NSURL URLWithString:(NSString *)[self ImageSize:item.imgurl Size:ChangeImageURL]]  placeholderImage:[UIImage imageNamed:@"pic_default_product_list_02.png"]];
+                [shoppingImg setImageWithURL:[NSURL URLWithString:(NSString *)[self ImageSize:item.imgurl Size:ChangeImageURL]]  placeholderImage:nil];
             }else{
-                [shoppingImg setImageWithURL:[NSURL URLWithString:(NSString *)[self ImageSize:item.imgurl Size:ChangeImageURL]]  placeholderImage:[UIImage imageNamed:@"pic_default_product_list_02.png"]];
+                [shoppingImg setImageWithURL:[NSURL URLWithString:(NSString *)[self ImageSize:item.imgurl Size:ChangeImageURL]]  placeholderImage:nil];
             }
 			
 			shoppingImg.frame = CGRectMake(15+103*i, 75+80, 82, 102);
@@ -951,9 +951,9 @@
 		UrlImageView* shoppingImg = [[UrlImageView alloc] init];
 		shoppingImg.frame = CGRectMake(16, 17, 84, 103);
         if (isRetina) {
-            [shoppingImg setImageWithURL:[NSURL URLWithString:[self ImageSize:item.imgurl Size:ChangeImageURL]] placeholderImage:[UIImage imageNamed:@"pic_default_product_list_02.png"]];
+            [shoppingImg setImageWithURL:[NSURL URLWithString:[self ImageSize:item.imgurl Size:ChangeImageURL]] placeholderImage:nil];
         }else{
-            [shoppingImg setImageWithURL:[NSURL URLWithString:[self ImageSize:item.imgurl Size:ChangeImageURL]] placeholderImage:[UIImage imageNamed:@"pic_default_product_list_02.png"]];
+            [shoppingImg setImageWithURL:[NSURL URLWithString:[self ImageSize:item.imgurl Size:ChangeImageURL]] placeholderImage:nil];
         }
 		
 		shoppingImg.backgroundColor = [UIColor clearColor];

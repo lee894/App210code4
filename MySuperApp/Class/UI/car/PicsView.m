@@ -70,7 +70,7 @@ CGFloat InnerMargin = 4;
         UrlImageButton *btn = [[UrlImageButton alloc] initWithFrame:CGRectMake(Margin + InnerMargin + width * column , row * RowHeight + InnerMargin, width - InnerMargin * 2, 120 - 2 * InnerMargin)];
         btn.tag = i;
         [btn addTarget:self action:@selector(btnsTapped:) forControlEvents:UIControlEventTouchUpInside];
-        [btn setImageWithURL:[NSURL URLWithString:nogifts.img_url] placeholderImage:[UIImage imageNamed:@"pic_default_product_list_02.png"]];
+        [btn setImageWithURL:[NSURL URLWithString:nogifts.img_url] placeholderImage:nil];
         [self addSubview:btn];
         [btn setBackgroundColor:[UIColor clearColor]];
 

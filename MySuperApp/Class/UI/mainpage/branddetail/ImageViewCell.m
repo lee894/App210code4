@@ -44,7 +44,7 @@
 //    [imageView setImageFromUrl:NO withUrl:imageUrl];
     
     //lee999recode
-    [imageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"Defaultbg3@2x.png"]];
+    [imageView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:nil];
     
     imageView.alpha = 1.0;
 

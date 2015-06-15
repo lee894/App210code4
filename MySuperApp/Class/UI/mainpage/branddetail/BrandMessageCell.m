@@ -32,7 +32,7 @@
     self.buttonVodie.hidden = YES;
     self.buttonVodie.tag = row;
     NSURL *url = [NSURL URLWithString:data.imgPath];
-    [self.imageViewShop setImageWithURL:url placeholderImage:[UIImage imageNamed:@"pic_default_brand_news.png"]];
+    [self.imageViewShop setImageWithURL:url placeholderImage:nil];
 //    [self.imageViewShop setImageFromUrl:YES withUrl:data.imgPath];
     
     if ([data.type integerValue] == 7) {

@@ -134,7 +134,7 @@
             [orderCell setFrame:CGRectMake(0, scrollViewHeigh, 320, 390)];
             orderCell.tag = i;
             [self setUrlImageBtnSuperIndex:orderCell withindex:i];
-            [orderCell.imageViewCommodity setImageWithURL:[NSURL URLWithString:assessdetail.imgfilePath] placeholderImage:[UIImage imageNamed:@"pic_default_product_list_02.png"]];
+            [orderCell.imageViewCommodity setImageWithURL:[NSURL URLWithString:assessdetail.imgfilePath] placeholderImage:nil];
             orderCell.labelIntroduce.text = assessdetail.productName;
             orderCell.labelColor.text = assessdetail.product_color;
             orderCell.labelSize.text = assessdetail.product_size;
@@ -159,7 +159,7 @@
             [orderCell setFrame:CGRectMake(0, scrollViewHeigh, 320, +350)];
             orderCell.tag = i;
             [self setUrlImageBtnSuperIndex:orderCell withindex:i];
-            [orderCell.imageViewCommodity setImageWithURL:[NSURL URLWithString:assessdetail.imgfilePath] placeholderImage:[UIImage imageNamed:@"pic_default_product_list_02.png"]];
+            [orderCell.imageViewCommodity setImageWithURL:[NSURL URLWithString:assessdetail.imgfilePath] placeholderImage:nil];
             orderCell.labelIntroduce.text = assessdetail.productName;
             orderCell.labelColor.text = assessdetail.product_color;
             orderCell.labelSize.text = assessdetail.product_size;
@@ -180,7 +180,7 @@
             [orderCell setFrame:CGRectMake(0, scrollViewHeigh, 320, +310)];
             orderCell.tag = i;
             [self setUrlImageBtnSuperIndex:orderCell withindex:i];
-            [orderCell.imageViewCommodity setImageWithURL:[NSURL URLWithString:assessdetail.imgfilePath] placeholderImage:[UIImage imageNamed:@"pic_default_product_list_02.png"]];
+            [orderCell.imageViewCommodity setImageWithURL:[NSURL URLWithString:assessdetail.imgfilePath] placeholderImage:nil];
             orderCell.labelIntroduce.text = assessdetail.productName;
             orderCell.labelColor.text = assessdetail.product_color;
             orderCell.labelSize.text = assessdetail.product_size;

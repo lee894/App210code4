@@ -44,7 +44,7 @@
     self.labelBrand.text = store.brand;
     [self.buttonPhone setTitle:store.storeTel forState:UIControlStateNormal];
     [self.buttonPhone setTitle:store.storeTel forState:UIControlStateHighlighted];
-    [self.img setImageWithURL:[NSURL URLWithString:store.filePath] placeholderImage:[UIImage imageNamed:@"pic_default_shop.png"]];
+    [self.img setImageWithURL:[NSURL URLWithString:store.filePath] placeholderImage:nil];
     
     // Do any additional setup after loading the view from its nib.
 }

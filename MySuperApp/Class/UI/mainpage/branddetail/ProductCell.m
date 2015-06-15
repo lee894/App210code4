@@ -44,7 +44,7 @@
     BrandsProductlistPictext *first = (BrandsProductlistPictext *)[array objectAtIndex:indexRow * numOfCell];
 //    [self.productViewFirst.imageViewBackground setImageFromUrl:YES withUrl:first.pic];
     NSURL *url = [NSURL URLWithString:first.pic];
-    [self.productViewFirst.imageViewBackground setImageWithURL:url placeholderImage:[UIImage imageNamed:@"pic_default_product_list_03.png"]];//
+    [self.productViewFirst.imageViewBackground setImageWithURL:url placeholderImage:nil];//
     self.productViewFirst.labelMessage.text = first.name;
     BrandsPrice *priceone = (BrandsPrice *)first.price;
     BrandsPrice1 *priceOneOld = (BrandsPrice1 *)first.price1;
@@ -66,7 +66,7 @@
             
             BrandsProductlistPictext *second = (BrandsProductlistPictext *)[array objectAtIndex:indexRow * numOfCell + 1];
             NSURL *urlSecond = [NSURL URLWithString:second.pic];
-            [self.productViewSecond.imageViewBackground setImageWithURL:urlSecond placeholderImage:[UIImage imageNamed:@"pic_default_product_list_03.png"]];
+            [self.productViewSecond.imageViewBackground setImageWithURL:urlSecond placeholderImage:nil];
             self.productViewSecond.labelMessage.text = second.name;
             BrandsPrice *priceSecond = (BrandsPrice *)second.price;
             BrandsPrice1 *priceSecondOld = (BrandsPrice1 *)second.price1;
@@ -83,7 +83,7 @@
         
         BrandsProductlistPictext *second = (BrandsProductlistPictext *)[array objectAtIndex:indexRow * numOfCell + 1];
         NSURL *urlSecond = [NSURL URLWithString:second.pic];
-        [self.productViewSecond.imageViewBackground setImageWithURL:urlSecond placeholderImage:[UIImage imageNamed:@"pic_default_product_list_03.png"]];
+        [self.productViewSecond.imageViewBackground setImageWithURL:urlSecond placeholderImage:nil];
         self.productViewSecond.labelMessage.text = second.name;
         BrandsPrice *priceSecond = (BrandsPrice *)second.price;
         self.productViewSecond.labelMoney.text = [NSString stringWithFormat:@"￥%@",priceSecond.value];
@@ -100,7 +100,7 @@
         
        BrandsProductlistPictext *third = (BrandsProductlistPictext *)[array objectAtIndex:indexRow * numOfCell + 2];
         NSURL *urlThird = [NSURL URLWithString:third.pic];
-        [self.productViewThird.imageViewBackground setImageWithURL:urlThird placeholderImage:[UIImage imageNamed:@"pic_default_product_list_03.png"]];
+        [self.productViewThird.imageViewBackground setImageWithURL:urlThird placeholderImage:nil];
         self.productViewThird.labelMessage.text = third.name;
         BrandsPrice *priceThird = (BrandsPrice *)third.price;
         BrandsPrice1 *priceThirdOld = (BrandsPrice1 *)third.price1;

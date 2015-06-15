@@ -75,9 +75,9 @@
         UrlImageView* imageView = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 0, 320,  productImageHeight)];
         imageView.clipsToBounds = YES;
         if (isRetina) {
-            [imageView setImageWithURL:[NSURL URLWithString:[self ImageSize:[[self.arrayForImg objectAtIndex:index] BannerPic] Size:@"640x760"]] placeholderImage:[UIImage imageNamed:IMG_PlaceHolder_time]];
+            [imageView setImageWithURL:[NSURL URLWithString:[self ImageSize:[[self.arrayForImg objectAtIndex:index] BannerPic] Size:@"640x760"]] placeholderImage:nil];
         }else{
-            [imageView setImageWithURL:[NSURL URLWithString:[self ImageSize:[[self.arrayForImg objectAtIndex:index] BannerPic] Size:@"320x380"]] placeholderImage:[UIImage imageNamed:IMG_PlaceHolder_time]];
+            [imageView setImageWithURL:[NSURL URLWithString:[self ImageSize:[[self.arrayForImg objectAtIndex:index] BannerPic] Size:@"320x380"]] placeholderImage:nil];
         }
         UIScrollView* svScan = [[UIScrollView alloc] initWithFrame:CGRectMake(320*index, 0, 320,  productImageHeight)];
         [svScan setShowsHorizontalScrollIndicator:NO];
