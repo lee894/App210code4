@@ -120,53 +120,10 @@
     currentNumber = 0;
     buttonsForSize=[[NSMutableArray alloc] init];
     
-//    if (isHiddenBar) {
-//        [self hiddenFooterwithAnimated:YES];
-//    }
-    
     //lee894设置首页的高度~~
     //适配屏幕及系统版本
     CGRect frame = CGRectZero;
-//    if (isIOS7up) {
-//        frame = CGRectMake(0, 0, 320, self.view.frame.size.height-40);
-//    }else{
-//        frame = CGRectMake(0, 0, 320, self.view.frame.size.height-40-40);
-//    }
-    
-    //lee999recode
-//    if (isIOS7up) {
-//        
-//        if (isHiddenBar) {
-////            [self NewHiddenTableBarwithAnimated:YES];
-//            frame = CGRectMake(0, 0, 320, ScreenHeight -50);
-//
-//        }
-//        else if (isFromMyAimer) {
-//            frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
-//        }
-//        else{
-//            frame = CGRectMake(0, 0, 320, self.view.frame.size.height-40);
-//        }
-//    }else{
-//        if (isHiddenBar || isFromMyAimer) {
-//            frame = CGRectMake(0, 0, 320, self.view.frame.size.height-40);
-//            
-//        }else{
-//            frame = CGRectMake(0, 0, 320, self.view.frame.size.height-40-40);
-//        }
-//    }
-
     frame = CGRectMake(0, 0, 320, ScreenHeight -50);
-
-    
-    //lee999 来自我的爱慕的话 增加高度
-//    if (isFromMyAimer || isHiddenBar) {
-//        if (isIOS7up) {
-//            frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
-//        }else{
-//            frame = CGRectMake(0, 0, 320, self.view.frame.size.height-40);
-//        }
-//    }
     
     detailTab=[[UITableView alloc] initWithFrame:frame];
     detailTab.delegate=self;
@@ -299,12 +256,6 @@
     [super viewWillAppear:animated];
     
     
-    //lee999recode 显示头和尾
-    //if (isHiddenBar) {
-    //}else{
-//        [self showTitleAndFootwithAnimated:NO];
-    //}
-    
     [self NewHiddenTableBarwithAnimated:YES];
 
     
@@ -320,13 +271,6 @@
     NSDictionary *dic=[[NSDictionary alloc]initWithObjectsAndKeys:@"1",@"disable", nil];
 	[[NSNotificationCenter defaultCenter]postNotificationName:@"enable" object:nil userInfo:dic];
 }
-
-//-(void)viewWillDisappear:(BOOL)animated{
-//    [super viewWillDisappear:YES];
-//    
-//    [self hiddenBar];
-//}
-
 
 /**
  *	创建表头视图，即在UIView上放UIImageView、UIViewForRecursively、UIScrollView、UIPageControl
@@ -646,7 +590,6 @@
                     
                 }
                 
-                //               NSLog(@"_++_+++++++++++++++++++++++++++++%d",pgControlForScroll.numberOfPages);
                 //找出当前currentProduct的
                 pgControlForScroll.numberOfPages=[productModel.bannerlist count];
                 [pgControlForScroll updateDots];
@@ -761,7 +704,7 @@
     else if(barButton.tag==102+100)
     {
         NSLog(@"size完成arrTemSize:%@", self.arrTemSize);
-        NSLog(@"size完成currentSize:%d", currentSize);
+        NSLog(@"size完成currentSize:%ld", currentSize);
         if ([productModel.array_size count]!=0)
         {
 //            self.selectedSize=[[self.arrTemSize objectAtIndex:currentSize]objectForKey:@"spec_alias"];
@@ -786,7 +729,6 @@
                     NSArray *arr = [[productModel.array_size objectAtIndex:j]objectForKey:[[productModel.colorlist objectAtIndex:currentColor]ID]];
   
                     //lee999 修改选择尺码崩溃
-//                    [self.str_append appendFormat:@"%@",[[arr objectAtIndex:currentSize] objectForKey:@"id"]];
                     if ([arr count] > currentSize) {
                         [self.str_append appendFormat:@"%@",[[arr objectAtIndex:currentSize] objectForKey:@"id"]];
                     }else{
@@ -808,7 +750,7 @@
     }else if(barButton.tag==102+10){
         if (didSelectNumber != currentNumber) {
             
-            buttonForNum.text = [[NSString alloc]initWithFormat:@"%d",currentNumber];
+            buttonForNum.text = [[NSString alloc]initWithFormat:@"%ld",currentNumber];
             recordNUM=[buttonForNum.text intValue];
             [detailTab reloadData];
         }
@@ -858,14 +800,6 @@
  */
 -(void)buttonAction:(UIButton *)action{
     
-    
-//    if ([buttonForNum.text isEqualToString:@""]||(buttonForNum.text==nil&&![[self getLastViewController] isEqualToString:@"YKCar"])) {
-//        [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"数量不能为空"];
-//        
-//        [buttonForNum resignFirstResponder];
-//        return;
-//    }
-    
     if ([buttonForNum.text intValue]>9) {
         [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"单品购买不得超过9件，谢谢"];
         return;
@@ -905,18 +839,13 @@
                             str = [[arr objectAtIndex:k] objectForKey:@"id"];
                         }
                     }
-//                    [self.str_append appendFormat:@"%@",(str?str:[[arr objectAtIndex:currentSize] objectForKey:@"id"])];
                     //lee999 修改选择尺码的崩溃
                     if ([arr count] > currentSize) {
                         [self.str_append appendFormat:@"%@",(str?str:[[arr objectAtIndex:currentSize] objectForKey:@"id"])];
                     }else{
                         currentSize = 0;
                         return;
-//                        [self.str_append appendFormat:@"%@",(str?str:[[arr objectAtIndex:currentSize] objectForKey:@"id"])];
                     }
-                    
-
-                    
                 }
             }
             NSLog(@"颜色:%@ 尺码:%@", [[productModel.colorlist objectAtIndex:currentColor]ID], self.str_append);
@@ -1018,12 +947,8 @@
         //去购物车
         if (buttonIndex == 0) {
             
-            //AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-            //if (app.mytabBarController.selectedIndex == 3) {
             [self.navigationController popToRootViewControllerAnimated:NO];
-            //}else{
             [self performSelector:@selector(JumpToCarpage) withObject:nil afterDelay:0.2];
-            //}
         }
     }
 }
@@ -1117,13 +1042,8 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
     
-//    if (isFromMyAimer) {
-//        pickerForSelectNumber.frame = CGRectMake(0,  ScreenHeight-PickShowHigh+50, 320, 216);
-//        toolBarForNumber.frame = CGRectMake(0, ScreenHeight-PickShowHigh-44+50, 320, 44);
-//    }else{
     pickerForSelectNumber.frame = CGRectMake(0,  ScreenHeight-PickShowHigh, 320, 216);
     toolBarForNumber.frame = CGRectMake(0, ScreenHeight-PickShowHigh-44, 320, 44);
-//    }
     
     pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, 320, 216);
     toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44);
@@ -1173,7 +1093,7 @@
  */
 
 -(void)pgChange{
-    int page=pgControlForScroll.currentPage;//CGRectMake(65+i*169, 6, 150, 150)
+    NSInteger page=pgControlForScroll.currentPage;
     [headerView.scroll setContentOffset:CGPointMake(169*page, 0) animated:YES];
 }
 
@@ -1193,49 +1113,19 @@
  *	@param  (UIButton *)button 颜色按钮
  *  @return (void)
  */
--(void)showPicker:(UIButton *)button{
+-(void)showPicker:(UIButton *)button
+{
     if ([buttonForNum isFirstResponder]) {
         [buttonForNum resignFirstResponder];
     }
+    [pickerForSelectNumber removeFromSuperview];
+    [toolBarForNumber removeFromSuperview];
+    [pickerForSelectColor removeFromSuperview];
+    [toolBarForPicker removeFromSuperview];
+    [pickerForSelectSize removeFromSuperview];
+    [toolBarForSizePicker removeFromSuperview];
     
-//    if (!toolBarForNumber || !toolBarForPicker || !toolBarForSizePicker) {
-//        [self createtoolbarandpicker];
-//    }
-    
-
-//    lee999 修改bug  新品标签进单品，再点击热卖右上角的我的爱慕，返回新品  点击单品的颜色和尺码就选择不了了
-//    if (!toolBarForNumber || !toolBarForPicker || !toolBarForSizePicker) {
-//        [toolBarForPicker removeFromSuperview];
-//        [toolBarForSizePicker removeFromSuperview];
-//        
-//        
-    
-        [pickerForSelectNumber removeFromSuperview];
-        [toolBarForNumber removeFromSuperview];
-        [pickerForSelectColor removeFromSuperview];
-        [toolBarForPicker removeFromSuperview];
-        [pickerForSelectSize removeFromSuperview];
-        [toolBarForSizePicker removeFromSuperview];
-        
-        [self createtoolbarandpicker];
-
-//    }
-    
-    
-//    UIPickerView *pickerForSelectNumber;
-//    UIToolbar *toolBarForNumber;
-//    
-//    
-//    UIPickerView *pickerForSelectColor;//颜色下拉列表
-//    UIToolbar *toolBarForPicker;//picker上的toolbar
-//    
-//    UIPickerView *pickerForSelectSize;//尺寸下来列表
-//    UIToolbar *toolBarForSizePicker;//尺寸picker的toolbar
-    
-    
-    
-
-    
+    [self createtoolbarandpicker];
     
     if (button==self.buttonForSelect) {
         toolBarForNumber.hidden = YES;
@@ -1251,14 +1141,9 @@
         [UIView setAnimationDuration:0.3];
         pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, 320, 216);
         toolBarForSizePicker.frame=CGRectMake(0,ScreenHeight+20, 320, 44);
-//        if (isFromMyAimer) {
-//            pickerForSelectColor.frame=CGRectMake(0, ScreenHeight-PickShowHigh+50, 320, 216);
-//            toolBarForPicker.frame=CGRectMake(0, ScreenHeight-PickShowHigh-44+50, 320, 44);
-//        }else {
         pickerForSelectColor.frame=CGRectMake(0, ScreenHeight-PickShowHigh, 320, 216);
         toolBarForPicker.frame=CGRectMake(0, ScreenHeight-PickShowHigh-44, 320, 44);
-//        }
-
+        
         [UIView commitAnimations];
     }else{
         toolBarForNumber.hidden = YES;
@@ -1283,14 +1168,9 @@
         
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
-//        if (isFromMyAimer) {
-//            pickerForSelectSize.frame=CGRectMake(0, ScreenHeight-PickShowHigh+50, 320, 216);
-//            toolBarForSizePicker.frame=CGRectMake(0,ScreenHeight-PickShowHigh-44+50, 320, 44);
-//        }else{
-            pickerForSelectSize.frame=CGRectMake(0, ScreenHeight-PickShowHigh, 320, 216);
-            toolBarForSizePicker.frame=CGRectMake(0,ScreenHeight-PickShowHigh-44, 320, 44);
-//        }
-
+        pickerForSelectSize.frame=CGRectMake(0, ScreenHeight-PickShowHigh, 320, 216);
+        toolBarForSizePicker.frame=CGRectMake(0,ScreenHeight-PickShowHigh-44, 320, 44);
+        
         pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, 320, 216);
         toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44);
         [UIView commitAnimations];
@@ -1326,7 +1206,7 @@
     }
     cell.contentView.backgroundColor=[UIColor clearColor];
     detailList=[productModel.detailSuper ProductdetailSuperDetail];
-    int row = [indexPath row];
+    NSInteger row = [indexPath row];
     if (row > 2 && !hasSuit) {
         row += 1;
     }
@@ -1491,8 +1371,6 @@
                                 label_size.text = self.selectedSize;
                                 break;
                             }else {
-                                //                                currentSize = 0;
-//                                label_size.text =[[self.arrTemSize objectAtIndex:currentSize] objectForKey:@"spec_alias"];
                                 //lee999 增加判断
                                 if ([self.arrTemSize count] > currentSize) {
                                     label_size.text =[[self.arrTemSize objectAtIndex:currentSize] objectForKey:@"spec_alias"];
@@ -1515,7 +1393,6 @@
             [self.buttonForSize addSubview:label_size];
             
             //从购物车和秒杀进 不创建数量
-//            int forNum=[[self getLastViewController] isEqualToString:@"YKSecKillListController"]||[[self getLastViewController] isEqualToString:@"YKCartController"]?2:3;
             int forNum = 3;
             for (int i = 0; i < forNum; ++i) {
                 UILabel *cellWith1Lab = [[UILabel alloc] init];
@@ -1555,10 +1432,6 @@
                 [cell.contentView addSubview:cellWith1Lab];
             } // end for
             
-            //从购物车和秒杀进 不创建数量
-//            if (forNum==2) {
-//                break;
-//            }
             buttonForNum=[[UITextField alloc] initWithFrame:CGRectMake(60, 50, 79, 30)];
             buttonForNum.borderStyle=UITextBorderStyleNone;
             buttonForNum.background=[UIImage imageNamed:@"choice_btn_02.png"];
@@ -1644,14 +1517,7 @@
                     [buttonForAction setTitle:[buttonName objectAtIndex:i] forState:UIControlStateNormal];
                     [buttonForAction setEnabled:YES];
                 }
-                //判断上一级目录是不是收藏列表，如果是，就不能再次点击收藏
-//                if ([[self getLastViewController]isEqualToString:@"CollectViewController"]) {
-//                    if (i==1) {
-//                        [buttonForAction setUserInteractionEnabled:NO];
-//                        
-//                        [buttonForAction setSelected:YES];
-//                    }
-//                }
+
                 //加入收藏夹
                 [buttonForAction addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
                 buttonForAction.tag=200+i;
@@ -1718,11 +1584,10 @@
                     
                     UIButton *control = [[UIButton alloc] initWithFrame:CGRectMake(10, 9, 91, 111)];
                     control.tag =i*3+j ;
-                    [[NSUserDefaults standardUserDefaults]setObject:[[productModel.recommendlist objectAtIndex:i*3+j]RecommendID] forKey:[NSString stringWithFormat:@"%d",control.tag]];
+                    [[NSUserDefaults standardUserDefaults]setObject:[[productModel.recommendlist objectAtIndex:i*3+j]RecommendID] forKey:[NSString stringWithFormat:@"%ld",control.tag]];
                     
                     UrlImageView *imageView=[[UrlImageView alloc]init];
                     imageView.frame=CGRectMake(0, 0, 91, 111);
-                    //                    [imageView setImageFromUrl:YES withUrl:[self ImageSize:[[productModel.recommendlist objectAtIndex:i*3+j]RecommendPic] Size:@"112x124"]];
                     [imageView setImageWithURL:[NSURL URLWithString:[self ImageSize:[[productModel.recommendlist objectAtIndex:i*3+j]RecommendPic] Size:ChangeImageURL]] placeholderImage:[UIImage imageNamed:@"pic_default_product_list_02.png"]];
                     [control addSubview:imageView];
                     
@@ -1769,7 +1634,7 @@
 
 #pragma mark === 商品评价
 - (void)Productdetail_PingjianShow:(UIButton *)sender {
-//    [MYCommentAlertView showMessage:@"即将推出，敬请期待" target:nil];    
+
     ShowcomMentViewController *aceessVC = [[ShowcomMentViewController alloc] init];
     aceessVC.goodId = self.thisProductId;
     aceessVC.pingjian = productModel.commentcount;
@@ -1790,7 +1655,6 @@
         YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
         webView.strURL = productModel.size_url;
         webView.strTitle = @"尺码对照";
-//        webView.webViewFrame = self.view.frame;
         webView.isHiddenBar = self.isHiddenBar;
         [self.navigationController pushViewController:webView animated:YES];
     }
@@ -1799,10 +1663,7 @@
 
 - (void)preferendialsuit:(id) sender
 {
-//    [MYCommentAlertView showMessage:@"即将推出，敬请期待" target:nil];
-
     YKPreferentialSuit *controller = [[YKPreferentialSuit alloc] init];
-//    controller.mill_Tag = self.mill_Tag;
     controller.strStuit = productModel.suitid;
     controller.isFromMyAimer =  self.isFromMyAimer;
     controller.isHiddenBar = self.isHiddenBar;
@@ -1817,7 +1678,7 @@
     
     UrlImageButton *button=(UrlImageButton*)sender;
     ProductDetailViewController *detial = [[ProductDetailViewController alloc]init];
-    detial.thisProductId=[[NSUserDefaults standardUserDefaults] objectForKey: [NSString stringWithFormat:@"%d",button.tag]];
+    detial.thisProductId=[[NSUserDefaults standardUserDefaults] objectForKey: [NSString stringWithFormat:@"%ld",button.tag]];
     detial.isFromMyAimer = self.isFromMyAimer;
     detial.isHiddenBar = self.isHiddenBar;
     detial.isPush = YES;
@@ -1950,77 +1811,4 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 @end
-
-
-
-
-
-
-
-
-//- (IBAction)productShare:(UIButton *)sender//分享点击事件
-//{
-
-//    self.navbtnRight.enabled = NO;
-//    UIView *productShare = [[[NSBundle mainBundle] loadNibNamed:@"ProductShareView" owner:self options:nil] lastObject];
-//    self.shareView = productShare;
-//    [[productShare viewWithTag:208] setFrame:CGRectMake(0, self.view.frame.size.height-230,320,230)];
-//
-////    if (isiPhone5) {
-////    }else{
-////        [[productShare viewWithTag:208] setFrame:CGRectMake(0, 250-50,320,230)];
-////    }
-//    [self.view addSubview:self.shareView];
-
-
-//    //lee999埋点
-//    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"分享", @"Share_Type", self.thisProductId, @"Goods_ID",productModel.prodcutName, @"Goods_Name",nil];
-//    [TalkingData trackEvent:@"1005" label:@"商品分享" parameters:dic];
-//
-//    switch (sender.tag) {
-//        case 81://新浪
-//        {
-//            ProductShareViewController *shareV = [[ProductShareViewController alloc] initWithNibName:@"ProductShareViewController" bundle:nil];
-//            shareV.isSina = YES;
-//            shareV.productID = self.thisProductId;
-//            shareV.productDetailModel = productModel;
-//            shareV.strTitle = @"分享至新浪微博";
-//            [self.navigationController pushViewController:shareV animated:YES];
-//        }
-//            break;
-//        case 82://朋友圈
-//        {
-//            ProductShareViewController *shareV = [[ProductShareViewController alloc] initWithNibName:@"ProductShareViewController" bundle:nil];
-//            shareV.isSina = NO;
-//
-//            shareV.productDetailModel = productModel;
-//            shareV.strTitle = @"分享至微信朋友圈";
-//            [self.navigationController pushViewController:shareV animated:YES];
-//        }
-//            break;
-//        case 83://复制
-//        {
-//            UIPasteboard *PasttBoard = [UIPasteboard generalPasteboard];
-//            PasttBoard.string = [NSString stringWithFormat:@"我在@爱慕官方商城 客户端发现了一款不错的产品:%@,%@元,\n%@下载客户端:\nhttp://m.aimer.com.cn/method/xiazai",productModel.prodcutName,productModel.price_aimer,productModel.product_share_url];
-//        }
-//            break;
-//        default:
-//            break;
-//    }
-//    self.navbtnRight.enabled = YES;
-//    [self.shareView removeFromSuperview];
-//}
-
-//- (void)shareSuccess {
-//    self.navbtnRight.enabled = YES;
-//    [self.navigationController popViewControllerAnimated:YES];
-////    [self popBackAnimate:nil];
-//}
-//
-//- (IBAction)cancel:(id)sender{
-//    self.navbtnRight.enabled = YES;
-//    [self.shareView removeFromSuperview];
-//}

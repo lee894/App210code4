@@ -947,6 +947,15 @@
 }
 
 
+//获取私人衣橱2 的数据
+-(void)getCloset2Data:(NSString*)strtype{
+    
+    [self sendPostWithURL:@"wardrobe" tag:Http_wardrobe_Tag beforeRequest:^{
+        [self addParam:@"type" withValue:strtype];
+    }];
+}
+
+
 
 @end
 

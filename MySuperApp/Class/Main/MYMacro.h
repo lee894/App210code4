@@ -168,11 +168,11 @@
 //====================================================
 
 //API的host路径
-#define OFFICIALDOMAIN @"http://mobiletest.aimer.com.cn:8888/mobile/"
-//#define OFFICIALDOMAIN @"http://124.207.72.140:8888/mobiletest/"
-//#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobile/"
+//#define OFFICIALDOMAIN @"http://mobiletest.aimer.com.cn:8888/mobile/"
+#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobile/"
 //#define OFFICIALDOMAIN @"http://124.207.152.104/mobile/"
 //#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobiletest/"
+//#define OFFICIALDOMAIN @"http://124.207.72.140:8888/mobiletest/"
 
 //====================================================
 // 用途: viewController里主视图的frame
@@ -439,11 +439,11 @@
 #define Http_MoreMyAimer20_Tag      207 //获取我的爱慕页面更多推荐的信息
 
 #define Http_Sort20_Tag      208 //新版本 分类
-
-
 #define Http_Branddetail20_Tag      209 //品牌馆详情
-
 #define Http_FavoriteList20_Tag 210 //新版本 收藏夹列表
+
+
+#define Http_wardrobe_Tag 301 //私人衣橱 1
 
 
 

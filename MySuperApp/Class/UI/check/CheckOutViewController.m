@@ -67,18 +67,6 @@
     [self.navbtnRight setTitle:@"提交订单" forState:UIControlStateNormal];
     [self.navbtnRight setTitle:@"提交订单" forState:UIControlStateHighlighted];
     [self.navbtnRight setFrame:CGRectMake(242, 7, 66, 32)];
-    
-    
-//	chectOutTable=[[UITableView alloc] initWithFrame:CGRectMake(0, 10, 320, self.view.frame.size.height-100) style:UITableViewStylePlain];
-//	chectOutTable.delegate=self;
-//	chectOutTable.dataSource=self;
-//    chectOutTable.backgroundView = nil;
-//    chectOutTable.backgroundColor=[UIColor clearColor];
-//    chectOutTable.showsVerticalScrollIndicator=NO;
-//    chectOutTable.separatorStyle=UITableViewCellSeparatorStyleNone;
-//    if (isIOS7up) {
-//        [chectOutTable setFrame:CGRectMake(0, 70, 320, self.view.frame.size.height-130)];
-//    }
 	
     suitlistcell= [[NSMutableArray alloc] init];
 	tableCells = [[NSMutableArray alloc] init];
@@ -159,32 +147,6 @@
                 refer.sendStrng = submitOrderModel.key;
                 //end
                 [self.navigationController pushViewController:refer animated:YES];
-                
-                
-//            if (submitOrderModel.zunxiang)
-//                {
-//                    BlockAlertView *alert = [[BlockAlertView alloc]initWithTitle:@"爱慕提示" message:@"此次购物完成后可以成为爱慕集团尊享卡会员，请问您是否愿意加入？"];
-//                    alert.isTag = YES;
-//                    [alert setDestructiveButtonWithTitle:@"我为什么要入会？>" block:^(void) {
-//                        
-//                        YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
-//                        webView.strURL = @"http://m.aimer.com.cn/method/v6codeinfo";
-//                        webView.strTitle = @"尊享卡会员";
-//                        webView.webViewFrame = self.view.frame;
-//                        webView.sendStrng =submitOrderModel.key;
-//                        [self.navigationController pushViewController:webView animated:YES];
-//                    }];
-//                    
-//                    [alert addButtonWithTitle:@"是" block:^(void)
-//                     {
-//                         ImproveInformationViewController *iminfo = [[ImproveInformationViewController alloc] initWithNibName:@"ImproveInformationViewController" bundle:nil];
-//                         iminfo.key = submitOrderModel.key;
-//                         [self.navigationController pushViewController:iminfo animated:YES];
-//                     }];
-//                    [alert setCancelButtonWithTitle:@"否" block:nil];
-//                    
-//                    [alert show];
-//                }
                 
                 [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 
@@ -291,7 +253,6 @@
     } else {
         //提交订单
         [self loadData];
-//		[self performSelector:@selector(loadData) withObject:nil afterDelay:0.1];
 	}
 }
 
@@ -302,9 +263,6 @@
     if (card_id) {
         self.vouId = @"";
     }
-
-//    [TalkingDataAppCpa convertedWithAppKey:@"9857c315ff5042289dbcac3bd89aa4ab"];
-    
     if ([self.postText isEqualToString:@"订单附言"]) {
         self.postText = @"";
     }
@@ -329,15 +287,14 @@
 	[footView addSubview:tijiButton];
     
 	//ADD HeadView:
-	UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 140)];
+	UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(140))];
 	headerView.backgroundColor = [UIColor clearColor];
     
-	UIImageView* bgview = [[UIImageView alloc] init];
-	bgview.frame = CGRectMake(5, 5, 310, 147);
-//    [bgview setImage:[UIImage imageNamed:@"edit_infor_bg.png"]];//[ resizableImageWithCap:UIEdgeInsetsMake(0, 0, 0, 0)];
-    //lee给view设置为圆角，不再使用图片了。 -140512
-    [SingletonState setViewRadioSider:bgview];
-	[headerView addSubview:bgview];
+//	UIImageView* bgview = [[UIImageView alloc] init];
+//	bgview.frame = CGRectMake(5, 5, 310, 147);
+//    //lee给view设置为圆角，不再使用图片了。 -140512
+//    [SingletonState setViewRadioSider:bgview];
+//	[headerView addSubview:bgview];
 
 	
 	NSArray* nameArray = [[NSArray alloc] initWithObjects:@"商品金额：",@"运费：",@"优惠券抵扣：",@"活动优惠金额：",@"尊享卡电子劵抵扣：",@"订单总金额：",@"可获积分：",nil];
@@ -406,11 +363,6 @@
 		UITableViewCell *Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                        reuseIdentifier:CellIdentifier2];
 		Cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        UIImageView *cellBg = [[UIImageView alloc] initWithFrame:CGRectMake(5, 6, 310, 152)];
-        //lee给view设置为圆角，不再使用图片了。 -140512
-        [SingletonState setViewRadioSider:cellBg];
-        [Cell.contentView addSubview:cellBg];
         
 		UIImageView* bgview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cart_pic_bg"]];
 		bgview.frame = CGRectMake(10, 10, 92, 113);
@@ -423,7 +375,7 @@
         jifenLabel.backgroundColor = [UIColor clearColor];
         jifenLabel.textAlignment = UITextAlignmentCenter;
         jifenLabel.font = [UIFont systemFontOfSize:13.];
-        jifenLabel.text = [NSString stringWithFormat:@"积分： %d",item.score];
+        jifenLabel.text = [NSString stringWithFormat:@"积分： %ld",item.score];
         
         [Cell.contentView addSubview:jifenLabel];
         
@@ -713,30 +665,26 @@
                                                        reuseIdentifier:CellIdentifier];
 		Cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        
 		if (i == 0) {//地址
             
             height_d = 70; //如果地址有内容 cell section 的高度
             
-            UILabel* name = nil;
-        
-//            UIImage *bgImage = [[UIImage imageNamed:@"list_one.png"] resizableImageWithCap:UIEdgeInsetsMake(2, 2, 2, 2)];
+            UILabel* name2 = nil;
             
-            
-			if (self.addressItem_ben != nil) {
-//                bgImage = [bgImage resizableImageWithCap:UIEdgeInsetsMake(14, 14, 10, 10)];
-
+			if (self.addressItem_ben != nil)
+            {
 				self.straddressID = self.addressItem_ben.addresslistIdentifier;
-				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 265, 25)];
+				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(20, 5,ScreenWidth-40, 30)];
 				name.backgroundColor = [UIColor clearColor];
-				name.font = [UIFont systemFontOfSize:14];
+				name.font = [UIFont systemFontOfSize:LabMidSize];
 				name.text = self.addressItem_ben.userName;
 				[Cell addSubview:name];
 
-				
-				UILabel* address2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, 200, 35)];
+				UILabel* address2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, ScreenWidth-60, 35)];
 				address2.backgroundColor = [UIColor clearColor];
 				address2.font = [UIFont systemFontOfSize:14];
-				NSString* addresss1 = [NSString stringWithFormat:@"%@%@%@%@",self.addressItem_ben.province,self.addressItem_ben.city,self.addressItem_ben.county,self.addressItem_ben.address];
+				NSString* addresss1 = [NSString stringWithFormat:@"地址：%@%@%@%@",self.addressItem_ben.province,self.addressItem_ben.city,self.addressItem_ben.county,self.addressItem_ben.address];
                 
                 self.province = self.addressItem_ben.province;
 				address2.text = addresss1;
@@ -745,19 +693,15 @@
 				address2.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
 				[Cell addSubview:address2];
 
-				
-				UILabel* phone = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, 280, 25)];
+				UILabel* phone = [[UILabel alloc] initWithFrame:CGRectMake(20, 75, lee1fitAllScreen(280), 25)];
 				phone.backgroundColor = [UIColor clearColor];
 				phone.font = [UIFont systemFontOfSize:14];
 				phone.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
-				phone.text = self.addressItem_ben.mobile;
+				phone.text = [NSString stringWithFormat:@"电话：%@",self.addressItem_ben.mobile];
 				[Cell addSubview:phone];
-
-			}else if ([mycheckOutModel.checkoutConsigneeinfo count] >0)
+			}
+            else if ([mycheckOutModel.checkoutConsigneeinfo count] >0)
             {
-                
-//                 bgImage = [bgImage resizableImageWithCap:UIEdgeInsetsMake(14, 14, 10, 10)];
-                
                 YKAdressItem* addressItem = nil;
                 
                 for (YKAdressItem *temp in mycheckOutModel.checkoutConsigneeinfo) {
@@ -774,17 +718,17 @@
 				self.straddressID = addressItem.addressId;
                 self.province = addressItem.province;
                 
-				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 280, 25)];
+				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, ScreenWidth-40, 30)];
 				name.backgroundColor = [UIColor clearColor];
-				name.font = [UIFont systemFontOfSize:14];
+				name.font = [UIFont systemFontOfSize:LabMidSize];
 				name.text = addressItem.user_name;
 				[Cell addSubview:name];
 
 				
-				UILabel* address2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 30, 200, 35)];
+				UILabel* address2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, ScreenWidth-40, 35)];
 				address2.backgroundColor = [UIColor clearColor];
 				address2.font = [UIFont systemFontOfSize:14];
-				NSString* addresss1 = [NSString stringWithFormat:@"%@%@%@%@",addressItem.province,addressItem.city,addressItem.county,addressItem.address];
+				NSString* addresss1 = [NSString stringWithFormat:@"地址：%@%@%@%@",addressItem.province,addressItem.city,addressItem.county,addressItem.address];
 				address2.text = addresss1;
 				address2.numberOfLines = 0;
 				address2.lineBreakMode = UILineBreakModeWordWrap;
@@ -792,55 +736,43 @@
 				[Cell addSubview:address2];
 
 				
-				UILabel* phone = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, 280, 25)];
+				UILabel* phone = [[UILabel alloc] initWithFrame:CGRectMake(20, 75, 280, 25)];
 				phone.backgroundColor = [UIColor clearColor];
 				phone.font = [UIFont systemFontOfSize:14];
 				phone.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
-				phone.text = addressItem.mobile;
+				phone.text = [NSString stringWithFormat:@"电话：%@",addressItem.mobile];
 				[Cell addSubview:phone];
 
 			}else {
 				
                 height_d = 0;// 地址没有信息
              
-                name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 30)];
-				name.text = [titleArray objectAtIndex:i];
-				name.backgroundColor = [UIColor clearColor];
-				name.font = [UIFont systemFontOfSize:14];
-				name.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
-				[Cell.contentView addSubview:name];
+                name2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, ScreenWidth-20, 30)];
+				name2.text = [titleArray objectAtIndex:i];
+				name2.backgroundColor = [UIColor clearColor];
+				name2.font = [UIFont systemFontOfSize:LabMidSize];
+				name2.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
+				[Cell.contentView addSubview:name2];
 			}
             
-            UIImageView *cellBg = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, height_d+40)];
-//            [cellBg setImage:bgImage];
-            //lee给view设置为圆角，不再使用图片了。 -140512
-            [SingletonState setViewRadioSider:cellBg];
-            [Cell.contentView addSubview:cellBg];
-            [Cell.contentView bringSubviewToFront:name];
+            [Cell.contentView bringSubviewToFront:name2];
 
 			Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			
-		} else if (i == 1) {//附言
-            
-            
-//            UIImage *bgImage = [UIImage imageNamed:@"list_one.png"];//[ resizableImageWithCap:UIEdgeInsetsMake(2, 0, 2, 0)];
-            UIImageView *cellBg = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, height_d+40)];
-//            [cellBg setImage:bgImage];
-            //lee给view设置为圆角，不再使用图片了。 -140512
-            [SingletonState setViewRadioSider:cellBg];
-            [Cell.contentView addSubview:cellBg];
+		}
+        else if (i == 1) {//附言
             
 			if ([self.postText isEqualToString:@""] || self.postText == nil) {
-				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 30)];
+				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, ScreenWidth-20, 30)];
 				name.text = [titleArray objectAtIndex:i];
 				name.backgroundColor = [UIColor clearColor];
-				name.font = [UIFont systemFontOfSize:14];
+				name.font = [UIFont systemFontOfSize:LabMidSize];
 				name.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
                 name.tag=1154;
 				[Cell.contentView addSubview:name];
 			} else {
 				UIFont *font = [UIFont systemFontOfSize:14];
-				CGSize size = [self.postText sizeWithFont:font constrainedToSize:CGSizeMake(230.0f, 10000) lineBreakMode:NSLineBreakByWordWrapping];
+                CGSize size = [self.postText sizeWithFont:font constrainedToSize:CGSizeMake(ScreenWidth-60, 10000) lineBreakMode:NSLineBreakByWordWrapping];
                 
                 CGFloat heigth;
                 heigth = size.height;
@@ -851,9 +783,7 @@
                     heigth+=10;
                 }
                 
-                UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, 230, heigth)];
-                cellBg.frame = CGRectMake(cellBg.frame.origin.x, cellBg.frame.origin.y, 310, name.frame.size.height+10-3);
-
+                UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, ScreenWidth-60, heigth)];
 				name.text = self.postText;
 				name.numberOfLines = 0;
 				name.lineBreakMode = UILineBreakModeWordWrap;
@@ -861,23 +791,21 @@
 				name.font = [UIFont systemFontOfSize:14];
 				name.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
 				[Cell.contentView addSubview:name];
+                
+                if ([self.postText isEqualToString:[titleArray objectAtIndex:i]]) {
+                    name.font = [UIFont systemFontOfSize:LabMidSize];
+                }
 			}
-            
+        
 			Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
 		} else if (i == 2) {//优惠券
-            
-            UIImageView *cellBg = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, 40)];
-//            [cellBg setImage:bgImage];
-            //lee给view设置为圆角，不再使用图片了。 -140512
-            [SingletonState setViewRadioSider:cellBg];
-            [Cell.contentView addSubview:cellBg];
             
 			if (!mycheckOutModel.checkout_usecouponcard&& !mycheckOutModel.checkout_usev6cards) {
 				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 150, 30)];
 				name.text = [titleArray objectAtIndex:i];
 				name.backgroundColor = [UIColor clearColor];
-				name.font = [UIFont systemFontOfSize:14];
+				name.font = [UIFont systemFontOfSize:LabMidSize];
 				name.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
 				[Cell.contentView addSubview:name];
 				Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -908,13 +836,6 @@
 			
 		} else if (i == 3) { //新增付款方式选择
             
-//            UIImage *bgImage = [UIImage imageNamed:@"list_one.png"];//[ resizableImageWithCap:UIEdgeInsetsMake(0, 0, 0, 0)];
-            UIImageView *cellBg = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, 40)];
-//            [cellBg setImage:bgImage];
-            //lee给view设置为圆角，不再使用图片了。 -140512
-            [SingletonState setViewRadioSider:cellBg];
-            [Cell.contentView addSubview:cellBg];
-            
             Cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             OHAttributedLabel *name = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(10, 5+5+2, 300, 30)];
@@ -924,7 +845,7 @@
             if ((self.m_strPayMethod == nil) || ([self.m_strPayMethod isEqualToString:@""])) {
                 NSMutableAttributedString *attributeStr = [NSMutableAttributedString attributedStringWithString:[NSString stringWithFormat:@"%@",[titleArray objectAtIndex:i]]];
                 [attributeStr setTextColor:[UIColor colorWithHexString:@"0x666666"]];
-                [attributeStr setFont:[UIFont systemFontOfSize:14]];
+                [attributeStr setFont:[UIFont systemFontOfSize:LabMidSize]];
                 
                 name.attributedText = attributeStr;
                 
@@ -952,7 +873,7 @@
                     
                     NSMutableAttributedString *attributeStr = [NSMutableAttributedString attributedStringWithString:[NSString stringWithFormat:@"%@",[titleArray objectAtIndex:i]]];
                     [attributeStr setTextColor:[UIColor colorWithHexString:@"0x666666"]];
-                    [attributeStr setFont:[UIFont systemFontOfSize:14]];
+                    [attributeStr setFont:[UIFont systemFontOfSize:LabMidSize]];
                     name.attributedText = attributeStr;
                 }
 			}
@@ -961,11 +882,12 @@
             Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
         } else if (i == 4){
+            
 			Cell.selectionStyle = UITableViewCellSelectionStyleNone;
 			UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 30)];
 			name.text = [titleArray objectAtIndex:i];
 			name.backgroundColor = [UIColor clearColor];
-			name.font = [UIFont systemFontOfSize:14];
+			name.font = [UIFont systemFontOfSize:LabMidSize];
 			name.textColor = [UIColor colorWithHexString:@"0x666666"];
 			[Cell.contentView addSubview:name];
             
@@ -1053,9 +975,22 @@ NSLog(@"createOtherCells  come out");
 	return 0;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 1 ||section == 2 ||section == 3 ||section == 4) {
+        return 0.5;
+    }
+    return 10.;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *fv = [[UIView alloc] init];
+    [fv setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
+    return fv;
+
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int section = indexPath.section;
+    NSInteger section = indexPath.section;
     if (section >= 5) {
         if (section - suitCount == 5) {
             //普通商品
@@ -1073,7 +1008,7 @@ NSLog(@"createOtherCells  come out");
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    int section = indexPath.section;
+    NSInteger section = indexPath.section;
     
     switch (section) {
         case 0:
@@ -1135,7 +1070,7 @@ NSLog(@"createOtherCells  come out");
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    int section = indexPath.section;
+    NSInteger section = indexPath.section;
     if (section == 0) {
         //地址选择
         AddressViewController* addressView = [[AddressViewController alloc] initWithNibName:@"AddressViewController" bundle:nil];

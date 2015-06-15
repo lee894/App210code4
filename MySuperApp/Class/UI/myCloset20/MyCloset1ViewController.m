@@ -11,10 +11,17 @@
 #import "MyClosetNan2ViewController.h"
 #import "MyClosetKid2ViewController.h"
 #import "MyClosetMade2ViewController.h"
+#import "MyClosetInfo.h"
+#import "MyClosetParser.h"
 
-@interface MyCloset1ViewController ()
+@interface MyCloset1ViewController ()<ServiceDelegate>
 {
-    int selectTag;
+    
+    MainpageServ *mainSev;
+    MyClosetInfo *_closetinfo;
+
+    
+    NSInteger selectTag;
 
     IBOutlet UILabel *nameLab1;
     IBOutlet UILabel *nameLab2;
@@ -38,51 +45,14 @@
     [self createBackBtnWithType:0];
     [self NewHiddenTableBarwithAnimated:YES];
 
-//    [self createView];
+    
+    mainSev = [[MainpageServ alloc] init];
+    mainSev.delegate = self;
+    [mainSev getHomePage20data];
 }
 
 
--(void)createView{
-    
-    int countNum = 4;
-    int sep = 13;
-    int H = 100;
-    
-    NSArray *imageArr = [NSArray arrayWithObjects:@"sryc_img_woman.png",@"sryc_img_man.png",@"sryc_img_girl.png",@"sryc_img_dz.png", nil];
-    for (int i = 0; i<countNum; i++) {
-        
-        if (i==2) {
-            H += 180+sep;
-        }
-        
-        UIImageView *imagev = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[imageArr objectAtIndex:i]]];
-        [imagev setFrame:CGRectMake((i|2)==0?sep:sep*2+140, H, 140, 180)];
-        [self.view addSubview:imagev];
-        
-        
-    }
-    
-    
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+#pragma mark--- Action
 
 - (IBAction)typeSelectAction:(id)sender {
     
@@ -231,6 +201,38 @@
         return;
     }
     
+    
+    NSString *strtype = @"";
+    switch (selectTag) {
+        case 1:
+        strtype = @"woman";
+            break;
+            
+        case 2:
+            strtype = @"man";
+
+            break;
+            
+        case 3:
+            strtype = @"kids";
+
+            break;
+            
+        case 4:
+#warning -----
+            strtype = @"";
+
+            break;
+            
+        default:
+            break;
+    }
+    
+    [mainSev getCloset2Data:strtype];
+
+    
+    
+    
     switch (selectTag) {
         case 1:
         {
@@ -268,8 +270,62 @@
         default:
             break;
     }
+}
+
+
+#pragma mark--- Severvice
+-(void)serviceStarted:(ServiceType)aHandle{
+}
+
+-(void)serviceFailed:(ServiceType)aHandle{
+    [SBPublicAlert hideMBprogressHUD:self.view];
     
 }
+
+-(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel{
+    
+    LBaseModel *model = (LBaseModel *)amodel;
+    _closetinfo = [[MyClosetParser alloc] init];
+}
+
+//-(void)createView{
+//
+//    int countNum = 4;
+//    int sep = 13;
+//    int H = 100;
+//
+//    NSArray *imageArr = [NSArray arrayWithObjects:@"sryc_img_woman.png",@"sryc_img_man.png",@"sryc_img_girl.png",@"sryc_img_dz.png", nil];
+//    for (int i = 0; i<countNum; i++) {
+//
+//        if (i==2) {
+//            H += 180+sep;
+//        }
+//
+//        UIImageView *imagev = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[imageArr objectAtIndex:i]]];
+//        [imagev setFrame:CGRectMake((i|2)==0?sep:sep*2+140, H, 140, 180)];
+//        [self.view addSubview:imagev];
+//
+//
+//    }
+//}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 
 

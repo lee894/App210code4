@@ -45,11 +45,11 @@
     NSMutableArray *buttonsForSize;//尺码数据源
     NSMutableArray *numberProduct;//物品数量的数据源
     
-    int currentProduct;//因为不同颜色对应不同的商品 换颜色也换currentproduct id
-    int currentColor;//滚动picker时给这b赋值
-    int didSelectColor;
-    int currentSize;
-    int currentNumber; //商品的数量
+    NSInteger currentProduct;//因为不同颜色对应不同的商品 换颜色也换currentproduct id
+    NSInteger currentColor;//滚动picker时给这b赋值
+    NSInteger didSelectColor;
+    NSInteger currentSize;
+    NSInteger currentNumber; //商品的数量
     int didSelectNumber;
     int recordNUM;
     

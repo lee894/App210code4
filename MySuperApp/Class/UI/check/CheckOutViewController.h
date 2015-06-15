@@ -18,7 +18,7 @@
     
    IBOutlet UITableView* chectOutTable;
     
-    int suitCount;  //套装拥有数量
+    NSInteger suitCount;  //套装拥有数量
     
     COCheckOutModel *mycheckOutModel;
 

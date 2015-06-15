@@ -10,7 +10,7 @@
 
 @interface MyCloset2ViewController : LBaseViewController
 
-@property(nonatomic,assign) int selectType; //1 女士，2 男士 3，儿童  4定制
+@property(nonatomic,assign) NSInteger selectType; //1 女士，2 男士 3，儿童  4定制
 
 - (IBAction)nextBtnAction:(id)sender;
 

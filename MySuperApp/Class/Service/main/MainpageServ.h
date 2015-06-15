@@ -306,6 +306,11 @@
 - (void)getRegisterVerifycode:(NSString *)mobile;
 
 
+
+//获取私人衣橱2 的数据
+-(void)getCloset2Data:(NSString*)strtype;
+
+
 @end
 
 

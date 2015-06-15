@@ -699,7 +699,7 @@
     
     for (int i = 0; i<subSortbtnNum; i++) {
         
-        int jcount = ([subSortArray count]-lineNum*i)>lineNum?lineNum:([subSortArray count]-lineNum*i);
+        NSInteger jcount = ([subSortArray count]-lineNum*i)>lineNum?lineNum:([subSortArray count]-lineNum*i);
         
         for (int j = 0; j<jcount; j++) {
             

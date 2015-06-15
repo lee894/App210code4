@@ -719,6 +719,8 @@
 		96D465771AD558C800BA5700 /* tb_4_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D4656D1AD558C800BA5700 /* tb_4_normal@2x.png */; };
 		96D465781AD558C800BA5700 /* tb_5_hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D4656E1AD558C800BA5700 /* tb_5_hover@2x.png */; };
 		96D465791AD558C800BA5700 /* tb_5_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D4656F1AD558C800BA5700 /* tb_5_normal@2x.png */; };
+		96DB41871B2D5CC8006E35CC /* MyClosetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DB41861B2D5CC8006E35CC /* MyClosetInfo.m */; };
+		96DB418A1B2D5CE4006E35CC /* MyClosetParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DB41891B2D5CE4006E35CC /* MyClosetParser.m */; };
 		96EDC3BD1AC436070093FF25 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EDC3B81AC436070093FF25 /* RDVTabBar.m */; };
 		96EDC3BE1AC436070093FF25 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EDC3BA1AC436070093FF25 /* RDVTabBarController.m */; };
 		96EDC3BF1AC436070093FF25 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EDC3BC1AC436070093FF25 /* RDVTabBarItem.m */; };
@@ -2078,6 +2080,10 @@
 		96D4656D1AD558C800BA5700 /* tb_4_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb_4_normal@2x.png"; sourceTree = "<group>"; };
 		96D4656E1AD558C800BA5700 /* tb_5_hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb_5_hover@2x.png"; sourceTree = "<group>"; };
 		96D4656F1AD558C800BA5700 /* tb_5_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb_5_normal@2x.png"; sourceTree = "<group>"; };
+		96DB41851B2D5CC8006E35CC /* MyClosetInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClosetInfo.h; sourceTree = "<group>"; };
+		96DB41861B2D5CC8006E35CC /* MyClosetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClosetInfo.m; sourceTree = "<group>"; };
+		96DB41881B2D5CE4006E35CC /* MyClosetParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClosetParser.h; sourceTree = "<group>"; };
+		96DB41891B2D5CE4006E35CC /* MyClosetParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClosetParser.m; sourceTree = "<group>"; };
 		96EDC3B71AC436070093FF25 /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBar.h; sourceTree = "<group>"; };
 		96EDC3B81AC436070093FF25 /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBar.m; sourceTree = "<group>"; };
 		96EDC3B91AC436070093FF25 /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarController.h; sourceTree = "<group>"; };
@@ -3636,6 +3642,7 @@
 		9665907D1B159942004CF036 /* myCloset20 */ = {
 			isa = PBXGroup;
 			children = (
+				96DB417E1B2D5B50006E35CC /* data */,
 				968AE8991B2540AB004A1A85 /* MyClosetKidGril3ViewController.h */,
 				968AE89A1B2540AB004A1A85 /* MyClosetKidGril3ViewController.m */,
 				968AE89B1B2540AB004A1A85 /* MyClosetKidGril3ViewController.xib */,
@@ -4195,6 +4202,17 @@
 				96D4656F1AD558C800BA5700 /* tb_5_normal@2x.png */,
 			);
 			path = newTableBar;
+			sourceTree = "<group>";
+		};
+		96DB417E1B2D5B50006E35CC /* data */ = {
+			isa = PBXGroup;
+			children = (
+				96DB41851B2D5CC8006E35CC /* MyClosetInfo.h */,
+				96DB41861B2D5CC8006E35CC /* MyClosetInfo.m */,
+				96DB41881B2D5CE4006E35CC /* MyClosetParser.h */,
+				96DB41891B2D5CE4006E35CC /* MyClosetParser.m */,
+			);
+			path = data;
 			sourceTree = "<group>";
 		};
 		96EDC3B61AC436070093FF25 /* RDVTabBarController */ = {
@@ -6786,6 +6804,7 @@
 				9B49754118E66C5C00F3D140 /* ModifyCell.m in Sources */,
 				2F2137D718E4574700F91104 /* AddAddressViewController.m in Sources */,
 				968AE8761B24A55B004A1A85 /* MyClosetMade2ViewController.m in Sources */,
+				96DB41871B2D5CC8006E35CC /* MyClosetInfo.m in Sources */,
 				9BCA82C218C47FA300B81CA5 /* NewPageViewController.m in Sources */,
 				9B7CB14418D59C4300D8DAA5 /* SubmitOrderSubmitorder.m in Sources */,
 				9BD58CFA18E40D57008CD881 /* RKTabItem.m in Sources */,
@@ -6932,6 +6951,7 @@
 				9B23E77B18F658AC00E9B317 /* NoticeListViewController.m in Sources */,
 				9B7CB13D18D59C4300D8DAA5 /* CheckCheckOffineMobile.m in Sources */,
 				9B7CB15418D59C4300D8DAA5 /* NogiftsModel.m in Sources */,
+				96DB418A1B2D5CE4006E35CC /* MyClosetParser.m in Sources */,
 				969852AE1ADEC75600DD499C /* MyButton.m in Sources */,
 				968AE8861B24AAF4004A1A85 /* ZHPickView.m in Sources */,
 				9B08830F18F7C45200F76D65 /* PicsView.m in Sources */,
