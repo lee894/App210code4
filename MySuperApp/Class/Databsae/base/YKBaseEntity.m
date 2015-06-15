@@ -11,7 +11,7 @@
 //#import "YKStringHelper.h"
 
 @implementation YKBaseEntity
-@synthesize type = type_;
+@synthesize nType = nType_;
 @synthesize attributeDic = attributeDic_;
 -(id) init{
     if((self=[super init])){

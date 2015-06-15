@@ -14,7 +14,7 @@
 -(id)init
 {
     if (self = [super init]) {
-        self.type = 2;
+        self.nType = 2;
     }
     return self;
 }
@@ -80,7 +80,7 @@
 -(id)init
 {
     if (self = [super init]) {
-        self.type = 1;
+        self.nType = 1;
     }
     return self;
 }

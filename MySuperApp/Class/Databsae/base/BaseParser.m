@@ -53,7 +53,7 @@
                 Class c = NSClassFromString([dicClassNames objectForKey:[keys objectAtIndex:i]]);
                 if (c) {
                     YKBaseEntity* temp = [[c alloc] init];
-                    switch (temp.type) {
+                    switch (temp.nType) {
                         case 1:
                         {
                             NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:1];

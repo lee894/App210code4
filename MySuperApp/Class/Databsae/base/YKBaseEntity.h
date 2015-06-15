@@ -21,10 +21,10 @@ static NSString*  VALUE_RESULT_SUCCESS;
 @end
 
 @interface YKBaseEntity : NSObject <BaseEntityDelegate> {
-    int type_;
+    int nType_;
     NSMutableDictionary* attributeDic_;
 }
-@property (nonatomic) int type;
+@property (nonatomic) int nType;
 @property (nonatomic, retain) NSMutableDictionary* attributeDic;
 -(BOOL) hasError;
 @end

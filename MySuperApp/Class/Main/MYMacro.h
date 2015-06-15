@@ -441,9 +441,8 @@
 #define Http_Sort20_Tag      208 //新版本 分类
 #define Http_Branddetail20_Tag      209 //品牌馆详情
 #define Http_FavoriteList20_Tag 210 //新版本 收藏夹列表
-
-#define Http_PackageInfo20_Tag 211 //新版本 收藏夹列表
-
+#define Http_PackageInfo20_Tag 211 //新版本 礼包详情
+#define Http_CouponList20_Tag 212 //新版本 优惠券列表
 
 #define Http_wardrobe_Tag 301 //私人衣橱 1
 
@@ -585,4 +584,5 @@
 
 
 #define Clientinformation_API (@"clientinformation") //客户端信息
+#define CouponList20    (@"couponlist20")//优惠卡增加接口
 

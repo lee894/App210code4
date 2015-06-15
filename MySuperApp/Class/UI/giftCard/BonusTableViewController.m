@@ -24,14 +24,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-   self.title = @"积分优惠";
-    
-    //lee999 防止位置偏移
-    if (isIOS7up) {
-        self.mytableView.frame = CGRectMake(0, 0, 320, self.view.frame.size.height-65);
-    }
-    //end
 }
 
 - (void)didReceiveMemoryWarning

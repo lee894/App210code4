@@ -14,11 +14,17 @@
 #import "BlockTextPromptAlertView.h"
 
 
+// 全部的优惠券
+typedef enum : NSUInteger {
+    EAll,
+    ECoupon,
+    EFreeShippingCard,
+    EGiftCard
+} ECouponListType;
+
 @interface CouponsListTableViewController : LBaseViewController <UITableViewDelegate,UITableViewDataSource,ServiceDelegate,UIAlertViewDelegate,UIScrollViewDelegate,BlockAlertViewDelegate,UITextFieldDelegate>
 {
     UILabel *_labelInfo;
-    PullToRefreshTableView *mytableView;
-
     NSInteger totalCount;
     NSInteger current;
     MainpageServ *mainSer;//兑换用
@@ -32,11 +38,9 @@
 @property (retain, nonatomic) NSMutableArray *contentArr;
 @property (nonatomic, retain) NSString *phoneNum;
 @property (nonatomic, assign) CheckOutViewController *checkOutViewCtrl;
-
-@property (nonatomic, retain)PullToRefreshTableView *mytableView;
-
-
 @property (nonatomic, assign) BOOL isAimer;
+@property (nonatomic, retain) PullToRefreshTableView *mytableView;
+@property (nonatomic, assign) ECouponListType clType;
 //单元格上按钮的点击事件
 - (void)btnClicked:(UIButton *) btn onCell:(UITableViewCell *)cell;
 

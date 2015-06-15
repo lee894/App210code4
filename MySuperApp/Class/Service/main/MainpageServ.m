@@ -964,6 +964,13 @@
     }];
 }
 
+- (void)getCouponcardList20WithPage:(NSString *)page andPer_page:(NSString *)per_page andType:(NSString*)type{
+    [self sendPostWithURL:CouponList20 tag:Http_CouponList20_Tag beforeRequest:^{
+        [self addParam:@"page" withValue:page];
+        [self addParam:@"per_page" withValue:per_page];
+        [self addParam:@"type" withValue:type];
+    }];
+}
 
 @end
 

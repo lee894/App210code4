@@ -32,7 +32,8 @@
     UIImageView *bgBut;
     MainpageServ *mainSer;
 }
-
+@property (nonatomic, retain) MoerMoreModel  *moreModel;
+@property (nonatomic, weak) IBOutlet UITableView *tableList;
 @end
 
 @implementation MyAimerloginViewController
@@ -59,19 +60,19 @@
     
     self.title = @"我的爱慕";
     
-    //判断如果是IOS7的话，适配屏幕的宽度和高度
-    if (isIOS7up) {
-        
-        NSLog(@"---ScreenHeight:%f",ScreenHeight);
-        
-        [tableList setFrame:CGRectMake(10, 0, ScreenWidth, self.view.frame.size.height)];
-    }else if (isIOS6Down) {
-        [tableList setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height)];
-    } else{
-        [tableList setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height)];
-    }
-    [tableList setBackgroundView:nil];
-    [tableList setBackgroundColor:[UIColor clearColor]];
+//    //判断如果是IOS7的话，适配屏幕的宽度和高度
+//    if (isIOS7up) {
+//        
+//        NSLog(@"---ScreenHeight:%f",ScreenHeight);
+//        
+//        [_tableList setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height)];
+//    }else if (isIOS6Down) {
+//        [_tableList setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height)];
+//    } else{
+//        [_tableList setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height)];
+//    }
+    [_tableList setBackgroundView:nil];
+    [_tableList setBackgroundColor:[UIColor clearColor]];
     
     //lee999注释了 设置导航器的位置
     //    [self.navigationController.navigationBar setFrame:CGRectMake(0.0,20.0,320,44)];
@@ -111,12 +112,12 @@
     
     //判断登录  判断如果没有登录，弹出登录界面
     if (![SingletonState sharedStateInstance].userHasLogin) {
-        tableList.hidden = YES;
+        _tableList.hidden = YES;
         [self changeToMyaimer];
         return;
     }else{
         [self dismissViewControllerAnimated:YES completion:nil];
-        tableList.hidden  =NO;
+        _tableList.hidden  =NO;
     }
     //end
     
@@ -140,7 +141,7 @@
     switch (sender.tag) {
         case 11://购物车
         {
-            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:moreModel.userinfo.username, @"UserName",nil];
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
             [TalkingData trackEvent:@"5010" label:@"购物车" parameters:dic1];
             
             [SingletonState sharedStateInstance].mycarfrom = 2;
@@ -151,7 +152,7 @@
             break;
         case 12://待处理
         {
-            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:moreModel.userinfo.username, @"UserName",nil];
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
             [TalkingData trackEvent:@"5010" label:@"待处理" parameters:dic1];
             
             OrderViewController *tempOrder = [[OrderViewController alloc] initWithNibName:@"OrderViewController" bundle:nil];
@@ -162,13 +163,13 @@
             break;
         case 13://待评价
         {
-            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:moreModel.userinfo.username, @"UserName",nil];
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
             [TalkingData trackEvent:@"5010" label:@"待评价" parameters:dic1];
             
             OrderViewController *tempOrder = [[OrderViewController alloc] initWithNibName:@"OrderViewController" bundle:nil];
             tempOrder.howEnter = 3;
             tempOrder.ishowHeadView = NO;
-            //            tempOrder.userName = moreModel.userinfo.username;
+            //            tempOrder.userName = _moreModel.userinfo.username;
             [self.navigationController pushViewController:tempOrder animated:YES];
         }
             break;
@@ -201,10 +202,10 @@
     switch (model.requestTag) {
         case Http_More_Tag:
             if (!model.errorMessage) {
-                moreModel = (MoerMoreModel *)model;
+                _moreModel = (MoerMoreModel *)model;
                 
                 
-                [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%.f",[[moreModel userinfo] shopcartcount]] forKey:@"totalNUM"];
+                [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%.f",[[_moreModel userinfo] shopcartcount]] forKey:@"totalNUM"];
                 
                 
                 [UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
@@ -223,10 +224,10 @@
                 
                 [SBPublicAlert hideMBprogressHUD:self.view];
                 
-                NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:moreModel.userinfo.username, @"UserName",nil];
+                NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
                 [TalkingData trackEvent:@"5010" label:@"我的爱慕" parameters:dic1];
                 
-                [tableList reloadData];
+                [_tableList reloadData];
             }else{
                 [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:1.0];
             }
@@ -261,7 +262,7 @@
                 
                 
                 //lee999 返回顶部
-                [tableList setContentOffset:CGPointMake(0, 0)];
+                [_tableList setContentOffset:CGPointMake(0, 0)];
                 
                 
             }else{
@@ -275,7 +276,7 @@
             if (!model.errorMessage) {
                 [SBPublicAlert hideMBprogressHUD:self.view];
                 
-                AimerHeadCell *cell = (AimerHeadCell *)[tableList cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                AimerHeadCell *cell = (AimerHeadCell *)[_tableList cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
                 [cell.InfterFaceBut setImage:self.headimage
                                     forState:UIControlStateNormal];
                 
@@ -354,18 +355,18 @@
             }
             
             UIImageView *headAllV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(100))];
-            [headAllV setImage:[UIImage imageNamed:@"my_am_user_bg@2x.png"]];
+            [headAllV setImage:[UIImage imageNamed:@"my_am_user_bg"]];
             [cell addSubview:headAllV];
             
             //头像
-            UIImage *imag = [UIImage imageNamed:@"my_am_user_img@2x.png"];
+            UIImage *imag = [UIImage imageNamed:@"my_am_user_img"];
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn setBackgroundImage:imag forState:UIControlStateNormal];
             [btn setFrame:CGRectMake((headAllV.width - imag.size.width)/2, 12, imag.size.width, imag.size.height)];
             [headAllV addSubview:btn];
             
             //carma
-            UIImage *imagca = [UIImage imageNamed:@"my_am_ca@2x.png"];
+            UIImage *imagca = [UIImage imageNamed:@"my_am_ca"];
             UIImageView *imacaV = [[UIImageView alloc]
                                    initWithFrame:CGRectMake(
                                                             btn.frame.origin.x + btn.frame.size.width - 10,
@@ -377,7 +378,7 @@
             
             //name
             UILabel * noticeTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, btn.frame.size.height + 12, headAllV.width - 20, 30)];
-            noticeTitle.text = moreModel.userinfo.username;
+            noticeTitle.text = _moreModel.userinfo.username;
             noticeTitle.textColor = [UIColor colorWithHexString:@"0xe4a1a1"];//UIColorFromRGB(0xB90023);
             noticeTitle.backgroundColor = [UIColor clearColor];
             noticeTitle.font = [UIFont systemFontOfSize:14];
@@ -388,8 +389,8 @@
             
             //            AimerHeadCell *headcell = [[[NSBundle mainBundle] loadNibNamed:@"AimerHeadCell" owner:self options:nil] lastObject];
             //
-            //            if ([moreModel.userinfo.userface description].length > 0) {
-            //                //[headcell.InfterFaceBut setImageWithURL:[NSURL URLWithString:moreModel.userinfo.userface] placeholderImage:[UIImage imageNamed:@"defaulthead.jpg"]];
+            //            if ([_moreModel.userinfo.userface description].length > 0) {
+            //                //[headcell.InfterFaceBut setImageWithURL:[NSURL URLWithString:_moreModel.userinfo.userface] placeholderImage:[UIImage imageNamed:@"defaulthead.jpg"]];
             //            }
             //
             //
@@ -401,7 +402,7 @@
             //            //lee999 150503 修改头像不显示的bug
             //            //[[headcell.InfterFaceBut layer] setMask:roundCornerLayer];
             //
-            //            [headcell setContent:moreModel.userinfo];
+            //            [headcell setContent:_moreModel.userinfo];
             //            headcell.selectionStyle = UITableViewCellSelectionStyleNone;
             //
             //            //lee999取消上传头像
@@ -577,9 +578,9 @@
                 //                universalCell.labelTitle.text = [arraySectionThird objectAtIndex:indexPath.row];
                 //                universalCell.labelDetail.text = [arraySectionThird objectAtIndex:indexPath.row + 5];
                 //                if (indexPath.row == 3) {
-                //                    if ([moreModel.userinfo.isbind isEqualToString:@"0"]) {
+                //                    if ([_moreModel.userinfo.isbind isEqualToString:@"0"]) {
                 //                        universalCell.labelDetail.text = @"未绑定";
-                //                    }else if([moreModel.userinfo.isbind isEqualToString:@"1"])
+                //                    }else if([_moreModel.userinfo.isbind isEqualToString:@"1"])
                 //                        universalCell.labelDetail.text = @"已绑定";
                 //                }
                 ////            }
@@ -657,7 +658,7 @@
         case 2:
         {
             //我的收藏
-            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:moreModel.userinfo.username, @"UserName",nil];
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
             [TalkingData trackEvent:@"5010" label:@"收藏" parameters:dic1];
             
             MyFavAll20ViewController *favvc = [[MyFavAll20ViewController alloc] init];
@@ -712,7 +713,7 @@
             case 1:
             {
                 //我的收藏
-                NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:moreModel.userinfo.username, @"UserName",nil];
+                NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
                 [TalkingData trackEvent:@"5010" label:@"收藏" parameters:dic1];
                 
                 MyFavAll20ViewController *favvc = [[MyFavAll20ViewController alloc] init];
@@ -726,7 +727,7 @@
                 tempOrder.howEnter = 1;
                 tempOrder.ishowHeadView = YES;
                 //lee999
-                MoerUserinfo*info = moreModel.userinfo;
+                MoerUserinfo*info = _moreModel.userinfo;
                 tempOrder.bandgeNum1 = [info.nodispose isKindOfClass:[NSNull class]] ? @"0" : info.nodispose;
                 int noaccess = (int)info.norates;
                 tempOrder.bandgeNum2 = [NSString stringWithFormat:@"%d",noaccess];
@@ -810,7 +811,7 @@
 #pragma mark-- 积分优惠
 - (void)jifenYouHui {
     
-    NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:moreModel.userinfo.username, @"UserName",nil];
+    NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
     [TalkingData trackEvent:@"5010" label:@"积分优惠" parameters:dic1];
     
     BonusTableViewController *ctrl = [[BonusTableViewController alloc] init];

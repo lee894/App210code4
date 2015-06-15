@@ -354,7 +354,7 @@
         model.requestTag = atag;
         model.responseDic = jsonDic;
         */
-        
+        handle = atag;
         [self.delegate serviceFinished:handle withmodel:jsonDic];
     }else{
         LBaseModel *model = [ModelManager parseModelWithDictionary:jsonDic tag:atag];
@@ -533,7 +533,7 @@
                 Class c = NSClassFromString([muDictClassNames objectForKey:[keys objectAtIndex:i]]);
                 if (c) {
                     YKBaseEntity* temp = [[c alloc] init];
-                    switch (temp.type) {
+                    switch (temp.nType) {
                         case 1:
                         {
                             NSMutableArray* arr = [[NSMutableArray alloc] initWithCapacity:1];

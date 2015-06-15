@@ -310,9 +310,11 @@
 //获取私人衣橱2 的数据
 -(void)getCloset2Data:(NSString*)strtype;
 
-
+//获得礼包详情
 -(void)getPackageInfoWithPid:(NSString*)pid;
 
+//获得优惠券列表
+- (void)getCouponcardList20WithPage:(NSString *)page andPer_page:(NSString *)per_page andType:(NSString*)type;
 
 @end
 

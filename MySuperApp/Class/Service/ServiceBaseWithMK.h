@@ -33,7 +33,7 @@ typedef enum ServiceHandle
     
     //lee999 200版本开发
     EMageinzeList20_Tag,
-    
+    ECouponList20_Tag
 }ServiceType;
 
 @protocol ServiceDelegate <NSObject>

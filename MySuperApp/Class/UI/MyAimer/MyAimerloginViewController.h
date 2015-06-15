@@ -13,17 +13,11 @@
 {
     NSArray *arraySectionThird;
     NSArray *arraySectionTwo;
-    
-    MoerMoreModel *moreModel;
-    
-    
-    IBOutlet UITableView *tableList;
     BOOL isPush;
 }
 
 
 @property (nonatomic, retain) UIImage *headimage;
-
 
 - (IBAction)makeCall:(id)sender;//拨打电话
 

@@ -956,7 +956,7 @@
             [shoppingImg setImageWithURL:[NSURL URLWithString:[self ImageSize:item.imgurl Size:ChangeImageURL]] placeholderImage:nil];
         }
 		
-		shoppingImg.backgroundColor = [UIColor clearColor];
+//		shoppingImg.backgroundColor = [UIColor clearColor];
 		[shoppingCarCell addSubview:shoppingImg];
         
         int yOffset = 5;
