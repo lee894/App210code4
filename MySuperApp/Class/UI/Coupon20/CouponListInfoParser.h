@@ -40,6 +40,7 @@
 -(NSString*)price;
 -(NSString*)desc;
 -(NSString*)info;
+-(NSString*)url;
 @end
 
 @interface CouponListInfo : YKBaseEntity

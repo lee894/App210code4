@@ -482,19 +482,11 @@
             type = ((CouponInfo*)data).type;
             strTitle = ((CouponInfo*)data).title;
             strPrice = ((CouponInfo*)data).price;
-        }else if ([data class] == [V6CardInfo class])
-        {
-            strStatus = ((CouponInfo*)data).stuatus;
-            type = ((CouponInfo*)data).type;
-            strTitle = ((CouponInfo*)data).title;
-            strPrice = ((CouponInfo*)data).price;
         }
         else if ([data class] == [FreePostCardInfo class])
         {
-            strStatus = ((CouponInfo*)data).stuatus;
-            type = ((CouponInfo*)data).type;
-            strTitle = ((CouponInfo*)data).title;
-            strPrice = ((CouponInfo*)data).price;
+            strStatus = ((FreePostCardInfo*)data).status;
+            strTitle = ((FreePostCardInfo*)data).name;
         }
         UIImage* iBg = nil;
         if (strStatus) {
@@ -830,7 +822,7 @@
             case Http_CouponList20_Tag:
             {
                 _cli = [[[CouponListInfoParser alloc] init] parseCouponListInfo:amodel];
-                if ([_strType isEqualToString:@"coupon"]) {
+                if ([_strType isEqualToString:@"coupon"] || [_strType isEqualToString:@"gift"]) {
                     if (current == 1) {
 //                        [self.arrCard removeAllObjects];
 //                        [self.arrCard addObjectsFromArray:_cli.coupons];
@@ -844,13 +836,16 @@
                     
                     [self updateTableView];
                 }
-                else if ([_strType isEqualToString:@"v6card"])
-                {
-                    
-                }
                 else if ([_strType isEqualToString:@"freepostcards"])
                 {
+                    if (current == 1) {
+                        [self.contentArr removeAllObjects];
+                        [self.contentArr addObjectsFromArray:_cli.freepostcards];
+                    }else {
+                        [self.contentArr addObjectsFromArray:_cli.freepostcards];
+                    }
                     
+                    [self updateTableView];
                 }
             }
                 break;
@@ -1024,6 +1019,7 @@
     switch (sender.tag) {
         case 10001:
         {
+            _strType = @"coupon";
             [self getData];
         }
             break;
@@ -1053,6 +1049,8 @@
         [vCouponMenu removeFromSuperview];
         vCouponMenu = nil;
     }
+    _strType = @"freepostcards";
+    [self getData];
 }
 
 -(void)toGiftCard:(UIButton*)sender
@@ -1064,6 +1062,8 @@
         [vCouponMenu removeFromSuperview];
         vCouponMenu = nil;
     }
+    _strType = @"gift";
+    [self getData];
 }
 
 -(NSArray*)viewConstraints
