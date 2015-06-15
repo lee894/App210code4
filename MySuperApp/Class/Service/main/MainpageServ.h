@@ -311,6 +311,9 @@
 -(void)getCloset2Data:(NSString*)strtype;
 
 
+-(void)getPackageInfoWithPid:(NSString*)pid;
+
+
 @end
 
 

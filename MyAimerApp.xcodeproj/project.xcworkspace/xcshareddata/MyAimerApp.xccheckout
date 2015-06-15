@@ -5,13 +5,11 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>7A16729F-7C60-4782-97F5-23853EB6534E</string>
+	<string>08DDEF1C-DD6B-42E3-9259-57082B475786</string>
 	<key>IDESourceControlProjectName</key>
 	<string>MyAimerApp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>6A7591A54F6C1CD0DE2D4590A55B6F98ACE582C1</key>
-		<string>https://github.com/lee894/App210code.git</string>
 		<key>6C78AC63A775F41BF6879FDE5F1F1DB591FF0F4E</key>
 		<string>https://github.com/lee894/App210code4.git</string>
 	</dict>
@@ -19,8 +17,6 @@
 	<string>MyAimerApp.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>6A7591A54F6C1CD0DE2D4590A55B6F98ACE582C1</key>
-		<string>../../../App210codeA</string>
 		<key>6C78AC63A775F41BF6879FDE5F1F1DB591FF0F4E</key>
 		<string>../..</string>
 	</dict>
@@ -39,14 +35,6 @@
 			<string>6C78AC63A775F41BF6879FDE5F1F1DB591FF0F4E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>App210code4</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>6A7591A54F6C1CD0DE2D4590A55B6F98ACE582C1</string>
-			<key>IDESourceControlWCCName</key>
-			<string>App210codeA</string>
 		</dict>
 	</array>
 </dict>

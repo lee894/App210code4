@@ -442,6 +442,8 @@
 #define Http_Branddetail20_Tag      209 //品牌馆详情
 #define Http_FavoriteList20_Tag 210 //新版本 收藏夹列表
 
+#define Http_PackageInfo20_Tag 211 //新版本 收藏夹列表
+
 
 #define Http_wardrobe_Tag 301 //私人衣橱 1
 

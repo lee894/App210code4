@@ -957,6 +957,14 @@
 
 
 
+-(void)getPackageInfoWithPid:(NSString*)pid
+{
+    [self sendPostWithURL:@"packageinfo" tag:Http_PackageInfo20_Tag beforeRequest:^{
+        [self addParam:@"package_id" withValue:pid];
+    }];
+}
+
+
 @end
 
 

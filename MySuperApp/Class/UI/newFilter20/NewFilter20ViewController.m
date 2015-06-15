@@ -615,7 +615,7 @@
     UIView *bgv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 38)];
     [bgv setBackgroundColor:[UIColor colorWithHexString:@"ffffff"]];
 
-    UIImage*img = [UIImage imageNamed:@"list_title_to.png"];
+    UIImage*img = [UIImage imageNamed:@"list_title_to.jpg"];
     UIImageView*imageV = [[UIImageView alloc] initWithFrame:CGRectMake(15, 12, img.size.width, img.size.height)];
     [imageV setImage:img];
     [bgv addSubview:imageV];
