@@ -9,5 +9,8 @@
 #import "LBaseViewController.h"
 
 @interface MyClosetKidGril3ViewController : LBaseViewController
+{
+//123123
 
+}
 @end
