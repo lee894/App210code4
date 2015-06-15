@@ -275,41 +275,60 @@
 
 - (void)createHeaderAndFooter{
     //ADD FootView:
-	UIView* footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 210)];
+	UIView* footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 240)];
 	footView.backgroundColor = [UIColor clearColor];
+    
+    
+    UIView* sepfootView = [[UIView alloc] initWithFrame:CGRectMake(0, 160, ScreenWidth, 10)];
+    sepfootView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6"];
+    [footView addSubview:sepfootView];
+    
+    
+    UILabel* totallab = [[UILabel alloc] initWithFrame:CGRectMake(20, 190, 120, 30)];
+    totallab.backgroundColor = [UIColor clearColor];
+    [totallab setTextColor:[UIColor blackColor]];
+    totallab.text = @"合计：";//[nameArray objectAtIndex:i];
+    totallab.font = [UIFont systemFontOfSize:LabBigSize];
+    totallab.textAlignment = UITextAlignmentLeft;
+    [footView addSubview:totallab];
+    
+    
+    UILabel* pricelab = [[UILabel alloc] initWithFrame:CGRectMake(70, 190, 120, 30)];
+    pricelab.backgroundColor = [UIColor clearColor];
+    pricelab.text = [NSString stringWithFormat:@"%@",mycheckOutModel.orderPrice];
+    [pricelab setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
+    pricelab.font = [UIFont systemFontOfSize:LabBigSize];
+    pricelab.textAlignment = UITextAlignmentLeft;
+    [footView addSubview:pricelab];
+    
+    
 	UIButton* tijiButton = [UIButton buttonWithType:UIButtonTypeCustom];
-	tijiButton.frame = CGRectMake(50, 160, 220, 35);
-	tijiButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
+	tijiButton.frame = CGRectMake(lee1fitAllScreen(210), 180, 110, 50);
+	tijiButton.titleLabel.font = [UIFont boldSystemFontOfSize:17];
 	[tijiButton setTitle:@"提交订单" forState:UIControlStateNormal];
 	[tijiButton addTarget:self action:@selector(tijiao) forControlEvents:UIControlEventTouchUpInside];
-	[tijiButton setBackgroundImage:[UIImage imageNamed:@"button_red.png"] forState:UIControlStateNormal];
-	[tijiButton setBackgroundImage:[UIImage imageNamed:@"button_red_press.png"] forState:UIControlStateHighlighted];
+	[tijiButton setBackgroundImage:[UIImage imageNamed:@"sryc_keyb_enter_normal.png"] forState:UIControlStateNormal];
+	[tijiButton setBackgroundImage:[UIImage imageNamed:@"sryc_keyb_enter_hover.png"] forState:UIControlStateHighlighted];
 	[footView addSubview:tijiButton];
+    
     
 	//ADD HeadView:
 	UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(140))];
 	headerView.backgroundColor = [UIColor clearColor];
-    
-//	UIImageView* bgview = [[UIImageView alloc] init];
-//	bgview.frame = CGRectMake(5, 5, 310, 147);
-//    //lee给view设置为圆角，不再使用图片了。 -140512
-//    [SingletonState setViewRadioSider:bgview];
-//	[headerView addSubview:bgview];
-
 	
 	NSArray* nameArray = [[NSArray alloc] initWithObjects:@"商品金额：",@"运费：",@"优惠券抵扣：",@"活动优惠金额：",@"尊享卡电子劵抵扣：",@"订单总金额：",@"可获积分：",nil];
 	for (int i = 0; i < [nameArray count]; i ++) {
 		UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(20, 10+20*i, 120, 20)];
 		colorName.backgroundColor = [UIColor clearColor];
 		colorName.text = [nameArray objectAtIndex:i];
-		colorName.font = [UIFont systemFontOfSize:12];
+		colorName.font = [UIFont systemFontOfSize:13];
 		colorName.textAlignment = UITextAlignmentLeft;
 		[headerView addSubview:colorName];
 
 	}
 	
 	for (int i = 0; i < [nameArray count]; i ++) {
-		UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(200, 10+20*i, 110, 20)];
+		UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(210), 10+20*i, 110, 20)];
 		colorName.backgroundColor = [UIColor clearColor];
 		switch (i) {
 			case 0:
@@ -364,20 +383,11 @@
                                                        reuseIdentifier:CellIdentifier2];
 		Cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-		UIImageView* bgview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cart_pic_bg"]];
-		bgview.frame = CGRectMake(10, 10, 92, 113);
-		[Cell.contentView addSubview:bgview];
+//		UIImageView* bgview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cart_pic_bg"]];
+//		bgview.frame = CGRectMake(10, 10, 92, 113);
+//		[Cell.contentView addSubview:bgview];
     
         YKItem* item = (YKItem *)[mycheckOutModel.checkoutProductlist objectAtIndex:i];
-
-        //积分
-        UILabel *jifenLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, 128, 88, 15)];
-        jifenLabel.backgroundColor = [UIColor clearColor];
-        jifenLabel.textAlignment = UITextAlignmentCenter;
-        jifenLabel.font = [UIFont systemFontOfSize:13.];
-        jifenLabel.text = [NSString stringWithFormat:@"积分： %ld",item.score];
-        
-        [Cell.contentView addSubview:jifenLabel];
         
 		UrlImageView* shoppingImg = [[UrlImageView alloc] init];
 		[shoppingImg setImageFromUrl:YES withUrl:item.imgurl];
@@ -406,7 +416,8 @@
             [Cell.contentView addSubview:shoppingName];
 
         }else{
-		UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, 190, 45)];
+//		UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, 190, 45)];
+        UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, ScreenWidth-110, 45)];
 		shoppingName.backgroundColor = [UIColor clearColor];
 		shoppingName.numberOfLines = 0;
 		shoppingName.lineBreakMode = UILineBreakModeWordWrap;
@@ -476,18 +487,37 @@
 		numberValue.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666)
 		[Cell.contentView addSubview:numberValue];
         
-        UIFont *font = [UIFont systemFontOfSize:12];
-
+        UIFont *font = [UIFont systemFontOfSize:LabMidSize];
+        
+        UIView *seplineView = [[UIView alloc] init];
+        [seplineView setFrame:CGRectMake(0, 130, ScreenWidth, 0.5)];
+        [seplineView setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
+        [Cell addSubview:seplineView];
+        
+        UIView *seplineView2 = [[UIView alloc] init];
+        [seplineView2 setFrame:CGRectMake(0, 169.5, ScreenWidth, 0.5)];
+        [seplineView2 setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
+        [Cell addSubview:seplineView2];
+        
+        //积分
+        UILabel *jifenLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 137, 88, 25)];
+        jifenLabel.backgroundColor = [UIColor clearColor];
+        jifenLabel.textAlignment = UITextAlignmentCenter;
+        jifenLabel.font = font;//[UIFont systemFontOfSize:font];
+        jifenLabel.text = [NSString stringWithFormat:@"积分： %ld",(long)item.score];
+        [Cell.contentView addSubview:jifenLabel];
+        
         NSString *strTotal = @"总价： ";
-		UILabel* caseName = [[UILabel alloc] initWithFrame:CGRectMake(224, 128, 40, 25)];
+		UILabel* caseName = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(204), 137, 50, 25)];
 		caseName.backgroundColor = [UIColor clearColor];
 		caseName.text = strTotal;
 		caseName.font = font;
 		caseName.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666)
 		[Cell.contentView addSubview:caseName];
+        
 		
-       NSString *str = [NSString stringWithFormat:@"  ¥%.2f",[item.subtotal floatValue]];
-		UILabel* caseValue = [[UILabel alloc] initWithFrame:CGRectMake(254, 128, 100, 25)];
+        NSString *str = [NSString stringWithFormat:@"  ¥%.2f",[item.subtotal floatValue]];
+		UILabel* caseValue = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(234), 137, 100, 25)];
 		caseValue.backgroundColor = [UIColor clearColor];
 		caseValue.text = str;
 		caseValue.font = font;
@@ -518,27 +548,36 @@
             UIImageView *icon = nil;
             if (k==0) {
                 
-                UIImageView *topImageV = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, 140)];
-                [topImageV setImage:[[UIImage imageNamed:@"list_bg_01.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(16, 14, 250, 100)]];//[ resizableImageWithCap:UIEdgeInsetsMake(14, 14, 0, 0)]
-                [Cell.contentView addSubview:topImageV];
+//                UIImageView *topImageV = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, 140)];
+//                [topImageV setImage:[[UIImage imageNamed:@"list_bg_01.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(16, 14, 250, 100)]];//[ resizableImageWithCap:UIEdgeInsetsMake(14, 14, 0, 0)]
+//                [Cell.contentView addSubview:topImageV];
                 
                 icon  = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 21, 38)];
                 [icon setImage:[UIImage imageNamed:@"icon_suit.png"]];
                 [Cell.contentView addSubview:icon];
-
-            }else {
                 
-                UIImageView *modile = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, 140)];
-                [modile setImage:[UIImage imageNamed:@"list_bg_02.png"]];//[ resizableImageWithCap:UIEdgeInsetsMake(5, 5, 0, 0)]
-                [Cell.contentView addSubview:modile];
             }
+            
+            UIView *seplineView = [[UIView alloc] init];
+            [seplineView setFrame:CGRectMake(0, 139.5, ScreenWidth, 0.5)];
+            [seplineView setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
+            [Cell addSubview:seplineView];
+
+            
+
+//            }else {
+//                
+//                UIImageView *modile = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, 140)];
+//                [modile setImage:[UIImage imageNamed:@"list_bg_02.png"]];//[ resizableImageWithCap:UIEdgeInsetsMake(5, 5, 0, 0)]
+//                [Cell.contentView addSubview:modile];
+//            }
             
             YKProductsItem *pItem = [item.suits objectAtIndex:k];
             
             
-            UIImageView* bgview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cart_pic_bg.png"]];
-            bgview.frame = CGRectMake(10, 10, 93, 113);
-            [Cell.contentView addSubview:bgview];
+//            UIImageView* bgview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cart_pic_bg.png"]];
+//            bgview.frame = CGRectMake(10, 10, 93, 113);
+//            [Cell.contentView addSubview:bgview];
 
             UrlImageView* shoppingImg = [[UrlImageView alloc] init];
             [shoppingImg setImageFromUrl:YES withUrl:pItem.pic];
@@ -546,7 +585,8 @@
             shoppingImg.backgroundColor = [UIColor clearColor];
             [Cell.contentView addSubview:shoppingImg];
             
-            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, 190, 45)];
+//            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, 190, 45)];
+            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, ScreenWidth-110, 45)];
             shoppingName.backgroundColor = [UIColor clearColor];
             shoppingName.numberOfLines = 0;
             shoppingName.lineBreakMode = UILineBreakModeWordWrap;
@@ -582,14 +622,14 @@
             [array addObject:Cell];
         }
         
-        
+
         static NSString	*CellSuitlist = @"Cell";
         UITableViewCell *viewSuitlistCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellSuitlist];
         viewSuitlistCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        UIImageView *buttom = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, 60)];
-        [buttom setImage:[UIImage imageNamed:@"list_bg_03.png"]];//[ resizableImageWithCap:UIEdgeInsetsMake(5, 5, 0, 0)]
-        [viewSuitlistCell.contentView addSubview:buttom];
+//        UIImageView *buttom = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, 60)];
+//        [buttom setImage:[UIImage imageNamed:@"list_bg_03.png"]];//[ resizableImageWithCap:UIEdgeInsetsMake(5, 5, 0, 0)]
+//        [viewSuitlistCell.contentView addSubview:buttom];
         
         UIFont *font = [UIFont systemFontOfSize:13];
         int xOffset = 12;
@@ -656,11 +696,13 @@
 	NSArray* titleArray = [[NSArray alloc] initWithObjects:
                            @"收货人信息（必填）",
                            @"订单附言",
-                           @"使用优惠券",
                            @"支付方式",
-                           @"商品数量",nil];
+                           @"使用优惠券",
+                           @"使用电子券",
+                           @"使用包邮卡",
+                           nil];
     static NSString	* CellIdentifier = @"Cell";
-	for (int i = 0; i < 5; i ++) {
+	for (int i = 0; i < 6; i ++) {
 		UITableViewCell *Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                        reuseIdentifier:CellIdentifier];
 		Cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -763,7 +805,7 @@
         else if (i == 1) {//附言
             
 			if ([self.postText isEqualToString:@""] || self.postText == nil) {
-				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, ScreenWidth-20, 30)];
+				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, ScreenWidth-60, 30)];
 				name.text = [titleArray objectAtIndex:i];
 				name.backgroundColor = [UIColor clearColor];
 				name.font = [UIFont systemFontOfSize:LabMidSize];
@@ -783,7 +825,7 @@
                     heigth+=10;
                 }
                 
-                UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, ScreenWidth-60, heigth)];
+                UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, ScreenWidth-60, heigth)];
 				name.text = self.postText;
 				name.numberOfLines = 0;
 				name.lineBreakMode = UILineBreakModeWordWrap;
@@ -799,42 +841,8 @@
         
 			Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
-		} else if (i == 2) {//优惠券
-            
-			if (!mycheckOutModel.checkout_usecouponcard&& !mycheckOutModel.checkout_usev6cards) {
-				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 150, 30)];
-				name.text = [titleArray objectAtIndex:i];
-				name.backgroundColor = [UIColor clearColor];
-				name.font = [UIFont systemFontOfSize:LabMidSize];
-				name.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
-				[Cell.contentView addSubview:name];
-				Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			} else {
-				UILabel* name1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, 200, 30)];
-				name1.text = @"使用优惠券";
-				name1.backgroundColor = [UIColor clearColor];
-				name1.font = [UIFont systemFontOfSize:14];
-				name1.textColor = [UIColor grayColor];
-				[Cell.contentView addSubview:name1];
-                
-                UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 3, 200, 30)];
-				name2.text = @"已使用";
-				name2.backgroundColor = [UIColor clearColor];
-				name2.font = [UIFont systemFontOfSize:14];
-				name2.textColor = [UIColor redColor];
-				[Cell.contentView addSubview:name2];
-				
-				UIButton *cancle = [UIButton buttonWithType:UIButtonTypeCustom];
-				[cancle setTitle:@"取消" forState:UIControlStateNormal];
-                [cancle setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-				cancle.titleLabel.font = [UIFont systemFontOfSize:13];
-				[cancle setFrame:CGRectMake(240, 5, 50, 31)];
-				[cancle setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
-				[cancle addTarget:self action:@selector(cancle) forControlEvents:UIControlEventTouchUpInside];
-				[Cell.contentView addSubview:cancle];
-			}
-			
-		} else if (i == 3) { //新增付款方式选择
+		}
+        else if (i == 2) { //新增付款方式选择
             
             Cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
@@ -881,23 +889,83 @@
             [Cell.contentView addSubview:name];
             Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
-        } else if (i == 4){
+        }
+        else if (i == 3) {//优惠券
+            
+            if (!mycheckOutModel.checkout_usecouponcard&& !mycheckOutModel.checkout_usev6cards) {
+                UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 150, 30)];
+                name.text = [titleArray objectAtIndex:i];
+                name.backgroundColor = [UIColor clearColor];
+                name.font = [UIFont systemFontOfSize:LabMidSize];
+                name.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
+                [Cell.contentView addSubview:name];
+                Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            } else {
+                UILabel* name1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, 200, 30)];
+                name1.text = @"使用优惠券";
+                name1.backgroundColor = [UIColor clearColor];
+                name1.font = [UIFont systemFontOfSize:14];
+                name1.textColor = [UIColor grayColor];
+                [Cell.contentView addSubview:name1];
+                
+                UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 3, 200, 30)];
+                name2.text = @"已使用";
+                name2.backgroundColor = [UIColor clearColor];
+                name2.font = [UIFont systemFontOfSize:14];
+                name2.textColor = [UIColor redColor];
+                [Cell.contentView addSubview:name2];
+                
+                UIButton *cancle = [UIButton buttonWithType:UIButtonTypeCustom];
+                [cancle setTitle:@"取消" forState:UIControlStateNormal];
+                [cancle setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                cancle.titleLabel.font = [UIFont systemFontOfSize:13];
+                [cancle setFrame:CGRectMake(240, 5, 50, 31)];
+                [cancle setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
+                [cancle addTarget:self action:@selector(cancle) forControlEvents:UIControlEventTouchUpInside];
+                [Cell.contentView addSubview:cancle];
+            }
+        }
+        else if (i == 4){
+            //电子券
             
 			Cell.selectionStyle = UITableViewCellSelectionStyleNone;
-			UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 300, 30)];
+			UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 300, 35)];
 			name.text = [titleArray objectAtIndex:i];
 			name.backgroundColor = [UIColor clearColor];
 			name.font = [UIFont systemFontOfSize:LabMidSize];
 			name.textColor = [UIColor colorWithHexString:@"0x666666"];
 			[Cell.contentView addSubview:name];
             
-            UILabel *numerTotle = [[UILabel alloc] initWithFrame:CGRectMake(300, 5, 50, 30)];
+            UILabel *numerTotle = [[UILabel alloc] initWithFrame:CGRectMake(300, 8, 50, 35)];
             numerTotle.text = [[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"];
             numerTotle.backgroundColor = [UIColor clearColor];
             name.font = [UIFont systemFontOfSize:14.];
             [Cell.contentView addSubview:numerTotle];
+            
+            Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
 
 		}
+        else if (i == 5){
+            //包邮卡
+            Cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 300, 35)];
+            name.text = [titleArray objectAtIndex:i];
+            name.backgroundColor = [UIColor clearColor];
+            name.font = [UIFont systemFontOfSize:LabMidSize];
+            name.textColor = [UIColor colorWithHexString:@"0x666666"];
+            [Cell.contentView addSubview:name];
+            
+            UILabel *numerTotle = [[UILabel alloc] initWithFrame:CGRectMake(300, 8, 50, 35)];
+            numerTotle.text = [[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"];
+            numerTotle.backgroundColor = [UIColor clearColor];
+            name.font = [UIFont systemFontOfSize:14.];
+            [Cell.contentView addSubview:numerTotle];
+            
+            Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+        }
+        
         [otherCells addObject:Cell];
 	}
 NSLog(@"createOtherCells  come out");
@@ -947,7 +1015,7 @@ NSLog(@"createOtherCells  come out");
 #pragma mark UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 6  + suitCount;
+    return 6+1  + suitCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -964,12 +1032,14 @@ NSLog(@"createOtherCells  come out");
         return 1;
     }else if (section == 4) {
         return 1;
+    }else if (section == 5) {
+        return 1;
     }else{
-        if (section-suitCount == 5) {
+        if (section-suitCount == 6) {
             return [tableCells count];
         }
         else {
-            return [(NSMutableArray*)[suitlistcell objectAtIndex:section-5 isArray:nil] count];
+            return [(NSMutableArray*)[suitlistcell objectAtIndex:section-6 isArray:nil] count];
         }
     }
 	return 0;
@@ -991,14 +1061,14 @@ NSLog(@"createOtherCells  come out");
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger section = indexPath.section;
-    if (section >= 5) {
-        if (section - suitCount == 5) {
+    if (section >= 6) {
+        if (section - suitCount == 6) {
             //普通商品
             return [tableCells objectAtIndex:indexPath.row];
         }
         else {
             //套装商品
-            return [[suitlistcell objectAtIndex:section-5] objectAtIndex:indexPath.row];
+            return [[suitlistcell objectAtIndex:section-6] objectAtIndex:indexPath.row];
         }
     }
     else {
@@ -1013,6 +1083,7 @@ NSLog(@"createOtherCells  come out");
     switch (section) {
         case 0:
         {
+            //地址
             if (height_d > 0){
                 return height_d+45;
             }else {
@@ -1022,15 +1093,17 @@ NSLog(@"createOtherCells  come out");
             break;
         case 1:
         {
-            if ([self.postText isEqualToString:@""] || self.postText == nil) {
+            if ([self.postText isEqualToString:@""] || self.postText == nil || [self.postText hasPrefix:@"订单附言"]) {
                 self.postText = @"订单附言";
                 return 45;
             }else {
-            CGSize size = [self.postText sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(230.0f, 10000) lineBreakMode:NSLineBreakByWordWrapping];
+            CGSize size = [self.postText sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(ScreenWidth-60, 10000) lineBreakMode:NSLineBreakByWordWrapping];
             if (size.height > 18) {
-                return size.height+10;
+                return size.height+15;
             } else {
-                return size.height+20;
+                
+                return 45;
+               // return size.height+20;
                 }
             }
         }
@@ -1050,10 +1123,17 @@ NSLog(@"createOtherCells  come out");
             return 45;
         }
             break;
+        case 5:
+        {
+            return 45;
+        }
+            break;
+            
         default:
         {
-            if (section-suitCount == 5) {
-                return 160;
+            if (section-suitCount == 6) {
+                //普通商品cell
+                return 170;
             }
             else {
                 if (indexPath.row == [(NSMutableArray*)[suitlistcell objectAtIndex:0 isArray:nil] count]-1) {
@@ -1079,7 +1159,8 @@ NSLog(@"createOtherCells  come out");
         addressView.isCar = YES;
         [self.navigationController pushViewController:addressView animated:YES];
 
-	} else if (section == 1) {
+	}
+    else if (section == 1) {
         //订单附言
         YKOrderPostscriptView* post = [[YKOrderPostscriptView alloc] init];
         post.checkOut = self;
@@ -1089,8 +1170,20 @@ NSLog(@"createOtherCells  come out");
             post.postStr = self.postText;
         }
         [self.navigationController pushViewController:post animated:YES];
+	}
+    
+    else if (section == 2) {
+        //支付方式
+        YKPayMethod * page_paymethod = [[YKPayMethod  alloc] init];
+        page_paymethod.m_StrSelectIndex = self.m_strPayMethod;
+        page_paymethod.m_sourcePage = self;
+        page_paymethod.m_pay_id = self.str_pay_Way;
+        [page_paymethod initPayMethod:mycheckOutModel.checkoutPaywayNew];
         
-	} else if (section == 2) {
+        [self.navigationController pushViewController:page_paymethod animated:YES];
+    }
+    
+    else if (section == 3) {
         //优惠券
         if (mycheckOutModel.checkout_usecouponcard || mycheckOutModel.checkout_usev6cards)
         {//已使用
@@ -1129,17 +1222,7 @@ NSLog(@"createOtherCells  come out");
             [self.navigationController pushViewController:ctrl animated:YES];
         }
         
-    }else if (section == 3) {
-        //支付方式
-        YKPayMethod * page_paymethod = [[YKPayMethod  alloc] init];
-        page_paymethod.m_StrSelectIndex = self.m_strPayMethod;
-        page_paymethod.m_sourcePage = self;
-        page_paymethod.m_pay_id = self.str_pay_Way;
-        [page_paymethod initPayMethod:mycheckOutModel.checkoutPaywayNew];
-      
-        [self.navigationController pushViewController:page_paymethod animated:YES];
     }
-	
     //lee999 新增结算中心能进入商品详情
 //    if (section >= 5) {
 //        if (section - suitCount == 5) {
@@ -1184,25 +1267,5 @@ NSLog(@"createOtherCells  come out");
 {
     [super didReceiveMemoryWarning];
 }
-
-//iOS 5
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-	return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
-}
-//iOS 6
-- (BOOL)shouldAutorotate
-{
-	return NO;
-}
-- (NSUInteger)supportedInterfaceOrientations
-{
-	return UIInterfaceOrientationMaskPortrait;
-}
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-	return UIInterfaceOrientationPortrait;
-}
-
 
 @end

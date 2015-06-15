@@ -35,15 +35,14 @@
 
 	UIImageView* bgtextview = [[UIImageView alloc] init];//WithImage:[[UIImage imageNamed:@"list_one.png"] resizableImageWithCap:UIEdgeInsetsMake(14, 14, 14, 14)]
     //lee给view设置为圆角，不再使用图片了。 -140512
-    [SingletonState setViewRadioSider:bgtextview];
-//	bgtextview.frame = CGRectMake(10, isIOS7up?44+50:50, 300, 130);
-    bgtextview.frame = CGRectMake(10, 50, 300, 130);
-
+//    [SingletonState setViewRadioSider:bgtextview];
+    bgtextview.frame = CGRectMake(10, 50, ScreenWidth-20, 130);
+    [bgtextview setBackgroundColor:[UIColor whiteColor]];
 	[self.view addSubview:bgtextview];
 
 	
 //	postText = [[UITextView alloc] initWithFrame:CGRectMake(10, isIOS7up?44+ 50:50, 300, 120)];
-    postText = [[UITextView alloc] initWithFrame:CGRectMake(10, 50, 300, 120)];
+    postText = [[UITextView alloc] initWithFrame:CGRectMake(10, 50,  ScreenWidth-20, 120)];
 
 	postText.font = [UIFont systemFontOfSize:14];
 	postText.delegate = self;

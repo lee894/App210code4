@@ -54,10 +54,7 @@
     [tableList setAllowsSelectionDuringEditing:YES];
     tableList.tableFooterView = tempFoot;
     
-    if (isIOS7up) {
-        [tableList setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-    }
-    
+    [tableList setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height)];
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
@@ -105,7 +102,6 @@
         [buttonEdit setTitle:@"编辑地址" forState:UIControlStateHighlighted];
         [tableList setEditing:NO];
         [tableList reloadData];
-
     }
 }
 
@@ -135,6 +131,10 @@
             if (!model.errorMessage) {
                 [SBPublicAlert hideMBprogressHUD:self.view];
                 addresslistModel = (AddressAddressLIstModel *)model;
+                
+                CGRect oldF = buttonEdit.frame;
+                oldF.origin.x = (ScreenWidth-oldF.size.width)/2;
+                [buttonEdit setFrame:oldF];
                 
                 [buttonEdit setHidden:NO];
                 
@@ -208,6 +208,10 @@
     
     if ([self.PublicStringAddressId isEqualToString:addressList.addresslistIdentifier]&&!tableView.editing) {
         addressCell.imageCheck.hidden = NO;
+        
+        CGRect oldf = addressCell.imageCheck.frame;
+        oldf.origin.x = ScreenWidth-50;
+        [addressCell.imageCheck setFrame:oldf];
         
     }else {
         addressCell.imageCheck.hidden = YES;

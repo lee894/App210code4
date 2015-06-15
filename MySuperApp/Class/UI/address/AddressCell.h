@@ -12,7 +12,6 @@
 
 @interface AddressCell : UITableViewCell{
 
-    IBOutlet UIImageView *imageBackground;
     IBOutlet UILabel *labelName;
     IBOutlet UILabel *labelMessage;
     IBOutlet UILabel *labelPhone;

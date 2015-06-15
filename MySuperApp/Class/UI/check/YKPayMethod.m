@@ -49,7 +49,7 @@
     [self createBackBtnWithType:0];
 
     
-    m_UISelectTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, ScreenHeight-20) style:UITableViewStyleGrouped];
+    m_UISelectTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-20) style:UITableViewStyleGrouped];
     m_UISelectTable.delegate   = self;
     m_UISelectTable.dataSource = self;
     [m_UISelectTable setBackgroundColor:[UIColor clearColor]];

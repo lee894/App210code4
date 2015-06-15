@@ -11,6 +11,7 @@
                 <outlet property="alipyaloginLab" destination="IL2-Jo-Jhm" id="klV-Zq-bWA"/>
                 <outlet property="myallView" destination="1" id="b7c-8G-IVs"/>
                 <outlet property="qqloginBtn" destination="27" id="zoz-Ud-EjJ"/>
+                <outlet property="qqloginLab" destination="Ioq-Gx-SXJ" id="cni-7c-bP1"/>
                 <outlet property="textFieldAccount" destination="18" id="25"/>
                 <outlet property="textFieldPassword" destination="19" id="26"/>
                 <outlet property="view" destination="aMi-Bf-Q9A" id="2fQ-MW-EFX"/>
@@ -236,7 +237,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
-            <point key="canvasLocation" x="-55" y="39"/>
+            <point key="canvasLocation" x="-72" y="34"/>
         </view>
     </objects>
     <resources>
