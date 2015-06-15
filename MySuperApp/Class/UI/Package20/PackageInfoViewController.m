@@ -25,16 +25,16 @@
     NSMutableArray *colorsForProduct;//颜色数据源
     NSMutableArray *buttonsForSize;//尺码数据源
     
-    int currentProduct;//因为不同颜色对应不同的商品 换颜色也换currentproduct id
-    int currentColor;//滚动picker时给这b赋值
-    int didSelectColor;
-    int currentSize;
-    int currentNumber; //商品的数量
+    NSInteger currentProduct;//因为不同颜色对应不同的商品 换颜色也换currentproduct id
+    NSInteger currentColor;//滚动picker时给这b赋值
+    NSInteger currentSize;
+    ProductProductDetailModel *productModel;
 }
 @property (nonatomic, retain) PackageInfo* pInfo;
 @property (nonatomic, retain) UIScrollView* svPackage;
 @property(nonatomic, copy)	NSString *selectedSize;//记录选择的尺码
 @property (nonatomic, retain) NSArray *arrTemSize;
+@property(nonatomic,retain) NSMutableString *str_append;
 @end
 
 @implementation PackageInfoViewController
@@ -359,72 +359,71 @@
     [self hiddenBar];
     
     
-//    if(barButton.tag==102)
-//    {
-//        if (didSelectColor!=currentColor) {// 如果颜色不同 说明换商品了
-//            didSelectColor=currentColor;
-//            currentProduct=currentColor;
-//            
-//            currentSize = [self indexOfSize:self.selectedSize];
-////            [self structMultiDesc];
-////            [detailTab reloadData];
-//        }
-//    }
-//    else if(barButton.tag==102+100)
-//    {
-//        NSLog(@"size完成arrTemSize:%@", self.arrTemSize);
-//        NSLog(@"size完成currentSize:%d", currentSize);
-//        if ([productModel.array_size count]!=0)
-//        {
-//            //            self.selectedSize=[[self.arrTemSize objectAtIndex:currentSize]objectForKey:@"spec_alias"];
-//            //lee999 修改选择尺码崩溃
-//            if ([self.arrTemSize count] > currentSize) {
-//                self.selectedSize=[[self.arrTemSize objectAtIndex:currentSize]objectForKey:@"spec_alias"];
-//            }else{
-//                self.selectedSize = @"";
-//                currentSize = 0;
-//            }
-//        }
-//        if ([productModel.colorlist count]==0) {
-//            self.leftNUM=0;
-//        }
-//        else{
-//            _str_append=[[NSMutableString alloc]init];
-//            [self.str_append appendFormat:@"%@",[[productModel.colorlist objectAtIndex:currentColor]ID]];
-//            [self.str_append appendFormat:@"|"];
-//            for (int j = 0; j<productModel.array_size.count; j++) {
-//                if ([[[[productModel.array_size objectAtIndex:j] allKeys] lastObject] isEqualToString:[[productModel.colorlist objectAtIndex:currentColor]ID]]) {
-//                    
-//                    NSArray *arr = [[productModel.array_size objectAtIndex:j]objectForKey:[[productModel.colorlist objectAtIndex:currentColor]ID]];
-//                    
-//                    //lee999 修改选择尺码崩溃
-//                    //                    [self.str_append appendFormat:@"%@",[[arr objectAtIndex:currentSize] objectForKey:@"id"]];
-//                    if ([arr count] > currentSize) {
-//                        [self.str_append appendFormat:@"%@",[[arr objectAtIndex:currentSize] objectForKey:@"id"]];
-//                    }else{
-//                        currentSize = 0;
-//                    }
-//                    
-//                }
-//            }
-//            [self.str_append appendFormat:@"|"];
-//            for (int i=0; i<[productModel.array_color_size count]; i++) {
-//                if ([[productModel.array_color_size objectAtIndex:i]isEqualToString:self.str_append]) {
-//                    self.product_id=[[productModel.productlist objectAtIndex:i] ID];
-//                    self.leftNUM=[[[productModel.productlist objectAtIndex:i] Count] intValue];
-//                }
-//            }
-//        }
-//        [self setSizeButtonText];
-//        [detailTab reloadData];
-//    }else if(barButton.tag==102+10){
-//        if (didSelectNumber != currentNumber) {
-//            
-//            buttonForNum.text = [[NSString alloc]initWithFormat:@"%d",currentNumber];
-//            recordNUM=[buttonForNum.text intValue];
-//            [detailTab reloadData];
-//        }
-//    }
+    if(barButton.tag==102)
+    {
+        
+    }
+    else if(barButton.tag==102+100)
+    {
+        
+    }
+}
+
+
+#pragma mark picker delegate&dataSource
+//====================================================
+// 函数名称: picker delegate&dataSource
+// 函数功能: picker的协议方法
+//====================================================
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    if (pickerView==pickerForSelectColor) {
+        return [productModel.colorlist count];
+    }else if (pickerView == pickerForSelectSize) {
+        return [self.arrTemSize count];
+    }
+    return 0;
+}
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, 220, 44) ];
+    NSString *pickerText=@"";
+    UrlImageView *image=[[UrlImageView alloc]init];
+    if (pickerView==pickerForSelectColor) {
+        pickerText= [[productModel.colorlist objectAtIndex:row] Spec_alias];
+        [image setImageWithURL:[NSURL URLWithString:[[productModel.colorlist objectAtIndex:row] ImageUrl]]];
+        titleLabel.textAlignment = UITextAlignmentLeft;
+    }
+    else if (pickerView==pickerForSelectSize){
+        
+        titleLabel.textAlignment = UITextAlignmentCenter;
+        
+        pickerText= [[self.arrTemSize objectAtIndex:row] objectForKey:@"spec_alias"];
+        
+    }
+    titleLabel.text = pickerText;
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.font = [ UIFont boldSystemFontOfSize:18];;
+    titleLabel.opaque = NO;
+    
+    image.frame=CGRectMake(180, 4, 50, 36);
+    UIView *view_image=[[UIView alloc]init];
+    view_image.frame=CGRectMake(0, 0, 320, 44);
+    [view_image addSubview:image];
+    [view_image addSubview:titleLabel];
+    return view_image;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    
+    if (pickerView==pickerForSelectColor) {
+        currentColor = row;
+    }else if (pickerView == pickerForSelectSize) {
+        currentSize = row;
+    }
 }
 
 @end

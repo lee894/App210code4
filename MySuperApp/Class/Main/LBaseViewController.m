@@ -21,6 +21,7 @@
 #import "YKCanReuse_webViewController.h"
 #import "MyAimerloginViewController.h"
 #import "MyAimerViewController.h"
+#import "PackageInfoViewController.h"
 
 
 @interface LBaseViewController ()
@@ -404,6 +405,17 @@
                 jumpVC.isFromRight = right;
                 
                 return jumpVC;
+            }
+        }
+            break;
+        case 10:
+        {
+            NSArray* param = [argu componentsSeparatedByString:@":"];
+            if (param.count > 1) {
+                NSString* strPackageId = [param objectAtIndex:1 isArray:nil];
+                PackageInfoViewController* pivc = [[PackageInfoViewController alloc] init];
+                pivc.pid = strPackageId;
+                return pivc;
             }
         }
             break;
