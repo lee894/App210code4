@@ -8,6 +8,73 @@
 
 #import "PackageInfoParser.h"
 
+@implementation PackageSpecValueInfo
+-(NSString*)sid
+{
+    return [[self attributeForKey:@"id"] description];
+}
+-(NSString*)spec_id
+{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [[self attributeForKey:[str substringToIndex:str.length - 1]] description];
+}
+-(NSString*)spec_value
+{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [[self attributeForKey:[str substringToIndex:str.length - 1]] description];
+}
+-(NSString*)spec_alias
+{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [[self attributeForKey:[str substringToIndex:str.length - 1]] description];
+}
+-(NSString*)imgurl
+{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [[self attributeForKey:[str substringToIndex:str.length - 1]] description];
+}
+@end
+
+@implementation PackageSpecInfo
+-(NSString*)sId
+{
+    return [[self attributeForKey:@"id"] description];
+}
+-(NSString*)spec_type
+{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [[self attributeForKey:[str substringToIndex:str.length - 1]] description];
+}
+-(NSString*)type
+{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [[self attributeForKey:[str substringToIndex:str.length - 1]] description];
+}
+-(NSString*)view_name
+{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [[self attributeForKey:[str substringToIndex:str.length - 1]] description];
+}
+@end
+
+@implementation PackageProductInfo
+-(NSString*)product_id
+{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [[self attributeForKey:[str substringToIndex:str.length - 1]] description];
+}
+-(NSInteger)count
+{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [[[self attributeForKey:[str substringToIndex:str.length - 1]] description] integerValue];
+}
+-(YKBaseEntity*)_spec_value_ids
+{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [self attributeForKey:[str substringToIndex:str.length - 1]];
+}
+@end
+
 @implementation PackageGoodsInfo
 -(NSString*)gid
 {
@@ -32,6 +99,21 @@
 {
     NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
     return [[self attributeForKey:[str substringToIndex:str.length - 1]] description];
+}
+-(NSMutableArray*)products
+{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [self attributeForKey:[str substringToIndex:str.length - 1]];
+}
+-(NSArray*)specs
+{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [self attributeForKey:[str substringToIndex:str.length - 1]];
+}
+-(YKBaseEntity*)spec_values
+{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [self attributeForKey:[str substringToIndex:str.length - 1]];
 }
 @end
 
@@ -158,7 +240,9 @@
     dicClassNames = @{@"topkey" : @"PackageInfo",
                       @"groups" : @"PackageGroupInfo",
                       @"packageinfo" : @"PackageData",
-                      @"goods" : @"PackageGoodsInfo"
+                      @"goods" : @"PackageGoodsInfo",
+                      @"specs" : @"PackageSpecInfo",
+                      @"products" : @"PackageProductInfo"
                       };
     return [self parseDic:dic byKey:@"topkey"];
 

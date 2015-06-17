@@ -471,38 +471,73 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell setBackgroundColor:[UIColor clearColor]];
         
+        UIImageView* ivBg = [[UIImageView alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - (lee1fitAllScreen(295))) / 2, 0, lee1fitAllScreen(295), lee1fitAllScreen(76))];
+        [cell.contentView addSubview:ivBg];
+        
+        UILabel* lblPrice = [[UILabel alloc] initWithFrame:CGRectMake(0, (lee1fitAllScreen(76) - 18) / 2, lee1fitAllScreen(72), 18)];
+        [lblPrice setTextAlignment:NSTextAlignmentCenter];
+        [lblPrice setFont:[UIFont boldSystemFontOfSize:15]];
+        [lblPrice setTextColor:[UIColor whiteColor]];
+        [ivBg addSubview:lblPrice];
+        
+        UILabel* lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(72) + 10, 22, lee1fitAllScreen(160), 12)];
+        [lblTitle setFont:[UIFont boldSystemFontOfSize:12]];
+        [lblTitle setLineBreakMode:NSLineBreakByTruncatingTail];
+        [lblTitle setTextColor:[UIColor colorWithHexString:@"#666666"]];
+        [ivBg addSubview:lblTitle];
+        
+        UILabel* lblTime = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(72) + 10, lblTitle.frame.size.height + lblTitle.frame.origin.y + 6, lee1fitAllScreen(160), 12)];
+        [lblTime setFont:[UIFont systemFontOfSize:12]];
+        [lblTime setLineBreakMode:NSLineBreakByTruncatingTail];
+        [lblTime setTextColor:[UIColor colorWithHexString:@"#666666"]];
+        [ivBg addSubview:lblTime];
+        
+        UIImageView* ivState = [[UIImageView alloc] initWithFrame:CGRectMake(ivBg.frame.size.width - (lee1fitAllScreen(63)), 5, 0.5, ivBg.frame.size.height - 10)];
+        [ivBg addSubview:ivState];
+        
         NSString* strStatus = @"";
         NSString* type = @"";
         NSString* strPrice = @"";
         NSString* strTitle = @"";
-        
+        NSString* strTime = @"";
+        UIImage* iBg = nil;
         id data = [self.contentArr objectAtIndex:indexPath.row isArray:nil];
         if ([data class] == [CouponInfo class]) {
             strStatus = ((CouponInfo*)data).stuatus;
             type = ((CouponInfo*)data).type;
             strTitle = ((CouponInfo*)data).title;
-            strPrice = ((CouponInfo*)data).price;
+            strPrice = [NSString stringWithFormat:@"￥%@", ((CouponInfo*)data).price];
+            strTime = [NSString stringWithFormat:@"有效期至%@", ((CouponInfo*)data).failtime];
         }
         else if ([data class] == [FreePostCardInfo class])
         {
             strStatus = ((FreePostCardInfo*)data).status;
-            strTitle = ((FreePostCardInfo*)data).name;
+            strTitle = [NSString stringWithFormat:@"%@共计%@次", ((FreePostCardInfo*)data).name, ((FreePostCardInfo*)data).total_times];
+            strPrice = [[NSNumber numberWithInteger:[((FreePostCardInfo*)data).total_times integerValue] - [((FreePostCardInfo*)data).used_times integerValue]] description];
+            iBg = [UIImage imageNamed:@"laber_byk"];
+            strTime = [NSString stringWithFormat:@"有效期至%@", [[((FreePostCardInfo*)data).end_time componentsSeparatedByString:@" "] firstObject]];
         }
-        UIImage* iBg = nil;
         if (strStatus) {
             if ([strStatus isEqualToString:@"已过期优惠劵"] || [strStatus isEqualToString:@"已过期优惠劵状态"])
             {
                 iBg = [UIImage imageNamed:@"laber_byk_use"];
+                [ivState setImage:[UIImage imageNamed:@"yhq_none_laber"]];
+                [ivState setFrame:CGRectMake(ivState.frame.origin.x, 11, lee1fitAllScreen(55), lee1fitAllScreen(55))];
             }
             else if([strStatus isEqualToString:@"已使用"])
             {
                 iBg = [UIImage imageNamed:@"laber_byk_use"];
+                [ivState setImage:[UIImage imageNamed:@"yhq_use_laber"]];
+                [ivState setFrame:CGRectMake(ivState.frame.origin.x, 11, lee1fitAllScreen(55), lee1fitAllScreen(55))];
             }
             else
             {
+                [ivState setBackgroundColor:[UIColor colorWithHexString:@"c6c6c6"]];
+                UIButton* btnAction = [UIButton buttonWithType:UIButtonTypeCustom];
                 if ([type isEqualToString:@"o2o"])
                 {
                     iBg = [UIImage imageNamed:@"laber_o2o"];
+                    [btnAction setTag:1];
                 }
                 else if([type isEqualToString:@"coupon"])
                 {
@@ -512,27 +547,26 @@
                 {
                     iBg = [UIImage imageNamed:@"laber_lpk"];
                 }
+                [btnAction addTarget:self action:@selector(toHome:) forControlEvents:UIControlEventTouchUpInside];
+                [btnAction setTitle:@"使用" forState:UIControlStateNormal];
+                [btnAction setTitleColor:[UIColor colorWithHexString:@"#c8002c"] forState:UIControlStateNormal];
+                [btnAction.titleLabel setFont:[UIFont systemFontOfSize:14]];
+                [btnAction setFrame:CGRectMake(ivState.frame.origin.x, 0, lee1fitAllScreen(63), ivBg.frame.size.height)];
+                [ivBg addSubview:btnAction];
             }
         }
-        
-        UIImageView* ivBg = [[UIImageView alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - (lee1fitAllScreen(295))) / 2, 0, lee1fitAllScreen(295), lee1fitAllScreen(76))];
         [ivBg setImage:iBg];
-        [cell.contentView addSubview:ivBg];
-        
-        UILabel* lblPrice = [[UILabel alloc] initWithFrame:CGRectMake(0, (lee1fitAllScreen(76) - 18) / 2, lee1fitAllScreen(72), 18)];
-        [lblPrice setTextAlignment:NSTextAlignmentCenter];
-        [lblPrice setFont:[UIFont boldSystemFontOfSize:15]];
-        [lblPrice setText:[NSString stringWithFormat:@"￥%@", strPrice]];
-        [lblPrice setTextColor:[UIColor whiteColor]];
-        [ivBg addSubview:lblPrice];
-        
-        UILabel* lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(72) + 10, 22, lee1fitAllScreen(160), 12)];
-        [lblTitle setFont:[UIFont boldSystemFontOfSize:12]];
-        [lblTitle setLineBreakMode:NSLineBreakByTruncatingTail];
+        [lblPrice setText:strPrice];
         [lblTitle setText:strTitle];
-        [lblTitle setTextColor:[UIColor colorWithHexString:@"#666666"]];
-        [ivBg addSubview:lblTitle];
-        
+        [lblTime setText:strTime];
+        CGRect rcTitle = [lblTitle.text boundingRectWithSize:CGSizeMake(lblTitle.frame.size.width, lee1fitAllScreen(62)) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblTitle.font} context:nil];
+        NSLog(@"%@", NSStringFromCGRect(rcTitle));
+        if (rcTitle.size.height > 15) {
+            float originY = (ivBg.frame.size.height - rcTitle.size.height - 6 - 12) / 2;
+            [lblTitle setFrame:CGRectMake(lblTitle.frame.origin.x, originY, rcTitle.size.width, rcTitle.size.height)];
+            [lblTitle setNumberOfLines:2];
+            [lblTime setFrame:CGRectMake(lee1fitAllScreen(72) + 10, lblTitle.frame.size.height + lblTitle.frame.origin.y + 6, lee1fitAllScreen(160), 12)];
+        }
         
 //        cell.labelTitle.text = LegalObject([dic objectForKey:@"title"],[NSString class]);//@"线上全场通用券";
 //        cell.labelDesc.text = LegalObject([dic objectForKey:@"desc"],[NSString class]);
@@ -612,6 +646,10 @@
     return nil;
 }
 
+-(void)toHome:(UIButton*)sender
+{
+    
+}
 
 //lee999 修改绑定
 - (void)btnBindClicked:(UIButton *)sender {
@@ -752,7 +790,7 @@
 - (void)updateTableView
 {
     BOOL status = NO;
-    if (self.couponcardListModel.currentPage < self.couponcardListModel.pageCount) {//小于
+    if (_cli.current_page < _cli.page_count) {//小于
         status = YES;
     }
     _mytableView.isCloseFooter = !status;

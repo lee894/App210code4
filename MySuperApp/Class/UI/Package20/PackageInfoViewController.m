@@ -10,6 +10,8 @@
 #import "ProductDetailViewController.h"
 #import "PackageInfoViewController.h"
 
+#define PickShowHigh 265.+50.
+
 @interface PackageInfoViewController ()
 {
     MainpageServ* mainSev;
@@ -22,19 +24,23 @@
     UIToolbar *toolBarForSizePicker;//尺寸picker的toolbar
     
     //数据源
-    NSMutableArray *colorsForProduct;//颜色数据源
-    NSMutableArray *buttonsForSize;//尺码数据源
+    NSMutableArray *marrColor;//颜色数据源
+    NSMutableArray *marrSize;//尺码数据源
     
-    NSInteger currentProduct;//因为不同颜色对应不同的商品 换颜色也换currentproduct id
+//    NSInteger currentProduct;//因为不同颜色对应不同的商品 换颜色也换currentproduct id
     NSInteger currentColor;//滚动picker时给这b赋值
     NSInteger currentSize;
-    ProductProductDetailModel *productModel;
+//    ProductProductDetailModel *productModel;
+    UIButton* btnColor;
+    UIButton* btnSize;
+    PackageGoodsInfo* goodsInfo;
 }
 @property (nonatomic, retain) PackageInfo* pInfo;
 @property (nonatomic, retain) UIScrollView* svPackage;
-@property(nonatomic, copy)	NSString *selectedSize;//记录选择的尺码
-@property (nonatomic, retain) NSArray *arrTemSize;
-@property(nonatomic,retain) NSMutableString *str_append;
+@property (nonatomic, retain) NSMutableArray *marrGoods;
+//@property(nonatomic, copy)	NSString *selectedSize;//记录选择的尺码
+//@property (nonatomic, retain) NSArray *arrTemSize;
+//@property(nonatomic,retain) NSMutableString *str_append;
 @end
 
 @implementation PackageInfoViewController
@@ -49,6 +55,9 @@
     [self.view addSubview:self.svPackage];
     [self.view addConstraints:[self viewConstraints]];
     [mainSev getPackageInfoWithPid:self.pid];
+    currentColor = 0;
+    currentSize = 0;
+    self.marrGoods = [[NSMutableArray alloc] initWithCapacity:1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,6 +73,18 @@
 -(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel
 {
     _pInfo = [[[PackageInfoParser alloc] init] parsePackageInfo:amodel];
+    for (NSInteger i = 0; i < _pInfo.packageinfo.groups.count; ++i) {
+        PackageGroupInfo* pgi = [_pInfo.packageinfo.groups objectAtIndex:i isArray:nil];
+        for (NSInteger j = 0; j < pgi.goods.count; ++j) {
+            PackageGoodsInfo* pgInfo = [pgi.goods objectAtIndex:j isArray:nil];
+            for (NSInteger k = 0; k < pgInfo.products.count; ++k) {
+                PackageProductInfo* ppi = [pgInfo.products objectAtIndex:k isArray:nil];
+                if (ppi.count == 0) {
+                    [pgInfo.products removeObject:ppi];
+                }
+            }
+        }
+    }
     self.title = _pInfo.packageinfo.name;
     for (NSInteger i = 0; i < ((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods.count; ++i) {
         PackageGoodsInfo* pgi = [((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods objectAtIndex:i];
@@ -115,26 +136,90 @@
     
 }
 
+-(void)closeGoodsView:(UIButton*)sender
+{
+    [vGoods removeFromSuperview];
+}
+
 -(void)selectGoods:(UIButton*)sender
 {
     NSInteger index = sender.tag;
-    PackageGoodsInfo* pgi = [((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods objectAtIndex:index];
-    vGoods = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    goodsInfo = [((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods objectAtIndex:index];
+    
+    PackageSpecInfo* firstSepc = (PackageSpecInfo*)[goodsInfo.specs firstObject];
+    PackageSpecInfo* lastSepc = (PackageSpecInfo*)[goodsInfo.specs lastObject];
+    
+    marrColor = [NSMutableArray arrayWithCapacity:1];
+    for (PackageProductInfo* ppi in goodsInfo.products) {
+        NSString* strSpecValue = [ppi._spec_value_ids attributeForKey:firstSepc.sId];
+        PackageSpecValueInfo* sepcValueInfo = [[PackageSpecValueInfo alloc] init];
+        [sepcValueInfo setAttributeDic:((YKBaseEntity*)[goodsInfo.spec_values attributeForKey:strSpecValue]).attributeDic];
+        
+        if (marrColor.count > 0) {
+            BOOL has = NO;
+            for (int i = 0; i < marrColor.count; ++i) {
+                PackageSpecValueInfo* recordColor = [marrColor objectAtIndex:i isArray:nil];
+                if ([recordColor.spec_alias isEqualToString:sepcValueInfo.spec_alias]) {
+                    has = YES;
+                }
+            }
+            if (!has) {
+                [marrColor addObject:sepcValueInfo];
+            }
+        }else{
+            [marrColor addObject:sepcValueInfo];
+        }
+    }
+    
+    marrSize = [NSMutableArray arrayWithCapacity:1];
+    PackageProductInfo* firstProcuct = [goodsInfo.products firstObject];
+    NSString* strSpecValue = [firstProcuct._spec_value_ids attributeForKey:firstSepc.sId];
+    for (PackageProductInfo* ppi in goodsInfo.products) {
+        if ([[ppi._spec_value_ids attributeForKey:firstSepc.sId] isEqualToString:strSpecValue]) {
+            NSString* tempSpecValue = [ppi._spec_value_ids attributeForKey:lastSepc.sId];
+            PackageSpecValueInfo* sepcValueInfo = [[PackageSpecValueInfo alloc] init];
+            [sepcValueInfo setAttributeDic:((YKBaseEntity*)[goodsInfo.spec_values attributeForKey:tempSpecValue]).attributeDic];
+            if (marrSize.count > 0) {
+                BOOL has = NO;
+                for (int i = 0; i < marrColor.count; ++i) {
+                    PackageSpecValueInfo* recordColor = [marrColor objectAtIndex:i isArray:nil];
+                    if ([recordColor.spec_alias isEqualToString:sepcValueInfo.spec_alias]) {
+                        has = YES;
+                    }
+                }
+                if (!has) {
+                    [marrSize addObject:sepcValueInfo];
+                }
+            }else{
+                [marrSize addObject:sepcValueInfo];
+            }
+        }
+    }
+    
+    
+    vGoods = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - lee1fitAllScreen(59))];
     [vGoods setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
     UIView* vBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, lee1fitAllScreen(270), lee1fitAllScreen(212))];
     [vBG setBackgroundColor:[UIColor colorWithHexString:@"#eaeaea"]];
     [vBG setAlpha:0.8];
     [vBG.layer setCornerRadius:5];
     [vBG setCenter:vGoods.center];
+    [vGoods addSubview:vBG];
     
     UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(15, 15, lee1fitAllScreen(97), lee1fitAllScreen(125))];
-    [uiv setImageWithURL:[NSURL URLWithString:pgi.image_url] placeholderImage:nil];
+    [uiv setImageWithURL:[NSURL URLWithString:goodsInfo.image_url] placeholderImage:nil];
     [vBG addSubview:uiv];
+    
+    UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn addTarget:self action:@selector(closeGoodsView:) forControlEvents:UIControlEventTouchUpInside];
+    [btn setImage:[UIImage imageNamed:@"lp_shut_b"] forState:UIControlStateNormal];
+    [btn setFrame:CGRectMake(vBG.frame.origin.x + vBG.frame.size.width - (lee1fitAllScreen(25) / 2), vBG.frame.origin.y - (lee1fitAllScreen(25) / 2), lee1fitAllScreen(25), lee1fitAllScreen(25))];
+    [vGoods addSubview:btn];
     
     UILabel* lblName = [[UILabel alloc] init];
     [lblName setFont:[UIFont systemFontOfSize:12]];
     [lblName setNumberOfLines:2];
-    [lblName setText:pgi.name];
+    [lblName setText:goodsInfo.name];
     [lblName setTextColor:[UIColor colorWithHexString:@"#333333"]];
     [lblName setLineBreakMode:NSLineBreakByTruncatingTail];
     NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
@@ -145,27 +230,44 @@
     
     UILabel* lblColor = [[UILabel alloc] init];
     [lblColor setFont:[UIFont systemFontOfSize:12]];
-    [lblColor setText:@"颜色："];
+    [lblColor setText:[NSString stringWithFormat:@"%@：", firstSepc.view_name]];
     [lblColor setTextColor:[UIColor colorWithHexString:@"#666666"]];
     [lblColor setFrame:CGRectMake(lblName.frame.origin.x, 76, 100, 12)];
     [vBG addSubview:lblColor];
     
-    UIButton* btnColor = [UIButton buttonWithType:UIButtonTypeCustom];
+    PackageSpecValueInfo* firstSepcValueInfo = [[PackageSpecValueInfo alloc] init];
+    [firstSepcValueInfo setAttributeDic:((YKBaseEntity*)[goodsInfo.spec_values attributeForKey:strSpecValue]).attributeDic];
+    
+    strSpecValue = [firstProcuct._spec_value_ids attributeForKey:lastSepc.sId];
+    PackageSpecValueInfo* lastSepcValueInfo = [[PackageSpecValueInfo alloc] init];
+    [lastSepcValueInfo setAttributeDic:((YKBaseEntity*)[goodsInfo.spec_values attributeForKey:strSpecValue]).attributeDic];
+    
+    btnColor = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnColor setFrame:CGRectMake(uiv.frame.origin.x + uiv.frame.size.width + 62.5, 68, lee1fitAllScreen(80), lee1fitAllScreen(30))];
-    [btnColor addTarget:self action:@selector(ShowColorView:) forControlEvents:UIControlEventTouchUpInside];
+    [btnColor addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
     [btnColor setTitleColor:[UIColor colorWithHexString:@"181818"] forState:UIControlStateNormal];
     [btnColor.titleLabel setFont:[UIFont systemFontOfSize:12]];
-    [btnColor setTitle:@"橘色" forState:UIControlStateNormal];
+    [btnColor setTitle:firstSepcValueInfo.spec_alias forState:UIControlStateNormal];
     [btnColor setTitleEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
     [btnColor setBackgroundImage:[UIImage imageNamed:@"lp_option"] forState:UIControlStateNormal];
     [vBG addSubview:btnColor];
     
     UILabel* lblSize = [[UILabel alloc] init];
     [lblSize setFont:[UIFont systemFontOfSize:12]];
-    [lblSize setText:@"尺码："];
+    [lblSize setText:[NSString stringWithFormat:@"%@：", lastSepc.view_name]];
     [lblSize setTextColor:[UIColor colorWithHexString:@"#666666"]];
     [lblSize setFrame:CGRectMake(lblName.frame.origin.x, 122, 100, 12)];
     [vBG addSubview:lblSize];
+    
+    btnSize = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btnSize setFrame:CGRectMake(uiv.frame.origin.x + uiv.frame.size.width + 62.5, btnColor.frame.size.height + btnColor.frame.origin.y + 14, lee1fitAllScreen(80), lee1fitAllScreen(30))];
+    [btnSize addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
+    [btnSize setTitleColor:[UIColor colorWithHexString:@"181818"] forState:UIControlStateNormal];
+    [btnSize.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    [btnSize setTitle:lastSepcValueInfo.spec_alias forState:UIControlStateNormal];
+    [btnSize setTitleEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
+    [btnSize setBackgroundImage:[UIImage imageNamed:@"lp_option"] forState:UIControlStateNormal];
+    [vBG addSubview:btnSize];
     
     UILabel* lblSep = [[UILabel alloc] initWithFrame:CGRectMake(0, uiv.frame.origin.y + uiv.frame.size.height + 11, vBG.frame.size.width, 0.5)];
     [lblSep setBackgroundColor:[UIColor colorWithHexString:@"#d1d1d1"]];
@@ -193,8 +295,6 @@
     [btnAddToPackage setFrame:CGRectMake(btnToDetail.frame.size.width + btnToDetail.frame.origin.x   + 20, 7.5 + lblSep.frame.origin.y + lblSep.frame.size.height, lee1fitAllScreen(105), lee1fitAllScreen(44))];
     [vBG addSubview:btnAddToPackage];
     
-    [vGoods addSubview:vBG];
-    
     [((AppDelegate*)[UIApplication sharedApplication].delegate).window addSubview:vGoods];
 }
 
@@ -212,12 +312,22 @@
 
 -(void)addToPackage:(UIButton*)sender
 {
-    
-}
-
--(void)ShowColorView:(UIButton*)sender
-{
-    
+    PackageProductInfo* ppInfo = nil;
+    PackageSpecValueInfo* colorSpecValueInfo = [marrColor objectAtIndex:currentColor isArray:nil];
+    PackageSpecValueInfo* sizeSpecValueInfo = [marrSize objectAtIndex:currentSize isArray:nil];
+    PackageSpecInfo* firstSpec = (PackageSpecInfo*)[goodsInfo.specs firstObject];
+    PackageSpecInfo* lastSpec = (PackageSpecInfo*)[goodsInfo.specs lastObject];
+    for (PackageProductInfo* ppi in goodsInfo.products) {
+        if ([[ppi._spec_value_ids attributeForKey:firstSpec.sId] isEqualToString:colorSpecValueInfo.sid] && [[ppi._spec_value_ids attributeForKey:lastSpec.sId] isEqualToString:sizeSpecValueInfo.sid]) {
+            ppInfo = ppi;
+            break;
+        }
+    }
+    if (ppInfo) {
+//        NSLog(@"%@, %@", ppInfo.product_id, ppInfo._spec_value_ids);
+        [_marrGoods addObject:@{ppInfo.product_id : goodsInfo}];
+    }
+    [self closeGoodsView:nil];
 }
 
 -(NSArray*)viewConstraints
@@ -342,17 +452,6 @@
     [UIView commitAnimations];
 }
 
-- (int)indexOfSize:(NSString *)size
-{
-    int index = 0;
-    for (int i=0; i<self.arrTemSize.count; i++) {
-        if ([[[self.arrTemSize objectAtIndex:i]objectForKey:@"spec_alias"] isEqualToString:self.selectedSize]) {
-            index = i;
-        }
-    }
-    return index;
-}
-
 -(void)BarButtonClick:(UIBarButtonItem *)barButton{
     
     
@@ -361,14 +460,89 @@
     
     if(barButton.tag==102)
     {
+        //颜色
+        PackageSpecValueInfo* sepcValueInfo = [marrColor objectAtIndex:currentColor isArray:nil];
+        [btnColor setTitle:sepcValueInfo.spec_alias forState:UIControlStateNormal];
         
+        PackageSpecInfo* firstSepc = (PackageSpecInfo*)[goodsInfo.specs firstObject];
+        PackageSpecInfo* lastSepc = (PackageSpecInfo*)[goodsInfo.specs lastObject];
+        
+        [marrSize removeAllObjects];
+        for (PackageProductInfo* ppi in goodsInfo.products) {
+            if ([[ppi._spec_value_ids attributeForKey:firstSepc.sId] isEqualToString:sepcValueInfo.sid]) {
+                NSString* tempSpecValue = [ppi._spec_value_ids attributeForKey:lastSepc.sId];
+                PackageSpecValueInfo* sepcValueInfo = [[PackageSpecValueInfo alloc] init];
+                [sepcValueInfo setAttributeDic:((YKBaseEntity*)[goodsInfo.spec_values attributeForKey:tempSpecValue]).attributeDic];
+                if (marrSize.count > 0) {
+                    BOOL has = NO;
+                    for (int i = 0; i < marrColor.count; ++i) {
+                        PackageSpecValueInfo* recordColor = [marrColor objectAtIndex:i isArray:nil];
+                        if ([recordColor.spec_alias isEqualToString:sepcValueInfo.spec_alias]) {
+                            has = YES;
+                        }
+                    }
+                    if (!has) {
+                        [marrSize addObject:sepcValueInfo];
+                    }
+                }else{
+                    [marrSize addObject:sepcValueInfo];
+                }
+            }
+        }
+        currentSize = 0;
+        sepcValueInfo = [marrSize objectAtIndex:currentSize isArray:nil];
+        [btnSize setTitle:sepcValueInfo.spec_alias forState:UIControlStateNormal];
     }
     else if(barButton.tag==102+100)
     {
-        
+        PackageSpecValueInfo* sepcValueInfo = [marrSize objectAtIndex:currentSize isArray:nil];
+        [btnSize setTitle:sepcValueInfo.spec_alias forState:UIControlStateNormal];
     }
 }
 
+/**
+ *	颜色picker的显示
+ *	@param  (UIButton *)button 颜色按钮
+ *  @return (void)
+ */
+-(void)showPicker:(UIButton *)button
+{
+    [pickerForSelectColor removeFromSuperview];
+    [toolBarForPicker removeFromSuperview];
+    [pickerForSelectSize removeFromSuperview];
+    [toolBarForSizePicker removeFromSuperview];
+    
+    [self createtoolbarandpicker];
+    
+    if (button == btnColor) {
+        //color
+        toolBarForSizePicker.hidden = YES;
+        toolBarForPicker.hidden = NO;
+        [pickerForSelectColor reloadAllComponents];//picker的数据源是会变的 reload后更换一套新的数据源
+        [pickerForSelectColor selectRow:currentColor inComponent:0 animated:NO];
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.3];
+        pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, 320, 216);
+        toolBarForSizePicker.frame=CGRectMake(0,ScreenHeight+20, 320, 44);
+        pickerForSelectColor.frame=CGRectMake(0, ScreenHeight-PickShowHigh, 320, 216);
+        toolBarForPicker.frame=CGRectMake(0, ScreenHeight-PickShowHigh-44, 320, 44);
+        
+        [UIView commitAnimations];
+    }else{
+        //size
+        toolBarForSizePicker.hidden = NO;
+        toolBarForPicker.hidden = YES;
+        [pickerForSelectSize reloadAllComponents];//picker的数据源是会变的 reload后更换一套新的数据源
+        
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.3];
+        pickerForSelectSize.frame=CGRectMake(0, ScreenHeight-PickShowHigh, 320, 216);
+        toolBarForSizePicker.frame=CGRectMake(0,ScreenHeight-PickShowHigh-44, 320, 44);
+        pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, 320, 216);
+        toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44);
+        [UIView commitAnimations];
+    }
+}
 
 #pragma mark picker delegate&dataSource
 //====================================================
@@ -381,9 +555,9 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     if (pickerView==pickerForSelectColor) {
-        return [productModel.colorlist count];
+        return marrColor.count;
     }else if (pickerView == pickerForSelectSize) {
-        return [self.arrTemSize count];
+        return [marrSize count];
     }
     return 0;
 }
@@ -392,16 +566,18 @@
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, 220, 44) ];
     NSString *pickerText=@"";
     UrlImageView *image=[[UrlImageView alloc]init];
-    if (pickerView==pickerForSelectColor) {
-        pickerText= [[productModel.colorlist objectAtIndex:row] Spec_alias];
-        [image setImageWithURL:[NSURL URLWithString:[[productModel.colorlist objectAtIndex:row] ImageUrl]]];
+    if (pickerView == pickerForSelectColor) {
+        PackageSpecValueInfo* sepcValueInfo = [marrColor objectAtIndex:row isArray:nil];
+        pickerText= sepcValueInfo.spec_alias;
+        [image setImageWithURL:[NSURL URLWithString:sepcValueInfo.spec_alias]];
         titleLabel.textAlignment = UITextAlignmentLeft;
     }
     else if (pickerView==pickerForSelectSize){
         
         titleLabel.textAlignment = UITextAlignmentCenter;
         
-        pickerText= [[self.arrTemSize objectAtIndex:row] objectForKey:@"spec_alias"];
+        PackageSpecValueInfo* sepcValueInfo = [marrSize objectAtIndex:row isArray:nil];
+        pickerText= sepcValueInfo.spec_alias;
         
     }
     titleLabel.text = pickerText;
@@ -425,5 +601,7 @@
         currentSize = row;
     }
 }
+
+
 
 @end
