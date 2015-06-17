@@ -46,7 +46,7 @@
     [self createBackBtnWithType:0];
     mainSer  = [[MainpageServ alloc] init];
     mainSer.delegate = self;
-    self.strType = @"coupon";
+    self.strType = @"c";
 //    //创建右边按钮
 //    [self createRightBtn];
 //    [self.navbtnRight setTitle:@"绑定" forState:UIControlStateNormal];
@@ -860,7 +860,7 @@
             case Http_CouponList20_Tag:
             {
                 _cli = [[[CouponListInfoParser alloc] init] parseCouponListInfo:amodel];
-                if ([_strType isEqualToString:@"coupon"] || [_strType isEqualToString:@"gift"]) {
+                if ([_strType isEqualToString:@"c"] || [_strType isEqualToString:@"g"]) {
                     if (current == 1) {
 //                        [self.arrCard removeAllObjects];
 //                        [self.arrCard addObjectsFromArray:_cli.coupons];
@@ -874,7 +874,7 @@
                     
                     [self updateTableView];
                 }
-                else if ([_strType isEqualToString:@"freepostcards"])
+                else if ([_strType isEqualToString:@"f"])
                 {
                     if (current == 1) {
                         [self.contentArr removeAllObjects];
@@ -1057,13 +1057,14 @@
     switch (sender.tag) {
         case 10001:
         {
-            _strType = @"coupon";
+            _strType = @"c";
             [self getData];
         }
             break;
         case 10002:
         {
-            
+            _strType = @"u";
+            [self getData];
         }
             break;
         default:
@@ -1087,7 +1088,7 @@
         [vCouponMenu removeFromSuperview];
         vCouponMenu = nil;
     }
-    _strType = @"freepostcards";
+    _strType = @"f";
     [self getData];
 }
 
@@ -1100,7 +1101,7 @@
         [vCouponMenu removeFromSuperview];
         vCouponMenu = nil;
     }
-    _strType = @"gift";
+    _strType = @"g";
     [self getData];
 }
 
