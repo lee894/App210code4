@@ -972,6 +972,18 @@
     }];
 }
 
+- (void)addPackageToCartWithData:(NSArray*)data andPid:(NSString*)pid_
+{
+    NSMutableArray* marrData = [NSMutableArray arrayWithCapacity:1];
+    for (NSDictionary* dic in data) {
+        [marrData addObject:[[dic allKeys] firstObject]];
+    }
+    [self sendPostWithURL:@"addpackagetoshopcart" tag:Http_AddPackageToCart20_Tag beforeRequest:^{
+        [self addParam:@"package_id" withValue:pid_];
+        [self addParam:@"product_id" withValue:[marrData componentsJoinedByString:@"|"]];
+        [self addParam:@"number" withValue:@"1"];
+    }];
+}
 @end
 
 

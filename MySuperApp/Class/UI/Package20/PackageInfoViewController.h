@@ -8,6 +8,6 @@
 
 #import "LBaseViewController.h"
 
-@interface PackageInfoViewController : LBaseViewController <ServiceDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@interface PackageInfoViewController : LBaseViewController <ServiceDelegate, UIScrollViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 @property (nonatomic, retain) NSString* pid;
 @end

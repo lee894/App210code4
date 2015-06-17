@@ -114,11 +114,11 @@
     [self.navbtnRight setFrame:CGRectMake(242, 7, 30, 30)];
     
     
-    didSelectColor=-1;
-    currentColor=0;
-    currentSize=0;
+    didSelectColor = -1;
+    currentColor = 0;
+    currentSize = 0;
     currentNumber = 0;
-    buttonsForSize=[[NSMutableArray alloc] init];
+    buttonsForSize = [[NSMutableArray alloc] init];
     
     //lee894设置首页的高度~~
     //适配屏幕及系统版本

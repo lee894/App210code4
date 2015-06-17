@@ -229,6 +229,7 @@
 }
 -(PackageData*)packageinfo
 {
+//    return [[self attributeForKey:@"id"] description];
     NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
     return [self attributeForKey:[str substringToIndex:str.length - 1]];
 }

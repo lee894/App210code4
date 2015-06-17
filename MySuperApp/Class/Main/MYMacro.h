@@ -443,7 +443,7 @@
 #define Http_FavoriteList20_Tag 210 //新版本 收藏夹列表
 #define Http_PackageInfo20_Tag 211 //新版本 礼包详情
 #define Http_CouponList20_Tag 212 //新版本 优惠券列表
-
+#define Http_AddPackageToCart20_Tag 213 //新版本 礼包加入购物车
 #define Http_wardrobe_Tag 301 //私人衣橱 1
 
 

@@ -36,8 +36,9 @@
     PackageGoodsInfo* goodsInfo;
 }
 @property (nonatomic, retain) PackageInfo* pInfo;
-@property (nonatomic, retain) UIScrollView* svPackage;
+@property (nonatomic, retain) UITableView* tbPackage;
 @property (nonatomic, retain) NSMutableArray *marrGoods;
+@property (nonatomic, retain) UIView* vToolbar;
 //@property(nonatomic, copy)	NSString *selectedSize;//记录选择的尺码
 //@property (nonatomic, retain) NSArray *arrTemSize;
 //@property(nonatomic,retain) NSMutableString *str_append;
@@ -52,7 +53,10 @@
     [self NewHiddenTableBarwithAnimated:YES];
     mainSev = [[MainpageServ alloc] init];
     mainSev.delegate = self;
-    [self.view addSubview:self.svPackage];
+    [self.view addSubview:self.tbPackage];
+    UIView* vFooter = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, lee1fitAllScreen(59))];
+    [self.tbPackage setTableFooterView:vFooter];
+    [self.view addSubview:self.vToolbar];
     [self.view addConstraints:[self viewConstraints]];
     [mainSev getPackageInfoWithPid:self.pid];
     currentColor = 0;
@@ -72,63 +76,83 @@
 
 -(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel
 {
-    _pInfo = [[[PackageInfoParser alloc] init] parsePackageInfo:amodel];
-    for (NSInteger i = 0; i < _pInfo.packageinfo.groups.count; ++i) {
-        PackageGroupInfo* pgi = [_pInfo.packageinfo.groups objectAtIndex:i isArray:nil];
-        for (NSInteger j = 0; j < pgi.goods.count; ++j) {
-            PackageGoodsInfo* pgInfo = [pgi.goods objectAtIndex:j isArray:nil];
-            for (NSInteger k = 0; k < pgInfo.products.count; ++k) {
-                PackageProductInfo* ppi = [pgInfo.products objectAtIndex:k isArray:nil];
-                if (ppi.count == 0) {
-                    [pgInfo.products removeObject:ppi];
+    switch ((NSUInteger)aHandle) {
+        case Http_AddPackageToCart20_Tag:
+        {
+            if ([[amodel objectForKey:@"response"] isEqualToString:@"addpackagetoshopcart"]) {
+                
+                [SBPublicAlert showMBProgressHUDTextOnly:@"成功加入购物车" andWhereView:self.view hiddenTime:3.0];
+                
+            }else{
+                [SBPublicAlert showMBProgressHUD:@"加入购物车失败" andWhereView:self.view hiddenTime:1.];
+            }
+
+        }
+            break;
+        case Http_PackageInfo20_Tag:
+        {
+            self.pInfo = [[[PackageInfoParser alloc] init] parsePackageInfo:amodel];
+            for (NSInteger i = 0; i < _pInfo.packageinfo.groups.count; ++i) {
+                PackageGroupInfo* pgi = [_pInfo.packageinfo.groups objectAtIndex:i isArray:nil];
+                for (NSInteger j = 0; j < pgi.goods.count; ++j) {
+                    PackageGoodsInfo* pgInfo = [pgi.goods objectAtIndex:j isArray:nil];
+                    for (NSInteger k = 0; k < pgInfo.products.count; ++k) {
+                        PackageProductInfo* ppi = [pgInfo.products objectAtIndex:k isArray:nil];
+                        if (ppi.count == 0) {
+                            [pgInfo.products removeObject:ppi];
+                        }
+                    }
                 }
             }
+            
+            self.title = _pInfo.packageinfo.name;
+            [_tbPackage setDelegate:self];
+            [_tbPackage setDataSource:self];
+            [_tbPackage reloadData];
+            
+            UIButton* btnAddtoCart = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btnAddtoCart setFrame:CGRectMake(_vToolbar.frame.size.width - 13 - lee1fitAllScreen(49), 8, lee1fitAllScreen(49), lee1fitAllScreen(44))];
+            [btnAddtoCart setImage:[UIImage imageNamed:@"lp_btn_shop_normal"] forState:UIControlStateNormal];
+            [btnAddtoCart setImage:[UIImage imageNamed:@"lp_btn_shop_hover"] forState:UIControlStateHighlighted];
+            [btnAddtoCart addTarget:self action:@selector(addToCart:) forControlEvents:UIControlEventTouchUpInside];
+            [_vToolbar addSubview:btnAddtoCart];
+            
+            UIButton* btnReset = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btnReset setFrame:CGRectMake(btnAddtoCart.frame.origin.x - 10 - lee1fitAllScreen(70), 8, lee1fitAllScreen(70), lee1fitAllScreen(44))];
+            [btnReset setBackgroundImage:[UIImage imageNamed:@"lp_btn_reset_normal"] forState:UIControlStateNormal];
+            [btnReset setBackgroundImage:[UIImage imageNamed:@"lp_btn_reset_hover"] forState:UIControlStateHighlighted];
+            [btnReset setTitle:@"重置" forState:UIControlStateNormal];
+            [btnReset.titleLabel setFont:[UIFont systemFontOfSize:15]];
+            [btnReset setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [btnReset addTarget:self action:@selector(resetPackage:) forControlEvents:UIControlEventTouchUpInside];
+            [_vToolbar addSubview:btnReset];
+            
+            UILabel* lblSpec = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, _vToolbar.frame.size.width - btnReset.frame.origin.x - 30, 12)];
+            [lblSpec setText:[NSString stringWithFormat:@"%@元/%@件", _pInfo.packageinfo.price, _pInfo.packageinfo.need_select_count]];
+            [lblSpec setTextColor:[UIColor colorWithHexString:@"#181818"]];
+            [lblSpec setFont:[UIFont systemFontOfSize:12]];
+            [_vToolbar addSubview:lblSpec];
+            
+            UILabel* lblPrice = [[UILabel alloc] init];
+            [lblPrice setText:[NSString stringWithFormat:@"金额:%@元", _pInfo.packageinfo.price]];
+            [lblPrice setFont:[UIFont systemFontOfSize:12]];
+            CGRect rcPrice = [lblPrice.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblPrice.font} context:nil];
+            [lblPrice setFrame:CGRectMake(15, lblSpec.frame.size.height + lblSpec.frame.origin.y + 8, rcPrice.size.width, rcPrice.size.height)];
+            [lblPrice setTextColor:[UIColor colorWithHexString:@"#181818"]];
+            [_vToolbar addSubview:lblPrice];
+            
+            UILabel* lblCount = [[UILabel alloc] init];
+            [lblCount setFont:[UIFont systemFontOfSize:12]];
+            [lblCount setText:[NSString stringWithFormat:@"数量:%@", _pInfo.packageinfo.need_select_count]];
+            CGRect rcCount = [lblCount.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblCount.font} context:nil];
+            [lblCount setFrame:CGRectMake(lblPrice.frame.size.width + lblPrice.frame.origin.x + 14, lblPrice.frame.origin.y, rcCount.size.width, rcCount.size.height)];
+            [lblCount setTextColor:[UIColor colorWithHexString:@"#181818"]];
+            [_vToolbar addSubview:lblCount];
         }
+            break;
+        default:
+            break;
     }
-    self.title = _pInfo.packageinfo.name;
-    for (NSInteger i = 0; i < ((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods.count; ++i) {
-        PackageGoodsInfo* pgi = [((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods objectAtIndex:i];
-        UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(15 + (i % 2) * (lee1fitAllScreen(140) + 10), (i / 2) * (lee1fitAllScreen((180 + 105))), lee1fitAllScreen(140), lee1fitAllScreen((180 + 105)))];
-        UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
-        [uiv setImageWithURL:[NSURL URLWithString:pgi.image_url] placeholderImage:nil];
-        [vUnit addSubview:uiv];
-        
-        UILabel* lblName = [[UILabel alloc] init];
-        [lblName setFont:[UIFont systemFontOfSize:11]];
-        [lblName setNumberOfLines:2];
-        [lblName setText:pgi.name];
-        [lblName setTextColor:[UIColor colorWithHexString:@"#333333"]];
-        [lblName setLineBreakMode:NSLineBreakByTruncatingTail];
-        NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
-        [mps setLineBreakMode:NSLineBreakByCharWrapping];
-        CGRect rcName = [lblName.text boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 36) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSParagraphStyleAttributeName : mps, NSFontAttributeName : lblName.font} context:nil];
-        [lblName setFrame:CGRectMake(10, uiv.frame.size.height + uiv.frame.origin.y + 12, rcName.size.width, rcName.size.height)];
-        [vUnit addSubview:lblName];
-        
-        UILabel* lblPrice = [[UILabel alloc] init];
-        [lblPrice setFont:[UIFont systemFontOfSize:11]];
-        [lblPrice setText:[NSString stringWithFormat:@"￥%@", pgi.price]];
-        [lblPrice setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
-        CGRect rcPrice = [lblName.text boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 36) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblPrice.font} context:nil];
-        [lblPrice setFrame:CGRectMake(lblName.frame.origin.x, vUnit.frame.size.height - 15 - rcPrice.size.height, rcPrice.size.width, rcPrice.size.height)];
-        [vUnit addSubview:lblPrice];
-        
-        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setFrame:CGRectMake(0, 0, vUnit.frame.size.width, vUnit.frame.size.height)];
-        [btn addTarget:self action:@selector(selectGoods:) forControlEvents:UIControlEventTouchUpInside];
-        [btn setTag:i];
-        [vUnit addSubview:btn];
-        
-        [self.svPackage addSubview:vUnit];
-        
-        if (i % 2 == 1) {
-            UILabel* lblSep = [[UILabel alloc] initWithFrame:CGRectMake(15, vUnit.frame.origin.y + vUnit.frame.size.height, [UIScreen mainScreen].bounds.size.width - 30, 0.5)];
-            [lblSep setBackgroundColor:[UIColor colorWithHexString:@"#d1d1d1"]];
-            [self.svPackage addSubview:lblSep];
-        }
-    }
-    NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods.count;
-    [_svPackage setContentSize:CGSizeMake([UIScreen mainScreen].bounds.size.width, lee1fitAllScreen(285) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2)))];
 }
 
 -(void)serviceFailed:(ServiceType)aHandle
@@ -143,8 +167,9 @@
 
 -(void)selectGoods:(UIButton*)sender
 {
-    NSInteger index = sender.tag;
-    goodsInfo = [((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods objectAtIndex:index];
+    NSInteger index = sender.tag % 10000;
+    NSInteger groupIndex = (sender.tag - index) / 10000;
+    goodsInfo = [((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:groupIndex isArray:nil]).goods objectAtIndex:index];
     
     PackageSpecInfo* firstSepc = (PackageSpecInfo*)[goodsInfo.specs firstObject];
     PackageSpecInfo* lastSepc = (PackageSpecInfo*)[goodsInfo.specs lastObject];
@@ -325,32 +350,112 @@
     }
     if (ppInfo) {
 //        NSLog(@"%@, %@", ppInfo.product_id, ppInfo._spec_value_ids);
-        [_marrGoods addObject:@{ppInfo.product_id : goodsInfo}];
+        PackageGroupInfo* pGroupInfo = nil;
+        NSInteger groupIndex = -1;
+        for (NSInteger i = 0; i < _pInfo.packageinfo.groups.count; ++i) {
+            PackageGroupInfo* pgi = [_pInfo.packageinfo.groups objectAtIndex:i isArray:nil];
+            for (PackageGoodsInfo* pginfo in pgi.goods) {
+                if (pginfo == goodsInfo) {
+                    pGroupInfo = pgi;
+                    groupIndex = i;
+                    break;
+                }
+            }
+        }
+        if (pGroupInfo && (groupIndex > -1)) {
+            NSInteger i = 0;
+            for (NSDictionary* dic in _marrGoods) {
+                PackageGoodsInfo* pGoodsInfo = [dic objectForKey:[[dic allKeys] firstObject] isDictionary:nil];
+//                NSInteger index = [[[((NSString*)[[dic allKeys] firstObject]) componentsSeparatedByString:@"_"] firstObject] integerValue];
+                for (PackageGroupInfo* pgi in _pInfo.packageinfo.groups) {
+                    for (PackageGoodsInfo* pginfo in pgi.goods) {
+                        if (pginfo == pGoodsInfo) {
+                            ++i;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (i < [pGroupInfo.need_select_count integerValue]) {
+                [_marrGoods addObject:@{[NSString stringWithFormat:@"%@_%@",pGroupInfo.gid, ppInfo.product_id] : goodsInfo}];
+            }else
+            {
+                UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"%@最多只能购买%@件", pGroupInfo.name, pGroupInfo.need_select_count] delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                [av show];
+            }
+        }
     }
     [self closeGoodsView:nil];
 }
 
+-(void)addToCart:(UIButton*)sender
+{
+    BOOL pickGoodsDone = YES;
+    for (NSInteger i = 0; i < _pInfo.packageinfo.groups.count; ++i) {
+        NSInteger count = 0;
+        PackageGroupInfo* pgi = (PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:i isArray:nil];
+        for (NSDictionary* dic in _marrGoods) {
+            PackageGoodsInfo* pGoodsInfo = [dic objectForKey:[[dic allKeys] firstObject] isDictionary:nil];
+            for (PackageGoodsInfo* pginfo in pgi.goods) {
+                if (pginfo == pGoodsInfo) {
+                    ++count;
+                    break;
+                }
+            }
+        }
+        if (count != [pgi.need_select_count integerValue]) {
+            pickGoodsDone = NO;
+            UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"%@还未满足条件,无法购买礼包", pgi.name] delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+            [av show];
+            return;
+        }
+    }
+    mainSev = [[MainpageServ alloc] init];
+    mainSev.delegate = self;
+    [mainSev addPackageToCartWithData:_marrGoods andPid:self.pid];
+}
+
+-(void)resetPackage:(UIButton*)sender
+{
+    UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"确定重置？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    av.tag = 10213219;
+    [av show];
+}
+
 -(NSArray*)viewConstraints
 {
-    NSDictionary *views = @{@"svPackage" : self.svPackage};
+    NSDictionary *views = @{@"tbPackage" : self.tbPackage, @"vToolbar" : self.vToolbar};
     NSDictionary *metrics = @{@"barHeight" : [NSNumber numberWithFloat:lee1fitAllScreen(59)]};
     
     NSMutableArray *constraints = [[NSMutableArray alloc] init];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[svPackage]-(barHeight)-|" options:0 metrics:metrics views:views]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[svPackage]|" options:0 metrics:metrics views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[tbPackage]|" options:0 metrics:metrics views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0@999)-[vToolbar(barHeight)]|" options:0 metrics:metrics views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[tbPackage]|" options:0 metrics:metrics views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[vToolbar]|" options:0 metrics:metrics views:views]];
     return constraints;
 }
 
--(UIScrollView *)svPackage
+-(UITableView *)tbPackage
 {
-    if (_svPackage) {
-        return _svPackage;
+    if (_tbPackage) {
+        return _tbPackage;
     }
-    _svPackage = [[UIScrollView alloc] init];
-    [_svPackage setDelegate:self];
-    [_svPackage setShowsVerticalScrollIndicator:NO];
-    [_svPackage setTranslatesAutoresizingMaskIntoConstraints:NO];
-    return _svPackage;
+    _tbPackage = [[UITableView alloc] init];
+    [_tbPackage setShowsVerticalScrollIndicator:NO];
+    [_tbPackage setTranslatesAutoresizingMaskIntoConstraints:NO];
+    return _tbPackage;
+}
+
+-(UIView *)vToolbar
+{
+    if (_vToolbar) {
+        return _vToolbar;
+    }
+    _vToolbar = [[UIView alloc] init];
+    [_vToolbar setBackgroundColor:[UIColor whiteColor]];
+    [_vToolbar setAlpha:0.8];
+    [_vToolbar setTranslatesAutoresizingMaskIntoConstraints:NO];
+    return _vToolbar;
 }
 
 -(void)createtoolbarandpicker{
@@ -544,6 +649,91 @@
     }
 }
 
+#pragma mark table delegate&dataSource
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger count = _pInfo.packageinfo.groups.count;
+    return count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIView* v = [[UIView alloc] init];
+    for (NSInteger i = 0; i < ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count; ++i) {
+        PackageGoodsInfo* pgi = [((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods objectAtIndex:i];
+        UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(15 + (i % 2) * (lee1fitAllScreen(140) + 10), (i / 2) * (lee1fitAllScreen((180 + 105))), lee1fitAllScreen(140), lee1fitAllScreen((180 + 105)))];
+        UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
+        [uiv setImageWithURL:[NSURL URLWithString:pgi.image_url] placeholderImage:nil];
+        [vUnit addSubview:uiv];
+        
+        UILabel* lblName = [[UILabel alloc] init];
+        [lblName setFont:[UIFont systemFontOfSize:11]];
+        [lblName setNumberOfLines:2];
+        [lblName setText:pgi.name];
+        [lblName setTextColor:[UIColor colorWithHexString:@"#333333"]];
+        [lblName setLineBreakMode:NSLineBreakByTruncatingTail];
+        NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
+        [mps setLineBreakMode:NSLineBreakByCharWrapping];
+        CGRect rcName = [lblName.text boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 36) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSParagraphStyleAttributeName : mps, NSFontAttributeName : lblName.font} context:nil];
+        [lblName setFrame:CGRectMake(10, uiv.frame.size.height + uiv.frame.origin.y + 12, rcName.size.width, rcName.size.height)];
+        [vUnit addSubview:lblName];
+        
+        UILabel* lblPrice = [[UILabel alloc] init];
+        [lblPrice setFont:[UIFont systemFontOfSize:11]];
+        [lblPrice setText:[NSString stringWithFormat:@"￥%@", pgi.price]];
+        [lblPrice setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
+        CGRect rcPrice = [lblName.text boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 36) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblPrice.font} context:nil];
+        [lblPrice setFrame:CGRectMake(lblName.frame.origin.x, vUnit.frame.size.height - 15 - rcPrice.size.height, rcPrice.size.width, rcPrice.size.height)];
+        [vUnit addSubview:lblPrice];
+        
+        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setFrame:CGRectMake(0, 0, vUnit.frame.size.width, vUnit.frame.size.height)];
+        [btn addTarget:self action:@selector(selectGoods:) forControlEvents:UIControlEventTouchUpInside];
+        [btn setTag:indexPath.row * 10000 + i];
+        [vUnit addSubview:btn];
+        
+        [v addSubview:vUnit];
+        
+        if (i % 2 == 1) {
+            UILabel* lblSep = [[UILabel alloc] initWithFrame:CGRectMake(15, vUnit.frame.origin.y + vUnit.frame.size.height, [UIScreen mainScreen].bounds.size.width - 30, 0.5)];
+            [lblSep setBackgroundColor:[UIColor colorWithHexString:@"#d1d1d1"]];
+            [v addSubview:lblSep];
+        }
+    }
+    NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods.count;
+    CGFloat height = 0;
+    UIView* vGroup = nil;
+    if ([self tableView:tableView numberOfRowsInSection:0] > 1) {
+        vGroup = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
+        UILabel* lblGroupName = [[UILabel alloc] initWithFrame:CGRectMake(15, (lee1fitAllScreen(44) - 15) / 2, SCREEN_WIDTH - 30, 15)];
+        [lblGroupName setFont:[UIFont systemFontOfSize:15]];
+        [lblGroupName setText:((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).name];
+        [lblGroupName setTextColor:[UIColor colorWithHexString:@"#181818"]];
+        [vGroup addSubview:lblGroupName];
+        
+        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setFrame:CGRectMake(0, 0, tableView.frame.size.width, lee1fitAllScreen(44))];
+        [btn addTarget:self action:@selector(changeCellDisplay:) forControlEvents:UIControlEventTouchUpInside];
+        [vGroup addSubview:btn];
+        height = lee1fitAllScreen(44);
+    }
+    [v setFrame:CGRectMake(0, height, SCREEN_WIDTH, lee1fitAllScreen(285) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2)))];
+    UITableViewCell* cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, v.frame.size.width, v.frame.size.height + height)];
+    [cell addSubview:v];
+    return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger count = _pInfo.packageinfo.groups.count;
+    CGFloat height = 0;
+    if (count) {
+        height += 44;
+    }
+    NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count;
+    height += lee1fitAllScreen(285) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2));
+    return height;
+}
 #pragma mark picker delegate&dataSource
 //====================================================
 // 函数名称: picker delegate&dataSource
@@ -602,6 +792,13 @@
     }
 }
 
-
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 10213219) {
+        if (buttonIndex == 1) {
+            [_marrGoods removeAllObjects];
+        }
+    }
+}
 
 @end
