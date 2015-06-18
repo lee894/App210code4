@@ -170,7 +170,7 @@
     
     
     //lee999 适配高度
-    NSLog(@"支付按钮的个数是：----%ld",[orderDetail.itemAllowpaytype count]);
+    NSLog(@"支付按钮的个数是：----%ld",(unsigned long)[orderDetail.itemAllowpaytype count]);
     if ([orderDetail.itemAllowpaytype count] ==1) {
         yHeight = 90;
     }
@@ -533,7 +533,7 @@
                 //lee999 创建套装cell
                 [self createSuitlistcells];
 
-                NSLog(@"---expressid:--------%d",orderDetail.orderdetailInfo.expressid.length);
+                NSLog(@"---expressid:--------%lu",(unsigned long)orderDetail.orderdetailInfo.expressid.length);
                 
                 
                 [tableList reloadData];

@@ -21,6 +21,9 @@
 #import "MyImagePickViewController.h"
 #import "MyFavAll20ViewController.h"
 #import "NoticeinfoViewController.h"
+#import "MyCloset1ViewController.h"
+#import "MyClosetListViewController.h"
+
 
 
 #import "ImproveInformationViewController.h"
@@ -683,16 +686,20 @@
         case 5:
         {
             //品牌馆
+            
         }
             break;
         case 6:
         {
             //私人衣橱
+            MyClosetListViewController *vc1 = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
+            [self.navigationController pushViewController:vc1 animated:YES];
         }
             break;
         case 7:
         {
             //微社区
+            
         }
             break;
         default:
@@ -702,6 +709,57 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    switch (indexPath.row) {
+        case 1:
+        {
+            //@"全部订单";
+            OrderViewController *tempOrder = [[OrderViewController alloc] initWithNibName:@"OrderViewController" bundle:nil];
+            tempOrder.howEnter = 1;
+            tempOrder.ishowHeadView = YES;
+            //lee999
+            MoerUserinfo*info = _moreModel.userinfo;
+            tempOrder.bandgeNum1 = [info.nodispose isKindOfClass:[NSNull class]] ? @"0" : info.nodispose;
+            int noaccess = (int)info.norates;
+            tempOrder.bandgeNum2 = [NSString stringWithFormat:@"%d",noaccess];
+            //end
+            [self.navigationController pushViewController:tempOrder animated:YES];
+        }
+            break;
+        case 4:
+        {
+            //@"修改密码";
+            ChangePwdViewController *updatePwdVC = [[ChangePwdViewController alloc] initWithNibName:@"ChangePwdViewController" bundle:nil];
+            [self.navigationController pushViewController:updatePwdVC animated:YES];
+        }
+            break;
+        case 5:
+        {
+            //@"绑定手机";
+            BindPhoneViewController *tempBindPhone = [[BindPhoneViewController alloc] initWithNibName:@"BindPhoneViewController" bundle:nil];
+            [self.navigationController  pushViewController:tempBindPhone animated:YES];
+        }
+            break;
+        case 6:
+        {
+            //@"退出登录";
+            [mainSer getuserLogout];
+            [SBPublicAlert showMBProgressHUD:@"正在退出···" andWhereView:self.view states:NO];
+        }
+            break;
+        case 7:
+        {
+            //@"应用评分";
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=515651364"]];
+        }
+            break;
+        default:
+            break;
+    }
+    
+    
+    /*
     if (indexPath.section == 1) {
         switch (indexPath.row) {
             case 0:
@@ -803,6 +861,7 @@
                 break;
         }
     }
+     */
 }
 
 
