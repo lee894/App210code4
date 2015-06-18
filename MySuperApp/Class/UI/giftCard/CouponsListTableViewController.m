@@ -17,6 +17,7 @@
 #import "YKCanReuse_webViewController.h"
 #import "CouponListInfoParser.h"
 #import "CouponDetailViewController.h"
+#import "CouponDetail20ViewController.h"
 
 
 @interface CouponsListTableViewController (){
@@ -537,7 +538,6 @@
                 if ([type isEqualToString:@"o2o"])
                 {
                     iBg = [UIImage imageNamed:@"laber_o2o"];
-                    [btnAction setTag:1];
                 }
                 else if([type isEqualToString:@"coupon"])
                 {
@@ -689,6 +689,29 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    id data = [self.contentArr objectAtIndex:indexPath.row isArray:nil];
+    CouponDetail20ViewController* cdvc = [[CouponDetail20ViewController alloc] init];
+    if ([data class] == [CouponInfo class]) {
+        NSString* type = ((CouponInfo*)data).type;
+        if ([type isEqualToString:@"o2o"])
+        {
+            cdvc.dType = kO2O;
+        }
+        else if([type isEqualToString:@"coupon"])
+        {
+            cdvc.dType = kCoupon;
+        }
+        else if([type isEqualToString:@"gift"])
+        {
+            cdvc.dType = kGift;
+        }
+    }
+    else if ([data class] == [FreePostCardInfo class])
+    {
+        cdvc.dType = kFreePost;
+    }
+    cdvc.data = data;
+    [self.navigationController pushViewController:cdvc animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

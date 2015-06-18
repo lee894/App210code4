@@ -1115,6 +1115,10 @@
 		9BF57E7B18E2D5AB00B2A3E6 /* AimerHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BF57E7918E2D5AB00B2A3E6 /* AimerHeadCell.xib */; };
 		9BF57E8118E2D78100B2A3E6 /* UniversalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF57E7F18E2D78100B2A3E6 /* UniversalCell.m */; };
 		9BF57E8218E2D78100B2A3E6 /* UniversalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BF57E8018E2D78100B2A3E6 /* UniversalCell.xib */; };
+		A6218D851B325FC400D9ED93 /* CouponDetail20ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6218D841B325FC400D9ED93 /* CouponDetail20ViewController.m */; };
+		A6218D881B32A6AC00D9ED93 /* MyClosetListParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A6218D871B32A6AC00D9ED93 /* MyClosetListParser.m */; };
+		A6218D8C1B32A6EE00D9ED93 /* MyCloset7ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6218D8A1B32A6EE00D9ED93 /* MyCloset7ViewController.m */; };
+		A6218D8D1B32A6EE00D9ED93 /* MyCloset7ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6218D8B1B32A6EE00D9ED93 /* MyCloset7ViewController.xib */; };
 		A67BEAB81B281A0300418650 /* aimerLogoDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A67BEAB71B281A0300418650 /* aimerLogoDefault@2x.png */; };
 		A6F394EB1B2E7C74004566CA /* PackageInfoParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F394E81B2E7C74004566CA /* PackageInfoParser.m */; };
 		A6F394EC1B2E7C74004566CA /* PackageInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F394EA1B2E7C74004566CA /* PackageInfoViewController.m */; };
@@ -1127,7 +1131,6 @@
 		A6F394FD1B2E7D7A004566CA /* lp_option@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F394F41B2E7D7A004566CA /* lp_option@2x.png */; };
 		A6F394FE1B2E7D7A004566CA /* lp_shut_b@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F394F51B2E7D7A004566CA /* lp_shut_b@2x.png */; };
 		A6F394FF1B2E7D7A004566CA /* lp_shut_h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F394F61B2E7D7A004566CA /* lp_shut_h@2x.png */; };
-		A6F395051B2E7DAE004566CA /* MyClosetInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F395021B2E7DAE004566CA /* MyClosetInfo.m */; };
 		A6F395061B2E7DAE004566CA /* MyClosetParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F395041B2E7DAE004566CA /* MyClosetParser.m */; };
 		A6F3951F1B2E7EE9004566CA /* my_am_ico_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F395171B2E7EE9004566CA /* my_am_ico_1@2x.png */; };
 		A6F395201B2E7EE9004566CA /* my_am_ico_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F395181B2E7EE9004566CA /* my_am_ico_2@2x.png */; };
@@ -2847,6 +2850,13 @@
 		9BF57E7E18E2D78100B2A3E6 /* UniversalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversalCell.h; sourceTree = "<group>"; };
 		9BF57E7F18E2D78100B2A3E6 /* UniversalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversalCell.m; sourceTree = "<group>"; };
 		9BF57E8018E2D78100B2A3E6 /* UniversalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UniversalCell.xib; sourceTree = "<group>"; };
+		A6218D831B325FC400D9ED93 /* CouponDetail20ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponDetail20ViewController.h; sourceTree = "<group>"; };
+		A6218D841B325FC400D9ED93 /* CouponDetail20ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponDetail20ViewController.m; sourceTree = "<group>"; };
+		A6218D861B32A6AC00D9ED93 /* MyClosetListParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClosetListParser.h; sourceTree = "<group>"; };
+		A6218D871B32A6AC00D9ED93 /* MyClosetListParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClosetListParser.m; sourceTree = "<group>"; };
+		A6218D891B32A6EE00D9ED93 /* MyCloset7ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCloset7ViewController.h; sourceTree = "<group>"; };
+		A6218D8A1B32A6EE00D9ED93 /* MyCloset7ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCloset7ViewController.m; sourceTree = "<group>"; };
+		A6218D8B1B32A6EE00D9ED93 /* MyCloset7ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCloset7ViewController.xib; sourceTree = "<group>"; };
 		A67BEAB71B281A0300418650 /* aimerLogoDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aimerLogoDefault@2x.png"; sourceTree = "<group>"; };
 		A6F394E71B2E7C74004566CA /* PackageInfoParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageInfoParser.h; sourceTree = "<group>"; };
 		A6F394E81B2E7C74004566CA /* PackageInfoParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageInfoParser.m; sourceTree = "<group>"; };
@@ -2861,8 +2871,6 @@
 		A6F394F41B2E7D7A004566CA /* lp_option@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lp_option@2x.png"; sourceTree = "<group>"; };
 		A6F394F51B2E7D7A004566CA /* lp_shut_b@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lp_shut_b@2x.png"; sourceTree = "<group>"; };
 		A6F394F61B2E7D7A004566CA /* lp_shut_h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lp_shut_h@2x.png"; sourceTree = "<group>"; };
-		A6F395011B2E7DAE004566CA /* MyClosetInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClosetInfo.h; sourceTree = "<group>"; };
-		A6F395021B2E7DAE004566CA /* MyClosetInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClosetInfo.m; sourceTree = "<group>"; };
 		A6F395031B2E7DAE004566CA /* MyClosetParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClosetParser.h; sourceTree = "<group>"; };
 		A6F395041B2E7DAE004566CA /* MyClosetParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClosetParser.m; sourceTree = "<group>"; };
 		A6F395171B2E7EE9004566CA /* my_am_ico_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_1@2x.png"; sourceTree = "<group>"; };
@@ -3726,6 +3734,9 @@
 		9665907D1B159942004CF036 /* myCloset20 */ = {
 			isa = PBXGroup;
 			children = (
+				A6218D891B32A6EE00D9ED93 /* MyCloset7ViewController.h */,
+				A6218D8A1B32A6EE00D9ED93 /* MyCloset7ViewController.m */,
+				A6218D8B1B32A6EE00D9ED93 /* MyCloset7ViewController.xib */,
 				A6F395001B2E7DAE004566CA /* data */,
 				968AE8991B2540AB004A1A85 /* MyClosetKidGril3ViewController.h */,
 				968AE89A1B2540AB004A1A85 /* MyClosetKidGril3ViewController.m */,
@@ -5977,8 +5988,8 @@
 		A6F395001B2E7DAE004566CA /* data */ = {
 			isa = PBXGroup;
 			children = (
-				A6F395011B2E7DAE004566CA /* MyClosetInfo.h */,
-				A6F395021B2E7DAE004566CA /* MyClosetInfo.m */,
+				A6218D861B32A6AC00D9ED93 /* MyClosetListParser.h */,
+				A6218D871B32A6AC00D9ED93 /* MyClosetListParser.m */,
 				A6F395031B2E7DAE004566CA /* MyClosetParser.h */,
 				A6F395041B2E7DAE004566CA /* MyClosetParser.m */,
 			);
@@ -6014,6 +6025,8 @@
 			children = (
 				A6F3954F1B2F1552004566CA /* CouponListInfoParser.h */,
 				A6F395501B2F1552004566CA /* CouponListInfoParser.m */,
+				A6218D831B325FC400D9ED93 /* CouponDetail20ViewController.h */,
+				A6218D841B325FC400D9ED93 /* CouponDetail20ViewController.m */,
 			);
 			path = Coupon20;
 			sourceTree = "<group>";
@@ -6347,6 +6360,7 @@
 				A6F3951F1B2E7EE9004566CA /* my_am_ico_1@2x.png in Resources */,
 				9685FA581ADD75ED00BF2DE8 /* sx_dz@2x.png in Resources */,
 				968AE84C1B247C54004A1A85 /* sryc_cm_input@2x.png in Resources */,
+				A6218D8D1B32A6EE00D9ED93 /* MyCloset7ViewController.xib in Resources */,
 				96308D111AD968110068D271 /* title_logo@2x.png in Resources */,
 				962693991A135FB700A0BC7F /* alert-red-button.png in Resources */,
 				962693AD1A135FB700A0BC7F /* word_intro.png in Resources */,
@@ -6846,6 +6860,7 @@
 				9BCA82BE18C47FA300B81CA5 /* MainpageViewController.m in Sources */,
 				9B7CB12F18D59C4300D8DAA5 /* ProductlistModel.m in Sources */,
 				9BB3061F1917E1F500CD4BCD /* HasUsedViewController.m in Sources */,
+				A6218D881B32A6AC00D9ED93 /* MyClosetListParser.m in Sources */,
 				9695425D1B25F7C500206FAB /* QRCodeGenerator.m in Sources */,
 				9BD58CAB18E40D57008CD881 /* AFURLConnectionOperation.m in Sources */,
 				9BB88A2A19A86BA700A3D371 /* WXPayClient.m in Sources */,
@@ -7047,6 +7062,7 @@
 				9B7CB10318D59C4300D8DAA5 /* CategoriesPictext.m in Sources */,
 				9BF57E8118E2D78100B2A3E6 /* UniversalCell.m in Sources */,
 				9B4599F918D2EE3E00849B96 /* YKBaseEntity.m in Sources */,
+				A6218D851B325FC400D9ED93 /* CouponDetail20ViewController.m in Sources */,
 				9B4599FA18D2EE3E00849B96 /* YKBaseEntityList.m in Sources */,
 				9B7CB12018D59C4300D8DAA5 /* CannelCategoriesPictext.m in Sources */,
 				9B7CB0E718D59C4300D8DAA5 /* VersionVersion.m in Sources */,
@@ -7159,6 +7175,7 @@
 				9BD58C9918E40D57008CD881 /* NSDictionaryAdditions.m in Sources */,
 				9B7CB14218D59C4300D8DAA5 /* SuitServiceModel.m in Sources */,
 				9BD58CD718E40D57008CD881 /* iCarousel.m in Sources */,
+				A6218D8C1B32A6EE00D9ED93 /* MyCloset7ViewController.m in Sources */,
 				9695425B1B25F7C500206FAB /* bitstream.c in Sources */,
 				968C29271AE1868C00D1ABFD /* UIViewController+MaryPopin.m in Sources */,
 				9B7CB0EF18D59C4300D8DAA5 /* BrandsBrandInfo.m in Sources */,
@@ -7230,7 +7247,6 @@
 				962D37111AD56B8D0012D749 /* UIScrollView+MJRefresh.m in Sources */,
 				9B7CB14318D59C4300D8DAA5 /* SubmitOrderPrice.m in Sources */,
 				9695421E1B25F63E00206FAB /* RSADataSigner.m in Sources */,
-				A6F395051B2E7DAE004566CA /* MyClosetInfo.m in Sources */,
 				9698F6721AEBE35A009A29EC /* NewFavParser.m in Sources */,
 				9695422B1B25F70A00206FAB /* AlixPayResult.m in Sources */,
 				9BD58C9F18E40D57008CD881 /* UIImage+Resize.m in Sources */,
