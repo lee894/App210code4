@@ -18,7 +18,7 @@
     IBOutlet UIButton* fubtn3;
 
     
-    int selectIndex;
+    NSInteger selectIndex;
 
 
 }
@@ -45,21 +45,21 @@
     
     if (btn.tag == 1) {
         //支持自定义数组：  女孩文胸
-        NSArray *array=@[@[@"110/56",@"120/60",@"130/60",@"140/68",@"150/72",@"160/76",@"165/78",@"170/80"]];
+        NSArray *array=@[@[@"A65",@"B65",@"C65",@"A70",@"B70",@"C70",@"A75",@"B75",@"C75",@"A80",@"B80",@"C80",@"100",@"110",@"120",@"130",@"140",@"150",@"160",@"170"]];
        ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
         _pickview.delegate = self;
         [_pickview show];
     }
    else if (btn.tag == 2) {
         //支持自定义数组： 女孩底裤
-        NSArray *array=@[@[@"100/47",@"110/50",@"120/53",@"130/56",@"140/55",@"150/58",@"160/61",@"170/64"]];
+        NSArray *array=@[@[@[@"100",@"110",@"120",@"130",@"140",@"150",@"160",@"170"]]];
         ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
        _pickview.delegate = self;
         [_pickview show];
     }
    else if (btn.tag == 3) {
        //支持自定义数组：女孩睡衣
-       NSArray *array=@[@[@"100/52",@"110/56",@"120/60",@"130/64",@"140/64",@"150/68",@"160/72",@"170/76"]];
+       NSArray *array=@[@[@[@"100",@"110",@"120",@"130",@"140",@"150",@"160",@"170"]]];
        ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
        _pickview.delegate = self;
        [_pickview show];

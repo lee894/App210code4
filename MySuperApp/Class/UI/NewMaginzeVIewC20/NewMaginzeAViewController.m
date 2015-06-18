@@ -595,7 +595,7 @@
     int imgH = 154; //商品图片的高度
 
     //行数
-    int subSortbtnNum = ([subSortArray count]%lineNum == 0? [subSortArray count]/lineNum :[subSortArray count]/lineNum+1);
+    NSInteger subSortbtnNum = ([subSortArray count]%lineNum == 0? [subSortArray count]/lineNum :[subSortArray count]/lineNum+1);
     
     UIView *bgv = [[UIView alloc] initWithFrame:CGRectMake(0, bgvH, ScreenWidth, subSortbtnNum*100)];
     [bgv setBackgroundColor:[UIColor clearColor]];
@@ -604,7 +604,7 @@
     
     for (int i = 0; i<subSortbtnNum; i++) {
         
-        int jcount = ([subSortArray count]-lineNum*i)>lineNum?lineNum:([subSortArray count]-lineNum*i);
+        NSInteger jcount = ([subSortArray count]-lineNum*i)>lineNum?lineNum:([subSortArray count]-lineNum*i);
         
         for (int j = 0; j<jcount; j++) {
             
@@ -642,7 +642,7 @@
         }
     }
     
-    int H = SP + (pH +SP)* subSortbtnNum;
+    NSInteger H = SP + (pH +SP)* subSortbtnNum;
     [bgv setFrame:CGRectMake(0, bgvH, ScreenWidth, H)];
     
     return bgv;

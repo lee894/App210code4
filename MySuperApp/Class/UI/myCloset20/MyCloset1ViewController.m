@@ -11,7 +11,6 @@
 #import "MyClosetNan2ViewController.h"
 #import "MyClosetKid2ViewController.h"
 #import "MyClosetMade2ViewController.h"
-#import "MyClosetInfo.h"
 #import "MyClosetParser.h"
 
 @interface MyCloset1ViewController ()<ServiceDelegate>
@@ -196,8 +195,7 @@
 - (IBAction)nextBtnAction:(id)sender {
     
     if (selectTag == 0) {
-        
-        [MYCommentAlertView showMessage:@"您还未选择类型" target:nil];
+        [SBPublicAlert showMBProgressHUD:@"您还未选择类型" andWhereView:self.view hiddenTime:AlertShowTime];
         return;
     }
     
@@ -228,24 +226,65 @@
             break;
     }
     
+    if (selectTag == 4) {
+        [self jumpNextPage];
+        return;
+    }
+    
     [mainSev getCloset2Data:strtype];
+}
 
+
+#pragma mark--- Severvice
+-(void)serviceStarted:(ServiceType)aHandle{
+}
+
+-(void)serviceFailed:(ServiceType)aHandle{
+    [SBPublicAlert hideMBprogressHUD:self.view];
     
+}
+
+-(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel{
+    [SBPublicAlert hideMBprogressHUD:self.view];
+
+    // LBaseModel *model = (LBaseModel *)amodel;
     
-    
+    if(![amodel isKindOfClass:[LBaseModel class]])
+    {
+        switch ((NSUInteger)aHandle) {
+            case Http_wardrobe_Tag:
+            {
+                _closetinfo = [[[MyClosetParser alloc] init] parseClosetInfo:amodel];
+                
+                NSLog(@"--%@",((MyClosetData*)[_closetinfo.chuanyizhidao objectAtIndex:1]).wardrobe_name);
+            
+                [self jumpNextPage];
+            }
+                break;
+                
+            default:
+                break;
+        }
+        return;
+    }
+}
+
+-(void)jumpNextPage{
+
     switch (selectTag) {
         case 1:
         {
             MyCloset2ViewController *clv2 = [[MyCloset2ViewController alloc] initWithNibName:@"MyCloset2ViewController" bundle:nil];
             clv2.selectType = selectTag;
+            clv2.closetinfo = _closetinfo;
             [self.navigationController pushViewController:clv2 animated:YES];
-        
         }
             break;
             
         case 2:
         {
             MyClosetNan2ViewController *clv2 = [[MyClosetNan2ViewController alloc] initWithNibName:@"MyClosetNan2ViewController" bundle:nil];
+            clv2.closetinfo = _closetinfo;
             [self.navigationController pushViewController:clv2 animated:YES];
             
         }
@@ -273,48 +312,10 @@
 }
 
 
-#pragma mark--- Severvice
--(void)serviceStarted:(ServiceType)aHandle{
-}
-
--(void)serviceFailed:(ServiceType)aHandle{
-    [SBPublicAlert hideMBprogressHUD:self.view];
-    
-}
-
--(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel{
-    
-    LBaseModel *model = (LBaseModel *)amodel;
-    _closetinfo = [[MyClosetParser alloc] init];
-}
-
-//-(void)createView{
-//
-//    int countNum = 4;
-//    int sep = 13;
-//    int H = 100;
-//
-//    NSArray *imageArr = [NSArray arrayWithObjects:@"sryc_img_woman.png",@"sryc_img_man.png",@"sryc_img_girl.png",@"sryc_img_dz.png", nil];
-//    for (int i = 0; i<countNum; i++) {
-//
-//        if (i==2) {
-//            H += 180+sep;
-//        }
-//
-//        UIImageView *imagev = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[imageArr objectAtIndex:i]]];
-//        [imagev setFrame:CGRectMake((i|2)==0?sep:sep*2+140, H, 140, 180)];
-//        [self.view addSubview:imagev];
-//
-//
-//    }
-//}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 
 /*

@@ -138,7 +138,7 @@
     self.navbtnRight = [UIButton buttonWithType:UIButtonTypeCustom];
 	[self.navbtnRight setTitle:@"保存" forState:UIControlStateNormal];
 	self.navbtnRight.titleLabel.font = [UIFont systemFontOfSize:LabSmallSize];
-	[self.navbtnRight setFrame:CGRectMake(244, 7, 66, 32)];
+	[self.navbtnRight setFrame:CGRectMake(254, 7, 66, 32)];
 	//[self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_btn.png"] forState:UIControlStateNormal];
     //[self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_btn_press.png"] forState:UIControlStateHighlighted];
 	[self.navbtnRight addTarget:self action:@selector(rightButAction) forControlEvents:UIControlEventTouchUpInside];

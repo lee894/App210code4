@@ -17,7 +17,7 @@
     __weak IBOutlet UIButton *littleGrilBtn;
     __weak IBOutlet UIButton *littleBoyBtn;
     
-    int selectIndex;
+    NSInteger selectIndex;
 }
 @end
 
@@ -61,7 +61,7 @@
 - (IBAction)nextBtnAction:(id)sender {
     
     if (selectIndex == 0) {
-        [MYCommentAlertView showMessage:@"您还未选择" target:nil];
+        [SBPublicAlert showMBProgressHUD:@"您还未选择" andWhereView:self.view hiddenTime:AlertShowTime];
         return;
     }
     

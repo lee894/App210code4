@@ -316,8 +316,23 @@
 //获得优惠券列表
 - (void)getCouponcardList20WithPage:(NSString *)page andPer_page:(NSString *)per_page andType:(NSString*)type;
 
+
 //礼包加入购物车
 - (void)addPackageToCartWithData:(NSArray*)data andPid:(NSString*)pid_;
+
+//定期更换内衣提醒
+-(void)alertChangeMyClost:(NSString *)shangyi andDown:(NSString*)xiayi;
+
+//获取预约测体门店
+-(void)getbespeak;
+
+
+//预约测体
+-(void)bespeakup:(NSString*)storeid andTime:(NSString*)atime anduid:(NSString*)userid;
+
+//获取私人衣橱列表
+-(void)getwardrobeinfo;
+
 @end
 
 

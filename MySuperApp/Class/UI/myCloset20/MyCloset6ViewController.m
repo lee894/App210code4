@@ -7,9 +7,14 @@
 //
 
 #import "MyCloset6ViewController.h"
+#import "MyCloset7ViewController.h"
 
 @interface MyCloset6ViewController ()
+{
+    IBOutlet UIScrollView *myScrollV;
 
+
+}
 @end
 
 @implementation MyCloset6ViewController
@@ -28,6 +33,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+//约约测体
+-(IBAction)testMybobyAction:(id)sender{
+
+    MyCloset7ViewController *clv2 = [[MyCloset7ViewController alloc] initWithNibName:@"MyCloset7ViewController" bundle:nil];
+    [self.navigationController pushViewController:clv2 animated:YES];
+}
 
 
 - (void)didReceiveMemoryWarning {

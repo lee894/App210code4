@@ -23,6 +23,7 @@
 #import "UrlImageButton.h"
 #import "UIScrollView+MJRefresh.h"
 #import "LCommentAlertView.h"
+#import "MyClosetParser.h"
 
 //#import "AKTabBar.h"
 #import "TalkingData.h"

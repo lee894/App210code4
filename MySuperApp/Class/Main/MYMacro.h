@@ -17,6 +17,9 @@
 #define ChangeImageURL  @"242x294"
 
 
+#define AlertShowTime 1.5
+
+
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
 
@@ -168,8 +171,8 @@
 //====================================================
 
 //API的host路径
-#define OFFICIALDOMAIN @"http://mobiletest.aimer.com.cn:8888/mobile/"
-//#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobile/"
+//#define OFFICIALDOMAIN @"http://mobiletest.aimer.com.cn:8888/mobile/"
+#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobile/"
 //#define OFFICIALDOMAIN @"http://124.207.152.104/mobile/"
 //#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobiletest/"
 //#define OFFICIALDOMAIN @"http://124.207.72.140:8888/mobiletest/"
@@ -445,6 +448,14 @@
 #define Http_CouponList20_Tag 212 //新版本 优惠券列表
 #define Http_AddPackageToCart20_Tag 213 //新版本 礼包加入购物车
 #define Http_wardrobe_Tag 301 //私人衣橱 1
+#define Http_changefrequency20_Tag 302 //设置定期更换内衣提醒
+#define Http_bespeak20_Tag 303 //预约测体门店
+#define Http_bespeakup20_Tag 304 //测体门店
+
+#define Http_wardrobeinfo20_Tag 305 //我的衣橱列表
+
+
+
 
 
 

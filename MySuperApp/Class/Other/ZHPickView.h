@@ -14,6 +14,10 @@
 @optional
 -(void)toobarDonBtnHaveClick:(ZHPickView *)pickView resultString:(NSString *)resultString;
 
+//lee999 新增index
+-(void)toobarDonBtnHave:(ZHPickView *)pickView andIndex:(NSInteger)index;
+
+
 @end
 
 @interface ZHPickView : UIView

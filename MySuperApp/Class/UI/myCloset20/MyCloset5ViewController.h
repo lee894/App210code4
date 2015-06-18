@@ -8,6 +8,6 @@
 
 #import "LBaseViewController.h"
 
-@interface MyCloset5ViewController : LBaseViewController
+@interface MyCloset5ViewController : LBaseViewController<ServiceDelegate>
 
 @end

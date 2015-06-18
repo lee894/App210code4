@@ -972,6 +972,7 @@
     }];
 }
 
+
 - (void)addPackageToCartWithData:(NSArray*)data andPid:(NSString*)pid_
 {
     NSMutableArray* marrData = [NSMutableArray arrayWithCapacity:1];
@@ -984,6 +985,43 @@
         [self addParam:@"number" withValue:@"1"];
     }];
 }
+
+//定期更换内衣提醒
+-(void)alertChangeMyClost:(NSString *)shangyi andDown:(NSString*)xiayi{
+    
+    [self sendPostWithURL:@"changefrequency" tag:Http_changefrequency20_Tag beforeRequest:^{
+        
+        NSString *str = [NSString stringWithFormat:@"%@,%@",shangyi,xiayi];
+        [self addParam:@"frequency" withValue:str];
+    }];
+}
+
+
+-(void)getbespeak{
+    [self sendPostWithURL:@"bespeak" tag:Http_bespeak20_Tag beforeRequest:^{
+    }];
+}
+
+//预约测体
+-(void)bespeakup:(NSString*)storeid andTime:(NSString*)atime anduid:(NSString*)userid{
+
+    [self sendPostWithURL:@"bespeakup" tag:Http_bespeakup20_Tag beforeRequest:^{
+        
+        [self addParam:@"store_id" withValue:storeid];
+        [self addParam:@"time" withValue:atime];
+        [self addParam:@"user_id" withValue:userid];
+    }];
+}
+
+-(void)getwardrobeinfo{
+    
+    [self sendPostWithURL:@"wardrobeinfo" tag:Http_wardrobeinfo20_Tag beforeRequest:^{
+        
+    }];
+}
+
+
+
 @end
 
 

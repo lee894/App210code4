@@ -9,13 +9,23 @@
 #import "MyCloset5ViewController.h"
 #import "MyClosetListViewController.h"
 #import "ZHPickView.h"
+#import "BindPhoneViewController.h"
+#import "MyClosetListViewController.h"
 
 @interface MyCloset5ViewController ()<ZHPickViewDelegate>
 {
+    
+    
+    NSString *selectBra;
+    NSString *selectUnderpants;
+    
+    MainpageServ *mainSev;
+    MyClosetInfo *_closetinfo;
+    
     IBOutlet UIButton *btn1;
     IBOutlet UIButton *btn2;
     
-    int selectIndex;
+    NSInteger selectIndex;
 }
 @end
 
@@ -24,9 +34,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    selectBra = @"";
+    selectUnderpants = @"";
     
     [self setTitle:@"私人衣橱5"];
     [self createBackBtnWithType:0];
+    
+    mainSev = [[MainpageServ alloc] init];
+    mainSev.delegate = self;
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -41,34 +56,133 @@
     
     if (btn.tag == 1) {
         //支持自定义数组：
-        NSArray *array=@[@[@"每周更换",@"每月更换",@"每三个月更换",@"半年更换",@"一年更换",@"不换"]];
+        NSArray *array=@[@[@"三个月",@"半年（建议）",@"一年"]];
         ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
         _pickview.delegate = self;
         [_pickview show];
     }
     else if (btn.tag == 2) {
         //支持自定义数组：
-        NSArray *array=@[@[@"每周更换",@"每月更换",@"每三个月更换",@"半年更换",@"一年更换",@"不换"]];
+        NSArray *array=@[@[@"一个月",@"三个月（建议）",@"半年"]];
         ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
         _pickview.delegate = self;
         [_pickview show];
     }
-
 }
+
 
 -(void)toobarDonBtnHaveClick:(ZHPickView *)pickView resultString:(NSString *)resultString{
     
     if (selectIndex==1) {
         [btn1 setTitle:[NSString stringWithFormat:@"文胸 (%@)",resultString] forState:UIControlStateNormal];
+        
+        if ([resultString isEqualToString:@"三个月"]) {
+        selectBra = @"B";
+        }
+        if ([resultString isEqualToString:@"半年（建议）"]) {
+            selectBra = @"C";
+        }
+        if ([resultString isEqualToString:@"一年"]) {
+            selectBra = @"D";
+        }
     }
     
     if (selectIndex==2) {
         [btn2 setTitle:[NSString stringWithFormat:@"底裤 (%@)",resultString] forState:UIControlStateNormal];
+        
+        if ([resultString isEqualToString:@"一个月"]) {
+            selectUnderpants = @"A";
+        }
+        if ([resultString isEqualToString:@"三个月（建议）"]) {
+            selectUnderpants = @"B";
+        }
+        if ([resultString isEqualToString:@"半年"]) {
+            selectUnderpants = @"C";
+        }
+        
+    }
+}
+
+//定期更换提醒
+-(IBAction)aLertChangeAction:(id)sender{
+    
+    
+    if ([selectBra isEqualToString:@""]) {
+        [SBPublicAlert showMBProgressHUD:@"请您选择文胸的更换频率" andWhereView:self.view hiddenTime:AlertShowTime];
+        return;
+    }
+    
+    if ([selectUnderpants isEqualToString:@""]) {
+        
+        [SBPublicAlert showMBProgressHUD:@"请您选择底裤的更换频率" andWhereView:self.view hiddenTime:AlertShowTime];
+        return;
     }
 
+    [mainSev alertChangeMyClost:selectBra andDown:selectUnderpants];
 }
 
 
+#pragma mark--- Severvice
+-(void)serviceStarted:(ServiceType)aHandle{
+}
+
+-(void)serviceFailed:(ServiceType)aHandle{
+    [SBPublicAlert hideMBprogressHUD:self.view];
+    
+    if (aHandle == ENeedbindPhone) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"更换频率提醒需要您先绑定手机" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"绑定", nil];
+        alert.delegate = self;
+        alert.tag = 1099;
+        [alert show];
+    }
+}
+
+-(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel{
+    [SBPublicAlert hideMBprogressHUD:self.view];
+    
+    if(![amodel isKindOfClass:[LBaseModel class]])
+    {
+        switch ((NSUInteger)aHandle) {
+            case Http_changefrequency20_Tag:
+            {
+                
+                NSString *moblie = @"";
+                if ([amodel respondsToSelector:@selector(objectForKey:)]) {
+                    moblie = [amodel objectForKey:@"mobile" isDictionary:nil];
+                }
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:[NSString stringWithFormat:@"更换提醒将以短信的形式发送到您的手机(%@)，退订可以再手机中操作",moblie] delegate:self cancelButtonTitle:@"进入衣橱" otherButtonTitles:nil];
+                alert.delegate = self;
+                alert.tag = 1100;
+                [alert show];
+            }
+                break;
+                
+            default:
+                break;
+        }
+        return;
+    }
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    if (alertView.tag == 1099) {
+        if (buttonIndex == 1) {
+            
+            //绑定手机
+            BindPhoneViewController *tempBindPhone = [[BindPhoneViewController alloc] initWithNibName:@"BindPhoneViewController" bundle:nil];
+            [self.navigationController  pushViewController:tempBindPhone animated:YES];
+            
+        }
+    }
+    
+    if (alertView.tag == 1100) {
+
+        MyClosetListViewController *lstvc = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
+        [self.navigationController pushViewController:lstvc animated:YES];        
+    }
+}
 
 
 - (IBAction)gotoClosetListAction:(id)sender {

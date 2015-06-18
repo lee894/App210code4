@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyCloset2ViewController">
             <connections>
+                <outlet property="myScrollV" destination="J94-Cx-iY3" id="0Lx-KK-fMX"/>
                 <outlet property="title2Lab" destination="CO2-gv-udb" id="lQX-vQ-YPN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -52,7 +53,7 @@
                             <color key="textColor" red="0.67450980390000004" green="0.64705882349999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6d-We-NSf">
+                        <button hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6d-We-NSf">
                             <rect key="frame" x="43" y="125" width="100" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="LYu-qS-G6Y"/>
@@ -70,7 +71,7 @@
                                 <action selector="typeBtnAction:" destination="-1" eventType="touchUpInside" id="NgD-Lp-4Yu"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jV-hN-bC9">
+                        <button hidden="YES" opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jV-hN-bC9">
                             <rect key="frame" x="43" y="172" width="100" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="VNm-do-cGU"/>
@@ -88,7 +89,7 @@
                                 <action selector="typeBtnAction:" destination="-1" eventType="touchUpInside" id="oQV-pz-ANb"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jst-HB-5aW">
+                        <button hidden="YES" opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jst-HB-5aW">
                             <rect key="frame" x="43" y="220" width="100" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="G8Y-iZ-8nf"/>
@@ -106,7 +107,7 @@
                                 <action selector="typeBtnAction:" destination="-1" eventType="touchUpInside" id="9LZ-9R-cms"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nu7-g6-Ctv">
+                        <button hidden="YES" opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nu7-g6-Ctv">
                             <rect key="frame" x="181" y="78" width="100" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="BrF-TL-trY"/>
@@ -124,7 +125,7 @@
                                 <action selector="typeBtnAction:" destination="-1" eventType="touchUpInside" id="Yb8-g3-1ga"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDy-Qa-rzb">
+                        <button hidden="YES" opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDy-Qa-rzb">
                             <rect key="frame" x="181" y="125" width="100" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="70m-sS-YRx"/>
@@ -142,7 +143,7 @@
                                 <action selector="typeBtnAction:" destination="-1" eventType="touchUpInside" id="lTe-eF-cxj"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQT-RE-VvM">
+                        <button hidden="YES" opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQT-RE-VvM">
                             <rect key="frame" x="181" y="172" width="100" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="ZTt-FT-rHe"/>
@@ -160,7 +161,7 @@
                                 <action selector="typeBtnAction:" destination="-1" eventType="touchUpInside" id="A4W-5u-ffi"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEL-aK-sZd">
+                        <button hidden="YES" opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEL-aK-sZd">
                             <rect key="frame" x="181" y="221" width="100" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="5f3-j5-eIn"/>
@@ -178,7 +179,7 @@
                                 <action selector="typeBtnAction:" destination="-1" eventType="touchUpInside" id="3fO-vN-yDf"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsY-bv-0kx">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zsY-bv-0kx">
                             <rect key="frame" x="45" y="310" width="230" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="i0N-4O-9fr"/>
@@ -192,7 +193,7 @@
                                 <action selector="nextBtnAction:" destination="-1" eventType="touchUpInside" id="U5q-Jh-unF"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTz-eU-DkW">
+                        <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTz-eU-DkW">
                             <rect key="frame" x="43" y="78" width="100" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="7yW-Ru-Rtx"/>

@@ -321,12 +321,27 @@
            }
         }
     }else if (_datePicker) {
-      
-        _resultString=[NSString stringWithFormat:@"%@",_datePicker.date];
+        
+        //lee999 新增日期
+        NSDateFormatter *dateF = [[NSDateFormatter alloc] init];
+        [dateF setDateFormat:@"yyyy-MM-dd"];
+        NSString *sdate = [dateF stringFromDate:_datePicker.date];
+    
+        _resultString=[NSString stringWithFormat:@"%@",sdate];
     }
+    
     if ([self.delegate respondsToSelector:@selector(toobarDonBtnHaveClick:resultString:)]) {
         [self.delegate toobarDonBtnHaveClick:self resultString:_resultString];
     }
+    
+    if ([self.delegate respondsToSelector:@selector(toobarDonBtnHave:andIndex:)]) {
+        NSInteger pIndex = [self.pickerView selectedRowInComponent:0];
+        [self.delegate toobarDonBtnHave:self andIndex:pIndex];
+    }
+    
+
+    
+    
     [self removeFromSuperview];
 }
 /**

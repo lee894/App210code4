@@ -10,6 +10,7 @@
 
 @interface MyCloset3ViewController : LBaseViewController
 
+@property(nonatomic,retain) MyClosetInfo *closetinfo;
 
 
 - (IBAction)nextBtnAction:(id)sender;

@@ -19,7 +19,7 @@
     IBOutlet UIButton* btn2;
     IBOutlet UIButton* btn3;
 
-    int selectIndex;
+    NSInteger selectIndex;
 
 
 }
@@ -47,21 +47,21 @@
     if (btn.tag == 1) {
         //支持自定义数组：  女  文胸
         //NSArray *array=@[@[@"1",@"小明",@"aa"],@[@"2",@"大黄",@"bb"],@[@"3",@"企鹅",@"cc"]];
-        NSArray *array=@[@[@"A70",@"B70",@"C70",@"D70",@"E70",@"F70",@"A75",@"B75",@"C75",@"D75",@"E75",@"F75",@"A80",@"B80",@"C80",@"D80",@"E80",@"F80",@"A85",@"B85",@"C85",@"D85",@"E85",@"F85",@"A90",@"B90",@"C90",@"D90",@"E90",@"F90"]];
+        NSArray *array=@[@[@"A65",@"B65",@"C65",@"A70",@"B70",@"C70",@"D70",@"E70",@"F70",@"A75",@"B75",@"C75",@"D75",@"E75",@"F75",@"A80",@"B80",@"C80",@"D80",@"E80",@"F80",@"A85",@"B85",@"C85",@"D85",@"E85",@"F85",@"A90",@"B90",@"C90",@"D90",@"E90",@"F90",@"A100",@"B100",@"C100",@"D100",@"E100",@"F100"]];
         ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
         _pickview.delegate = self;
         [_pickview show];
     }
     else if (btn.tag == 2) {
         //支持自定义数组： 女  底裤
-        NSArray *array=@[@[@"155/64/S",@"160/70/M",@"165/76/L",@"170/82/XL",@"175/90/XXL"]];
+        NSArray *array=@[@[@"64",@"70",@"76",@"82",@"90",@"95",@"100",@"110",@"155",@"160",@"165",@"170",@"175"]];
         ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
         _pickview.delegate = self;
         [_pickview show];
     }
     else if (btn.tag == 3) {
         //支持自定义数组：女睡衣
-        NSArray *array=@[@[@"155/80（S）",@"160/85（M）",@"165/90（L）",@"170/95（XL）",@"175/100（XXL）",@"180/105"]];
+        NSArray *array=@[@[@"155",@"160",@"165",@"170",@"175",@"180"]];
         ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
         _pickview.delegate = self;
         [_pickview show];

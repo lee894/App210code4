@@ -335,7 +335,18 @@
     NSDictionary *jsonDic = [backstr JSONValue];
     
     if ([[jsonDic objectForKey:@"response"] isEqualToString:@"error"]) {
+        
+        //lee999 特殊处理，需要绑定手机的话
+        if ([[[jsonDic objectForKey:@"error"] objectForKey:@"text"] isEqualToString:@"您还未绑定手机号码"]) {
+            handle = ENeedbindPhone;
+            [self.delegate serviceFailed:handle];
+            return;
+        }
+        //end
+        
         [MYCommentAlertView showMessage:[NSString stringWithFormat:@"%@",[[jsonDic objectForKey:@"error"] objectForKey:@"text"]] target:nil];
+
+        
         [self.delegate serviceFailed:handle];
         return ;
     }

@@ -73,6 +73,9 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="gotoBackAction:" destination="-1" eventType="touchUpInside" id="BpU-2b-ggl"/>
+                            </connections>
                         </button>
                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jui-su-0Zt">
                             <rect key="frame" x="45" y="202" width="230" height="35"/>
@@ -88,6 +91,9 @@
                             <state key="selected" backgroundImage="sryc_laber_class_big_select.png">
                                 <color key="titleColor" red="0.7843137255" green="0.0" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="testMybobyAction:" destination="-1" eventType="touchUpInside" id="U4P-qo-E9m"/>
+                            </connections>
                         </button>
                     </subviews>
                     <constraints>

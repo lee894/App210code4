@@ -12,6 +12,7 @@
 
 @property(nonatomic,assign) BOOL btnisSelected;
 
+@property(nonatomic,retain) NSString *btntype;
 @property(nonatomic,retain) NSString *addstring;
 
 @property(nonatomic,retain) NSString *addtitle;
@@ -19,7 +20,6 @@
 @property(nonatomic,retain) NSString *addimageurl;
 
 
-@property(nonatomic,retain) NSString *btntype;
 @property(nonatomic,assign) int btntypeid;
 @property(nonatomic,assign)  int btngroup;
 @property(nonatomic,retain) NSString *btntitle;

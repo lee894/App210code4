@@ -10,6 +10,7 @@
                 <outlet property="btn1" destination="K2Y-Xe-ASL" id="ZFF-I0-Wbg"/>
                 <outlet property="btn2" destination="MkL-ty-2eD" id="9z6-TR-Wv5"/>
                 <outlet property="btn3" destination="D8P-Y1-77f" id="isX-Gu-Zo1"/>
+                <outlet property="myScrollV" destination="EGp-eW-uts" id="ggr-j8-YL3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -41,7 +42,7 @@
                                 <constraint firstAttribute="height" constant="2" id="e71-zX-BPE"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2Y-Xe-ASL">
+                        <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2Y-Xe-ASL">
                             <rect key="frame" x="45" y="81" width="230" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="230" id="Jgi-3m-bd0"/>
@@ -61,7 +62,7 @@
                                 <action selector="typeAction:" destination="-1" eventType="touchUpInside" id="w3m-Ea-JfU"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MkL-ty-2eD">
+                        <button hidden="YES" opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MkL-ty-2eD">
                             <rect key="frame" x="45" y="130" width="230" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="230" id="41r-j9-TW6"/>
@@ -81,7 +82,7 @@
                                 <action selector="typeAction:" destination="-1" eventType="touchUpInside" id="Rmi-iZ-5is"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7VP-Y0-VEk">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7VP-Y0-VEk">
                             <rect key="frame" x="45" y="310" width="230" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="230" id="4yx-l9-mSK"/>
@@ -98,7 +99,7 @@
                                 <action selector="nextBtnAction:" destination="-1" eventType="touchUpInside" id="hhp-jx-HoR"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8P-Y1-77f">
+                        <button hidden="YES" opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8P-Y1-77f">
                             <rect key="frame" x="45" y="180" width="230" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="230" id="Xxg-yU-zdv"/>

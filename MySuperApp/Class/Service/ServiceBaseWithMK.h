@@ -31,6 +31,9 @@ typedef enum ServiceHandle
     EAlipaywaletService,
     
     
+    //lee999 申请定期更换需要绑定手机
+    ENeedbindPhone,
+    
     //lee999 200版本开发
     EMageinzeList20_Tag,
     ECouponList20_Tag

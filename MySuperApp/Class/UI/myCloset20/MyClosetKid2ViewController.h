@@ -7,7 +7,12 @@
 //
 
 #import "LBaseViewController.h"
+#import "MyClosetParser.h"
+
 
 @interface MyClosetKid2ViewController : LBaseViewController
+
+
+@property(nonatomic,retain) MyClosetInfo *closetinfo;
 
 @end

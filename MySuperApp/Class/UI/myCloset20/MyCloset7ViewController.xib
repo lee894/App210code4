@@ -5,8 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyClosetListViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyCloset7ViewController">
             <connections>
+                <outlet property="myScrollV" destination="hwR-8g-uFh" id="sbN-yi-EGo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -14,8 +15,19 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwR-8g-uFh">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                </scrollView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="342" y="380"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="hwR-8g-uFh" secondAttribute="trailing" id="1f9-A2-BIk"/>
+                <constraint firstAttribute="bottom" secondItem="hwR-8g-uFh" secondAttribute="bottom" id="hYY-Z2-sVZ"/>
+                <constraint firstItem="hwR-8g-uFh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yrZ-09-RL7"/>
+                <constraint firstItem="hwR-8g-uFh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zLH-LB-tei"/>
+            </constraints>
+            <point key="canvasLocation" x="29" y="81"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

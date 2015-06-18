@@ -43,7 +43,7 @@
     if (btn.tag == 1) {
         //支持自定义数组： 男  内裤
         //NSArray *array=@[@[@"1",@"小明",@"aa"],@[@"2",@"大黄",@"bb"],@[@"3",@"企鹅",@"cc"]];
-        NSArray *array=@[@[@"165/80(S）",@"170/85（M)",@"175/90（L）",@"180/95（XL）",@"185/100（XXL）",@"190/105（XXXL）"]];
+        NSArray *array=@[@[@"165",@"170",@"175",@"180",@"185",@"190"]];
        ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
         _pickview.delegate = self;
         [_pickview show];
@@ -51,7 +51,7 @@
    else if (btn.tag == 2) {
         //支持自定义数组：
         //NSArray *array=@[@[@"1",@"小明",@"aa"],@[@"2",@"大黄",@"bb"],@[@"3",@"企鹅",@"cc"]];
-        NSArray *array=@[@[@"165/90（S）",@"170/95（M）",@"175/100（L）",@"180/105（XL）",@"185/110（XXL）",@"190/115(XXXL)"]];
+       NSArray *array=@[@[@"165",@"170",@"175",@"180",@"185",@"190"]];
         ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
        _pickview.delegate = self;
         [_pickview show];

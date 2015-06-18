@@ -20,6 +20,7 @@
 #import "PlayNDropViewController.h"
 #import "YKChannelViewController.h"
 #import "MyCloset1ViewController.h"
+#import "MyClosetListViewController.h"
 #import "MyButton.h"
 #import "APService.h"
 
@@ -820,7 +821,7 @@
     
     
 #warning ----test lee999
-    MyCloset1ViewController *vc1 = [[MyCloset1ViewController alloc] initWithNibName:@"MyCloset1ViewController" bundle:nil];
+    MyClosetListViewController *vc1 = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
     [self.navigationController pushViewController:vc1 animated:YES];
     
     return;
