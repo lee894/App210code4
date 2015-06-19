@@ -60,6 +60,9 @@
 -(void)loadMainView;
 
 
++ (BOOL) isFileExist:(NSString *)fileName;
+
+
 @end
 
 

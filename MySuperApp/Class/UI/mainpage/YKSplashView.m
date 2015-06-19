@@ -9,6 +9,8 @@
 #import "YKSplashView.h"
 #import "MYMacro.h"
 #import "AppDelegate.h"
+#import "JSON.h"
+
 
 
 @implementation YKSplashView
@@ -18,26 +20,125 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        //先判断是否是第一次使用
+        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString * documentsDirectory = [paths objectAtIndex:0];
+        NSString* strFileName = @"s1136";
+        //[NSString stringWithFormat:@"s%.0f", [UIScreen mainScreen].bounds.size.height * 2];
         
-        [[UIApplication sharedApplication] setStatusBarHidden:YES];
-        
-        _scrollView = [[UIScrollView alloc] initWithFrame:self.frame];
-        _scrollView.delegate = self;
-        _scrollView.bounces = NO;
-        [_scrollView setShowsHorizontalScrollIndicator:NO];
-        [_scrollView setShowsVerticalScrollIndicator:NO];
-        [_scrollView setPagingEnabled:YES];
-        [self addSubview:_scrollView];
-        
-//        _pageControl = [[BluePageControl alloc] initWithFrame:CGRectMake(0, 0, 300, 20)];
-//        [_pageControl  setBackgroundColor:[UIColor clearColor]];
-//        _pageControl.center = CGPointMake(ScreenHeight/2, 320-10);
-//        [self addSubview:_pageControl];
-//        _pageControl.activeImage = [UIImage imageNamed:@"guide_dot_red.png"];
-//        _pageControl.inactiveImage = [UIImage imageNamed:@"guide_dot_white.png"];
-//        _pageControl.imgSize = CGSizeMake(9, 9);
-        [self loadView];
-        
+        if (![YKSplashView getIsOpenGuideView]) {
+            //加载引导图
+            //            [[UIApplication sharedApplication] setStatusBarHidden:YES];
+            
+            _scrollView = [[UIScrollView alloc] initWithFrame:self.frame];
+            _scrollView.delegate = self;
+            _scrollView.bounces = NO;
+            [_scrollView setShowsHorizontalScrollIndicator:NO];
+            [_scrollView setShowsVerticalScrollIndicator:NO];
+            [_scrollView setPagingEnabled:YES];
+            [self addSubview:_scrollView];
+            [self loadView];
+            //如果第一次显示引导图 也要下载广告图
+            NSString* strAdPic = @"";
+            NSStringEncoding chineseEnc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+            NSString* str = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:SPlashViewUrl] encoding:chineseEnc error:nil];
+            if ([str rangeOfString:@"{"].location != NSNotFound) {
+                NSString* adPic = [str substringWithRange:NSMakeRange([str rangeOfString:@"{"].location, [str rangeOfString:@"}"].location - [str rangeOfString:@"{"].location + 1)];
+                NSDictionary* adPicDic = [adPic JSONValue];
+                if ([[adPicDic allKeys] containsObject:strFileName]) {
+                    //有对应key 取值 值为ad图的url
+                    strAdPic = [adPicDic objectForKey:strFileName];
+                }
+            }
+            if (strAdPic.length > 0) {
+                //本地无缓存 下载图片 储存至本地 跳过本页面
+                dispatch_queue_t network_queue = dispatch_queue_create("adPic", nil);
+                dispatch_async(network_queue, ^{
+                    NSData* dzPic = [NSData dataWithContentsOfURL:[NSURL URLWithString:strAdPic]];
+                    if (dzPic) {
+                        NSDictionary* picDic = [NSDictionary dictionaryWithObject:dzPic forKey:strAdPic];
+                        if (picDic) {
+                            [picDic writeToFile:[documentsDirectory stringByAppendingPathComponent:strFileName] atomically:YES];
+                        }
+                    }
+                } );
+            }
+        }else{
+            //广告图
+            NSString* strAdPic = @"";
+            NSStringEncoding chineseEnc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+            NSString* str = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://www.paipai.com/sinclude/app_slogo_ios.js"] encoding:chineseEnc error:nil];
+            if ([str rangeOfString:@"{"].location != NSNotFound) {
+                NSString* adPic = [str substringWithRange:NSMakeRange([str rangeOfString:@"{"].location, [str rangeOfString:@"}"].location - [str rangeOfString:@"{"].location + 1)];
+                NSDictionary* adPicDic = [adPic JSONValue];
+                if ([[adPicDic allKeys] containsObject:strFileName]) {
+                    //有对应key 取值 值为ad图的url
+                    strAdPic = [adPicDic objectForKey:strFileName];
+                }
+            }
+            if (strAdPic.length > 0) {
+                //获取到对应屏幕的广告图 图片地址
+                if ([AppDelegate isFileExist:strFileName]) {
+                    //本地有广告图缓存
+                    NSDictionary* dict = [NSDictionary dictionaryWithContentsOfFile:[documentsDirectory stringByAppendingPathComponent:strFileName]];
+                    
+                    if ([[dict allKeys] containsObject:strAdPic]) {
+                        //广告图没换 直接本地读取 2秒后消失
+                        NSData* picData = (NSData*)[dict objectForKey:strAdPic];
+                        UIImage* image = [UIImage imageWithData:picData];
+                        UIImageView* iv = [[UIImageView alloc] initWithFrame:self.frame];
+                        [iv setImage:image];
+                        [self addSubview:iv];
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            [self btnGuideClick:nil];
+                        });
+                    }
+                    else
+                    {
+                        //广告图换了 本地读取展示 2秒消失 后台下载新图片 下载完成后 清理本地缓存文件
+                        
+                        NSData* picData = (NSData*)[dict objectForKey:[[dict allKeys] firstObject]];
+                        UIImage* image = [UIImage imageWithData:picData];
+                        UIImageView* iv = [[UIImageView alloc] initWithFrame:self.frame];
+                        [iv setImage:image];
+                        [self addSubview:iv];
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            [self btnGuideClick:nil];
+                        });
+                        dispatch_queue_t network_queue;
+                        network_queue = dispatch_queue_create("adPic", nil);
+                        dispatch_async(network_queue, ^{
+                            NSData* dzPic = [NSData dataWithContentsOfURL:[NSURL URLWithString:strAdPic]];
+                            if (dzPic) {
+                                NSDictionary* picDic = [NSDictionary dictionaryWithObject:dzPic forKey:strAdPic];
+                                if (picDic) {
+                                    [picDic writeToFile:[documentsDirectory stringByAppendingPathComponent:strFileName] atomically:YES];
+                                }
+                            }
+                        } );
+                    }
+                }else
+                {
+                    //本地无缓存 下载图片 储存至本地 跳过本页面
+                    dispatch_queue_t network_queue;
+                    network_queue = dispatch_queue_create("adPic", nil);
+                    dispatch_async(network_queue, ^{
+                        NSData* dzPic = [NSData dataWithContentsOfURL:[NSURL URLWithString:strAdPic]];
+                        if (dzPic) {
+                            NSDictionary* picDic = [NSDictionary dictionaryWithObject:dzPic forKey:strAdPic];
+                            if (picDic) {
+                                [picDic writeToFile:[documentsDirectory stringByAppendingPathComponent:strFileName] atomically:YES];
+                            }
+                        }
+                    } );
+                    [self btnGuideClick:nil];
+                }
+            }
+            else
+            {
+                [self btnGuideClick:nil];
+            }
+        }
     }
     return self;
 }
@@ -54,61 +155,7 @@
 {
     theImgView.userInteractionEnabled = YES;
     
-//    CGRect rect;
-//    UIImageView *imgView = [[UIImageView alloc] init];
-//    CGSize size = CGSizeMake(288/2, 126/2);
-//    switch (index) {
-//        case 0:
-//            if (states) {//是iPhone5
-//                rect = CGRectMake(736/2, 338/2, 0, 0);
-//            } else {
-//                rect = CGRectMake(568/2, 338/2, 0, 0);
-//            }
-//            break;
-//        case 1:
-//            if (states) {//是iPhone5
-//                rect = CGRectMake(60/2, 290/2, 0, 0);
-//            } else {
-//                rect = CGRectMake(26/2, 290/2, 0, 0);
-//            }
-//            break;
-//        case 2:
-//            if (states) {//是iPhone5
-//                rect = CGRectMake(526/2, 228/2, 0, 0);
-//            } else {
-//                rect = CGRectMake(440/2, 228/2, 0, 0);
-//            }
-//            break;
-//        case 3:
-//            size = CGSizeMake(382/2, 48/2);
-//            if (states) {//是iPhone5
-//                rect = CGRectMake(640/2, 478/2, 0, 0);
-//            } else {
-//                rect = CGRectMake(498/2, 478/2, 0, 0);
-//            }
-//            break;
-//        default:
-//            break;
-//    }
-    
-    //引导图上的文字
-//    imgView.image = [UIImage imageNamed:[NSString stringWithFormat:@"guide_0%d_word.png",index+1]];
-//    rect.size = size;
-//    imgView.frame = rect;
-//    [theImgView addSubview:imgView];
-    
     if (index == 2) {//最后一页
-//        CGRect btnRect = CGRectMake(0, 478/2, 200/2, 100/2);
-////        imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"guide_start_logo.png"]];
-//        if (states) {//是iPhone5
-////            rect = CGRectMake(792/2, 34/2, 288/2, 72/2);
-//            btnRect.origin.x = 1030/2;
-//        } else {
-//            btnRect.origin.x = 884/2;
-////            rect = CGRectMake(648/2, 34/2, 288/2, 72/2);
-//        }
-//        imgView.frame = rect;
-//        [theImgView addSubview:imgView];
         
         UIButton *clickBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [clickBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];

@@ -484,7 +484,7 @@
                 
                 for (NSInteger i = 0; i < 8; ++i) {
                     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-                    [btn setFrame:CGRectMake((i % 4) * (68 + 10) + 10, i / 4 * (66 + 10) + 10, 66, 66)];
+                    [btn setFrame:CGRectMake((i % 4) * (lee1fitAllScreen(68) + 10) + 10, i / 4 * (lee1fitAllScreen(66) + 10) + 10, lee1fitAllScreen(66), lee1fitAllScreen(66))];
                     [btn setTag:i];
                     NSString* strImgName = [NSString stringWithFormat:@"my_am_ico_%ld", (long)(i + 1)];
                     [btn setImage:[UIImage imageNamed:strImgName] forState:UIControlStateNormal];
@@ -517,7 +517,7 @@
         //if (universalCell == nil) {
         universalCell =  [[[NSBundle mainBundle] loadNibNamed:@"UniversalCell" owner:self options:nil] objectAtIndex:0];
         //}
-        [universalCell setBackgroundColor:[UIColor clearColor]];
+        [universalCell setBackgroundColor:[UIColor whiteColor]];
         switch (indexPath.row) {
             case 1:
             {

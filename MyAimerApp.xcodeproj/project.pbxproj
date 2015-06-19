@@ -440,6 +440,8 @@
 		966590C81B1601BD004CF036 /* MyCloset4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 966590C61B1601BD004CF036 /* MyCloset4ViewController.xib */; };
 		966590CC1B1604D3004CF036 /* MyCloset5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966590CA1B1604D3004CF036 /* MyCloset5ViewController.m */; };
 		966590CD1B1604D3004CF036 /* MyCloset5ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 966590CB1B1604D3004CF036 /* MyCloset5ViewController.xib */; };
+		9677E7971B32603800EC9008 /* MyClosetListParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9677E7961B32603800EC9008 /* MyClosetListParser.m */; };
+		9677E7991B32B5A400EC9008 /* service_btn2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9677E7981B32B5A400EC9008 /* service_btn2@2x.png */; };
 		967F00581B12074500B7E639 /* Deafult750.png in Resources */ = {isa = PBXBuildFile; fileRef = 967F00551B12074500B7E639 /* Deafult750.png */; };
 		967F00591B12074500B7E639 /* Deafult1242.png in Resources */ = {isa = PBXBuildFile; fileRef = 967F00561B12074500B7E639 /* Deafult1242.png */; };
 		967F005A1B12074500B7E639 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 967F00571B12074500B7E639 /* Default.png */; };
@@ -709,6 +711,8 @@
 		96D465771AD558C800BA5700 /* tb_4_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D4656D1AD558C800BA5700 /* tb_4_normal@2x.png */; };
 		96D465781AD558C800BA5700 /* tb_5_hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D4656E1AD558C800BA5700 /* tb_5_hover@2x.png */; };
 		96D465791AD558C800BA5700 /* tb_5_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D4656F1AD558C800BA5700 /* tb_5_normal@2x.png */; };
+		96E3BF641B312D790092C54D /* MyCloset7ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E3BF621B312D790092C54D /* MyCloset7ViewController.m */; };
+		96E3BF651B312D790092C54D /* MyCloset7ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96E3BF631B312D790092C54D /* MyCloset7ViewController.xib */; };
 		96EDC3BD1AC436070093FF25 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EDC3B81AC436070093FF25 /* RDVTabBar.m */; };
 		96EDC3BE1AC436070093FF25 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EDC3BA1AC436070093FF25 /* RDVTabBarController.m */; };
 		96EDC3BF1AC436070093FF25 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EDC3BC1AC436070093FF25 /* RDVTabBarItem.m */; };
@@ -1667,6 +1671,9 @@
 		966590C91B1604D3004CF036 /* MyCloset5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCloset5ViewController.h; sourceTree = "<group>"; };
 		966590CA1B1604D3004CF036 /* MyCloset5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCloset5ViewController.m; sourceTree = "<group>"; };
 		966590CB1B1604D3004CF036 /* MyCloset5ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCloset5ViewController.xib; sourceTree = "<group>"; };
+		9677E7951B32603800EC9008 /* MyClosetListParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClosetListParser.h; sourceTree = "<group>"; };
+		9677E7961B32603800EC9008 /* MyClosetListParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClosetListParser.m; sourceTree = "<group>"; };
+		9677E7981B32B5A400EC9008 /* service_btn2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service_btn2@2x.png"; sourceTree = "<group>"; };
 		967F00551B12074500B7E639 /* Deafult750.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Deafult750.png; sourceTree = "<group>"; };
 		967F00561B12074500B7E639 /* Deafult1242.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Deafult1242.png; sourceTree = "<group>"; };
 		967F00571B12074500B7E639 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -2103,6 +2110,9 @@
 		96D4656D1AD558C800BA5700 /* tb_4_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb_4_normal@2x.png"; sourceTree = "<group>"; };
 		96D4656E1AD558C800BA5700 /* tb_5_hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb_5_hover@2x.png"; sourceTree = "<group>"; };
 		96D4656F1AD558C800BA5700 /* tb_5_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb_5_normal@2x.png"; sourceTree = "<group>"; };
+		96E3BF611B312D790092C54D /* MyCloset7ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCloset7ViewController.h; sourceTree = "<group>"; };
+		96E3BF621B312D790092C54D /* MyCloset7ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCloset7ViewController.m; sourceTree = "<group>"; };
+		96E3BF631B312D790092C54D /* MyCloset7ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCloset7ViewController.xib; sourceTree = "<group>"; };
 		96EDC3B71AC436070093FF25 /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBar.h; sourceTree = "<group>"; };
 		96EDC3B81AC436070093FF25 /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBar.m; sourceTree = "<group>"; };
 		96EDC3B91AC436070093FF25 /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarController.h; sourceTree = "<group>"; };
@@ -3088,6 +3098,7 @@
 		9601E0B51B26D65D002C32E0 /* MyAimer20 */ = {
 			isa = PBXGroup;
 			children = (
+				9677E7981B32B5A400EC9008 /* service_btn2@2x.png */,
 				A6F395171B2E7EE9004566CA /* my_am_ico_1@2x.png */,
 				A6F395181B2E7EE9004566CA /* my_am_ico_2@2x.png */,
 				A6F395191B2E7EE9004566CA /* my_am_ico_3@2x.png */,
@@ -3741,6 +3752,9 @@
 				968AE8991B2540AB004A1A85 /* MyClosetKidGril3ViewController.h */,
 				968AE89A1B2540AB004A1A85 /* MyClosetKidGril3ViewController.m */,
 				968AE89B1B2540AB004A1A85 /* MyClosetKidGril3ViewController.xib */,
+				966590831B159963004CF036 /* MyCloset1ViewController.h */,
+				966590841B159963004CF036 /* MyCloset1ViewController.m */,
+				966590851B159963004CF036 /* MyCloset1ViewController.xib */,
 				968AE8941B253E29004A1A85 /* MyClosetKid3ViewController.h */,
 				968AE8951B253E29004A1A85 /* MyClosetKid3ViewController.m */,
 				968AE8961B253E29004A1A85 /* MyClosetKid3ViewController.xib */,
@@ -3750,9 +3764,6 @@
 				968AE8781B24A7E1004A1A85 /* MyClosetNan3ViewController.h */,
 				968AE8791B24A7E1004A1A85 /* MyClosetNan3ViewController.m */,
 				968AE87A1B24A7E1004A1A85 /* MyClosetNan3ViewController.xib */,
-				966590831B159963004CF036 /* MyCloset1ViewController.h */,
-				966590841B159963004CF036 /* MyCloset1ViewController.m */,
-				966590851B159963004CF036 /* MyCloset1ViewController.xib */,
 				966590BA1B15F420004CF036 /* MyCloset2ViewController.h */,
 				966590BB1B15F420004CF036 /* MyCloset2ViewController.m */,
 				966590BC1B15F420004CF036 /* MyCloset2ViewController.xib */,
@@ -3779,6 +3790,9 @@
 				968AE8751B24A55B004A1A85 /* MyClosetMade2ViewController.xib */,
 				968AE8871B25314B004A1A85 /* MyClosetMade3ViewController.h */,
 				968AE8881B25314B004A1A85 /* MyClosetMade3ViewController.m */,
+				96E3BF611B312D790092C54D /* MyCloset7ViewController.h */,
+				96E3BF621B312D790092C54D /* MyCloset7ViewController.m */,
+				96E3BF631B312D790092C54D /* MyCloset7ViewController.xib */,
 			);
 			path = myCloset20;
 			sourceTree = "<group>";
@@ -5988,10 +6002,15 @@
 		A6F395001B2E7DAE004566CA /* data */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< Updated upstream
 				A6218D861B32A6AC00D9ED93 /* MyClosetListParser.h */,
 				A6218D871B32A6AC00D9ED93 /* MyClosetListParser.m */,
+=======
+>>>>>>> Stashed changes
 				A6F395031B2E7DAE004566CA /* MyClosetParser.h */,
 				A6F395041B2E7DAE004566CA /* MyClosetParser.m */,
+				9677E7951B32603800EC9008 /* MyClosetListParser.h */,
+				9677E7961B32603800EC9008 /* MyClosetListParser.m */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -6360,7 +6379,11 @@
 				A6F3951F1B2E7EE9004566CA /* my_am_ico_1@2x.png in Resources */,
 				9685FA581ADD75ED00BF2DE8 /* sx_dz@2x.png in Resources */,
 				968AE84C1B247C54004A1A85 /* sryc_cm_input@2x.png in Resources */,
+<<<<<<< Updated upstream
 				A6218D8D1B32A6EE00D9ED93 /* MyCloset7ViewController.xib in Resources */,
+=======
+				96E3BF651B312D790092C54D /* MyCloset7ViewController.xib in Resources */,
+>>>>>>> Stashed changes
 				96308D111AD968110068D271 /* title_logo@2x.png in Resources */,
 				962693991A135FB700A0BC7F /* alert-red-button.png in Resources */,
 				962693AD1A135FB700A0BC7F /* word_intro.png in Resources */,
@@ -6695,6 +6718,7 @@
 				962694A61A135FB700A0BC7F /* top3_search_latest_press.png in Resources */,
 				9664A1651AE742BF002C0B1D /* aimerWeiboErCode@2x.png in Resources */,
 				9626939C1A135FB700A0BC7F /* card_aimer01.png in Resources */,
+				9677E7991B32B5A400EC9008 /* service_btn2@2x.png in Resources */,
 				962694A11A135FB700A0BC7F /* shop_nav_icon_navigation_press.png in Resources */,
 				9626943E1A135FB700A0BC7F /* guide_dot_white.png in Resources */,
 				9B69574718E3F9AA0051B562 /* AMServerCenterViewController.xib in Resources */,
@@ -6844,6 +6868,7 @@
 				96F2A5021ADAB6ED00E1A04B /* NewMaginzeBViewController.m in Sources */,
 				9BD58CD318E40D57008CD881 /* ActivityIndicatorView.m in Sources */,
 				9B7CB0F918D59C4300D8DAA5 /* AddressAddresslist.m in Sources */,
+				9677E7971B32603800EC9008 /* MyClosetListParser.m in Sources */,
 				9B5840691904C906008DC48F /* AccessViewController.m in Sources */,
 				9B7CB15118D59C4300D8DAA5 /* MagazineMagazineinfo.m in Sources */,
 				9B7CB12818D59C4300D8DAA5 /* SearchKeyword.m in Sources */,
@@ -7161,6 +7186,7 @@
 				968AE8891B25314B004A1A85 /* MyClosetMade3ViewController.m in Sources */,
 				2F2137BD18E453A400F91104 /* BindPhoneViewController.m in Sources */,
 				9B7CB0E818D59C4300D8DAA5 /* VersionVersionModel.m in Sources */,
+				96E3BF641B312D790092C54D /* MyCloset7ViewController.m in Sources */,
 				968C29241AE1835C00D1ABFD /* CCMBorderView.m in Sources */,
 				9B7CB13118D59C4300D8DAA5 /* ShowcomMentModel.m in Sources */,
 				9BCA829A18C47FA300B81CA5 /* LBaseViewController.m in Sources */,

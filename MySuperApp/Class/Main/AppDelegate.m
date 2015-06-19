@@ -215,12 +215,19 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
 
 -(void)loadMainView
 {
-    //先判断是否是第一次使用
-    if (![YKSplashView getIsOpenGuideView]) {
-        [self loadSplashView]; //加载引导图
-    }else{
-        [self createAKtableBar];
-    }
+    
+    YKSplashView *gudeView = [[YKSplashView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
+    self.splashView = gudeView;
+    [self.window addSubview:self.splashView];
+    [self.window makeKeyAndVisible];
+    
+    
+//    //先判断是否是第一次使用
+//    if (![YKSplashView getIsOpenGuideView]) {
+//        [self loadSplashView]; //加载引导图
+//    }else{
+//        [self createAKtableBar];
+//    }
 }
 
 //加载引导图
@@ -605,6 +612,16 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
 	}
 }
 
+
++ (BOOL) isFileExist:(NSString *)fileName
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [paths objectAtIndex:0];
+    NSString *filePath = [path stringByAppendingPathComponent:fileName];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL result = [fileManager fileExistsAtPath:filePath];
+    return result;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

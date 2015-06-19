@@ -26,7 +26,7 @@
 @interface OrderViewController () {
     UILabel *noorderlabel;
     
-    int selectTag;//选中的tag
+    NSInteger selectTag;//选中的tag
     BOOL isMakesureGetgood;  //是否点击了确认收货
     
     BOOL isGetNotice;  //是否弹出了升级提示框
@@ -115,14 +115,14 @@
 //        [self.view addSubview:headview];
 //    }
     
-    if (isIOS7up) {
-//        if (ishowHeadView) {
-            [headview setFrame:CGRectMake(0, 0, 320, 40)];
-            [tableList setFrame:CGRectMake(0, 40, 320, self.view.frame.size.height-40)];
-//        }else{
-//            [tableList setFrame:CGRectMake(0, 60, 320, self.view.frame.size.height-60)];
-//        }
-    }
+//    if (isIOS7up) {
+////        if (ishowHeadView) {
+//            [headview setFrame:CGRectMake(0, 0, ScreenWidth, 40)];
+//            [tableList setFrame:CGRectMake(0, 40, ScreenWidth, self.view.frame.size.height-40)];
+////        }else{
+////            [tableList setFrame:CGRectMake(0, 60, 320, self.view.frame.size.height-60)];
+////        }
+//    }
     //lee999
     
     //返回按钮
@@ -317,7 +317,7 @@
 {
     NSInteger returnKey = [tableList tableViewDidEndDragging];
     if (returnKey != k_RETURN_DO_NOTHING) {
-        NSString * key = [NSString stringWithFormat:@"%d", returnKey];
+        NSString * key = [NSString stringWithFormat:@"%ld", (long)returnKey];
         [self updateThread:key];
     }
     
@@ -327,7 +327,7 @@
     
     NSInteger returnKey = [tableList tableViewDidDragging];
     if (returnKey == k_RETURN_LOADMORE) {
-        NSString * key = [NSString stringWithFormat:@"%d", returnKey];
+        NSString * key = [NSString stringWithFormat:@"%ld", (long)returnKey];
         [self updateThread:key];
     }
 }
@@ -383,7 +383,7 @@
 -(void)getData
 {
     current = 1;
-    NSString *PageCurr = [NSString stringWithFormat:@"%d",current];
+    NSString *PageCurr = [NSString stringWithFormat:@"%ld",(long)current];
     
     switch (howEnter) {
         case 1://我的订单
@@ -413,7 +413,7 @@
 - (void)nextPage
 {
     current ++;
-    NSString *PageCurr = [NSString stringWithFormat:@"%d",current];
+    NSString *PageCurr = [NSString stringWithFormat:@"%ld",(long)current];
     
     switch (howEnter) {
         case 1://我的订单
@@ -472,8 +472,6 @@
 -(IBAction)MyorderRed:(id)sender{
     UIButton *btn = (UIButton*)sender;
     
-    NSLog(@"----------%@---%d",btn.titleLabel.text,btn.tag);
-    
     selectTag = btn.tag;
     OrdersOrdersList *item = (OrdersOrdersList*)[contentArr objectAtIndex:selectTag];
 
@@ -486,7 +484,6 @@
         //lee999 适配高度
         OrdersOrdersList *item = (OrdersOrdersList*)[contentArr objectAtIndex:selectTag];
         NSArray *arrtype = item.itemAllowpaytype;
-        NSLog(@"支付按钮的个数是：----%d",[arrtype count]);
         if ([arrtype count] ==1) {
             yHeight = 90;
         }
@@ -525,7 +522,6 @@
 -(IBAction)MyorderGray:(id)sender{
     
     UIButton *btn = (UIButton*)sender;
-    NSLog(@"----------%@---%d",btn.titleLabel.text,btn.tag);
     selectTag = btn.tag;
     OrdersOrdersList *item = (OrdersOrdersList*)[contentArr objectAtIndex:selectTag];
 

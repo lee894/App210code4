@@ -41,10 +41,10 @@
 
 @interface OrderDetailViewController () {
     
-    int four;
-    int five;
-    int six;
-    int seven;
+    NSInteger four;
+    NSInteger five;
+    NSInteger six;
+    NSInteger seven;
     
     UIView *viewBg;
     
@@ -102,9 +102,7 @@
     
     _suitlistcell = [[NSMutableArray alloc] init];
 
-    if (isIOS7up) {
-        [tableList setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-    }
+    [tableList setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height)];
     
     endCell2 = [[[NSBundle mainBundle] loadNibNamed:@"OrderpaynowEndCell" owner:self options:nil] lastObject];
     
@@ -117,9 +115,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideSeeButPay:) name:@"alipayOKanjumptoOrderDetail" object:nil];
     [SingletonState sharedStateInstance].alipayisShowAlert = YES;
     
-    if (isIOS7up) {
-        [tableList setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-    }
+//    if (isIOS7up) {
+//        [tableList setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height)];
+//    }
     
     //lee999
     if ([SingletonState sharedStateInstance].isFromCheckOKView == YES) {
@@ -465,7 +463,7 @@
     [endCell2 setBackgroundColor:[UIColor whiteColor]];
     [endCell2 setFrame:oldframe];
     
-    CGRect oldframe2 = CGRectMake(0, 0, 320, self.view.frame.size.height);
+    CGRect oldframe2 = CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height);
     oldframe2.size.height = oldframe2.size.height - endCell2.frame.size.height;
     [tableList setFrame:oldframe2];
     
@@ -493,7 +491,7 @@
     if (!orderDetail.isshowpaybar) {
         endCell2.hidden = YES;
         //恢复table为原来的高度
-        [tableList setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+        [tableList setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height)];
     }
 }
 
@@ -585,9 +583,6 @@
 //    }else
     {
         if (orderDetail.iscancle) {
-            
-            NSLog(@"session-------%d",8+orderDetail.itemSuit.count +1);
-            
             return 8+orderDetail.itemSuit.count +1; //lee999 在这个地方加1，为了在最后显示 查看物流按钮
         }else {
             return 7+orderDetail.itemSuit.count +1;

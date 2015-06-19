@@ -28,7 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *redBtn;
 @property (weak, nonatomic) IBOutlet UIButton *graybtn;
 
-@property (nonatomic, assign)int tag;
+@property (nonatomic, assign)NSInteger tag;
 
 
 - (void)setCellContent:(OrdersOrdersList *)orderList;//设置cell上面的数据
