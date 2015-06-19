@@ -440,6 +440,8 @@
 		966590C81B1601BD004CF036 /* MyCloset4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 966590C61B1601BD004CF036 /* MyCloset4ViewController.xib */; };
 		966590CC1B1604D3004CF036 /* MyCloset5ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966590CA1B1604D3004CF036 /* MyCloset5ViewController.m */; };
 		966590CD1B1604D3004CF036 /* MyCloset5ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 966590CB1B1604D3004CF036 /* MyCloset5ViewController.xib */; };
+		9670D3A31B3412E6002ED503 /* MyCloset7ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9670D3A11B3412E6002ED503 /* MyCloset7ViewController.m */; };
+		9670D3A41B3412E6002ED503 /* MyCloset7ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9670D3A21B3412E6002ED503 /* MyCloset7ViewController.xib */; };
 		9677E7971B32603800EC9008 /* MyClosetListParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9677E7961B32603800EC9008 /* MyClosetListParser.m */; };
 		9677E7991B32B5A400EC9008 /* service_btn2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9677E7981B32B5A400EC9008 /* service_btn2@2x.png */; };
 		967F00581B12074500B7E639 /* Deafult750.png in Resources */ = {isa = PBXBuildFile; fileRef = 967F00551B12074500B7E639 /* Deafult750.png */; };
@@ -711,8 +713,6 @@
 		96D465771AD558C800BA5700 /* tb_4_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D4656D1AD558C800BA5700 /* tb_4_normal@2x.png */; };
 		96D465781AD558C800BA5700 /* tb_5_hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D4656E1AD558C800BA5700 /* tb_5_hover@2x.png */; };
 		96D465791AD558C800BA5700 /* tb_5_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D4656F1AD558C800BA5700 /* tb_5_normal@2x.png */; };
-		96E3BF641B312D790092C54D /* MyCloset7ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96E3BF621B312D790092C54D /* MyCloset7ViewController.m */; };
-		96E3BF651B312D790092C54D /* MyCloset7ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96E3BF631B312D790092C54D /* MyCloset7ViewController.xib */; };
 		96EDC3BD1AC436070093FF25 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EDC3B81AC436070093FF25 /* RDVTabBar.m */; };
 		96EDC3BE1AC436070093FF25 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EDC3BA1AC436070093FF25 /* RDVTabBarController.m */; };
 		96EDC3BF1AC436070093FF25 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EDC3BC1AC436070093FF25 /* RDVTabBarItem.m */; };
@@ -1120,9 +1120,6 @@
 		9BF57E8118E2D78100B2A3E6 /* UniversalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF57E7F18E2D78100B2A3E6 /* UniversalCell.m */; };
 		9BF57E8218E2D78100B2A3E6 /* UniversalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BF57E8018E2D78100B2A3E6 /* UniversalCell.xib */; };
 		A6218D851B325FC400D9ED93 /* CouponDetail20ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6218D841B325FC400D9ED93 /* CouponDetail20ViewController.m */; };
-		A6218D881B32A6AC00D9ED93 /* MyClosetListParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A6218D871B32A6AC00D9ED93 /* MyClosetListParser.m */; };
-		A6218D8C1B32A6EE00D9ED93 /* MyCloset7ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6218D8A1B32A6EE00D9ED93 /* MyCloset7ViewController.m */; };
-		A6218D8D1B32A6EE00D9ED93 /* MyCloset7ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6218D8B1B32A6EE00D9ED93 /* MyCloset7ViewController.xib */; };
 		A67BEAB81B281A0300418650 /* aimerLogoDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A67BEAB71B281A0300418650 /* aimerLogoDefault@2x.png */; };
 		A6F394EB1B2E7C74004566CA /* PackageInfoParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F394E81B2E7C74004566CA /* PackageInfoParser.m */; };
 		A6F394EC1B2E7C74004566CA /* PackageInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F394EA1B2E7C74004566CA /* PackageInfoViewController.m */; };
@@ -1671,6 +1668,9 @@
 		966590C91B1604D3004CF036 /* MyCloset5ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCloset5ViewController.h; sourceTree = "<group>"; };
 		966590CA1B1604D3004CF036 /* MyCloset5ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCloset5ViewController.m; sourceTree = "<group>"; };
 		966590CB1B1604D3004CF036 /* MyCloset5ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCloset5ViewController.xib; sourceTree = "<group>"; };
+		9670D3A01B3412E6002ED503 /* MyCloset7ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCloset7ViewController.h; sourceTree = "<group>"; };
+		9670D3A11B3412E6002ED503 /* MyCloset7ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCloset7ViewController.m; sourceTree = "<group>"; };
+		9670D3A21B3412E6002ED503 /* MyCloset7ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCloset7ViewController.xib; sourceTree = "<group>"; };
 		9677E7951B32603800EC9008 /* MyClosetListParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClosetListParser.h; sourceTree = "<group>"; };
 		9677E7961B32603800EC9008 /* MyClosetListParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClosetListParser.m; sourceTree = "<group>"; };
 		9677E7981B32B5A400EC9008 /* service_btn2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service_btn2@2x.png"; sourceTree = "<group>"; };
@@ -2110,9 +2110,6 @@
 		96D4656D1AD558C800BA5700 /* tb_4_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb_4_normal@2x.png"; sourceTree = "<group>"; };
 		96D4656E1AD558C800BA5700 /* tb_5_hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb_5_hover@2x.png"; sourceTree = "<group>"; };
 		96D4656F1AD558C800BA5700 /* tb_5_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb_5_normal@2x.png"; sourceTree = "<group>"; };
-		96E3BF611B312D790092C54D /* MyCloset7ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCloset7ViewController.h; sourceTree = "<group>"; };
-		96E3BF621B312D790092C54D /* MyCloset7ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCloset7ViewController.m; sourceTree = "<group>"; };
-		96E3BF631B312D790092C54D /* MyCloset7ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCloset7ViewController.xib; sourceTree = "<group>"; };
 		96EDC3B71AC436070093FF25 /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBar.h; sourceTree = "<group>"; };
 		96EDC3B81AC436070093FF25 /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBar.m; sourceTree = "<group>"; };
 		96EDC3B91AC436070093FF25 /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarController.h; sourceTree = "<group>"; };
@@ -2862,11 +2859,6 @@
 		9BF57E8018E2D78100B2A3E6 /* UniversalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UniversalCell.xib; sourceTree = "<group>"; };
 		A6218D831B325FC400D9ED93 /* CouponDetail20ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponDetail20ViewController.h; sourceTree = "<group>"; };
 		A6218D841B325FC400D9ED93 /* CouponDetail20ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponDetail20ViewController.m; sourceTree = "<group>"; };
-		A6218D861B32A6AC00D9ED93 /* MyClosetListParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClosetListParser.h; sourceTree = "<group>"; };
-		A6218D871B32A6AC00D9ED93 /* MyClosetListParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClosetListParser.m; sourceTree = "<group>"; };
-		A6218D891B32A6EE00D9ED93 /* MyCloset7ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCloset7ViewController.h; sourceTree = "<group>"; };
-		A6218D8A1B32A6EE00D9ED93 /* MyCloset7ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCloset7ViewController.m; sourceTree = "<group>"; };
-		A6218D8B1B32A6EE00D9ED93 /* MyCloset7ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCloset7ViewController.xib; sourceTree = "<group>"; };
 		A67BEAB71B281A0300418650 /* aimerLogoDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aimerLogoDefault@2x.png"; sourceTree = "<group>"; };
 		A6F394E71B2E7C74004566CA /* PackageInfoParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageInfoParser.h; sourceTree = "<group>"; };
 		A6F394E81B2E7C74004566CA /* PackageInfoParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageInfoParser.m; sourceTree = "<group>"; };
@@ -3745,9 +3737,9 @@
 		9665907D1B159942004CF036 /* myCloset20 */ = {
 			isa = PBXGroup;
 			children = (
-				A6218D891B32A6EE00D9ED93 /* MyCloset7ViewController.h */,
-				A6218D8A1B32A6EE00D9ED93 /* MyCloset7ViewController.m */,
-				A6218D8B1B32A6EE00D9ED93 /* MyCloset7ViewController.xib */,
+				9670D3A01B3412E6002ED503 /* MyCloset7ViewController.h */,
+				9670D3A11B3412E6002ED503 /* MyCloset7ViewController.m */,
+				9670D3A21B3412E6002ED503 /* MyCloset7ViewController.xib */,
 				A6F395001B2E7DAE004566CA /* data */,
 				968AE8991B2540AB004A1A85 /* MyClosetKidGril3ViewController.h */,
 				968AE89A1B2540AB004A1A85 /* MyClosetKidGril3ViewController.m */,
@@ -3790,9 +3782,6 @@
 				968AE8751B24A55B004A1A85 /* MyClosetMade2ViewController.xib */,
 				968AE8871B25314B004A1A85 /* MyClosetMade3ViewController.h */,
 				968AE8881B25314B004A1A85 /* MyClosetMade3ViewController.m */,
-				96E3BF611B312D790092C54D /* MyCloset7ViewController.h */,
-				96E3BF621B312D790092C54D /* MyCloset7ViewController.m */,
-				96E3BF631B312D790092C54D /* MyCloset7ViewController.xib */,
 			);
 			path = myCloset20;
 			sourceTree = "<group>";
@@ -6002,11 +5991,6 @@
 		A6F395001B2E7DAE004566CA /* data */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< Updated upstream
-				A6218D861B32A6AC00D9ED93 /* MyClosetListParser.h */,
-				A6218D871B32A6AC00D9ED93 /* MyClosetListParser.m */,
-=======
->>>>>>> Stashed changes
 				A6F395031B2E7DAE004566CA /* MyClosetParser.h */,
 				A6F395041B2E7DAE004566CA /* MyClosetParser.m */,
 				9677E7951B32603800EC9008 /* MyClosetListParser.h */,
@@ -6379,11 +6363,6 @@
 				A6F3951F1B2E7EE9004566CA /* my_am_ico_1@2x.png in Resources */,
 				9685FA581ADD75ED00BF2DE8 /* sx_dz@2x.png in Resources */,
 				968AE84C1B247C54004A1A85 /* sryc_cm_input@2x.png in Resources */,
-<<<<<<< Updated upstream
-				A6218D8D1B32A6EE00D9ED93 /* MyCloset7ViewController.xib in Resources */,
-=======
-				96E3BF651B312D790092C54D /* MyCloset7ViewController.xib in Resources */,
->>>>>>> Stashed changes
 				96308D111AD968110068D271 /* title_logo@2x.png in Resources */,
 				962693991A135FB700A0BC7F /* alert-red-button.png in Resources */,
 				962693AD1A135FB700A0BC7F /* word_intro.png in Resources */,
@@ -6612,6 +6591,7 @@
 				C598E65118FAA8C900C5A7B0 /* OrderEndCell.xib in Resources */,
 				962693E71A135FB700A0BC7F /* sort_pic_04.png in Resources */,
 				962694891A135FB700A0BC7F /* number_bg_red.png in Resources */,
+				9670D3A41B3412E6002ED503 /* MyCloset7ViewController.xib in Resources */,
 				9626949F1A135FB700A0BC7F /* shop_nav_icon_backup.png in Resources */,
 				962693D81A135FB700A0BC7F /* sort_brand_07.png in Resources */,
 				962694C91A135FB700A0BC7F /* sina00_icon.png in Resources */,
@@ -6885,7 +6865,6 @@
 				9BCA82BE18C47FA300B81CA5 /* MainpageViewController.m in Sources */,
 				9B7CB12F18D59C4300D8DAA5 /* ProductlistModel.m in Sources */,
 				9BB3061F1917E1F500CD4BCD /* HasUsedViewController.m in Sources */,
-				A6218D881B32A6AC00D9ED93 /* MyClosetListParser.m in Sources */,
 				9695425D1B25F7C500206FAB /* QRCodeGenerator.m in Sources */,
 				9BD58CAB18E40D57008CD881 /* AFURLConnectionOperation.m in Sources */,
 				9BB88A2A19A86BA700A3D371 /* WXPayClient.m in Sources */,
@@ -7186,7 +7165,6 @@
 				968AE8891B25314B004A1A85 /* MyClosetMade3ViewController.m in Sources */,
 				2F2137BD18E453A400F91104 /* BindPhoneViewController.m in Sources */,
 				9B7CB0E818D59C4300D8DAA5 /* VersionVersionModel.m in Sources */,
-				96E3BF641B312D790092C54D /* MyCloset7ViewController.m in Sources */,
 				968C29241AE1835C00D1ABFD /* CCMBorderView.m in Sources */,
 				9B7CB13118D59C4300D8DAA5 /* ShowcomMentModel.m in Sources */,
 				9BCA829A18C47FA300B81CA5 /* LBaseViewController.m in Sources */,
@@ -7201,7 +7179,7 @@
 				9BD58C9918E40D57008CD881 /* NSDictionaryAdditions.m in Sources */,
 				9B7CB14218D59C4300D8DAA5 /* SuitServiceModel.m in Sources */,
 				9BD58CD718E40D57008CD881 /* iCarousel.m in Sources */,
-				A6218D8C1B32A6EE00D9ED93 /* MyCloset7ViewController.m in Sources */,
+				9670D3A31B3412E6002ED503 /* MyCloset7ViewController.m in Sources */,
 				9695425B1B25F7C500206FAB /* bitstream.c in Sources */,
 				968C29271AE1868C00D1ABFD /* UIViewController+MaryPopin.m in Sources */,
 				9B7CB0EF18D59C4300D8DAA5 /* BrandsBrandInfo.m in Sources */,
