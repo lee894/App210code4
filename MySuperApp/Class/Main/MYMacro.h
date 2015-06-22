@@ -165,18 +165,15 @@
 #define YKAuthtype @"md5"
 #define YKVer      @"1.2"//通讯协议版本号
 
-
-
-#define SPlashViewUrl @"http://mtest.aimer.com.cn:8888/method/appslogoios"
-
-
 //====================================================
 // 用途: 相关接口  API的host路径
 //====================================================
 
+#define SPlashViewUrl @"http://mtest.aimer.com.cn:8888/method/appslogoios"
+
 //API的host路径
-//#define OFFICIALDOMAIN @"http://mobiletest.aimer.com.cn:8888/mobile/"
-#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobile/"
+#define OFFICIALDOMAIN @"http://mobiletest.aimer.com.cn:8888/mobile/"
+//#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobile/"
 //#define OFFICIALDOMAIN @"http://124.207.152.104/mobile/"
 //#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobiletest/"
 //#define OFFICIALDOMAIN @"http://124.207.72.140:8888/mobiletest/"

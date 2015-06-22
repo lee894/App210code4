@@ -67,7 +67,7 @@
             //广告图
             NSString* strAdPic = @"";
             NSStringEncoding chineseEnc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
-            NSString* str = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:@"http://www.paipai.com/sinclude/app_slogo_ios.js"] encoding:chineseEnc error:nil];
+            NSString* str = [[NSString alloc] initWithContentsOfURL:[NSURL URLWithString:SPlashViewUrl] encoding:chineseEnc error:nil];
             if ([str rangeOfString:@"{"].location != NSNotFound) {
                 NSString* adPic = [str substringWithRange:NSMakeRange([str rangeOfString:@"{"].location, [str rangeOfString:@"}"].location - [str rangeOfString:@"{"].location + 1)];
                 NSDictionary* adPicDic = [adPic JSONValue];
@@ -172,6 +172,8 @@
 {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ishasOpenapp"];
 //    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self setBackgroundColor:[UIColor greenColor]];
     
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [app createAKtableBar];

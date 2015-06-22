@@ -39,6 +39,7 @@
     self.title = self.strTitle;
     
     [self createBackBtnWithType:0];
+    [self addLeftBtnItems];
     
     webSizeChart = [[UIWebView alloc] init];
     //如果没有传递过来frame的话
@@ -50,7 +51,6 @@
     }
     
     [self NewHiddenTableBarwithAnimated:YES];
-    
     
     [webSizeChart setDelegate:self];
     if ([webType isEqualToString:@"text"]) {
@@ -70,62 +70,89 @@
     }else{
         isshowZunxiangKaAlert = NO;
     }
+    
+    [self initWebViewProgress:webSizeChart];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    CGRect barFrame = CGRectMake(0, 0, ScreenWidth, 4);
+    _progressView.frame = barFrame;
+
 }
 
 
-//lee999 修改bug   点我为什么要入会——进去页面点返回，后应该记住上一步弹框，不然顾客怎么入会呢
--(void)viewDidDisappear:(BOOL)animated{
-
-    //如果显示尊享卡会员的话，继续弹出alertview
-//    if (isshowZunxiangKaAlert) {
-//        BlockAlertView *alert = [[BlockAlertView alloc]initWithTitle:@"爱慕提示" message:@"此次购物完成后可以成为爱慕集团尊享卡会员，请问您是否愿意加入？"];
-//        alert.isTag = YES;
-//        [alert setDestructiveButtonWithTitle:@"我为什么要入会？>" block:^(void) {
-//            
-//            YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
-//            webView.strURL = @"http://m.aimer.com.cn/method/v6codeinfo";
-//            webView.strTitle = @"尊享卡会员";
-//            webView.webViewFrame = self.view.frame;
-//            [self.navigationController pushViewController:webView animated:YES];
-//        }];
-//        
-//        [alert addButtonWithTitle:@"是" block:^(void)
-//         {
-//             ImproveInformationViewController *iminfo = [[ImproveInformationViewController alloc] initWithNibName:@"ImproveInformationViewController" bundle:nil];
-//             iminfo.key = self.sendStrng;//submitOrderModel.key;
-//             [self.navigationController pushViewController:iminfo animated:YES];
-//         }];
-//        [alert setCancelButtonWithTitle:@"否" block:nil];
-//        
-//        [alert show];
-//    }
-
+- (void)addLeftBtnItems{
+    
+    UIView *leftbtnView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 80, 40)];
+    [leftbtnView setBackgroundColor:[UIColor clearColor]];
+    
+    UIButton *backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+    [backBtn setBackgroundImage:[UIImage imageNamed:@"t_ico_back_normal.png"] forState:UIControlStateNormal];
+    [backBtn setBackgroundImage:[UIImage imageNamed:@"t_ico_back_hover.png"] forState:UIControlStateHighlighted];
+    [backBtn addTarget:self action:@selector(gotoback:) forControlEvents:UIControlEventTouchUpInside];
+    backBtn.tag = 1;
+    [leftbtnView addSubview:backBtn];
+    
+    UIButton* navbtnclose = [[UIButton alloc] initWithFrame:CGRectMake(40, 0, 40 , 35)];
+    [navbtnclose setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [navbtnclose setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateHighlighted];
+    [navbtnclose.titleLabel setFont:[UIFont systemFontOfSize:16]];
+    [navbtnclose addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
+    [navbtnclose setTitle:@"关闭" forState:UIControlStateNormal];
+//    [navbtnclose setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 15)];
+    [navbtnclose setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [leftbtnView addSubview:navbtnclose];
+    
+    self.navigationItem.hidesBackButton = YES;
+    
+    UIBarButtonItem *spaceButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    spaceButtonItem.width = 1;
+    [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:leftbtnView]];
 }
-//end
+
+- (void)initWebViewProgress:(UIWebView *)webView{
+    
+    _progressProxy = [[NJKWebViewProgress alloc] init];
+    webView.delegate = _progressProxy;
+    _progressProxy.webViewProxyDelegate = self;
+    _progressProxy.progressDelegate = self;
+    
+    CGRect barFrame = CGRectMake(0, 0, ScreenWidth, 20);
+    _progressView = [[NJKWebViewProgressView alloc] initWithFrame:barFrame];
+    _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    [self.view addSubview:_progressView];
+}
+#pragma mark - NJKWebViewProgressDelegate
+-(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
+{
+    [_progressView setProgress:progress animated:YES];
+    
+}
+
+
+-(void)gotoback:(id)sender
+{
+    if(webSizeChart.canGoBack)
+    {
+        [webSizeChart goBack];
+        return;
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)close:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:NO];
+}
 
 
 
-//-(void)cangoback
-//{
-//    if (isgotoDetail) {
-//
-//        NSString *fontSize = @"16";
-//        [self.webSizeChart loadHTMLString:[NSString stringWithFormat:@"%@%@%@%@", @"<style type=\"text/css\">img{width:300px;}.newtext{text-indent:2em;font-size:", fontSize, @"px;}</style>", strURL] baseURL:nil];
-//        webSizeChart.scalesPageToFit =NO;
-//        isgotoDetail = NO;
-//        btndown.hidden = YES;
-//        downimageV.hidden = YES;
-//        
-//        
-//    }else{
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }
-//}
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     
-    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+//    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 
     return YES;
 }

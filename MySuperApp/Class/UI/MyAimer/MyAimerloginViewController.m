@@ -700,6 +700,11 @@
         {
             //微社区
             
+            YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
+            webView.strURL = @"http://xiaoqu.qq.com/mobile/barindex.html?_bid=128&_wv=1027&bid=51413";
+            webView.strTitle = @"微社区";
+            [self.navigationController pushViewController:webView animated:YES];
+            
         }
             break;
         default:

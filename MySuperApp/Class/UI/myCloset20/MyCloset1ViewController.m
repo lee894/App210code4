@@ -12,6 +12,7 @@
 #import "MyClosetKid2ViewController.h"
 #import "MyClosetMade2ViewController.h"
 #import "MyClosetParser.h"
+#import "BfdAgent.h"
 
 @interface MyCloset1ViewController ()<ServiceDelegate>
 {
@@ -48,6 +49,10 @@
     mainSev = [[MainpageServ alloc] init];
     mainSev.delegate = self;
     [mainSev getHomePage20data];
+    
+
+    NSAssert(<#condition#>, <#desc, ...#>)
+    [BfdAgent recommendP:self recommendIds:<#(NSArray *)#> options:<#(NSDictionary *)#>];
 }
 
 

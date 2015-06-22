@@ -106,7 +106,7 @@
     }
     //end
     
-    newfvc.strcurrentpage = [NSString stringWithFormat:@"%d",current];
+    newfvc.strcurrentpage = [NSString stringWithFormat:@"%ld",(long)current];
     newfvc.strperpage = @"10";
     [self.navigationController pushViewController:newfvc animated:YES];
 }
@@ -120,7 +120,7 @@
     
     self.title = @"筛选结果";
     
-    [mainSev getProductlist:self.params andOrder:self.orderStr andKeyword:self.key andPage:[NSString stringWithFormat:@"%d",current] andPer_page:@"10"];
+    [mainSev getProductlist:self.params andOrder:self.orderStr andKeyword:self.key andPage:[NSString stringWithFormat:@"%ld",(long)current] andPer_page:@"10"];
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 
 }

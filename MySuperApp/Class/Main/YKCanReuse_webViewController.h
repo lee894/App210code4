@@ -9,12 +9,18 @@
 
 #import <UIKit/UIKit.h>
 #import "LBaseViewController.h"
+#import "NJKWebViewProgress.h"
+#import "NJKWebViewProgressView.h"
 
-@interface YKCanReuse_webViewController : LBaseViewController<UIWebViewDelegate> {
+@interface YKCanReuse_webViewController : LBaseViewController<UIWebViewDelegate,NJKWebViewProgressDelegate> {
     
     UIWebView* webSizeChart;
     
     BOOL isshowZunxiangKaAlert;  //是否显示尊享卡激活的alertview
+    
+    
+    NJKWebViewProgress *_progressProxy;
+    NJKWebViewProgressView *_progressView;
 }
 
 

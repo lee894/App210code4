@@ -63,7 +63,7 @@
     self.navigationController.navigationBar.translucent = NO;
 
     
-    [self.view setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E6"]];
+    [self.view setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
     
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 

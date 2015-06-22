@@ -34,12 +34,9 @@
     
     //创建返回按钮
     [self createBackBtnWithType:0];
+
     
     [self NewHiddenTableBarwithAnimated:YES];
-    
-    if (isIOS7up) {
-        [myallView setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-    }
 }
 
 - (IBAction)selectbtnType:(UIButton *)sender//进入各个子页面

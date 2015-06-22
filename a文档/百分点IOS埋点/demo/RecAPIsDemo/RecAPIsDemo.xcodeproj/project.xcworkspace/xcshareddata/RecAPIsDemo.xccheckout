@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>83719DC3-9B36-4223-A16C-FCDB9D0FDC36</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RecAPIsDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6C78AC63A775F41BF6879FDE5F1F1DB591FF0F4E</key>
+		<string>https://github.com/lee894/App210code4.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>a文档/百分点IOS埋点/demo/RecAPIsDemo/RecAPIsDemo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6C78AC63A775F41BF6879FDE5F1F1DB591FF0F4E</key>
+		<string>../../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lee894/App210code4.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6C78AC63A775F41BF6879FDE5F1F1DB591FF0F4E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6C78AC63A775F41BF6879FDE5F1F1DB591FF0F4E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>App210code4</string>
+		</dict>
+	</array>
+</dict>
+</plist>

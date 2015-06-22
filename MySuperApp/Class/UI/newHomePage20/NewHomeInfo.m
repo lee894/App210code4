@@ -117,6 +117,11 @@
     return [self attributeForKey:@"msg"];
 }
 
+-(NSMutableArray*)top_banner{
+    return [self attributeForKey:@"top_banner"];
+}
+
+
 
 -(NSMutableArray*)home_banner{
     return [self attributeForKey:@"home_banner"];

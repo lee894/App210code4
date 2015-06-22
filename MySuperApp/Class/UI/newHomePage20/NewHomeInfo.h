@@ -46,6 +46,7 @@
 @interface NewHomeInfo : YKBaseEntity
 
 -(int)errCode;
+-(NSMutableArray*)top_banner;
 
 -(NSMutableArray*)home_banner;
 -(NSMutableArray*)home_navi;

@@ -61,6 +61,10 @@
 		9601E0D61B26D84D002C32E0 /* MyAimerV20ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9601E0D41B26D84D002C32E0 /* MyAimerV20ViewController.xib */; };
 		961182EF1AD80F5E00D14A00 /* NSObject+ArrayGetData.m in Sources */ = {isa = PBXBuildFile; fileRef = 961182EE1AD80F5E00D14A00 /* NSObject+ArrayGetData.m */; };
 		9618A96C1AFA75C800FC3C56 /* icon120.png in Resources */ = {isa = PBXBuildFile; fileRef = 9618A96B1AFA75C800FC3C56 /* icon120.png */; };
+		961BEF171B34EC99003BEF9D /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 961BEF141B34EC99003BEF9D /* NJKWebViewProgress.m */; };
+		961BEF181B34EC99003BEF9D /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 961BEF161B34EC99003BEF9D /* NJKWebViewProgressView.m */; };
+		961BEF1C1B35109E003BEF9D /* libBfdAgent.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 961BEF1B1B35109E003BEF9D /* libBfdAgent.a */; };
+		961BEF1F1B3557E6003BEF9D /* customInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 961BEF1E1B3557E6003BEF9D /* customInfo.plist */; };
 		961F4C401AF618C70068ED12 /* alert-yellow-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 961F4C3F1AF618C70068ED12 /* alert-yellow-button.png */; };
 		9626937F1A135FB700A0BC7F /* fashion_brand_logo_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 962692251A135FB700A0BC7F /* fashion_brand_logo_1.png */; };
 		962693801A135FB700A0BC7F /* fashion_brand_logo_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 962692261A135FB700A0BC7F /* fashion_brand_logo_2.png */; };
@@ -1267,6 +1271,14 @@
 		961182ED1AD80F5E00D14A00 /* NSObject+ArrayGetData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ArrayGetData.h"; sourceTree = "<group>"; };
 		961182EE1AD80F5E00D14A00 /* NSObject+ArrayGetData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ArrayGetData.m"; sourceTree = "<group>"; };
 		9618A96B1AFA75C800FC3C56 /* icon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon120.png; sourceTree = "<group>"; };
+		961BEF131B34EC99003BEF9D /* NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgress.h; sourceTree = "<group>"; };
+		961BEF141B34EC99003BEF9D /* NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgress.m; sourceTree = "<group>"; };
+		961BEF151B34EC99003BEF9D /* NJKWebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgressView.h; sourceTree = "<group>"; };
+		961BEF161B34EC99003BEF9D /* NJKWebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgressView.m; sourceTree = "<group>"; };
+		961BEF1A1B35109E003BEF9D /* BfdAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BfdAgent.h; sourceTree = "<group>"; };
+		961BEF1B1B35109E003BEF9D /* libBfdAgent.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBfdAgent.a; sourceTree = "<group>"; };
+		961BEF1D1B355792003BEF9D /* MyAimerApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = MyAimerApp.entitlements; path = MyAimerApp/MyAimerApp.entitlements; sourceTree = SOURCE_ROOT; };
+		961BEF1E1B3557E6003BEF9D /* customInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = customInfo.plist; sourceTree = "<group>"; };
 		961F4C3F1AF618C70068ED12 /* alert-yellow-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-yellow-button.png"; sourceTree = "<group>"; };
 		962692251A135FB700A0BC7F /* fashion_brand_logo_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fashion_brand_logo_1.png; sourceTree = "<group>"; };
 		962692261A135FB700A0BC7F /* fashion_brand_logo_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fashion_brand_logo_2.png; sourceTree = "<group>"; };
@@ -2971,6 +2983,7 @@
 				96CD7C181AF7C73400831E3F /* AGCommon.framework in Frameworks */,
 				96FF99F81B268CE400AA82BF /* libWeiboSDK.a in Frameworks */,
 				9BD4944418F3F094002C50F3 /* libxml2.dylib in Frameworks */,
+				961BEF1C1B35109E003BEF9D /* libBfdAgent.a in Frameworks */,
 				9BF57E2F18E2749E00B2A3E6 /* MediaPlayer.framework in Frameworks */,
 				2F79CC4118E1D1A700E4A38B /* libz.dylib in Frameworks */,
 				9BE4C407192CE66A00E6FA21 /* libTalkingData.a in Frameworks */,
@@ -3123,6 +3136,27 @@
 				96296C021B09793400435740 /* BaiduMapAPI.framework */,
 			);
 			path = BaiduMap;
+			sourceTree = "<group>";
+		};
+		961BEF121B34EC99003BEF9D /* NJKWebViewProgress */ = {
+			isa = PBXGroup;
+			children = (
+				961BEF131B34EC99003BEF9D /* NJKWebViewProgress.h */,
+				961BEF141B34EC99003BEF9D /* NJKWebViewProgress.m */,
+				961BEF151B34EC99003BEF9D /* NJKWebViewProgressView.h */,
+				961BEF161B34EC99003BEF9D /* NJKWebViewProgressView.m */,
+			);
+			path = NJKWebViewProgress;
+			sourceTree = "<group>";
+		};
+		961BEF191B35109E003BEF9D /* Baifendian */ = {
+			isa = PBXGroup;
+			children = (
+				961BEF1A1B35109E003BEF9D /* BfdAgent.h */,
+				961BEF1B1B35109E003BEF9D /* libBfdAgent.a */,
+				961BEF1E1B3557E6003BEF9D /* customInfo.plist */,
+			);
+			path = Baifendian;
 			sourceTree = "<group>";
 		};
 		962692231A135FB700A0BC7F /* Image */ = {
@@ -5285,6 +5319,7 @@
 		9BCA820518C47EAF00B81CA5 /* MyAimerApp */ = {
 			isa = PBXGroup;
 			children = (
+				961BEF1D1B355792003BEF9D /* MyAimerApp.entitlements */,
 				962692231A135FB700A0BC7F /* Image */,
 				9BCA822E18C47FA300B81CA5 /* Class */,
 				9BCA821118C47EAF00B81CA5 /* Images.xcassets */,
@@ -5509,6 +5544,8 @@
 		9BD58AE518E40D56008CD881 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				961BEF191B35109E003BEF9D /* Baifendian */,
+				961BEF121B34EC99003BEF9D /* NJKWebViewProgress */,
 				9695422C1B25F7C500206FAB /* ZBarSDK */,
 				968AE8841B24AAF4004A1A85 /* ZHPickView.h */,
 				968AE8851B24AAF4004A1A85 /* ZHPickView.m */,
@@ -6114,7 +6151,11 @@
 				ORGANIZATIONNAME = aimer;
 				TargetAttributes = {
 					9BCA81FB18C47EAF00B81CA5 = {
+						DevelopmentTeam = 4TJG9GVNXQ;
 						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.iOS = {
 								enabled = 0;
 							};
@@ -6176,6 +6217,7 @@
 				9685FA421ADD75ED00BF2DE8 /* dl_mm_ico@2x.png in Resources */,
 				962693E81A135FB700A0BC7F /* sort_pic_05.png in Resources */,
 				967F00591B12074500B7E639 /* Deafult1242.png in Resources */,
+				961BEF1F1B3557E6003BEF9D /* customInfo.plist in Resources */,
 				968AE8431B247C54004A1A85 /* sryc_arrow_btn_l@2x.png in Resources */,
 				9BF57E1D18E12FDC00B2A3E6 /* ScanFrameView.xib in Resources */,
 				9601E0CA1B26D65D002C32E0 /* my_am_user_bg@2x.png in Resources */,
@@ -6836,6 +6878,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				961BEF171B34EC99003BEF9D /* NJKWebViewProgress.m in Sources */,
 				9BB3062C1918868A00CD4BCD /* GetCouponTableViewController.m in Sources */,
 				9B7CB12A18D59C4300D8DAA5 /* ScanModel.m in Sources */,
 				9698F61B1AEA8C1F009A29EC /* NewBrandDetail20ViewController.m in Sources */,
@@ -7280,6 +7323,7 @@
 				9BB30628191872C100CD4BCD /* ImproveInformationViewController.m in Sources */,
 				9BDABAA9190F679A004A5D1B /* Reachability.m in Sources */,
 				9698F6651AEBE31A009A29EC /* CollectCell.m in Sources */,
+				961BEF181B34EC99003BEF9D /* NJKWebViewProgressView.m in Sources */,
 				9BD58D0318E40D57008CD881 /* WaterFlowView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7392,8 +7436,9 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Lei Wang (XP5XW9D974)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lei Wang (XP5XW9D974)";
+				CODE_SIGN_ENTITLEMENTS = MyAimerApp/MyAimerApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/QQShare",
@@ -7429,6 +7474,7 @@
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/Alipay",
+					"$(PROJECT_DIR)/MySuperApp/Class/Other/Baifendian",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -7437,7 +7483,7 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = MyAimerApp;
-				PROVISIONING_PROFILE = "3cf4f35c-4511-42a7-a25c-bdacb1336886";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -7451,8 +7497,9 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Lei Wang (XP5XW9D974)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lei Wang (XP5XW9D974)";
+				CODE_SIGN_ENTITLEMENTS = MyAimerApp/MyAimerApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/QQShare",
@@ -7488,6 +7535,7 @@
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/ShareSDK/Extend/SinaWeiboSDK",
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/Alipay",
+					"$(PROJECT_DIR)/MySuperApp/Class/Other/Baifendian",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -7496,7 +7544,7 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = MyAimerApp;
-				PROVISIONING_PROFILE = "3cf4f35c-4511-42a7-a25c-bdacb1336886";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALID_ARCHS = "armv7 armv7s arm64";

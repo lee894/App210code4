@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SizeViewController">
@@ -19,21 +19,18 @@
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="jeZ-Jh-pn8">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view contentMode="scaleToFill" id="1">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="page_bg_1136.png" id="10">
-                                    <rect key="frame" x="0.0" y="-38" width="320" height="606"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
                                 <button opaque="NO" tag="201" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="82">
-                                    <rect key="frame" x="10" y="7" width="300" height="42"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="0.0" y="7" width="320" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="文胸" backgroundImage="list_one.png">
+                                    <state key="normal" title="文胸">
                                         <color key="titleColor" red="0.3058823645" green="0.3058823645" blue="0.3058823645" alpha="1" colorSpace="deviceRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -45,10 +42,11 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="202" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="83">
-                                    <rect key="frame" x="10" y="57" width="300" height="42"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="0.0" y="57" width="320" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="内裤" backgroundImage="list_one.png">
+                                    <state key="normal" title="内裤">
                                         <color key="titleColor" red="0.3058823645" green="0.3058823645" blue="0.3058823645" alpha="1" colorSpace="deviceRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -60,10 +58,11 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="203" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="84">
-                                    <rect key="frame" x="10" y="107" width="300" height="42"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="0.0" y="107" width="320" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="睡衣" backgroundImage="list_one.png">
+                                    <state key="normal" title="睡衣">
                                         <color key="titleColor" red="0.3058823645" green="0.3058823645" blue="0.3058823645" alpha="1" colorSpace="deviceRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -75,10 +74,11 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="204" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="85">
-                                    <rect key="frame" x="10" y="156" width="300" height="42"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="0.0" y="156" width="320" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="塑身衣" backgroundImage="list_one.png">
+                                    <state key="normal" title="塑身衣">
                                         <color key="titleColor" red="0.3058823645" green="0.3058823645" blue="0.3058823645" alpha="1" colorSpace="deviceRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -90,10 +90,11 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="205" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="86">
-                                    <rect key="frame" x="10" y="206" width="300" height="42"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="0.0" y="206" width="320" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="泳衣" backgroundImage="list_one.png">
+                                    <state key="normal" title="泳衣">
                                         <color key="titleColor" red="0.3058823645" green="0.3058823645" blue="0.3058823645" alpha="1" colorSpace="deviceRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -105,10 +106,11 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="206" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="87">
-                                    <rect key="frame" x="10" y="256" width="300" height="42"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="0.0" y="256" width="320" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="保暖衣" backgroundImage="list_one.png">
+                                    <state key="normal" title="保暖衣">
                                         <color key="titleColor" red="0.3058823645" green="0.3058823645" blue="0.3058823645" alpha="1" colorSpace="deviceRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -120,10 +122,11 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="207" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="88">
-                                    <rect key="frame" x="10" y="306" width="300" height="42"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="0.0" y="306" width="320" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="运动" backgroundImage="list_one.png">
+                                    <state key="normal" title="运动">
                                         <color key="titleColor" red="0.3058823645" green="0.3058823645" blue="0.3058823645" alpha="1" colorSpace="deviceRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -135,10 +138,11 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="208" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rda-ak-VSL">
-                                    <rect key="frame" x="10" y="356" width="300" height="42"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="0.0" y="356" width="320" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="基础内衣" backgroundImage="list_one.png">
+                                    <state key="normal" title="基础内衣">
                                         <color key="titleColor" red="0.3058823645" green="0.3058823645" blue="0.3058823645" alpha="1" colorSpace="deviceRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -150,10 +154,11 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="209" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="89">
-                                    <rect key="frame" x="10" y="406" width="300" height="42"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="0.0" y="406" width="320" height="42"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="配饰" backgroundImage="list_one.png">
+                                    <state key="normal" title="配饰">
                                         <color key="titleColor" red="0.3058823645" green="0.3058823645" blue="0.3058823645" alpha="1" colorSpace="deviceRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -175,11 +180,11 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
+            <point key="canvasLocation" x="310" y="367"/>
         </view>
     </objects>
     <resources>
         <image name="list_one.png" width="600" height="80"/>
-        <image name="page_bg_1136.png" width="640" height="1136"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

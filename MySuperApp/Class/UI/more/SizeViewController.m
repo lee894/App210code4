@@ -34,15 +34,16 @@
     [self createBackBtnWithType:0];
     
 
-    [myscrollingV setFrame:CGRectMake(0, 60, 320, self.view.frame.size.height-60)];
-
-    [myscrollingV setContentSize:CGSizeMake(320, 600)];
-    
+//    [myscrollingV setFrame:CGRectMake(0, 60, ScreenWidth, self.view.frame.size.height-60)];
+//
+    [myscrollingV setContentSize:CGSizeMake(ScreenWidth, 600)];
+//
 //    if (!isIOS8up) {
 //        [myallView setFrame:CGRectMake(0, 80, 320, self.view.frame.size.height-80)];
 //    }else{
 //        
 //    }
+    
 }
 
 - (void)didReceiveMemoryWarning

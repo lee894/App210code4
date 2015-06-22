@@ -14,6 +14,7 @@
 -(NewHomeInfo*)parseNewHomeInfo:(NSDictionary*)dic
 {
     dicClassNames = @{@"topkey" : @"NewHomeInfo",
+                      @"top_banner" : @"NewhomeNormalData",
                       @"home_banner" : @"NewhomeNormalData",
                       @"home_navi" : @"NewhomeNormalData",
                       @"home_match" : @"NewhomeNormalData",

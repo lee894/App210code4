@@ -66,7 +66,7 @@
     
     sepViewH = 10;
     
-    forMeHeight = ScreenWidth*1.6875;//540;
+    forMeHeight = lee1fitAllScreen(540);//ScreenWidth*1.6875;//540;
     
     [self createNavItem];
     
@@ -79,6 +79,12 @@
     [mainSev getappVersion];
     
     [self creatTableView];
+    
+    
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (app.splashView) {
+        [app.splashView removeFromSuperview];
+    }
     
     
 //    [LCommentAlertView showMessage:[APService registrationID] target:nil];
@@ -110,8 +116,9 @@
 
     if ([SingletonState sharedStateInstance].isNewHomePageScrollToTop) {
         [SingletonState sharedStateInstance].isNewHomePageScrollToTop = NO;
-        [myTableV setContentOffset:CGPointMake(0, 0) animated:YES];
+//        [myTableV setContentOffset:CGPointMake(0, 0) animated:YES];
     }
+    myTableV.scrollEnabled = YES;
     
     [self NewSHowTableBarwithAnimated:YES];
 }
@@ -370,7 +377,7 @@
         [footV addSubview:imagev];
         
         
-//        UILabel *nameelab = [[UILabel alloc] initWithFrame:CGRectMake(0+i*(image.size.width+50), totalHight + image.size.height, 80, 26)];
+//        UILabel *nameelab = [[UILabel alloc]   initWithFrame:CGRectMake(0+i*(image.size.width+50), totalHight + image.size.height, 80, 26)];
         UILabel *nameelab = [[UILabel alloc] initWithFrame:CGRectMake(i*(ScreenWidth/4), totalHight + image.size.height, (ScreenWidth/4), 26)];
         [nameelab setNumberOfLines:1];
         [nameelab setTextAlignment:NSTextAlignmentCenter];
@@ -390,19 +397,36 @@
 
 -(void)creatCellView{
 
-    
-    //三个杂志入口------------
-    int mageH = ScreenWidth*0.468;
-    if (!magizeView) {
-        magizeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, sepViewH + mageH*3)];
+    //lee999 新增头部banner
+    if ([_homeinfo.top_banner count]>0) {
+        
+        UIView *headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(110))];
+        [headV setBackgroundColor:[UIColor whiteColor]];
+        [myTableV setTableHeaderView:headV];
+        
+        UrlImageButton *bannerBtn = [[UrlImageButton alloc] initWithFrame:CGRectMake(5,5,lee1fitAllScreen(310),lee1fitAllScreen(100))];
+        NewhomeNormalData *topbannerModel = [_homeinfo.top_banner objectAtIndex:0 isArray:nil];
+        [bannerBtn setImageFromUrl:NO withUrl:topbannerModel.pic];
+        [bannerBtn addTarget:self action:@selector(topbannerJump:) forControlEvents:UIControlEventTouchUpInside];
+        [headV addSubview:bannerBtn];
     }
+    
+    
+    
+    NSInteger topbannerH = 0;
+    //三个杂志入口------------
+    int mageH = lee1fitAllScreen(150); //ScreenWidth*0.468;
+    if (!magizeView) {
+        magizeView = [[UIView alloc] initWithFrame:CGRectMake(0, topbannerH, ScreenWidth, sepViewH + mageH*3)];
+    }
+    
     for (UIView *view in magizeView.subviews) {
         [view removeFromSuperview];
     }
     for (int i = 0; i<3; i++) {
         NewhomeNormalData *data = [_homeinfo.home_navi objectAtIndex:i isArray:nil];
         UrlImageButton *imageView = [[UrlImageButton alloc] initWithFrame:CGRectMake(0,i*(mageH+0.5),ScreenWidth, mageH)];
-       // [imageView setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"pic_default_mall_banner.png"]];
+        // [imageView setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"pic_default_mall_banner.png"]];
         [imageView setImageFromUrl:NO withUrl:data.pic];
         imageView.tag = i;
         [imageView addTarget:self action:@selector(gotoMaginzeViewCwithType:) forControlEvents:UIControlEventTouchUpInside];
@@ -458,7 +482,7 @@
     [firstLab setText:bannerModel.title];
     [firstLab setNumberOfLines:1];
     [firstLab setTextAlignment:NSTextAlignmentCenter];
-//    [firstLab setBackgroundColor:[UIColor yellowColor]];
+    //    [firstLab setBackgroundColor:[UIColor yellowColor]];
     firstLab.font = [UIFont systemFontOfSize:LabBigSize];
     [firstLab setTextColor:[UIColor colorWithHexString:@"#181818"]];
     
@@ -468,11 +492,11 @@
     NSString* str =[bannerModel.titledes stringByAppendingString:@"\n "];
     [secondLab setText:str];
     [secondLab setNumberOfLines:2];
-//    [secondLab setBackgroundColor:[UIColor greenColor]];
+    //    [secondLab setBackgroundColor:[UIColor greenColor]];
     [secondLab setTextAlignment:NSTextAlignmentCenter];
     secondLab.font = [UIFont systemFontOfSize:LabSmallSize];
     [secondLab setTextColor:[UIColor colorWithHexString:@"#888888"]];
-
+    
     
     //banner 加两个黑箭头
     
@@ -498,16 +522,16 @@
     UIButton *btnRight = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnRight setFrame:CGRectMake(ScreenWidth-img2.size.width-20, (bannerView.frame.size.height-img.size.height)/2, img.size.width + 20, img.size.height)];
     [btnRight addTarget:self action:@selector(showNextViewAction) forControlEvents:UIControlEventTouchUpInside];
-
+    
     btnRight.tag = 2002;
     [bannerView addSubview:btnRight];
     
-//    bannerView
+    //    bannerView
     
     
     //限时抢购---------
     if (!buyNowView) {
-        buyNowView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, sepViewH + ScreenWidth*0.8125)];
+        buyNowView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, sepViewH + lee1fitAllScreen(260))]; //ScreenWidth*0.8125
     }
     for (UIView *view in buyNowView.subviews) {
         [view removeFromSuperview];
@@ -528,7 +552,7 @@
     [buyNowView addSubview:buyNowLab];
     
     UILabel *timeLab = [[UILabel alloc] initWithFrame:CGRectMake(5,15 + buyNowLab.frame.size.height + 10, 100, 20)];
-//    [timeLab setText:@"距离本场结束"];
+    //    [timeLab setText:@"距离本场结束"];
     [timeLab setNumberOfLines:1];
     [timeLab setTextAlignment:NSTextAlignmentCenter];
     timeLab.font = [UIFont systemFontOfSize:LabSmallSize];
@@ -544,8 +568,8 @@
     [buynowBtn setBackgroundColor:[UIColor clearColor]];
     [buynowBtn addTarget:self action:@selector(gotoBuyNowViewC) forControlEvents:UIControlEventTouchUpInside];
     [buyNowView addSubview:buynowBtn];
-
-
+    
+    
     //热卖
     UIImage *imagehot = [UIImage imageNamed:@"hot.png"];
     UIImageView *imagev2 = [[UIImageView alloc] init];
@@ -907,9 +931,7 @@
     popin.view.bounds = CGRectMake(20, 0, ScreenWidth -40, lee1fitAllScreen(310));
     popin.view.backgroundColor = [UIColor whiteColor];
     [popin setPopinTransitionStyle:BKTPopinTransitionStyleSnap];
-    //[popin setPopinOptions:BKTPopinDisableAutoDismiss];
     BKTBlurParameters *blurParameters = [[BKTBlurParameters alloc] init];
-    //blurParameters.alpha = 0.5;
     blurParameters.tintColor = [UIColor colorWithWhite:0 alpha:0.5];
     blurParameters.radius = 0.3;
     [popin setBlurParameters:blurParameters];
@@ -956,6 +978,19 @@
 
 
 #pragma mark---banner 事件
+
+-(void)topbannerJump:(id)sender{
+
+    NewhomeNormalData *bannerModel = (NewhomeNormalData *)[_homeinfo.top_banner objectAtIndex:0 isArray:nil];
+    [self.navigationController pushViewController:[LBaseViewController bannerJumpTo:[[bannerModel atype] intValue]
+                                                                       withtypeArgu:[bannerModel type_argu]
+                                                                          withTitle:[bannerModel title]
+                                                                         andIsRight:NO
+                                                   ] animated:YES];
+}
+
+
+
 - (void)foucusImageFrame:(SGFocusImageFrame *)imageFrame didSelectItem:(UITapGestureRecognizer*)item{
 
     NewhomeNormalData *bannerModel = (NewhomeNormalData *)[_homeinfo.home_banner objectAtIndex:[item.view tag]-132];
@@ -1030,22 +1065,21 @@
     switch ([indexPath section]) {
         case 0:
             //杂志
-            //return 450 + sepViewH;
-            return ScreenWidth*1.406 + sepViewH;
+            return lee1fitAllScreen(450) + sepViewH; //ScreenWidth*1.406 + sepViewH + 100;
 
             break;
             
         case 1:
             //banner
             //return 405 + sepViewH;
-            return ScreenWidth*1.2656 + sepViewH;
+            return lee1fitAllScreen(405)+sepViewH;//ScreenWidth*1.2656 + sepViewH;
 
             break;
             
         case 2:
             //限时抢购
             //return 260 + sepViewH +10;
-            return ScreenWidth*0.8125 + sepViewH +10;
+            return lee1fitAllScreen(260) + sepViewH +10;//ScreenWidth*0.8125
             break;
             
         case 3:

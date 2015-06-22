@@ -52,23 +52,20 @@
 {
     if ([labelChoose.text isEqualToString:@"必选"])
     {
-        [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"请选择反馈类型"];
-        
+        [SBPublicAlert showMBProgressHUD:@"请选择反馈类型" andWhereView:self.view hiddenTime:AlertShowTime];
     }
     else if ([textFieldPhone.text isEqualToString:@""])
     {
-        [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"请输入联系方式"];
-        
+        [SBPublicAlert showMBProgressHUD:@"请输入联系方式" andWhereView:self.view hiddenTime:AlertShowTime];
     }
     else  if ([textViewContent.text isEqualToString:@""]) {
-        [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"请输入内容"];
-        
+        [SBPublicAlert showMBProgressHUD:@"请输入内容" andWhereView:self.view hiddenTime:AlertShowTime];
     }
     else
     {
         
         if (![NSString isValidTelephoneNum2:textFieldPhone.text]) {
-            [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"请输入正确的手机号码"];
+            [SBPublicAlert showMBProgressHUD:@"请输入正确的手机号码" andWhereView:self.view hiddenTime:AlertShowTime];
         }else {
             
             [mainSer getFeedback:textViewContent.text andContact:textFieldPhone.text andType:labelChoose.text];

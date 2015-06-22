@@ -20,6 +20,7 @@
 #import "YKCanReuse_webViewController.h"
 
 #import "ShareUnit.h"
+#import "BfdAgent.h"
 
 //pick显示出来时候的高度
 #define PickShowHigh 265.+50.
@@ -66,7 +67,7 @@
 @end
 
 
-@interface ProductDetailViewController ()
+@interface ProductDetailViewController ()<mobideaRecProtocol>
 {
     MainpageServ *mainSev;
     
@@ -143,7 +144,15 @@
     _product_id=[[NSString alloc]init];
     
     recordNUM=1;
+    
+    
+    [BfdAgent visit:self itemId:self.thisProductId options:nil];
 }
+
+-(void)mobidea_Recs:(NSError *)error feedback:(id)feedback{
+    NSLog(@"----%@---%ld----%@",[error domain],(long)[error code],feedback)
+}
+
 
 -(void)createtoolbarandpicker{
 

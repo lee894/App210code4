@@ -26,14 +26,9 @@
 
 #import "MainpageViewController.h"
 #import "UIDevice-Hardware.h"
-
-//#import "HomepageViewController.h"
 #import "MainpageViewController.h"
-//#import "GotoMallViewController.h"
 #import "BrandlistViewController.h"
-//#import "MagazineViewController.h"
 #import "AMMapViewController.h"
-//#import "GotoAimerViewController.h"
 #import "MyAimerViewController.h"
 #import "MyAimerloginViewController.h"
 #import "NewMaginzeListViewController.h"
@@ -50,7 +45,8 @@
 #import <ShareSDK/ShareSDK.h>
 #import "WeiboSDK.h"
 #import <RennSDK/RennSDK.h>
-
+//百分点代理
+#import "BfdAgent.h"
 
 @implementation AppDelegate
 //@synthesize aktabBarVerticalController;
@@ -627,6 +623,8 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+    [BfdAgent appWillResignActive];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -647,11 +645,16 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    [BfdAgent appDidBecomeActive];
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    [BfdAgent bfdAgentDeInit];
 }
 
 @end

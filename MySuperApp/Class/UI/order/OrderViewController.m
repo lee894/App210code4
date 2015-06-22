@@ -103,6 +103,11 @@
     
     [SingletonState sharedStateInstance].isInCheckOKView = NO;
     
+    
+//    [tableList addHeaderWithTarget:self action:@selector(getData)];
+//    [tableList addFooterWithTarget:self action:@selector(nextPage)];
+    
+    
     //lee999  全部订单加上分类的头头
 //    if (!ishowHeadView) {
 //        headview.hidden = YES;
