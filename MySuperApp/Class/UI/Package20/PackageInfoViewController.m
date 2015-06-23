@@ -39,7 +39,7 @@
 @property (nonatomic, retain) UITableView* tbPackage;
 @property (nonatomic, retain) NSMutableArray *marrGoods;
 @property (nonatomic, retain) UIView* vToolbar;
-@property (nonatomic, retain) UIScrollView* vPackage;
+@property (nonatomic, retain) UIScrollView* svPackage;
 //@property(nonatomic, copy)	NSString *selectedSize;//记录选择的尺码
 //@property (nonatomic, retain) NSArray *arrTemSize;
 //@property(nonatomic,retain) NSMutableString *str_append;
@@ -72,9 +72,9 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    if (_vPackage) {
-        [_vPackage removeFromSuperview];
-        _vPackage = nil;
+    if (_svPackage) {
+        [_svPackage removeFromSuperview];
+        _svPackage = nil;
     }
     if (vGoods) {
         [vGoods removeFromSuperview];
@@ -191,21 +191,22 @@
 
 -(void)showPackage:(UITapGestureRecognizer*)gesture
 {
-    if (_vPackage) {
-        [_vPackage removeFromSuperview];
-        _vPackage = nil;
+    if (_svPackage) {
+        [_svPackage removeFromSuperview];
+        _svPackage = nil;
     }else
     {
         AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        _vPackage = [[UIScrollView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - lee1fitAllScreen(120) - lee1fitAllScreen(59), SCREEN_WIDTH, lee1fitAllScreen(120))];
-        [_vPackage setBackgroundColor:[UIColor colorWithHexString:@"f8f8f8"]];
-        [_vPackage setAlpha:0.8];
-        [_vPackage.layer setMasksToBounds:YES];
+        _svPackage = [[UIScrollView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - lee1fitAllScreen(120) - lee1fitAllScreen(59), SCREEN_WIDTH, lee1fitAllScreen(120))];
+        [_svPackage setBackgroundColor:[UIColor colorWithHexString:@"f8f8f8"]];
+        [_svPackage setAlpha:0.8];
+        [_svPackage.layer setMasksToBounds:YES];
         CGFloat originY = 26.f;
         CGFloat spacing = 15.f;
+        [_svPackage setContentSize:CGSizeMake(([_pInfo.packageinfo.need_select_count integerValue] * (60 + spacing) + spacing), _svPackage.frame.size.height)];
         for (NSInteger i = 0; i < [_pInfo.packageinfo.need_select_count integerValue]; ++i) {
             UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(spacing + i * (60 + spacing), originY, 60, 77)];
-            [_vPackage addSubview:uiv];
+            [_svPackage addSubview:uiv];
             if (_marrGoods.count > i) {
                 NSDictionary* dic = [_marrGoods objectAtIndex:i isArray:nil];
                 PackageGoodsInfo* pgi = [dic objectForKey:[[dic allKeys] firstObject] isDictionary:nil];
@@ -216,16 +217,16 @@
                 [btnDel setTag:i];
                 [btnDel setImage:[UIImage imageNamed:@"lp_shut_h"] forState:UIControlStateNormal];
                 [btnDel addTarget:self action:@selector(delSelectedGoods:) forControlEvents:UIControlEventTouchUpInside];
-                [_vPackage addSubview:btnDel];
+                [_svPackage addSubview:btnDel];
                 
             }else
             {
                 [uiv setImageWithURL:[NSURL URLWithString:@""] placeholderImage:nil];
             }
         }
-        [app.window addSubview:_vPackage];
+        [app.window addSubview:_svPackage];
         if (_vToolbar) {
-            [app.window bringSubviewToFront:_vPackage];
+            [app.window bringSubviewToFront:_svPackage];
         }
     }
 }
@@ -392,8 +393,8 @@
     [vBG addSubview:btnAddToPackage];
     
     [((AppDelegate*)[UIApplication sharedApplication].delegate).window addSubview:vGoods];
-    if (_vPackage) {
-        [((AppDelegate*)[UIApplication sharedApplication].delegate).window bringSubviewToFront:_vPackage];
+    if (_svPackage) {
+        [((AppDelegate*)[UIApplication sharedApplication].delegate).window bringSubviewToFront:_svPackage];
     }
 }
 
@@ -453,10 +454,10 @@
             }
             if (i < [pGroupInfo.need_select_count integerValue]) {
                 [_marrGoods addObject:@{[NSString stringWithFormat:@"%@_%@",pGroupInfo.gid, ppInfo.product_id] : goodsInfo}];
-                if (_vPackage) {
+                if (_svPackage) {
                     CGFloat spacing = 15;
-                    for (NSInteger i = 0; i < _vPackage.subviews.count; ++i) {
-                        UIView* v = [_vPackage.subviews objectAtIndex:i isArray:nil];
+                    for (NSInteger i = 0; i < _svPackage.subviews.count; ++i) {
+                        UIView* v = [_svPackage.subviews objectAtIndex:i isArray:nil];
                         if (v.frame.origin.x == (spacing + (_marrGoods.count - 1) * (spacing + 60))) {
                             UrlImageView* uiv = (UrlImageView*)v;
                             [uiv setImageWithURL:[NSURL URLWithString:goodsInfo.image_url] placeholderImage:nil];
@@ -465,7 +466,7 @@
                             [btnDel setTag:_marrGoods.count - 1];
                             [btnDel setImage:[UIImage imageNamed:@"lp_shut_h"] forState:UIControlStateNormal];
                             [btnDel addTarget:self action:@selector(delSelectedGoods:) forControlEvents:UIControlEventTouchUpInside];
-                            [_vPackage addSubview:btnDel];
+                            [_svPackage addSubview:btnDel];
                             break;
                         }
                     }
@@ -897,10 +898,10 @@
     if (alertView.tag == 10213219) {
         if (buttonIndex == 1) {
             [_marrGoods removeAllObjects];
-            if(_vPackage)
+            if(_svPackage)
             {
-                [_vPackage removeFromSuperview];
-                _vPackage = nil;
+                [_svPackage removeFromSuperview];
+                _svPackage = nil;
                 [self showPackage:nil];
             }
         }
@@ -909,9 +910,9 @@
     if (alertView.tag >= 20000) {
         if (buttonIndex == 1) {
             [_marrGoods removeObjectAtIndex:alertView.tag - 20000];
-            if (_vPackage) {
-                [_vPackage removeFromSuperview];
-                _vPackage = nil;
+            if (_svPackage) {
+                [_svPackage removeFromSuperview];
+                _svPackage = nil;
                 [self showPackage:nil];
 //                CGFloat spacing = 15;
 //                BOOL finduiv = NO;
