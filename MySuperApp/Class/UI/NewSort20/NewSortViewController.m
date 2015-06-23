@@ -253,7 +253,7 @@
 -(UIView *)createCellView:(NSArray*)subSortArray{
     
     //行数
-    int subSortbtnNum = ([subSortArray count]%4 == 0? [subSortArray count]/4 :[subSortArray count]/4+1);
+    NSInteger subSortbtnNum = ([subSortArray count]%4 == 0? [subSortArray count]/4 :[subSortArray count]/4+1);
     
     UIView *bgv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, subSortbtnNum*100)];
     [bgv setBackgroundColor:[UIColor clearColor]];
@@ -261,7 +261,7 @@
 
     for (int i = 0; i<subSortbtnNum; i++) {
         
-        int jcount = ([subSortArray count]-4*i)>4?4:([subSortArray count]-4*i);
+        NSInteger jcount = ([subSortArray count]-4*i)>4?4:([subSortArray count]-4*i);
         
         for (int j = 0; j<jcount; j++) {
             //80  100
