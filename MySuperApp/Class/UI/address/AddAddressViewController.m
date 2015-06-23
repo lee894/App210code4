@@ -226,7 +226,7 @@
     [newtxt replaceCharactersInRange:range withString:string];
     
     
-    NSLog(@"tag-----%ld----newtxt-%@----text-%@",textField.tag,newtxt,textField.text);
+  //  NSLog(@"tag-----%ld----newtxt-%@----text-%@",(long)textField.tag,newtxt,textField.text);
 
     
     if (textField.tag == 11110) {

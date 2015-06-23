@@ -23,6 +23,7 @@
 #import "UIDevice-hardware.h"
 #import "OpenUDID.h"
 #import "ASIHTTPRequest.h"
+#import "MyAimerViewController.h"
 
 
 @implementation ServiceBaseWithMK
@@ -342,6 +343,18 @@
             [self.delegate serviceFailed:handle];
             return;
         }
+        
+        //请先登录
+        if ([[[jsonDic objectForKey:@"error"] objectForKey:@"text"] isEqualToString:@"请先登录"]) {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:[[jsonDic objectForKey:@"error"] objectForKey:@"text"] delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+           [alert show];
+            alert.tag = 100012;
+            
+            handle = ENeedGotoLogin;
+            [self.delegate serviceFailed:handle];
+            return;
+        }
         //end
         
         [MYCommentAlertView showMessage:[NSString stringWithFormat:@"%@",[[jsonDic objectForKey:@"error"] objectForKey:@"text"]] target:nil];
@@ -376,7 +389,7 @@
 //请求失败
 -(void)requesetFail:(NSError*)aerror{
     
-    NSLog(@"竟然执行到了错误界面：--%d", aerror.code);
+    NSLog(@"竟然执行到了错误界面：--%ld", (long)aerror.code);
     [self.delegate serviceFailed:handle];
     //提示失败的错误
     if([aerror code] == 1){
@@ -393,6 +406,17 @@
 }
 
 -(void)parseJson:(NSString*)jsonString{
+}
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 100012 && buttonIndex == 0) {
+     
+        AppDelegate *app = [UIApplication sharedApplication].delegate;
+        MyAimerViewController *loginvc = [[MyAimerViewController alloc] initWithNibName:@"MyAimerViewController" bundle:nil];
+        UINavigationController *navCtl = [[UINavigationController alloc] initWithRootViewController:loginvc];
+        [app.mytabBarController presentViewController:navCtl animated:YES completion:^{}];        
+    }
 }
 
 

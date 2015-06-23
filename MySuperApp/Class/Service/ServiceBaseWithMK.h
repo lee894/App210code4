@@ -34,6 +34,10 @@ typedef enum ServiceHandle
     //lee999 申请定期更换需要绑定手机
     ENeedbindPhone,
     
+    //需要登录
+    ENeedGotoLogin,
+
+    
     //lee999 200版本开发
     EMageinzeList20_Tag,
     ECouponList20_Tag
@@ -48,7 +52,7 @@ typedef enum ServiceHandle
 
 
 
-@interface ServiceBaseWithMK : NSObject<ASIHTTPRequestDelegate>
+@interface ServiceBaseWithMK : NSObject<ASIHTTPRequestDelegate,UIAlertViewDelegate>
 {
     id<ServiceDelegate> delegate_;
     NSMutableDictionary *headerFields;
