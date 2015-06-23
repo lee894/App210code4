@@ -14,7 +14,7 @@
 #import "MyClosetParser.h"
 #import "BfdAgent.h"
 
-@interface MyCloset1ViewController ()<ServiceDelegate>
+@interface MyCloset1ViewController ()<ServiceDelegate,mobideaRecProtocol>
 {
     
     MainpageServ *mainSev;
@@ -51,8 +51,7 @@
     [mainSev getHomePage20data];
     
 
-    NSAssert(<#condition#>, <#desc, ...#>)
-    [BfdAgent recommendP:self recommendIds:<#(NSArray *)#> options:<#(NSDictionary *)#>];
+    [BfdAgent recommendP:self recommendIds:nil options:nil];
 }
 
 

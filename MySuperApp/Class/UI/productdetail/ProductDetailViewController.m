@@ -150,7 +150,7 @@
 }
 
 -(void)mobidea_Recs:(NSError *)error feedback:(id)feedback{
-    NSLog(@"----%@---%ld----%@",[error domain],(long)[error code],feedback)
+    NSLog(@"----%@---%ld----%@",[error domain],(long)[error code],feedback);
 }
 
 
