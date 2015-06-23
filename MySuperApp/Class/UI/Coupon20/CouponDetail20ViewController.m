@@ -231,10 +231,12 @@
 {
     [MYCommentAlertView showMessage:@"二维码已经保存到相册" target:nil];
     
-    UIGraphicsBeginImageContext(self.view.bounds.size);     //currentView 当前的view
-    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+//    UIGraphicsBeginImageContext(self.view.bounds.size);     //currentView 当前的view
+//    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+//    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+    CouponInfo* ci = _data;
+    UIImage *viewImage = [QRCodeGenerator qrImageForString:ci.code imageSize:220];
     UIImageWriteToSavedPhotosAlbum(viewImage, nil, nil, nil);
 }
 

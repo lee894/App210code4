@@ -39,6 +39,7 @@
 @property (nonatomic, retain) UITableView* tbPackage;
 @property (nonatomic, retain) NSMutableArray *marrGoods;
 @property (nonatomic, retain) UIView* vToolbar;
+@property (nonatomic, retain) UIScrollView* vPackage;
 //@property(nonatomic, copy)	NSString *selectedSize;//记录选择的尺码
 //@property (nonatomic, retain) NSArray *arrTemSize;
 //@property(nonatomic,retain) NSMutableString *str_append;
@@ -54,8 +55,8 @@
     mainSev = [[MainpageServ alloc] init];
     mainSev.delegate = self;
     [self.view addSubview:self.tbPackage];
-    UIView* vFooter = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, lee1fitAllScreen(59))];
-    [self.tbPackage setTableFooterView:vFooter];
+//    UIView* vFooter = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, lee1fitAllScreen(59))];
+//    [self.tbPackage setTableFooterView:vFooter];
     [self.view addSubview:self.vToolbar];
     [self.view addConstraints:[self viewConstraints]];
     [mainSev getPackageInfoWithPid:self.pid];
@@ -67,6 +68,19 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    if (_vPackage) {
+        [_vPackage removeFromSuperview];
+        _vPackage = nil;
+    }
+    if (vGoods) {
+        [vGoods removeFromSuperview];
+        vGoods = nil;
+    }
+    
 }
 
 -(void)serviceStarted:(ServiceType)aHandle
@@ -148,6 +162,14 @@
             [lblCount setFrame:CGRectMake(lblPrice.frame.size.width + lblPrice.frame.origin.x + 14, lblPrice.frame.origin.y, rcCount.size.width, rcCount.size.height)];
             [lblCount setTextColor:[UIColor colorWithHexString:@"#181818"]];
             [_vToolbar addSubview:lblCount];
+            
+            UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPackage:)];
+            [_vToolbar addGestureRecognizer:tap];
+            
+//            UIButton* btnShowPackage = [UIButton buttonWithType:UIButtonTypeCustom];
+//            [btnShowPackage setFrame:CGRectMake(0, 0, 0, 0)];
+//            [btnShowPackage addTarget:self action:@selector(showPackage:) forControlEvents:UIControlEventTouchUpInside];
+//            [_vToolbar addSubview:btnShowPackage];
         }
             break;
         default:
@@ -160,9 +182,58 @@
     
 }
 
+-(void)delSelectedGoods:(UIButton*)sender
+{
+    UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"确定删除该商品？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [av setTag:sender.tag + 20000];
+    [av show];
+}
+
+-(void)showPackage:(UITapGestureRecognizer*)gesture
+{
+    if (_vPackage) {
+        [_vPackage removeFromSuperview];
+        _vPackage = nil;
+    }else
+    {
+        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        _vPackage = [[UIScrollView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - lee1fitAllScreen(120) - lee1fitAllScreen(59), SCREEN_WIDTH, lee1fitAllScreen(120))];
+        [_vPackage setBackgroundColor:[UIColor colorWithHexString:@"f8f8f8"]];
+        [_vPackage setAlpha:0.8];
+        [_vPackage.layer setMasksToBounds:YES];
+        CGFloat originY = 26.f;
+        CGFloat spacing = 15.f;
+        for (NSInteger i = 0; i < [_pInfo.packageinfo.need_select_count integerValue]; ++i) {
+            UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(spacing + i * (60 + spacing), originY, 60, 77)];
+            [_vPackage addSubview:uiv];
+            if (_marrGoods.count > i) {
+                NSDictionary* dic = [_marrGoods objectAtIndex:i isArray:nil];
+                PackageGoodsInfo* pgi = [dic objectForKey:[[dic allKeys] firstObject] isDictionary:nil];
+                [uiv setImageWithURL:[NSURL URLWithString:pgi.image_url] placeholderImage:nil];
+                
+                UIButton* btnDel = [UIButton buttonWithType:UIButtonTypeCustom];
+                [btnDel setFrame:CGRectMake(uiv.frame.origin.x + uiv.frame.size.width - 15, uiv.frame.origin.y - 9, 25, 25)];
+                [btnDel setTag:i];
+                [btnDel setImage:[UIImage imageNamed:@"lp_shut_h"] forState:UIControlStateNormal];
+                [btnDel addTarget:self action:@selector(delSelectedGoods:) forControlEvents:UIControlEventTouchUpInside];
+                [_vPackage addSubview:btnDel];
+                
+            }else
+            {
+                [uiv setImageWithURL:[NSURL URLWithString:@""] placeholderImage:nil];
+            }
+        }
+        [app.window addSubview:_vPackage];
+        if (_vToolbar) {
+            [app.window bringSubviewToFront:_vPackage];
+        }
+    }
+}
+
 -(void)closeGoodsView:(UIButton*)sender
 {
     [vGoods removeFromSuperview];
+    vGoods = nil;
 }
 
 -(void)selectGoods:(UIButton*)sender
@@ -321,12 +392,16 @@
     [vBG addSubview:btnAddToPackage];
     
     [((AppDelegate*)[UIApplication sharedApplication].delegate).window addSubview:vGoods];
+    if (_vPackage) {
+        [((AppDelegate*)[UIApplication sharedApplication].delegate).window bringSubviewToFront:_vPackage];
+    }
 }
 
 -(void)toDetail:(UIButton*)sender
 {
     NSInteger index = sender.tag;
     [vGoods removeFromSuperview];
+    vGoods = nil;
     PackageGoodsInfo* pgi = [((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods objectAtIndex:index];
     ProductDetailViewController* detail = [[ProductDetailViewController alloc] init];
     detail.thisProductId = pgi.gid;
@@ -378,6 +453,24 @@
             }
             if (i < [pGroupInfo.need_select_count integerValue]) {
                 [_marrGoods addObject:@{[NSString stringWithFormat:@"%@_%@",pGroupInfo.gid, ppInfo.product_id] : goodsInfo}];
+                if (_vPackage) {
+                    CGFloat spacing = 15;
+                    for (NSInteger i = 0; i < _vPackage.subviews.count; ++i) {
+                        UIView* v = [_vPackage.subviews objectAtIndex:i isArray:nil];
+                        if (v.frame.origin.x == (spacing + (_marrGoods.count - 1) * (spacing + 60))) {
+                            UrlImageView* uiv = (UrlImageView*)v;
+                            [uiv setImageWithURL:[NSURL URLWithString:goodsInfo.image_url] placeholderImage:nil];
+                            UIButton* btnDel = [UIButton buttonWithType:UIButtonTypeCustom];
+                            [btnDel setFrame:CGRectMake(uiv.frame.origin.x + uiv.frame.size.width - 15, uiv.frame.origin.y - 9, 25, 25)];
+                            [btnDel setTag:_marrGoods.count - 1];
+                            [btnDel setImage:[UIImage imageNamed:@"lp_shut_h"] forState:UIControlStateNormal];
+                            [btnDel addTarget:self action:@selector(delSelectedGoods:) forControlEvents:UIControlEventTouchUpInside];
+                            [_vPackage addSubview:btnDel];
+                            break;
+                        }
+                    }
+
+                }
             }else
             {
                 UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"%@最多只能购买%@件", pGroupInfo.name, pGroupInfo.need_select_count] delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
@@ -442,6 +535,7 @@
     }
     _tbPackage = [[UITableView alloc] init];
     [_tbPackage setShowsVerticalScrollIndicator:NO];
+    [_tbPackage setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [_tbPackage setTranslatesAutoresizingMaskIntoConstraints:NO];
     return _tbPackage;
 }
@@ -456,6 +550,11 @@
     [_vToolbar setAlpha:0.8];
     [_vToolbar setTranslatesAutoresizingMaskIntoConstraints:NO];
     return _vToolbar;
+}
+
+-(void)changeCellDisplay:(UIButton*)sender
+{
+    
 }
 
 -(void)createtoolbarandpicker{
@@ -700,6 +799,7 @@
             [v addSubview:lblSep];
         }
     }
+    
     NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods.count;
     CGFloat height = 0;
     UIView* vGroup = nil;
@@ -797,6 +897,44 @@
     if (alertView.tag == 10213219) {
         if (buttonIndex == 1) {
             [_marrGoods removeAllObjects];
+            if(_vPackage)
+            {
+                [_vPackage removeFromSuperview];
+                _vPackage = nil;
+                [self showPackage:nil];
+            }
+        }
+        return;
+    }
+    if (alertView.tag >= 20000) {
+        if (buttonIndex == 1) {
+            [_marrGoods removeObjectAtIndex:alertView.tag - 20000];
+            if (_vPackage) {
+                [_vPackage removeFromSuperview];
+                _vPackage = nil;
+                [self showPackage:nil];
+//                CGFloat spacing = 15;
+//                BOOL finduiv = NO;
+//                BOOL finddelbtn = NO;
+//                UrlImageView* uiv = nil;
+//                for (NSInteger i = 0; i < _vPackage.subviews.count; ++i) {
+//                    UIView* v = [_vPackage.subviews objectAtIndex:i isArray:nil];
+//                    if (v.frame.origin.x == (spacing + (alertView.tag - 20000) * (spacing + 60))) {
+//                        uiv = (UrlImageView*)v;
+//                        [uiv setImageWithURL:[NSURL URLWithString:@""] placeholderImage:nil];
+//                        finduiv = YES;
+//                    }
+//                    if (uiv) {
+//                        if (uiv.frame.origin.x + uiv.frame.size.width - 15 == v.frame.origin.x) {
+//                            [v removeFromSuperview];
+//                            finddelbtn = YES;
+//                        }
+//                    }
+//                    if (finddelbtn && finduiv) {
+//                        break;
+//                    }
+//                }
+            }
         }
     }
 }
