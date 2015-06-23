@@ -73,14 +73,20 @@
     }else if (self.indexPath.column < self.columnCount - 1){
     
         originX = LEFTMARGIN/2.0;
+//         originX = LEFTMARGIN +30;
         width = CGRectGetWidth(self.frame) - LEFTMARGIN;
     }else{
     
         originX = LEFTMARGIN/2.0;
+//        originX = LEFTMARGIN +30;
         width = CGRectGetWidth(self.frame) - LEFTMARGIN - 1/2.0*LEFTMARGIN;
     }
+    
     imageView.frame = CGRectMake( originX, originY,width, height);
 
+    
+    NSLog(@"-----%f",width);
+    
     //lee999 修改位置 width/2
 //    imageView.frame = CGRectMake( originX, originY,width/2, height);
 

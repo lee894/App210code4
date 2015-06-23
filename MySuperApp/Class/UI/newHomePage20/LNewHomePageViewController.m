@@ -902,11 +902,11 @@
 -(void)gotoSearchViewC{
     
     
-#warning ----test lee999
-    MyClosetListViewController *vc1 = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
-    [self.navigationController pushViewController:vc1 animated:YES];
-    
-    return;
+//#warning ----test lee999
+//    MyClosetListViewController *vc1 = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
+//    [self.navigationController pushViewController:vc1 animated:YES];
+//    
+//    return;
     
     
     SearchpageViewController *searchVC = [[SearchpageViewController alloc] init];

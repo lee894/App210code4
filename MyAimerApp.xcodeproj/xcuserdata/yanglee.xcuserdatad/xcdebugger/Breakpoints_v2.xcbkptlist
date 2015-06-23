@@ -35,13 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MySuperApp/Class/UI/newHomePage20/LNewHomePageViewController.m"
-            timestampString = "456730000.897823"
+            filePath = "MySuperApp/Class/UI/mainpage/branddetail/ImageViewCell.m"
+            timestampString = "456737353.885297"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "791"
-            endingLineNumber = "791"
-            landmarkName = "-createCellView:andisfromReconnend:"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "-relayoutViews"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

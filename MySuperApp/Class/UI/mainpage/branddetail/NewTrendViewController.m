@@ -15,8 +15,8 @@
 //#define TableViewOneWidth (320/5.0*2.0)
 //#define TableViewTowWidth (320/5.0*3.0)
 
-#define TableViewOneWidth (320/5.0*2.0)
-#define TableViewTowWidth (320/5.0*3.0)
+#define TableViewOneWidth (320/6.0*3.0)
+#define TableViewTowWidth (320/6.0*3.0)
 
 #define objectwidth 150
 
@@ -58,12 +58,6 @@
     self.title = @"潮流新品";
     
     
-    if (self.arrayImg.count > index) {
-        
-        [backgroundimg setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@.jpg",[self.arrayImg objectAtIndex:index]]]  placeholderImage:nil];
-    }
-    
-    
     MainpageServ *mainSev = [[MainpageServ alloc] init];
     mainSev.delegate = self;
     [mainSev getBrandtrend:self.brandName];
@@ -74,9 +68,8 @@
 //    waterFlow = [[WaterFlowView alloc] initWithFrame:self.view.frame];
     waterFlow.waterFlowViewDelegate = self;
     waterFlow.waterFlowViewDatasource = self;
-    waterFlow.backgroundColor = [UIColor colorWithHexString:tableViewBGC];
+    waterFlow.backgroundColor = [UIColor clearColor];
     [self.view addSubview:waterFlow];
-    
     [self.view setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
     
     waterFlow.showsVerticalScrollIndicator = FALSE;
@@ -179,7 +172,6 @@
 -(void)waterFlowView:(WaterFlowView *)waterFlowView  relayoutCellSubview:(UIView *)view withIndexPath:(IndexPath *)indexPath{
     
     //arrIndex是某个数据在总数组中的索引
-    NSLog(@"%d", view.tag);
     
     switch (indexPath.column) {
         case 0:
@@ -265,29 +257,45 @@
 - (void)waterFlowView:(WaterFlowView *)waterFlowView didSelectRowAtIndexPath:(IndexPath *)indexPath{
     
     
+    NewBigViewController *newBigImageVC = [[NewBigViewController alloc] init];
     
-    ProductDetailViewController* detail = [[ProductDetailViewController alloc] init];
-//    detail.thisProductId = self.productID;
-//    NewBigViewController *newBigImageVC = [[NewBigViewController alloc] init];
-
     if (indexPath.column == 0) {
         if (indexPath.row == 0) {
             return;
         }
         ChaoliuChaoliuxinpinInfo *object = [arrayFirst objectAtIndex:indexPath.row];
-//        newBigImageVC.productID = object.productId;
-//        newBigImageVC.imagePath = object.imgPath;
-        detail.thisProductId = object.productId;
-
+        newBigImageVC.productID = object.productId;
+        newBigImageVC.imagePath = object.imgPath;
     }else {
         ChaoliuChaoliuxinpinInfo *object = [arraySecond objectAtIndex:indexPath.row];
-//        newBigImageVC.productID = object.productId;
-//        newBigImageVC.imagePath = object.imgPath;
-        
-        detail.thisProductId = object.productId;
+        newBigImageVC.productID = object.productId;
+        newBigImageVC.imagePath = object.imgPath;
     }
-//    [self.navigationController pushViewController:newBigImageVC animated:YES];
-    [self.navigationController pushViewController:detail animated:YES];
+    [self.navigationController pushViewController:newBigImageVC animated:YES];
+    
+    
+//    ProductDetailViewController* detail = [[ProductDetailViewController alloc] init];
+////    detail.thisProductId = self.productID;
+//    NewBigViewController *newBigImageVC = [[NewBigViewController alloc] init];
+//
+//    if (indexPath.column == 0) {
+//        if (indexPath.row == 0) {
+//            return;
+//        }
+//        ChaoliuChaoliuxinpinInfo *object = [arrayFirst objectAtIndex:indexPath.row];
+////        newBigImageVC.productID = object.productId;
+////        newBigImageVC.imagePath = object.imgPath;
+//        detail.thisProductId = object.productId;
+//
+//    }else {
+//        ChaoliuChaoliuxinpinInfo *object = [arraySecond objectAtIndex:indexPath.row];
+////        newBigImageVC.productID = object.productId;
+////        newBigImageVC.imagePath = object.imgPath;
+//        
+//        detail.thisProductId = object.productId;
+//    }
+////    [self.navigationController pushViewController:newBigImageVC animated:YES];
+//    [self.navigationController pushViewController:detail animated:YES];
 
 }
 

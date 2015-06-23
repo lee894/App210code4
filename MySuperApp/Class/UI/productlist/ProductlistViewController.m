@@ -327,6 +327,14 @@
                 
                 productListModel = (BrandsProductListModel *)model;
                 
+                
+                //lee999 200版本 新增筛选界面  修改为  ios，搜索结果不存在，也要有筛选按钮
+                //                if (!self.isHiddenFilerbtn && [contentArr count]> 0) {
+                [self createRightBtn];
+                [self.navbtnRight setTitle:@"筛选" forState:UIControlStateNormal];
+                [self.navbtnRight setTitle:@"筛选" forState:UIControlStateSelected];
+                //                }
+                
                 if (self.isSearch&&productListModel.recordCount == 0) {
                     [SBPublicAlert showMBProgressHUD:@"没有查到此商品" andWhereView:self.view hiddenTime:0.6];
                     return;
@@ -343,14 +351,7 @@
                 [producttabV reloadData];
                 
                 //[self updateTableViewCount:contentArr.count];
-                
-                
-                //lee999 200版本 新增筛选界面
-                if (!self.isHiddenFilerbtn && [contentArr count]> 0) {
-                    [self createRightBtn];
-                    [self.navbtnRight setTitle:@"筛选" forState:UIControlStateNormal];
-                    [self.navbtnRight setTitle:@"筛选" forState:UIControlStateSelected];
-                }
+
                 
             }else {
                 if (current > 1) {

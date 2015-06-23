@@ -173,7 +173,7 @@
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ishasOpenapp"];
 //    [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [self setBackgroundColor:[UIColor greenColor]];
+    [self setBackgroundColor:[UIColor clearColor]];
     
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [app createAKtableBar];

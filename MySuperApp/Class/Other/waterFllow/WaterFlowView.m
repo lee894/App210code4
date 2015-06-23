@@ -16,8 +16,8 @@
 //#define TableViewTowWidth  ScreenHeight/5*3
 
 
-#define TableViewOneWidth ScreenWidth/5*2
-#define TableViewTowWidth  ScreenWidth/5*3
+#define TableViewOneWidth ScreenWidth/6*3
+#define TableViewTowWidth  ScreenWidth/6*3
 
 
 @implementation WaterFlowView
@@ -91,7 +91,7 @@
             
 //            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(ScreenHeight/5*2*i, 0, _cellWidth, CGRectGetHeight(self.frame)) style:UITableViewStylePlain];
 
-            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth/5*2*i, 0, _cellWidth, CGRectGetHeight(self.frame)) style:UITableViewStylePlain];
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(ScreenWidth/6*3*i, 0, _cellWidth, CGRectGetHeight(self.frame)) style:UITableViewStylePlain];
 
             tableView.delegate = self;
             tableView.dataSource = self;

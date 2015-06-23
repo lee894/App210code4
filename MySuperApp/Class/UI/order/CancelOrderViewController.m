@@ -84,11 +84,55 @@
 - (IBAction)cancelOrder:(UIButton *)sender//取消订单
 {
     
-    NSString *str = [(UILabel *)[self.view viewWithTag:sender.tag+100] text];
+    NSString *str = @"";
+    switch (buttonlast.tag) {
+        case 200:
+            str = @"选错商品";
+            break;
+        case 201:
+            str = @"下单重复了";
+            break;
+        case 202:
+            str = @"更换其他商品";
+            break;
+        case 203:
+            str = @"等待发货时间太久";
+            break;
+        case 204:
+            str = @"我不想买了";
+            break;
+        case 205:
+            str = @"支付失败";
+            break;
+        case 206:
+            str = @"换支付方式";
+            break;
+        case 207:
+            str = @"忘记选赠品";
+            break;
+        case 208:
+            str = @"有缺货商品";
+            break;
+        case 209:
+            str = @"忘记使用优惠券";
+            break;
+        case 210:
+            str = @"加个太贵";
+            break;
+        case 211:
+            str = @"其他";
+            break;
+        default:
+            break;
+    }
+    
+    //NSString *str = [(UILabel *)[self.view viewWithTag:sender.tag+100] text];
     NSDictionary *dic2 = [NSDictionary dictionaryWithObjectsAndKeys:self.userName, @"UserName",self.orderid, @"CoId",str,@"Reason",self.payWay,@"Payment",nil];
     [TalkingData trackEvent:@"5011" label:@"取消订单" parameters:dic2];
     
-    [mainSev getCancelorder:self.orderid];
+    NSLog(@"退款原因：--%@",str);
+    
+    [mainSev getCancelorder:self.orderid andReason:@""];
     [SBPublicAlert showMBProgressHUD:@"正在取消···" andWhereView:self.view states:NO];
 }
 

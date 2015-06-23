@@ -8,7 +8,7 @@
 
 #import "BrandListViewController.h"
 #import "MainpageViewController.h"
-//#import "BrandDetailViewController.h"
+#import "NewBrandDetail20ViewController.h"
 
 
 #import "UrlImageView.h"
@@ -46,6 +46,8 @@
     
     [self createBackBtnWithType:0];
     [self setTitle:@"品牌馆"];
+    [self NewHiddenTableBarwithAnimated:YES];
+
     
     [self createBrandView];
 
@@ -90,6 +92,13 @@
     //lee999埋点
     [TalkingData trackEvent:@"5003" label:@"点击品牌馆" parameters:dic1];
     [TalkingData trackEvent:@"5004" label:@"点击品牌详情" parameters:dic1];
+    
+    
+    
+    NewBrandDetail20ViewController *brandvc = [[NewBrandDetail20ViewController alloc] initWithNibName:@"NewBrandDetail20ViewController" bundle:nil];
+    brandvc.brandname = wallModel.name;
+    [self.navigationController pushViewController:brandvc animated:YES];
+    
     
 //    BrandDetailViewController* tempVCon = [[BrandDetailViewController alloc] initWithNibName:@"BrandDetailViewController" bundle:nil];
 //    tempVCon.brandsModel = self.brandModel;

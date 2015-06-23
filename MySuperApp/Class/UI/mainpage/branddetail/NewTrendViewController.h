@@ -21,8 +21,6 @@
     
     WaterFlowView *waterFlow;
     NSArray *arrIcon;
-
-    __weak IBOutlet UrlImageView *backgroundimg;
     
     NSMutableArray *arrayFirst;
     NSMutableArray *arraySecond;

@@ -184,7 +184,7 @@
 - (void)getLinkageconfirmpay:(NSString *)co_id;
 
 //取消订单
-- (void)getCancelorder:(NSString *)ordered;
+- (void)getCancelorder:(NSString *)ordered andReason:(NSString*)strreson;
 
 //商品详情评价
 - (void)getShowcomment:(NSString *)goodsid andPage:(NSString *)page andPer_page:(NSString *)per_page;

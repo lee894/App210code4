@@ -23,7 +23,7 @@
 #import "NoticeinfoViewController.h"
 #import "MyCloset1ViewController.h"
 #import "MyClosetListViewController.h"
-
+#import "BrandListViewController.h"
 
 
 #import "ImproveInformationViewController.h"
@@ -686,6 +686,8 @@
         case 5:
         {
             //品牌馆
+            BrandListViewController *barnvc = [[BrandListViewController alloc] init];
+            [self.navigationController pushViewController:barnvc animated:YES];
             
         }
             break;

@@ -621,9 +621,11 @@
 }
 
 //取消订单
-- (void)getCancelorder:(NSString *)ordered{
+- (void)getCancelorder:(NSString *)ordered andReason:(NSString*)strreson{
     [self sendPostWithURL:ORDER_CANCEL_API tag:Http_CancelOrder_Tag beforeRequest:^{
         [self addParam:@"ordered" withValue:ordered];
+        [self addParam:@"text" withValue:strreson];
+
     }];
 }
 

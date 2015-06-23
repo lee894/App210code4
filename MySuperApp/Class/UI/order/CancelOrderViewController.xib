@@ -329,7 +329,7 @@
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="167" y="126"/>
+            <point key="canvasLocation" x="72" y="304"/>
         </view>
     </objects>
     <resources>
