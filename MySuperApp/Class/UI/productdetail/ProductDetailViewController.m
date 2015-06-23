@@ -114,6 +114,8 @@
     [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_icon_share_press.png"] forState:UIControlStateHighlighted];
     [self.navbtnRight setFrame:CGRectMake(242, 7, 30, 30)];
     
+    isAddtoCar = NO;
+    
     
     didSelectColor = -1;
     currentColor = 0;
@@ -712,8 +714,8 @@
     }
     else if(barButton.tag==102+100)
     {
-       // NSLog(@"size完成arrTemSize:%@", self.arrTemSize);
-       // NSLog(@"size完成currentSize:%ld", (long)currentSize);
+        NSLog(@"size完成arrTemSize:%@", self.arrTemSize);
+        NSLog(@"size完成currentSize:%ld", currentSize);
         if ([productModel.array_size count]!=0)
         {
 //            self.selectedSize=[[self.arrTemSize objectAtIndex:currentSize]objectForKey:@"spec_alias"];
@@ -816,6 +818,8 @@
     switch (action.tag) {
             
         case 200: /* 加入购物车 */ {
+            
+            isAddtoCar = YES;
             
             
             //向服务器发送添加购物车请求
@@ -961,6 +965,19 @@
         }
     }
 }
+
+-(void)loginOKCallBack:(NSString *)prama{
+    if (isAddtoCar) {
+        
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.tag = 200;
+        [self buttonAction:btn];
+        isAddtoCar = NO;
+    }
+    
+    
+}
+
 
 -(void)JumpToCarpage{
     

@@ -62,7 +62,7 @@
 -(void)changeToMyaimer;
 
 //显示上一个的商场界面
--(void)changeToLastShopView;
+//-(void)changeToLastShopView;
 //显示商城
 -(void)changeToShop;
 //显示首页

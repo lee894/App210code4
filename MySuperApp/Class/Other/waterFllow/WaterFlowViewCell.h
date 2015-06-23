@@ -27,11 +27,11 @@
 
 @interface IndexPath : NSObject
 {
-    int _row;       //行号
-    int _column;    //列号
+    NSInteger _row;       //行号
+    NSInteger _column;    //列号
 }
-@property(nonatomic,assign) int row;
-@property(nonatomic,assign) int column;
+@property(nonatomic,assign) NSInteger row;
+@property(nonatomic,assign) NSInteger column;
 
 +(IndexPath *)initWithRow:(int)indexRow withColumn:(int)indexColumn;
 

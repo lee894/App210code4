@@ -40,10 +40,10 @@
 
 
 -(NSString*)goodid;
--(void)setgoodid:(NSString*)goodid_;
+//-(void)setgoodid:(NSString*)goodid_;
 
 -(NSString*)name;
--(void)setname:(NSString*)name_;
+//-(void)setname:(NSString*)name_;
 
 //-(NSString*)recommendprice;
 //-(void)setrecommendprice:(NSString*)recommendprice_;

@@ -425,7 +425,7 @@
 {
     
     NSString *responseStr = [request responseString];
-    NSLog(@"\n+++++++++++\n%@\n++++++++++++++request.tag:----%d",responseStr,request.tag);
+    NSLog(@"\n+++++++++++\n%@\n++++++++++++++request.tag:----%ld",responseStr,(long)request.tag);
     
     self.isuploadDATA = NO;
     

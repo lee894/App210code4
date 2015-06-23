@@ -92,6 +92,7 @@
 
 -(NSArray *)getPlistArrayByplistName:(NSString *)plistName{
     
+    
     NSString *path= [[NSBundle mainBundle] pathForResource:plistName ofType:@"plist"];
     NSArray * array=[[NSArray alloc] initWithContentsOfFile:path];
     [self setArrayClass:array];

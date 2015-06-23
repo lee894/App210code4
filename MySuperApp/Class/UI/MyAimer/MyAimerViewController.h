@@ -17,9 +17,9 @@
 
 
 @protocol LoginCallbackDelegate <NSObject>
-@required
 
-- (void)sureFilter:(NSString*)prama;
+@required
+- (void)loginOKCallBack:(NSString*)prama;
 
 @end
 
@@ -67,6 +67,7 @@
     
     BOOL isPushBack;
 }
+@property(nonatomic,assign)id<LoginCallbackDelegate> delegate;
 
 @property(nonatomic,assign) BOOL isPushBack; //登录完成之后，是否返回上一级界面
 

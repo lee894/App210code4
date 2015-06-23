@@ -153,6 +153,10 @@
     
     [SingletonState sharedStateInstance].userHasLogin = YES;
     
+    if ([self.delegate respondsToSelector:@selector(loginOKCallBack:)]) {
+        [self.delegate loginOKCallBack:nil];
+    }
+    
     [self dismissViewControllerAnimated:NO completion:^{}];
 
     

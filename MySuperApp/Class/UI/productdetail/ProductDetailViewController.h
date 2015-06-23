@@ -66,9 +66,9 @@
     YKProductdetailList *detailList;
     BOOL isAddFav;
     BOOL hasSuit;   //是否有套装
-    
-    
     ProductProductDetailModel *productModel;
+    
+    BOOL isAddtoCar;
 
 }
 

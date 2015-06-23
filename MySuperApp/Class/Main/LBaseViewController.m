@@ -24,7 +24,7 @@
 #import "PackageInfoViewController.h"
 
 
-@interface LBaseViewController ()
+@interface LBaseViewController ()<LoginCallbackDelegate>
 
 @end
 
@@ -190,7 +190,13 @@
     
     MyAimerViewController *loginvc = [[MyAimerViewController alloc] initWithNibName:@"MyAimerViewController" bundle:nil];
     UINavigationController *navCtl = [[UINavigationController alloc] initWithRootViewController:loginvc];
+    loginvc.delegate = self;
     [self presentViewController:navCtl animated:YES completion:^{}];
+}
+
+
+-(void)loginOKCallBack:(NSString *)prama{
+
 }
 
 
