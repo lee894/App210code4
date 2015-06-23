@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 aimer. All rights reserved.
 //
 
+#import "QrcodeView.h"
 #import "LBaseViewController.h"
 
 typedef enum : NSUInteger {
@@ -15,7 +16,7 @@ typedef enum : NSUInteger {
     kO2O
 } EDetailType;
 
-@interface CouponDetail20ViewController : LBaseViewController
+@interface CouponDetail20ViewController : LBaseViewController <QrcodeViewDelegate>
 @property (nonatomic, retain) id data;
 @property (nonatomic, assign) EDetailType dType;
 @end
