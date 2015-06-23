@@ -23,9 +23,10 @@
 #import "MyClosetListViewController.h"
 #import "MyButton.h"
 #import "APService.h"
+#import "BfdAgent.h"
 
 
-@interface LNewHomePageViewController ()
+@interface LNewHomePageViewController ()<mobideaRecProtocol>
 {
     UITableView *myTableV;
     
@@ -46,6 +47,9 @@
     NSString *downloadURL; //下载地址
 
     int sepViewH;
+    
+    NSMutableArray *recmmendArr; //为我推荐的数组
+    
 }
 @end
 
@@ -75,6 +79,8 @@
     [mainSev getHomePage20data];
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 
+    recmmendArr = [[NSMutableArray alloc] initWithCapacity:0];
+    
     //lee999 增加升级提示的判断。
     [mainSev getappVersion];
     
@@ -218,8 +224,6 @@
                     [alert show];
                     
                 }
-                
-                
             }
                 break;
                 
@@ -232,12 +236,32 @@
     
     _homeinfo = [[NewHomeParser alloc] parseNewHomeInfo:amodel];
     
+    
+    //lee999 百分点
+    [BfdAgent recommend:self recommendId:@"rec_2142096B_FB0B_FCD1_8DD8_0D235639F12F" options:nil];
+    //购物车：rec_FDFEE10D_5A29_BE14_3808_3C336BA76303
+    
     [self creatCellView];
     
     [myTableV reloadData];
     
     [SBPublicAlert hideMBprogressHUD:self.view];
     
+}
+
+
+-(void) mobidea_Recs:(NSError*) error feedback:(id)feedback{
+ 
+    NSLog(@"百分点推荐数据：--%@",feedback);
+    
+    if ([feedback respondsToSelector:@selector(objectAtIndex:)]) {
+        NSArray *arr = (NSArray*)feedback;
+        if ([arr count] > 0) {
+            [recmmendArr addObjectsFromArray:arr];
+            [self creatCellView];
+            [myTableV reloadData];
+        }
+    }
 }
 
 
@@ -681,12 +705,18 @@
     [formemorebtn addTarget:self action:@selector(gotoMoreRecommendViewC) forControlEvents:UIControlEventTouchUpInside];
     [formeView addSubview:formemorebtn];
     
-    [formeView addSubview:[self createCellView:_homeinfo.home_more]];
+    
+    //lee999如果有推荐商品，就显示推荐商品
+    if ([recmmendArr count] > 1) {
+        [formeView addSubview:[self createCellView:recmmendArr andisfromReconnend:YES]];
+    }else{
+        [formeView addSubview:[self createCellView:_homeinfo.home_more andisfromReconnend:NO]];
+    }
     
 }
 
 //为我推荐的商品
--(UIView *)createCellView:(NSArray*)subSortArray{
+-(UIView *)createCellView:(NSArray*)subSortArray andisfromReconnend:(BOOL)isRecommend{
     
 //    int bgvH = 40;
 //    int lineNum = 3; //每行的数量
@@ -729,6 +759,8 @@
         for (int j = 0; j<jcount; j++) {
             
             
+            NSDictionary *itemdic = [subSortArray objectAtIndex:j + i*lineNum isArray:nil];
+            
             NewhomeNormalData *item = (NewhomeNormalData*)[subSortArray objectAtIndex:j + i*lineNum isArray:nil];
             
             UIView *sortV = [[UIView alloc] initWithFrame:CGRectMake(SP + j*(pW+SP), ySP + i*(pH + ySP), pW, pH)];
@@ -738,7 +770,11 @@
             [sortV setBackgroundColor:[UIColor whiteColor]];
             
             UrlImageView *buynowV = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 0, pW, imgH)];
-            [buynowV setImageFromUrl:NO withUrl:item.pic];
+            if (isRecommend) {
+                [buynowV setImageFromUrl:NO withUrl:[itemdic objectForKey:@"img" isDictionary:nil]];
+            }else{
+                [buynowV setImageFromUrl:NO withUrl:item.pic];
+            }
             buynowV.layer.borderWidth = 0.5;
             buynowV.layer.borderColor = [[UIColor colorWithHexString:@"e2e2e2"] CGColor];
             [sortV addSubview:buynowV];
@@ -746,19 +782,32 @@
             UILabel *namelab = [[UILabel alloc] initWithFrame:CGRectMake(0, imgH+5, pW, 40)];
             [namelab setNumberOfLines:2];
             [namelab setTextAlignment:NSTextAlignmentLeft];
+            if (isRecommend) {
+                namelab.text = [itemdic objectForKey:@"name" isDictionary:nil];
+            }else{
             namelab.text = [NSString stringWithFormat:@"%@",item.name];
+            }
             namelab.font = [UIFont systemFontOfSize:LablitileSmallSize];
             [namelab setTextColor:[UIColor colorWithHexString:@"#444444"]];
             [sortV addSubview:namelab];
             
             
             UIFont *font = [UIFont systemFontOfSize:LabMidSize];
-            CGSize pricelabSize = [[NSString stringWithFormat:@"￥%@",item.price.value] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
+            CGSize pricelabSize ;
+            if (isRecommend) {
+                pricelabSize = [[NSString stringWithFormat:@"￥%@",[itemdic objectForKey:@"price" isDictionary:nil]] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
+            }else{
+                pricelabSize = [[NSString stringWithFormat:@"￥%@",item.price.value] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
+            }
         
             UILabel *pricelab = [[UILabel alloc] initWithFrame:CGRectMake(0, imgH+45, pricelabSize.width, 26)];
             [pricelab setNumberOfLines:1];
             [pricelab setTextAlignment:NSTextAlignmentLeft];
-            pricelab.text = [NSString stringWithFormat:@"￥%@",item.price.value];
+            if (isRecommend) {
+                pricelab.text = [NSString stringWithFormat:@"￥%@",[itemdic objectForKey:@"price" isDictionary:nil]];
+            }else{
+                pricelab.text = [NSString stringWithFormat:@"￥%@",item.price.value];
+            }
             pricelab.font = [UIFont systemFontOfSize:LabMidSize];
             [pricelab setTextColor:[UIColor colorWithHexString:@"#C70000"]];
             [sortV addSubview:pricelab];
@@ -767,25 +816,34 @@
             UILabel *pricelab2 = [[UILabel alloc] initWithFrame:CGRectMake(10+ pricelabSize.width, imgH+45, pW-10, 26)];
             [pricelab2 setNumberOfLines:1];
             [pricelab2 setTextAlignment:NSTextAlignmentLeft];
+            if (!isRecommend) {
             pricelab2.text = [NSString stringWithFormat:@"￥%@",item.price1.value];
+            }
             pricelab2.font = [UIFont systemFontOfSize:LabMidSize];
             [pricelab2 setTextColor:[UIColor colorWithHexString:@"#888888"]];
             [sortV addSubview:pricelab2];
             
             //价格上的划线
+            if (!isRecommend) {
             CGSize pricelab2Size = [[NSString stringWithFormat:@"￥%@",item.price1.value] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 15)];
             
             UIView *pricelab2V = [[UIView alloc] initWithFrame:CGRectMake(15+ pricelabSize.width, pricelab2.frame.origin.y + 14, pricelab2Size.width, 0.5)];
             [pricelab2V setBackgroundColor:[UIColor colorWithHexString:@"888888"]];
             [sortV addSubview:pricelab2V];
-            
+            }
             
             MyButton *sortbtn = [MyButton buttonWithType:UIButtonTypeCustom];
             [sortbtn setFrame:CGRectMake(SP + j*(pW+SP), ySP + i*(pH + ySP), pW, pH)];
             [sortbtn addTarget:self action:@selector(gotoProductDetailViewAciton:) forControlEvents:UIControlEventTouchUpInside];
             [sortbtn setBackgroundColor:[UIColor clearColor]];
+            if (isRecommend) {
+                sortbtn.addstring = [NSString stringWithFormat:@"%@",[itemdic objectForKey:@"iid" isDictionary:nil]];
+                sortbtn.addtitle = [NSString stringWithFormat:@"%@",[itemdic objectForKey:@"name" isDictionary:nil]];
+            }
+            else{
             sortbtn.addstring = item.goodid;
             sortbtn.addtitle = item.name;
+            }
             [bgv addSubview:sortbtn];
         }
     }

@@ -22,6 +22,12 @@
 -(NSString*)value{
     return [[self attributeForKey:@"value"] description];
 }
+-(void)setvalue:(NSString *)value_
+{
+    [self setAttribute:value_ forKey:@"value"];
+}
+
+
 -(NSString*)name{
     return [[self attributeForKey:@"name"] description];
 }
@@ -53,6 +59,11 @@
 
 -(NSString*)pic{
     return [[self attributeForKey:@"pic"] description];
+}
+
+-(void)setPic:(NSString *)pic_
+{
+    [self setAttribute:pic_ forKey:@"pic"];
 }
 
 -(NSString*)type_argu{

@@ -13,6 +13,8 @@
 @interface NewhomegoodPriceData: YKBaseEntity
 
 -(NSString*)value;
+-(void)setvalue:(NSString*)value_;
+
 -(NSString*)name;
 
 @end
@@ -25,8 +27,12 @@
 -(NSString*)bannerid;
 -(NSString*)title;
 -(NSString*)nexttitle;
+
 -(NSString*)pic;
+-(void)setPic:(NSString*)pic_;
+
 -(NSString*)type_argu;
+
 -(NSString*)titledes;
 -(NSString*)channelid;
 
@@ -34,7 +40,13 @@
 
 
 -(NSString*)goodid;
+-(void)setgoodid:(NSString*)goodid_;
+
 -(NSString*)name;
+-(void)setname:(NSString*)name_;
+
+//-(NSString*)recommendprice;
+//-(void)setrecommendprice:(NSString*)recommendprice_;
 
 -(NewhomegoodPriceData*)price;
 -(NewhomegoodPriceData*)price1;
