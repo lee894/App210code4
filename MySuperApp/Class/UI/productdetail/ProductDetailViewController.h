@@ -24,8 +24,7 @@
     NSInteger _currentPage;
     
     //UI
-    UITableView *detailTab;//大表
-    UIViewForRecursively *headerView;
+//    UIViewForRecursively *headerView;
     MyPageControl *pgControlForScroll;
     UITextField *buttonForNum;
     

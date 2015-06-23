@@ -31,16 +31,16 @@
 #define CELL_WITH_0_LAB_W_1 180.
 #define COLORBUTTON 50
 
-#define CELL_WITH_0_LAB_FRAME_0 CGRectMake(CELL_WITH_0_LAB_X_0, CELL_WITH_0_LAB_Y_0-6, 320-40, 50)
+#define CELL_WITH_0_LAB_FRAME_0 CGRectMake(CELL_WITH_0_LAB_X_0, CELL_WITH_0_LAB_Y_0-6, ScreenWidth-40, 50)
 #define CELL_WITH_0_LAB_FRAME_1 CGRectMake(CELL_WITH_0_LAB_X_0, CELL_WITH_0_LAB_Y_0+CELL_WITH_0_LAB_H+37, CELL_WITH_0_LAB_W_1, CELL_WITH_0_LAB_H)
 // 网站价（名字）
-#define CELL_WITH_0_LAB_FRAME_2 CGRectMake(CELL_WITH_0_LAB_X_0+140, CELL_WITH_0_LAB_Y_0+CELL_WITH_0_LAB_H+37, CELL_WITH_0_LAB_W_1, CELL_WITH_0_LAB_H)
+#define CELL_WITH_0_LAB_FRAME_2 CGRectMake((ScreenWidth / 2) + 20, CELL_WITH_0_LAB_Y_0+CELL_WITH_0_LAB_H+37, CELL_WITH_0_LAB_W_1, CELL_WITH_0_LAB_H)
 // 市场价
 #define CELL_WITH_0_LAB_FRAME_4 CGRectMake(CELL_WITH_0_LAB_X_0, (CELL_WITH_0_LAB_Y_0 + 3 * CELL_WITH_0_LAB_H)+10, CELL_WITH_0_LAB_W_1, CELL_WITH_0_LAB_H)
 // 节省了
-#define CELL_WITH_0_LAB_FRAME_6 CGRectMake(CELL_WITH_0_LAB_X_0+140, (CELL_WITH_0_LAB_Y_0 + 3 * CELL_WITH_0_LAB_H)+10, CELL_WITH_0_LAB_W_1, CELL_WITH_0_LAB_H)
+#define CELL_WITH_0_LAB_FRAME_6 CGRectMake((ScreenWidth / 2) + 20, (CELL_WITH_0_LAB_Y_0 + 3 * CELL_WITH_0_LAB_H)+10, CELL_WITH_0_LAB_W_1, CELL_WITH_0_LAB_H)
 
-#define CELL_WITH_0_LAB_FRAME_PRICE CGRectMake(CELL_WITH_0_LAB_X_0+140, CELL_WITH_0_LAB_Y_0+30, CELL_WITH_0_LAB_W_1, CELL_WITH_0_LAB_H)
+#define CELL_WITH_0_LAB_FRAME_PRICE CGRectMake((ScreenWidth / 2) + 20, CELL_WITH_0_LAB_Y_0+30, CELL_WITH_0_LAB_W_1, CELL_WITH_0_LAB_H)
 
 #define CELL_WITH_0_LAB_FRAME_PRICE_MARKET CGRectMake(CELL_WITH_0_LAB_X_0, CELL_WITH_0_LAB_Y_0+30, CELL_WITH_0_LAB_W_1, CELL_WITH_0_LAB_H)
 
@@ -50,7 +50,7 @@
 
 //尺码，颜色，价格，标签
 #define CELL_WITH_1_LAB_FRAME_0 CGRectMake(20, 0.+3.5, 34., 42.)
-#define CELL_WITH_1_LAB_FRAME_1 CGRectMake(172, 0.+3.5, 34., 42.)
+#define CELL_WITH_1_LAB_FRAME_1 CGRectMake((ScreenWidth / 2) + 20, 0.+3.5, 34., 42.)
 #define CELL_WITH_1_SIZE_LAB_FRAME_1 CGRectMake(10.+210, 0.+3.5, 34., 42.)
 
 
@@ -66,7 +66,6 @@
 }
 @end
 
-
 @interface ProductDetailViewController ()<mobideaRecProtocol>
 {
     MainpageServ *mainSev;
@@ -76,6 +75,9 @@
     UrlImageView* shareImgV;
     
 }
+@property (nonatomic, retain) UIScrollView* scrollViewForHeader;
+@property (nonatomic, retain) UITableView* detailTab;//大表
+@property (nonatomic, retain) UIView* vToolbar;
 @end
 
 
@@ -125,16 +127,9 @@
     
     //lee894设置首页的高度~~
     //适配屏幕及系统版本
-    CGRect frame = CGRectZero;
-    frame = CGRectMake(0, 0, 320, ScreenHeight -50);
-    
-    detailTab=[[UITableView alloc] initWithFrame:frame];
-    detailTab.delegate=self;
-    detailTab.dataSource=self;
-    detailTab.backgroundColor=[UIColor clearColor];
-    detailTab.separatorStyle=UITableViewCellSeparatorStyleNone;
-    detailTab.hidden = YES;
-    [self.view addSubview:detailTab];
+    [self.view addSubview:self.detailTab];
+    [self.view addSubview:self.vToolbar];
+    [self.view addConstraints:[self viewConstraints]];
     //创建表头	表尾
     [self createTableHeaderView];
     
@@ -151,6 +146,44 @@
     [BfdAgent visit:self itemId:self.thisProductId options:nil];
 }
 
+-(NSArray*)viewConstraints
+{
+    NSDictionary *views = @{@"detailTab" : self.detailTab, @"vToolbar" : self.vToolbar};
+    NSDictionary *metrics = @{@"barHeight" : [NSNumber numberWithFloat:lee1fitAllScreen(50)]};
+    
+    NSMutableArray *constraints = [[NSMutableArray alloc] init];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[detailTab][vToolbar(barHeight)]|" options:0 metrics:metrics views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[vToolbar]|" options:0 metrics:metrics views:views]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[detailTab]|" options:0 metrics:metrics views:views]];
+    return constraints;
+}
+
+-(UITableView *)detailTab
+{
+    if (_detailTab) {
+        return _detailTab;
+    }
+    _detailTab=[[UITableView alloc] init];
+//    _detailTab.delegate=self;
+//    _detailTab.dataSource=self;
+    _detailTab.backgroundColor=[UIColor clearColor];
+    _detailTab.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [_detailTab setTranslatesAutoresizingMaskIntoConstraints:NO];
+    _detailTab.hidden = YES;
+    return _detailTab;
+}
+
+-(UIView *)vToolbar
+{
+    if (_vToolbar) {
+        return _vToolbar;
+    }
+    _vToolbar = [[UIView alloc] init];
+    [_vToolbar setBackgroundColor:[UIColor blackColor]];
+    [_vToolbar setTranslatesAutoresizingMaskIntoConstraints:NO];
+    return _vToolbar;
+}
+
 -(void)mobidea_Recs:(NSError *)error feedback:(id)feedback{
     NSLog(@"----%@---%ld----%@",[error domain],(long)[error code],feedback);
 }
@@ -164,7 +197,7 @@
     for (int i = 1; i < 10 ; i++) {
         [numberProduct addObject:[NSString stringWithFormat:@"%d",i]];
     }
-    pickerForSelectNumber=[[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, 320, 216)];
+    pickerForSelectNumber=[[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 216)];
     [pickerForSelectNumber setDelegate:self];
     [pickerForSelectNumber setDataSource:self];
     pickerForSelectNumber.showsSelectionIndicator=YES;
@@ -173,7 +206,7 @@
     
     
     //创建toolbar
-    toolBarForNumber=[[UIToolbar alloc] initWithFrame:CGRectMake(0, ScreenHeight+20, 320, 44)];
+    toolBarForNumber=[[UIToolbar alloc] initWithFrame:CGRectMake(0, ScreenHeight+20, ScreenWidth, 44)];
     toolBarForNumber.barStyle=UIBarStyleBlackTranslucent;
     //    [self.view addSubview:toolBarForNumber];
     [[MyAppDelegate window] addSubview:toolBarForNumber];
@@ -195,14 +228,14 @@
     
     //创建picker
     //    颜色的pickeView
-    pickerForSelectColor=[[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, 320, 216)];
+    pickerForSelectColor=[[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 216)];
     [pickerForSelectColor setDelegate:self];
     [pickerForSelectColor setDataSource:self];
     pickerForSelectColor.showsSelectionIndicator=YES;
     //    [self.view addSubview:pickerForSelectColor];
     [[MyAppDelegate window] addSubview:pickerForSelectColor];
     //    尺寸的Pickview
-    pickerForSelectSize=[[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, 320, 216)];
+    pickerForSelectSize=[[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 216)];
     [pickerForSelectSize setDelegate:self];
     [pickerForSelectSize setDataSource:self];
     pickerForSelectSize.showsSelectionIndicator=YES;
@@ -210,12 +243,12 @@
     [[MyAppDelegate window] addSubview:pickerForSelectSize];
     
     //创建toolbar
-    toolBarForPicker=[[UIToolbar alloc] initWithFrame:CGRectMake(0, ScreenHeight+20, 320, 44)];
+    toolBarForPicker=[[UIToolbar alloc] initWithFrame:CGRectMake(0, ScreenHeight+20, ScreenWidth, 44)];
     toolBarForPicker.hidden = YES;
     toolBarForPicker.barStyle=UIBarStyleBlackTranslucent;
     //    [self.view addSubview:toolBarForPicker];
     [[MyAppDelegate window] addSubview:toolBarForPicker];
-    toolBarForSizePicker=[[UIToolbar alloc] initWithFrame:CGRectMake(0, ScreenHeight+20, 320, 44)];
+    toolBarForSizePicker=[[UIToolbar alloc] initWithFrame:CGRectMake(0, ScreenHeight+20, ScreenWidth, 44)];
     toolBarForSizePicker.barStyle=UIBarStyleBlackTranslucent;
     //    [self.view addSubview:toolBarForSizePicker];
     [[MyAppDelegate window] addSubview:toolBarForSizePicker];
@@ -264,9 +297,6 @@
  */
 - (void)viewWillAppear:(BOOL) animated
 {
-    [super viewWillAppear:animated];
-    
-    
     [self NewHiddenTableBarwithAnimated:YES];
 
     
@@ -281,6 +311,8 @@
     
     NSDictionary *dic=[[NSDictionary alloc]initWithObjectsAndKeys:@"1",@"disable", nil];
 	[[NSNotificationCenter defaultCenter]postNotificationName:@"enable" object:nil userInfo:dic];
+    [self hiddenBar];
+    [super viewWillAppear:animated];
 }
 
 /**
@@ -288,29 +320,29 @@
  *  @return (void)
  */
 -(void)createTableHeaderView{ //done
-    headerView=[[UIViewForRecursively alloc] initWithFrame:CGRectMake(0, 0, 320, 192)];
+//    headerView=[[UIViewForRecursively alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 192)];
     
-    UIScrollView *scrollViewForHeader = [[UIScrollView alloc] initWithFrame:CGRectMake(74.5, 0, 140+30, 212)];
+    _scrollViewForHeader = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth)];
     
-    scrollViewForHeader.showsHorizontalScrollIndicator = NO;
-    scrollViewForHeader.showsVerticalScrollIndicator = NO;
-    scrollViewForHeader.scrollsToTop = NO;
-    scrollViewForHeader.delegate = self;
-    scrollViewForHeader.bounces=YES;
-    scrollViewForHeader.clipsToBounds=NO;
-    scrollViewForHeader.pagingEnabled=YES;
-    scrollViewForHeader.contentOffset=CGPointMake(160, 0);
-    scrollViewForHeader.backgroundColor=[UIColor clearColor];
+    _scrollViewForHeader.showsHorizontalScrollIndicator = NO;
+    _scrollViewForHeader.showsVerticalScrollIndicator = NO;
+    _scrollViewForHeader.scrollsToTop = NO;
+    _scrollViewForHeader.delegate = self;
+    _scrollViewForHeader.bounces=YES;
+    _scrollViewForHeader.clipsToBounds=NO;
+    _scrollViewForHeader.pagingEnabled=YES;
+//    _scrollViewForHeader.contentOffset=CGPointMake(160, 0);
+    _scrollViewForHeader.backgroundColor=[UIColor clearColor];
     
     
-    headerView.scroll=scrollViewForHeader;//指定一下 不增加引用计数
+//    _scrollViewForHeader=scrollViewForHeader;//指定一下 不增加引用计数
     
-    UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 226)];
-    [view addSubview:headerView];
-    [view addSubview:scrollViewForHeader];
+    UIView *view=[[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth)];
+//    [view addSubview:headerView];
+    [view addSubview:_scrollViewForHeader];
     view.backgroundColor=[UIColor clearColor];
     
-    pgControlForScroll=[[MyPageControl alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2, 215, 3, 10)];
+    pgControlForScroll=[[MyPageControl alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2, view.frame.size.height - 10 - 3, 6, 10)];
     pgControlForScroll.backgroundColor=[UIColor clearColor];
     pgControlForScroll.currentPage=0;
     [pgControlForScroll setImagePageStateNormal:[UIImage imageNamed:@"pic29.png"]];
@@ -318,39 +350,39 @@
     [pgControlForScroll addTarget:self action:@selector(pgChange) forControlEvents:UIControlEventValueChanged];
     [view addSubview:pgControlForScroll];
 
-    UIImageView *leftImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 74.5, 220)];
-    leftImageView.backgroundColor = [UIColor clearColor];
+//    UIImageView *leftImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 74.5, 220)];
+//    leftImageView.backgroundColor = [UIColor clearColor];
+//    
+//    leftImageView.image = [UIImage imageNamed:@"page_bg_1136.png"];
+//    [view addSubview:leftImageView];
+//    leftImageView.userInteractionEnabled = YES;
+//    
+//    UIButton *leftBut = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [leftBut setFrame:CGRectMake(74.5-22, 216/2-16, 22, 32)];
+//    leftBut.tag = 133;
+//    [leftBut addTarget:self action:@selector(scrollBanner:) forControlEvents:UIControlEventTouchUpInside];
+//    [leftBut setImage:[UIImage imageNamed:@"arrow_left.png"] forState:UIControlStateNormal];
+//    [leftBut setImage:[UIImage imageNamed:@"arrow_left.png"] forState:UIControlStateHighlighted];
+//    
+//    [leftImageView addSubview:leftBut];
     
-    leftImageView.image = [UIImage imageNamed:@"page_bg_1136.png"];
-    [view addSubview:leftImageView];
-    leftImageView.userInteractionEnabled = YES;
     
-    UIButton *leftBut = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftBut setFrame:CGRectMake(74.5-22, 216/2-16, 22, 32)];
-    leftBut.tag = 133;
-    [leftBut addTarget:self action:@selector(scrollBanner:) forControlEvents:UIControlEventTouchUpInside];
-    [leftBut setImage:[UIImage imageNamed:@"arrow_left.png"] forState:UIControlStateNormal];
-    [leftBut setImage:[UIImage imageNamed:@"arrow_left.png"] forState:UIControlStateHighlighted];
-    
-    [leftImageView addSubview:leftBut];
-    
-    
-    UIImageView *rightImageView = [[UIImageView alloc] initWithFrame:CGRectMake(320-74.5, 0, 74.5, 220)];
-    rightImageView.backgroundColor = [UIColor clearColor];
-    rightImageView.image = [UIImage imageNamed:@"page_bg_1136.png"];
-    [view addSubview:rightImageView];
-    rightImageView.userInteractionEnabled = YES;
-    
-    UIButton *rightBut = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rightBut setFrame:CGRectMake(0, 216/2-16, 11*2, 16*2)];
-    rightBut.tag = 134;
-    [rightBut addTarget:self action:@selector(scrollBanner:) forControlEvents:UIControlEventTouchUpInside];
-    [rightBut setImage:[UIImage imageNamed:@"arrow_right.png"] forState:UIControlStateNormal];
-    [rightBut setImage:[UIImage imageNamed:@"arrow_right.png"] forState:UIControlStateHighlighted];
-    [rightImageView addSubview:rightBut];
+//    UIImageView *rightImageView = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth-74.5, 0, 74.5, 220)];
+//    rightImageView.backgroundColor = [UIColor clearColor];
+//    rightImageView.image = [UIImage imageNamed:@"page_bg_1136.png"];
+//    [view addSubview:rightImageView];
+//    rightImageView.userInteractionEnabled = YES;
+//    
+//    UIButton *rightBut = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [rightBut setFrame:CGRectMake(0, 216/2-16, 11*2, 16*2)];
+//    rightBut.tag = 134;
+//    [rightBut addTarget:self action:@selector(scrollBanner:) forControlEvents:UIControlEventTouchUpInside];
+//    [rightBut setImage:[UIImage imageNamed:@"arrow_right.png"] forState:UIControlStateNormal];
+//    [rightBut setImage:[UIImage imageNamed:@"arrow_right.png"] forState:UIControlStateHighlighted];
+//    [rightImageView addSubview:rightBut];
     
 
-    detailTab.tableHeaderView=view;
+    _detailTab.tableHeaderView=view;
     [self loadScrollSubViews];
 }
 
@@ -360,8 +392,8 @@
         case 133:
         {
             if (_currentPage != 0) {
-                CGPoint nextOffset = CGPointMake(headerView.scroll.frame.size.width*(_currentPage-1), 0);
-                [headerView.scroll setContentOffset:nextOffset animated:YES];
+                CGPoint nextOffset = CGPointMake(_scrollViewForHeader.frame.size.width*(_currentPage-1), 0);
+                [_scrollViewForHeader setContentOffset:nextOffset animated:YES];
                 _currentPage--;
             }
             
@@ -370,8 +402,8 @@
         case 134:
         {
             if (_currentPage != scrollNum-1) {
-                CGPoint nextOffset = CGPointMake(headerView.scroll.frame.size.width*(_currentPage+1), 0);
-                [headerView.scroll setContentOffset:nextOffset animated:YES];
+                CGPoint nextOffset = CGPointMake(_scrollViewForHeader.frame.size.width*(_currentPage+1), 0);
+                [_scrollViewForHeader setContentOffset:nextOffset animated:YES];
                 _currentPage++;
             }
             
@@ -388,8 +420,8 @@
 - (IBAction)leftArrowBtnTapped:(UIButton *)btn
 {
     if (_currentPage != 0) {
-        CGPoint nextOffset = CGPointMake(headerView.scroll.frame.size.width*(_currentPage-1), 0);
-        [headerView.scroll setContentOffset:nextOffset animated:YES];
+        CGPoint nextOffset = CGPointMake(_scrollViewForHeader.frame.size.width*(_currentPage-1), 0);
+        [_scrollViewForHeader setContentOffset:nextOffset animated:YES];
         _currentPage--;
     }
     
@@ -398,8 +430,8 @@
 - (IBAction)rightArrowBtnTapped:(UIButton *)btn
 {
     if (_currentPage != scrollNum-1) {
-        CGPoint nextOffset = CGPointMake(headerView.scroll.frame.size.width*(_currentPage+1), 0);
-        [headerView.scroll setContentOffset:nextOffset animated:YES];
+        CGPoint nextOffset = CGPointMake(_scrollViewForHeader.frame.size.width*(_currentPage+1), 0);
+        [_scrollViewForHeader setContentOffset:nextOffset animated:YES];
         _currentPage++;
     }
     
@@ -413,44 +445,45 @@
 -(void)loadScrollSubViews{
     //先删除子视图
     // NSLog(@"=========================================================================");
-    for (UIView *view in [headerView.scroll subviews]) {
+    for (UIView *view in [_scrollViewForHeader subviews]) {
         [view removeFromSuperview];
     }
 
     scrollNum=[productModel.bannerlist count];//有几个图片
     
     //这里只有一个pic和一个pic2 怎么弄到scrollview里啊
-    [headerView.scroll setContentSize:CGSizeMake(170*(scrollNum), 212)];
+    [_scrollViewForHeader setContentSize:CGSizeMake(SCREEN_WIDTH*(scrollNum), ScreenWidth)];
     //遍历list 获得小banner对象
     for (int i=0; i<scrollNum; i++) {
         
-        UIView *view_scroll=[[UIView alloc]initWithFrame:CGRectMake(i*170, 8, 170, 212)];
+//        UIView *view_scroll=[[UIView alloc]initWithFrame:CGRectMake(i*170, 8, 170, 212)];
         //view_scroll.backgroundColor=[UIColor blackColor];
-        UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 170, 212)];
+//        UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 170, 212)];
 //        imageView.image=[UIImage imageNamed:@"same_pic_bg.png"];
-        UrlImageButton *imgView;
-        if (isRetina) {
-            imgView=[[UrlImageButton alloc] initWithFrame:CGRectMake(10, 10, 149, 190)];
-            [imgView setImageFromUrl:YES withUrl:[self ImageSize:[[productModel.bannerlist objectAtIndex:i] BannerPic] Size:@"340x424"]];
-            
-        }else{
-            imgView=[[UrlImageButton alloc] initWithFrame:CGRectMake(11, 13, 147, 188)];
-            [imgView setImageFromUrl:YES withUrl:[self ImageSize:[[productModel.bannerlist objectAtIndex:i]BannerPic] Size:ChangeImageURL]];
-        }
+        UrlImageButton *imgView = [[UrlImageButton alloc] initWithFrame:CGRectMake(i * SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_WIDTH)];
+        [imgView setImageFromUrl:YES withUrl:[[productModel.bannerlist objectAtIndex:i]BannerPic]];
+//        if (isRetina) {
+//            imgView=[[UrlImageButton alloc] initWithFrame:CGRectMake(10, 10, 149, 190)];
+//            [imgView setImageFromUrl:YES withUrl:[self ImageSize:[[productModel.bannerlist objectAtIndex:i] BannerPic] Size:@"340x424"]];
+//            
+//        }else{
+//            imgView=[[UrlImageButton alloc] initWithFrame:CGRectMake(11, 13, 147, 188)];
+//            [imgView setImageFromUrl:YES withUrl:[self ImageSize:[[productModel.bannerlist objectAtIndex:i]BannerPic] Size:ChangeImageURL]];
+//        }
         
         if (i==0) {
-            shareImgV = [[UrlImageView alloc] initWithFrame:CGRectMake(11, 13, 147, 188)];
+            shareImgV = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH)];
             
-            [shareImgV setImageWithURL:[NSURL URLWithString:[self ImageSize:[[productModel.bannerlist objectAtIndex:i]BannerPic] Size:ChangeImageURL]] placeholderImage:nil];
+            [shareImgV setImageFromUrl:YES withUrl:[[productModel.bannerlist objectAtIndex:i]BannerPic]];
         }
         
-        imageView.tag = 100+i;
+//        imageView.tag = 100+i;
         imgView.adjustsImageWhenHighlighted=NO;
         [imgView addTarget:self action:@selector(showBigBanner:) forControlEvents:UIControlEventTouchUpInside];
-        [view_scroll addSubview:imageView];
-        [view_scroll addSubview:imgView];
-        imgView.tag=200+i;
-        [headerView.scroll addSubview:view_scroll];
+//        [view_scroll addSubview:imageView];
+//        [view_scroll addSubview:imgView];
+//        imgView.tag=200+i;
+        [_scrollViewForHeader addSubview:imgView];
     }
 }
 #pragma mark  商品大图
@@ -525,7 +558,7 @@
             if (!model.errorMessage) {
                 
                 productModel = (ProductProductDetailModel *)model;
-                detailTab.hidden = NO;
+                _detailTab.hidden = NO;
                 
                 NSDictionary *dic2 = [NSDictionary dictionaryWithObjectsAndKeys:productModel.productId, @"GoodsID",productModel.prodcutName, @"GoodsName",nil];
                 [TalkingData trackEvent:@"1002" label:@"商品详情" parameters:dic2];
@@ -570,11 +603,13 @@
                     }
 
                     //                    NSLog(@"_++++++++++++++++++++++++++++++++++++++++++++++%d",leftNUM);
-                    _buttonView_height=11+130*([productModel.recommendlist count]/3+([productModel.recommendlist count]%3==0?0:1)) + 20;
+                    _buttonView_height= 11+130*([productModel.recommendlist count]/3+([productModel.recommendlist count]%3==0?0:1)) + 20;
+                    _buttonView_height = lee1fitAllScreen(_buttonView_height);
                     self.selectedSize=nil;
                     [self loadScrollSubViews];
                     [pickerForSelectSize reloadAllComponents];
-                    [detailTab reloadData];
+                    
+//                    [_detailTab reloadData];
                     if (self.selectedSize==nil&&[productModel.array_size count]!=0) {
                         
                         for (int j = 0; j<productModel.array_size.count; j++) {
@@ -604,12 +639,81 @@
                 //找出当前currentProduct的
                 pgControlForScroll.numberOfPages=[productModel.bannerlist count];
                 [pgControlForScroll updateDots];
+                CGRect rc = pgControlForScroll.frame;
+                rc.size.width = pgControlForScroll.subviews.count * (6 + 4) + 6;
+                rc.origin.x = (SCREEN_WIDTH - rc.size.width) / 2;
+                [pgControlForScroll setFrame:rc];
                 //在刷新表之前 给表头的每个图片赋值
                 [self loadScrollSubViews];
                 //给picker数据源赋值
                 [self injectColor];
                 //            [self structMultiDesc];
-                [detailTab reloadData];
+                [_detailTab setDelegate:self];
+                [_detailTab setDataSource:self];
+                [_detailTab reloadData];
+                
+                if (_vToolbar) {
+                    
+                    //200购物车 202收藏 203去购物车 201客服
+                    UIButton* btnAddToCart = [UIButton buttonWithType:UIButtonTypeCustom];
+                    [btnAddToCart setFrame:CGRectMake(ScreenWidth - lee1fitAllScreen(117), 0, lee1fitAllScreen(117), _vToolbar.frame.size.height)];
+                    [btnAddToCart addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+                    [btnAddToCart setTag:200];
+                    [btnAddToCart.titleLabel setFont:[UIFont systemFontOfSize:17]];
+                    [btnAddToCart setTitle:@"加入购物车" forState:UIControlStateNormal];
+                    [btnAddToCart setBackgroundColor:[UIColor colorWithHexString:@"#c8002c"]];
+                    [_vToolbar addSubview:btnAddToCart];
+                    
+                    CGFloat fUnit = (ScreenWidth - btnAddToCart.frame.size.width) / 3;
+                    
+                    for (NSInteger i = 0; i < 3; ++i) {
+                        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+                        [btn setFrame:CGRectMake(i * (fUnit), 0, fUnit, lee1fitAllScreen(50))];
+                        [btn setTag:201 + i];
+                        [btn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+                        [btn setContentMode:UIViewContentModeCenter];
+                        [_vToolbar addSubview:btn];
+                        [btn.titleLabel setFont:[UIFont systemFontOfSize:9]];
+                        [btn setImageEdgeInsets:UIEdgeInsetsMake(-15, 0, 0, 0)];
+                        
+                        UILabel* lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 34, fUnit, 9)];
+                        [lbl setFont:[UIFont systemFontOfSize:9]];
+                        [lbl setTextColor:[UIColor whiteColor]];
+                        [lbl setTextAlignment:NSTextAlignmentCenter];
+                        [lbl setTag:1782329];
+                        [btn addSubview:lbl];
+                        switch (i) {
+                            case 0:
+                            {
+                                [btn setImage:[UIImage imageNamed:@"tb_ico_kf_w"] forState:UIControlStateNormal];
+                                [lbl setText:@"联系客服"];
+                            }
+                                break;
+                            case 1:
+                            {
+                                [btn setImage:[UIImage imageNamed:@"tb_ico_like_select"] forState:UIControlStateSelected];
+                                [btn setImage:[UIImage imageNamed:@"tb_ico_like_w"] forState:UIControlStateNormal];
+                                if (productModel.isSollection || isgoodHasAddFav) {
+                                    [lbl setText:@"已收藏"];
+                                    [btn setSelected:YES];
+                                }else
+                                {
+                                    [lbl setText:@"加入收藏"];
+                                }
+                            }
+                                break;
+                            case 2:
+                            {
+                                [btn setImage:[UIImage imageNamed:@"tb_ico_gwc_w"] forState:UIControlStateNormal];
+                                [lbl setText:@"购物车"];
+                            }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                
                 [SBPublicAlert hideMBprogressHUD:self.view];
                 
             }else {
@@ -622,9 +726,17 @@
         case Http_FavoriteAdd_Tag : {
             if (!model.errorMessage) {
                 [SBPublicAlert showMBProgressHUD:@"收藏成功" andWhereView:self.view hiddenTime:0.6];
-                addButfav.selected = YES;
-                
+//                addButfav.selected = YES;
                 isgoodHasAddFav = YES;
+                if(_vToolbar)
+                {
+                    UIButton* btn = (UIButton*)[_vToolbar viewWithTag:202];
+                    [btn setSelected:YES];
+                    if (btn) {
+                        UILabel* lbl = (UILabel*)[btn viewWithTag:1782329];
+                        [lbl setText:@"已收藏"];
+                    }
+                }
             }else {
                 [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:0.6];
                 
@@ -679,17 +791,17 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
     
-    pickerForSelectNumber.frame = CGRectMake(0, ScreenHeight, 320, 216);
-    toolBarForNumber.frame = CGRectMake(0, ScreenHeight+20, 320, 44);
+    pickerForSelectNumber.frame = CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+    toolBarForNumber.frame = CGRectMake(0, ScreenHeight+20, ScreenWidth, 44);
     
-    pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, 320, 216);
-    toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44)
+    pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+    toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44)
     ;
     [UIView commitAnimations];
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
-    pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, 320, 216);
-    toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44)
+    pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+    toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44)
     ;
     [UIView setAnimationDidStopSelector:@selector(hiddle)];
     [UIView commitAnimations];
@@ -709,7 +821,7 @@
             
             currentSize = [self indexOfSize:self.selectedSize];
             [self structMultiDesc];
-            [detailTab reloadData];
+            [_detailTab reloadData];
         }
     }
     else if(barButton.tag==102+100)
@@ -757,13 +869,13 @@
             }
         }
         [self setSizeButtonText];
-        [detailTab reloadData];
+        [_detailTab reloadData];
     }else if(barButton.tag==102+10){
         if (didSelectNumber != currentNumber) {
             
-            buttonForNum.text = [[NSString alloc]initWithFormat:@"%ld",currentNumber];
+            buttonForNum.text = [[NSNumber numberWithInteger:currentNumber] description];
             recordNUM=[buttonForNum.text intValue];
-            [detailTab reloadData];
+            [_detailTab reloadData];
         }
     }
 }
@@ -815,6 +927,7 @@
         [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"单品购买不得超过9件，谢谢"];
         return;
     }
+    //200购物车 202收藏 203去购物车 201客服
     switch (action.tag) {
             
         case 200: /* 加入购物车 */ {
@@ -891,13 +1004,24 @@
             }
         }
             break;
+        case 200 + 1://联系客服
+        {
             
-            
-        case 200 + 1: /* 收藏 */ {
+        }
+            break;
+        case 200 + 2: /* 收藏 */ {
             isAddFav=YES;
             
             
             if (productModel.isSollection) {
+                [MYCommentAlertView showMessage:@"您已经收藏过该商品，喜欢就买了吧" target:nil];
+                return;
+            }
+            if (isgoodHasAddFav) {
+                [MYCommentAlertView showMessage:@"您已经收藏过该商品，喜欢就买了吧" target:nil];
+                return;
+            }
+            if (action.selected) {
                 [MYCommentAlertView showMessage:@"您已经收藏过该商品，喜欢就买了吧" target:nil];
                 return;
             }
@@ -915,6 +1039,11 @@
                 alert.tag=111;
                 [alert show];
             }
+        }
+            break;
+        case 200 + 3:
+        {
+            [self changetableBarto:3];
         }
             break;
         default:
@@ -1037,7 +1166,7 @@
     
     image.frame=CGRectMake(180, 4, 50, 36);
     UIView *view_image=[[UIView alloc]init];
-    view_image.frame=CGRectMake(0, 0, 320, 44);
+    view_image.frame=CGRectMake(0, 0, ScreenWidth, 44);
     [view_image addSubview:image];
     [view_image addSubview:titleLabel];
     return view_image;
@@ -1068,21 +1197,21 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
     
-    pickerForSelectNumber.frame = CGRectMake(0,  ScreenHeight-PickShowHigh, 320, 216);
-    toolBarForNumber.frame = CGRectMake(0, ScreenHeight-PickShowHigh-44, 320, 44);
+    pickerForSelectNumber.frame = CGRectMake(0,  ScreenHeight-PickShowHigh, ScreenWidth, 216);
+    toolBarForNumber.frame = CGRectMake(0, ScreenHeight-PickShowHigh-44, ScreenWidth, 44);
     
-    pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, 320, 216);
-    toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44);
+    pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+    toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44);
     
-    pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, 320, 216);
-    toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44);
+    pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+    toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44);
     
-    toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44);
+    toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44);
     
     
     [UIView commitAnimations];
     
-    [detailTab scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [_detailTab scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     return  NO;
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -1120,7 +1249,7 @@
 
 -(void)pgChange{
     NSInteger page=pgControlForScroll.currentPage;
-    [headerView.scroll setContentOffset:CGPointMake(169*page, 0) animated:YES];
+    [_scrollViewForHeader setContentOffset:CGPointMake(SCREEN_WIDTH*page, 0) animated:YES];
 }
 
 /**
@@ -1128,8 +1257,8 @@
  *  @return (void)
  */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    CGFloat offSet=headerView.scroll.contentOffset.x;
-    pgControlForScroll.currentPage=offSet/169;
+    CGFloat offSet=_scrollViewForHeader.contentOffset.x;
+    pgControlForScroll.currentPage=offSet/SCREEN_WIDTH;
     _currentPage = pgControlForScroll.currentPage;
     [pgControlForScroll updateDots];
 }
@@ -1161,14 +1290,14 @@
         [pickerForSelectColor reloadAllComponents];//picker的数据源是会变的 reload后更换一套新的数据源
         [pickerForSelectColor selectRow:currentColor inComponent:0 animated:NO];
         
-        [detailTab scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        [_detailTab scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
-        pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, 320, 216);
-        toolBarForSizePicker.frame=CGRectMake(0,ScreenHeight+20, 320, 44);
-        pickerForSelectColor.frame=CGRectMake(0, ScreenHeight-PickShowHigh, 320, 216);
-        toolBarForPicker.frame=CGRectMake(0, ScreenHeight-PickShowHigh-44, 320, 44);
+        pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+        toolBarForSizePicker.frame=CGRectMake(0,ScreenHeight+20, ScreenWidth, 44);
+        pickerForSelectColor.frame=CGRectMake(0, ScreenHeight-PickShowHigh, ScreenWidth, 216);
+        toolBarForPicker.frame=CGRectMake(0, ScreenHeight-PickShowHigh-44, ScreenWidth, 44);
         
         [UIView commitAnimations];
     }else{
@@ -1190,15 +1319,15 @@
         }
         
         
-        [detailTab scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        [_detailTab scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
-        pickerForSelectSize.frame=CGRectMake(0, ScreenHeight-PickShowHigh, 320, 216);
-        toolBarForSizePicker.frame=CGRectMake(0,ScreenHeight-PickShowHigh-44, 320, 44);
+        pickerForSelectSize.frame=CGRectMake(0, ScreenHeight-PickShowHigh, ScreenWidth, 216);
+        toolBarForSizePicker.frame=CGRectMake(0,ScreenHeight-PickShowHigh-44, ScreenWidth, 44);
         
-        pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, 320, 216);
-        toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44);
+        pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+        toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44);
         [UIView commitAnimations];
     }
 }
@@ -1220,16 +1349,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString *myOrderCell = @"MyOrderCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:myOrderCell];
-    //详情表
-    if (cell==nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:myOrderCell];
+//    static NSString *myOrderCell = @"MyOrderCell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:myOrderCell];
+//    //详情表
+//    if (cell==nil) {
+        UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    }
-    for (UIView *v in [cell.contentView subviews]) {
-        [v removeFromSuperview];
-    }
+//    }
+//    for (UIView *v in [cell.contentView subviews]) {
+//        [v removeFromSuperview];
+//    }
     cell.contentView.backgroundColor=[UIColor clearColor];
     detailList=[productModel.detailSuper ProductdetailSuperDetail];
     NSInteger row = [indexPath row];
@@ -1268,9 +1397,9 @@
                         cellWith0Lab.font=[UIFont systemFontOfSize:12];
                         cellWith0Lab.textColor=[UIColor colorWithHexString:@"#666666"];
                         break;
-                    case 2://市场价 /原价
+                    case 2://品牌
                         if ([productModel.arr_desc count] < 3) {
-                            [cellWith0Lab setFrame:CGRectMake(160, 10+24+37, 180, 24)];
+                            [cellWith0Lab setFrame:CGRectMake((ScreenWidth / 2) + 20, 10+24+37, 180, 24)];
                         } else {
                             [cellWith0Lab setFrame:CELL_WITH_0_LAB_FRAME_2];
                         }
@@ -1280,7 +1409,7 @@
                         cellWith0Lab.font=[UIFont systemFontOfSize:12];
                         cellWith0Lab.textColor=[UIColor colorWithHexString:@"#666666"];
                         break;
-                    case 3://网站价/现售价
+                    case 3://
                         [cellWith0Lab setFrame:CELL_WITH_0_LAB_FRAME_4];
                         if ([productModel.arr_desc count]>2) {
                             [cellWith0Lab setText:[NSString stringWithFormat:@"%@",[productModel.arr_desc objectAtIndex:2]== nil?@"":[productModel.arr_desc objectAtIndex:2]]];
@@ -1288,7 +1417,7 @@
                         cellWith0Lab.font=[UIFont systemFontOfSize:12];
                         cellWith0Lab.textColor=[UIColor colorWithHexString:@"#666666"];
                         break;
-                    case 4://节省
+                    case 4://
                         [cellWith0Lab setFrame:CELL_WITH_0_LAB_FRAME_6];
                         if ([productModel.arr_desc count]>3) {
                             [cellWith0Lab setText:[NSString stringWithFormat:@"%@",[productModel.arr_desc objectAtIndex:3]== nil?@"":[productModel.arr_desc objectAtIndex:3]]];
@@ -1310,7 +1439,7 @@
             
             
             UIImageView *imageview_split=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"devider_line-1.png"]];
-            imageview_split.frame=CGRectMake(0,2, 320, 2);
+            imageview_split.frame=CGRectMake(0,2, ScreenWidth, 2);
             [cell.contentView addSubview:imageview_split];
 
             
@@ -1351,11 +1480,11 @@
             //下拉列表选择颜色按钮
             self.buttonForSelect=[UrlImageButton buttonWithType:UIButtonTypeCustom];
             [self.buttonForSelect setFrame:CGRectMake(62, 10, 79, 31)];
-            [self.buttonForSelect setImage:[UIImage imageNamed:@"choice_btn_arrow.png"] forState:UIControlStateNormal];
-            [self.buttonForSelect setImage:[UIImage imageNamed:@"choice_btn_arrow.png"]forState:UIControlStateHighlighted];
-            [self.buttonForSelect setImageEdgeInsets:UIEdgeInsetsMake(12, 65, 12, 4)];
-            [self.buttonForSelect setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
-            [self.buttonForSelect setBackgroundImage:[UIImage imageNamed:@"signup_btn_press.png"] forState:UIControlStateHighlighted];
+//            [self.buttonForSelect setImage:[UIImage imageNamed:@"choice_btn_arrow.png"] forState:UIControlStateNormal];
+//            [self.buttonForSelect setImage:[UIImage imageNamed:@"choice_btn_arrow.png"]forState:UIControlStateHighlighted];
+//            [self.buttonForSelect setImageEdgeInsets:UIEdgeInsetsMake(12, 65, 12, 4)];
+            [self.buttonForSelect setBackgroundImage:[UIImage imageNamed:@"lp_option"] forState:UIControlStateNormal];
+            [self.buttonForSelect setBackgroundImage:[UIImage imageNamed:@"lp_option_hover"] forState:UIControlStateHighlighted];
             [self.buttonForSelect addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
             self.buttonForSelect.tag=COLORBUTTON;
             [cell.contentView addSubview:self.buttonForSelect];
@@ -1373,12 +1502,12 @@
             [self.buttonForSelect addSubview:label_color];
             
             self.buttonForSize=[UrlImageButton buttonWithType:UIButtonTypeCustom];
-            [self.buttonForSize setFrame:CGRectMake(212, 10, 79, 31)];
-            [self.buttonForSize setImage:[UIImage imageNamed:@"choice_btn_arrow.png"] forState:UIControlStateNormal];
-            [self.buttonForSize setImage:[UIImage imageNamed:@"choice_btn_arrow.png"] forState:UIControlStateHighlighted];
-            [self.buttonForSize setImageEdgeInsets:UIEdgeInsetsMake(12, 65, 12, 4)];
-            [self.buttonForSize setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
-            [self.buttonForSize setBackgroundImage:[UIImage imageNamed:@"signup_btn_press.png"] forState:UIControlStateHighlighted];
+            [self.buttonForSize setFrame:CGRectMake(lee1fitAllScreen(212), 10, 79, 31)];
+//            [self.buttonForSize setImage:[UIImage imageNamed:@"choice_btn_arrow.png"] forState:UIControlStateNormal];
+//            [self.buttonForSize setImage:[UIImage imageNamed:@"choice_btn_arrow.png"] forState:UIControlStateHighlighted];
+//            [self.buttonForSize setImageEdgeInsets:UIEdgeInsetsMake(12, 65, 12, 4)];
+            [self.buttonForSize setBackgroundImage:[UIImage imageNamed:@"lp_option"] forState:UIControlStateNormal];
+            [self.buttonForSize setBackgroundImage:[UIImage imageNamed:@"lp_option_hover"] forState:UIControlStateHighlighted];
             [self.buttonForSize addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
             self.buttonForSize.tag=COLORBUTTON;
             [cell.contentView addSubview:self.buttonForSize];
@@ -1475,12 +1604,12 @@
             [cell.contentView addSubview:buttonForNum];
             
             UIButton *button_Size=[UIButton buttonWithType:UIButtonTypeCustom];
-            button_Size.frame=CGRectMake(212, 54, 75, 28);
-            [button_Size setBackgroundImage:[UIImage imageNamed:@"choice_btn_02.png"] forState:UIControlStateNormal];
-            [button_Size setBackgroundImage:[UIImage imageNamed:@"choice_btn_02_press.png"] forState:UIControlStateHighlighted];
-            
-            [button_Size setTitle:@"尺码对照" forState:UIControlStateNormal];
-            [button_Size setTitle:@"尺码对照" forState:UIControlStateHighlighted];
+            button_Size.frame=CGRectMake(lee1fitAllScreen(212), 54, 75, 28);
+            [button_Size setBackgroundImage:[UIImage imageNamed:@"lp_size_normal"] forState:UIControlStateNormal];
+            [button_Size setBackgroundImage:[UIImage imageNamed:@"lp_size_hover"] forState:UIControlStateHighlighted];
+            [button_Size setContentEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -10)];
+            [button_Size setTitle:@"尺码表" forState:UIControlStateNormal];
+            [button_Size setTitle:@"尺码表" forState:UIControlStateHighlighted];
             button_Size.titleLabel.font=[UIFont systemFontOfSize:11];
             [button_Size setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateNormal];;
             [button_Size setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:UIControlStateHighlighted];
@@ -1488,72 +1617,72 @@
             [cell.contentView addSubview:button_Size];
             
             UIImageView *imageview_split=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"h_split_.png"]];
-            imageview_split.frame=CGRectMake(20, 89, 320-40, 2);
+            imageview_split.frame=CGRectMake(20, 89, ScreenWidth-40, 2);
             [cell.contentView addSubview:imageview_split];
         }
             break;
         case 2:{
-            //动态创建 按钮数组 不改变原有button的tag分配
-            NSArray *buttonName=[NSArray arrayWithObjects:@"加入购物车",@"加入收藏",nil];
-            NSArray *buttonNameNoProduct=[NSArray arrayWithObjects:@"已售完",@"加入收藏", nil];
-            int h=0;
-            for (int i=0; i<2; i++) {
-                UIButton *buttonForAction=[UIButton buttonWithType:UIButtonTypeCustom];
-                buttonForAction.frame=CGRectMake(15+150*h+18*h, 9, 120, 40);
-                switch (i) {
-                    case 0:
-                        [buttonForAction setBackgroundImage:[UIImage imageNamed:@"login_btn.png"] forState:UIControlStateNormal];
-                        [buttonForAction setBackgroundImage:[UIImage imageNamed:@"login_btn_press.png"] forState:UIControlStateHighlighted];
-                        [buttonForAction setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-                        [buttonForAction setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-                        break;
-                    case 1:
-                    {
-                        [buttonForAction setImage:[UIImage imageNamed:@"icon_like_gray.png"] forState:UIControlStateNormal];
-                        [buttonForAction setImage:[UIImage imageNamed:@"icon_like_red.png"] forState:UIControlStateHighlighted];
-                        [buttonForAction setImage:[UIImage imageNamed:@"icon_like_red.png"] forState:UIControlStateSelected];
-                        
-                        //lee999增加收藏过的商品，显示红色
-                        //lee999 增加  || isgoodHasAddFav    修改bug  单品页，点击收藏，收藏标识变成红色，选择颜色或者尺码，收藏标识变成灰色的了。。点击收藏按钮提示已经收藏过。选择颜色尺码后收藏按钮的颜色不应变灰色
-                        if (productModel.isSollection || isgoodHasAddFav) {
-                            [buttonForAction setImage:[UIImage imageNamed:@"icon_like_red.png"] forState:UIControlStateNormal];
-                        }
-                        //end
-                        
-                        [buttonForAction setImageEdgeInsets:UIEdgeInsetsMake(10, 90, 10, 10)];
-                        [buttonForAction setTitleEdgeInsets:UIEdgeInsetsMake(10, -45, 10, 0)];
-                        [buttonForAction setBackgroundImage:[UIImage imageNamed:@"add_like_btn.png"] forState:UIControlStateNormal];
-                        [buttonForAction setBackgroundImage:[UIImage imageNamed:@"add_like_btn_press.png"] forState:UIControlStateHighlighted];
-                        [buttonForAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                        [buttonForAction setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-                        
-                        addButfav = buttonForAction;
-                    }
-                        break;
-                    default:
-                        break;
-                }
-                if (self.leftNUM<1) {
-                    if (i==0) {
-                        [buttonForAction setEnabled:NO];
-                    }
-                    
-                    [buttonForAction setTitle:[buttonNameNoProduct objectAtIndex:i] forState:UIControlStateNormal];
-                }else{
-                    [buttonForAction setTitle:[buttonName objectAtIndex:i] forState:UIControlStateNormal];
-                    [buttonForAction setEnabled:YES];
-                }
-
-                //加入收藏夹
-                [buttonForAction addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-                buttonForAction.tag=200+i;
-                [cell.contentView addSubview:buttonForAction];
-                h++;
-
+//            //动态创建 按钮数组 不改变原有button的tag分配
+//            NSArray *buttonName=[NSArray arrayWithObjects:@"加入购物车",@"加入收藏",nil];
+//            NSArray *buttonNameNoProduct=[NSArray arrayWithObjects:@"已售完",@"加入收藏", nil];
+//            int h=0;
+//            for (int i=0; i<2; i++) {
+//                UIButton *buttonForAction=[UIButton buttonWithType:UIButtonTypeCustom];
+//                buttonForAction.frame=CGRectMake(15+150*h+18*h, 9, 120, 40);
+//                switch (i) {
+//                    case 0:
+//                        [buttonForAction setBackgroundImage:[UIImage imageNamed:@"login_btn.png"] forState:UIControlStateNormal];
+//                        [buttonForAction setBackgroundImage:[UIImage imageNamed:@"login_btn_press.png"] forState:UIControlStateHighlighted];
+//                        [buttonForAction setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//                        [buttonForAction setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+//                        break;
+//                    case 1:
+//                    {
+//                        [buttonForAction setImage:[UIImage imageNamed:@"icon_like_gray.png"] forState:UIControlStateNormal];
+//                        [buttonForAction setImage:[UIImage imageNamed:@"icon_like_red.png"] forState:UIControlStateHighlighted];
+//                        [buttonForAction setImage:[UIImage imageNamed:@"icon_like_red.png"] forState:UIControlStateSelected];
+//                        
+//                        //lee999增加收藏过的商品，显示红色
+//                        //lee999 增加  || isgoodHasAddFav    修改bug  单品页，点击收藏，收藏标识变成红色，选择颜色或者尺码，收藏标识变成灰色的了。。点击收藏按钮提示已经收藏过。选择颜色尺码后收藏按钮的颜色不应变灰色
+//                        if (productModel.isSollection || isgoodHasAddFav) {
+//                            [buttonForAction setImage:[UIImage imageNamed:@"icon_like_red.png"] forState:UIControlStateNormal];
+//                        }
+//                        //end
+//                        
+//                        [buttonForAction setImageEdgeInsets:UIEdgeInsetsMake(10, 90, 10, 10)];
+//                        [buttonForAction setTitleEdgeInsets:UIEdgeInsetsMake(10, -45, 10, 0)];
+//                        [buttonForAction setBackgroundImage:[UIImage imageNamed:@"add_like_btn.png"] forState:UIControlStateNormal];
+//                        [buttonForAction setBackgroundImage:[UIImage imageNamed:@"add_like_btn_press.png"] forState:UIControlStateHighlighted];
+//                        [buttonForAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//                        [buttonForAction setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+//                        
+//                        addButfav = buttonForAction;
+//                    }
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                if (self.leftNUM<1) {
+//                    if (i==0) {
+//                        [buttonForAction setEnabled:NO];
+//                    }
+//                    
+//                    [buttonForAction setTitle:[buttonNameNoProduct objectAtIndex:i] forState:UIControlStateNormal];
+//                }else{
+//                    [buttonForAction setTitle:[buttonName objectAtIndex:i] forState:UIControlStateNormal];
+//                    [buttonForAction setEnabled:YES];
+//                }
+//
+//                //加入收藏夹
+//                [buttonForAction addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+//                buttonForAction.tag=200+i;
+//                [cell.contentView addSubview:buttonForAction];
+//                h++;
+//
                 // 商品详情按钮
                 YKProductDetailCell *productView = [[[NSBundle mainBundle] loadNibNamed:@"YKProductDetailCell" owner:self options:nil]lastObject];
                 productView.noticeLabel.text = productModel.notice ;
-                productView.frame = CGRectMake(0, 60, 320, 180);
+                productView.frame = CGRectMake(0, 0, ScreenWidth, 180);
                 //商品详情~~~~~~
                 [productView.ButProductdetail addTarget:self action:@selector(Productdetail_ActiveShow:) forControlEvents:UIControlEventTouchUpInside];
                 //商品评价~~~~~~
@@ -1561,8 +1690,8 @@
                 productView.LabelPingJiancount.text = productModel.commentcount==nil?@"":productModel.commentcount;
         
                 [cell.contentView addSubview:productView];
-
-            }
+//
+//            }
         }
             break;
         case 3:
@@ -1590,10 +1719,10 @@
         case 4:
         {//详情描述、问答、评价
             UIImageView * imageView_recommend = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"same_recommand_bg.png"]];
-            imageView_recommend.frame = CGRectMake(0, 0+10, 320, 28);
+            imageView_recommend.frame = CGRectMake(0, 0+10, ScreenWidth, 28);
             [cell.contentView addSubview:imageView_recommend];
 
-            UILabel *label_recommend = [[UILabel alloc]initWithFrame:CGRectMake(0, 0+10, 320, 28)];
+            UILabel *label_recommend = [[UILabel alloc]initWithFrame:CGRectMake(0, 0+10, ScreenWidth, 28)];
             label_recommend.textAlignment = UITextAlignmentCenter;
             label_recommend.textColor = [UIColor blackColor];
             label_recommend.text = @"同系列产品推荐";
@@ -1606,20 +1735,20 @@
             int height=11;
             for (int i=0; i<[productModel.recommendlist count]/3+1; i++) {
                 for (int j=0; j<3&&i*3+j<[productModel.recommendlist count]; j++) {
-                    UIView *view_button=[[UIView alloc]initWithFrame:CGRectMake(j*100+4, height+i*124, 112, 124)];
+                    UIView *view_button=[[UIView alloc]initWithFrame:CGRectMake(j*lee1fitAllScreen(104), height+i* lee1fitAllScreen(124), lee1fitAllScreen(112), lee1fitAllScreen(124))];
                     
-                    UIButton *control = [[UIButton alloc] initWithFrame:CGRectMake(10, 9, 91, 111)];
+                    UIButton *control = [[UIButton alloc] initWithFrame:CGRectMake(10, 9, lee1fitAllScreen(91), lee1fitAllScreen(111))];
                     control.tag =i*3+j ;
-                    [[NSUserDefaults standardUserDefaults]setObject:[[productModel.recommendlist objectAtIndex:i*3+j]RecommendID] forKey:[NSString stringWithFormat:@"%ld",control.tag]];
+                    [[NSUserDefaults standardUserDefaults]setObject:[[productModel.recommendlist objectAtIndex:i*3+j]RecommendID] forKey:[[NSNumber numberWithInteger:control.tag] description]];
                     
                     UrlImageView *imageView=[[UrlImageView alloc]init];
-                    imageView.frame=CGRectMake(0, 0, 91, 111);
+                    imageView.frame=CGRectMake(0, 0, lee1fitAllScreen(91), lee1fitAllScreen(111));
                     [imageView setImageWithURL:[NSURL URLWithString:[self ImageSize:[[productModel.recommendlist objectAtIndex:i*3+j]RecommendPic] Size:ChangeImageURL]] placeholderImage:nil];
                     [control addSubview:imageView];
                     
                     control.adjustsImageWhenHighlighted = NO;
                     control.titleLabel.font=[UIFont fontWithName:@"Helvetica" size:14];
-                    [control setTitleEdgeInsets:UIEdgeInsetsMake(0, 2, 3, 5)];
+                    [control setTitleEdgeInsets:UIEdgeInsetsMake(0, 2, lee1fitAllScreen(3), lee1fitAllScreen(5))];
                     [control setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                     [view_button addSubview:control];
                  
@@ -1695,16 +1824,16 @@
     controller.isHiddenBar = self.isHiddenBar;
     [self.navigationController pushViewController:controller animated:YES];
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([indexPath row]==0) {
-    }
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    if ([indexPath row]==0) {
+//    }
+//}
 #pragma mark-- 同产品推荐
 -(void)PressRecommend:(id)sender{
     
     UrlImageButton *button=(UrlImageButton*)sender;
     ProductDetailViewController *detial = [[ProductDetailViewController alloc]init];
-    detial.thisProductId=[[NSUserDefaults standardUserDefaults] objectForKey: [NSString stringWithFormat:@"%ld",button.tag]];
+    detial.thisProductId=[[NSUserDefaults standardUserDefaults] objectForKey:[[NSNumber numberWithInteger:button.tag] description]];
     detial.isFromMyAimer = self.isFromMyAimer;
     detial.isHiddenBar = self.isHiddenBar;
     detial.isPush = YES;
@@ -1732,7 +1861,7 @@
                 return rs;
                 break;
             case 2:
-                return 60+ 180; // lee999 修改添加购物车，收藏，商品详情，评价，公告的位置
+                return 180; // lee999 修改添加购物车，收藏，商品详情，评价，公告的位置
 //                return 152+48  + 40; //商品详情和评价 后又加上公告字段
                 
                 break;
@@ -1773,9 +1902,9 @@
                 return rs;
                 break;
             case 2:
-                return 60+ 180; // lee999 修改添加购物车，收藏，商品详情，评价，公告的位置
+                return 180; // lee999 修改添加购物车，收藏，商品详情，评价，公告的位置
 //                return 152+48  + 40; //商品详情和评价 后又加上公告字段  //
-                break;
+//                break;
             case 3:
                 if ([productModel.recommendlist count]==0) {
                     return 0;
