@@ -23,6 +23,7 @@
 @property (nonatomic, retain) NSMutableArray *hotlist;
 @property (nonatomic, retain) id warn;
 @property (nonatomic, retain) NSMutableArray *suitlist;
+@property (nonatomic, retain) NSMutableArray *packagelist;
 @property (nonatomic, retain) NSString *carStatistics;
 @property (nonatomic, retain) NSString *response;
 @property (nonatomic, retain) NSMutableArray *carProductlist;

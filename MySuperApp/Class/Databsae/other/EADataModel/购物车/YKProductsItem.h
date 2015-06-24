@@ -27,6 +27,7 @@
 @property(nonatomic,assign) int number;
 //lee999 新增套装的积分
 @property(nonatomic,assign) int suit_score;
+@property(nonatomic,retain) NSString* packageid;
 
 @property(nonatomic,retain) NSMutableArray *suits;
 @end

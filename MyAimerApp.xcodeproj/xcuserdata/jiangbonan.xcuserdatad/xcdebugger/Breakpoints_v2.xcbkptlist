@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MySuperApp/Class/UI/productdetail/ProductDetailViewController.m"
-            timestampString = "456756419.761455"
+            timestampString = "456807060.010154"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1234"
-            endingLineNumber = "1234"
+            startingLineNumber = "1233"
+            endingLineNumber = "1233"
             landmarkName = "-scrollViewWillBeginDragging:"
             landmarkType = "5">
          </BreakpointContent>

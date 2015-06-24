@@ -23,8 +23,8 @@
     NSMutableArray* textproductNumArray;
 //    NSMutableArray* textsuitNumArray;
 
-    int suitCount;  //套装拥有数量
-    
+    NSInteger suitCount;  //套装拥有数量
+    NSInteger packageCount;
     UIButton *toChectButton;
     UIButton *editButton;
     UIButton *toChectButton2;
@@ -33,7 +33,7 @@
     UIPickerView *pickerForSelectNumber;
     UIToolbar *toolBarForNumber;
     NSMutableArray *numberProduct;//物品数量的数据源
-    int currentNumber; //商品的数量
+    NSInteger currentNumber; //商品的数量
     
     UITextField *currentFiled;
     
@@ -51,6 +51,7 @@
 @property(nonatomic,retain) NSMutableArray* tableCells;
 @property(nonatomic,retain) NSMutableArray* favCells;
 @property(nonatomic,retain) NSMutableArray* suitlistcell;//套装
+@property(nonatomic,retain) NSMutableArray* packagelistcell;//套装
 
 
 @property(nonatomic,retain) UIButton* addfavButton; //选择赠品

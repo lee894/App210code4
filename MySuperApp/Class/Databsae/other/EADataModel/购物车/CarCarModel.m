@@ -83,7 +83,7 @@
     _gifts = [[NSMutableArray alloc] init];
     _suitlist = [[NSMutableArray alloc] init];
     _hotlist =  [[NSMutableArray alloc] init];
-    
+    _packagelist = [[NSMutableArray alloc] init];
     
     if(self && [json isKindOfClass:[NSDictionary class]]) {
         
@@ -253,6 +253,32 @@
             NSLog(@"arrSuit:%@",item);
             [self.suitlist addObject:item];
 
+        }
+        
+        //礼包
+        for (id dicdate in [json objectForKey:@"packagelist"]) {
+            YKSuitListItem * item = [[YKSuitListItem alloc] init];
+            for (id aSuit in [dicdate objectForKey:@"package_product"]) {
+                YKProductsItem *product=[[YKProductsItem alloc] init];
+                product.product_id = [aSuit objectForKey:@"product_id"];
+                product.name = [aSuit objectForKey:@"name"];
+                product.Count = [aSuit objectForKey:@"count"];
+                product.pic = [aSuit objectForKey:@"pic"];
+                product.mkt_price = [[aSuit objectForKey:@"mkt_price"] floatValue];
+                product.price = [[aSuit objectForKey:@"price"] floatValue];
+                product.size = [aSuit objectForKey:@"size"];
+                product.color = [aSuit objectForKey:@"color"];
+                product.stock = [aSuit objectForKey:@"stock"];
+                [item.suits addObject:product];
+                
+            }
+            item.disountprice =[[dicdate objectForKey:@"discountprice"] floatValue];
+            item.price = [[dicdate objectForKey:@"price"] floatValue];
+            item.save = [[dicdate objectForKey:@"save"] floatValue];
+            item.packageid = [dicdate objectForKey:@"packageid"];
+            NSLog(@"arrSuit:%@",item);
+            [self.packagelist addObject:item];
+            
         }
         
         id value = [json objectForKey:@"showwarn"];
