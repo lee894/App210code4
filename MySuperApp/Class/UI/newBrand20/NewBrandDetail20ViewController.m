@@ -132,7 +132,7 @@
     for (UIView *view in bannerView.subviews) {
         [view removeFromSuperview];
     }
-    int length = _detailinfo.home_banner.count;
+    NSInteger length = _detailinfo.home_banner.count;
     NSMutableArray *itemArray = [NSMutableArray arrayWithCapacity:length+2];
     if (length > 1)
     {

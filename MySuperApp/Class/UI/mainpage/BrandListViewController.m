@@ -94,7 +94,6 @@
     [TalkingData trackEvent:@"5004" label:@"点击品牌详情" parameters:dic1];
     
     
-    
     NewBrandDetail20ViewController *brandvc = [[NewBrandDetail20ViewController alloc] initWithNibName:@"NewBrandDetail20ViewController" bundle:nil];
     brandvc.brandname = wallModel.name;
     [self.navigationController pushViewController:brandvc animated:YES];
