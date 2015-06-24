@@ -172,8 +172,8 @@
 #define SPlashViewUrl @"http://mtest.aimer.com.cn:8888/method/appslogoios"
 
 //API的host路径
-//#define OFFICIALDOMAIN @"http://mobiletest.aimer.com.cn:8888/mobile/"
-#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobile/"
+#define OFFICIALDOMAIN @"http://mobiletest.aimer.com.cn:8888/mobile/"
+//#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobile/"
 //#define OFFICIALDOMAIN @"http://124.207.152.104/mobile/"
 //#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobiletest/"
 //#define OFFICIALDOMAIN @"http://124.207.72.140:8888/mobiletest/"
@@ -468,7 +468,7 @@
 #define Main_API           (@"main") //app首页
 #define HOME_PAGE_API      (@"home")
 #define SCAN_API           (@"scan") //扫描
-#define BRANDS_WALL_API    (@"brandslist")//品牌馆
+#define BRANDS_WALL_API    (@"brandslist20")//品牌馆
 #define Brandtrend_API     (@"brandtrend")// 潮流新品
 #define Brandzixun_API     (@"brandzixun") // 品牌资讯
 #define BRANDS_LIST_API    (@"/Brands/index/order/initial")//返回: 使用initial排序的有序数据

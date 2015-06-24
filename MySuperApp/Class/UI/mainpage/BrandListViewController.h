@@ -14,10 +14,10 @@
 #define BrandCellNum 2
 
 
-@interface BrandListViewController : LBaseViewController<UITableViewDataSource,UITableViewDelegate,ServiceDelegate>
+@interface BrandListViewController : LBaseViewController<ServiceDelegate>
 
 @property (retain, nonatomic) BrandsModel *brandModel;
 
-- (IBAction)changebrandView:(UIButton *)sender;
+//- (IBAction)changebrandView:(UIButton *)sender;
 
 @end
