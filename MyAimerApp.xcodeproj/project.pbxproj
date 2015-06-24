@@ -1135,6 +1135,8 @@
 		A6218DA21B395F5C00D9ED93 /* tb_ico_like_w@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218D9B1B395F5C00D9ED93 /* tb_ico_like_w@2x.png */; };
 		A6218DA51B3A665900D9ED93 /* choice_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218DA31B3A665900D9ED93 /* choice_checked@2x.png */; };
 		A6218DA61B3A665900D9ED93 /* choice_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218DA41B3A665900D9ED93 /* choice_unchecked@2x.png */; };
+		A6218DA91B3AB52300D9ED93 /* btn_mid_b_hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218DA71B3AB52300D9ED93 /* btn_mid_b_hover@2x.png */; };
+		A6218DAA1B3AB52300D9ED93 /* btn_mid_b_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218DA81B3AB52300D9ED93 /* btn_mid_b_normal@2x.png */; };
 		A67BEAB81B281A0300418650 /* aimerLogoDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A67BEAB71B281A0300418650 /* aimerLogoDefault@2x.png */; };
 		A6F394EB1B2E7C74004566CA /* PackageInfoParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F394E81B2E7C74004566CA /* PackageInfoParser.m */; };
 		A6F394EC1B2E7C74004566CA /* PackageInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F394EA1B2E7C74004566CA /* PackageInfoViewController.m */; };
@@ -2896,6 +2898,8 @@
 		A6218D9B1B395F5C00D9ED93 /* tb_ico_like_w@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb_ico_like_w@2x.png"; sourceTree = "<group>"; };
 		A6218DA31B3A665900D9ED93 /* choice_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "choice_checked@2x.png"; sourceTree = "<group>"; };
 		A6218DA41B3A665900D9ED93 /* choice_unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "choice_unchecked@2x.png"; sourceTree = "<group>"; };
+		A6218DA71B3AB52300D9ED93 /* btn_mid_b_hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_mid_b_hover@2x.png"; sourceTree = "<group>"; };
+		A6218DA81B3AB52300D9ED93 /* btn_mid_b_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_mid_b_normal@2x.png"; sourceTree = "<group>"; };
 		A67BEAB71B281A0300418650 /* aimerLogoDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aimerLogoDefault@2x.png"; sourceTree = "<group>"; };
 		A6F394E71B2E7C74004566CA /* PackageInfoParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageInfoParser.h; sourceTree = "<group>"; };
 		A6F394E81B2E7C74004566CA /* PackageInfoParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageInfoParser.m; sourceTree = "<group>"; };
@@ -6042,6 +6046,8 @@
 		A6218D941B395F5C00D9ED93 /* Cart20 */ = {
 			isa = PBXGroup;
 			children = (
+				A6218DA71B3AB52300D9ED93 /* btn_mid_b_hover@2x.png */,
+				A6218DA81B3AB52300D9ED93 /* btn_mid_b_normal@2x.png */,
 				A6218D951B395F5C00D9ED93 /* lp_option_hover@2x.png */,
 				A6218D961B395F5C00D9ED93 /* lp_size_hover@2x.png */,
 				A6218D971B395F5C00D9ED93 /* lp_size_normal@2x.png */,
@@ -6366,6 +6372,7 @@
 				962693A31A135FB700A0BC7F /* list_bg_big.png in Resources */,
 				962694181A135FB700A0BC7F /* page_bg_1136.png in Resources */,
 				962694A31A135FB700A0BC7F /* top3_search_hot.png in Resources */,
+				A6218DAA1B3AB52300D9ED93 /* btn_mid_b_normal@2x.png in Resources */,
 				9685FA521ADD75ED00BF2DE8 /* select_ico@2x.png in Resources */,
 				96308D0E1AD968110068D271 /* t_ico_location_hover@2x.png in Resources */,
 				A6F3954B1B2ED352004566CA /* yhq_laber_bg@2x.png in Resources */,
@@ -6812,6 +6819,7 @@
 				9685FA7D1ADD75ED00BF2DE8 /* zz_labler_bg_no_line@2x.png in Resources */,
 				9B486AB4191A45200021E57D /* LogisticsViewController.xib in Resources */,
 				9685FA571ADD75ED00BF2DE8 /* sx_body@2x.png in Resources */,
+				A6218DA91B3AB52300D9ED93 /* btn_mid_b_hover@2x.png in Resources */,
 				962693B21A135FB700A0BC7F /* icon@2x.png in Resources */,
 				962694C01A135FB700A0BC7F /* pic_default_home_modle.png in Resources */,
 				9B486AB9191A45880021E57D /* LogisticsCell.xib in Resources */,

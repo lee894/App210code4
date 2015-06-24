@@ -179,7 +179,6 @@
         return _vToolbar;
     }
     _vToolbar = [[UIView alloc] init];
-    [_vToolbar setBackgroundColor:[UIColor blackColor]];
     [_vToolbar setTranslatesAutoresizingMaskIntoConstraints:NO];
     return _vToolbar;
 }
@@ -653,7 +652,8 @@
                 [_detailTab reloadData];
                 
                 if (_vToolbar) {
-                    
+                    [_vToolbar setBackgroundColor:[UIColor blackColor]];
+
                     //200购物车 202收藏 203去购物车 201客服
                     UIButton* btnAddToCart = [UIButton buttonWithType:UIButtonTypeCustom];
                     [btnAddToCart setFrame:CGRectMake(ScreenWidth - lee1fitAllScreen(117), 0, lee1fitAllScreen(117), _vToolbar.frame.size.height)];

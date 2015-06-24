@@ -20,6 +20,7 @@
     BOOL isEditing; //是否编辑状态
 
 }
+@property (nonatomic, retain) NSMutableArray* selectedList;
 @end
 
 @implementation CarpageViewController
@@ -60,7 +61,7 @@
 	_favCells = [[NSMutableArray alloc] init] ;
     _suitlistcell = [[NSMutableArray alloc] initWithCapacity:1];
     _packagelistcell = [[NSMutableArray alloc] initWithCapacity:1];
-    
+    _selectedList = [[NSMutableArray alloc] initWithCapacity:1];
     mainSer = [[MainpageServ alloc] init];
     mainSer.delegate = self;
     
@@ -306,6 +307,7 @@
                 
                 [self creatCells];
                 [self createSuitlistcells];
+                [self createPackagelistcells];
                 
                 [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:0.6];
                 
@@ -314,6 +316,7 @@
                 
                 [self creatCells];
                 [self createSuitlistcells];
+                [self createPackagelistcells];
                 
                 [SBPublicAlert hideMBprogressHUD:self.view];
                 [shoppingCarTab reloadData];
@@ -348,6 +351,7 @@
             self.carModel = (CarCarModel *)model;
             [self creatCells];
             [self createSuitlistcells];
+            [self createPackagelistcells];
             
             [shoppingCarTab reloadData];
             
@@ -455,115 +459,157 @@
 
 - (void)creatFootView
 {
-	UIView* footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(400))];
+    CGFloat unitHeight = lee1fitAllScreen(187);
+    NSInteger row = _carModel.hotlist.count % 3 > 0 ? (_carModel.hotlist.count / 3 + 1) : (_carModel.hotlist.count / 3);
+	UIView* footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 39 + 65 + unitHeight * (row))];
 	footView.backgroundColor = [UIColor clearColor];
 	
-	UIButton* gotoChectOut = [UIButton buttonWithType:UIButtonTypeCustom];
-	gotoChectOut.frame = CGRectMake(10, 10, 130, 35);
-	gotoChectOut.titleLabel.font = [UIFont systemFontOfSize:13];
-	[gotoChectOut setTitle:@"去结算" forState:UIControlStateNormal];
-	[gotoChectOut addTarget:self action:@selector(gotoChectViewC) forControlEvents:UIControlEventTouchUpInside];
-//	if (shoppingCarTab.editing)
-    if (isEditing)
-    {
-		[gotoChectOut setBackgroundImage:[UIImage imageNamed:@"login_btn_press.png"] forState:UIControlStateNormal];
-		gotoChectOut.enabled = NO;
-	}else {
-		[gotoChectOut setBackgroundImage:[UIImage imageNamed:@"login_btn.png"] forState:UIControlStateNormal];
-		gotoChectOut.enabled = YES;
-	}
-	[gotoChectOut setBackgroundImage:[UIImage imageNamed:@"login_btn_press.png"] forState:UIControlStateHighlighted];
-	[footView addSubview:gotoChectOut];
-	
-	UIButton* goonShopping = [UIButton buttonWithType:UIButtonTypeCustom];
-	goonShopping.frame = CGRectMake(180, 10, 130, 35);
-	goonShopping.titleLabel.font = [UIFont systemFontOfSize:13];
-	[goonShopping setTitle:@"继续购物" forState:UIControlStateNormal];
-    [goonShopping setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [goonShopping setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-	[goonShopping addTarget:self action:@selector(gotoShopping) forControlEvents:UIControlEventTouchUpInside];
-//	if (shoppingCarTab.editing)
-    if (isEditing)
-    {
-		[goonShopping setBackgroundImage:[UIImage imageNamed:@"signup_btn_press.png"] forState:UIControlStateNormal];
-		goonShopping.enabled = NO;
-	}else {
-		[goonShopping setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
-		goonShopping.enabled = YES;
-	}
-	[goonShopping setBackgroundImage:[UIImage imageNamed:@"signup_btn_press.png"] forState:UIControlStateHighlighted];
-	[footView addSubview:goonShopping];
+//	UIButton* gotoChectOut = [UIButton buttonWithType:UIButtonTypeCustom];
+//	gotoChectOut.frame = CGRectMake(10, 10, 130, 35);
+//	gotoChectOut.titleLabel.font = [UIFont systemFontOfSize:13];
+//	[gotoChectOut setTitle:@"去结算" forState:UIControlStateNormal];
+//	[gotoChectOut addTarget:self action:@selector(gotoChectViewC) forControlEvents:UIControlEventTouchUpInside];
+////	if (shoppingCarTab.editing)
+//    if (isEditing)
+//    {
+//		[gotoChectOut setBackgroundImage:[UIImage imageNamed:@"login_btn_press.png"] forState:UIControlStateNormal];
+//		gotoChectOut.enabled = NO;
+//	}else {
+//		[gotoChectOut setBackgroundImage:[UIImage imageNamed:@"login_btn.png"] forState:UIControlStateNormal];
+//		gotoChectOut.enabled = YES;
+//	}
+//	[gotoChectOut setBackgroundImage:[UIImage imageNamed:@"login_btn_press.png"] forState:UIControlStateHighlighted];
+//	[footView addSubview:gotoChectOut];
+//	
+//	UIButton* goonShopping = [UIButton buttonWithType:UIButtonTypeCustom];
+//	goonShopping.frame = CGRectMake(180, 10, 130, 35);
+//	goonShopping.titleLabel.font = [UIFont systemFontOfSize:13];
+//	[goonShopping setTitle:@"继续购物" forState:UIControlStateNormal];
+//    [goonShopping setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [goonShopping setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+//	[goonShopping addTarget:self action:@selector(gotoShopping) forControlEvents:UIControlEventTouchUpInside];
+////	if (shoppingCarTab.editing)
+//    if (isEditing)
+//    {
+//		[goonShopping setBackgroundImage:[UIImage imageNamed:@"signup_btn_press.png"] forState:UIControlStateNormal];
+//		goonShopping.enabled = NO;
+//	}else {
+//		[goonShopping setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
+//		goonShopping.enabled = YES;
+//	}
+//	[goonShopping setBackgroundImage:[UIImage imageNamed:@"signup_btn_press.png"] forState:UIControlStateHighlighted];
+//	[footView addSubview:goonShopping];
     
     //活动公告
-    UILabel * noticeTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 35+15, 100, 20)];
-	noticeTitle.text = @"温馨提示：";
-	noticeTitle.textColor = [UIColor colorWithHexString:@"0xB90023"];//UIColorFromRGB(0xB90023);
-	noticeTitle.backgroundColor = [UIColor clearColor];
-	noticeTitle.font = [UIFont systemFontOfSize:14];
-	[footView addSubview:noticeTitle];
+//    UILabel * noticeTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 14, 100, 20)];
+//	noticeTitle.text = @"";
+//	noticeTitle.textColor = [UIColor colorWithHexString:@"0xB90023"];//UIColorFromRGB(0xB90023);
+//	noticeTitle.backgroundColor = [UIColor clearColor];
+//	noticeTitle.font = [UIFont systemFontOfSize:14];
+//	[footView addSubview:noticeTitle];
     
-    UILabel * notice = [[UILabel alloc] initWithFrame:CGRectMake(10, 35+30, 300, 60)];
-	notice.text = self.carModel.notice ;
-	notice.textColor = [UIColor colorWithHexString:@"0xB90023"];//UIColorFromRGB(0xB90023);
+    UILabel * notice = [[UILabel alloc] initWithFrame:CGRectMake(20, 14, ScreenWidth - 40, 65)];
+	notice.text = [NSString stringWithFormat:@"温馨提示：%@", self.carModel.notice];
+	notice.textColor = [UIColor colorWithHexString:@"#181818"];//UIColorFromRGB(0xB90023);
 	notice.backgroundColor = [UIColor clearColor];
 	notice.font = [UIFont systemFontOfSize:14];
     notice.numberOfLines = 3;
 	[footView addSubview:notice];
 	
     //推荐商品列表
-	UIImageView* segbg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"banner_dot_bg.png"]];
-	segbg.frame = CGRectMake(0, 40+80, ScreenWidth, lee1fitAllScreen(30));
-	[footView addSubview:segbg];
+//	UIImageView* segbg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"banner_dot_bg.png"]];
+//	segbg.frame = CGRectMake(0, 40+80, ScreenWidth, lee1fitAllScreen(30));
+//	[footView addSubview:segbg];
 	
-	UILabel* tit = [[UILabel alloc] initWithFrame:CGRectMake(125, 45+80, 100, 20)];
+	UILabel* tit = [[UILabel alloc] initWithFrame:CGRectMake(0, 65 + 12 + 1, ScreenWidth, 13)];
 	tit.text = @"热销商品推荐";
-	tit.textColor = [UIColor blackColor];
+	tit.textColor = [UIColor colorWithHexString:@"#181818"];
+    tit.textAlignment = NSTextAlignmentCenter;
 	tit.backgroundColor = [UIColor clearColor];
-	tit.font = [UIFont systemFontOfSize:12];
+	tit.font = [UIFont systemFontOfSize:13];
 	[footView addSubview:tit];
 	
-	for (int i = 0; i < [self.carModel.hotlist count]; i ++) {
+    CGFloat originX = 10;
+    CGFloat originY = 39 + 65;
+    CGFloat unitWidth = lee1fitAllScreen(90);
+    CGFloat spacing = (ScreenWidth - unitWidth * 3 - originX * 2) / 2;
+	for (NSInteger i = 0; i < [self.carModel.hotlist count]; ++i) {
 		YKItem* item = (YKItem *)[self.carModel.hotlist objectAtIndex:i];
-		if (i >= 3)
-        {
-			UIImageView* re_bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bigpic_bg.png"]];
-			re_bgView.frame = CGRectMake(10+103*(i-3), 185+80, 93, 113);
-//			[footView addSubview:re_bgView];
-			
-			UrlImageView* shoppingImg = [[UrlImageView alloc] init];
-			[shoppingImg setImageWithURL:[NSURL URLWithString:(NSString *)[self ImageSize:item.imgurl Size:ChangeImageURL]]  placeholderImage:nil];
-			shoppingImg.frame = CGRectMake(15+103*(i-3), 190+80, 82, 102);
-			shoppingImg.backgroundColor = [UIColor clearColor];
-			[footView addSubview:shoppingImg];
-			
-			UIButton* touchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-			touchButton.frame = CGRectMake(10+103*(i-3), 185+80, 93, 113);
-			touchButton.tag = i;
-			[touchButton addTarget:self action:@selector(touchAction:) forControlEvents:UIControlEventTouchUpInside];
-			[footView addSubview:touchButton];
-			
-		} else {
-			UIImageView* re_bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bigpic_bg.png"]];
-			re_bgView.frame = CGRectMake(10+103*i, 70+80, 93, 113);
-//			[footView addSubview:re_bgView];
-			
-			UrlImageView* shoppingImg = [[UrlImageView alloc] init];
-            if (isRetina) {
-                [shoppingImg setImageWithURL:[NSURL URLWithString:(NSString *)[self ImageSize:item.imgurl Size:ChangeImageURL]]  placeholderImage:nil];
-            }else{
-                [shoppingImg setImageWithURL:[NSURL URLWithString:(NSString *)[self ImageSize:item.imgurl Size:ChangeImageURL]]  placeholderImage:nil];
-            }
-			
-			shoppingImg.frame = CGRectMake(15+103*i, 75+80, 82, 102);
-			shoppingImg.backgroundColor = [UIColor clearColor];
-			[footView addSubview:shoppingImg];
-			
-			UIButton* touchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-			touchButton.frame = CGRectMake(10+103*i, 70+80, 93, 113);
-			touchButton.tag = i;
-			[touchButton addTarget:self action:@selector(touchAction:) forControlEvents:UIControlEventTouchUpInside];
-			[footView addSubview:touchButton];
-		}
+        UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(originX + (i % 3) * (spacing + unitWidth), (i / 3) * (unitHeight) + originY, unitWidth, unitHeight)];
+        UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 0, unitWidth, lee1fitAllScreen(110))];
+        [uiv setImageWithURL:[NSURL URLWithString:item.imgurl] placeholderImage:nil];
+        [vUnit addSubview:uiv];
+        
+        UILabel* lblName = [[UILabel alloc] init];
+        [lblName setText:item.name];
+        [lblName setTextColor:[UIColor colorWithHexString:@"#333333"]];
+        [lblName setFont:[UIFont systemFontOfSize:11]];
+        [lblName setLineBreakMode:NSLineBreakByTruncatingTail];
+        [lblName setNumberOfLines:2];
+        
+        NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
+        mps.lineBreakMode = NSLineBreakByCharWrapping;
+        mps.lineSpacing = 6;
+        CGRect rcName = [lblName.text boundingRectWithSize:CGSizeMake(unitWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblName.font, NSParagraphStyleAttributeName : mps} context:nil];
+        [lblName setFrame:CGRectMake(0, uiv.frame.origin.y + uiv.frame.size.height + 10, unitWidth, rcName.size.height)];
+        [vUnit addSubview:lblName];
+        
+        UILabel* lblPrice = [[UILabel alloc] init];
+        [lblPrice setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
+        [lblPrice setText:[NSString stringWithFormat:@"￥%@", item.strdiscountprice]];
+        [lblPrice setFont:[UIFont systemFontOfSize:12]];
+        [lblPrice setFrame:CGRectMake(0, uiv.frame.size.height + uiv.frame.origin.y + 45, unitWidth, 13)];
+        [vUnit addSubview:lblPrice];
+        
+        UILabel* lblMPrice = [[UILabel alloc] init];
+        [lblMPrice setTextColor:[UIColor colorWithHexString:@"#888888"]];
+        [lblMPrice setText:[NSString stringWithFormat:@"￥%@", item.price]];
+        [lblMPrice setFont:[UIFont systemFontOfSize:12]];
+        [lblMPrice setTextAlignment:NSTextAlignmentRight];
+        [lblMPrice setFrame:CGRectMake(0, uiv.frame.size.height + uiv.frame.origin.y + 45, unitWidth, 13)];
+        [vUnit addSubview:lblMPrice];
+        
+        [footView addSubview:vUnit];
+//		if (i >= 3)
+//        {
+////			UIImageView* re_bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bigpic_bg.png"]];
+////			re_bgView.frame = CGRectMake(10+103*(i-3), 185+80, 93, 113);
+////			[footView addSubview:re_bgView];
+//			
+//			UrlImageView* shoppingImg = [[UrlImageView alloc] init];
+//			[shoppingImg setImageWithURL:[NSURL URLWithString:(NSString *)[self ImageSize:item.imgurl Size:ChangeImageURL]]  placeholderImage:nil];
+//			shoppingImg.frame = CGRectMake(15+103*(i-3), 190+80, 82, 102);
+//			shoppingImg.backgroundColor = [UIColor clearColor];
+//			[footView addSubview:shoppingImg];
+//			
+//			UIButton* touchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//			touchButton.frame = CGRectMake(10+103*(i-3), 185+80, 93, 113);
+//			touchButton.tag = i;
+//			[touchButton addTarget:self action:@selector(touchAction:) forControlEvents:UIControlEventTouchUpInside];
+//			[footView addSubview:touchButton];
+//			
+//		} else {
+//			UIImageView* re_bgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bigpic_bg.png"]];
+//			re_bgView.frame = CGRectMake(10+103*i, 70+80, 93, 113);
+////			[footView addSubview:re_bgView];
+//			
+//			UrlImageView* shoppingImg = [[UrlImageView alloc] init];
+//            if (isRetina) {
+//                [shoppingImg setImageWithURL:[NSURL URLWithString:(NSString *)[self ImageSize:item.imgurl Size:ChangeImageURL]]  placeholderImage:nil];
+//            }else{
+//                [shoppingImg setImageWithURL:[NSURL URLWithString:(NSString *)[self ImageSize:item.imgurl Size:ChangeImageURL]]  placeholderImage:nil];
+//            }
+//			
+//			shoppingImg.frame = CGRectMake(15+103*i, 75+80, 82, 102);
+//			shoppingImg.backgroundColor = [UIColor clearColor];
+//			[footView addSubview:shoppingImg];
+//			
+//			UIButton* touchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//			touchButton.frame = CGRectMake(10+103*i, 70+80, 93, 113);
+//			touchButton.tag = i;
+//			[touchButton addTarget:self action:@selector(touchAction:) forControlEvents:UIControlEventTouchUpInside];
+//			[footView addSubview:touchButton];
+//		}
 	}
 	
 	shoppingCarTab.tableFooterView = footView;
@@ -927,11 +973,11 @@
                                                                   reuseIdentifier:CellIdentifier];
         shoppingCarCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        UIImageView *cellBg = [[UIImageView alloc] initWithFrame:CGRectMake(10, 3, ScreenWidth-20, lee1fitAllScreen(150))];
-        //[cellBg setImage:[UIImage imageNamed:@"edit_infor_bg.png"]];
-        //lee给view设置为圆角，不再使用图片了。 -140512
-        [SingletonState setViewRadioSider:cellBg];
-        [shoppingCarCell addSubview:cellBg];
+//        UIImageView *cellBg = [[UIImageView alloc] initWithFrame:CGRectMake(10, 3, ScreenWidth-20, lee1fitAllScreen(150))];
+//        //[cellBg setImage:[UIImage imageNamed:@"edit_infor_bg.png"]];
+//        //lee给view设置为圆角，不再使用图片了。 -140512
+//        [SingletonState setViewRadioSider:cellBg];
+//        [shoppingCarCell addSubview:cellBg];
         
 		
 		YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:i];
@@ -946,12 +992,21 @@
             }
         }
         
-        UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(14, 15, 88, 110)];
-        // [bgImageView setImage:[UIImage imageNamed:@"same_pic_bg.png"]];
-        [shoppingCarCell addSubview:bgImageView];
+//        UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(14, 15, 88, 110)];
+//        // [bgImageView setImage:[UIImage imageNamed:@"same_pic_bg.png"]];
+//        [shoppingCarCell addSubview:bgImageView];
 		
+        UIButton* btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnCheckBox setFrame:CGRectMake(14, 44, lee1fitAllScreen(22), lee1fitAllScreen(22))];
+        [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
+        [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
+        [btnCheckBox addTarget:self action:@selector(productCheckBoxAction:) forControlEvents:UIControlEventTouchUpInside];
+        [shoppingCarCell addSubview:btnCheckBox];
+        
+        CGFloat xOffset = 28 + lee1fitAllScreen(28);
+        
 		UrlImageView* shoppingImg = [[UrlImageView alloc] init];
-		shoppingImg.frame = CGRectMake(16, 17, 84, 103);
+		shoppingImg.frame = CGRectMake(xOffset, 16, lee1fitAllScreen(70), lee1fitAllScreen(90));
         if (isRetina) {
             [shoppingImg setImageWithURL:[NSURL URLWithString:[self ImageSize:item.imgurl Size:ChangeImageURL]] placeholderImage:nil];
         }else{
@@ -961,12 +1016,14 @@
 //		shoppingImg.backgroundColor = [UIColor clearColor];
 		[shoppingCarCell addSubview:shoppingImg];
         
-        int yOffset = 5;
+        CGFloat fTextWidth = ScreenWidth - shoppingImg.frame.size.width - xOffset - 12 - 16;
+        xOffset = shoppingImg.frame.size.width + shoppingImg.frame.origin.x + 16;
+        CGFloat yOffset = 9;
         if (!showStock) {
             yOffset += 5;
         }
 		
-        int nameHeight = showStock?40:50;
+        CGFloat nameHeight = showStock?40:50;
 		if ([item.type isEqualToString:@"gift"]) {
             
             CGSize textSize = [[NSString stringWithFormat:@"              %@",item.name] sizeWithFont:[UIFont systemFontOfSize:13.0] constrainedToSize:CGSizeMake(shoppingCarTab.editing?160:180, 50) lineBreakMode:NSLineBreakByTruncatingTail];
@@ -991,8 +1048,7 @@
 		}
         else {
 			//UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, yOffset, shoppingCarTab.editing?160:180, nameHeight)];
-            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, yOffset,180, nameHeight)];
-
+            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset, fTextWidth, nameHeight)];
 			shoppingName.backgroundColor = [UIColor clearColor];
 			shoppingName.numberOfLines = 0;
 			shoppingName.lineBreakMode = UILineBreakModeWordWrap;
@@ -1005,11 +1061,11 @@
         
         //lee999  显示缺货的文字
         if (showStock) {
-            UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(110, yOffset, 180, 20)];
+            UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(shoppingImg.frame.origin.x, shoppingImg.frame.origin.y + shoppingImg.frame.size.height + 10, shoppingImg.frame.size.width + 16 + fTextWidth / 2, 13)];
             desc.backgroundColor = [UIColor clearColor];
             desc.text = item.stock;
-            desc.font = [UIFont systemFontOfSize:12];
-            desc.textColor = [UIColor colorWithHexString:@"0xB90023"];//UIColorFromRGB(0xB90023);
+            desc.font = [UIFont systemFontOfSize:13];
+            desc.textColor = [UIColor colorWithHexString:@"0xc8002c"];//UIColorFromRGB(0xB90023);
             [shoppingCarCell addSubview:desc];
             yOffset += 20;
         }
@@ -1017,12 +1073,12 @@
         if (!isShowStock) {
             
             //UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(110, yOffset, shoppingCarTab.editing?75:105, 20)];
-            UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(110, yOffset,105, 20)];
+            UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, 62, fTextWidth / 2, 13)];
             colorName.backgroundColor = [UIColor clearColor];
             colorName.lineBreakMode = NSLineBreakByTruncatingTail;
             colorName.text = [NSString stringWithFormat:@"颜色：%@",item.color];
-            colorName.font = [UIFont systemFontOfSize:12];
-            colorName.textColor = [UIColor colorWithHexString:@"0x3b3b3b"];//UIColorFromRGB(0x3b3b3b);
+            colorName.font = [UIFont systemFontOfSize:13];
+            colorName.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x3b3b3b);
             [shoppingCarCell addSubview:colorName];
             
             UILabel* numberName = [[UILabel alloc] init];
@@ -1031,16 +1087,16 @@
             //}else {
               //  numberName.frame=CGRectMake(shoppingCarTab.editing?198:213, yOffset, 110, 20);
             //}
-            numberName.frame=CGRectMake(213, yOffset, 110, 20);
+            numberName.frame=CGRectMake(xOffset + fTextWidth / 2, colorName.frame.origin.y, 110, 20);
             numberName.backgroundColor = [UIColor clearColor];
             numberName.text = @"数量：";
-            numberName.font = [UIFont systemFontOfSize:12];
-            numberName.textColor = [UIColor colorWithHexString:@"0x3b3b3b"];//UIColorFromRGB(0x3b3b3b);
+            numberName.font = [UIFont systemFontOfSize:13];
+            numberName.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x3b3b3b);
             [shoppingCarCell addSubview:numberName];
             
             //lee999 商品数量
            // UITextField* numberValue = [[UITextField alloc] initWithFrame:CGRectMake(isEditing?228:245, yOffset+1, 36, 20)];
-            UITextField* numberValue = [[UITextField alloc] initWithFrame:CGRectMake(245, yOffset+1, 36, 20)];
+            UITextField* numberValue = [[UITextField alloc] initWithFrame:CGRectMake(lee1fitAllScreen(245), numberName.frame.origin.y - 1, 36, 20)];
             numberValue.textAlignment=UITextAlignmentCenter;
             numberValue.tag = 100992;
             
@@ -1062,63 +1118,69 @@
             [shoppingCarCell addSubview:numberValue];
             yOffset += 18;
             
-            UILabel* sizeName = [[UILabel alloc] initWithFrame:CGRectMake(110, yOffset, 100, 25)];
+            UILabel* sizeName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, 87, fTextWidth / 2, 13)];
             sizeName.backgroundColor = [UIColor clearColor];
             sizeName.text = [NSString stringWithFormat:@"尺码：%@",item.size];
-            sizeName.font = [UIFont systemFontOfSize:12];
+            sizeName.font = [UIFont systemFontOfSize:13];
             sizeName.textColor = UIColorFromRGB(0x3b3b3b);
             [shoppingCarCell addSubview:sizeName];
             
-            int xOffset = 110;
-            UIFont *font = [UIFont systemFontOfSize:12];
-            NSString *str = @"单价: ";
-            int strWidth = [str sizeWithFont:font].width;
+//            int xOffset = 110;
+            UIFont *font = [UIFont systemFontOfSize:13];
+//            NSString *str = @"单价: ";
+//            CGFloat strWidth = [str sizeWithFont:font].width;
             //UILabel* priceName = [[UILabel alloc] initWithFrame:CGRectMake(shoppingCarTab.editing?198:213, yOffset, strWidth, 25)];
-            UILabel* priceName = [[UILabel alloc] initWithFrame:CGRectMake(213, yOffset, strWidth, 25)];
+            UILabel* priceName = [[UILabel alloc] init];
 
             priceName.backgroundColor = [UIColor clearColor];
-            priceName.text = str;
+            priceName.text = [NSString stringWithFormat:@"单价: ¥%.2f",[item.price floatValue]];
+            CGFloat strWidth = [priceName.text sizeWithFont:font].width;
             priceName.font = font;
-            priceName.textColor = UIColorFromRGB(0x3b3b3b);
+            priceName.textColor = UIColorFromRGB(0x666666);
+            [priceName setFrame:CGRectMake(numberName.frame.origin.x, sizeName.frame.origin.y, strWidth, 13)];
             [shoppingCarCell addSubview:priceName];
-            xOffset += strWidth;
+//            xOffset += strWidth;
             
-            str = [NSString stringWithFormat:@"¥%.2f",[item.price floatValue]];
-            strWidth = [str sizeWithFont:font].width;
+//            str = [NSString stringWithFormat:@"¥%.2f",[item.price floatValue]];
+//            strWidth = [str sizeWithFont:font].width;
             //UILabel* priceValue = [[UILabel alloc] initWithFrame:CGRectMake(shoppingCarTab.editing?228:245, yOffset, strWidth, 25)];
-            UILabel* priceValue = [[UILabel alloc] initWithFrame:CGRectMake(245, yOffset, strWidth, 25)];
-
-            priceValue.backgroundColor = [UIColor clearColor];
-            priceValue.text = str;
-            priceValue.font = font;
-            priceValue.textColor =  UIColorFromRGB(0x3b3b3b);
-            [shoppingCarCell addSubview:priceValue];
-            xOffset += strWidth + (shoppingCarTab.editing?28:28);
-            yOffset += 30;
+//            UILabel* priceValue = [[UILabel alloc] initWithFrame:CGRectMake(245, yOffset, strWidth, 25)];
+//
+//            priceValue.backgroundColor = [UIColor clearColor];
+//            priceValue.text = str;
+//            priceValue.font = font;
+//            priceValue.textColor =  UIColorFromRGB(0x3b3b3b);
+//            [shoppingCarCell addSubview:priceValue];
+//            xOffset += strWidth + (shoppingCarTab.editing?28:28);
+//            yOffset += 30;
             
             
-            str = @"总价： ";
+            NSString* str = @"总价： ";
             strWidth = [str sizeWithFont:font].width;
             //UILabel* caseName = [[UILabel alloc] initWithFrame:CGRectMake(shoppingCarTab.editing?198:213, yOffset, strWidth, 25)];
-            UILabel* caseName = [[UILabel alloc] initWithFrame:CGRectMake(213, yOffset, strWidth, 25)];
+            UILabel* caseName = [[UILabel alloc] initWithFrame:CGRectMake(numberName.frame.origin.x, 112, strWidth, 13)];
 
             caseName.backgroundColor = [UIColor clearColor];
             caseName.text = str;
             caseName.font = font;
-            caseName.textColor = UIColorFromRGB(0x666666);//UIColorFromRGB(0x666666)
+            caseName.textColor = UIColorFromRGB(0x181818);//UIColorFromRGB(0x666666)
             [shoppingCarCell addSubview:caseName];
             //            xOffset += strWidth;
             
             str = [NSString stringWithFormat:@"¥%.2f",[item.subtotal floatValue]];
             strWidth = [str sizeWithFont:font].width;
             //UILabel* caseValue = [[UILabel alloc] initWithFrame:CGRectMake(shoppingCarTab.editing?228:245, yOffset, strWidth, 25)];
-            UILabel* caseValue = [[UILabel alloc] initWithFrame:CGRectMake(245, yOffset, strWidth, 25)];
+            UILabel* caseValue = [[UILabel alloc] initWithFrame:CGRectMake(caseName.frame.origin.x + caseName.frame.size.width, caseName.frame.origin.y, strWidth, 13)];
 
             caseValue.backgroundColor = [UIColor clearColor];
             caseValue.text = str;
             caseValue.font = font;
-            caseValue.textColor = UIColorFromRGB(0xB90023);
+            caseValue.textColor = UIColorFromRGB(0xc8002c);
             [shoppingCarCell addSubview:caseValue];
+            
+            UIView* v = [[UIView alloc] initWithFrame:CGRectMake(0, lee1fitAllScreen(146) - lee1fitAllScreen(10), ScreenWidth, lee1fitAllScreen(10))];
+            [v setBackgroundColor:[UIColor colorWithHexString:@"#e0e0e0"]];
+            [shoppingCarCell addSubview:v];
             
         }else {
             
@@ -1217,7 +1279,7 @@
         CGFloat height = 14;
         
         UIButton* btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnCheckBox setFrame:CGRectMake(14, 20, lee1fitAllScreen(28), lee1fitAllScreen(28))];
+        [btnCheckBox setFrame:CGRectMake(14, 20, lee1fitAllScreen(22), lee1fitAllScreen(22))];
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
         [btnCheckBox addTarget:self action:@selector(suitCheckBoxAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -1233,7 +1295,7 @@
         CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font} context:nil];
         [pName setFrame:CGRectMake(xOffset, yOffset - (rcName.size.height > pName.font.pointSize ? rcName.size.height - pName.font.pointSize : 0), rcName.size.width, rcName.size.height)];
         [viewSuitlistCell3 addSubview:pName];
-        UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset + pName.frame.size.width + 24, pName.frame.origin.y, 200, height)];
+        UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset + pName.frame.size.width + 24, pName.frame.origin.y, 200, rcName.size.height)];
         desc.backgroundColor = [UIColor clearColor];
         desc.lineBreakMode = UILineBreakModeMiddleTruncation;
         desc.text = [NSString stringWithFormat:@"数量: %d", item.number];
@@ -1423,7 +1485,7 @@
 //        int height = (70-yOffset-10)/2;
         
         UIButton* btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnCheckBox setFrame:CGRectMake(14, 20, lee1fitAllScreen(28), lee1fitAllScreen(28))];
+        [btnCheckBox setFrame:CGRectMake(14, 20, lee1fitAllScreen(22), lee1fitAllScreen(22))];
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
         [btnCheckBox addTarget:self action:@selector(packageCheckBoxAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -1565,6 +1627,81 @@
     }
 }
 
+#pragma mark--- CheckBoxAction
+-(void)packageCheckBoxAction:(UIButton*)sender
+{
+    UITableViewCell* cell = nil;
+    if(IOS8_OR_LATER)
+    {
+        cell = (UITableViewCell*)sender.superview;
+    }
+    else
+    {
+        cell = (UITableViewCell*)sender.superview.superview;
+    }
+    if (cell) {
+        NSInteger index = [shoppingCarTab indexPathForCell:cell].section;
+        YKSuitListItem* item = [_carModel.packagelist objectAtIndex:index isArray:nil];
+        if (item) {
+            if (sender.selected) {
+                [_selectedList removeObject:item];
+            }else
+            {
+                [_selectedList addObject:item];
+            }
+        }
+    }
+}
+
+-(void)suitCheckBoxAction:(UIButton*)sender
+{
+    UITableViewCell* cell = nil;
+    if(IOS8_OR_LATER)
+    {
+        cell = (UITableViewCell*)sender.superview;
+    }
+    else
+    {
+        cell = (UITableViewCell*)sender.superview.superview;
+    }
+    if (cell) {
+        NSInteger index = [shoppingCarTab indexPathForCell:cell].section;
+        YKSuitListItem* item = [_carModel.suitlist objectAtIndex:index isArray:nil];
+        if (item) {
+            if (sender.selected) {
+                [_selectedList removeObject:item];
+            }else
+            {
+                [_selectedList addObject:item];
+            }
+        }
+    }
+}
+
+-(void)productCheckBoxAction:(UIButton*)sender
+{
+    UITableViewCell* cell = nil;
+    if(IOS8_OR_LATER)
+    {
+        cell = (UITableViewCell*)sender.superview;
+    }
+    else
+    {
+        cell = (UITableViewCell*)sender.superview.superview;
+    }
+    if (cell) {
+        NSInteger index = [shoppingCarTab indexPathForCell:cell].section;
+        YKSuitListItem* item = [_carModel.carProductlist objectAtIndex:index isArray:nil];
+        if (item) {
+            if (sender.selected) {
+                [_selectedList removeObject:item];
+            }else
+            {
+                [_selectedList addObject:item];
+            }
+        }
+    }
+}
 
 #pragma mark--- 表相关
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -1633,14 +1770,14 @@
     }
 	else if (indexPath.section - suitCount - packageCount == 0) {
         // 这个是普通商品的cell
-		return lee1fitAllScreen(155);
+		return lee1fitAllScreen(146);
 	} else if (indexPath.section - suitCount - packageCount == 1) {
 		if (isaddfav) {
             //lee新增标题标题的cell  防止标题跟着滚动
             if ([indexPath row] == 0) {
-                return lee1fitAllScreen(30);
+                return lee1fitAllScreen(46);
             }
-			return lee1fitAllScreen(70);
+			return lee1fitAllScreen(56);
 		}
 		return lee1fitAllScreen(155);
 	}
@@ -1706,43 +1843,42 @@
 			self.addfavButton = [UIButton buttonWithType:UIButtonTypeCustom];
             
             if ([indexPath row] == 0) {
-                UIImageView* segbg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"banner_dot_bg.png"]];
-                segbg.frame = CGRectMake(0, 3, ScreenWidth, lee1fitAllScreen(30));
-                UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, ScreenWidth, lee1fitAllScreen(20))];
+//                UIImageView* segbg = [[UIImageView alloc] init];//WithImage:[UIImage imageNamed:@"banner_dot_bg.png"]];
+//                segbg.frame = CGRectMake(0, 3, ScreenWidth, lee1fitAllScreen(30));
+                UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, ScreenWidth, lee1fitAllScreen(12))];
                 name.textColor = [UIColor blackColor];
                 name.backgroundColor = [UIColor clearColor];
-                name.font = [UIFont systemFontOfSize:13];
-                name.text = @"（商品如不加入购物车内将视为放弃领取活动赠品）";
-                [segbg addSubview:name];
-                [segbg setBackgroundColor:[UIColor whiteColor]];
+                [name setTextAlignment:NSTextAlignmentCenter];
+                name.font = [UIFont systemFontOfSize:12];
+                name.text = @"(商品如不加入购物车内将视为放弃领取活动赠品)";
+//                [segbg addSubview:name];
+//                [segbg setBackgroundColor:[UIColor whiteColor]];
                 
-                [Cell addSubview:segbg];
+                [Cell addSubview:name];
             }else{
-            
-			if (shoppingCarTab.editing) {
-				[self.addfavButton setBackgroundImage:[UIImage imageNamed:@"button_red_press.png"] forState:UIControlStateNormal];
-				self.addfavButton.enabled = NO;
-			}else {
-				[self.addfavButton setBackgroundImage:[UIImage imageNamed:@"button_red.png"] forState:UIControlStateNormal];
-				self.addfavButton.enabled = YES;
-			}
-            UIImageView *addfavIcon = [[UIImageView alloc] initWithFrame:CGRectMake(40, 2, 20, 25)];
-            [addfavIcon setImage:[UIImage imageNamed:@"gift_icon.png"]];
-            [self.addfavButton addSubview:addfavIcon];
-
-            
-			[self.addfavButton setBackgroundImage:[UIImage imageNamed:@"button_red_press.png"] forState:UIControlStateHighlighted];
-			[self.addfavButton setFrame:CGRectMake(80, 10, 160, 35)];
-			[self.addfavButton setTitle:@"选择赠品" forState:UIControlStateNormal];
-            [self.addfavButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)];
-			[self.addfavButton addTarget:self action:@selector(addfavAction) forControlEvents:UIControlEventTouchUpInside];
-			[self.addfavButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica" size:13]];
-			[self.addfavButton.titleLabel setTextColor:[UIColor whiteColor]];
-			[Cell addSubview:self.addfavButton];
-			
-			UIImageView* lineView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"devider_02.png"]];
-			lineView.frame = CGRectMake(0, 55, ScreenWidth, lee1fitAllScreen(4));
-			[Cell addSubview:lineView];
+                if (shoppingCarTab.editing) {
+                    [self.addfavButton setBackgroundImage:[UIImage imageNamed:@"btn_mid_b_hover"] forState:UIControlStateNormal];
+                    self.addfavButton.enabled = NO;
+                }else {
+                    [self.addfavButton setBackgroundImage:[UIImage imageNamed:@"btn_mid_b_normal"] forState:UIControlStateNormal];
+                    self.addfavButton.enabled = YES;
+                }
+                UIImageView *addfavIcon = [[UIImageView alloc] initWithFrame:CGRectMake(40, (lee1fitAllScreen(36) - lee1fitAllScreen(25)) / 2, lee1fitAllScreen(20), lee1fitAllScreen(25))];
+                [addfavIcon setImage:[UIImage imageNamed:@"gift_icon.png"]];
+                [self.addfavButton addSubview:addfavIcon];
+                
+                [self.addfavButton setBackgroundImage:[UIImage imageNamed:@"btn_mid_b_hover"] forState:UIControlStateHighlighted];
+                [self.addfavButton setFrame:CGRectMake((ScreenWidth - lee1fitAllScreen(170)) / 2, 0, lee1fitAllScreen(170), lee1fitAllScreen(36))];
+                [self.addfavButton setTitle:@"选择赠品" forState:UIControlStateNormal];
+                [self.addfavButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 0)];
+                [self.addfavButton addTarget:self action:@selector(addfavAction) forControlEvents:UIControlEventTouchUpInside];
+                [self.addfavButton.titleLabel setFont:[UIFont systemFontOfSize:17]];
+                [self.addfavButton.titleLabel setTextColor:[UIColor whiteColor]];
+                [Cell addSubview:self.addfavButton];
+                
+                UIImageView* lineView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"devider_02.png"]];
+                lineView.frame = CGRectMake(0, 54, ScreenWidth, 2);
+                [Cell addSubview:lineView];
             }
             
 			return Cell;

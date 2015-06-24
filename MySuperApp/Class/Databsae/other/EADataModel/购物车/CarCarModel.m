@@ -225,6 +225,9 @@
             YKItem* item = [[YKItem alloc] init];
             item.productid = [dic objectForKey:@"id"];
             item.imgurl = [dic objectForKey:@"pic"];
+            item.name = [dic objectForKey:@"name"];
+            item.strdiscountprice = [dic objectForKey:@"price"];
+            item.price = [dic objectForKey:@"mkt_price"];
             [self.hotlist addObject:item];
         }
         
