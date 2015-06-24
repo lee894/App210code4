@@ -60,9 +60,15 @@
     [self.view addSubview:self.vToolbar];
     [self.view addConstraints:[self viewConstraints]];
     [mainSev getPackageInfoWithPid:self.pid];
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
+    
     currentColor = 0;
     currentSize = 0;
     self.marrGoods = [[NSMutableArray alloc] initWithCapacity:1];
+    
+    
+    [self showPackage:nil];
 }
 
 - (void)didReceiveMemoryWarning {
