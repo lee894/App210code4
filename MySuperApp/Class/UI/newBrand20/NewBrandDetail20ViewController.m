@@ -109,6 +109,7 @@
     }else{
         [lookWeiboBtn setImage:[UIImage imageNamed:@"px_xl_no.png"] forState:UIControlStateNormal];
         lookWeiboBtn.enabled = YES;
+        [weiboNameLab setText:[NSString stringWithFormat:@"暂未开通"]];
     }
     
     [fashionBtn setImageFromUrl:NO withUrl:_detailinfo.brand_trend.pic];

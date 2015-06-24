@@ -98,13 +98,6 @@
     NewBrandDetail20ViewController *brandvc = [[NewBrandDetail20ViewController alloc] initWithNibName:@"NewBrandDetail20ViewController" bundle:nil];
     brandvc.brandname = wallModel.name;
     [self.navigationController pushViewController:brandvc animated:YES];
-    
-    
-//    BrandDetailViewController* tempVCon = [[BrandDetailViewController alloc] initWithNibName:@"BrandDetailViewController" bundle:nil];
-//    tempVCon.brandsModel = self.brandModel;
-//    tempVCon.currentRow = sender.tag - 10;
-//    [self.navigationController pushViewController:tempVCon animated:NO];
-//    NSLog(@"barand的类型是：%d",sender.tag);
 }
 
 

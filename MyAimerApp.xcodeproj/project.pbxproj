@@ -428,6 +428,18 @@
 		96570D791AF46343006183C2 /* OTPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96570D771AF46343006183C2 /* OTPageView.m */; };
 		96570D7C1AF463AC006183C2 /* NewMaginzeBViewControllerV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 96570D7B1AF463AC006183C2 /* NewMaginzeBViewControllerV2.m */; };
 		96570D7F1AF47E97006183C2 /* PPBuyOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96570D7E1AF47E97006183C2 /* PPBuyOptionView.m */; };
+		965DF5AE1B3A7EE200FCD4C8 /* pp_aimer_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DF5A21B3A7EE200FCD4C8 /* pp_aimer_all@2x.png */; };
+		965DF5AF1B3A7EE200FCD4C8 /* pp_bd_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DF5A31B3A7EE200FCD4C8 /* pp_bd_all@2x.png */; };
+		965DF5B01B3A7EE200FCD4C8 /* pp_bechic_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DF5A41B3A7EE200FCD4C8 /* pp_bechic_all@2x.png */; };
+		965DF5B11B3A7EE200FCD4C8 /* pp_hj_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DF5A51B3A7EE200FCD4C8 /* pp_hj_all@2x.png */; };
+		965DF5B21B3A7EE200FCD4C8 /* pp_home_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DF5A61B3A7EE200FCD4C8 /* pp_home_all@2x.png */; };
+		965DF5B31B3A7EE200FCD4C8 /* pp_imis_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DF5A71B3A7EE200FCD4C8 /* pp_imis_all@2x.png */; };
+		965DF5B41B3A7EE200FCD4C8 /* pp_kids_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DF5A81B3A7EE200FCD4C8 /* pp_kids_all@2x.png */; };
+		965DF5B51B3A7EE200FCD4C8 /* pp_laclover_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DF5A91B3A7EE200FCD4C8 /* pp_laclover_all@2x.png */; };
+		965DF5B61B3A7EE200FCD4C8 /* pp_man_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DF5AA1B3A7EE200FCD4C8 /* pp_man_all@2x.png */; };
+		965DF5B71B3A7EE200FCD4C8 /* pp_modelab_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DF5AB1B3A7EE200FCD4C8 /* pp_modelab_all@2x.png */; };
+		965DF5B81B3A7EE200FCD4C8 /* pp_shinelove_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DF5AC1B3A7EE200FCD4C8 /* pp_shinelove_all@2x.png */; };
+		965DF5B91B3A7EE200FCD4C8 /* pp_sport_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DF5AD1B3A7EE200FCD4C8 /* pp_sport_all@2x.png */; };
 		96640A341ABB14B90081CD53 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96640A311ABB14B90081CD53 /* Default@2x.png */; };
 		9664A1651AE742BF002C0B1D /* aimerWeiboErCode@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9664A1641AE742BF002C0B1D /* aimerWeiboErCode@2x.png */; };
 		9664A1671AE744CB002C0B1D /* aimerWeiXinErCode@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9664A1661AE744CB002C0B1D /* aimerWeiXinErCode@2x.png */; };
@@ -1666,6 +1678,18 @@
 		96570D7B1AF463AC006183C2 /* NewMaginzeBViewControllerV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMaginzeBViewControllerV2.m; sourceTree = "<group>"; };
 		96570D7D1AF47E97006183C2 /* PPBuyOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPBuyOptionView.h; sourceTree = "<group>"; };
 		96570D7E1AF47E97006183C2 /* PPBuyOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPBuyOptionView.m; sourceTree = "<group>"; };
+		965DF5A21B3A7EE200FCD4C8 /* pp_aimer_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pp_aimer_all@2x.png"; sourceTree = "<group>"; };
+		965DF5A31B3A7EE200FCD4C8 /* pp_bd_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pp_bd_all@2x.png"; sourceTree = "<group>"; };
+		965DF5A41B3A7EE200FCD4C8 /* pp_bechic_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pp_bechic_all@2x.png"; sourceTree = "<group>"; };
+		965DF5A51B3A7EE200FCD4C8 /* pp_hj_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pp_hj_all@2x.png"; sourceTree = "<group>"; };
+		965DF5A61B3A7EE200FCD4C8 /* pp_home_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pp_home_all@2x.png"; sourceTree = "<group>"; };
+		965DF5A71B3A7EE200FCD4C8 /* pp_imis_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pp_imis_all@2x.png"; sourceTree = "<group>"; };
+		965DF5A81B3A7EE200FCD4C8 /* pp_kids_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pp_kids_all@2x.png"; sourceTree = "<group>"; };
+		965DF5A91B3A7EE200FCD4C8 /* pp_laclover_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pp_laclover_all@2x.png"; sourceTree = "<group>"; };
+		965DF5AA1B3A7EE200FCD4C8 /* pp_man_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pp_man_all@2x.png"; sourceTree = "<group>"; };
+		965DF5AB1B3A7EE200FCD4C8 /* pp_modelab_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pp_modelab_all@2x.png"; sourceTree = "<group>"; };
+		965DF5AC1B3A7EE200FCD4C8 /* pp_shinelove_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pp_shinelove_all@2x.png"; sourceTree = "<group>"; };
+		965DF5AD1B3A7EE200FCD4C8 /* pp_sport_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pp_sport_all@2x.png"; sourceTree = "<group>"; };
 		96640A311ABB14B90081CD53 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		9664A1641AE742BF002C0B1D /* aimerWeiboErCode@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aimerWeiboErCode@2x.png"; sourceTree = "<group>"; };
 		9664A1661AE744CB002C0B1D /* aimerWeiXinErCode@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aimerWeiXinErCode@2x.png"; sourceTree = "<group>"; };
@@ -3176,6 +3200,7 @@
 		962692231A135FB700A0BC7F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				965DF5A11B3A7EE200FCD4C8 /* brandShopicon20 */,
 				A6218D941B395F5C00D9ED93 /* Cart20 */,
 				A6F3952B1B2ED352004566CA /* Coupon20 */,
 				A6F394ED1B2E7D7A004566CA /* package20 */,
@@ -3781,6 +3806,25 @@
 				96570D771AF46343006183C2 /* OTPageView.m */,
 			);
 			path = OTPageView;
+			sourceTree = "<group>";
+		};
+		965DF5A11B3A7EE200FCD4C8 /* brandShopicon20 */ = {
+			isa = PBXGroup;
+			children = (
+				965DF5A21B3A7EE200FCD4C8 /* pp_aimer_all@2x.png */,
+				965DF5A31B3A7EE200FCD4C8 /* pp_bd_all@2x.png */,
+				965DF5A41B3A7EE200FCD4C8 /* pp_bechic_all@2x.png */,
+				965DF5A51B3A7EE200FCD4C8 /* pp_hj_all@2x.png */,
+				965DF5A61B3A7EE200FCD4C8 /* pp_home_all@2x.png */,
+				965DF5A71B3A7EE200FCD4C8 /* pp_imis_all@2x.png */,
+				965DF5A81B3A7EE200FCD4C8 /* pp_kids_all@2x.png */,
+				965DF5A91B3A7EE200FCD4C8 /* pp_laclover_all@2x.png */,
+				965DF5AA1B3A7EE200FCD4C8 /* pp_man_all@2x.png */,
+				965DF5AB1B3A7EE200FCD4C8 /* pp_modelab_all@2x.png */,
+				965DF5AC1B3A7EE200FCD4C8 /* pp_shinelove_all@2x.png */,
+				965DF5AD1B3A7EE200FCD4C8 /* pp_sport_all@2x.png */,
+			);
+			path = brandShopicon20;
 			sourceTree = "<group>";
 		};
 		9665907D1B159942004CF036 /* myCloset20 */ = {
@@ -6295,6 +6339,7 @@
 				962694061A135FB700A0BC7F /* list02_bg_02.png in Resources */,
 				9626945E1A135FB700A0BC7F /* tab_icon_mine_press@2x.png in Resources */,
 				9BD58CD018E40D57008CD881 /* 37x-False.png in Resources */,
+				965DF5B81B3A7EE200FCD4C8 /* pp_shinelove_all@2x.png in Resources */,
 				9626942A1A135FB700A0BC7F /* add_like_btn.png in Resources */,
 				9626939E1A135FB700A0BC7F /* card_ticket02.png in Resources */,
 				962694261A135FB700A0BC7F /* evaluate_btn_press.png in Resources */,
@@ -6323,9 +6368,11 @@
 				962D370B1AD56B8D0012D749 /* MJRefresh.bundle in Resources */,
 				9626943A1A135FB700A0BC7F /* guide_03_640960.jpg in Resources */,
 				9BD58CE818E40D57008CD881 /* arrow_down.png in Resources */,
+				965DF5AE1B3A7EE200FCD4C8 /* pp_aimer_all@2x.png in Resources */,
 				96CD7BB11AF7A94A00831E3F /* pin_purple@2x.png in Resources */,
 				962693B41A135FB700A0BC7F /* image-1@2x.png in Resources */,
 				C598E65718FAA8C900C5A7B0 /* ProductListCell.xib in Resources */,
+				965DF5B61B3A7EE200FCD4C8 /* pp_man_all@2x.png in Resources */,
 				962694581A135FB700A0BC7F /* tab_icon_home_press@2x.png in Resources */,
 				9685FA401ADD75ED00BF2DE8 /* dl_ico_xl@2x.png in Resources */,
 				A6F395251B2E7EE9004566CA /* my_am_ico_7@2x.png in Resources */,
@@ -6342,8 +6389,10 @@
 				9685FA521ADD75ED00BF2DE8 /* select_ico@2x.png in Resources */,
 				96308D0E1AD968110068D271 /* t_ico_location_hover@2x.png in Resources */,
 				A6F3954B1B2ED352004566CA /* yhq_laber_bg@2x.png in Resources */,
+				965DF5B41B3A7EE200FCD4C8 /* pp_kids_all@2x.png in Resources */,
 				9626944B1A135FB700A0BC7F /* tab02_icon_hot.png in Resources */,
 				962694B01A135FB700A0BC7F /* brand_09_pic_02.png in Resources */,
+				965DF5B91B3A7EE200FCD4C8 /* pp_sport_all@2x.png in Resources */,
 				96F2A5091ADAB92600E1A04B /* PPBuyCircleCommonCell.xib in Resources */,
 				9698F6441AEAA713009A29EC /* brand_3_n@2x.png in Resources */,
 				962693E41A135FB700A0BC7F /* sort_pic_01.png in Resources */,
@@ -6490,6 +6539,7 @@
 				962693A81A135FB700A0BC7F /* qrcodeicon.png in Resources */,
 				962693961A135FB700A0BC7F /* same_pic_bg.png in Resources */,
 				962694431A135FB700A0BC7F /* nav_icon_mine_press.png in Resources */,
+				965DF5B11B3A7EE200FCD4C8 /* pp_hj_all@2x.png in Resources */,
 				962694591A135FB700A0BC7F /* tab_icon_magzine@2x.png in Resources */,
 				962693FB1A135FB700A0BC7F /* chose_top_bg.png in Resources */,
 				9626945F1A135FB700A0BC7F /* tab_icon_shop@2x.png in Resources */,
@@ -6546,6 +6596,7 @@
 				9664A1671AE744CB002C0B1D /* aimerWeiXinErCode@2x.png in Resources */,
 				962694C51A135FB700A0BC7F /* pic_default_product_list_02.png in Resources */,
 				962694461A135FB700A0BC7F /* nav_icon_share_press.png in Resources */,
+				965DF5B21B3A7EE200FCD4C8 /* pp_home_all@2x.png in Resources */,
 				962693D71A135FB700A0BC7F /* sort_brand_06.png in Resources */,
 				9685FA731ADD75ED00BF2DE8 /* xl_ico@2x.png in Resources */,
 				962694A21A135FB700A0BC7F /* sns_icon_23@2x.png in Resources */,
@@ -6596,6 +6647,7 @@
 				962693DA1A135FB700A0BC7F /* sort_girl_pic_01.png in Resources */,
 				9B9CEFBF18E40A590039F34C /* PickerView.xib in Resources */,
 				A6F395441B2ED352004566CA /* yhq_arrow_u@2x.png in Resources */,
+				965DF5B51B3A7EE200FCD4C8 /* pp_laclover_all@2x.png in Resources */,
 				962693BE1A135FB700A0BC7F /* noise-dark-gray@2x.png in Resources */,
 				9626938E1A135FB700A0BC7F /* go_to_mall_icon_press.png in Resources */,
 				962694601A135FB700A0BC7F /* tab_icon_shop_press@2x.png in Resources */,
@@ -6607,6 +6659,7 @@
 				96D465771AD558C800BA5700 /* tb_4_normal@2x.png in Resources */,
 				962694C61A135FB700A0BC7F /* pic_default_product_list_03.png in Resources */,
 				9B53948018EB463C00084F6B /* ProductlistViewController.xib in Resources */,
+				965DF5B31B3A7EE200FCD4C8 /* pp_imis_all@2x.png in Resources */,
 				9685FA5B1ADD75ED00BF2DE8 /* sx_kinds@2x.png in Resources */,
 				9B23E78118F6654000E9B317 /* ProductShareView.xib in Resources */,
 				9685FA791ADD75ED00BF2DE8 /* zp_icon@2x.png in Resources */,
@@ -6717,6 +6770,7 @@
 				962693BC1A135FB700A0BC7F /* noise-dark-blue@2x.png in Resources */,
 				96308D0A1AD968110068D271 /* hot@2x.png in Resources */,
 				96308D0C1AD968110068D271 /* list_close@2x.png in Resources */,
+				965DF5B01B3A7EE200FCD4C8 /* pp_bechic_all@2x.png in Resources */,
 				9698F6511AEAA713009A29EC /* brand_9_s@2x.png in Resources */,
 				962693BA1A135FB700A0BC7F /* image-4@2x.png in Resources */,
 				9B5393C018EA929F00084F6B /* aimer_regions.db in Resources */,
@@ -6792,6 +6846,7 @@
 				A6F395431B2ED352004566CA /* yhq_arrow_d@2x.png in Resources */,
 				968AE84B1B247C54004A1A85 /* sryc_cm_ex_select@2x.png in Resources */,
 				962694BB1A135FB700A0BC7F /* Defaultbg3@2x.png in Resources */,
+				965DF5B71B3A7EE200FCD4C8 /* pp_modelab_all@2x.png in Resources */,
 				9698F6421AEAA713009A29EC /* brand_2_n@2x.png in Resources */,
 				A6F394FF1B2E7D7A004566CA /* lp_shut_h@2x.png in Resources */,
 				962693FD1A135FB700A0BC7F /* chose_yes_btn_press.png in Resources */,
@@ -6877,6 +6932,7 @@
 				962694A01A135FB700A0BC7F /* shop_nav_icon_navigation.png in Resources */,
 				962693AF1A135FB700A0BC7F /* Default-568h@2x.png in Resources */,
 				962694521A135FB700A0BC7F /* tab02_icon_shop_press.png in Resources */,
+				965DF5AF1B3A7EE200FCD4C8 /* pp_bd_all@2x.png in Resources */,
 				A6F3954C1B2ED352004566CA /* yhq_none_laber@2x.png in Resources */,
 				9BD58D5018E4136A008CD881 /* ChangePwdViewController.xib in Resources */,
 				9626945A1A135FB700A0BC7F /* tab_icon_magzine_press@2x.png in Resources */,
