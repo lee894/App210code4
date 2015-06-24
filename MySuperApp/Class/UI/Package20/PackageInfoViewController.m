@@ -67,8 +67,6 @@
     currentSize = 0;
     self.marrGoods = [[NSMutableArray alloc] initWithCapacity:1];
     
-    
-    [self showPackage:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,6 +94,8 @@
 
 -(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel
 {
+    [SBPublicAlert hideMBprogressHUD:self.view];
+
     switch ((NSUInteger)aHandle) {
         case Http_AddPackageToCart20_Tag:
         {
@@ -181,11 +181,13 @@
         default:
             break;
     }
+    
+    [self showPackage:nil];
 }
 
 -(void)serviceFailed:(ServiceType)aHandle
 {
-    
+    [SBPublicAlert hideMBprogressHUD:self.view];
 }
 
 -(void)delSelectedGoods:(UIButton*)sender
