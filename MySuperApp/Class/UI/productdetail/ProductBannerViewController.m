@@ -8,7 +8,7 @@
 
 #import "ProductBannerViewController.h"
 
-#define productImageHeight 396
+//#define productImageHeight 
 #define IMG_PlaceHolder_time       @"pic_default_product_list.png"
 
 @interface ProductBannerViewController ()
@@ -48,7 +48,7 @@
     
     
     
-    ImageScrollVIew.contentSize = CGSizeMake(ScreenWidth*self.arrayForImg.childArray.count, productImageHeight);
+    ImageScrollVIew.contentSize = CGSizeMake(ScreenWidth*self.arrayForImg.childArray.count, lee1fitAllScreen(396));
     
     NSLog(@"self.view.frame is %@",NSStringFromCGRect(self.view.frame));
     NSLog(@"self.view.bounds is %@",NSStringFromCGRect(self.view.bounds));
@@ -62,21 +62,21 @@
     
     for (int index = 0; index < self.arrayForImg.childArray.count; index ++) {
         
-        UrlImageView* imageView = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,  productImageHeight)];
+        UrlImageView* imageView = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,  lee1fitAllScreen(396))];
         imageView.clipsToBounds = YES;
         if (isRetina) {
             [imageView setImageWithURL:[NSURL URLWithString:[self ImageSize:[[self.arrayForImg objectAtIndex:index] BannerPic] Size:@"640x760"]] placeholderImage:nil];
         }else{
             [imageView setImageWithURL:[NSURL URLWithString:[self ImageSize:[[self.arrayForImg objectAtIndex:index] BannerPic] Size:@"320x380"]] placeholderImage:nil];
         }
-        UIScrollView* svScan = [[UIScrollView alloc] initWithFrame:CGRectMake(ScreenWidth*index, 0, ScreenWidth,  productImageHeight)];
+        UIScrollView* svScan = [[UIScrollView alloc] initWithFrame:CGRectMake(ScreenWidth*index, 0, ScreenWidth,  lee1fitAllScreen(396))];
         [svScan setShowsHorizontalScrollIndicator:NO];
         [svScan setShowsVerticalScrollIndicator:NO];
         [svScan setDelegate:self];
         svScan.tag = 10098;
         [imageView setTag:9712];
         [svScan setMaximumZoomScale:3.0];
-        [svScan setContentSize:CGSizeMake(ScreenWidth,productImageHeight)];
+        [svScan setContentSize:CGSizeMake(ScreenWidth,lee1fitAllScreen(396))];
         [svScan addSubview:imageView];
         
         
