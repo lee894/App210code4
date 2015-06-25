@@ -44,9 +44,9 @@
     [self createBackBtnWithType:0];
     
     if (isIOS7up) {
-        tableList.frame = CGRectMake(0, 40, 320, self.view.frame.size.height);
+        tableList.frame = CGRectMake(0, 40, ScreenWidth, self.view.frame.size.height);
     }else{
-    tableList.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+    tableList.frame = CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height);
     }
 
     

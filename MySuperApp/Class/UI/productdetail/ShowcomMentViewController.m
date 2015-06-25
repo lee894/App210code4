@@ -45,19 +45,13 @@
     //lee999 来自我的爱慕的话 增加高度
     
     scrollContent.contentSize = CGSizeMake(ScreenWidth, 500+ AddContentHight);
-    scrollContent.frame = CGRectMake(0, 0, 320, isFromMyAimer? self.view.frame.size.height: self.view.frame.size.height-50);
-    scrollContent.frame = CGRectMake(0, 0, 320, isHiddenBar? self.view.frame.size.height: self.view.frame.size.height-50);
+    scrollContent.frame = CGRectMake(0, 0, ScreenWidth, isFromMyAimer? self.view.frame.size.height: self.view.frame.size.height-50);
+    scrollContent.frame = CGRectMake(0, 0, ScreenWidth, isHiddenBar? self.view.frame.size.height: self.view.frame.size.height-50);
 
     
     self.title = @"商品评价";
     [self createBackBtnWithType:0];
     
-    //创建右边按钮
-    //lee999 要求注释掉，不在这个界面进行评价了，只能在订单里面进行评价
-//    [self createRightBtn];
-//    [self.navbtnRight setTitle:@"我要评价" forState:UIControlStateNormal];
-//    [self.navbtnRight setTitle:@"我要评价" forState:UIControlStateHighlighted];
-//    [self.navbtnRight setFrame:CGRectMake(242, 7, 66, 32)];
     
     for (int i = 0; i<3; i++) {
         StarLevelView *starView = [[StarLevelView alloc] initWithFrame:CGRectMake(83, 47+i*30, 150, 30)];
@@ -99,12 +93,6 @@
 		if (buttonIndex == 1) {
 
             [self changeToMyaimer];
-            
-////            [MYCommentAlertView showMessage:@"即将推出，敬请期待" target:nil];
-//            
-//			MyAimerViewController* login = [[MyAimerViewController alloc] initWithNibName:@"MyAimerViewController" bundle:nil];
-////            login.isPush = YES;
-//			[self.navigationController pushViewController:login animated:YES];
 		}
 	}
 }

@@ -34,20 +34,7 @@
     
     //lee894设置首页的高度~~
     //适配屏幕及系统版本
-    CGRect frame = CGRectZero;
-    if (isIOS7up) {
-        if (isHiddenBar) {
-            frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
-        }else{
-            frame = CGRectMake(0, 0, 320, self.view.frame.size.height-40);
-        }
-    }else{
-        if (isHiddenBar) {
-            frame = CGRectMake(0, 0, 320, self.view.frame.size.height-40);
-        }else{
-            frame = CGRectMake(0, 0, 320, self.view.frame.size.height-40-40);
-        }
-    }
+    CGRect frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight -60);
     
     UIWebView *webV = [[UIWebView alloc] initWithFrame:frame];
     webV.scalesPageToFit = YES;

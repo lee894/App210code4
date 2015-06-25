@@ -172,8 +172,8 @@
 #define SPlashViewUrl @"http://mtest.aimer.com.cn:8888/method/appslogoios"
 
 //API的host路径
-#define OFFICIALDOMAIN @"http://mobiletest.aimer.com.cn:8888/mobile/"
-//#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobile/"
+//#define OFFICIALDOMAIN @"http://mobiletest.aimer.com.cn:8888/mobile/"
+#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobile/"
 //#define OFFICIALDOMAIN @"http://124.207.152.104/mobile/"
 //#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobiletest/"
 //#define OFFICIALDOMAIN @"http://124.207.72.140:8888/mobiletest/"
@@ -453,7 +453,9 @@
 #define Http_bespeak20_Tag 303 //预约测体门店
 #define Http_bespeakup20_Tag 304 //测体门店
 
+
 #define Http_wardrobeinfo20_Tag 305 //我的衣橱列表
+#define Http_addwardrobeup20_Tag      306 //存储私人衣橱
 
 
 

@@ -57,28 +57,13 @@
     mainSer.delegate = self;
     
     
-    mytable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height) style:UITableViewStylePlain];
+    mytable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height) style:UITableViewStylePlain];
     mytable.backgroundColor = [UIColor clearColor];
     mytable.delegate = self;
     mytable.dataSource = self;
     //lee999注释掉这个地方
-//    mytable.tableFooterView = [self createTableFooterView];
     mytable.separatorColor = [UIColor clearColor];
-    if (isIOS7up) {
-        
-        if (isHiddenBar) {
-            [mytable setFrame:CGRectMake(0,0, 320, self.view.frame.size.height)];
-        }else{
-            [mytable setFrame:CGRectMake(0,0, 320, self.view.frame.size.height-55)];
-        }
-    }else{
-        if (isHiddenBar) {
-            [mytable setFrame:CGRectMake(0,0, 320, self.view.frame.size.height-45)];
-        }else{
-            [mytable setFrame:CGRectMake(0,0, 320, self.view.frame.size.height-95)];
-        }
-    }
-    
+    [mytable setFrame:CGRectMake(0,0, ScreenWidth, ScreenHeight-60)];
     [self.view addSubview:mytable];
     
     [self createRequest];
@@ -89,15 +74,15 @@
     //隐藏picker
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
-    pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, 320, 216);
-    toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44);
+    pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+    toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44);
     [UIView setAnimationDidStopSelector:@selector(hiddle)];
     [UIView commitAnimations];
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
-    pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, 320, 216);
-    toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44);
+    pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+    toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44);
     [UIView setAnimationDidStopSelector:@selector(hiddle)];
     
     [UIView commitAnimations];
@@ -172,14 +157,14 @@
 -(void)createPickerView
 {
     //创建picker
-    pickerForSelectColor=[[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, 320, 216)];    [pickerForSelectColor setDelegate:self];
+    pickerForSelectColor=[[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 216)];    [pickerForSelectColor setDelegate:self];
     [pickerForSelectColor setDataSource:self];
     pickerForSelectColor.showsSelectionIndicator=YES;
     [pickerForSelectColor setBackgroundColor:[UIColor whiteColor]];
 //    [self.view addSubview:pickerForSelectColor];
     [[MyAppDelegate window] addSubview:pickerForSelectColor];
 
-    pickerForSelectSize=[[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, 320, 216)];
+    pickerForSelectSize=[[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 216)];
     [pickerForSelectSize setDelegate:self];
     [pickerForSelectSize setDataSource:self];
     pickerForSelectSize.showsSelectionIndicator=YES;
@@ -188,12 +173,12 @@
     [[MyAppDelegate window] addSubview:pickerForSelectSize];
 
     //创建toolbar
-    toolBarForPicker=[[UIToolbar alloc] initWithFrame:CGRectMake(0, ScreenHeight+20, 320, 44)];
+    toolBarForPicker=[[UIToolbar alloc] initWithFrame:CGRectMake(0, ScreenHeight+20, ScreenWidth, 44)];
     toolBarForPicker.barStyle=UIBarStyleBlackTranslucent;
 //    [self.view addSubview:toolBarForPicker];
     [[MyAppDelegate window] addSubview:toolBarForPicker];
 
-    toolBarForSizePicker=[[UIToolbar alloc] initWithFrame:CGRectMake(0, ScreenHeight+20, 320, 44)];
+    toolBarForSizePicker=[[UIToolbar alloc] initWithFrame:CGRectMake(0, ScreenHeight+20, ScreenWidth, 44)];
     toolBarForSizePicker.barStyle=UIBarStyleBlackTranslucent;
 //    [self.view addSubview:toolBarForSizePicker];
     [[MyAppDelegate window] addSubview:toolBarForSizePicker];
@@ -249,15 +234,15 @@
     //隐藏picker
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
-    pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, 320, 216);
-    toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44);
+    pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+    toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44);
     [UIView setAnimationDidStopSelector:@selector(hiddle)];
     [UIView commitAnimations];
     
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
-    pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, 320, 216);
-    toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44);
+    pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+    toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44);
     [UIView setAnimationDidStopSelector:@selector(hiddle)];
 
     [UIView commitAnimations];
@@ -519,9 +504,6 @@
         [cell.contentView addSubview:item.buttonForSize];
         
         if (i != [self.suitListModel.suitArray count]) {
-//            UIImageView* lineView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"h_split_.png"]];
-//            lineView.frame = CGRectMake(0, 153, 320, 2);
-//            [cell addSubview:lineView];
         }
         }else {
             UIFont *font = [UIFont systemFontOfSize:18];
@@ -555,20 +537,11 @@
         
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
-        pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, 320, 216);
-        toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44);
+        pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+        toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44);
         
-        //lee999recode
-//        if (isFromMyAimer) {
-//            pickerForSelectColor.frame=CGRectMake(0, isFromMyAimer?ScreenHeight-PickShowHigh+50 : ScreenHeight-PickShowHigh, 320, 216);
-//            toolBarForPicker.frame=CGRectMake(0, isFromMyAimer?ScreenHeight-PickShowHigh-44+50: ScreenHeight-PickShowHigh-44, 320, 44);
-//        }else{
-//            pickerForSelectColor.frame=CGRectMake(0, ScreenHeight-PickShowHigh, 320, 216);
-//            toolBarForPicker.frame=CGRectMake(0, ScreenHeight-PickShowHigh-44, 320, 44);
-//        }
-        
-        pickerForSelectColor.frame=CGRectMake(0,ScreenHeight-PickShowHigh+50, 320, 216);
-        toolBarForPicker.frame=CGRectMake(0, ScreenHeight-PickShowHigh-44+50, 320, 44);
+        pickerForSelectColor.frame=CGRectMake(0,ScreenHeight-PickShowHigh+50, ScreenWidth, 216);
+        toolBarForPicker.frame=CGRectMake(0, ScreenHeight-PickShowHigh-44+50, ScreenWidth, 44);
         //end
         
         [UIView commitAnimations];
@@ -578,22 +551,13 @@
         
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
-  
-        //lee999recode
-//        if (isFromMyAimer) {
-//            pickerForSelectSize.frame=CGRectMake(0,isFromMyAimer?ScreenHeight-PickShowHigh+50 : ScreenHeight-PickShowHigh, 320, 216);
-//            toolBarForSizePicker.frame=CGRectMake(0, isFromMyAimer?ScreenHeight-PickShowHigh-44+50: ScreenHeight-PickShowHigh-44, 320, 44);
-//        }else{
-//            pickerForSelectSize.frame=CGRectMake(0, ScreenHeight-PickShowHigh, 320, 216);
-//            toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight-PickShowHigh-44, 320, 44);
-//        }
-        
-        pickerForSelectSize.frame=CGRectMake(0,ScreenHeight-PickShowHigh+50, 320, 216);
-        toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight-PickShowHigh-44+50, 320, 44);
+
+        pickerForSelectSize.frame=CGRectMake(0,ScreenHeight-PickShowHigh+50, ScreenWidth, 216);
+        toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight-PickShowHigh-44+50, ScreenWidth, 44);
         //end
         
-        pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, 320, 216);
-        toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44);
+        pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+        toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44);
         [UIView commitAnimations];
     }
 }
@@ -700,7 +664,7 @@
     
     image.frame=CGRectMake(200, 4, 50, 36);
     UIView *view_image=[[UIView alloc]init];
-    view_image.frame=CGRectMake(0, 0, 320, 44);
+    view_image.frame=CGRectMake(0, 0, ScreenWidth, 44);
     [view_image addSubview:image];
 
     [view_image addSubview:titleLabel];
@@ -751,38 +715,4 @@
 
 
 @end
-
-
-////iOS 6
-//- (BOOL)shouldAutorotate
-//{
-//    return NO;
-//}
-//- (NSUInteger)supportedInterfaceOrientations
-//{
-//    return UIInterfaceOrientationMaskPortrait;
-//}
-//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-//{
-//    return UIInterfaceOrientationPortrait;
-//}
-
-
-
-
-//                if (mytable) {
-//
-//                    [mytable removeFromSuperview];
-//                    mytable = nil;
-//                }
-//                mytable = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
-//                mytable.backgroundColor = [UIColor clearColor];
-//                mytable.delegate = self;
-//                mytable.dataSource = self;
-//                mytable.tableFooterView = [self createTableFooterView];
-//                mytable.separatorColor = [UIColor clearColor];
-//                if (isIOS7up) {
-//                    [mytable setFrame:CGRectMake(0,0, 320, self.view.frame.size.height)];
-//                }
-//                [self.view addSubview:mytable];
 

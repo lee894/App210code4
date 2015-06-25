@@ -906,6 +906,25 @@
     }];
 }
 
+//存储私人衣橱的信息
+- (void)getaddwardrobeupdata:(NSString *)wardrobe_name
+                    andcrowd:(NSString*)crowd
+                andfrequency:(NSString*)frequency
+                     andsize:(NSString *)size
+                    andprops:(NSString*)props_id
+                     andtype:(NSString*)type
+{
+    [self sendPostWithURL:@"addwardrobeup" tag:Http_addwardrobeup20_Tag beforeRequest:^{
+        [self addParam:@"wardrobe_name" withValue:wardrobe_name];
+        [self addParam:@"crowd" withValue:crowd];
+        [self addParam:@"frequency" withValue:frequency];
+        [self addParam:@"size" withValue:size];
+        [self addParam:@"props_id" withValue:props_id];
+        [self addParam:@"type" withValue:type];
+    }];
+    
+}
+
 //收藏夹列表！！！
 - (void)getFavorite20data{
     [self sendPostWithURL:@"favorite" tag:Http_Favorite20_Tag beforeRequest:^{

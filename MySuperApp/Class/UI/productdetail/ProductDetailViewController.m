@@ -321,7 +321,7 @@
 -(void)createTableHeaderView{ //done
 //    headerView=[[UIViewForRecursively alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 192)];
     
-    _scrollViewForHeader = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth)];
+    _scrollViewForHeader = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(192))];
     
     _scrollViewForHeader.showsHorizontalScrollIndicator = NO;
     _scrollViewForHeader.showsVerticalScrollIndicator = NO;
@@ -1043,7 +1043,12 @@
             break;
         case 200 + 3:
         {
-            [self changetableBarto:3];
+            
+            //lee999 修改购车的跳转，导致界面下方少一块
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            [self performSelector:@selector(JumpToCarpage) withObject:nil afterDelay:0.2];
+
+//            [self changetableBarto:3];
         }
             break;
         default:

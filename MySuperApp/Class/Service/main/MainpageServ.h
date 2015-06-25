@@ -296,6 +296,14 @@
 -(void)getBrandDetail20:(NSString*)brandID;
 
 
+//存储私人衣橱的信息
+- (void)getaddwardrobeupdata:(NSString *)wardrobe_name
+                    andcrowd:(NSString*)crowd
+                andfrequency:(NSString*)frequency
+                     andsize:(NSString *)size
+                    andprops:(NSString*)props_id
+                     andtype:(NSString*)type;
+
 
 //新版本收藏夹列表  tag210
 -(void)getFavListnew20:(NSString *)page andPer_page:(NSString *)per_page andtype:(NSString*)atype;

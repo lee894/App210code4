@@ -153,7 +153,6 @@
         _pickview.tag = btn.tag;
         [_pickview show];
         
-        
         btn2.selected = YES;
     }
 }
