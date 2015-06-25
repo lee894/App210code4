@@ -321,7 +321,7 @@
 -(void)createTableHeaderView{ //done
 //    headerView=[[UIViewForRecursively alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 192)];
     
-    _scrollViewForHeader = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(192))];
+    _scrollViewForHeader = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth)];
     
     _scrollViewForHeader.showsHorizontalScrollIndicator = NO;
     _scrollViewForHeader.showsVerticalScrollIndicator = NO;
