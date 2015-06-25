@@ -28,7 +28,7 @@
 
 
 @property(nonatomic,assign) BOOL isOpenCell;
-@property(nonatomic,assign) int index;
+@property(nonatomic,assign) NSInteger index;
 
 
 

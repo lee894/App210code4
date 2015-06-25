@@ -137,7 +137,7 @@
 
 #pragma mark--- 选中的按钮区域
 -(UIView *)createHeadV:(NSArray*)subSortArray
-//---------V2
+//---------V3
 {
     
     //filterSelectbtnH  按钮高度
@@ -153,7 +153,7 @@
     
     NSMutableArray *marrkey = [[NSMutableArray alloc] initWithCapacity:0];
     NSMutableArray *marrname = [[NSMutableArray alloc] initWithCapacity:0];
-
+    
     if (self.arrSelectfilter && [self.arrSelectfilter respondsToSelector:@selector(objectAtIndex:)] && [self.arrSelectfilter count]> 0) {
         
         for (int i = 0; i<[self.arrSelectfilter count]; i++) {
@@ -186,16 +186,12 @@
         NSString *str = [NSString stringWithFormat:@" %@  x ",name];
         
         
-        int tempLabW = [str sizeWithFont:font].width;
-                if (tempLabW > 110) {
-                    tempLabW = 110;
-                }
+//        int tempLabW = [str sizeWithFont:font].width;
+//        if (tempLabW > 110) {
+//            tempLabW = 110;
+//        }
         
-        
-//        int tempLabW = (ScreenWidth -5*filterSp)/4;//[str sizeWithFont:font].width;
-        
-
-        
+        int tempLabW = (ScreenWidth-5*filterSp)/4;
         
         if (i == 0) {
             pointX = filterSp;
@@ -203,7 +199,7 @@
         }else
         {
             //>0
-            if (pointX + tempLabW + filterSp <ScreenWidth - 2*filterSp) {
+            if (pointX + tempLabW + filterSp <ScreenWidth) {
                 //如果当前的X 加上 当前的宽度 < 300的时候，不分行
                 
                 //pointX = pointX;
@@ -222,6 +218,7 @@
         [lab setTextColor:[UIColor colorWithHexString:@"c8002c"]];
         lab.layer.borderColor = [UIColor colorWithHexString:@"888888"].CGColor;
         lab.layer.masksToBounds = YES;
+        [lab setTextAlignment:NSTextAlignmentCenter];
         lab.font = font;
         lab.text = str;
         lab.tag = i;
@@ -246,13 +243,129 @@
     
     
     
-//    int H = filterSp + (30 +filterSp)* lineNum;
-//    [bgv setFrame:CGRectMake(0, 0, ScreenWidth, H)];
+    //    int H = filterSp + (30 +filterSp)* lineNum;
+    //    [bgv setFrame:CGRectMake(0, 0, ScreenWidth, H)];
     
     
     return bgv;
     
 }
+//---------V2
+//{
+//    
+//    //filterSelectbtnH  按钮高度
+//    //filterSp 按钮分割线
+//    
+//    UIFont *font = [UIFont systemFontOfSize:LablitileSmallSize];
+//    //CGSize titleSize = [@"123123" sizeWithFont:font constrainedToSize:CGSizeMake(label.frame.size.width, MAXFLOAT) lineBreakMode:UILineBreakModeWordWrap];
+//    
+//    int lineNum = 0; //列数
+//    int pointX = 0;  //x的位置
+//    int pointY = 0;  //y的位置
+//    
+//    
+//    NSMutableArray *marrkey = [[NSMutableArray alloc] initWithCapacity:0];
+//    NSMutableArray *marrname = [[NSMutableArray alloc] initWithCapacity:0];
+//
+//    if (self.arrSelectfilter && [self.arrSelectfilter respondsToSelector:@selector(objectAtIndex:)] && [self.arrSelectfilter count]> 0) {
+//        
+//        for (int i = 0; i<[self.arrSelectfilter count]; i++) {
+//            id dic = [self.arrSelectfilter objectAtIndex:i isArray:nil];
+//            
+//            if ([dic respondsToSelector:@selector(objectForKey:)]) {
+//                NSString *type = [dic objectForKey:@"type" isDictionary:nil];
+//                NSString *namevalue = [dic objectForKey:@"namevalue" isDictionary:nil];
+//                
+//                [marrkey addObject:type];
+//                [marrname addObject:namevalue];
+//            }
+//        }
+//    }
+//    
+//    if ([marrkey count]> 0) {
+//        lineNum = 1;
+//    }
+//    
+//    UIView *bgv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 40)];
+//    [bgv setBackgroundColor:[UIColor clearColor]];
+//    
+//    for (int i= 0; i<[marrkey count]; i++) {
+//        
+//        
+//        NSString *key = [marrkey objectAtIndex:i isArray:nil];
+//        NSString *name = [marrname objectAtIndex:i isArray:nil];
+//        
+//        
+//        NSString *str = [NSString stringWithFormat:@" %@  x ",name];
+//        
+//        
+//        int tempLabW = [str sizeWithFont:font].width;
+//                if (tempLabW > 110) {
+//                    tempLabW = 110;
+//                }
+//        
+//        
+////        int tempLabW = (ScreenWidth -5*filterSp)/4;//[str sizeWithFont:font].width;
+//        
+//
+//        
+//        
+//        if (i == 0) {
+//            pointX = filterSp;
+//            pointY = filterSp;
+//        }else
+//        {
+//            //>0
+//            if (pointX + tempLabW + filterSp <ScreenWidth - 2*filterSp) {
+//                //如果当前的X 加上 当前的宽度 < 300的时候，不分行
+//                
+//                //pointX = pointX;
+//                //pointY = filterSp;
+//                
+//            }else{
+//                //如果当前的X 加上 当前的宽度 > 300的时候，换一行
+//                pointX = filterSp;
+//                pointY = filterSp + (lineNum)*(filterSelectbtnH + filterSp);
+//                lineNum ++;
+//            }
+//        }
+//        UILabel *lab = [[UILabel alloc] initWithFrame:CGRectMake(pointX, pointY, tempLabW, 30)];
+//        lab.lineBreakMode = UILineBreakModeMiddleTruncation;
+//        [lab setBackgroundColor:[UIColor colorWithHexString:@"F3F1F1"]];
+//        [lab setTextColor:[UIColor colorWithHexString:@"c8002c"]];
+//        lab.layer.borderColor = [UIColor colorWithHexString:@"888888"].CGColor;
+//        lab.layer.masksToBounds = YES;
+//        lab.font = font;
+//        lab.text = str;
+//        lab.tag = i;
+//        [bgv addSubview:lab];
+//        
+//        MyButton* bgv2 = [MyButton buttonWithType:UIButtonTypeCustom];
+//        [bgv2 setFrame:CGRectMake(pointX, pointY, tempLabW, 30)];
+//        [bgv2 setBackgroundColor:[UIColor clearColor]];
+//        bgv2.btntype = key;
+//        [bgv2 addTarget:self action:@selector(removeSelectCararyAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [bgv addSubview:bgv2];
+//        
+//        
+//        totalSelectHeight = pointY + 40;
+//        
+//        [bgv setFrame:CGRectMake(0, 0, ScreenWidth,totalSelectHeight)];
+//        [bgv setBackgroundColor:[UIColor clearColor]];
+//        
+//        //延长当前的X
+//        pointX = pointX + filterSp + tempLabW;
+//    }
+//    
+//    
+//    
+////    int H = filterSp + (30 +filterSp)* lineNum;
+////    [bgv setFrame:CGRectMake(0, 0, ScreenWidth, H)];
+//    
+//    
+//    return bgv;
+//    
+//}
 //---------V1
 //{
 //    
@@ -609,7 +722,7 @@
     }
     
     //正常的cell
-    int normalindex = section -1;
+    NSInteger normalindex = section -1;
     
 
     UIView *bgv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 38)];
@@ -658,7 +771,7 @@
     
     
     UIImage *image = [UIImage imageNamed:@"zz_arrow.png"];//[UIImage imageNamed:@"arrow_right.png"];
-    UIImageView *imageArrowV = [[UIImageView alloc] initWithFrame:CGRectMake(290, 10, image.size.width * 2/3, image.size.height *2/3)];
+    UIImageView *imageArrowV = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth-30, 10, image.size.width * 2/3, image.size.height *2/3)];
     [imageArrowV setImage:image];
     [imageArrowV setBackgroundColor:[UIColor clearColor]];
     [bgv addSubview:imageArrowV];
@@ -711,7 +824,7 @@
 //    return H;
     
     //正常的cell
-    int normalindex = [indexPath section] -1;
+    NSInteger normalindex = [indexPath section] -1;
     
     BrandsProductlistFilter *info = [arrfilter objectAtIndex:normalindex isArray:nil];
     
@@ -739,7 +852,7 @@
     {
         // Create a cell to display an ingredient.
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:[NSString stringWithFormat:@"index%d",[indexPath row]]];
+                                      reuseIdentifier:[NSString stringWithFormat:@"index%ld",(long)[indexPath row]]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
@@ -757,7 +870,7 @@
         
     }else{
     //正常的cell
-    int normalindex = [indexPath section] -1;
+    NSInteger normalindex = [indexPath section] -1;
     
     BrandsProductlistFilter *info = [arrfilter objectAtIndex:normalindex isArray:nil];
         
@@ -775,7 +888,7 @@
 
             
         }else{
-            int Hight = filterSp + (filterbtnH +filterSp)* ([info.items count]%filterCellNum == 0? [info.items count]/filterCellNum :[info.items count]/filterCellNum+1) ;
+            NSInteger Hight = filterSp + (filterbtnH +filterSp)* ([info.items count]%filterCellNum == 0? [info.items count]/filterCellNum :[info.items count]/filterCellNum+1) ;
             
             UIView *bgfootvLittle = [[UIView alloc] initWithFrame:CGRectMake(0, Hight, ScreenWidth, filterlittleSurebtnH)];
             [bgfootvLittle setBackgroundColor:[UIColor colorWithHexString:@"e6e6e6"]];
@@ -826,14 +939,14 @@
 -(UIView *)createCellView:(NSArray*)subSortArray withtype:(NSString *)atype withtypeid:(int)atypeid withgroup:(int)agroup withtitle:(NSString*)atitle withIsOpen:(BOOL)isOpen withIndex:(int)sectionindex{
 
     //行数
-    int subSortbtnNum = ([subSortArray count]%filterCellNum == 0? [subSortArray count]/filterCellNum :[subSortArray count]/filterCellNum+1);
+    NSInteger subSortbtnNum = ([subSortArray count]%filterCellNum == 0? [subSortArray count]/filterCellNum :[subSortArray count]/filterCellNum+1);
     
     //按钮宽度
-    int filterbtnW = (ScreenWidth-40)/3;
+    NSInteger filterbtnW = (ScreenWidth-40)/3;
     
     
     //view的高度
-    int viewH = 60;//subSortbtnNum*(filterbtnH+ SplashViewCount);
+    NSInteger viewH = 60;//subSortbtnNum*(filterbtnH+ SplashViewCount);
 
     UIView *bgv = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, viewH)];
     [bgv setBackgroundColor:[UIColor clearColor]];
@@ -841,7 +954,7 @@
 
     for (int i = 0; i<subSortbtnNum; i++) {
 
-        int jcount = ([subSortArray count] - filterCellNum*i) > filterCellNum ? filterCellNum : ([subSortArray count] - filterCellNum*i);
+        NSInteger jcount = ([subSortArray count] - filterCellNum*i) > filterCellNum ? filterCellNum : ([subSortArray count] - filterCellNum*i);
         
         for (int j = 0; j<jcount; j++) {
             
@@ -917,7 +1030,7 @@
     }
     
     
-    int H;
+    NSInteger H = 0;
     if (isOpen == NO) {
         H = filterSp + (filterbtnH +filterSp);
     }else{
