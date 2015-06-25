@@ -1137,6 +1137,8 @@
 		A6218DA61B3A665900D9ED93 /* choice_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218DA41B3A665900D9ED93 /* choice_unchecked@2x.png */; };
 		A6218DA91B3AB52300D9ED93 /* btn_mid_b_hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218DA71B3AB52300D9ED93 /* btn_mid_b_hover@2x.png */; };
 		A6218DAA1B3AB52300D9ED93 /* btn_mid_b_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218DA81B3AB52300D9ED93 /* btn_mid_b_normal@2x.png */; };
+		A6218DAD1B3B9B1B00D9ED93 /* btn_shop_a_hoverl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218DAB1B3B9B1B00D9ED93 /* btn_shop_a_hoverl@2x.png */; };
+		A6218DAE1B3B9B1B00D9ED93 /* btn_shop_a_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218DAC1B3B9B1B00D9ED93 /* btn_shop_a_normal@2x.png */; };
 		A67BEAB81B281A0300418650 /* aimerLogoDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A67BEAB71B281A0300418650 /* aimerLogoDefault@2x.png */; };
 		A6F394EB1B2E7C74004566CA /* PackageInfoParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F394E81B2E7C74004566CA /* PackageInfoParser.m */; };
 		A6F394EC1B2E7C74004566CA /* PackageInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F394EA1B2E7C74004566CA /* PackageInfoViewController.m */; };
@@ -2900,6 +2902,8 @@
 		A6218DA41B3A665900D9ED93 /* choice_unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "choice_unchecked@2x.png"; sourceTree = "<group>"; };
 		A6218DA71B3AB52300D9ED93 /* btn_mid_b_hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_mid_b_hover@2x.png"; sourceTree = "<group>"; };
 		A6218DA81B3AB52300D9ED93 /* btn_mid_b_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_mid_b_normal@2x.png"; sourceTree = "<group>"; };
+		A6218DAB1B3B9B1B00D9ED93 /* btn_shop_a_hoverl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_shop_a_hoverl@2x.png"; sourceTree = "<group>"; };
+		A6218DAC1B3B9B1B00D9ED93 /* btn_shop_a_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_shop_a_normal@2x.png"; sourceTree = "<group>"; };
 		A67BEAB71B281A0300418650 /* aimerLogoDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aimerLogoDefault@2x.png"; sourceTree = "<group>"; };
 		A6F394E71B2E7C74004566CA /* PackageInfoParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageInfoParser.h; sourceTree = "<group>"; };
 		A6F394E81B2E7C74004566CA /* PackageInfoParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageInfoParser.m; sourceTree = "<group>"; };
@@ -6046,6 +6050,8 @@
 		A6218D941B395F5C00D9ED93 /* Cart20 */ = {
 			isa = PBXGroup;
 			children = (
+				A6218DAB1B3B9B1B00D9ED93 /* btn_shop_a_hoverl@2x.png */,
+				A6218DAC1B3B9B1B00D9ED93 /* btn_shop_a_normal@2x.png */,
 				A6218DA71B3AB52300D9ED93 /* btn_mid_b_hover@2x.png */,
 				A6218DA81B3AB52300D9ED93 /* btn_mid_b_normal@2x.png */,
 				A6218D951B395F5C00D9ED93 /* lp_option_hover@2x.png */,
@@ -6369,6 +6375,7 @@
 				9626941C1A135FB700A0BC7F /* service_btn_press.png in Resources */,
 				9626949A1A135FB700A0BC7F /* shareto_bg.png in Resources */,
 				962693AA1A135FB700A0BC7F /* ticket_status_used.png in Resources */,
+				A6218DAD1B3B9B1B00D9ED93 /* btn_shop_a_hoverl@2x.png in Resources */,
 				962693A31A135FB700A0BC7F /* list_bg_big.png in Resources */,
 				962694181A135FB700A0BC7F /* page_bg_1136.png in Resources */,
 				962694A31A135FB700A0BC7F /* top3_search_hot.png in Resources */,
@@ -6746,6 +6753,7 @@
 				A6218DA61B3A665900D9ED93 /* choice_unchecked@2x.png in Resources */,
 				962693D11A135FB700A0BC7F /* sort_boy_pic_04.png in Resources */,
 				962694161A135FB700A0BC7F /* login_sns_sina_press-11.png in Resources */,
+				A6218DAE1B3B9B1B00D9ED93 /* btn_shop_a_normal@2x.png in Resources */,
 				585A677918DF1B0200390E86 /* BrandListViewController.xib in Resources */,
 				962693B51A135FB700A0BC7F /* image-2.png in Resources */,
 				962693BC1A135FB700A0BC7F /* noise-dark-blue@2x.png in Resources */,

@@ -448,6 +448,7 @@
 #define Http_PackageInfo20_Tag 211 //新版本 礼包详情
 #define Http_CouponList20_Tag 212 //新版本 优惠券列表
 #define Http_AddPackageToCart20_Tag 213 //新版本 礼包加入购物车
+#define Http_PartChangeItem20_Tag 214 //新版本 购物车选中商品
 #define Http_wardrobe_Tag 301 //私人衣橱 1
 #define Http_changefrequency20_Tag 302 //设置定期更换内衣提醒
 #define Http_bespeak20_Tag 303 //预约测体门店

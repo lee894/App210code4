@@ -28,7 +28,8 @@
 //lee999 新增套装的积分
 @property(nonatomic,assign) int suit_score;
 @property(nonatomic,retain) NSString* packageid;
-
+@property(nonatomic,retain) NSString* uk;
+@property(nonatomic,assign) BOOL selected;
 @property(nonatomic,retain) NSMutableArray *suits;
 @end
 
@@ -73,6 +74,12 @@
 
 -(NSString*)stock;
 -(void)setStock:(NSString*)aStock;
+
+-(NSString*)uk;
+-(void)setUk:(NSString*)aUk;
+
+-(BOOL)selected;
+-(void)setSelected:(BOOL)aSelected;
 
 @end
 @interface YKColor_Size : YKBaseEntity {

@@ -135,6 +135,33 @@
     [self setAttribute:aStock forKey:@"stock"];
 }
 
+-(NSString*)uk
+{
+    id value = [self attributeForKey:@"uk"];
+    if ([value isKindOfClass:[NSNull class]]) {
+        return nil;
+    }
+    return value;
+}
+
+-(void)setUk:(NSString*)aUk
+{
+    [self setAttribute:aUk forKey:@"uk"];
+}
+
+-(BOOL)selected
+{
+    id value = [self attributeForKey:@"selected"];
+    if ([value isKindOfClass:[NSNull class]]) {
+        return nil;
+    }
+    return [value boolValue];
+}
+-(void)setSelected:(BOOL)aSelected
+{
+    [self setAttribute:[NSNumber numberWithBool:aSelected] forKey:@"selected"];
+}
+
 @end
 @implementation YKColor_Size
 -(NSString*)ID{
