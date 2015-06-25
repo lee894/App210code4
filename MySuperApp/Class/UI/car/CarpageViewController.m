@@ -257,6 +257,10 @@
         if (shoppingCarTab) {
             [shoppingCarTab removeFromSuperview];
         }
+        if (vToolbar) {
+            [vToolbar removeFromSuperview];
+            vToolbar = nil;
+        }
         if (!self.nullView) {
             [self createNoGoodView];
         }
@@ -444,6 +448,46 @@
     [btnCheckOut setTitle:@"结算" forState:UIControlStateNormal];
     [btnCheckOut addTarget:self action:@selector(gotoChectViewC) forControlEvents:UIControlEventTouchUpInside];
     [vToolbar addSubview:btnCheckOut];
+    
+    UIButton* btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btnCheckBox setFrame:CGRectMake(15, (vToolbar.frame.size.height - lee1fitAllScreen(22)) / 2, lee1fitAllScreen(22), lee1fitAllScreen(22))];
+    [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
+    [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
+    [btnCheckBox addTarget:self action:@selector(checkBoxAction:) forControlEvents:UIControlEventTouchUpInside];
+    [vToolbar addSubview:btnCheckBox];
+    
+    UILabel* lbl = [[UILabel alloc] init];
+    [lbl setText:@"全选"];
+    [lbl setTextColor:[UIColor colorWithHexString:@"#666666"]];
+    [lbl setFont:[UIFont systemFontOfSize:17]];
+    CGRect rc = [lbl.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lbl.font} context:nil];
+    [lbl setFrame:CGRectMake(btnCheckBox.frame.size.width + btnCheckBox.frame.origin.x + 12, (vToolbar.frame.size.height - rc.size.height) / 2, rc.size.width, rc.size.height)];
+    [vToolbar addSubview:lbl];
+    
+    lbl = [[UILabel alloc] init];
+    [lbl setText:[NSString stringWithFormat:@"%.0f元", [_carModel.itemPrice floatValue]]];
+    [lbl setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
+    [lbl setFont:[UIFont systemFontOfSize:17]];
+    rc = [lbl.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lbl.font} context:nil];
+    [lbl setFrame:CGRectMake(btnCheckOut.frame.origin.x - 14 - rc.size.width, 13, rc.size.width, rc.size.height)];
+    [vToolbar addSubview:lbl];
+    
+    CGRect lastlblFrame = lbl.frame;
+    lbl = [[UILabel alloc] init];
+    [lbl setText:@"总计:"];
+    [lbl setTextColor:[UIColor colorWithHexString:@"#333333"]];
+    [lbl setFont:[UIFont systemFontOfSize:12]];
+    rc = [lbl.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lbl.font} context:nil];
+    [lbl setFrame:CGRectMake(lastlblFrame.origin.x - rc.size.width, 16, rc.size.width, rc.size.height)];
+    [vToolbar addSubview:lbl];
+    
+    lbl = [[UILabel alloc] init];
+    [lbl setText:@"不含运费"];
+    [lbl setTextColor:[UIColor colorWithHexString:@"#333333"]];
+    [lbl setFont:[UIFont systemFontOfSize:12]];
+    rc = [lbl.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lbl.font} context:nil];
+    [lbl setFrame:CGRectMake(btnCheckOut.frame.origin.x - 14 - rc.size.width, 38, rc.size.width, rc.size.height)];
+    [vToolbar addSubview:lbl];
     [self.view addSubview:vToolbar];
 }
 
@@ -1687,6 +1731,12 @@
 }
 
 #pragma mark--- CheckBoxAction
+
+-(void)checkBoxAction:(UIButton*)sender
+{
+    
+}
+
 -(void)packageCheckBoxAction:(UIButton*)sender
 {
     UITableViewCell* cell = nil;
