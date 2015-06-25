@@ -284,14 +284,14 @@
         [contentArr removeAllObjects];
     }
     
-    [mainSev getProductlist:self.params andOrder:self.orderStr andKeyword:@"" andPage:[NSString stringWithFormat:@"%d",current] andPer_page:@"10"];
+    [mainSev getProductlist:self.params andOrder:self.orderStr andKeyword:@"" andPage:[NSString stringWithFormat:@"%ld",(long)current] andPer_page:@"10"];
     
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 }
 
 -(void)footeraddDataingProductList{
     current++;
-    [mainSev getProductlist:self.params andOrder:self.orderStr andKeyword:@"" andPage:[NSString stringWithFormat:@"%d",current] andPer_page:@"10"];
+    [mainSev getProductlist:self.params andOrder:self.orderStr andKeyword:@"" andPage:[NSString stringWithFormat:@"%ld",(long)current] andPer_page:@"10"];
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 }
 
@@ -395,6 +395,11 @@
             //[self updateTableViewCount:contentArr.count];
             break;
     }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return lee1fitAllScreen(250);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
