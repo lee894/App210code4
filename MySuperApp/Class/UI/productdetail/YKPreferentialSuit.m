@@ -129,7 +129,7 @@
             if (!model.errorMessage) {
                 [SBPublicAlert hideMBprogressHUD:self.view];
                 NSInteger indexd = [[[NSUserDefaults standardUserDefaults] objectForKey:@"totalNUM"] intValue];
-                NSString * strInfo = [[NSString alloc] initWithFormat:@"%d", indexd];
+                NSString * strInfo = [[NSString alloc] initWithFormat:@"%ld", (long)indexd];
                 [[NSUserDefaults standardUserDefaults]setObject:strInfo forKey:@"totalNUM"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TotleNumber" object:nil];
 
@@ -485,7 +485,7 @@
             NSDictionary *dicColor = [item.array_size objectAtIndex:0];
             if ([(NSArray*)[dicColor objectForKey:[[item.colorlist objectAtIndex:0 isArray:nil] ID]] count]!=0) {
                 NSString* selectedSize;
-                NSLog(@"-----------============--------%@", [[[item.array_size objectAtIndex:item.currentColor] objectForKey:[[item.colorlist objectAtIndex:item.currentColor] ID]] objectAtIndex:item.currentSize]);
+                //NSLog(@"-----------============--------%@", [[[item.array_size objectAtIndex:item.currentColor] objectForKey:[[item.colorlist objectAtIndex:item.currentColor] ID]] objectAtIndex:item.currentSize]);
                 selectedSize = [[[[item.array_size objectAtIndex:item.currentColor] objectForKey:[[item.colorlist objectAtIndex:item.currentColor] ID]] objectAtIndex:item.currentSize]objectForKey:@"spec_alias"];
                 
                 item.currentSize = 0;

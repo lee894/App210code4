@@ -26,12 +26,12 @@
     
     NSString *productName;
     NSString *productId;
-    int selectIndex;
+    NSInteger selectIndex;
 //    NSString * pic;
     
     //数据源
-    int currentColor;//滚动picker时给这b赋值
-    int currentSize;
+    NSInteger currentColor;//滚动picker时给这b赋值
+    NSInteger currentSize;
     NSString *productSubId;
     
 }
@@ -47,12 +47,12 @@
 
 @property(nonatomic, retain)NSString *productName;
 @property(nonatomic, retain)NSString *productId;
-@property(nonatomic, assign)int selectIndex;
+@property(nonatomic, assign)NSInteger selectIndex;
 @property(nonatomic, assign)NSString * pic;
 
 //数据源
-@property(nonatomic, assign)int currentColor;//滚动picker时给这b赋值
-@property(nonatomic, assign)int currentSize;
+@property(nonatomic, assign)NSInteger currentColor;//滚动picker时给这b赋值
+@property(nonatomic, assign)NSInteger currentSize;
 @property(nonatomic, retain)NSString *productSubId;
 
 @property(nonatomic, retain) UrlImageButton *buttonForSelect;

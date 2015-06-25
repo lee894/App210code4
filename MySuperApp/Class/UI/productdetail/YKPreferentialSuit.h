@@ -23,7 +23,7 @@
     UIPickerView *pickerForSelectSize;//尺寸下来列表
     UIToolbar *toolBarForSizePicker;//尺寸picker的toolbar
     
-    int currentSelectRow;   //当前选中的行
+    NSInteger currentSelectRow;   //当前选中的行
 }
 @property (nonatomic, assign) BOOL isFromMyAimer;
 @property (nonatomic, assign) BOOL isHiddenBar;
