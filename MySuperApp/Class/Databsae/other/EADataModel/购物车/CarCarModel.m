@@ -113,7 +113,8 @@
             item.size = [dic objectForKey:@"size"];
             item.stock = [dic objectForKey:@"stock"];
             item.isSollection = [dic objectForKey:@"isSollection"];
-            
+            item.uk = [dic objectForKey:@"uk"];
+            item.selected = [[dic objectForKey:@"selected"] boolValue];
             
             [self.carProductlist addObject:item];
 //            [item release];
@@ -253,6 +254,8 @@
             item.save = [[dicdate objectForKey:@"save"] floatValue];
             item.number = [[dicdate objectForKey:@"number"] intValue];
             item.suitid = [dicdate objectForKey:@"suitid"];
+            item.selected = [[dicdate objectForKey:@"selected"] boolValue];
+            item.uk = [dicdate objectForKey:@"uk"];
             NSLog(@"arrSuit:%@",item);
             [self.suitlist addObject:item];
 
@@ -279,6 +282,8 @@
             item.price = [[dicdate objectForKey:@"price"] floatValue];
             item.save = [[dicdate objectForKey:@"save"] floatValue];
             item.packageid = [dicdate objectForKey:@"packageid"];
+            item.selected = [[dicdate objectForKey:@"selected"] boolValue];
+            item.uk = [dicdate objectForKey:@"uk"];
             NSLog(@"arrSuit:%@",item);
             [self.packagelist addObject:item];
             

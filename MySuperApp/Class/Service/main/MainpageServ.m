@@ -1041,6 +1041,12 @@
     }];
 }
 
+-(void)PartChangeItemWithUk:(NSString*)aUk
+{
+    [self sendPostWithURL:@"partchangeitem" tag:Http_PartChangeItem20_Tag beforeRequest:^{
+        [self addParam:@"change_uk" withValue:aUk];
+    }];
+}
 
 
 @end

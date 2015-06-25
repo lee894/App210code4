@@ -18,7 +18,7 @@
 //    UIButton *doneButton;
     
     BOOL isEditing; //是否编辑状态
-
+    UIView* vToolbar;
 }
 @property (nonatomic, retain) NSMutableArray* selectedList;
 @end
@@ -279,6 +279,31 @@
 -(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel
 {
     [SBPublicAlert hideMBprogressHUD:self.view];
+    
+    switch ((NSUInteger)aHandle) {
+        case Http_PartChangeItem20_Tag:
+        {
+            if ([[amodel objectForKey:@"response"] isEqualToString:@"error"]) {
+                [SBPublicAlert showMBProgressHUD:@"选择失败" andWhereView:self.view hiddenTime:0.6];
+            }else {
+//                [SBPublicAlert showMBProgressHUD:@"收藏失败" andWhereView:self.view hiddenTime:0.6];
+                LBaseModel *model = [ModelManager parseModelWithDictionary:amodel tag:Http_Car_Tag];
+                self.carModel = (CarCarModel *)model;
+                [self creatCells];
+                [self createSuitlistcells];
+                [self createPackagelistcells];
+                [self creatToolBar];
+                [shoppingCarTab reloadData];
+                return;
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    
+    
+    
     LBaseModel *model = (LBaseModel *)amodel;
     
     switch (model.requestTag) {
@@ -296,7 +321,7 @@
             [self createSuitlistcells];
             [self createPackagelistcells];
             [self checkTable];
-            
+            [self creatToolBar];
             [shoppingCarTab reloadData];
             [SBPublicAlert hideMBprogressHUD:self.view];
         }
@@ -308,7 +333,7 @@
                 [self creatCells];
                 [self createSuitlistcells];
                 [self createPackagelistcells];
-                
+                [self creatToolBar];
                 [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:0.6];
                 
             }else {
@@ -317,7 +342,7 @@
                 [self creatCells];
                 [self createSuitlistcells];
                 [self createPackagelistcells];
-                
+                [self creatToolBar];
                 [SBPublicAlert hideMBprogressHUD:self.view];
                 [shoppingCarTab reloadData];
             }
@@ -352,7 +377,7 @@
             [self creatCells];
             [self createSuitlistcells];
             [self createPackagelistcells];
-            
+            [self creatToolBar];
             [shoppingCarTab reloadData];
             
             [SBPublicAlert hideMBprogressHUD:self.view];
@@ -379,7 +404,7 @@
     }
     [self creatCells];
     [self checkTable];
-    
+    [self creatToolBar];
     
     //lee999 设置气泡
     [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%.f",[self.carModel.itemNumber floatValue]] forKey:@"totalNUM"];
@@ -403,6 +428,24 @@
     [self changetableBarto:0];
 }
 
+-(void)creatToolBar
+{
+    if (vToolbar) {
+        [vToolbar removeFromSuperview];
+        vToolbar = nil;
+    }
+    vToolbar = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - lee1fitAllScreen(60), ScreenWidth, lee1fitAllScreen(60))];
+    [vToolbar setBackgroundColor:[UIColor colorWithHexString:@"#f8f8f8"]];
+    [vToolbar setAlpha:0.9];
+    UIButton* btnCheckOut = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btnCheckOut setFrame:CGRectMake(vToolbar.frame.size.width - 10 - lee1fitAllScreen(90), (vToolbar.frame.size.height - lee1fitAllScreen(44)) / 2, lee1fitAllScreen(90), lee1fitAllScreen(44))];
+    [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_normal"] forState:UIControlStateNormal];
+    [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_hoverl"] forState:UIControlStateHighlighted];
+    [btnCheckOut setTitle:@"结算" forState:UIControlStateNormal];
+    [btnCheckOut addTarget:self action:@selector(gotoChectViewC) forControlEvents:UIControlEventTouchUpInside];
+    [vToolbar addSubview:btnCheckOut];
+    [self.view addSubview:vToolbar];
+}
 
 -(void)creatHeadView{
 	UIView* headView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(60))];
@@ -550,20 +593,20 @@
         NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
         mps.lineBreakMode = NSLineBreakByCharWrapping;
         mps.lineSpacing = 6;
-        CGRect rcName = [lblName.text boundingRectWithSize:CGSizeMake(unitWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblName.font, NSParagraphStyleAttributeName : mps} context:nil];
+        CGRect rcName = [lblName.text boundingRectWithSize:CGSizeMake(unitWidth, 40) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblName.font, NSParagraphStyleAttributeName : mps} context:nil];
         [lblName setFrame:CGRectMake(0, uiv.frame.origin.y + uiv.frame.size.height + 10, unitWidth, rcName.size.height)];
         [vUnit addSubview:lblName];
         
         UILabel* lblPrice = [[UILabel alloc] init];
         [lblPrice setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
-        [lblPrice setText:[NSString stringWithFormat:@"￥%@", item.strdiscountprice]];
+        [lblPrice setText:[NSString stringWithFormat:@"￥%.0f", [item.strdiscountprice floatValue]]];
         [lblPrice setFont:[UIFont systemFontOfSize:12]];
         [lblPrice setFrame:CGRectMake(0, uiv.frame.size.height + uiv.frame.origin.y + 45, unitWidth, 13)];
         [vUnit addSubview:lblPrice];
         
         UILabel* lblMPrice = [[UILabel alloc] init];
         [lblMPrice setTextColor:[UIColor colorWithHexString:@"#888888"]];
-        [lblMPrice setText:[NSString stringWithFormat:@"￥%@", item.price]];
+        [lblMPrice setText:[NSString stringWithFormat:@"￥%.0f", [item.price floatValue]]];
         [lblMPrice setFont:[UIFont systemFontOfSize:12]];
         [lblMPrice setTextAlignment:NSTextAlignmentRight];
         [lblMPrice setFrame:CGRectMake(0, uiv.frame.size.height + uiv.frame.origin.y + 45, unitWidth, 13)];
@@ -912,7 +955,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSInteger index = indexPath.row;
-    if (indexPath.section-suitCount<0) {
+    if (indexPath.section < suitCount) {
         if ([indexPath section] < 0 || [indexPath section] >= [self.carModel.suitlist count]) {
             return ;
         }
@@ -921,6 +964,19 @@
         //....
         [mainSer getDeletesuittocar:item.suitid];
         [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
+        
+    }
+    else if (indexPath.section - suitCount < packageCount) {
+        if ([indexPath section] < 0) {
+            return ;
+        }
+        YKSuitListItem *item = [self.carModel.packagelist objectAtIndex:[indexPath section] - suitCount];
+        [mainSer getDelcar:item.uk];
+        [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
+        //删除套装
+        //....
+//        [mainSer getDeletesuittocar:item.suitid];
+//        [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
         
     }
     else if ([indexPath section]-suitCount==0 && !isaddfav) {
@@ -1001,6 +1057,7 @@
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
         [btnCheckBox addTarget:self action:@selector(productCheckBoxAction:) forControlEvents:UIControlEventTouchUpInside];
+        btnCheckBox.selected = item.selected;
         [shoppingCarCell addSubview:btnCheckBox];
         
         CGFloat xOffset = 28 + lee1fitAllScreen(28);
@@ -1087,7 +1144,7 @@
             //}else {
               //  numberName.frame=CGRectMake(shoppingCarTab.editing?198:213, yOffset, 110, 20);
             //}
-            numberName.frame=CGRectMake(xOffset + fTextWidth / 2, colorName.frame.origin.y, 110, 20);
+            numberName.frame=CGRectMake(xOffset + fTextWidth / 2, colorName.frame.origin.y, 110, 13);
             numberName.backgroundColor = [UIColor clearColor];
             numberName.text = @"数量：";
             numberName.font = [UIFont systemFontOfSize:13];
@@ -1096,7 +1153,7 @@
             
             //lee999 商品数量
            // UITextField* numberValue = [[UITextField alloc] initWithFrame:CGRectMake(isEditing?228:245, yOffset+1, 36, 20)];
-            UITextField* numberValue = [[UITextField alloc] initWithFrame:CGRectMake(lee1fitAllScreen(245), numberName.frame.origin.y - 1, 36, 20)];
+            UITextField* numberValue = [[UITextField alloc] initWithFrame:CGRectMake(lee1fitAllScreen(255), numberName.frame.origin.y - 3, 36, 20)];
             numberValue.textAlignment=UITextAlignmentCenter;
             numberValue.tag = 100992;
             
@@ -1155,7 +1212,7 @@
 //            yOffset += 30;
             
             
-            NSString* str = @"总价： ";
+            NSString* str = @"总价: ";
             strWidth = [str sizeWithFont:font].width;
             //UILabel* caseName = [[UILabel alloc] initWithFrame:CGRectMake(shoppingCarTab.editing?198:213, yOffset, strWidth, 25)];
             UILabel* caseName = [[UILabel alloc] initWithFrame:CGRectMake(numberName.frame.origin.x, 112, strWidth, 13)];
@@ -1283,6 +1340,7 @@
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
         [btnCheckBox addTarget:self action:@selector(suitCheckBoxAction:) forControlEvents:UIControlEventTouchUpInside];
+        btnCheckBox.selected = item.selected;
         [viewSuitlistCell3 addSubview:btnCheckBox];
         
         
@@ -1488,6 +1546,7 @@
         [btnCheckBox setFrame:CGRectMake(14, 20, lee1fitAllScreen(22), lee1fitAllScreen(22))];
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
+        btnCheckBox.selected = item.selected;
         [btnCheckBox addTarget:self action:@selector(packageCheckBoxAction:) forControlEvents:UIControlEventTouchUpInside];
         [viewSuitlistCell3 addSubview:btnCheckBox];
         
@@ -1642,14 +1701,8 @@
     if (cell) {
         NSInteger index = [shoppingCarTab indexPathForCell:cell].section;
         YKSuitListItem* item = [_carModel.packagelist objectAtIndex:index isArray:nil];
-        if (item) {
-            if (sender.selected) {
-                [_selectedList removeObject:item];
-            }else
-            {
-                [_selectedList addObject:item];
-            }
-        }
+        [mainSer PartChangeItemWithUk:item.uk];
+        [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
     }
 }
 
@@ -1667,14 +1720,8 @@
     if (cell) {
         NSInteger index = [shoppingCarTab indexPathForCell:cell].section;
         YKSuitListItem* item = [_carModel.suitlist objectAtIndex:index isArray:nil];
-        if (item) {
-            if (sender.selected) {
-                [_selectedList removeObject:item];
-            }else
-            {
-                [_selectedList addObject:item];
-            }
-        }
+        [mainSer PartChangeItemWithUk:item.uk];
+        [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
     }
 }
 
@@ -1692,14 +1739,8 @@
     if (cell) {
         NSInteger index = [shoppingCarTab indexPathForCell:cell].section;
         YKSuitListItem* item = [_carModel.carProductlist objectAtIndex:index isArray:nil];
-        if (item) {
-            if (sender.selected) {
-                [_selectedList removeObject:item];
-            }else
-            {
-                [_selectedList addObject:item];
-            }
-        }
+        [mainSer PartChangeItemWithUk:item.uk];
+        [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
     }
 }
 
@@ -1951,10 +1992,10 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([indexPath section] < suitCount) {
         //lee999 套装的最后一行，也能del
-        if (indexPath.row == [(NSMutableArray*)[self.suitlistcell objectAtIndex:indexPath.section isArray:nil] count] - 1) {
-            return NO;
+        if (indexPath.row == 0) {
+            return YES;
         }
-        return YES;
+        return NO;
     }
     if ([indexPath section] - suitCount < packageCount) {
         //lee999 套装的最后一行，也能del
