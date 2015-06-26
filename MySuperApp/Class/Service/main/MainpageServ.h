@@ -341,7 +341,7 @@
 //获取私人衣橱列表
 -(void)getwardrobeinfo;
 
--(void)PartChangeItemWithUk:(NSString*)aUk;
+-(void)PartChangeItemWithUk:(NSString*)aUk andType:(NSString*)aType;
 
 @end
 

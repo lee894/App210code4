@@ -1041,10 +1041,11 @@
     }];
 }
 
--(void)PartChangeItemWithUk:(NSString*)aUk
+-(void)PartChangeItemWithUk:(NSString*)aUk andType:(NSString*)aType
 {
     [self sendPostWithURL:@"partchangeitem" tag:Http_PartChangeItem20_Tag beforeRequest:^{
         [self addParam:@"change_uk" withValue:aUk];
+        [self addParam:@"change_type" withValue:aType];
     }];
 }
 

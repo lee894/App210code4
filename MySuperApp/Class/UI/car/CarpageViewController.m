@@ -445,7 +445,7 @@
     [btnCheckOut setFrame:CGRectMake(vToolbar.frame.size.width - 10 - lee1fitAllScreen(90), (vToolbar.frame.size.height - lee1fitAllScreen(44)) / 2, lee1fitAllScreen(90), lee1fitAllScreen(44))];
     [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_normal"] forState:UIControlStateNormal];
     [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_hoverl"] forState:UIControlStateHighlighted];
-    [btnCheckOut setTitle:@"结算" forState:UIControlStateNormal];
+    [btnCheckOut setTitle:[NSString stringWithFormat:@"结算(%@)", _carModel.itemNumber] forState:UIControlStateNormal];
     [btnCheckOut addTarget:self action:@selector(gotoChectViewC) forControlEvents:UIControlEventTouchUpInside];
     [vToolbar addSubview:btnCheckOut];
     
@@ -456,6 +456,30 @@
     [btnCheckBox addTarget:self action:@selector(checkBoxAction:) forControlEvents:UIControlEventTouchUpInside];
     [vToolbar addSubview:btnCheckBox];
     
+    BOOL selectAll = YES;
+    for (YKItem* item in _carModel.carProductlist) {
+        if(!item.selected)
+        {
+            selectAll = NO;
+            break;
+        }
+    }
+    for (YKSuitListItem* item in _carModel.suitlist) {
+        if(!item.selected)
+        {
+            selectAll = NO;
+            break;
+        }
+    }
+    for (YKSuitListItem* item in _carModel.packagelist) {
+        if(!item.selected)
+        {
+            selectAll = NO;
+            break;
+        }
+    }
+    btnCheckBox.selected = selectAll;
+    
     UILabel* lbl = [[UILabel alloc] init];
     [lbl setText:@"全选"];
     [lbl setTextColor:[UIColor colorWithHexString:@"#666666"]];
@@ -465,7 +489,7 @@
     [vToolbar addSubview:lbl];
     
     lbl = [[UILabel alloc] init];
-    [lbl setText:[NSString stringWithFormat:@"%.0f元", [_carModel.itemPrice floatValue]]];
+    [lbl setText:[NSString stringWithFormat:@"%.0f元", [_carModel.selectedItemCount floatValue]]];
     [lbl setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
     [lbl setFont:[UIFont systemFontOfSize:17]];
     rc = [lbl.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lbl.font} context:nil];
@@ -1734,7 +1758,8 @@
 
 -(void)checkBoxAction:(UIButton*)sender
 {
-    
+    [mainSer PartChangeItemWithUk:@"" andType:@"no"];
+    [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
 }
 
 -(void)packageCheckBoxAction:(UIButton*)sender
@@ -1751,7 +1776,7 @@
     if (cell) {
         NSInteger index = [shoppingCarTab indexPathForCell:cell].section;
         YKSuitListItem* item = [_carModel.packagelist objectAtIndex:index isArray:nil];
-        [mainSer PartChangeItemWithUk:item.uk];
+        [mainSer PartChangeItemWithUk:item.uk andType:@"part"];
         [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
     }
 }
@@ -1770,7 +1795,7 @@
     if (cell) {
         NSInteger index = [shoppingCarTab indexPathForCell:cell].section;
         YKSuitListItem* item = [_carModel.suitlist objectAtIndex:index isArray:nil];
-        [mainSer PartChangeItemWithUk:item.uk];
+        [mainSer PartChangeItemWithUk:item.uk andType:@"part"];
         [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
     }
 }
@@ -1789,7 +1814,7 @@
     if (cell) {
         NSInteger index = [shoppingCarTab indexPathForCell:cell].section;
         YKSuitListItem* item = [_carModel.carProductlist objectAtIndex:index isArray:nil];
-        [mainSer PartChangeItemWithUk:item.uk];
+        [mainSer PartChangeItemWithUk:item.uk andType:@"part"];
         [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
     }
 }

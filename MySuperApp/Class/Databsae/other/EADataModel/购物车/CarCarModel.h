@@ -30,6 +30,7 @@
 @property (nonatomic, retain) NSMutableArray* gifts;
 @property (nonatomic, retain) NSString* itemNumber; //商品总量
 @property (nonatomic, retain) NSString* itemPrice;
+@property (nonatomic, retain) NSString* selectedItemCount;
 
 
 @property (retain, nonatomic) NSString *errorMessage;

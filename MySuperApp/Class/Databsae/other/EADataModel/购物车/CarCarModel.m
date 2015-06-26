@@ -119,6 +119,7 @@
             [self.carProductlist addObject:item];
 //            [item release];
         }
+        self.selectedItemCount = [json objectForKey:@"itemprice"];
         NSString* car_statistics = [json objectForKey:@"car_statistics"];
         NSArray* array1 = [car_statistics componentsSeparatedByString:@"|"];
         if (array1.count >= 1) {
