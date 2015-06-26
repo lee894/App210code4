@@ -381,6 +381,7 @@
         handle = atag;
         [self.delegate serviceFinished:handle withmodel:jsonDic];
     }else{
+        handle = ELoginQQService;
         LBaseModel *model = [ModelManager parseModelWithDictionary:jsonDic tag:atag];
         [self.delegate serviceFinished:handle withmodel:model];
     }

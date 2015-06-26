@@ -21,6 +21,7 @@
     UIView* vToolbar;
 }
 @property (nonatomic, retain) NSMutableArray* selectedList;
+@property (nonatomic, assign) UIButton* btnCheckBox;
 @end
 
 @implementation CarpageViewController
@@ -285,21 +286,27 @@
 -(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel
 {
     [SBPublicAlert hideMBprogressHUD:self.view];
-    if(aHandle)
+    NSUInteger tag = (NSUInteger)aHandle;
+    if(tag > 200)
     {
-        switch ((NSUInteger)aHandle) {
+        switch (tag) {
             case Http_PartChangeItem20_Tag:
             {
-                if ([[[amodel objectForKey:@"response"] description] isEqualToString:@"error"]) {
-                    [SBPublicAlert showMBProgressHUD:@"选择失败" andWhereView:self.view hiddenTime:0.6];
-                }else {
-                    LBaseModel *model = [ModelManager parseModelWithDictionary:amodel tag:Http_Car_Tag];
-                    self.carModel = (CarCarModel *)model;
-                    [self creatCells];
-                    [self createSuitlistcells];
-                    [self createPackagelistcells];
-                    [self creatToolBar];
-                    [shoppingCarTab reloadData];
+                if (amodel) {
+                    if ([[[amodel objectForKey:@"response" isDictionary:nil] description] isEqualToString:@"error"]) {
+                        [SBPublicAlert showMBProgressHUD:@"选择失败" andWhereView:self.view hiddenTime:0.6];
+                    }else {
+                        LBaseModel *model = [ModelManager parseModelWithDictionary:amodel tag:Http_Car_Tag];
+                        self.carModel = (CarCarModel *)model;
+                        [self creatCells];
+                        [self createSuitlistcells];
+                        [self createPackagelistcells];
+                        [self creatToolBar];
+                        [shoppingCarTab reloadData];
+                        return;
+                    }
+                }else
+                {
                     return;
                 }
             }
@@ -452,12 +459,12 @@
     [btnCheckOut addTarget:self action:@selector(gotoChectViewC) forControlEvents:UIControlEventTouchUpInside];
     [vToolbar addSubview:btnCheckOut];
     
-    UIButton* btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnCheckBox setFrame:CGRectMake(15, (vToolbar.frame.size.height - lee1fitAllScreen(22)) / 2, lee1fitAllScreen(22), lee1fitAllScreen(22))];
-    [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
-    [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
-    [btnCheckBox addTarget:self action:@selector(checkBoxAction:) forControlEvents:UIControlEventTouchUpInside];
-    [vToolbar addSubview:btnCheckBox];
+    _btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_btnCheckBox setFrame:CGRectMake(15, (vToolbar.frame.size.height - lee1fitAllScreen(22)) / 2, lee1fitAllScreen(22), lee1fitAllScreen(22))];
+    [_btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
+    [_btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
+    [_btnCheckBox addTarget:self action:@selector(checkBoxAction:) forControlEvents:UIControlEventTouchUpInside];
+    [vToolbar addSubview:_btnCheckBox];
     
     BOOL selectAll = YES;
     for (YKItem* item in _carModel.carProductlist) {
@@ -481,14 +488,14 @@
             break;
         }
     }
-    btnCheckBox.selected = selectAll;
+    _btnCheckBox.selected = selectAll;
     
     UILabel* lbl = [[UILabel alloc] init];
     [lbl setText:@"全选"];
     [lbl setTextColor:[UIColor colorWithHexString:@"#666666"]];
     [lbl setFont:[UIFont systemFontOfSize:17]];
     CGRect rc = [lbl.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lbl.font} context:nil];
-    [lbl setFrame:CGRectMake(btnCheckBox.frame.size.width + btnCheckBox.frame.origin.x + 12, (vToolbar.frame.size.height - rc.size.height) / 2, rc.size.width, rc.size.height)];
+    [lbl setFrame:CGRectMake(_btnCheckBox.frame.size.width + _btnCheckBox.frame.origin.x + 12, (vToolbar.frame.size.height - rc.size.height) / 2, rc.size.width, rc.size.height)];
     [vToolbar addSubview:lbl];
     
     lbl = [[UILabel alloc] init];
@@ -1761,8 +1768,17 @@
 
 -(void)checkBoxAction:(UIButton*)sender
 {
-    [mainSer PartChangeItemWithUk:@"" andType:@"no"];
-    [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
+    if(_btnCheckBox)
+    {
+        if (_btnCheckBox.selected) {
+            [mainSer PartChangeItemWithUk:@"" andType:@"no"];
+            [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
+        }else
+        {
+            [mainSer PartChangeItemWithUk:@"" andType:@"all"];
+            [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
+        }
+    }
 }
 
 -(void)packageCheckBoxAction:(UIButton*)sender
@@ -1778,7 +1794,7 @@
     }
     if (cell) {
         NSInteger index = [shoppingCarTab indexPathForCell:cell].section;
-        YKSuitListItem* item = [_carModel.packagelist objectAtIndex:index isArray:nil];
+        YKSuitListItem* item = [_carModel.packagelist objectAtIndex:index - suitCount isArray:nil];
         [mainSer PartChangeItemWithUk:item.uk andType:@"part"];
         [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
     }
@@ -1815,7 +1831,7 @@
         cell = (UITableViewCell*)sender.superview.superview;
     }
     if (cell) {
-        NSInteger index = [shoppingCarTab indexPathForCell:cell].section;
+        NSInteger index = [shoppingCarTab indexPathForCell:cell].row;
         YKSuitListItem* item = [_carModel.carProductlist objectAtIndex:index isArray:nil];
         [mainSer PartChangeItemWithUk:item.uk andType:@"part"];
         [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
