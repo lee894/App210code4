@@ -582,7 +582,7 @@
 {
     CGFloat unitHeight = lee1fitAllScreen(187);
     NSInteger row = _carModel.hotlist.count % 3 > 0 ? (_carModel.hotlist.count / 3 + 1) : (_carModel.hotlist.count / 3);
-	UIView* footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 39 + 65 + unitHeight * (row))];
+	UIView* footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 39 + 65 + unitHeight * (row) + lee1fitAllScreen(60))];
 	footView.backgroundColor = [UIColor clearColor];
 	
 //	UIButton* gotoChectOut = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -2119,10 +2119,25 @@
             return ;
         }
         YKSuitListItem *item = [self.carModel.suitlist objectAtIndex:[indexPath section]];
-        if (indexPath.row < 0 || indexPath.row >= [item.suits count]) {
+        if (indexPath.row == 0) {
             return ;
         }
-        YKProductsItem *pItem = [item.suits objectAtIndex:indexPath.row];
+        YKProductsItem *pItem = [item.suits objectAtIndex:indexPath.row - 1];
+        ProductDetailViewController *controller = [[ProductDetailViewController alloc] init];
+        controller.isPush = YES;
+        controller.isShop = YES;
+        controller.thisProductId = pItem.product_id;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    else if (indexPath.section - suitCount < packageCount) {
+        if ([indexPath section] < 0 || ([indexPath section] - suitCount) >= [self.carModel.packagelist count]) {
+            return ;
+        }
+        YKSuitListItem *item = [self.carModel.packagelist objectAtIndex:[indexPath section] - suitCount];
+        if (indexPath.row == 0) {
+            return ;
+        }
+        YKProductsItem *pItem = [item.suits objectAtIndex:indexPath.row - 1];
         ProductDetailViewController *controller = [[ProductDetailViewController alloc] init];
         controller.isPush = YES;
         controller.isShop = YES;
