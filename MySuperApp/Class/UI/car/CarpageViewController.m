@@ -285,27 +285,28 @@
 -(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel
 {
     [SBPublicAlert hideMBprogressHUD:self.view];
-    
-    switch ((NSUInteger)aHandle) {
-        case Http_PartChangeItem20_Tag:
-        {
-            if ([[amodel objectForKey:@"response"] isEqualToString:@"error"]) {
-                [SBPublicAlert showMBProgressHUD:@"选择失败" andWhereView:self.view hiddenTime:0.6];
-            }else {
-//                [SBPublicAlert showMBProgressHUD:@"收藏失败" andWhereView:self.view hiddenTime:0.6];
-                LBaseModel *model = [ModelManager parseModelWithDictionary:amodel tag:Http_Car_Tag];
-                self.carModel = (CarCarModel *)model;
-                [self creatCells];
-                [self createSuitlistcells];
-                [self createPackagelistcells];
-                [self creatToolBar];
-                [shoppingCarTab reloadData];
-                return;
+    if(aHandle)
+    {
+        switch ((NSUInteger)aHandle) {
+            case Http_PartChangeItem20_Tag:
+            {
+                if ([[[amodel objectForKey:@"response"] description] isEqualToString:@"error"]) {
+                    [SBPublicAlert showMBProgressHUD:@"选择失败" andWhereView:self.view hiddenTime:0.6];
+                }else {
+                    LBaseModel *model = [ModelManager parseModelWithDictionary:amodel tag:Http_Car_Tag];
+                    self.carModel = (CarCarModel *)model;
+                    [self creatCells];
+                    [self createSuitlistcells];
+                    [self createPackagelistcells];
+                    [self creatToolBar];
+                    [shoppingCarTab reloadData];
+                    return;
+                }
             }
+                break;
+            default:
+                break;
         }
-            break;
-        default:
-            break;
     }
     
     
