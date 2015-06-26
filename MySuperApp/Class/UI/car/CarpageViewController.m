@@ -21,7 +21,7 @@
     UIView* vToolbar;
 }
 @property (nonatomic, retain) NSMutableArray* selectedList;
-@property (nonatomic, assign) UIButton* btnCheckBox;
+@property (nonatomic, retain) UIButton* btnCheckBox;
 @end
 
 @implementation CarpageViewController
