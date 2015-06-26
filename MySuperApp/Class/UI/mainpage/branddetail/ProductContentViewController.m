@@ -81,7 +81,7 @@
     newfvc.params = self.params;
     newfvc.orderStr = @"";
     newfvc.key = @"";
-    newfvc.strcurrentpage = [NSString stringWithFormat:@"%d",current];
+    newfvc.strcurrentpage = [NSString stringWithFormat:@"%ld",(long)current];
     newfvc.strperpage = @"10";
     [self.navigationController pushViewController:newfvc animated:YES];
 }

@@ -211,20 +211,22 @@
     
     _nullView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, NowViewsHight)];
 	self.nullView.backgroundColor = [UIColor clearColor];
-	UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(70, 150, 220, 40)];
+	UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(70, 150, ScreenWidth-140, 40)];
 	name.text = @"   您的购物车还是空的哟,\n快去选购自己喜欢的宝贝吧~";
     name.textColor = [UIColor lightGrayColor];
     name.numberOfLines = 2;
+    name.textAlignment = NSTextAlignmentCenter;
 	name.backgroundColor = [UIColor clearColor];
 	name.font = [UIFont systemFontOfSize:16];
 	[self.nullView addSubview:name];
     
+    UIImage *image = [UIImage imageNamed:@"cart_nothing_pic.png"];
 	UIImageView* null = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cart_nothing_pic.png"]];
-	null.frame = CGRectMake(110, 60, 108, 71);
+	null.frame = CGRectMake((ScreenWidth-image.size.width)/2, 60, image.size.width, image.size.height);
 	[self.nullView addSubview:null];
     
     UIButton* gotobutton = [UIButton buttonWithType:UIButtonTypeCustom];
-	gotobutton.frame = CGRectMake(80, 230, 160, 35);
+	gotobutton.frame = CGRectMake((ScreenWidth-160)/2, 230, 160, 35);
 	gotobutton.titleLabel.font = [UIFont systemFontOfSize:13];
 	[gotobutton setTitle:@"逛一逛" forState:UIControlStateNormal];
 	[gotobutton addTarget:self action:@selector(gotoShopping) forControlEvents:UIControlEventTouchUpInside];
