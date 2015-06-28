@@ -44,12 +44,12 @@
     
     
     if (isIOS7up) {
-        [myallView setFrame:CGRectMake(0, new20ViewY, 320, self.view.frame.size.height-new20ViewY)];
-        [myallView2 setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-0)];
+        [myallView setFrame:CGRectMake(0, new20ViewY, ScreenWidth, self.view.frame.size.height-new20ViewY)];
+        [myallView2 setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-0)];
     }
     
-    [myallView setContentSize:CGSizeMake(320, 700)];
-    [myallView2 setContentSize:CGSizeMake(320, 700)];
+    [myallView setContentSize:CGSizeMake(ScreenWidth, 700)];
+    [myallView2 setContentSize:CGSizeMake(ScreenWidth, 700)];
 
     if (self.type == 1) {//线下 用户名填写完毕  出弹框
         

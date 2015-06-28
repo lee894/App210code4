@@ -264,33 +264,60 @@
 #pragma mark 门店会员激活
 - (IBAction)memberActive:(id)sender//
 {
-    UIView *viewMember = [[[NSBundle mainBundle] loadNibNamed:@"MemberView" owner:self options:nil] lastObject];
-    memberView = viewMember;
-    [memberView setFrame:CGRectMake(lee1fitAllScreen(20), 100, 285, 161)];
-    [self.view addSubview:viewMember];
+    
+    UIAlertView *alertv = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您是否已经拥有爱慕官方商城账号？" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+    alertv.tag = 10030;
+    [alertv show];
+    
+//    UIView *viewMember = [[[NSBundle mainBundle] loadNibNamed:@"MemberView" owner:self options:nil] lastObject];
+//    memberView = viewMember;
+//    [memberView setFrame:CGRectMake(lee1fitAllScreen(20), 100, 285, 161)];
+//    [self.view addSubview:viewMember];
 }
 
-- (IBAction)memberActiveNoOrYes:(UIButton *)sender//门店会员激活
-{
-    [memberView removeFromSuperview];
-    switch (sender.tag) {
-        case 91://NO
-        {
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    if (alertView.tag == 10030) {
+        if (buttonIndex == 0) {
+            //NO
+            
             MemberActiveViewController *memberViewC = [[MemberActiveViewController alloc] initWithNibName:@"MemberActiveViewController" bundle:nil];
             memberViewC.type = 3;
             [self.navigationController pushViewController:memberViewC animated:YES];
-        }
-            break;
-        case 90://yes
-        {
+        }else{
+        //YES
+            
             MemberActiveViewController *memberViewC = [[MemberActiveViewController alloc] initWithNibName:@"ActiveLoginViewController" bundle:nil];
             memberViewC.type = 4;
             [self.navigationController pushViewController:memberViewC animated:YES];
         }
-        default:
-            break;
     }
+    
 }
+
+
+
+//- (IBAction)memberActiveNoOrYes:(UIButton *)sender//门店会员激活
+//{
+//    [memberView removeFromSuperview];
+//    switch (sender.tag) {
+//        case 91://NO
+//        {
+//            MemberActiveViewController *memberViewC = [[MemberActiveViewController alloc] initWithNibName:@"MemberActiveViewController" bundle:nil];
+//            memberViewC.type = 3;
+//            [self.navigationController pushViewController:memberViewC animated:YES];
+//        }
+//            break;
+//        case 90://yes
+//        {
+//            MemberActiveViewController *memberViewC = [[MemberActiveViewController alloc] initWithNibName:@"ActiveLoginViewController" bundle:nil];
+//            memberViewC.type = 4;
+//            [self.navigationController pushViewController:memberViewC animated:YES];
+//        }
+//        default:
+//            break;
+//    }
+//}
 
 #pragma mark 判断是否是线下会员弹出view
 - (IBAction)yesOrNo:(UIButton *)sender

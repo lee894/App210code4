@@ -428,9 +428,10 @@
         [headV setBackgroundColor:[UIColor whiteColor]];
         [myTableV setTableHeaderView:headV];
         
-        UrlImageButton *bannerBtn = [[UrlImageButton alloc] initWithFrame:CGRectMake(5,0,lee1fitAllScreen(320),lee1fitAllScreen(100))];
+        UrlImageButton *bannerBtn = [[UrlImageButton alloc] initWithFrame:CGRectMake(0,5,ScreenWidth,lee1fitAllScreen(100))];
         NewhomeNormalData *topbannerModel = [_homeinfo.top_banner objectAtIndex:0 isArray:nil];
         [bannerBtn setImageFromUrl:NO withUrl:topbannerModel.pic];
+        bannerBtn.imageView.layer.masksToBounds = YES;
         [bannerBtn addTarget:self action:@selector(topbannerJump:) forControlEvents:UIControlEventTouchUpInside];
         [headV addSubview:bannerBtn];
     }

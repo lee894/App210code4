@@ -568,14 +568,14 @@
 
 -(void)createtoolbarandpicker{
     //toolbar上地按钮
-    UIBarButtonItem *buttonForCancel_Number=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel_Number=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForCancel_Number.tintColor = [UIColor whiteColor];
     }
     buttonForCancel_Number.tag=101;
     UIBarButtonItem *buttonForFix_Number=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:@selector(BarButtonClick:)];
-    buttonForFix_Number.width=225;
-    UIBarButtonItem *buttonForDone_Number=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    buttonForFix_Number.width=lee1fitAllScreen(225);
+    UIBarButtonItem *buttonForDone_Number=[[UIBarButtonItem alloc] initWithTitle:@"  完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForDone_Number.tintColor = [UIColor whiteColor];
     }
@@ -583,14 +583,14 @@
     
     //创建picker
     //    颜色的pickeView
-    pickerForSelectColor=[[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, 320, 216)];
+    pickerForSelectColor=[[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 216)];
     [pickerForSelectColor setDelegate:self];
     [pickerForSelectColor setDataSource:self];
     pickerForSelectColor.showsSelectionIndicator=YES;
     //    [self.view addSubview:pickerForSelectColor];
     [[MyAppDelegate window] addSubview:pickerForSelectColor];
     //    尺寸的Pickview
-    pickerForSelectSize=[[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, 320, 216)];
+    pickerForSelectSize=[[UIPickerView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 216)];
     [pickerForSelectSize setDelegate:self];
     [pickerForSelectSize setDataSource:self];
     pickerForSelectSize.showsSelectionIndicator=YES;
@@ -598,25 +598,25 @@
     [[MyAppDelegate window] addSubview:pickerForSelectSize];
     
     //创建toolbar
-    toolBarForPicker=[[UIToolbar alloc] initWithFrame:CGRectMake(0, ScreenHeight+20, 320, 44)];
+    toolBarForPicker=[[UIToolbar alloc] initWithFrame:CGRectMake(0, ScreenHeight+20, ScreenWidth, 44)];
     toolBarForPicker.hidden = YES;
     toolBarForPicker.barStyle=UIBarStyleBlackTranslucent;
     //    [self.view addSubview:toolBarForPicker];
     [[MyAppDelegate window] addSubview:toolBarForPicker];
-    toolBarForSizePicker=[[UIToolbar alloc] initWithFrame:CGRectMake(0, ScreenHeight+20, 320, 44)];
+    toolBarForSizePicker=[[UIToolbar alloc] initWithFrame:CGRectMake(0, ScreenHeight+20, ScreenWidth, 44)];
     toolBarForSizePicker.barStyle=UIBarStyleBlackTranslucent;
     //    [self.view addSubview:toolBarForSizePicker];
     [[MyAppDelegate window] addSubview:toolBarForSizePicker];
     
     //toolbar上地按钮
-    UIBarButtonItem *buttonForCancel=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForCancel.tintColor = [UIColor whiteColor];
     }
     buttonForCancel.tag=101;
     UIBarButtonItem *buttonForFix=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:@selector(BarButtonClick:)];
-    buttonForFix.width=225;
-    UIBarButtonItem *buttonForDone=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    buttonForFix.width=lee1fitAllScreen(225);
+    UIBarButtonItem *buttonForDone=[[UIBarButtonItem alloc] initWithTitle:@"  完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForDone.tintColor = [UIColor whiteColor];
     }
@@ -624,14 +624,14 @@
     [toolBarForPicker setItems:[NSArray arrayWithObjects:buttonForCancel,buttonForFix,buttonForDone,nil]];
     
     
-    UIBarButtonItem *buttonForCancel_size=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel_size=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForCancel_size.tintColor = [UIColor whiteColor];
     }
     buttonForCancel_size.tag=101+100;
     UIBarButtonItem *buttonForFix_size=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:@selector(BarButtonClick:)];
-    buttonForFix_size.width=220;
-    UIBarButtonItem *buttonForDone_size=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    buttonForFix_size.width=lee1fitAllScreen(220);
+    UIBarButtonItem *buttonForDone_size=[[UIBarButtonItem alloc] initWithTitle:@"  完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForDone_size.tintColor = [UIColor whiteColor];
     }
@@ -652,14 +652,14 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
     
-    pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, 320, 216);
-    toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44)
+    pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+    toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44)
     ;
     [UIView commitAnimations];
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.3];
-    pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, 320, 216);
-    toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44)
+    pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+    toolBarForSizePicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44)
     ;
     [UIView setAnimationDidStopSelector:@selector(hiddle)];
     [UIView commitAnimations];
@@ -735,10 +735,10 @@
         [pickerForSelectColor selectRow:currentColor inComponent:0 animated:NO];
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
-        pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, 320, 216);
-        toolBarForSizePicker.frame=CGRectMake(0,ScreenHeight+20, 320, 44);
-        pickerForSelectColor.frame=CGRectMake(0, ScreenHeight-PickShowHigh, 320, 216);
-        toolBarForPicker.frame=CGRectMake(0, ScreenHeight-PickShowHigh-44, 320, 44);
+        pickerForSelectSize.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+        toolBarForSizePicker.frame=CGRectMake(0,ScreenHeight+20, ScreenWidth, 44);
+        pickerForSelectColor.frame=CGRectMake(0, ScreenHeight-PickShowHigh, ScreenWidth, 216);
+        toolBarForPicker.frame=CGRectMake(0, ScreenHeight-PickShowHigh-44, ScreenWidth, 44);
         
         [UIView commitAnimations];
     }else{
@@ -749,10 +749,10 @@
         
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.3];
-        pickerForSelectSize.frame=CGRectMake(0, ScreenHeight-PickShowHigh, 320, 216);
-        toolBarForSizePicker.frame=CGRectMake(0,ScreenHeight-PickShowHigh-44, 320, 44);
-        pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, 320, 216);
-        toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, 320, 44);
+        pickerForSelectSize.frame=CGRectMake(0, ScreenHeight-PickShowHigh, ScreenWidth, 216);
+        toolBarForSizePicker.frame=CGRectMake(0,ScreenHeight-PickShowHigh-44, ScreenWidth, 44);
+        pickerForSelectColor.frame=CGRectMake(0, ScreenHeight, ScreenWidth, 216);
+        toolBarForPicker.frame=CGRectMake(0, ScreenHeight+20, ScreenWidth, 44);
         [UIView commitAnimations];
     }
 }
@@ -886,7 +886,7 @@
     
     image.frame=CGRectMake(180, 4, 50, 36);
     UIView *view_image=[[UIView alloc]init];
-    view_image.frame=CGRectMake(0, 0, 320, 44);
+    view_image.frame=CGRectMake(0, 0, ScreenWidth, 44);
     [view_image addSubview:image];
     [view_image addSubview:titleLabel];
     return view_image;
