@@ -347,9 +347,14 @@
         //请先登录
         if ([[[jsonDic objectForKey:@"error"] objectForKey:@"text"] isEqualToString:@"请先登录"]) {
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:[[jsonDic objectForKey:@"error"] objectForKey:@"text"] delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
-           [alert show];
-            alert.tag = 100012;
+            AppDelegate *app = [UIApplication sharedApplication].delegate;
+            MyAimerViewController *loginvc = [[MyAimerViewController alloc] initWithNibName:@"MyAimerViewController" bundle:nil];
+            UINavigationController *navCtl = [[UINavigationController alloc] initWithRootViewController:loginvc];
+            [app.mytabBarController presentViewController:navCtl animated:YES completion:^{}];
+            
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:[[jsonDic objectForKey:@"error"] objectForKey:@"text"] delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+//           [alert show];
+//            alert.tag = 100012;
             
             handle = ENeedGotoLogin;
             [self.delegate serviceFailed:handle];
@@ -410,15 +415,15 @@
 }
 
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (alertView.tag == 100012 && buttonIndex == 0) {
-     
-        AppDelegate *app = [UIApplication sharedApplication].delegate;
-        MyAimerViewController *loginvc = [[MyAimerViewController alloc] initWithNibName:@"MyAimerViewController" bundle:nil];
-        UINavigationController *navCtl = [[UINavigationController alloc] initWithRootViewController:loginvc];
-        [app.mytabBarController presentViewController:navCtl animated:YES completion:^{}];        
-    }
-}
+//-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+//    if (alertView.tag == 100012 && buttonIndex == 0) {
+//     
+//        AppDelegate *app = [UIApplication sharedApplication].delegate;
+//        MyAimerViewController *loginvc = [[MyAimerViewController alloc] initWithNibName:@"MyAimerViewController" bundle:nil];
+//        UINavigationController *navCtl = [[UINavigationController alloc] initWithRootViewController:loginvc];
+//        [app.mytabBarController presentViewController:navCtl animated:YES completion:^{}];        
+//    }
+//}
 
 
 #pragma mark ASIHTTPRequestDelegate

@@ -428,7 +428,7 @@
         [headV setBackgroundColor:[UIColor whiteColor]];
         [myTableV setTableHeaderView:headV];
         
-        UrlImageButton *bannerBtn = [[UrlImageButton alloc] initWithFrame:CGRectMake(5,5,lee1fitAllScreen(310),lee1fitAllScreen(100))];
+        UrlImageButton *bannerBtn = [[UrlImageButton alloc] initWithFrame:CGRectMake(5,0,lee1fitAllScreen(320),lee1fitAllScreen(100))];
         NewhomeNormalData *topbannerModel = [_homeinfo.top_banner objectAtIndex:0 isArray:nil];
         [bannerBtn setImageFromUrl:NO withUrl:topbannerModel.pic];
         [bannerBtn addTarget:self action:@selector(topbannerJump:) forControlEvents:UIControlEventTouchUpInside];
@@ -513,10 +513,9 @@
     if (!secondLab) {
         secondLab = [[UILabel alloc] initWithFrame:CGRectMake(10, firstLab.frame.origin.y + firstLab.frame.size.height, ScreenWidth-20, 40)];
     }
-    NSString* str =[bannerModel.titledes stringByAppendingString:@"\n "];
+    NSString* str =[bannerModel.titledes stringByAppendingString:@" "];
     [secondLab setText:str];
     [secondLab setNumberOfLines:2];
-    //    [secondLab setBackgroundColor:[UIColor greenColor]];
     [secondLab setTextAlignment:NSTextAlignmentCenter];
     secondLab.font = [UIFont systemFontOfSize:LabSmallSize];
     [secondLab setTextColor:[UIColor colorWithHexString:@"#888888"]];
@@ -1073,7 +1072,7 @@
     NewhomeNormalData *data = [_homeinfo.home_banner objectAtIndex:index isArray:nil];
 
     firstLab.text = data.title;
-    NSString* str =[data.titledes stringByAppendingString:@"\n "];
+    NSString* str =[data.titledes stringByAppendingString:@" "]; 
     secondLab.text = str;
 }
 
