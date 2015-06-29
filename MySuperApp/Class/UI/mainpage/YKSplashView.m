@@ -146,7 +146,11 @@
 
 + (BOOL)getIsOpenGuideView
 {
-    BOOL isOneOpen = [[NSUserDefaults standardUserDefaults] boolForKey:@"ishasOpenapp"];
+    
+    NSString* appversion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *openKey = [NSString stringWithFormat:@"ishasOpenapp%@",appversion];
+    
+    BOOL isOneOpen = [[NSUserDefaults standardUserDefaults] boolForKey:openKey];
     
     return isOneOpen;
 }
@@ -170,9 +174,9 @@
 //登录主界面
 - (void)btnGuideClick:(UIButton *)sender
 {
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ishasOpenapp"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-    
+    NSString* appversion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    NSString *openKey = [NSString stringWithFormat:@"ishasOpenapp%@",appversion];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:openKey];
     [self setBackgroundColor:[UIColor clearColor]];
     
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;

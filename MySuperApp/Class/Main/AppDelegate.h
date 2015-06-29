@@ -11,13 +11,14 @@
 #import <QuartzCore/QuartzCore.h>
 
 #import "YKSplashView.h"
+#import "SinaClass.h"
 //#import "AKTabBarController.h"
 #import "SingletonState.h"
 #import "WeixinManager.h"
 #import <ShareSDK/ShareSDK.h>
 #import "RDVTabBarController.h"
 #import <BaiduMapAPI/BMapKit.h>//引入所有的头文件
-
+#import "WeiboSDK.h"
 
 #define AimerChannelId @"1001"
 
@@ -28,7 +29,7 @@
 @class SingletonState;
 @class MyAimerViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,UIScrollViewDelegate,WXApiDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,UIScrollViewDelegate,WXApiDelegate,WeiboSDKDelegate,SinaWeiboRequestDelegate>
 {
     BMKMapManager* _mapManager;
     
@@ -40,14 +41,9 @@
 @property(nonatomic, strong) YKSplashView    *splashView;
 
 @property(nonatomic, strong) UINavigationController *navMyaimerVC;
-//@property (nonatomic, strong) AKTabBarController *aktabBarVerticalController;
-//@property (nonatomic, strong) AKTabBarController *aktabBarRightController;
-
 @property (nonatomic, assign) int tablebarType;//  1是横屏  2是竖屏
 
 @property (strong, nonatomic) UIViewController *viewController;
-
-
 @property (strong, nonatomic)RDVTabBarController *mytabBarController;
 
 

@@ -2174,6 +2174,14 @@
 		96F2A50D1ADAC20100E1A04B /* NewMaginzeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMaginzeParser.h; sourceTree = "<group>"; };
 		96F2A50E1ADAC20100E1A04B /* NewMaginzeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMaginzeParser.m; sourceTree = "<group>"; };
 		96F632631AEFE21E00F4BE14 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		96F8A50A1B4178D400A806BB /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
+		96F8A50B1B4178D400A806BB /* WBHttpRequest+WeiboToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboToken.h"; sourceTree = "<group>"; };
+		96F8A50C1B4178D400A806BB /* WBHttpRequest+WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboUser.h"; sourceTree = "<group>"; };
+		96F8A50D1B4178D400A806BB /* WBHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBHttpRequest.h; sourceTree = "<group>"; };
+		96F8A50E1B4178D400A806BB /* WBSDKBasicButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKBasicButton.h; sourceTree = "<group>"; };
+		96F8A50F1B4178D400A806BB /* WBSDKCommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKCommentButton.h; sourceTree = "<group>"; };
+		96F8A5101B4178D400A806BB /* WBSDKRelationshipButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKRelationshipButton.h; sourceTree = "<group>"; };
+		96F8A5111B4178D400A806BB /* WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboUser.h; sourceTree = "<group>"; };
 		96FF99F51B268CE400AA82BF /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		96FF99F61B268CE400AA82BF /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		96FF99F71B268CE400AA82BF /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
@@ -4169,6 +4177,7 @@
 		9695426E1B25F9EF00206FAB /* SinaWeiboSDK */ = {
 			isa = PBXGroup;
 			children = (
+				96F8A5091B4178D400A806BB /* weiboClass */,
 				96FF99F51B268CE400AA82BF /* libWeiboSDK.a */,
 				96FF99F61B268CE400AA82BF /* WeiboSDK.bundle */,
 				96FF99F71B268CE400AA82BF /* WeiboSDK.h */,
@@ -4432,6 +4441,21 @@
 				969D60301AED2A7500D499C0 /* NewBrandDetailInfo.m */,
 			);
 			path = newBrand20;
+			sourceTree = "<group>";
+		};
+		96F8A5091B4178D400A806BB /* weiboClass */ = {
+			isa = PBXGroup;
+			children = (
+				96F8A50A1B4178D400A806BB /* WBHttpRequest+WeiboShare.h */,
+				96F8A50B1B4178D400A806BB /* WBHttpRequest+WeiboToken.h */,
+				96F8A50C1B4178D400A806BB /* WBHttpRequest+WeiboUser.h */,
+				96F8A50D1B4178D400A806BB /* WBHttpRequest.h */,
+				96F8A50E1B4178D400A806BB /* WBSDKBasicButton.h */,
+				96F8A50F1B4178D400A806BB /* WBSDKCommentButton.h */,
+				96F8A5101B4178D400A806BB /* WBSDKRelationshipButton.h */,
+				96F8A5111B4178D400A806BB /* WeiboUser.h */,
+			);
+			path = weiboClass;
 			sourceTree = "<group>";
 		};
 		9B23E76B18F64CAA00E9B317 /* shopinfo */ = {
@@ -7519,8 +7543,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = MyAimerApp/MyAimerApp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lei Wang (XP5XW9D974)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lei Wang (XP5XW9D974)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/QQShare",
@@ -7565,7 +7589,7 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = MyAimerApp;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3cf4f35c-4511-42a7-a25c-bdacb1336886";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -7580,7 +7604,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = MyAimerApp/MyAimerApp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lei Wang (XP5XW9D974)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -7626,7 +7650,7 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = MyAimerApp;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3cf4f35c-4511-42a7-a25c-bdacb1336886";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALID_ARCHS = "armv7 armv7s arm64";

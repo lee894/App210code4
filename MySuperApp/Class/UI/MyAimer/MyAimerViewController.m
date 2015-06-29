@@ -17,6 +17,7 @@
 
 #import "MyAimerViewController.h"
 #import "ModelManager.h"
+#import "WeiboUser.h"
 
 #import <AlipaySDK/AlipaySDK.h>
 #import <AlipaySDK/APayAuthInfo.h>
@@ -129,6 +130,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(alipayloginOK:)
                                                  name:@"AlipayLogin" object:nil];
+    
+    
+    //lee999  150628 新浪微博的回调
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(tranferUserInfo2:)
+                                                 name:@"weiboLoginOKNotification" object:nil];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -137,6 +145,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"weChatLoginOKCallBack" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"AlipayLogin" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"weiboLoginOKNotification" object:nil];
     
     
     [self ShowFooterwithAnimated:YES];
@@ -364,8 +373,16 @@
         }
             break;
         case 52://sina
-            [SinaClass sinaLogin];
-            [SinaClass shareWBInfo].loginDelegate = self;
+            
+            if ([WeiboSDK isWeiboAppInstalled]) {
+                [self ssoButtonPressed];
+            }else{
+                
+                [SinaClass sinaLogin];
+                [SinaClass shareWBInfo].loginDelegate = self;
+            }
+            
+            
             break;
         case 53://支付宝
         {
@@ -388,6 +405,21 @@
             break;
     }
 }
+
+
+
+- (void)ssoButtonPressed
+{
+    WBAuthorizeRequest *request = [WBAuthorizeRequest request];
+    request.redirectURI = kAppRedirectURI;
+    request.scope = @"all";
+    request.userInfo = @{@"SSO_From": @"SendMessageToWeiboViewController",
+                         @"Other_Info_1": [NSNumber numberWithInt:123],
+                         @"Other_Info_2": @[@"obj1", @"obj2"],
+                         @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
+    [WeiboSDK sendRequest:request];
+}
+
 
 
 -(void)WXsendAuthRequest
@@ -452,15 +484,32 @@
 
 
 #pragma mark -- 新浪微博登录代理
+
 - (void)tranferUserInfo:(NSMutableDictionary *)userInfo
 {
-    
     NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:[userInfo objectForKey:@"name"], @"UserName",nil];
-   [TalkingData trackEvent:@"5009" label:@"sina快捷登录" parameters:dic1];
+    [TalkingData trackEvent:@"5009" label:@"sina快捷登录" parameters:dic1];
     
     [mainSer getSinaCallBack:[userInfo objectForKey:@"id"] andName:[userInfo objectForKey:@"name"] andGender:[userInfo objectForKey:@"gender"] andImageUrl:[userInfo objectForKey:@"profile_image_url"]];
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 }
+
+
+- (void)tranferUserInfo2:(NSNotification *)auserInfo
+{
+    WeiboUser *userInfo = [auserInfo object];
+    
+    NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:userInfo.name, @"UserName",nil];
+   [TalkingData trackEvent:@"5009" label:@"sina快捷登录" parameters:dic1];
+    
+    [mainSer getSinaCallBack:userInfo.userID
+                     andName:userInfo.name
+                   andGender:userInfo.gender
+                 andImageUrl:userInfo.profileImageUrl];
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+}
+
+
 
 
 

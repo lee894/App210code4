@@ -14,6 +14,8 @@
 #import "RegisterViewController.h"
 #import "QQLogin.h"
 #import "APService.h"
+#import "WBHttpRequest.h"
+#import "WeiboSDK.h"
 
 
 @protocol LoginCallbackDelegate <NSObject>
@@ -24,7 +26,7 @@
 @end
 
 
-@interface MyAimerViewController : LBaseViewController <UITextFieldDelegate,ServiceDelegate,sinaLoginDelegate,RegisterViewControllerDelegate,TencentLoginDelegate,WXApiDelegate> {
+@interface MyAimerViewController : LBaseViewController <UITextFieldDelegate,ServiceDelegate,sinaLoginDelegate,RegisterViewControllerDelegate,TencentLoginDelegate,WXApiDelegate,WBHttpRequestDelegate> {
 
     BOOL userStates;//是否是输入用户后显示提示框
     BOOL loginStates;//是否是登录后显示提示框

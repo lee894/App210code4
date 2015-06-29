@@ -37,6 +37,7 @@
 #import "APService.h"
 #import "ShareMsgView.h"
 #import "MYCommentAlertView.h"
+#import "WBHttpRequest+WeiboUser.h"
 
 //以下是腾讯QQ和QQ空间
 #import <TencentOpenAPI/QQApi.h>
@@ -339,7 +340,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
     
-    NSLog(@"---微信支付的返回：%@-----%@",[url absoluteString],url.host);
+    NSLog(@"---回调的地址~：%@-----%@",[url absoluteString],url.host);
 
     
     //lee999
@@ -357,6 +358,12 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
             return [TencentOAuth HandleOpenURL:url];
         }
         return YES;
+    }else if ([[url absoluteString] hasPrefix:@"wb"]){
+        //微博的回调
+        if (YES == [WeiboSDK handleOpenURL:url delegate:self]){
+            return [WeiboSDK handleOpenURL:url delegate:self];
+        }
+        return YES;
     }else {
         if ([WXApi handleOpenURL:url delegate:self]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"shareSuccess" object:nil];
@@ -364,6 +371,8 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
         return  [WXApi handleOpenURL:url delegate:self];
     }
 }
+
+
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
@@ -407,6 +416,14 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
     }
     //end
     
+    //微博的回调
+    if ([[url absoluteString] hasPrefix:@"wb"]){
+        if (YES == [WeiboSDK handleOpenURL:url delegate:self]){
+            return [WeiboSDK handleOpenURL:url delegate:self];
+        }
+        return YES;
+    }
+    
     
     //微信支付的回调
     NSString *jap = @"//pay";
@@ -440,11 +457,6 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
     if ([[url absoluteString] hasPrefix:@"AmierProduct:"]) {
         [self parseURL:url application:application];
 
-        //lee999 改为新版本了  这里应该废弃了。  lee999 150120
-//        //如果极简SDK不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给SDK
-//        if ([url.host isEqualToString:@"safepay"]) {
-////            [[AlipaySDK defaultService] processPayResultFromAlipayclientWithOrder:url];
-//        }
         return YES;
         
     }else if ([[url absoluteString] hasPrefix:@"tencent"])  {
@@ -453,15 +465,38 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
             return [TencentOAuth HandleOpenURL:url];
         }
     }else {
-        //lee999 150503 注释掉这个地方，因为会引起崩溃
-        
-//        if ([WXApi handleOpenURL:url delegate:self]) {
-//        }
-//        return  [WXApi handleOpenURL:url delegate:self];
     }
     return NO;
 }
 
+
+- (void)didReceiveWeiboResponse:(WBBaseResponse *)response
+{
+    
+    
+if ([response isKindOfClass:WBAuthorizeResponse.class])
+    {
+        
+        [WBHttpRequest requestForUserProfile:[(WBAuthorizeResponse *)response userID]
+                             withAccessToken:[(WBAuthorizeResponse *)response accessToken]
+                          andOtherProperties:nil
+                                       queue:nil
+                       withCompletionHandler:
+         ^(WBHttpRequest *httpRequest, id result, NSError *error) {
+            
+             //DemoRequestHanlder(httpRequest, result, error);
+             
+             NSMutableDictionary * userDic = nil;
+             if ([httpRequest.url hasSuffix:@"users/show.json"])//用户信息
+             {
+                 NSLog(@"**********%@",httpRequest.url);
+                 userDic = result;
+                 //获取用户信息详情  发送通知
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"weiboLoginOKNotification" object:userDic];
+             }
+        }];
+    }
+}
 
 
 #pragma maek-- 微信登录回调   wxDelegateMethods
