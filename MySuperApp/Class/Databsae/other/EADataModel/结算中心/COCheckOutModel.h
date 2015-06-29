@@ -38,15 +38,16 @@
 @property (nonatomic, retain) NSString *zuxiangPrice;
 
 @property (nonatomic, retain) NSArray *checkout_usev6cards;
-@property(nonatomic,retain) NSDictionary *checkout_usecouponcard;
-@property(nonatomic,retain) NSString *checkout_usev6cardsres;
+@property(nonatomic,retain) NSDictionary *checkout_usecouponcard;  //使用优惠券
+@property(nonatomic,retain) NSString *checkout_usev6cardsres;  //使用v6card
+@property(nonatomic,retain) NSString *checkout_usefreepost;   //使用包邮卡
 
 
 @property (nonatomic, retain) NSArray *checkoutV6cards;
-@property (nonatomic, retain) NSArray *arrCheckout_couponcard;
 @property (nonatomic, assign) int checkoutCountv6;
 
-@property (nonatomic, retain) NSArray *checkout_freepostcard;
+@property (nonatomic, retain) NSArray *checkout_freepostcard;  //包邮卡
+@property (nonatomic, retain) NSArray *arrCheckout_couponcard; //优惠券
 
 
 

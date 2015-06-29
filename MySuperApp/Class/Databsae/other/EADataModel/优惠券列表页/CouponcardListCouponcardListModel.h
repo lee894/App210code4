@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSArray *checkoutCards;
 @property (nonatomic, retain) NSArray *checkoutCouponcard;
 @property (nonatomic, assign) int cards_count;//卡个数
-@property (nonatomic, assign) int couponcard_count;//优惠券个数
+@property (nonatomic, assign) NSInteger couponcard_count;//优惠券个数
 
 
 @property (nonatomic, assign) int requestTag;

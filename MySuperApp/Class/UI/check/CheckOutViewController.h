@@ -37,8 +37,10 @@
 @property (nonatomic, assign) BOOL isAmier;
 
 @property(nonatomic, retain) NSString* straddressID; //地址ID
-@property(nonatomic, retain) NSString* v6useCardId; //使用的尊享卡ID
-@property(nonatomic, retain) NSString* vouId; //优惠劵ID
+
+@property(nonatomic, retain) NSString* usev6useCardId; //使用的电子券
+@property(nonatomic, retain) NSString* useCouponcardId; //优惠劵ID
+@property(nonatomic, retain) NSString* usefreepostcardId;//使用的包邮卡ID
 
 @property(nonatomic, retain)NSString* postText; //订单留言
 

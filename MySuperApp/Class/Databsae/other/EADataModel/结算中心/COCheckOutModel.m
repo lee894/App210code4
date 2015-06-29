@@ -35,6 +35,8 @@
 @synthesize arrCheckout_couponcard =_arrCheckout_couponcard;
 @synthesize checkout_freepostcard = _checkout_freepostcard;
 
+@synthesize checkout_usefreepost = _checkout_usefreepost;
+
 
 @synthesize requestTag;
 @synthesize errorMessage;
@@ -54,7 +56,11 @@
 
         _checkout_usecouponcard = [self objectOrNilForKey:@"checkout_usecouponcard" fromDictionary:json];
         _checkout_usev6cards = [self objectOrNilForKey:@"checkout_usev6cards" fromDictionary:json];
+        //使用v6card
         _checkout_usev6cardsres = [self objectOrNilForKey:@"checkout_usev6cardsres" fromDictionary:json];
+        //使用包邮卡
+        _checkout_freepostcard = [self objectOrNilForKey:@"checkout_usefreepost" fromDictionary:json];
+        
         self.checkout_score = [[self objectOrNilForKey:@"checkout_score" fromDictionary:json] intValue];
         
         _checkoutProductlist = [[NSMutableArray alloc] init] ;

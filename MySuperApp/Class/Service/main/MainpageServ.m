@@ -573,20 +573,22 @@
 }
 
 //结算中心
-- (void)getCheckout:(NSString *)address andV6usercard_id:(NSString *)v6CardId andCouponcard:(NSString *)couponcard payway:(NSString*)paywaystr{
+- (void)getCheckout:(NSString *)address andV6usercard_id:(NSString *)v6CardId andCouponcard:(NSString *)couponcard payway:(NSString*)paywaystr andfreepostcard:(NSString*)freepostcard{
     [self sendPostWithURL:CHECKOUT_API tag:Http_Checkout_Tag beforeRequest:^{
         [self addParam:@"address" withValue:address];
         [self addParam:@"v6usercard_id" withValue:v6CardId];
         [self addParam:@"couponcard" withValue:couponcard];
+        [self addParam:@"freepostcard_id" withValue:freepostcard];
         [self addParam:@"payway" withValue:paywaystr];
     }];
 }
 
 //提交订单
-- (void)getSubmitorder:(NSString *)address andCouponcard:(NSString *)couponcard andPayway:(NSString *)payway andPayprice:(NSString *)payprice andRemarkmsg:(NSString *)remarkmsg andCard_id:(NSString *)card_id{
+- (void)getSubmitorder:(NSString *)address andCouponcard:(NSString *)couponcard andPayway:(NSString *)payway andPayprice:(NSString *)payprice andRemarkmsg:(NSString *)remarkmsg andCard_id:(NSString *)card_id andfreepostcard:(NSString*)freepostcard{
     [self sendPostWithURL:ORDER_SUBMIT_API tag:Http_Submitorder_Tag beforeRequest:^{
         [self addParam:@"address" withValue:address];
         [self addParam:@"couponcard" withValue:couponcard];
+        [self addParam:@"freepostcard_id" withValue:freepostcard];
         [self addParam:@"payway" withValue:payway];
         [self addParam:@"payprice" withValue:payprice];
         [self addParam:@"remarkmsg" withValue:remarkmsg];

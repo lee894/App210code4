@@ -169,10 +169,10 @@
 - (void)getSelectgifts;
 
 //结算中心
-- (void)getCheckout:(NSString *)address andV6usercard_id:(NSString *)v6CardId andCouponcard:(NSString *)couponcard payway:(NSString*)paywaystr;
+- (void)getCheckout:(NSString *)address andV6usercard_id:(NSString *)v6CardId andCouponcard:(NSString *)couponcard payway:(NSString*)paywaystr andfreepostcard:(NSString*)freepostcard;
 
 //提交订单
-- (void)getSubmitorder:(NSString *)address andCouponcard:(NSString *)couponcard andPayway:(NSString *)payway andPayprice:(NSString *)payprice andRemarkmsg:(NSString *)remarkmsg andCard_id:(NSString *)card_id;
+- (void)getSubmitorder:(NSString *)address andCouponcard:(NSString *)couponcard andPayway:(NSString *)payway andPayprice:(NSString *)payprice andRemarkmsg:(NSString *)remarkmsg andCard_id:(NSString *)card_id andfreepostcard:(NSString*)freepostcard;
 
 //订单详情
 - (void)getOrderdetail:(NSString *)orderid;

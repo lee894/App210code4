@@ -157,19 +157,19 @@
 //    [nametextfield resignFirstResponder];
 //}
 
--(void)textFieldDidBeginEditing:(UITextField *)textField{
-
-//    if (textField == nametextfield) {
-//        doneButton.hidden = NO;
-//    }else{
-//        doneButton.hidden = YES;
-//    }
-}
-
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-
-    return YES;
-}
+//-(void)textFieldDidBeginEditing:(UITextField *)textField{
+//
+////    if (textField == nametextfield) {
+////        doneButton.hidden = NO;
+////    }else{
+////        doneButton.hidden = YES;
+////    }
+//}
+//
+//-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+//
+//    return YES;
+//}
 
 - (void)initRequest
 {
@@ -318,7 +318,7 @@
                 }
             } else {
                 NSDictionary *dic = [self.contentArr objectAtIndex:index isArray:nil];
-                self.checkOutViewCtrl.vouId = LegalObject([dic objectForKey:@"code"],[NSString class]);
+                self.checkOutViewCtrl.useCouponcardId = LegalObject([dic objectForKey:@"code"],[NSString class]);
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }
@@ -656,7 +656,7 @@
     
     [nametextfield resignFirstResponder];
 //    if (nametextfield.text.length == 14) {
-        self.checkOutViewCtrl.vouId = nametextfield.text;
+        self.checkOutViewCtrl.useCouponcardId = nametextfield.text;
         
         [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
         [mainSer addCouponcard:nametextfield.text];
@@ -670,7 +670,7 @@
 
 - (void)UserCouns:(UIButton *)sender {
     
-    self.checkOutViewCtrl.vouId = nametextfield.text;
+    self.checkOutViewCtrl.useCouponcardId = nametextfield.text;
     [self popBackAnimate:nil];
 }
 
@@ -924,7 +924,7 @@
             if (!model.errorMessage) {
                 
                 self.couponcardListModel = (CouponcardListCouponcardListModel *)model;
-                _labelInfo.text = [NSString stringWithFormat:@"%@%d张会员卡  %d张优惠券",([self.title  isEqualToString:@"使用优惠券"] ?  @"本单可用" : @"我有"),self.couponcardListModel.cards_count,self.couponcardListModel.couponcard_count];
+                _labelInfo.text = [NSString stringWithFormat:@"%@%d张会员卡  %ld张优惠券",([self.title  isEqualToString:@"使用优惠券"] ?  @"本单可用" : @"我有"),self.couponcardListModel.cards_count,(long)self.couponcardListModel.couponcard_count];
                 
                 if (self.couponcardListModel.recordCount == 0) {
                     [SBPublicAlert showMBProgressHUD:@"您还没有尊享卡或优惠券可用" andWhereView:self.view hiddenTime:1.];
@@ -963,7 +963,7 @@
         {
             if (!model.errorMessage) {
                 //使用成功
-                self.checkOutViewCtrl.v6useCardId = [((Usev6cardusev6cardModel *)model) usev6cardID];
+                self.checkOutViewCtrl.usev6useCardId = [((Usev6cardusev6cardModel *)model) usev6cardID];
                 [self popBackAnimate:nil];//回到结算中心
             }else{
                 [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:1.];

@@ -23,7 +23,8 @@
 #import "OHAttributedLabel.h"
 #import "NSAttributedString+Attributes.h"
 
-@interface CheckOutViewController () {
+@interface CheckOutViewController ()<SelectCouponDelegate>
+{
 }
 
 @property (nonatomic, retain) NSString *str_pay_Way;
@@ -55,6 +56,9 @@
     
     //lee999recode
     self.straddressID = @"";
+    self.usefreepostcardId = @"";
+    self.useCouponcardId = @"";
+    self.usev6useCardId = @"";
     //end
     
     [self NewHiddenTableBarwithAnimated:YES];
@@ -94,17 +98,18 @@
     [self ShowFooterwithAnimated:NO];
     
     //请求网络数据
-    if (!self.vouId) {
-        self.vouId = @"";
+    if (!self.useCouponcardId) {
+        self.useCouponcardId = @"";
     }
-    if (![self.v6useCardId isEqualToString:@""] && self.v6useCardId) {
-        self.vouId = self.v6useCardId;
+    
+    if (![self.usev6useCardId isEqualToString:@""] && self.usev6useCardId) {
+        self.useCouponcardId = self.usev6useCardId;
         
         //lee999recode
-        [mainSev getCheckout:self.straddressID andV6usercard_id:self.vouId andCouponcard:@"" payway:self.m_strPayMethod];
+        [mainSev getCheckout:self.straddressID andV6usercard_id:self.useCouponcardId andCouponcard:@"" payway:self.m_strPayMethod andfreepostcard:self.usefreepostcardId];
     } else {
         
-        [mainSev getCheckout:self.straddressID andV6usercard_id:@"" andCouponcard:self.vouId payway:self.m_strPayMethod];
+        [mainSev getCheckout:self.straddressID andV6usercard_id:@"" andCouponcard:self.useCouponcardId payway:self.m_strPayMethod andfreepostcard:self.usefreepostcardId];
     }
     
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
@@ -122,8 +127,10 @@
     [SBPublicAlert hideMBprogressHUD:self.view];
     
     //lee999 修改一个比较复杂的bug
-    self.vouId = @"";
-    self.v6useCardId = @"";
+    self.useCouponcardId = @"";
+    self.usev6useCardId = @"";
+    self.usefreepostcardId = @"";
+
     //end
 }
 
@@ -266,18 +273,19 @@
 	}
 }
 
+#pragma mark--- 提交订单
 - (void) loadData {
     NSString *str1 = [mycheckOutModel.itemPrice stringByReplacingOccurrencesOfString:@"￥" withString:@""];
     NSString *card_id = [[mycheckOutModel.checkout_usev6cards lastObject] objectForKey:@"card_id"];
     
     if (card_id) {
-        self.vouId = @"";
+        self.useCouponcardId = @"";
     }
     if ([self.postText isEqualToString:@"订单附言"]) {
         self.postText = @"";
     }
     
-    [mainSev getSubmitorder:self.straddressID andCouponcard:self.vouId andPayway:self.m_strPayMethod andPayprice:str1 andRemarkmsg:self.postText andCard_id:card_id];
+    [mainSev getSubmitorder:self.straddressID andCouponcard:self.useCouponcardId andPayway:self.m_strPayMethod andPayprice:str1 andRemarkmsg:self.postText andCard_id:card_id andfreepostcard:self.usefreepostcardId];
     
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
     
@@ -526,7 +534,6 @@
 		caseName.textColor = [UIColor colorWithHexString:@"0x666666"];
 		[Cell.contentView addSubview:caseName];
         
-		
         NSString *str = [NSString stringWithFormat:@"  ¥%.2f",[item.subtotal floatValue]];
 		UILabel* caseValue = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(234), 137, 100, 25)];
 		caseValue.backgroundColor = [UIColor clearColor];
@@ -1185,15 +1192,15 @@
         }
         else if (i == 3) {//优惠券
             
+            UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 150, 30)];
+            name.text = [titleArray objectAtIndex:i];
+            name.backgroundColor = [UIColor clearColor];
+            name.font = [UIFont systemFontOfSize:LabMidSize];
+            name.textColor = [UIColor colorWithHexString:@"0x666666"];;
+            [Cell.contentView addSubview:name];
+            
+            
             if (!mycheckOutModel.checkout_usecouponcard && !mycheckOutModel.checkout_usev6cards) {
-                
-                UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 150, 30)];
-                name.text = [titleArray objectAtIndex:i];
-                name.backgroundColor = [UIColor clearColor];
-                name.font = [UIFont systemFontOfSize:LabMidSize];
-                name.textColor = [UIColor colorWithHexString:@"0x666666"];;
-                [Cell.contentView addSubview:name];
-                Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 
                 UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, ScreenWidth-60, 30)];
                 [name2 setTextAlignment:NSTextAlignmentRight];
@@ -1203,16 +1210,11 @@
                 name2.textColor = [UIColor colorWithHexString:@"0x666666"];;
                 [Cell.contentView addSubview:name2];
                 
-                
+                Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
             } else {
-                UILabel* name1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, 200, 30)];
-                name1.text = @"使用优惠券";
-                name1.backgroundColor = [UIColor clearColor];
-                name1.font = [UIFont systemFontOfSize:LabMidSize];
-                name1.textColor = [UIColor colorWithHexString:@"0x666666"];
-                [Cell.contentView addSubview:name1];
                 
-                UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 3, ScreenWidth-120, 30)];
+                UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 8, ScreenWidth-120, 30)];
                 name2.text = @"已使用";
                 name2.backgroundColor = [UIColor clearColor];
                 name2.font = [UIFont systemFontOfSize:LabMidSize];
@@ -1225,14 +1227,17 @@
                 cancle.titleLabel.font = [UIFont systemFontOfSize:13];
                 [cancle setFrame:CGRectMake(ScreenWidth-80, 5, 50, 31)];
                 [cancle setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
-                [cancle addTarget:self action:@selector(cancle) forControlEvents:UIControlEventTouchUpInside];
+                [cancle addTarget:self action:@selector(cancleCouponcard) forControlEvents:UIControlEventTouchUpInside];
                 [Cell.contentView addSubview:cancle];
+                
+                
+                Cell.accessoryType = UITableViewCellAccessoryNone;
+
             }
         }
         else if (i == 4){
             //电子券
             
-			Cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 150, 30)];
             name.text = [titleArray objectAtIndex:i];
@@ -1241,28 +1246,49 @@
             name.textColor = [UIColor colorWithHexString:@"0x666666"];;
             [Cell.contentView addSubview:name];
             
-            UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, ScreenWidth-60, 30)];
-            [name2 setTextAlignment:NSTextAlignmentRight];
-
-            if (mycheckOutModel.checkoutCountv6 >0) {
-                NSArray *arr = mycheckOutModel.checkoutV6cards;
-                
-                name2.text = [NSString stringWithFormat:@"您有%@元电子券可用",[[arr objectAtIndex:0]objectForKey:@"balance" isDictionary:nil]];
-            }else{
-                name2.text = [NSString stringWithFormat:@"您没有可用的电子券"];
-            }
-            name2.backgroundColor = [UIColor clearColor];
-            name2.font = [UIFont systemFontOfSize:LabMidSize];
-            name2.textColor = [UIColor colorWithHexString:@"0x666666"];;
-            [Cell.contentView addSubview:name2];
             
-            Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
+            if (!mycheckOutModel.checkout_usev6cards || [self.usev6useCardId isEqualToString:@""]) {
+                
+                UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, ScreenWidth-60, 30)];
+                [name2 setTextAlignment:NSTextAlignmentRight];
+                
+                if (mycheckOutModel.checkoutCountv6 >0) {
+                    NSArray *arr = mycheckOutModel.checkoutV6cards;
+                    
+                    name2.text = [NSString stringWithFormat:@"您有%@元电子券可用",[[arr objectAtIndex:0]objectForKey:@"balance" isDictionary:nil]];
+                }else{
+                    name2.text = [NSString stringWithFormat:@"您没有可用的电子券"];
+                }
+                name2.backgroundColor = [UIColor clearColor];
+                name2.font = [UIFont systemFontOfSize:LabMidSize];
+                name2.textColor = [UIColor colorWithHexString:@"0x666666"];;
+                [Cell.contentView addSubview:name2];
+                
+                Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }else {
+                
+                UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 8, ScreenWidth-120, 30)];
+                name2.text = @"已使用";
+                name2.backgroundColor = [UIColor clearColor];
+                name2.font = [UIFont systemFontOfSize:LabMidSize];
+                name2.textColor = [UIColor redColor];
+                [Cell.contentView addSubview:name2];
+                
+                UIButton *cancle = [UIButton buttonWithType:UIButtonTypeCustom];
+                [cancle setTitle:@"取消" forState:UIControlStateNormal];
+                [cancle setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                cancle.titleLabel.font = [UIFont systemFontOfSize:13];
+                [cancle setFrame:CGRectMake(ScreenWidth-80, 5, 50, 31)];
+                [cancle setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
+                [cancle addTarget:self action:@selector(canclev6useCard) forControlEvents:UIControlEventTouchUpInside];
+                [Cell.contentView addSubview:cancle];
+                
+                Cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
 
 		}
         else if (i == 5){
             //包邮卡
-            Cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 150, 30)];
             name.text = [titleArray objectAtIndex:i];
@@ -1271,16 +1297,37 @@
             name.textColor = [UIColor colorWithHexString:@"0x666666"];;
             [Cell.contentView addSubview:name];
             
-            UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, ScreenWidth-60, 30)];
-            [name2 setTextAlignment:NSTextAlignmentRight];
-            name2.text = [NSString stringWithFormat:@"您有%lu张包邮卡可用",(unsigned long)[mycheckOutModel.checkout_freepostcard count]];
-            name2.backgroundColor = [UIColor clearColor];
-            name2.font = [UIFont systemFontOfSize:LabMidSize];
-            name2.textColor = [UIColor colorWithHexString:@"0x666666"];;
-            [Cell.contentView addSubview:name2];
-            
-            Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-
+            if (!mycheckOutModel.checkout_freepostcard || [self.usefreepostcardId isEqualToString:@""]) {
+                
+                UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, ScreenWidth-60, 30)];
+                [name2 setTextAlignment:NSTextAlignmentRight];
+                name2.text = [NSString stringWithFormat:@"您有%lu张包邮卡可用",(unsigned long)[mycheckOutModel.checkout_freepostcard count]];
+                name2.backgroundColor = [UIColor clearColor];
+                name2.font = [UIFont systemFontOfSize:LabMidSize];
+                name2.textColor = [UIColor colorWithHexString:@"0x666666"];;
+                [Cell.contentView addSubview:name2];
+                
+                Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }else {
+                
+                UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 8, ScreenWidth-120, 30)];
+                name2.text = @"已使用";
+                name2.backgroundColor = [UIColor clearColor];
+                name2.font = [UIFont systemFontOfSize:LabMidSize];
+                name2.textColor = [UIColor redColor];
+                [Cell.contentView addSubview:name2];
+                
+                UIButton *cancle = [UIButton buttonWithType:UIButtonTypeCustom];
+                [cancle setTitle:@"取消" forState:UIControlStateNormal];
+                [cancle setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                cancle.titleLabel.font = [UIFont systemFontOfSize:13];
+                [cancle setFrame:CGRectMake(ScreenWidth-80, 5, 50, 31)];
+                [cancle setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
+                [cancle addTarget:self action:@selector(canclefreepostcard) forControlEvents:UIControlEventTouchUpInside];
+                [Cell.contentView addSubview:cancle];
+                
+                Cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
         }
         
         [otherCells addObject:Cell];
@@ -1288,23 +1335,62 @@
 NSLog(@"createOtherCells  come out");
 }
 
-#pragma mark 取消优惠券
+#pragma mark ---优惠券 包邮卡等
 
-- (void) cancle {
-    self.vouId = nil;
-    self.v6useCardId = nil;
+-(void)SelectCouponIndex:(NSInteger)index withslelectTag:(NSInteger)tag withCodeValue:(NSString *)value{
     
-    if (!self.vouId) {
-        self.vouId = @"";
+    if (tag == 1)
+    {
+        //礼品卡
+        self.useCouponcardId = value;
+    }else if (tag == 2)
+    {
+    //电子券
+        self.usev6useCardId = value;
+        
+    }else if(tag == 3){
+    //包邮卡
+        self.usefreepostcardId = value;
     }
-    [mainSev getCheckout:self.straddressID andV6usercard_id:@"" andCouponcard:self.vouId payway:self.m_strPayMethod];
+    
+    [mainSev getCheckout:self.straddressID
+        andV6usercard_id:self.usev6useCardId
+           andCouponcard:self.useCouponcardId
+                  payway:self.m_strPayMethod
+         andfreepostcard:self.usefreepostcardId];
     
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
-    
-    if ((self.m_strPayMethod == nil) || ([self.m_strPayMethod isEqualToString:@""])) {
-    } else {
-    }
 }
+
+#pragma mark --- 取消使用
+- (void) cancleCouponcard {
+    self.useCouponcardId = @"";
+    
+    if (!self.useCouponcardId) {
+        self.useCouponcardId = @"";
+    }
+    
+    [self cancleUsedcard];
+}
+
+- (void) canclev6useCard {
+    
+    self.usev6useCardId = @"";
+    [self cancleUsedcard];
+}
+
+- (void) canclefreepostcard {
+ self.usefreepostcardId = @"";
+    [self cancleUsedcard];
+}
+
+-(void)cancleUsedcard{
+    [mainSev getCheckout:self.straddressID andV6usercard_id:self.usev6useCardId andCouponcard:self.useCouponcardId payway:self.m_strPayMethod andfreepostcard:self.usefreepostcardId];
+    
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+}
+
+
 
 - (void)rightButAction {
     
@@ -1559,39 +1645,34 @@ NSLog(@"createOtherCells  come out");
     
     else if (section == 3) {
         //优惠券
-        if (mycheckOutModel.checkout_usecouponcard || mycheckOutModel.checkout_usev6cards)
+        if (mycheckOutModel.checkout_usecouponcard || ![self.useCouponcardId isEqualToString:@""])
         {//已使用
-            //            /*
-            //lee999recode
-            //进入已使用优惠券列表
-//            HasUsedViewController *ctrl = [[HasUsedViewController alloc] init];
-//            ctrl.checkout_usecouponcard = mycheckOutModel.checkout_usecouponcard;//优惠券
-//            ctrl.checkout_usev6cards = mycheckOutModel.checkout_usev6cards;//尊享卡
-//            ctrl.checkOutViewCtrl = self;
-//            [self.navigationController pushViewController:ctrl animated:YES];
+            
         } else {
 
             //进入优惠券列表页
             SelectCouponTableViewController *ctrl = [[SelectCouponTableViewController alloc] init];
-            ctrl.isAimer = NO;
+            ctrl.delegate = self;
+            ctrl.selectType = 1;
             
-            ctrl.phoneNum = mycheckOutModel.checkout_usev6cardsres;
-            ctrl.checkOutViewCtrl = self;
-            CouponcardListCouponcardListModel *couponcardListModel = [[CouponcardListCouponcardListModel alloc] init];
-            if (mycheckOutModel.checkoutCountv6 == 0) {
-                couponcardListModel.cards_count = 0;
-                couponcardListModel.checkoutCards = nil;
-            } else {
-                couponcardListModel.checkoutCards = mycheckOutModel.checkoutV6cards;
-                couponcardListModel.cards_count=1;
-            }
-            
-            couponcardListModel.checkoutCouponcard = mycheckOutModel.arrCheckout_couponcard;
-            couponcardListModel.couponcard_count = [couponcardListModel.checkoutCouponcard count];
-            if (!couponcardListModel.checkoutCouponcard) {
-                couponcardListModel.couponcard_count = 0;
-            }
-            ctrl.couponcardListModel = couponcardListModel;
+//            ctrl.phoneNum = mycheckOutModel.checkout_usev6cardsres;
+//            ctrl.checkOutViewCtrl = self;
+            //            if (mycheckOutModel.checkoutCountv6 == 0) {
+            //                couponcardListModel.cards_count = 0;
+            //                couponcardListModel.checkoutCards = nil;
+            //            } else {
+            //                couponcardListModel.checkoutCards = mycheckOutModel.checkoutV6cards;
+            //                couponcardListModel.cards_count=1;
+            //            }
+
+//            CouponcardListCouponcardListModel *couponcardListModel = [[CouponcardListCouponcardListModel alloc] init];
+//            couponcardListModel.couponcard_count = [mycheckOutModel.checkoutCouponcard count];
+//            couponcardListModel.checkoutCouponcard = mycheckOutModel.arrCheckout_couponcard;
+//            
+//            if (!couponcardListModel.checkoutCouponcard) {
+//                couponcardListModel.couponcard_count = 0;
+//            }
+            ctrl.contentArr = mycheckOutModel.arrCheckout_couponcard;
 
             [self.navigationController pushViewController:ctrl animated:YES];
         }
@@ -1599,10 +1680,21 @@ NSLog(@"createOtherCells  come out");
     {
     //电子券
         
+        
     }else if (section ==5)
     {
     //包邮卡
-        
+        //进入优惠券列表页
+        if ([self.usefreepostcardId isEqualToString:@""]){
+            
+            SelectCouponTableViewController *ctrl = [[SelectCouponTableViewController alloc] init];
+            ctrl.delegate = self;
+            ctrl.selectType = 3;
+            
+            ctrl.contentArr = mycheckOutModel.checkout_freepostcard;
+            
+            [self.navigationController pushViewController:ctrl animated:YES];
+        }
     }
     
     //lee999 新增结算中心能进入商品详情
