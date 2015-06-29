@@ -322,7 +322,7 @@
 
 #define Http_Delcar_Tag 129 //从购物车删除
 
-#define Http_Addressadd_Tag 130 //添加地址
+
 
 #define Http_AddressEdit_Tag 131 //修改地址
 
@@ -449,6 +449,9 @@
 #define Http_CouponList20_Tag 212 //新版本 优惠券列表
 #define Http_AddPackageToCart20_Tag 213 //新版本 礼包加入购物车
 #define Http_PartChangeItem20_Tag 214 //新版本 购物车选中商品
+#define Http_GetGiftCode20_Tag 215 //新版 礼品管理
+#define Http_SubmitGiftOrder20_Tag 216 //新版 礼品结算
+#define Http_Addressadd_Tag 217 //添加地址
 #define Http_wardrobe_Tag 301 //私人衣橱 1
 #define Http_changefrequency20_Tag 302 //设置定期更换内衣提醒
 #define Http_bespeak20_Tag 303 //预约测体门店

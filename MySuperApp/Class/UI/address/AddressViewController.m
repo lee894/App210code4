@@ -143,6 +143,10 @@
                     tableList.hidden = YES;
                     [buttonEdit setHidden:YES];
                     noaddrssslab.hidden = NO;
+                    if(chectOutViewC)
+                    {
+                        chectOutViewC.straddressID = @"";
+                    }
                 }else{
                     tableList.hidden = NO;
                     noaddrssslab.hidden = YES;

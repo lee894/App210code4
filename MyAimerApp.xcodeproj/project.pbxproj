@@ -1139,6 +1139,10 @@
 		A6218DAA1B3AB52300D9ED93 /* btn_mid_b_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218DA81B3AB52300D9ED93 /* btn_mid_b_normal@2x.png */; };
 		A6218DAD1B3B9B1B00D9ED93 /* btn_shop_a_hoverl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218DAB1B3B9B1B00D9ED93 /* btn_shop_a_hoverl@2x.png */; };
 		A6218DAE1B3B9B1B00D9ED93 /* btn_shop_a_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218DAC1B3B9B1B00D9ED93 /* btn_shop_a_normal@2x.png */; };
+		A6218DB21B40EC4300D9ED93 /* ManageGiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6218DB11B40EC4300D9ED93 /* ManageGiftViewController.m */; };
+		A6218DB51B40F77A00D9ED93 /* ManageGiftInfoParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A6218DB41B40F77A00D9ED93 /* ManageGiftInfoParser.m */; };
+		A6218DB91B417B7400D9ED93 /* lp_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218DB71B417B7400D9ED93 /* lp_add@2x.png */; };
+		A6218DBA1B417B7400D9ED93 /* lp_editor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6218DB81B417B7400D9ED93 /* lp_editor@2x.png */; };
 		A67BEAB81B281A0300418650 /* aimerLogoDefault@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A67BEAB71B281A0300418650 /* aimerLogoDefault@2x.png */; };
 		A6F394EB1B2E7C74004566CA /* PackageInfoParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F394E81B2E7C74004566CA /* PackageInfoParser.m */; };
 		A6F394EC1B2E7C74004566CA /* PackageInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F394EA1B2E7C74004566CA /* PackageInfoViewController.m */; };
@@ -2912,6 +2916,12 @@
 		A6218DA81B3AB52300D9ED93 /* btn_mid_b_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_mid_b_normal@2x.png"; sourceTree = "<group>"; };
 		A6218DAB1B3B9B1B00D9ED93 /* btn_shop_a_hoverl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_shop_a_hoverl@2x.png"; sourceTree = "<group>"; };
 		A6218DAC1B3B9B1B00D9ED93 /* btn_shop_a_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_shop_a_normal@2x.png"; sourceTree = "<group>"; };
+		A6218DB01B40EC4300D9ED93 /* ManageGiftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageGiftViewController.h; sourceTree = "<group>"; };
+		A6218DB11B40EC4300D9ED93 /* ManageGiftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageGiftViewController.m; sourceTree = "<group>"; };
+		A6218DB31B40F77A00D9ED93 /* ManageGiftInfoParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageGiftInfoParser.h; sourceTree = "<group>"; };
+		A6218DB41B40F77A00D9ED93 /* ManageGiftInfoParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageGiftInfoParser.m; sourceTree = "<group>"; };
+		A6218DB71B417B7400D9ED93 /* lp_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lp_add@2x.png"; sourceTree = "<group>"; };
+		A6218DB81B417B7400D9ED93 /* lp_editor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lp_editor@2x.png"; sourceTree = "<group>"; };
 		A67BEAB71B281A0300418650 /* aimerLogoDefault@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aimerLogoDefault@2x.png"; sourceTree = "<group>"; };
 		A6F394E71B2E7C74004566CA /* PackageInfoParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageInfoParser.h; sourceTree = "<group>"; };
 		A6F394E81B2E7C74004566CA /* PackageInfoParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageInfoParser.m; sourceTree = "<group>"; };
@@ -3203,6 +3213,7 @@
 		962692231A135FB700A0BC7F /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				A6218DB61B417B7400D9ED93 /* Gift20 */,
 				A6218D941B395F5C00D9ED93 /* Cart20 */,
 				A6F3952B1B2ED352004566CA /* Coupon20 */,
 				A6F394ED1B2E7D7A004566CA /* package20 */,
@@ -5466,6 +5477,7 @@
 		9BCA828118C47FA300B81CA5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A6218DAF1B40E41600D9ED93 /* Gift20 */,
 				A6F3954E1B2F1535004566CA /* Coupon20 */,
 				A6F394E61B2E7C74004566CA /* Package20 */,
 				9601E0D11B26D84D002C32E0 /* myAimer20 */,
@@ -6089,6 +6101,26 @@
 			path = Cart20;
 			sourceTree = "<group>";
 		};
+		A6218DAF1B40E41600D9ED93 /* Gift20 */ = {
+			isa = PBXGroup;
+			children = (
+				A6218DB01B40EC4300D9ED93 /* ManageGiftViewController.h */,
+				A6218DB11B40EC4300D9ED93 /* ManageGiftViewController.m */,
+				A6218DB31B40F77A00D9ED93 /* ManageGiftInfoParser.h */,
+				A6218DB41B40F77A00D9ED93 /* ManageGiftInfoParser.m */,
+			);
+			path = Gift20;
+			sourceTree = "<group>";
+		};
+		A6218DB61B417B7400D9ED93 /* Gift20 */ = {
+			isa = PBXGroup;
+			children = (
+				A6218DB71B417B7400D9ED93 /* lp_add@2x.png */,
+				A6218DB81B417B7400D9ED93 /* lp_editor@2x.png */,
+			);
+			path = Gift20;
+			sourceTree = "<group>";
+		};
 		A6F394E61B2E7C74004566CA /* Package20 */ = {
 			isa = PBXGroup;
 			children = (
@@ -6583,6 +6615,7 @@
 				9618A96C1AFA75C800FC3C56 /* icon120.png in Resources */,
 				A6F395201B2E7EE9004566CA /* my_am_ico_2@2x.png in Resources */,
 				969542781B25F9EF00206FAB /* RennSDK.bundle in Resources */,
+				A6218DB91B417B7400D9ED93 /* lp_add@2x.png in Resources */,
 				9685FA821ADD75ED00BF2DE8 /* zz_text_end@2x.png in Resources */,
 				9685FA721ADD75ED00BF2DE8 /* wx_ico@2x.png in Resources */,
 				962693ED1A135FB700A0BC7F /* top3_arrow_up@2x.png in Resources */,
@@ -6763,6 +6796,7 @@
 				9BF57E3A18E2809B00B2A3E6 /* RegisterViewController.xib in Resources */,
 				9BF57E7018E2C65300B2A3E6 /* MyAimerloginViewController.xib in Resources */,
 				585A66E518D9E57B00390E86 /* BrandDetailCell.xib in Resources */,
+				A6218DBA1B417B7400D9ED93 /* lp_editor@2x.png in Resources */,
 				9BB306301918DCC900CD4BCD /* PromptView.xib in Resources */,
 				9685FA4F1ADD75ED00BF2DE8 /* list_arrow@2x.png in Resources */,
 				962694341A135FB700A0BC7F /* same_recommand_bg.png in Resources */,
@@ -7043,6 +7077,7 @@
 				9BDABAA8190F679A004A5D1B /* ASINetworkQueue.m in Sources */,
 				9B7CB10418D59C4300D8DAA5 /* NoticeListNotice.m in Sources */,
 				2F2137CA18E4572F00F91104 /* AddressCell.m in Sources */,
+				A6218DB21B40EC4300D9ED93 /* ManageGiftViewController.m in Sources */,
 				9BD58CD418E40D57008CD881 /* BadgeView.m in Sources */,
 				9699D5E61B1707DD006D3A37 /* MyCloset6ViewController.m in Sources */,
 				9B7CB16118D59C4300D8DAA5 /* ModelToArray.m in Sources */,
@@ -7261,6 +7296,7 @@
 				9B53941318EAAC4500084F6B /* CategoryView.m in Sources */,
 				962D37121AD56B8D0012D749 /* UIView+MJExtension.m in Sources */,
 				9B08830318F7C2A800F76D65 /* ButtonInSection.m in Sources */,
+				A6218DB51B40F77A00D9ED93 /* ManageGiftInfoParser.m in Sources */,
 				9BB88A2919A86BA700A3D371 /* CommonUtil.m in Sources */,
 				9B7CB0E918D59C4300D8DAA5 /* BindBindModel.m in Sources */,
 				9628EF4D1AE4BA0C007091B1 /* StoreDetail20ViewController.m in Sources */,

@@ -343,6 +343,9 @@
 
 -(void)PartChangeItemWithUk:(NSString*)aUk andType:(NSString*)aType;
 
+-(void)getGiftWithCode:(NSString*)code_ andAddress:(NSString*)address_;
+
+-(void)submitGiftOrderWithAddress:(NSString*)address_ andCode:(NSString*)code_ andProducts:(NSString*)products_;
 @end
 
 

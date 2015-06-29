@@ -286,8 +286,8 @@
             [sepcValueInfo setAttributeDic:((YKBaseEntity*)[goodsInfo.spec_values attributeForKey:tempSpecValue]).attributeDic];
             if (marrSize.count > 0) {
                 BOOL has = NO;
-                for (int i = 0; i < marrColor.count; ++i) {
-                    PackageSpecValueInfo* recordColor = [marrColor objectAtIndex:i isArray:nil];
+                for (int i = 0; i < marrSize.count; ++i) {
+                    PackageSpecValueInfo* recordColor = [marrSize objectAtIndex:i isArray:nil];
                     if ([recordColor.spec_alias isEqualToString:sepcValueInfo.spec_alias]) {
                         has = YES;
                     }

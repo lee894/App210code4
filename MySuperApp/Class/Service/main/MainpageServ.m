@@ -1051,7 +1051,22 @@
     }];
 }
 
+-(void)getGiftWithCode:(NSString*)code_ andAddress:(NSString*)address_
+{
+    [self sendPostWithURL:@"getgiftcode" tag:Http_GetGiftCode20_Tag beforeRequest:^{
+        [self addParam:@"giftcode_id" withValue:code_];
+        [self addParam:@"address_id" withValue:address_];
+    }];
+}
 
+-(void)submitGiftOrderWithAddress:(NSString*)address_ andCode:(NSString*)code_ andProducts:(NSString*)products_
+{
+    [self sendPostWithURL:@"submitgiftorder" tag:Http_SubmitGiftOrder20_Tag beforeRequest:^{
+        [self addParam:@"address_id" withValue:address_];
+        [self addParam:@"coupon_code" withValue:code_];
+        [self addParam:@"product_ids" withValue:products_];
+    }];
+}
 @end
 
 

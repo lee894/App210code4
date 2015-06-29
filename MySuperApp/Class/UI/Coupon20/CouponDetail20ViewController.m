@@ -200,11 +200,6 @@
     }
 }
 
--(void)toHome:(UIButton*)sender
-{
-    
-}
-
 -(void)showQR:(UIButton*)sender
 {
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;

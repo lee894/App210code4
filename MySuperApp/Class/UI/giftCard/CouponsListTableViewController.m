@@ -18,6 +18,7 @@
 #import "CouponListInfoParser.h"
 #import "CouponDetailViewController.h"
 #import "CouponDetail20ViewController.h"
+#import "ManageGiftViewController.h"
 
 
 @interface CouponsListTableViewController (){
@@ -196,6 +197,23 @@
     NSRange numRange = NSMakeRange(self.phoneNum.length-12, 11);;
     //发送验证码
     [mainSer getProveMobile:[self.phoneNum substringWithRange:numRange] andType:@"v6card"];
+}
+
+-(void)action:(UIButton*)sender
+{
+    if ([_strType isEqualToString:@"g"]) {
+        ManageGiftViewController* mgvc = [[ManageGiftViewController alloc] init];
+        [mgvc setCouponInfo:[_cli.coupons objectAtIndex:sender.tag isArray:nil]];
+        [self.navigationController pushViewController:mgvc animated:YES];
+    }
+//    else if (0)
+//    {
+//        
+//    }
+    else
+    {
+        [self changetableBarto:0];
+    }
 }
 
 //单元格上按钮的点击事件
@@ -547,15 +565,17 @@
                 {
                     iBg = [UIImage imageNamed:@"laber_lpk"];
                 }
-                [btnAction addTarget:self action:@selector(toHome:) forControlEvents:UIControlEventTouchUpInside];
                 [btnAction setTitle:@"使用" forState:UIControlStateNormal];
                 [btnAction setTitleColor:[UIColor colorWithHexString:@"#c8002c"] forState:UIControlStateNormal];
                 [btnAction.titleLabel setFont:[UIFont systemFontOfSize:14]];
                 [btnAction setFrame:CGRectMake(ivState.frame.origin.x, 0, lee1fitAllScreen(63), ivBg.frame.size.height)];
+                [btnAction setTag:indexPath.row];
+                [btnAction addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
                 [ivBg addSubview:btnAction];
             }
         }
         [ivBg setImage:iBg];
+        [ivBg setUserInteractionEnabled:YES];
         [lblPrice setText:strPrice];
         [lblTitle setText:strTitle];
         [lblTime setText:strTime];

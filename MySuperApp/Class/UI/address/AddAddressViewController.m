@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 zan. All rights reserved.
 //
 
+#import "CheckOutViewController.h"
 #import "AddAddressViewController.h"
 #import "UIView+ChangeFrame.h"
 #import "SBPublicFormatValidation.h"
@@ -372,12 +373,27 @@
 
 -(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel{
     
+    switch ((NSUInteger)aHandle) {
+        case Http_Addressadd_Tag:
+        {
+            if (_covc) {
+                _covc.straddressID = [amodel objectForKey:@"address_id" isDictionary:nil];
+            }
+            [SBPublicAlert hideMBprogressHUD:self.view];
+            [self.navigationController popViewControllerAnimated:YES];
+            return;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
     [SBPublicAlert hideMBprogressHUD:self.view];
     LBaseModel *model = (LBaseModel *)amodel;
     switch (model.requestTag) {
         case Http_Addressadd_Tag:
             [SBPublicAlert hideMBprogressHUD:self.view];
-
             [self.navigationController popViewControllerAnimated:YES];
             break;
         case Http_AddressEdit_Tag:

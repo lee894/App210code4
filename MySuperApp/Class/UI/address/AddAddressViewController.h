@@ -8,7 +8,7 @@
 
 #import "LBaseViewController.h"
 #import "AddressPickerView.h"
-
+@class CheckOutViewController;
 @interface AddAddressViewController : LBaseViewController <UITextFieldDelegate,AreaPickerDelegate,ServiceDelegate,UIScrollViewDelegate>
 {
     MainpageServ *mainSer;
@@ -43,6 +43,6 @@
 
 @property (nonatomic, assign) BOOL isFromcheck; // isFromCheckView
 @property (nonatomic, retain) AddressAddresslist *addressList;//用于显示编辑地址时信息
-
+@property (nonatomic, assign) CheckOutViewController* covc;
 - (IBAction)chooseCity:(id)sender;//选择城市
 @end
