@@ -18,6 +18,8 @@
 @interface COCheckOutModel : LBaseModel <NSCoding>
 
 @property (nonatomic, retain) NSMutableArray *suitlist;
+@property (nonatomic, retain) NSMutableArray *packagelist;
+
 @property (nonatomic, retain) COCheckoutStatistics *checkoutStatistics;
 @property (nonatomic, retain) NSMutableArray *checkoutPaywayNew;
 @property (nonatomic, retain) NSMutableArray *checkoutCouponcard;
@@ -43,6 +45,9 @@
 @property (nonatomic, retain) NSArray *checkoutV6cards;
 @property (nonatomic, retain) NSArray *arrCheckout_couponcard;
 @property (nonatomic, assign) int checkoutCountv6;
+
+@property (nonatomic, retain) NSArray *checkout_freepostcard;
+
 
 
 

@@ -19,6 +19,7 @@
 @implementation COCheckOutModel
 
 @synthesize suitlist = _suitlist;
+@synthesize packagelist = _packagelist;
 @synthesize checkoutStatistics = _checkoutStatistics;
 @synthesize checkoutPaywayNew = _checkoutPaywayNew;
 @synthesize checkoutCouponcard = _checkoutCouponcard;
@@ -32,6 +33,7 @@
 @synthesize checkoutV6cards = _checkoutV6cards;
 @synthesize checkoutCountv6 = _checkoutCountv6;
 @synthesize arrCheckout_couponcard =_arrCheckout_couponcard;
+@synthesize checkout_freepostcard = _checkout_freepostcard;
 
 
 @synthesize requestTag;
@@ -57,12 +59,16 @@
         
         _checkoutProductlist = [[NSMutableArray alloc] init] ;
         _suitlist = [[NSMutableArray alloc] init] ;
+        _packagelist = [[NSMutableArray alloc] init];
         _checkoutCouponcard = [[NSMutableArray alloc] init] ;
         _checkoutConsigneeinfo = [[NSMutableArray alloc] init] ;
         _checkoutPaywayNew = [[NSMutableArray alloc] init] ;
         self.checkoutV6cards = [self objectOrNilForKey:@"checkout_v6cards" fromDictionary:json];
         self.checkoutCountv6 = [[self objectOrNilForKey:@"checkout_countv6" fromDictionary:json] intValue];
         self.arrCheckout_couponcard = [self objectOrNilForKey:@"checkout_couponcard" fromDictionary:json];
+        
+        self.checkout_freepostcard = [self objectOrNilForKey:@"checkout_freepostcard" fromDictionary:json];
+        
         
         NSArray* array = [json objectForKey:@"checkout_productlist"];
         for (int i = 0; i < [array count]; i++) {
@@ -140,6 +146,35 @@
         }
         
         
+        //lee999 150628 新增礼包
+        for (id dicdate in [json objectForKey:@"packagelist"]) {
+            YKSuitListItem * item = [[YKSuitListItem alloc] init];
+            for (id aSuit in [dicdate objectForKey:@"package"]) {
+                YKProductsItem *product=[[YKProductsItem alloc] init];
+                product.product_id = [aSuit objectForKey:@"product_id"];
+                product.name = [aSuit objectForKey:@"name"];
+                product.Count = [aSuit objectForKey:@"count"];
+                product.pic = [aSuit objectForKey:@"pic"];
+                product.mkt_price = [[aSuit objectForKey:@"mkt_price"] floatValue];
+                product.price = [[aSuit objectForKey:@"price"] floatValue];
+                product.size = [aSuit objectForKey:@"size"];
+                product.color = [aSuit objectForKey:@"color"];
+                product.stock = [aSuit objectForKey:@"stock"];
+                [item.suits addObject:product];
+                
+            }
+            item.disountprice =[[dicdate objectForKey:@"discountprice"] floatValue];
+            item.price = [[dicdate objectForKey:@"price"] floatValue];
+            item.save = [[dicdate objectForKey:@"save"] floatValue];
+            item.packageid = [dicdate objectForKey:@"packageid"];
+            item.selected = [[dicdate objectForKey:@"selected"] boolValue];
+            item.uk = [dicdate objectForKey:@"uk"];
+            NSLog(@"arrSuit:%@",item);
+            [self.packagelist addObject:item];
+            
+        }
+        
+        
         NSDictionary* dic = [json objectForKey:@"checkout_statistics"];
         NSDictionary* price1 = [dic objectForKey:@"price1"];
         NSDictionary* price2 = [dic objectForKey:@"price2"];
@@ -177,7 +212,21 @@
         }
     }
     [mutableDict setValue:[NSArray arrayWithArray:tempArrayForSuitlist] forKey:@"suitlist"];
-//    [mutableDict setValue:[self.checkoutStatistics dictionaryRepresentation] forKey:@"checkout_statistics"];
+
+    
+    //lee999 150626 新增礼包
+    NSMutableArray *tempArrayForSuitlist2 = [NSMutableArray array];
+    for (NSObject *subArrayObject in self.packagelist) {
+        if([subArrayObject respondsToSelector:@selector(dictionaryRepresentation)]) {
+            [tempArrayForSuitlist2 addObject:[subArrayObject performSelector:@selector(dictionaryRepresentation)]];
+        } else {
+            [tempArrayForSuitlist2 addObject:subArrayObject];
+        }
+    }
+    [mutableDict setValue:[NSArray arrayWithArray:tempArrayForSuitlist2] forKey:@"packagelist"];
+    //end
+    
+    
     NSMutableArray *tempArrayForCheckoutPaywayNew = [NSMutableArray array];
     for (NSObject *subArrayObject in self.checkoutPaywayNew) {
         if([subArrayObject respondsToSelector:@selector(dictionaryRepresentation)]) {
@@ -248,6 +297,8 @@
     self = [super init];
     
     self.suitlist = [aDecoder decodeObjectForKey:@"suitlist"];
+    self.packagelist = [aDecoder decodeObjectForKey:@"packagelist"];
+
     self.checkoutStatistics = [aDecoder decodeObjectForKey:@"checkoutStatistics"];
     self.checkoutPaywayNew = [aDecoder decodeObjectForKey:@"checkoutPaywayNew"];
     self.checkoutCouponcard = [aDecoder decodeObjectForKey:@"checkoutCouponcard"];
@@ -262,6 +313,8 @@
 {
     
     [aCoder encodeObject:_suitlist forKey:@"suitlist"];
+    [aCoder encodeObject:_packagelist forKey:@"packagelist"];
+
     [aCoder encodeObject:_checkoutStatistics forKey:@"checkoutStatistics"];
     [aCoder encodeObject:_checkoutPaywayNew forKey:@"checkoutPaywayNew"];
     [aCoder encodeObject:_checkoutCouponcard forKey:@"checkoutCouponcard"];

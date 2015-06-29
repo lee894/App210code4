@@ -19,6 +19,8 @@
    IBOutlet UITableView* chectOutTable;
     
     NSInteger suitCount;  //套装拥有数量
+    NSInteger packageCount; //礼包数量
+
     
     COCheckOutModel *mycheckOutModel;
 
@@ -26,6 +28,8 @@
     NSMutableArray* otherCells;
     NSMutableArray* tableCells;
     NSMutableArray* suitlistcell;//套装
+    NSMutableArray* packagelistcell;//礼包
+
     
     NSString* postText; //订单留言
 }

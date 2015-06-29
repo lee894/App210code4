@@ -62,13 +62,20 @@
     //创建返回按钮
     [self createBackBtnWithType:0];
     
+    [chectOutTable setHidden:YES];
+
+    
     //创建右边按钮
     [self createRightBtn];
     [self.navbtnRight setTitle:@"提交订单" forState:UIControlStateNormal];
     [self.navbtnRight setTitle:@"提交订单" forState:UIControlStateHighlighted];
     [self.navbtnRight setFrame:CGRectMake(242, 7, 66, 32)];
 	
+    suitCount = 0;
+    packageCount = 0;
+    
     suitlistcell= [[NSMutableArray alloc] init];
+    packagelistcell = [[NSMutableArray alloc] init];
 	tableCells = [[NSMutableArray alloc] init];
 	otherCells = [[NSMutableArray alloc] init];
 	_dicTD = [[NSMutableDictionary alloc] init];
@@ -184,7 +191,10 @@
                     }
                 }
                 
+                [chectOutTable setHidden:NO];
+                
                 [self createSuitlistcells];
+                [self createPackagelistcells];
                 [self createCells];
                 [self createOtherCells];
                 [self createHeaderAndFooter];
@@ -383,10 +393,6 @@
                                                        reuseIdentifier:CellIdentifier2];
 		Cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-//		UIImageView* bgview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cart_pic_bg"]];
-//		bgview.frame = CGRectMake(10, 10, 92, 113);
-//		[Cell.contentView addSubview:bgview];
-    
         YKItem* item = (YKItem *)[mycheckOutModel.checkoutProductlist objectAtIndex:i];
         
 		UrlImageView* shoppingImg = [[UrlImageView alloc] init];
@@ -397,16 +403,16 @@
         
 		//lee999recode
         if ([item.type isEqualToString:@"gift"]) {
-            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, 190, 45)];
+            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, ScreenWidth-100, 45)];
             shoppingName.backgroundColor = [UIColor clearColor];
             shoppingName.numberOfLines = 0;
             shoppingName.lineBreakMode = UILineBreakModeWordWrap;
             shoppingName.text = [NSString stringWithFormat:@"             %@",item.name];
             shoppingName.font = [UIFont systemFontOfSize:13];
-            shoppingName.textColor = [UIColor blackColor];//UIColorFromRGB(0x666666)
+            shoppingName.textColor = [UIColor blackColor];
             
             UILabel* biaozhi = [[UILabel alloc] init];
-            biaozhi.frame=CGRectMake(0, 6, 60, 18);
+            biaozhi.frame=CGRectMake(0, lee1fitAllScreen(13), 60, 18);
 			biaozhi.backgroundColor = [UIColor clearColor];
 			biaozhi.text = @"【赠品】";
 			biaozhi.font = [UIFont systemFontOfSize:13];
@@ -416,14 +422,13 @@
             [Cell.contentView addSubview:shoppingName];
 
         }else{
-//		UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, 190, 45)];
         UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, ScreenWidth-110, 45)];
 		shoppingName.backgroundColor = [UIColor clearColor];
 		shoppingName.numberOfLines = 0;
 		shoppingName.lineBreakMode = UILineBreakModeWordWrap;
 		shoppingName.text = item.name;
 		shoppingName.font = [UIFont systemFontOfSize:13];
-		shoppingName.textColor = [UIColor blackColor];//UIColorFromRGB(0x666666)
+		shoppingName.textColor = [UIColor blackColor];
 		[Cell.contentView addSubview:shoppingName];
 		}
         //end
@@ -432,28 +437,28 @@
 		colorName.backgroundColor = [UIColor clearColor];
 		colorName.text = @"颜色：";
 		colorName.font = [UIFont systemFontOfSize:12];
-		colorName.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);//UIColorFromRGB(0x666666)
+		colorName.textColor = [UIColor colorWithHexString:@"0x666666"];
 		[Cell.contentView addSubview:colorName];
 		
 		UILabel* sizeName = [[UILabel alloc] initWithFrame:CGRectMake(110, 80, 50, 20)];
 		sizeName.backgroundColor = [UIColor clearColor];
 		sizeName.text = @"尺码：";
 		sizeName.font = [UIFont systemFontOfSize:12];
-		sizeName.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666)
+		sizeName.textColor = [UIColor colorWithHexString:@"0x666666"];
 		[Cell.contentView addSubview:sizeName];
 		
 		UILabel* priceName = [[UILabel alloc] initWithFrame:CGRectMake(224, 80, 50, 20)];
 		priceName.backgroundColor = [UIColor clearColor];
 		priceName.text = @"单价：";
 		priceName.font = [UIFont systemFontOfSize:12];
-		priceName.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666)
+		priceName.textColor = [UIColor colorWithHexString:@"0x666666"];
 		[Cell.contentView addSubview:priceName];
 		
 		UILabel* numberName = [[UILabel alloc] initWithFrame:CGRectMake(224, 60, 50, 20)];
 		numberName.backgroundColor = [UIColor clearColor];
 		numberName.text = @"数量：";
 		numberName.font = [UIFont systemFontOfSize:12];
-		numberName.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666)
+		numberName.textColor = [UIColor colorWithHexString:@"0x666666"];
 		[Cell.contentView addSubview:numberName];
 		
 		UILabel* colorValue = [[UILabel alloc] initWithFrame:CGRectMake(150, 60, 74, 20)];
@@ -461,7 +466,7 @@
         colorName.textAlignment = UITextAlignmentLeft;
 		colorValue.text = item.color;
 		colorValue.font = [UIFont systemFontOfSize:12];
-		colorValue.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666)
+		colorValue.textColor = [UIColor colorWithHexString:@"0x666666"];
 		[Cell.contentView addSubview:colorValue];
 		
 		UILabel* sizeValue = [[UILabel alloc] initWithFrame:CGRectMake(150, 80, 50, 20)];
@@ -470,34 +475,40 @@
 
 		sizeValue.text = item.size;
 		sizeValue.font = [UIFont systemFontOfSize:12];
-		sizeValue.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666)
+		sizeValue.textColor = [UIColor colorWithHexString:@"0x666666"];
 		[Cell.contentView addSubview:sizeValue];
 		
 		UILabel* priceValue = [[UILabel alloc] initWithFrame:CGRectMake(254, 80, 100, 20)];
 		priceValue.backgroundColor = [UIColor clearColor];
 		priceValue.text = [NSString stringWithFormat:@" ￥%@",item.price];;
 		priceValue.font = [UIFont systemFontOfSize:12];
-		priceValue.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666)
+		priceValue.textColor = [UIColor colorWithHexString:@"0x666666"];
 		[Cell.contentView addSubview:priceValue];
 		
 		UILabel* numberValue = [[UILabel alloc] initWithFrame:CGRectMake(254, 59, 50, 20)];
 		numberValue.backgroundColor = [UIColor clearColor];
 		numberValue.text = [NSString stringWithFormat:@"  %@",item.number];
 		numberValue.font = [UIFont systemFontOfSize:12];
-		numberValue.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666)
+		numberValue.textColor = [UIColor colorWithHexString:@"0x666666"];
 		[Cell.contentView addSubview:numberValue];
         
         UIFont *font = [UIFont systemFontOfSize:LabMidSize];
         
+        //分割线
         UIView *seplineView = [[UIView alloc] init];
         [seplineView setFrame:CGRectMake(0, 130, ScreenWidth, 0.5)];
         [seplineView setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
         [Cell addSubview:seplineView];
         
-        UIView *seplineView2 = [[UIView alloc] init];
-        [seplineView2 setFrame:CGRectMake(0, 169.5, ScreenWidth, 0.5)];
-        [seplineView2 setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
-        [Cell addSubview:seplineView2];
+        if (i != [mycheckOutModel.checkoutProductlist count]-1) {
+            
+            UIView *seplineView2 = [[UIView alloc] init];
+            //        [seplineView2 setFrame:CGRectMake(0, 169.5, ScreenWidth, 8)];
+            [seplineView2 setFrame:CGRectMake(0, lee1fitAllScreen(142), ScreenWidth, 8)];
+            
+            [seplineView2 setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
+            [Cell addSubview:seplineView2];
+        }
         
         //积分
         UILabel *jifenLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 137, 88, 25)];
@@ -512,7 +523,7 @@
 		caseName.backgroundColor = [UIColor clearColor];
 		caseName.text = strTotal;
 		caseName.font = font;
-		caseName.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666)
+		caseName.textColor = [UIColor colorWithHexString:@"0x666666"];
 		[Cell.contentView addSubview:caseName];
         
 		
@@ -530,165 +541,447 @@
 
 
 -(void)createSuitlistcells
+//-----V2
 {
     [suitlistcell removeAllObjects];
     suitCount = [mycheckOutModel.suitlist count];
     
     for (int j=0; j<[mycheckOutModel.suitlist count]; j++) {
-        YKSuitListItem *item = [mycheckOutModel.suitlist objectAtIndex:j];
+        YKSuitListItem* item = [mycheckOutModel.suitlist objectAtIndex:j];
         
         NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:1];
         
+        static NSString	*CellSuitlist3 = @"Cell3";
+        UITableViewCell *viewSuitlistCell3 = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellSuitlist3];
+        viewSuitlistCell3.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
+        UIFont *font = [UIFont systemFontOfSize:13];
+        CGFloat xOffset = 20;//28 + lee1fitAllScreen(28);
+        CGFloat yOffset = 16;
+        CGFloat height = 14;
+        
+        UILabel* pName = [[UILabel alloc] init];
+        pName.backgroundColor = [UIColor clearColor];
+        pName.lineBreakMode = UILineBreakModeMiddleTruncation;
+        pName.text = [NSString stringWithFormat:@"套装%d", j + 1];
+        pName.font = [UIFont systemFontOfSize:14];
+        pName.textColor = UIColorFromRGB(0x666666);
+        CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font} context:nil];
+        [pName setFrame:CGRectMake(xOffset, yOffset - (rcName.size.height > pName.font.pointSize ? rcName.size.height - pName.font.pointSize : 0), rcName.size.width, rcName.size.height)];
+        [viewSuitlistCell3 addSubview:pName];
+        UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset + pName.frame.size.width + 24, pName.frame.origin.y, 200, rcName.size.height)];
+        desc.backgroundColor = [UIColor clearColor];
+        desc.lineBreakMode = UILineBreakModeMiddleTruncation;
+        desc.text = [NSString stringWithFormat:@"数量: %d", item.number];
+        desc.font = [UIFont systemFontOfSize:14];
+        desc.textColor = UIColorFromRGB(0x181818);
+        [viewSuitlistCell3 addSubview:desc];
+        
+        NSString *str = @"套装价: ";
+        int strWidth = [str sizeWithFont:font].width;
+        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset + 20, strWidth, height)];
+        desc.backgroundColor = [UIColor clearColor];
+        desc.text = str;
+        desc.font = [UIFont systemFontOfSize:14];
+        desc.textColor = UIColorFromRGB(0x181818);/*UIColorFromRGB(0x666666)*/
+        [viewSuitlistCell3 addSubview:desc];
+        //xOffset += strWidth;
+        
+        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset + strWidth, desc.frame.origin.y, 90, height)];
+        desc.backgroundColor = [UIColor clearColor];
+        desc.text = [NSString stringWithFormat:@"￥%.2f", item.disountprice];
+        desc.font = [UIFont systemFontOfSize:14];
+        desc.textColor = UIColorFromRGB(0xc8002c);
+        [viewSuitlistCell3 addSubview:desc];
+        //xOffset = lee1fitAllScreen(204);
+        
+        desc = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(204), desc.frame.origin.y, 110, height)];
+        desc.backgroundColor = [UIColor clearColor];
+        desc.lineBreakMode = UILineBreakModeMiddleTruncation;
+        desc.text = [NSString stringWithFormat:@"优惠: ￥%.2f", item.save];
+        desc.font = [UIFont systemFontOfSize:14];
+        desc.textColor = UIColorFromRGB(0x666666);
+        [viewSuitlistCell3 addSubview:desc];
+        
+        [array addObject:viewSuitlistCell3];
+        
+        //xOffset = 28 + lee1fitAllScreen(28);
         for (int k = 0; k<[item.suits count]; k++) {
             static NSString	*CellIdentifier2 = @"Cell2";
             UITableViewCell *Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                            reuseIdentifier:CellIdentifier2];
             Cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            UIImageView *icon = nil;
-            if (k==0) {
-                
-//                UIImageView *topImageV = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, 140)];
-//                [topImageV setImage:[[UIImage imageNamed:@"list_bg_01.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(16, 14, 250, 100)]];//[ resizableImageWithCap:UIEdgeInsetsMake(14, 14, 0, 0)]
-//                [Cell.contentView addSubview:topImageV];
-                
-                icon  = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 21, 38)];
-                [icon setImage:[UIImage imageNamed:@"icon_suit.png"]];
-                [Cell.contentView addSubview:icon];
-                
-            }
-            
-            UIView *seplineView = [[UIView alloc] init];
-            [seplineView setFrame:CGRectMake(0, 139.5, ScreenWidth, 0.5)];
-            [seplineView setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
-            [Cell addSubview:seplineView];
-
-            
-
-//            }else {
-//                
-//                UIImageView *modile = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, 140)];
-//                [modile setImage:[UIImage imageNamed:@"list_bg_02.png"]];//[ resizableImageWithCap:UIEdgeInsetsMake(5, 5, 0, 0)]
-//                [Cell.contentView addSubview:modile];
-//            }
+            UILabel* lblSep = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, 0, ScreenWidth - 12, 1)];
+            [lblSep setBackgroundColor:[UIColor colorWithHexString:@"#d0d0d0"]];
+            [Cell addSubview:lblSep];
             
             YKProductsItem *pItem = [item.suits objectAtIndex:k];
+            BOOL showStock = NO;
+            if (pItem.stock && ![pItem.stock isKindOfClass:[NSNull class]] && ![pItem.stock isEqualToString:@""]) {
+                showStock = YES;
+            }
             
-            
-//            UIImageView* bgview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cart_pic_bg.png"]];
-//            bgview.frame = CGRectMake(10, 10, 93, 113);
-//            [Cell.contentView addSubview:bgview];
-
             UrlImageView* shoppingImg = [[UrlImageView alloc] init];
             [shoppingImg setImageFromUrl:YES withUrl:pItem.pic];
-            shoppingImg.frame = CGRectMake(14, 15, 84, 103);
+            shoppingImg.frame = CGRectMake(xOffset, 12, lee1fitAllScreen(70), lee1fitAllScreen(90));
             shoppingImg.backgroundColor = [UIColor clearColor];
-            [Cell.contentView addSubview:shoppingImg];
+            [Cell addSubview:shoppingImg];
             
-//            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, 190, 45)];
-            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, ScreenWidth-110, 45)];
+            CGFloat fTextWidth = ScreenWidth - shoppingImg.frame.size.width - xOffset - 12 - 16;
+            
+            int yOffset = 6;
+            if (!showStock) {
+                yOffset += 8;
+            }
+            
+            CGFloat nameHeight = showStock ? 40 : 45;
+            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(shoppingImg.frame.origin.x + shoppingImg.frame.size.width + 16, yOffset, fTextWidth/*shoppingCarTab.editing ? 160 : 190*/, nameHeight)];
             shoppingName.backgroundColor = [UIColor clearColor];
             shoppingName.numberOfLines = 0;
             shoppingName.lineBreakMode = UILineBreakModeWordWrap;
-            shoppingName.text = [NSString stringWithFormat:@"%@【套装】", pItem.name];
+            shoppingName.text = pItem.name;
             shoppingName.font = [UIFont systemFontOfSize:13];
-            shoppingName.textColor = [UIColor blackColor];
-            [Cell.contentView addSubview:shoppingName];
+            shoppingName.textColor = [UIColor colorWithHexString:@"#181818"];
+            [Cell addSubview:shoppingName];
             
-            UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(110, 60, 175, 30)];
+            yOffset += nameHeight;
+            
+            if (showStock) {
+                UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(shoppingImg.frame.origin.x + shoppingImg.frame.size.width + 16, yOffset, fTextWidth, 12)];
+                desc.backgroundColor = [UIColor clearColor];
+                desc.text = pItem.stock;
+                desc.font = [UIFont systemFontOfSize:12];
+                desc.textColor = [UIColor colorWithHexString:@"#c8002c"];
+                [Cell addSubview:desc];
+                
+                yOffset += 12;
+            }
+            yOffset = 64;
+            UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(shoppingImg.frame.origin.x + shoppingImg.frame.size.width + 16, 64, fTextWidth/*shoppingCarTab.editing?160:170*/, 13)];
             colorName.backgroundColor = [UIColor clearColor];
             colorName.lineBreakMode = UILineBreakModeMiddleTruncation;
             colorName.text = [NSString stringWithFormat:@"颜色: %@    尺码: %@", pItem.color, pItem.size];
             colorName.font = [UIFont systemFontOfSize:13];
-            colorName.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
-            [Cell.contentView addSubview:colorName];
+            colorName.textColor = UIColorFromRGB(0x666666);
+            [Cell addSubview:colorName];
             
-            UILabel* priceName = [[UILabel alloc] initWithFrame:CGRectMake(110, 90, 50, 30)];
+            yOffset += 13;
+            
+            UILabel* priceName = [[UILabel alloc] initWithFrame:CGRectMake(shoppingImg.frame.origin.x + shoppingImg.frame.size.width + 16, 89, fTextWidth, 13)];
             priceName.backgroundColor = [UIColor clearColor];
-            priceName.text = @"单价: ";
+            priceName.text = [NSString stringWithFormat:@"单价: ￥%.2f", pItem.price];
             priceName.font = [UIFont systemFontOfSize:13];
-            priceName.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
-            [Cell.contentView addSubview:priceName];
-            
-            UILabel* priceValue = [[UILabel alloc] initWithFrame:CGRectMake(150, 89, 100, 30)];
-            priceValue.backgroundColor = [UIColor clearColor];
-            priceValue.text = [NSString stringWithFormat:@"￥%.2f", pItem.price];
-            priceValue.font = [UIFont systemFontOfSize:14];
-            priceValue.textColor = [UIColor colorWithHexString:@"0xB90023"];//UIColorFromRGB(0xB90023);
-            [Cell.contentView addSubview:priceValue];
-
-            [Cell.contentView bringSubviewToFront:icon];
-            
+            priceName.textColor = UIColorFromRGB(0x666666);
+            [Cell addSubview:priceName];
             [array addObject:Cell];
         }
-        
-
-        static NSString	*CellSuitlist = @"Cell";
-        UITableViewCell *viewSuitlistCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellSuitlist];
-        viewSuitlistCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-//        UIImageView *buttom = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, 60)];
-//        [buttom setImage:[UIImage imageNamed:@"list_bg_03.png"]];//[ resizableImageWithCap:UIEdgeInsetsMake(5, 5, 0, 0)]
-//        [viewSuitlistCell.contentView addSubview:buttom];
-        
-        UIFont *font = [UIFont systemFontOfSize:13];
-        int xOffset = 12;
-        int yOffset = 10;
-        int height = 20;
-        UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset, 200, height)];
-        desc.backgroundColor = [UIColor clearColor];
-        desc.lineBreakMode = UILineBreakModeMiddleTruncation;
-        desc.text = [NSString stringWithFormat:@"数量: %d", item.number];
-        desc.font = [UIFont systemFontOfSize:13];
-        desc.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
-        [viewSuitlistCell.contentView addSubview:desc];
-        
-        //lee999 新增套装积分
-//        if (item.suit_score > 0) {
-            UILabel* scoredesc = [[UILabel alloc] initWithFrame:CGRectMake(165, yOffset, 200, height)];
-            scoredesc.backgroundColor = [UIColor clearColor];
-            scoredesc.lineBreakMode = UILineBreakModeMiddleTruncation;
-            scoredesc.text = [NSString stringWithFormat:@"积分: %d", item.suit_score];
-            scoredesc.font = [UIFont systemFontOfSize:13];
-            scoredesc.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
-            [viewSuitlistCell.contentView addSubview:scoredesc];
-//        }
-    
-        //套装价
-        NSString *str = @"套装价: ";
-        int strWidth = [str sizeWithFont:font].width;
-        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset+height, strWidth, height)];
-        desc.backgroundColor = [UIColor clearColor];
-        desc.text = str;
-        desc.font = [UIFont systemFontOfSize:13];
-        desc.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
-        [viewSuitlistCell.contentView addSubview:desc];
-        xOffset += strWidth;
-        
-        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset+height, 90, height)];
-        desc.backgroundColor = [UIColor clearColor];
-        desc.text = [NSString stringWithFormat:@"￥%.2f", item.disountprice];
-        desc.font = [UIFont systemFontOfSize:16];
-        desc.textColor = [UIColor colorWithHexString:@"0xB90023"];//UIColorFromRGB(0xB90023);
-        [viewSuitlistCell.contentView addSubview:desc];
-        xOffset = 165;
-        
-        //优惠
-        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset+height, 110, height)];
-        desc.backgroundColor = [UIColor clearColor];
-        desc.lineBreakMode = UILineBreakModeMiddleTruncation;
-        desc.text = [NSString stringWithFormat:@"优惠: ￥%.2f", item.save];
-        desc.font = [UIFont systemFontOfSize:13];
-        desc.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
-        [viewSuitlistCell.contentView addSubview:desc];
-        
-        [array addObject:viewSuitlistCell];
         
         [suitlistcell addObject:array];
     }
 }
 
+//{
+//    [suitlistcell removeAllObjects];
+//    suitCount = [mycheckOutModel.suitlist count];
+//    
+//    for (int j=0; j<[mycheckOutModel.suitlist count]; j++) {
+//        YKSuitListItem *item = [mycheckOutModel.suitlist objectAtIndex:j];
+//        
+//        NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:1];
+//        
+//        for (int k = 0; k<[item.suits count]; k++) {
+//            static NSString	*CellIdentifier2 = @"Cell2";
+//            UITableViewCell *Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+//                                                           reuseIdentifier:CellIdentifier2];
+//            Cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            
+//            UIImageView *icon = nil;
+//            if (k==0) {
+//                
+////                UIImageView *topImageV = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, 140)];
+////                [topImageV setImage:[[UIImage imageNamed:@"list_bg_01.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(16, 14, 250, 100)]];//[ resizableImageWithCap:UIEdgeInsetsMake(14, 14, 0, 0)]
+////                [Cell.contentView addSubview:topImageV];
+//                
+//                icon  = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 21, 38)];
+//                [icon setImage:[UIImage imageNamed:@"icon_suit.png"]];
+//                [Cell.contentView addSubview:icon];
+//                
+//            }
+//            
+//            UIView *seplineView = [[UIView alloc] init];
+//            [seplineView setFrame:CGRectMake(0, 139.5, ScreenWidth, 0.5)];
+//            [seplineView setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
+//            [Cell addSubview:seplineView];
+//
+//            
+//
+////            }else {
+////                
+////                UIImageView *modile = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, 140)];
+////                [modile setImage:[UIImage imageNamed:@"list_bg_02.png"]];//[ resizableImageWithCap:UIEdgeInsetsMake(5, 5, 0, 0)]
+////                [Cell.contentView addSubview:modile];
+////            }
+//            
+//            YKProductsItem *pItem = [item.suits objectAtIndex:k];
+//            
+//            
+////            UIImageView* bgview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cart_pic_bg.png"]];
+////            bgview.frame = CGRectMake(10, 10, 93, 113);
+////            [Cell.contentView addSubview:bgview];
+//
+//            UrlImageView* shoppingImg = [[UrlImageView alloc] init];
+//            [shoppingImg setImageFromUrl:YES withUrl:pItem.pic];
+//            shoppingImg.frame = CGRectMake(14, 15, 84, 103);
+//            shoppingImg.backgroundColor = [UIColor clearColor];
+//            [Cell.contentView addSubview:shoppingImg];
+//            
+////            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, 190, 45)];
+//            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, ScreenWidth-110, 45)];
+//            shoppingName.backgroundColor = [UIColor clearColor];
+//            shoppingName.numberOfLines = 0;
+//            shoppingName.lineBreakMode = UILineBreakModeWordWrap;
+//            shoppingName.text = [NSString stringWithFormat:@"%@【套装】", pItem.name];
+//            shoppingName.font = [UIFont systemFontOfSize:13];
+//            shoppingName.textColor = [UIColor blackColor];
+//            [Cell.contentView addSubview:shoppingName];
+//            
+//            UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(110, 60, 175, 30)];
+//            colorName.backgroundColor = [UIColor clearColor];
+//            colorName.lineBreakMode = UILineBreakModeMiddleTruncation;
+//            colorName.text = [NSString stringWithFormat:@"颜色: %@    尺码: %@", pItem.color, pItem.size];
+//            colorName.font = [UIFont systemFontOfSize:13];
+//            colorName.textColor = [UIColor colorWithHexString:@"0x666666"];;
+//            [Cell.contentView addSubview:colorName];
+//            
+//            UILabel* priceName = [[UILabel alloc] initWithFrame:CGRectMake(110, 90, 50, 30)];
+//            priceName.backgroundColor = [UIColor clearColor];
+//            priceName.text = @"单价: ";
+//            priceName.font = [UIFont systemFontOfSize:13];
+//            priceName.textColor = [UIColor colorWithHexString:@"0x666666"];;
+//            [Cell.contentView addSubview:priceName];
+//            
+//            UILabel* priceValue = [[UILabel alloc] initWithFrame:CGRectMake(150, 89, 100, 30)];
+//            priceValue.backgroundColor = [UIColor clearColor];
+//            priceValue.text = [NSString stringWithFormat:@"￥%.2f", pItem.price];
+//            priceValue.font = [UIFont systemFontOfSize:14];
+//            priceValue.textColor = [UIColor colorWithHexString:@"0xB90023"];//UIColorFromRGB(0xB90023);
+//            [Cell.contentView addSubview:priceValue];
+//
+//            [Cell.contentView bringSubviewToFront:icon];
+//            
+//            [array addObject:Cell];
+//        }
+//        
+//
+//        static NSString	*CellSuitlist = @"Cell";
+//        UITableViewCell *viewSuitlistCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellSuitlist];
+//        viewSuitlistCell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        
+////        UIImageView *buttom = [[UIImageView alloc] initWithFrame:CGRectMake(5, 0, 310, 60)];
+////        [buttom setImage:[UIImage imageNamed:@"list_bg_03.png"]];//[ resizableImageWithCap:UIEdgeInsetsMake(5, 5, 0, 0)]
+////        [viewSuitlistCell.contentView addSubview:buttom];
+//        
+//        UIFont *font = [UIFont systemFontOfSize:13];
+//        int xOffset = 12;
+//        int yOffset = 10;
+//        int height = 20;
+//        UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset, 200, height)];
+//        desc.backgroundColor = [UIColor clearColor];
+//        desc.lineBreakMode = UILineBreakModeMiddleTruncation;
+//        desc.text = [NSString stringWithFormat:@"数量: %d", item.number];
+//        desc.font = [UIFont systemFontOfSize:13];
+//        desc.textColor = [UIColor colorWithHexString:@"0x666666"];;
+//        [viewSuitlistCell.contentView addSubview:desc];
+//        
+//        //lee999 新增套装积分
+////        if (item.suit_score > 0) {
+//            UILabel* scoredesc = [[UILabel alloc] initWithFrame:CGRectMake(165, yOffset, 200, height)];
+//            scoredesc.backgroundColor = [UIColor clearColor];
+//            scoredesc.lineBreakMode = UILineBreakModeMiddleTruncation;
+//            scoredesc.text = [NSString stringWithFormat:@"积分: %d", item.suit_score];
+//            scoredesc.font = [UIFont systemFontOfSize:13];
+//            scoredesc.textColor = [UIColor colorWithHexString:@"0x666666"];;
+//            [viewSuitlistCell.contentView addSubview:scoredesc];
+////        }
+//    
+//        //套装价
+//        NSString *str = @"套装价: ";
+//        int strWidth = [str sizeWithFont:font].width;
+//        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset+height, strWidth, height)];
+//        desc.backgroundColor = [UIColor clearColor];
+//        desc.text = str;
+//        desc.font = [UIFont systemFontOfSize:13];
+//        desc.textColor = [UIColor colorWithHexString:@"0x666666"];;
+//        [viewSuitlistCell.contentView addSubview:desc];
+//        xOffset += strWidth;
+//        
+//        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset+height, 90, height)];
+//        desc.backgroundColor = [UIColor clearColor];
+//        desc.text = [NSString stringWithFormat:@"￥%.2f", item.disountprice];
+//        desc.font = [UIFont systemFontOfSize:16];
+//        desc.textColor = [UIColor colorWithHexString:@"0xB90023"];//UIColorFromRGB(0xB90023);
+//        [viewSuitlistCell.contentView addSubview:desc];
+//        xOffset = 165;
+//        
+//        //优惠
+//        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset+height, 110, height)];
+//        desc.backgroundColor = [UIColor clearColor];
+//        desc.lineBreakMode = UILineBreakModeMiddleTruncation;
+//        desc.text = [NSString stringWithFormat:@"优惠: ￥%.2f", item.save];
+//        desc.font = [UIFont systemFontOfSize:13];
+//        desc.textColor = [UIColor colorWithHexString:@"0x666666"];;
+//        [viewSuitlistCell.contentView addSubview:desc];
+//        
+//        [array addObject:viewSuitlistCell];
+//        
+//        [suitlistcell addObject:array];
+//    }
+//}
 
+#pragma mark 创建礼包列表
+-(void)createPackagelistcells
+{
+    [packagelistcell removeAllObjects];
+    packageCount = [mycheckOutModel.packagelist count];
+    
+    for (int j=0; j<[mycheckOutModel.packagelist count]; j++) {
+        YKSuitListItem* item = [mycheckOutModel.packagelist objectAtIndex:j];
+        
+        NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:1];
+        
+        static NSString	*CellSuitlist3 = @"Cell4";
+        UITableViewCell *viewSuitlistCell3 = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellSuitlist3];
+        viewSuitlistCell3.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
+        UIFont *font = [UIFont systemFontOfSize:13];
+        CGFloat xOffset = 20;//28 + lee1fitAllScreen(28);
+        CGFloat yOffset = 16;
+        
+        UILabel* pName = [[UILabel alloc] init];
+        pName.backgroundColor = [UIColor clearColor];
+        pName.lineBreakMode = UILineBreakModeMiddleTruncation;
+        pName.text = [NSString stringWithFormat:@"礼包%d", j + 1];
+        pName.font = [UIFont systemFontOfSize:14];
+        pName.textColor = UIColorFromRGB(0x666666);
+        CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font} context:nil];
+        [pName setFrame:CGRectMake(xOffset, yOffset - (rcName.size.height > pName.font.pointSize ? rcName.size.height - pName.font.pointSize : 0), rcName.size.width, rcName.size.height)];
+        [viewSuitlistCell3 addSubview:pName];
+        
+        UILabel* number = [[UILabel alloc] initWithFrame:CGRectMake(xOffset + pName.frame.size.width + 24, pName.frame.origin.y, 200, rcName.size.height)];
+        number.backgroundColor = [UIColor clearColor];
+        number.lineBreakMode = UILineBreakModeMiddleTruncation;
+        number.text = [NSString stringWithFormat:@"数量: %d", 1];
+        number.font = [UIFont systemFontOfSize:14];
+        number.textColor = UIColorFromRGB(0x181818);
+        [viewSuitlistCell3 addSubview:number];
+        
+        NSString *str = @"礼包价: ";
+        CGFloat strWidth = [str sizeWithFont:font].width;
+        UILabel* price = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset + 20, strWidth, rcName.size.height)];
+        price.backgroundColor = [UIColor clearColor];
+        price.text = str;
+        price.font = [UIFont systemFontOfSize:14];
+        price.textColor = UIColorFromRGB(0x181818);/*UIColorFromRGB(0x666666)*/
+        [viewSuitlistCell3 addSubview:price];
+        //xOffset += strWidth;
+        
+        UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset + strWidth, price.frame.origin.y, 90, rcName.size.height)];
+        desc.backgroundColor = [UIColor clearColor];
+        desc.text = [NSString stringWithFormat:@"￥%.2f", item.disountprice];
+        desc.font = [UIFont systemFontOfSize:14];
+        desc.textColor = UIColorFromRGB(0xc8002c);
+        [viewSuitlistCell3 addSubview:desc];
+        //xOffset = lee1fitAllScreen(204);
+        
+        UILabel* save = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, price.frame.origin.y, 110, rcName.size.height)];
+        save.backgroundColor = [UIColor clearColor];
+        save.lineBreakMode = UILineBreakModeMiddleTruncation;
+        save.text = [NSString stringWithFormat:@"优惠: ￥%.2f", item.save];
+        save.font = [UIFont systemFontOfSize:14];
+        save.textColor = UIColorFromRGB(0x666666);
+        [viewSuitlistCell3 addSubview:desc];
+        
+        [array addObject:viewSuitlistCell3];
+        
+        //xOffset = 28 + lee1fitAllScreen(28);
+        for (int k = 0; k<[item.suits count]; k++) {
+            static NSString	*CellIdentifier2 = @"Cell5";
+            UITableViewCell *Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                           reuseIdentifier:CellIdentifier2];
+            Cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            UILabel* lblSep = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, 0, ScreenWidth - 12, 1)];
+            [lblSep setBackgroundColor:[UIColor colorWithHexString:@"#d0d0d0"]];
+            [Cell addSubview:lblSep];
+            
+            YKProductsItem *pItem = [item.suits objectAtIndex:k];
+            BOOL showStock = NO;
+            if (pItem.stock && ![pItem.stock isKindOfClass:[NSNull class]] && ![pItem.stock isEqualToString:@""]) {
+                showStock = YES;
+            }
+            
+            UrlImageView* shoppingImg = [[UrlImageView alloc] init];
+            [shoppingImg setImageFromUrl:YES withUrl:pItem.pic];
+            shoppingImg.frame = CGRectMake(xOffset, 12, lee1fitAllScreen(70), lee1fitAllScreen(90));
+            shoppingImg.backgroundColor = [UIColor clearColor];
+            [Cell addSubview:shoppingImg];
+            
+            CGFloat fTextWidth = ScreenWidth - shoppingImg.frame.size.width - xOffset - 12 - 16;
+            
+            int yOffset = 6;
+            if (!showStock) {
+                yOffset += 8;
+            }
+            
+            CGFloat nameHeight = showStock ? 40 : 45;
+            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(shoppingImg.frame.origin.x + shoppingImg.frame.size.width + 16, yOffset, fTextWidth/*shoppingCarTab.editing ? 160 : 190*/, nameHeight)];
+            shoppingName.backgroundColor = [UIColor clearColor];
+            shoppingName.numberOfLines = 0;
+            shoppingName.lineBreakMode = UILineBreakModeWordWrap;
+            shoppingName.text = pItem.name;
+            shoppingName.font = [UIFont systemFontOfSize:13];
+            shoppingName.textColor = [UIColor colorWithHexString:@"#181818"];
+            [Cell addSubview:shoppingName];
+            
+            yOffset += nameHeight;
+            
+            if (showStock) {
+                UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(shoppingImg.frame.origin.x + shoppingImg.frame.size.width + 16, yOffset, fTextWidth, 12)];
+                desc.backgroundColor = [UIColor clearColor];
+                desc.text = pItem.stock;
+                desc.font = [UIFont systemFontOfSize:12];
+                desc.textColor = [UIColor colorWithHexString:@"#c8002c"];
+                [Cell addSubview:desc];
+                
+                yOffset += 12;
+            }
+            yOffset = 64;
+            UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(shoppingImg.frame.origin.x + shoppingImg.frame.size.width + 16, 64, fTextWidth/*shoppingCarTab.editing?160:170*/, 13)];
+            colorName.backgroundColor = [UIColor clearColor];
+            colorName.lineBreakMode = UILineBreakModeMiddleTruncation;
+            colorName.text = [NSString stringWithFormat:@"颜色: %@    尺码: %@", pItem.color, pItem.size];
+            colorName.font = [UIFont systemFontOfSize:13];
+            colorName.textColor = UIColorFromRGB(0x666666);
+            [Cell addSubview:colorName];
+            
+            yOffset += 13;
+            
+            UILabel* priceName = [[UILabel alloc] initWithFrame:CGRectMake(shoppingImg.frame.origin.x + shoppingImg.frame.size.width + 16, 89, fTextWidth, 13)];
+            priceName.backgroundColor = [UIColor clearColor];
+            priceName.text = [NSString stringWithFormat:@"单价: ￥%.2f", pItem.price];
+            priceName.font = [UIFont systemFontOfSize:13];
+            priceName.textColor = UIColorFromRGB(0x666666);
+            [Cell addSubview:priceName];
+            [array addObject:Cell];
+        }
+        
+        [packagelistcell addObject:array];
+    }
+}
+
+#pragma mark-- 其他cell
 -(void)createOtherCells{
     NSLog(@"createOtherCells  come in");
 	[otherCells removeAllObjects];
@@ -732,13 +1025,13 @@
 				address2.text = addresss1;
 				address2.numberOfLines = 0;
 				address2.lineBreakMode = UILineBreakModeWordWrap;
-				address2.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
+				address2.textColor = [UIColor colorWithHexString:@"0x666666"];;
 				[Cell addSubview:address2];
 
 				UILabel* phone = [[UILabel alloc] initWithFrame:CGRectMake(20, 75, lee1fitAllScreen(280), 25)];
 				phone.backgroundColor = [UIColor clearColor];
 				phone.font = [UIFont systemFontOfSize:14];
-				phone.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
+				phone.textColor = [UIColor colorWithHexString:@"0x666666"];;
 				phone.text = [NSString stringWithFormat:@"电话：%@",self.addressItem_ben.mobile];
 				[Cell addSubview:phone];
 			}
@@ -774,14 +1067,14 @@
 				address2.text = addresss1;
 				address2.numberOfLines = 0;
 				address2.lineBreakMode = UILineBreakModeWordWrap;
-				address2.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
+				address2.textColor = [UIColor colorWithHexString:@"0x666666"];;
 				[Cell addSubview:address2];
 
 				
 				UILabel* phone = [[UILabel alloc] initWithFrame:CGRectMake(20, 75, 280, 25)];
 				phone.backgroundColor = [UIColor clearColor];
 				phone.font = [UIFont systemFontOfSize:14];
-				phone.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
+				phone.textColor = [UIColor colorWithHexString:@"0x666666"];;
 				phone.text = [NSString stringWithFormat:@"电话：%@",addressItem.mobile];
 				[Cell addSubview:phone];
 
@@ -793,7 +1086,7 @@
 				name2.text = [titleArray objectAtIndex:i];
 				name2.backgroundColor = [UIColor clearColor];
 				name2.font = [UIFont systemFontOfSize:LabMidSize];
-				name2.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
+				name2.textColor = [UIColor colorWithHexString:@"0x666666"];;
 				[Cell.contentView addSubview:name2];
 			}
             
@@ -809,7 +1102,7 @@
 				name.text = [titleArray objectAtIndex:i];
 				name.backgroundColor = [UIColor clearColor];
 				name.font = [UIFont systemFontOfSize:LabMidSize];
-				name.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
+				name.textColor = [UIColor colorWithHexString:@"0x666666"];;
                 name.tag=1154;
 				[Cell.contentView addSubview:name];
 			} else {
@@ -831,7 +1124,7 @@
 				name.lineBreakMode = UILineBreakModeWordWrap;
 				name.backgroundColor = [UIColor clearColor];
 				name.font = [UIFont systemFontOfSize:14];
-				name.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
+				name.textColor = [UIColor colorWithHexString:@"0x666666"];;
 				[Cell.contentView addSubview:name];
                 
                 if ([self.postText isEqualToString:[titleArray objectAtIndex:i]]) {
@@ -892,26 +1185,37 @@
         }
         else if (i == 3) {//优惠券
             
-            if (!mycheckOutModel.checkout_usecouponcard&& !mycheckOutModel.checkout_usev6cards) {
-                UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 150, 30)];
+            if (!mycheckOutModel.checkout_usecouponcard && !mycheckOutModel.checkout_usev6cards) {
+                
+                UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 150, 30)];
                 name.text = [titleArray objectAtIndex:i];
                 name.backgroundColor = [UIColor clearColor];
                 name.font = [UIFont systemFontOfSize:LabMidSize];
-                name.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);
+                name.textColor = [UIColor colorWithHexString:@"0x666666"];;
                 [Cell.contentView addSubview:name];
                 Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                
+                UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, ScreenWidth-60, 30)];
+                [name2 setTextAlignment:NSTextAlignmentRight];
+                name2.text = [NSString stringWithFormat:@"您有%lu张优惠券可用",(unsigned long)[mycheckOutModel.arrCheckout_couponcard count]];
+                name2.backgroundColor = [UIColor clearColor];
+                name2.font = [UIFont systemFontOfSize:LabMidSize];
+                name2.textColor = [UIColor colorWithHexString:@"0x666666"];;
+                [Cell.contentView addSubview:name2];
+                
+                
             } else {
                 UILabel* name1 = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, 200, 30)];
                 name1.text = @"使用优惠券";
                 name1.backgroundColor = [UIColor clearColor];
-                name1.font = [UIFont systemFontOfSize:14];
-                name1.textColor = [UIColor grayColor];
+                name1.font = [UIFont systemFontOfSize:LabMidSize];
+                name1.textColor = [UIColor colorWithHexString:@"0x666666"];
                 [Cell.contentView addSubview:name1];
                 
-                UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 3, 200, 30)];
+                UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 3, ScreenWidth-120, 30)];
                 name2.text = @"已使用";
                 name2.backgroundColor = [UIColor clearColor];
-                name2.font = [UIFont systemFontOfSize:14];
+                name2.font = [UIFont systemFontOfSize:LabMidSize];
                 name2.textColor = [UIColor redColor];
                 [Cell.contentView addSubview:name2];
                 
@@ -919,7 +1223,7 @@
                 [cancle setTitle:@"取消" forState:UIControlStateNormal];
                 [cancle setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
                 cancle.titleLabel.font = [UIFont systemFontOfSize:13];
-                [cancle setFrame:CGRectMake(240, 5, 50, 31)];
+                [cancle setFrame:CGRectMake(ScreenWidth-80, 5, 50, 31)];
                 [cancle setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
                 [cancle addTarget:self action:@selector(cancle) forControlEvents:UIControlEventTouchUpInside];
                 [Cell.contentView addSubview:cancle];
@@ -929,18 +1233,28 @@
             //电子券
             
 			Cell.selectionStyle = UITableViewCellSelectionStyleNone;
-			UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 300, 35)];
-			name.text = [titleArray objectAtIndex:i];
-			name.backgroundColor = [UIColor clearColor];
-			name.font = [UIFont systemFontOfSize:LabMidSize];
-			name.textColor = [UIColor colorWithHexString:@"0x666666"];
-			[Cell.contentView addSubview:name];
             
-            UILabel *numerTotle = [[UILabel alloc] initWithFrame:CGRectMake(300, 8, 50, 35)];
-            numerTotle.text = [[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"];
-            numerTotle.backgroundColor = [UIColor clearColor];
-            name.font = [UIFont systemFontOfSize:14.];
-            [Cell.contentView addSubview:numerTotle];
+            UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 150, 30)];
+            name.text = [titleArray objectAtIndex:i];
+            name.backgroundColor = [UIColor clearColor];
+            name.font = [UIFont systemFontOfSize:LabMidSize];
+            name.textColor = [UIColor colorWithHexString:@"0x666666"];;
+            [Cell.contentView addSubview:name];
+            
+            UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, ScreenWidth-60, 30)];
+            [name2 setTextAlignment:NSTextAlignmentRight];
+
+            if (mycheckOutModel.checkoutCountv6 >0) {
+                NSArray *arr = mycheckOutModel.checkoutV6cards;
+                
+                name2.text = [NSString stringWithFormat:@"您有%@元电子券可用",[[arr objectAtIndex:0]objectForKey:@"balance" isDictionary:nil]];
+            }else{
+                name2.text = [NSString stringWithFormat:@"您没有可用的电子券"];
+            }
+            name2.backgroundColor = [UIColor clearColor];
+            name2.font = [UIFont systemFontOfSize:LabMidSize];
+            name2.textColor = [UIColor colorWithHexString:@"0x666666"];;
+            [Cell.contentView addSubview:name2];
             
             Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
@@ -949,18 +1263,21 @@
         else if (i == 5){
             //包邮卡
             Cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 300, 35)];
+            
+            UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 150, 30)];
             name.text = [titleArray objectAtIndex:i];
             name.backgroundColor = [UIColor clearColor];
             name.font = [UIFont systemFontOfSize:LabMidSize];
-            name.textColor = [UIColor colorWithHexString:@"0x666666"];
+            name.textColor = [UIColor colorWithHexString:@"0x666666"];;
             [Cell.contentView addSubview:name];
             
-            UILabel *numerTotle = [[UILabel alloc] initWithFrame:CGRectMake(300, 8, 50, 35)];
-            numerTotle.text = [[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"];
-            numerTotle.backgroundColor = [UIColor clearColor];
-            name.font = [UIFont systemFontOfSize:14.];
-            [Cell.contentView addSubview:numerTotle];
+            UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, ScreenWidth-60, 30)];
+            [name2 setTextAlignment:NSTextAlignmentRight];
+            name2.text = [NSString stringWithFormat:@"您有%lu张包邮卡可用",(unsigned long)[mycheckOutModel.checkout_freepostcard count]];
+            name2.backgroundColor = [UIColor clearColor];
+            name2.font = [UIFont systemFontOfSize:LabMidSize];
+            name2.textColor = [UIColor colorWithHexString:@"0x666666"];;
+            [Cell.contentView addSubview:name2];
             
             Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
@@ -1015,7 +1332,7 @@ NSLog(@"createOtherCells  come out");
 #pragma mark UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 6+1  + suitCount;
+    return 6+ 1  + suitCount + packageCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -1035,47 +1352,29 @@ NSLog(@"createOtherCells  come out");
     }else if (section == 5) {
         return 1;
     }else{
-        if (section-suitCount == 6) {
+        
+        if (section - 6 < suitCount) {
+            //lee999  这个地方是套装的cell
+            return [(NSMutableArray*)[suitlistcell objectAtIndex:section-6 isArray:nil] count];
+            
+        }else if (section -6 -suitCount < packageCount){
+            //lee999  这个地方是礼包的cell
+            return [(NSMutableArray*)[packagelistcell objectAtIndex:section-6-suitCount isArray:nil] count];
+        }else{
+            //lee999  这个地方是普通商品的cell
             return [tableCells count];
         }
-        else {
-            return [(NSMutableArray*)[suitlistcell objectAtIndex:section-6 isArray:nil] count];
-        }
+        
+//        if (section-suitCount - packageCount == 6) {
+//            return [tableCells count];
+//        }
+//        else {
+//            return [(NSMutableArray*)[suitlistcell objectAtIndex:section-6 isArray:nil] count];
+//        }
     }
 	return 0;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == 1 ||section == 2 ||section == 3 ||section == 4) {
-        return 0.5;
-    }
-    return 10.;
-}
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView *fv = [[UIView alloc] init];
-    [fv setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
-    return fv;
-
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSInteger section = indexPath.section;
-    if (section >= 6) {
-        if (section - suitCount == 6) {
-            //普通商品
-            return [tableCells objectAtIndex:indexPath.row];
-        }
-        else {
-            //套装商品
-            return [[suitlistcell objectAtIndex:section-6] objectAtIndex:indexPath.row];
-        }
-    }
-    else {
-        //选择结算信息按钮
-        return [otherCells objectAtIndex:section];
-    }
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger section = indexPath.section;
@@ -1097,13 +1396,13 @@ NSLog(@"createOtherCells  come out");
                 self.postText = @"订单附言";
                 return 45;
             }else {
-            CGSize size = [self.postText sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(ScreenWidth-60, 10000) lineBreakMode:NSLineBreakByWordWrapping];
-            if (size.height > 18) {
-                return size.height+15;
-            } else {
-                
-                return 45;
-               // return size.height+20;
+                CGSize size = [self.postText sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(ScreenWidth-60, 10000) lineBreakMode:NSLineBreakByWordWrapping];
+                if (size.height > 18) {
+                    return size.height+15;
+                } else {
+                    
+                    return 45;
+                    // return size.height+20;
                 }
             }
         }
@@ -1131,23 +1430,98 @@ NSLog(@"createOtherCells  come out");
             
         default:
         {
-            if (section-suitCount == 6) {
-                //普通商品cell
-                return 170;
-            }
-            else {
-                if (indexPath.row == [(NSMutableArray*)[suitlistcell objectAtIndex:0 isArray:nil] count]-1) {
-                    return 70;
-                }else {
-                    return 140;
+            
+            if (section - 6 < suitCount) {
+                //lee999  这个地方是套装的cell
+                if (indexPath.row == 0) {
+                    return 66;
                 }
+                return lee1fitAllScreen(116);
+                
+            }else if (section -6 -suitCount < packageCount){
+                //lee999  这个地方是礼包的cell
+                if (indexPath.row == 0) {
+                    return 66;
+                }
+                return lee1fitAllScreen(116);
+                
+            }else{
+                //lee999  这个地方是普通商品的cell
+                return lee1fitAllScreen(150);
             }
+            
+            
+            
+            //            if (section-suitCount-packageCount == 6) {
+            //                //普通商品cell
+            //                return 170;
+            //            }
+            //            else {
+            //                if (indexPath.row == [(NSMutableArray*)[suitlistcell objectAtIndex:0 isArray:nil] count]-1) {
+            //                    return 70;
+            //                }else {
+            //                    return 140;
+            //                }
+            //            }
         }
             break;
     }
     return 160;
 }
 
+
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 1 ||section == 2 ||section == 3 ||section == 4) {
+        return 0.5;
+    }
+    return 8.;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *fv = [[UIView alloc] init];
+    [fv setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
+    return fv;
+
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger section = indexPath.section;
+    
+    if (section< 6) {
+        return [otherCells objectAtIndex:section];
+    }
+    else if (section - 6 < suitCount) {
+        //lee999  这个地方是套装的cell
+        return [[suitlistcell objectAtIndex:section-6 isArray:nil] objectAtIndex:indexPath.row isArray:nil];
+        
+    }else if (section -6 -suitCount < packageCount){
+        //lee999  这个地方是礼包的cell
+        return [[packagelistcell objectAtIndex:section-6 -suitCount isArray:nil] objectAtIndex:indexPath.row isArray:nil];
+
+//        return [[[[packagelistcell objectAtIndex:section-6 -suitCount isArray:nil] objectAtIndex:indexPath.row isArray:nil] objectAtIndex:section-6 isArray:nil] objectAtIndex:indexPath.row isArray:nil];
+    }else{
+        //lee999  这个地方是普通商品的cell
+        return [tableCells objectAtIndex:indexPath.row isArray:nil];
+    }
+    
+//    if (section >= 6) {
+//        if (section - suitCount -packageCount == 6) {
+//            //普通商品
+//            return [tableCells objectAtIndex:indexPath.row];
+//        }
+//        else {
+//            //套装商品
+//            return [[suitlistcell objectAtIndex:section-6] objectAtIndex:indexPath.row];
+//        }
+//    }
+//    else {
+//        //选择结算信息按钮
+//        return [otherCells objectAtIndex:section];
+//    }
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger section = indexPath.section;
@@ -1221,8 +1595,16 @@ NSLog(@"createOtherCells  come out");
 
             [self.navigationController pushViewController:ctrl animated:YES];
         }
+    }else if (section ==4)
+    {
+    //电子券
+        
+    }else if (section ==5)
+    {
+    //包邮卡
         
     }
+    
     //lee999 新增结算中心能进入商品详情
 //    if (section >= 5) {
 //        if (section - suitCount == 5) {

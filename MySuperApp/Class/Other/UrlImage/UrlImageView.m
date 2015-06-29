@@ -228,7 +228,7 @@
         {
             [self setContentMode:UIViewContentModeCenter];
         }
-        self.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0"];
+        self.backgroundColor = [UIColor colorWithHexString:@"#F0F0F0"];
     }
     
     _animated=NO;

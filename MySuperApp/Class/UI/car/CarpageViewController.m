@@ -1163,8 +1163,9 @@
             
             CGSize textSize = [[NSString stringWithFormat:@"              %@",item.name] sizeWithFont:[UIFont systemFontOfSize:13.0] constrainedToSize:CGSizeMake(shoppingCarTab.editing?160:180, 50) lineBreakMode:NSLineBreakByTruncatingTail];
             
-			UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(105, yOffset, shoppingCarTab.editing?160:180, textSize.height)];
+//			UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(105), yOffset, shoppingCarTab.editing?160:180, textSize.height)];
             
+            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset, shoppingCarTab.editing?160:180, textSize.height)];
 			shoppingName.backgroundColor = [UIColor clearColor];
 			shoppingName.numberOfLines = 0;
 			shoppingName.lineBreakMode = UILineBreakModeWordWrap;
@@ -1897,7 +1898,7 @@
         return lee1fitAllScreen(116);
     }
     else if (indexPath.section - suitCount < packageCount) {
-        //lee999  这个地方是套装的cell
+        //lee999  这个地方是礼包的cell
         if (indexPath.row == 0) {
             return 66;
         }
