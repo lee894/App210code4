@@ -484,7 +484,7 @@
 
 
 #pragma mark -- 新浪微博登录代理
-
+//web
 - (void)tranferUserInfo:(NSMutableDictionary *)userInfo
 {
     NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:[userInfo objectForKey:@"name"], @"UserName",nil];
@@ -494,7 +494,7 @@
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 }
 
-
+//sso
 - (void)tranferUserInfo2:(NSNotification *)auserInfo
 {
     WeiboUser *userInfo = [auserInfo object];
