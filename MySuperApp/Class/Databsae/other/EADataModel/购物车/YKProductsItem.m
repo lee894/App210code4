@@ -153,7 +153,7 @@
 {
     id value = [self attributeForKey:@"selected"];
     if ([value isKindOfClass:[NSNull class]]) {
-        return nil;
+        return NO;
     }
     return [value boolValue];
 }

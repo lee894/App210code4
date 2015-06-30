@@ -7,18 +7,20 @@
 //
 //
 
+#import "BfdAgent.h"
 #import "CarpageViewController.h"
 #import "ProductDetailViewController.h"
 #import "UIImage+ImageSize.h"
 #import "YKChoseGiftViewController.h"
 #import "CheckOutViewController.h"
 
-@interface CarpageViewController ()
+@interface CarpageViewController () <mobideaRecProtocol>
 {
 //    UIButton *doneButton;
     
     BOOL isEditing; //是否编辑状态
     UIView* vToolbar;
+    UIButton* btnCheckOut;
 }
 @property (nonatomic, retain) NSMutableArray* selectedList;
 @property (nonatomic, retain) UIButton* btnCheckBox;
@@ -110,7 +112,7 @@
     if (isCheck) {
         isCheck = NO;
         if ([SingletonState sharedStateInstance].userHasLogin) {
-            [self gotoChectViewC];
+            [self gotoChectViewC:nil];
         }
     }
 }
@@ -162,8 +164,29 @@
 //	}}
 
 #pragma mark-- 去结算中心
--(void)gotoChectViewC{
-    
+-(void)gotoChectViewC:(UIButton*)sender
+{
+    if (sender && sender.selected) {
+        //删除
+        NSMutableString* mstrUks = [[NSMutableString alloc] initWithCapacity:1];
+        for (YKItem* item in _carModel.carProductlist) {
+            if (item.selected) {
+                [mstrUks appendFormat:@"%@|", item.uk];
+            }
+        }
+        for (YKSuitListItem* item in _carModel.suitlist) {
+            if (item.selected) {
+                [mstrUks appendFormat:@"%@|", item.uk];
+            }
+        }
+        for (YKSuitListItem* item in _carModel.packagelist) {
+            if (item.selected) {
+                [mstrUks appendFormat:@"%@|", item.uk];
+            }
+        }
+        [mainSer getDelcar:[mstrUks substringToIndex:mstrUks.length - 1]];
+        return;
+    }
     if (self.carModel.showwarn) {
         UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:(NSString *)self.carModel.warn delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil,nil];
         alert.tag = 1000988;
@@ -211,29 +234,47 @@
 -(void)createNoGoodView{
     
     _nullView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, NowViewsHight)];
-	self.nullView.backgroundColor = [UIColor clearColor];
-	UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(70, 150, ScreenWidth-140, 40)];
-	name.text = @"   您的购物车还是空的哟,\n快去选购自己喜欢的宝贝吧~";
-    name.textColor = [UIColor lightGrayColor];
-    name.numberOfLines = 2;
-    name.textAlignment = NSTextAlignmentCenter;
-	name.backgroundColor = [UIColor clearColor];
-	name.font = [UIFont systemFontOfSize:16];
-	[self.nullView addSubview:name];
+	_nullView.backgroundColor = [UIColor clearColor];
     
-    UIImage *image = [UIImage imageNamed:@"cart_nothing_pic.png"];
-	UIImageView* null = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cart_nothing_pic.png"]];
-	null.frame = CGRectMake((ScreenWidth-image.size.width)/2, 60, image.size.width, image.size.height);
-	[self.nullView addSubview:null];
+    UIImageView* ivEmpty = [[UIImageView alloc] init];
+    [ivEmpty setFrame:CGRectMake((ScreenWidth - lee1fitAllScreen(105)) / 2, 80, lee1fitAllScreen(105), lee1fitAllScreen(110))];
+    [ivEmpty setImage:[UIImage imageNamed:@"shop_none"]];
+    [_nullView addSubview:ivEmpty];
+    
+    
+	UILabel* name = [[UILabel alloc] init];
+    NSMutableAttributedString* maStr = [[NSMutableAttributedString alloc] initWithString:@"您的购物车还是空的哦！\n快去选购自己喜欢的宝贝吧~"];
+    NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
+    [mps setLineBreakMode:NSLineBreakByCharWrapping];
+    [mps setLineSpacing:12];
+    [mps setAlignment:NSTextAlignmentCenter];
+    
+    [maStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#b8b8b8"] range:NSMakeRange(0, maStr.length)];
+    [maStr addAttribute:NSParagraphStyleAttributeName value:mps range:NSMakeRange(0, maStr.length)];
+    [maStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:lee1fitAllScreen(14)] range:NSMakeRange(0, maStr.length)];
+	[name setAttributedText:maStr];
+    
+//    name.textColor = [UIColor colorWithHexString:@"#b8b8b8"];
+    name.numberOfLines = 2;
+	name.backgroundColor = [UIColor clearColor];
+//	name.font = [UIFont systemFontOfSize:lee1fitAllScreen(14)];
+
+//    CGRect rcName = [name.attributedText boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : name.font, NSParagraphStyleAttributeName : mps} context:nil];
+    CGRect rcName = [name.attributedText boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil];
+    [name setFrame:CGRectMake(0, ivEmpty.frame.size.height + ivEmpty.frame.origin.y + 32, ScreenWidth, rcName.size.height)];
+	[_nullView addSubview:name];
     
     UIButton* gotobutton = [UIButton buttonWithType:UIButtonTypeCustom];
-	gotobutton.frame = CGRectMake((ScreenWidth-160)/2, 230, 160, 35);
-	gotobutton.titleLabel.font = [UIFont systemFontOfSize:13];
-	[gotobutton setTitle:@"逛一逛" forState:UIControlStateNormal];
+	gotobutton.frame = CGRectMake((ScreenWidth - lee1fitAllScreen(170)) / 2, lee1fitAllScreen(294), lee1fitAllScreen(170), lee1fitAllScreen(36));
+	gotobutton.titleLabel.font = [UIFont systemFontOfSize:lee1fitAllScreen(17)];
+	[gotobutton setTitle:@"去逛逛" forState:UIControlStateNormal];
 	[gotobutton addTarget:self action:@selector(gotoShopping) forControlEvents:UIControlEventTouchUpInside];
-	[gotobutton setBackgroundImage:[UIImage imageNamed:@"button_red.png"] forState:UIControlStateNormal];
-	[gotobutton setBackgroundImage:[UIImage imageNamed:@"button_red_press.png"] forState:UIControlStateHighlighted];
-	[self.nullView addSubview:gotobutton];
+    [gotobutton setBackgroundColor:[UIColor colorWithHexString:@"#c8002c"]];
+    [gotobutton.layer setCornerRadius:gotobutton.frame.size.height / 2];
+    [gotobutton.layer setMasksToBounds:YES];
+//	[gotobutton setBackgroundImage:[UIImage imageNamed:@"button_red.png"] forState:UIControlStateNormal];
+//	[gotobutton setBackgroundImage:[UIImage imageNamed:@"button_red_press.png"] forState:UIControlStateHighlighted];
+	[_nullView addSubview:gotobutton];
 }
 
 
@@ -254,6 +295,9 @@
             [self.nullView removeFromSuperview];
         }
 		[self.view addSubview:shoppingCarTab];
+        if (vToolbar) {
+            [self.view bringSubviewToFront:vToolbar];
+        }
         self.navbtnRight.hidden = NO;
 	}else {
         //购物车为空
@@ -298,10 +342,22 @@
                     }else {
                         LBaseModel *model = [ModelManager parseModelWithDictionary:amodel tag:Http_Car_Tag];
                         self.carModel = (CarCarModel *)model;
-                        [self creatCells];
-                        [self createSuitlistcells];
-                        [self createPackagelistcells];
-                        [self creatToolBar];
+                        BOOL hasContent = NO;
+                        if (_carModel.carProductlist.count) {
+                            [self creatCells];
+                            hasContent = YES;
+                        }
+                        if (_carModel.suitlist.count) {
+                            [self createSuitlistcells];
+                            hasContent = YES;
+                        }
+                        if (_carModel.packagelist.count) {
+                            [self createPackagelistcells];
+                            hasContent = YES;
+                        }
+                        if (hasContent) {
+                            [self creatToolBar];
+                        }
                         [shoppingCarTab reloadData];
                         return;
                     }
@@ -331,13 +387,29 @@
 
             self.carModel = (CarCarModel *)model;
             
-            [self creatCells];
-            [self createSuitlistcells];
-            [self createPackagelistcells];
+            BOOL hasContent = NO;
+            if (_carModel.carProductlist.count) {
+                [self creatCells];
+                hasContent = YES;
+            }
+            if (_carModel.suitlist.count) {
+                [self createSuitlistcells];
+                hasContent = YES;
+            }
+            if (_carModel.packagelist.count) {
+                [self createPackagelistcells];
+                hasContent = YES;
+            }
+            if (hasContent) {
+                [self creatToolBar];
+                //lee999 百分点
+                [BfdAgent recommend:self recommendId:@"rec_FDFEE10D_5A29_BE14_3808_3C336BA76303" options:nil];
+            }
+
             [self checkTable];
-            [self creatToolBar];
             [shoppingCarTab reloadData];
             [SBPublicAlert hideMBprogressHUD:self.view];
+            
         }
             break;
         case Http_EditCar_Tag:
@@ -416,9 +488,9 @@
         default:
             break;
     }
-    [self creatCells];
-    [self checkTable];
-    [self creatToolBar];
+//    [self creatCells];
+//    [self checkTable];
+//    [self creatToolBar];
     
     //lee999 设置气泡
     [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%.f",[self.carModel.itemNumber floatValue]] forKey:@"totalNUM"];
@@ -435,7 +507,32 @@
     //end
 }
 
-
+-(void) mobidea_Recs:(NSError*) error feedback:(id)feedback{
+    
+    NSLog(@"百分点推荐数据：--%@",feedback);
+    
+    if ([feedback respondsToSelector:@selector(objectAtIndex:)]) {
+        NSArray *arr = (NSArray*)feedback;
+        if ([arr count] > 0) {
+            NSInteger count = 0;
+            for (NSDictionary* dic in feedback) {
+                if (count > 2) {
+                    break;
+                }
+                YKItem* item = [[YKItem alloc] init];
+                item.productid = [dic objectForKey:@"iid"];
+                item.imgurl = [dic objectForKey:@"img"];
+                item.name = [dic objectForKey:@"name"];
+                item.strdiscountprice = [dic objectForKey:@"price"];
+                item.price = [dic objectForKey:@"mktp"];
+                item.url = [dic objectForKey:@"url"];
+                [_carModel.hotlist insertObject:item atIndex:0];
+                ++count;
+            }
+            [self creatFootView];
+        }
+    }
+}
 
 #pragma mark ===逛一逛 事件
 -(void)gotoShopping{
@@ -451,13 +548,23 @@
     vToolbar = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - lee1fitAllScreen(60), ScreenWidth, lee1fitAllScreen(60))];
     [vToolbar setBackgroundColor:[UIColor colorWithHexString:@"#f8f8f8"]];
     [vToolbar setAlpha:0.9];
-    UIButton* btnCheckOut = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnCheckOut = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnCheckOut setFrame:CGRectMake(vToolbar.frame.size.width - 10 - lee1fitAllScreen(90), (vToolbar.frame.size.height - lee1fitAllScreen(44)) / 2, lee1fitAllScreen(90), lee1fitAllScreen(44))];
     [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_normal"] forState:UIControlStateNormal];
+    [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_normal"] forState:UIControlStateSelected];
     [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_hoverl"] forState:UIControlStateHighlighted];
     [btnCheckOut setTitle:[NSString stringWithFormat:@"结算(%@)", _carModel.itemNumber] forState:UIControlStateNormal];
-    [btnCheckOut addTarget:self action:@selector(gotoChectViewC) forControlEvents:UIControlEventTouchUpInside];
+    [btnCheckOut setTitle:@"" forState:UIControlStateHighlighted];
+    [btnCheckOut setTitle:[NSString stringWithFormat:@"删除(%@)", _carModel.itemNumber] forState:UIControlStateSelected];
+    [btnCheckOut addTarget:self action:@selector(gotoChectViewC:) forControlEvents:UIControlEventTouchUpInside];
     [vToolbar addSubview:btnCheckOut];
+    
+    if(self.navbtnRight)
+    {
+        if ([[self.navbtnRight titleForState:UIControlStateNormal] isEqualToString:@"完成"]) {
+            [btnCheckOut setSelected:YES];
+        }
+    }
     
     _btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
     [_btnCheckBox setFrame:CGRectMake(15, (vToolbar.frame.size.height - lee1fitAllScreen(22)) / 2, lee1fitAllScreen(22), lee1fitAllScreen(22))];
@@ -523,6 +630,7 @@
     [lbl setFrame:CGRectMake(btnCheckOut.frame.origin.x - 14 - rc.size.width, 38, rc.size.width, rc.size.height)];
     [vToolbar addSubview:lbl];
     [self.view addSubview:vToolbar];
+    [self.view bringSubviewToFront:vToolbar];
 }
 
 -(void)creatHeadView{
@@ -581,7 +689,8 @@
 - (void)creatFootView
 {
     CGFloat unitHeight = lee1fitAllScreen(187);
-    NSInteger row = _carModel.hotlist.count % 3 > 0 ? (_carModel.hotlist.count / 3 + 1) : (_carModel.hotlist.count / 3);
+    NSInteger count = _carModel.hotlist.count > 6 ? 6 : _carModel.hotlist.count;
+    NSInteger row = count % 3 > 0 ? (count / 3 + 1) : (count / 3);
 	UIView* footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 39 + 65 + unitHeight * (row) + lee1fitAllScreen(60))];
 	footView.backgroundColor = [UIColor clearColor];
 	
@@ -654,7 +763,7 @@
     CGFloat originY = 39 + 65;
     CGFloat unitWidth = lee1fitAllScreen(90);
     CGFloat spacing = (ScreenWidth - unitWidth * 3 - originX * 2) / 2;
-	for (NSInteger i = 0; i < [self.carModel.hotlist count]; ++i) {
+	for (NSInteger i = 0; i < count; ++i) {
 		YKItem* item = (YKItem *)[self.carModel.hotlist objectAtIndex:i];
         UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(originX + (i % 3) * (spacing + unitWidth), (i / 3) * (unitHeight) + originY, unitWidth, unitHeight)];
         UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 0, unitWidth, lee1fitAllScreen(110))];
@@ -813,7 +922,10 @@
     
     isEditing = YES;
     [shoppingCarTab setEditing:isEditing animated:YES];
-
+    
+    if (btnCheckOut) {
+        [btnCheckOut setSelected:YES];
+    }
     
     [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_btn.png"] forState:UIControlStateNormal];
     [self.navbtnRight setTitle:@"完成" forState:UIControlStateNormal];
@@ -897,7 +1009,7 @@
 //	}
     //end
     
-	[self creatFootView];
+//	[self creatFootView];
     
 //	if (shoppingCarTab.editing) {
 		[self.addfavButton setBackgroundImage:[UIImage imageNamed:@"big_btn_hover.png"] forState:UIControlStateNormal];
@@ -1031,6 +1143,11 @@
     
 }
 
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleNone;
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSInteger index = indexPath.row;
     if (indexPath.section < suitCount) {
@@ -1057,7 +1174,7 @@
 //        [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
         
     }
-    else if ([indexPath section]-suitCount==0 && !isaddfav) {
+    else if ([indexPath section] - suitCount - packageCount==0 && !isaddfav) {
 		YKItem* item = (YKItem *)[self.carModel.carProductlist objectAtIndex:index];
         NSString* sku = @"";
         if ([item.type isEqualToString:@"product"]) {
@@ -1074,7 +1191,7 @@
         
     } else {
         //修改: 有赠品商品:删除按钮
-        if ([indexPath section]-suitCount==0 && isaddfav) {
+        if ([indexPath section] - suitCount - packageCount == 0 && isaddfav) {
             YKItem* item = (YKItem *)[self.carModel.carProductlist objectAtIndex:index];
             NSString* sku = @"";
             if ([item.type isEqualToString:@"product"]) {
@@ -1425,20 +1542,15 @@
         
         UILabel* pName = [[UILabel alloc] init];
         pName.backgroundColor = [UIColor clearColor];
-        pName.lineBreakMode = UILineBreakModeMiddleTruncation;
-        pName.text = [NSString stringWithFormat:@"套装%d", j + 1];
+        pName.lineBreakMode = UILineBreakModeTailTruncation;
+        pName.text = item.name;
         pName.font = [UIFont systemFontOfSize:14];
         pName.textColor = UIColorFromRGB(0x666666);
-        CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font} context:nil];
-        [pName setFrame:CGRectMake(xOffset, yOffset - (rcName.size.height > pName.font.pointSize ? rcName.size.height - pName.font.pointSize : 0), rcName.size.width, rcName.size.height)];
+        NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
+        [mps setLineBreakMode:pName.lineBreakMode];
+        CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake((lee1fitAllScreen(204) - xOffset), MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font, NSParagraphStyleAttributeName : mps} context:nil];
+        [pName setFrame:CGRectMake(xOffset, yOffset - (rcName.size.height > pName.font.pointSize ? rcName.size.height - pName.font.pointSize : 0), (lee1fitAllScreen(204) - xOffset), rcName.size.height)];
         [viewSuitlistCell3 addSubview:pName];
-        UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset + pName.frame.size.width + 24, pName.frame.origin.y, 200, rcName.size.height)];
-        desc.backgroundColor = [UIColor clearColor];
-        desc.lineBreakMode = UILineBreakModeMiddleTruncation;
-        desc.text = [NSString stringWithFormat:@"数量: %d", item.number];
-        desc.font = [UIFont systemFontOfSize:14];
-        desc.textColor = UIColorFromRGB(0x181818);
-        [viewSuitlistCell3 addSubview:desc];
         
         /*
          //lee999 套装的商品数量要求可以编辑~~
@@ -1463,7 +1575,7 @@
         
         NSString *str = @"套装价: ";
         int strWidth = [str sizeWithFont:font].width;
-        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset + 20, strWidth, height)];
+        UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset + 20, strWidth, height)];
         desc.backgroundColor = [UIColor clearColor];
         desc.text = str;
         desc.font = [UIFont systemFontOfSize:14];
@@ -1485,6 +1597,14 @@
         desc.text = [NSString stringWithFormat:@"优惠: ￥%.2f", item.save];
         desc.font = [UIFont systemFontOfSize:14];
         desc.textColor = UIColorFromRGB(0x666666);
+        [viewSuitlistCell3 addSubview:desc];
+        
+        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, pName.frame.origin.y, ScreenWidth - xOffset - 12, rcName.size.height)];
+        desc.backgroundColor = [UIColor clearColor];
+        desc.lineBreakMode = UILineBreakModeMiddleTruncation;
+        desc.text = [NSString stringWithFormat:@"数量: %d", item.number];
+        desc.font = [UIFont systemFontOfSize:14];
+        desc.textColor = UIColorFromRGB(0x181818);
         [viewSuitlistCell3 addSubview:desc];
         
         [array addObject:viewSuitlistCell3];
@@ -1527,9 +1647,8 @@
 //            [Cell addSubview:bgview];
             
             UrlImageView* shoppingImg = [[UrlImageView alloc] init];
-            [shoppingImg setImageFromUrl:YES withUrl:pItem.pic];
+            [shoppingImg setImageWithURL:[NSURL URLWithString:pItem.pic] placeholderImage:nil];
             shoppingImg.frame = CGRectMake(xOffset, 12, lee1fitAllScreen(70), lee1fitAllScreen(90));
-            shoppingImg.backgroundColor = [UIColor clearColor];
             [Cell addSubview:shoppingImg];
             
             CGFloat fTextWidth = ScreenWidth - shoppingImg.frame.size.width - xOffset - 12 - 16;
@@ -1631,21 +1750,15 @@
         
         UILabel* pName = [[UILabel alloc] init];
         pName.backgroundColor = [UIColor clearColor];
-        pName.lineBreakMode = UILineBreakModeMiddleTruncation;
-        pName.text = [NSString stringWithFormat:@"礼包%d", j + 1];
+        pName.lineBreakMode = UILineBreakModeTailTruncation;
+        pName.text = item.name;
         pName.font = [UIFont systemFontOfSize:14];
         pName.textColor = UIColorFromRGB(0x666666);
-        CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font} context:nil];
-        [pName setFrame:CGRectMake(xOffset, yOffset - (rcName.size.height > pName.font.pointSize ? rcName.size.height - pName.font.pointSize : 0), rcName.size.width, rcName.size.height)];
+        NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
+        [mps setLineBreakMode:pName.lineBreakMode];
+        CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake((lee1fitAllScreen(204) - xOffset), MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font, NSParagraphStyleAttributeName : mps} context:nil];
+        [pName setFrame:CGRectMake(xOffset, yOffset - (rcName.size.height > pName.font.pointSize ? rcName.size.height - pName.font.pointSize : 0), (lee1fitAllScreen(204) - xOffset), rcName.size.height)];
         [viewSuitlistCell3 addSubview:pName];
-        
-        UILabel* number = [[UILabel alloc] initWithFrame:CGRectMake(xOffset + pName.frame.size.width + 24, pName.frame.origin.y, 200, rcName.size.height)];
-        number.backgroundColor = [UIColor clearColor];
-        number.lineBreakMode = UILineBreakModeMiddleTruncation;
-        number.text = [NSString stringWithFormat:@"数量: %d", 1];
-        number.font = [UIFont systemFontOfSize:14];
-        number.textColor = UIColorFromRGB(0x181818);
-        [viewSuitlistCell3 addSubview:number];
         
         NSString *str = @"礼包价: ";
         CGFloat strWidth = [str sizeWithFont:font].width;
@@ -1671,7 +1784,15 @@
         save.text = [NSString stringWithFormat:@"优惠: ￥%.2f", item.save];
         save.font = [UIFont systemFontOfSize:14];
         save.textColor = UIColorFromRGB(0x666666);
-        [viewSuitlistCell3 addSubview:desc];
+        [viewSuitlistCell3 addSubview:save];
+        
+        UILabel* number = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, pName.frame.origin.y, ScreenWidth - xOffset - 12, rcName.size.height)];
+        number.backgroundColor = [UIColor clearColor];
+        number.lineBreakMode = UILineBreakModeMiddleTruncation;
+        number.text = [NSString stringWithFormat:@"数量: %d", 1];
+        number.font = [UIFont systemFontOfSize:14];
+        number.textColor = UIColorFromRGB(0x181818);
+        [viewSuitlistCell3 addSubview:number];
         
         [array addObject:viewSuitlistCell3];
         
@@ -1697,9 +1818,8 @@
 //            [Cell addSubview:bgview];
             
             UrlImageView* shoppingImg = [[UrlImageView alloc] init];
-            [shoppingImg setImageFromUrl:YES withUrl:pItem.pic];
+            [shoppingImg setImageWithURL:[NSURL URLWithString:pItem.pic] placeholderImage:nil];
             shoppingImg.frame = CGRectMake(xOffset, 12, lee1fitAllScreen(70), lee1fitAllScreen(90));
-            shoppingImg.backgroundColor = [UIColor clearColor];
             [Cell addSubview:shoppingImg];
             
             CGFloat fTextWidth = ScreenWidth - shoppingImg.frame.size.width - xOffset - 12 - 16;

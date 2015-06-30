@@ -250,6 +250,7 @@
                 [item.suits addObject:product];
 
             }
+            item.name = [dicdate objectForKey:@"name"];
             item.disountprice =[[dicdate objectForKey:@"discountprice"] floatValue];
             item.price = [[dicdate objectForKey:@"price"] floatValue];
             item.save = [[dicdate objectForKey:@"save"] floatValue];
@@ -279,6 +280,7 @@
                 [item.suits addObject:product];
                 
             }
+            item.name = [dicdate objectForKey:@"name"];
             item.disountprice =[[dicdate objectForKey:@"discountprice"] floatValue];
             item.price = [[dicdate objectForKey:@"price"] floatValue];
             item.save = [[dicdate objectForKey:@"save"] floatValue];

@@ -59,7 +59,7 @@
 //    [self.tbPackage setTableFooterView:vFooter];
     [self.view addSubview:self.vToolbar];
     [self.view addConstraints:[self viewConstraints]];
-    [mainSev getPackageInfoWithPid:self.pid];
+    [mainSev getPackageInfoWithPid:@"8"];
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 
     
@@ -101,7 +101,9 @@
         {
             if ([[amodel objectForKey:@"response"] isEqualToString:@"addpackagetoshopcart"]) {
                 
-                [SBPublicAlert showMBProgressHUDTextOnly:@"成功加入购物车" andWhereView:self.view hiddenTime:3.0];
+                UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"提醒" message: @"成功加入购物车" delegate:self cancelButtonTitle: @"去购物车" otherButtonTitles: @"继续购物",nil];
+                someError.tag = 110011;
+                [someError show];
                 
             }else{
                 [SBPublicAlert showMBProgressHUD:@"加入购物车失败" andWhereView:self.view hiddenTime:1.];
@@ -172,6 +174,9 @@
             UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showPackage:)];
             [_vToolbar addGestureRecognizer:tap];
             
+            UIView* v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, _vToolbar.frame.size.height)];
+            [_tbPackage setTableFooterView:v];
+            
 //            UIButton* btnShowPackage = [UIButton buttonWithType:UIButtonTypeCustom];
 //            [btnShowPackage setFrame:CGRectMake(0, 0, 0, 0)];
 //            [btnShowPackage addTarget:self action:@selector(showPackage:) forControlEvents:UIControlEventTouchUpInside];
@@ -202,12 +207,16 @@
     if (_svPackage) {
         [_svPackage removeFromSuperview];
         _svPackage = nil;
+        UIView* v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, _vToolbar.frame.size.height)];
+        [_tbPackage setTableFooterView:v];
     }else
     {
         AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
         _svPackage = [[UIScrollView alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - lee1fitAllScreen(120) - lee1fitAllScreen(59), SCREEN_WIDTH, lee1fitAllScreen(120))];
+        UIView* v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, _vToolbar.frame.size.height + _svPackage.frame.size.height)];
+        [_tbPackage setTableFooterView:v];
         [_svPackage setBackgroundColor:[UIColor colorWithHexString:@"f8f8f8"]];
-        [_svPackage setAlpha:0.8];
+//        [_svPackage setAlpha:0.8];
         [_svPackage.layer setMasksToBounds:YES];
         CGFloat originY = 26.f;
         CGFloat spacing = 15.f;
@@ -303,10 +312,10 @@
     
     
     vGoods = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - lee1fitAllScreen(59))];
-    [vGoods setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+    [vGoods setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1]];
     UIView* vBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, lee1fitAllScreen(270), lee1fitAllScreen(212))];
     [vBG setBackgroundColor:[UIColor colorWithHexString:@"#eaeaea"]];
-    [vBG setAlpha:0.8];
+//    [vBG setAlpha:0.8];
     [vBG.layer setCornerRadius:5];
     [vBG setCenter:vGoods.center];
     [vGoods addSubview:vBG];
@@ -352,7 +361,7 @@
     [btnColor addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
     [btnColor setTitleColor:[UIColor colorWithHexString:@"181818"] forState:UIControlStateNormal];
     [btnColor.titleLabel setFont:[UIFont systemFontOfSize:12]];
-    [btnColor setTitle:firstSepcValueInfo.spec_alias forState:UIControlStateNormal];
+    [btnColor setTitle:[firstSepcValueInfo.spec_alias stringByReplacingOccurrencesOfString:@"分类" withString:@""] forState:UIControlStateNormal];
     [btnColor setTitleEdgeInsets:UIEdgeInsetsMake(0, -30, 0, 0)];
     [btnColor setBackgroundImage:[UIImage imageNamed:@"lp_option"] forState:UIControlStateNormal];
     [vBG addSubview:btnColor];
@@ -451,13 +460,13 @@
             for (NSDictionary* dic in _marrGoods) {
                 PackageGoodsInfo* pGoodsInfo = [dic objectForKey:[[dic allKeys] firstObject] isDictionary:nil];
 //                NSInteger index = [[[((NSString*)[[dic allKeys] firstObject]) componentsSeparatedByString:@"_"] firstObject] integerValue];
-                for (PackageGroupInfo* pgi in _pInfo.packageinfo.groups) {
-                    for (PackageGoodsInfo* pginfo in pgi.goods) {
+//                for (PackageGroupInfo* pgi in pGroupInfo) {
+                    for (PackageGoodsInfo* pginfo in pGroupInfo.goods) {
                         if (pginfo == pGoodsInfo) {
                             ++i;
                             break;
                         }
-                    }
+//                    }
                 }
             }
             if (i < [pGroupInfo.need_select_count integerValue]) {
@@ -492,6 +501,13 @@
 
 -(void)addToCart:(UIButton*)sender
 {
+    if (![SingletonState sharedStateInstance].userHasLogin) {
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您尚未登录，请先登录。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
+        alert.tag=111;
+        [alert show];
+        return;
+    }
+    
     BOOL pickGoodsDone = YES;
     for (NSInteger i = 0; i < _pInfo.packageinfo.groups.count; ++i) {
         NSInteger count = 0;
@@ -556,7 +572,7 @@
     }
     _vToolbar = [[UIView alloc] init];
     [_vToolbar setBackgroundColor:[UIColor whiteColor]];
-    [_vToolbar setAlpha:0.8];
+//    [_vToolbar setAlpha:0.8];
     [_vToolbar setTranslatesAutoresizingMaskIntoConstraints:NO];
     return _vToolbar;
 }
@@ -809,13 +825,14 @@
         }
     }
     
+    UITableViewCell* cell = [[UITableViewCell alloc] init];
     NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods.count;
     CGFloat height = 0;
     UIView* vGroup = nil;
-    if ([self tableView:tableView numberOfRowsInSection:0] > 1) {
+    if (_pInfo.packageinfo.groups.count > 1) {
         vGroup = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
-        UILabel* lblGroupName = [[UILabel alloc] initWithFrame:CGRectMake(15, (lee1fitAllScreen(44) - 15) / 2, SCREEN_WIDTH - 30, 15)];
-        [lblGroupName setFont:[UIFont systemFontOfSize:15]];
+        UILabel* lblGroupName = [[UILabel alloc] initWithFrame:CGRectMake(15, (lee1fitAllScreen(44) - lee1fitAllScreen(15)) / 2, SCREEN_WIDTH - 30, lee1fitAllScreen(15))];
+        [lblGroupName setFont:[UIFont systemFontOfSize:lee1fitAllScreen(15)]];
         [lblGroupName setText:((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).name];
         [lblGroupName setTextColor:[UIColor colorWithHexString:@"#181818"]];
         [vGroup addSubview:lblGroupName];
@@ -824,10 +841,11 @@
         [btn setFrame:CGRectMake(0, 0, tableView.frame.size.width, lee1fitAllScreen(44))];
         [btn addTarget:self action:@selector(changeCellDisplay:) forControlEvents:UIControlEventTouchUpInside];
         [vGroup addSubview:btn];
+        [cell addSubview:vGroup];
         height = lee1fitAllScreen(44);
     }
     [v setFrame:CGRectMake(0, height, SCREEN_WIDTH, lee1fitAllScreen(285) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2)))];
-    UITableViewCell* cell = [[UITableViewCell alloc] initWithFrame:CGRectMake(0, 0, v.frame.size.width, v.frame.size.height + height)];
+    [cell setFrame:CGRectMake(0, 0, v.frame.size.width, v.frame.size.height + height)];
     [cell addSubview:v];
     return cell;
 }
@@ -901,6 +919,11 @@
     }
 }
 
+-(void)JumpToCarpage
+{
+    [self changetableBarto:3];
+}
+
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == 10213219) {
@@ -915,6 +938,14 @@
         }
         return;
     }
+    if (alertView.tag == 110011) {
+        if (buttonIndex == 0) {
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            [self performSelector:@selector(JumpToCarpage) withObject:nil afterDelay:0.2];
+        }
+        return;
+    }
+    
     if (alertView.tag >= 20000) {
         if (buttonIndex == 1) {
             [_marrGoods removeObjectAtIndex:alertView.tag - 20000];

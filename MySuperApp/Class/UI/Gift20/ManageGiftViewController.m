@@ -5,6 +5,7 @@
 //  Created by 蒋博男 on 15/6/29.
 //  Copyright (c) 2015年 aimer. All rights reserved.
 //
+#import "GiftCheckOutFinishViewController.h"
 #import "PackageInfoParser.h"
 #import "ManageGiftInfoParser.h"
 #import "AddressViewController.h"
@@ -95,7 +96,9 @@
             break;
         case Http_SubmitGiftOrder20_Tag:
         {
-            
+            GiftCheckOutFinishViewController* gcovc = [[GiftCheckOutFinishViewController alloc] init];
+            gcovc.orderId = [amodel objectForKey:@"orderid" isDictionary:nil];
+            [self.navigationController pushViewController:gcovc animated:YES];
         }
             break;
         default:

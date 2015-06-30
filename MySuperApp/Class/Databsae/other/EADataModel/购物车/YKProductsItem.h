@@ -29,6 +29,7 @@
 @property(nonatomic,assign) int suit_score;
 @property(nonatomic,retain) NSString* packageid;
 @property(nonatomic,retain) NSString* uk;
+@property(nonatomic,retain) NSString* name;
 @property(nonatomic,assign) BOOL selected;
 @property(nonatomic,retain) NSMutableArray *suits;
 @end

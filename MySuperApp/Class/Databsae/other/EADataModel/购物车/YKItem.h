@@ -50,6 +50,7 @@
 @property (nonatomic, assign) NSInteger score;
 @property (nonatomic, assign) BOOL selected;
 @property (nonatomic, retain) NSString* uk;
+@property (nonatomic, retain) NSString* url;
 
 
 @property(nonatomic,retain) NSString* isSollection;
