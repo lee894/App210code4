@@ -300,8 +300,28 @@
             memberViewC.type = 4;
             [self.navigationController pushViewController:memberViewC animated:YES];
         }
+    }else if(alertView.tag == 10031){
+        //线下会员激活
+        
+        if (buttonIndex == 1) {
+            //是
+            
+            if (userStates) {
+                MemberActiveViewController *memberViewC = [[MemberActiveViewController alloc] initWithNibName:@"MemberActiveViewController" bundle:nil];
+                memberViewC.username= textFieldAccount.text;
+                memberViewC.type = 1;
+                [self.navigationController pushViewController:memberViewC animated:YES];
+            } else if (loginStates) {
+                MemberActiveViewController *loginViewC = [[MemberActiveViewController alloc] initWithNibName:@"ActiveLoginViewController" bundle:nil];
+                loginViewC.type = 2;
+                loginViewC.username= textFieldAccount.text;
+                loginViewC.pwd = textFieldPassword.text;
+                [self.navigationController pushViewController:loginViewC animated:YES];
+            }
+        }
+        loginStates = NO;
+        userStates = NO;
     }
-    
 }
 
 
@@ -328,33 +348,6 @@
 //    }
 //}
 
-#pragma mark 判断是否是线下会员弹出view
-- (IBAction)yesOrNo:(UIButton *)sender
-{
-    switch (sender.tag) {
-        case 80://yes
-        {
-            if (userStates) {
-                MemberActiveViewController *memberViewC = [[MemberActiveViewController alloc] initWithNibName:@"MemberActiveViewController" bundle:nil];
-                memberViewC.username= textFieldAccount.text;
-                memberViewC.type = 1;
-                [self.navigationController pushViewController:memberViewC animated:YES];
-            } else if (loginStates) {
-                MemberActiveViewController *loginViewC = [[MemberActiveViewController alloc] initWithNibName:@"ActiveLoginViewController" bundle:nil];
-                loginViewC.type = 2;
-                loginViewC.username= textFieldAccount.text;
-                loginViewC.pwd = textFieldPassword.text;
-                [self.navigationController pushViewController:loginViewC animated:YES];
-            }
-        }
-            break;
-        default:
-            break;
-    }
-    loginStates = NO;
-    userStates = NO;
-    [offineView removeFromSuperview];
-}
 
 #pragma mark 第三方登录
 - (IBAction)thirdLogin:(UIButton *)sender
@@ -607,10 +600,16 @@
                 CheckCheckOffineMobile *offineModel = (CheckCheckOffineMobile *)model;
                 if ([offineModel.offline isEqualToString:@"y"]) {
                     [self.view endEditing:YES];
-                    UIView *offine = [[[NSBundle mainBundle] loadNibNamed:@"PromptView" owner:self options:nil] lastObject];
-                    offineView = offine;
-                    [self.view addSubview:offineView];
-                    userStates = YES;
+
+                    
+                    UIAlertView *alertv = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您已经是爱慕集团实体店会员，立即激活账号!" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+                    alertv.tag = 10031;
+                    [alertv show];
+                    
+//                    UIView *offine = [[[NSBundle mainBundle] loadNibNamed:@"PromptView" owner:self options:nil] lastObject];
+//                    offineView = offine;
+//                    [self.view addSubview:offineView];
+//                    userStates = YES;
                 }
             }
             break;
@@ -624,6 +623,36 @@
     
     [SBPublicAlert hideMBprogressHUD:self.view];
 }
+
+
+//#pragma mark 判断是否是线下会员弹出view
+//- (IBAction)yesOrNo:(UIButton *)sender
+//{
+//    switch (sender.tag) {
+//        case 80://yes
+//        {
+//            if (userStates) {
+//                MemberActiveViewController *memberViewC = [[MemberActiveViewController alloc] initWithNibName:@"MemberActiveViewController" bundle:nil];
+//                memberViewC.username= textFieldAccount.text;
+//                memberViewC.type = 1;
+//                [self.navigationController pushViewController:memberViewC animated:YES];
+//            } else if (loginStates) {
+//                MemberActiveViewController *loginViewC = [[MemberActiveViewController alloc] initWithNibName:@"ActiveLoginViewController" bundle:nil];
+//                loginViewC.type = 2;
+//                loginViewC.username= textFieldAccount.text;
+//                loginViewC.pwd = textFieldPassword.text;
+//                [self.navigationController pushViewController:loginViewC animated:YES];
+//            }
+//        }
+//            break;
+//        default:
+//            break;
+//    }
+//    loginStates = NO;
+//    userStates = NO;
+//    [offineView removeFromSuperview];
+//}
+
 
 
 - (void)tagsAliasCallback:(int)iResCode tags:(NSSet*)tags alias:(NSString*)alias {

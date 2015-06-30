@@ -195,6 +195,11 @@
 
 #pragma mark -- UITableView delegate and datesource
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    return 110;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return addresslistModel.addresslist.count;
@@ -226,7 +231,6 @@
     addressCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return addressCell;
-    
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

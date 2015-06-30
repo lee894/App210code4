@@ -62,29 +62,12 @@
     [super viewDidLoad];
     
     self.title = @"我的爱慕";
-    
-//    //判断如果是IOS7的话，适配屏幕的宽度和高度
-//    if (isIOS7up) {
-//        
-//        NSLog(@"---ScreenHeight:%f",ScreenHeight);
-//        
-//        [_tableList setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height)];
-//    }else if (isIOS6Down) {
-//        [_tableList setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height)];
-//    } else{
-//        [_tableList setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height)];
-//    }
+
     [_tableList setBackgroundView:nil];
     [_tableList setBackgroundColor:[UIColor clearColor]];
-    
-    //lee999注释了 设置导航器的位置
-    //    [self.navigationController.navigationBar setFrame:CGRectMake(0.0,20.0,320,44)];
-    
+        
     mainSer = [[MainpageServ alloc] init];
     mainSer.delegate = self;
-    
-    //    arraySectionTwo = [NSArray arrayWithObjects:@"积分优惠",@"我的收藏",@"全部订单",@"查询积分,绑定优惠券",@"管理您的收藏夹",@"查看历史订单记录",nil];
-    //    arraySectionThird = [NSArray arrayWithObjects:@"收货地址",@"服务中心",@"修改密码",@"绑定手机",@"清除缓存",@"管理您的收货地址",@"常见问题查询",@"",@"",@"",nil];
     
     
     UIButton *photoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -142,15 +125,15 @@
 - (IBAction)shopOrUnhandelOrUnaccess:(UIButton *)sender//购物车||待处理||待评价
 {
     switch (sender.tag) {
-        case 11://购物车
+        case 11://代付款
         {
             NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
-            [TalkingData trackEvent:@"5010" label:@"购物车" parameters:dic1];
+            [TalkingData trackEvent:@"5010" label:@"待付款" parameters:dic1];
             
-            [SingletonState sharedStateInstance].mycarfrom = 2;
-            
-            //切换到购物车
-            [self changetableBarto:3];
+            OrderViewController *tempOrder = [[OrderViewController alloc] initWithNibName:@"OrderViewController" bundle:nil];
+            tempOrder.ishowHeadView = NO;
+            tempOrder.howEnter = 4;
+            [self.navigationController pushViewController:tempOrder animated:YES];
         }
             break;
         case 12://待处理
@@ -363,10 +346,15 @@
             
             //头像
             UIImage *imag = [UIImage imageNamed:@"my_am_user_img"];
-            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            UrlImageButton *btn = [UrlImageButton buttonWithType:UIButtonTypeCustom];
             [btn setBackgroundImage:imag forState:UIControlStateNormal];
             [btn setFrame:CGRectMake((headAllV.width - imag.size.width)/2, 12, imag.size.width, imag.size.height)];
             [headAllV addSubview:btn];
+            
+            if ([_moreModel.userinfo.userface description].length > 0) {
+                [btn setImageWithURL:[NSURL URLWithString:_moreModel.userinfo.userface] placeholderImage:[UIImage imageNamed:@"defaulthead.jpg"]];
+            }
+            
             
             //carma
             UIImage *imagca = [UIImage imageNamed:@"my_am_ca"];
@@ -380,7 +368,7 @@
             [cell addSubview:imacaV];
             
             //name
-            UILabel * noticeTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, btn.frame.size.height + 12, headAllV.width - 20, 30)];
+            UILabel * noticeTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, btn.frame.size.height + lee1fitAllScreen(12), headAllV.width - 20, 30)];
             noticeTitle.text = _moreModel.userinfo.username;
             noticeTitle.textColor = [UIColor colorWithHexString:@"0xe4a1a1"];//UIColorFromRGB(0xB90023);
             noticeTitle.backgroundColor = [UIColor clearColor];
@@ -432,9 +420,21 @@
             
             UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn1 setTitle:[NSString stringWithFormat:@"待付款"] forState:UIControlStateNormal];
+            if ([[_moreModel.userinfo.nopay description] intValue] > 0) {
+                
+                NSInteger num = [[_moreModel.userinfo.nopay description] intValue];
+                NSString *strnum = @"";
+                if (num>99) {
+                    strnum = @"99+";
+                }else{
+                    strnum = [NSString stringWithFormat:@"%ld",(long)num];
+                }
+                [btn1 setTitle:[NSString stringWithFormat:@"待付款（%@）",strnum] forState:UIControlStateNormal];
+            }
             [btn1 setFrame:CGRectMake(0,0,ScreenWidth/3,44)];
             btn1.titleLabel.font = [UIFont systemFontOfSize:14];
             [btn1 setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
+            [btn1 setTag:11];
             [btn1 addTarget:self action:@selector(shopOrUnhandelOrUnaccess:) forControlEvents:UIControlEventTouchUpInside];
             [cell addSubview:btn1];
             
@@ -444,6 +444,17 @@
             
             UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn2 setTitle:[NSString stringWithFormat:@"待评价"] forState:UIControlStateNormal];
+            if ([_moreModel.userinfo.norates class] != [NSNull class] && [[_moreModel.userinfo.norates description] intValue] > 0) {
+                
+                NSInteger num = [[_moreModel.userinfo.norates description] intValue];
+                NSString *strnum = @"";
+                if (num>99) {
+                    strnum = @"99+";
+                }else{
+                    strnum = [NSString stringWithFormat:@"%ld",(long)num];
+                }
+                [btn2 setTitle:[NSString stringWithFormat:@"待评价（%@）",strnum] forState:UIControlStateNormal];
+            }
             [btn2 setFrame:CGRectMake(ScreenWidth/3,0,ScreenWidth/3,44)];
             btn2.titleLabel.font = [UIFont systemFontOfSize:14];
             [btn2 setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
@@ -457,6 +468,17 @@
             
             UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn3 setTitle:[NSString stringWithFormat:@"待处理"] forState:UIControlStateNormal];
+            if ([[_moreModel.userinfo.nodispose description] intValue] > 0) {
+                
+                NSInteger num = [[_moreModel.userinfo.nodispose description] intValue];
+                NSString *strnum = @"";
+                if (num>99) {
+                    strnum = @"99+";
+                }else{
+                    strnum = [NSString stringWithFormat:@"%ld",(long)num];
+                }
+                [btn3 setTitle:[NSString stringWithFormat:@"待处理（%@）",strnum] forState:UIControlStateNormal];
+            }
             [btn3 setFrame:CGRectMake((ScreenWidth/3)*2,0,ScreenWidth/3,44)];
             btn3.titleLabel.font = [UIFont systemFontOfSize:14];
             [btn3 setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
@@ -464,9 +486,9 @@
             [btn3 addTarget:self action:@selector(shopOrUnhandelOrUnaccess:) forControlEvents:UIControlEventTouchUpInside];
             [cell addSubview:btn3];
             
-            UIView *sepV3 = [[UIView alloc] initWithFrame:CGRectMake(0, 43.5, ScreenWidth, 0.5)];
-            [sepV3 setBackgroundColor:[UIColor colorWithHexString:@"333333"]];
-            [cell addSubview:sepV3];
+//            UIView *sepV3 = [[UIView alloc] initWithFrame:CGRectMake(0, 43.5, ScreenWidth, 0.5)];
+//            [sepV3 setBackgroundColor:[UIColor colorWithHexString:@"333333"]];
+//            [cell addSubview:sepV3];
             
             return cell;
         }
@@ -532,6 +554,13 @@
             case 5:
             {
                 universalCell.labelTitle.text = @"绑定手机";
+                
+                if ([_moreModel.userinfo.isbind isEqualToString:@"0"]) {
+                    universalCell.labelDetail.text = @"未绑定";
+                }else if([_moreModel.userinfo.isbind isEqualToString:@"1"]){
+                    universalCell.labelDetail.text = @"已绑定";
+                    universalCell.imgViewBg.hidden = YES;
+                }
             }
                 break;
             case 6:
@@ -744,8 +773,10 @@
         case 5:
         {
             //@"绑定手机";
-            BindPhoneViewController *tempBindPhone = [[BindPhoneViewController alloc] initWithNibName:@"BindPhoneViewController" bundle:nil];
-            [self.navigationController  pushViewController:tempBindPhone animated:YES];
+            if ([_moreModel.userinfo.isbind isEqualToString:@"0"]) {
+                BindPhoneViewController *tempBindPhone = [[BindPhoneViewController alloc] initWithNibName:@"BindPhoneViewController" bundle:nil];
+                [self.navigationController  pushViewController:tempBindPhone animated:YES];
+            }
         }
             break;
         case 6:

@@ -87,17 +87,27 @@
     if (howEnter == 1) {
         self.title = @"我的订单";
         allkeyImg.hidden = NO;
+        needpayImg.hidden = YES;
         needcommkeyImg.hidden = YES;
         needHandlekeyImg.hidden = YES;
     }else if(howEnter == 2){
         self.title = @"待处理";
         allkeyImg.hidden = YES;
+        needpayImg.hidden = YES;
         needcommkeyImg.hidden = YES;
         needHandlekeyImg.hidden = NO;
     }else if(howEnter == 3){
         self.title = @"待评价";
         allkeyImg.hidden = YES;
+        needpayImg.hidden = YES;
         needcommkeyImg.hidden = NO;
+        needHandlekeyImg.hidden = YES;
+    }
+    else if(howEnter == 4){
+        self.title = @"待付款";
+        allkeyImg.hidden = YES;
+        needpayImg.hidden = NO;
+        needcommkeyImg.hidden = YES;
         needHandlekeyImg.hidden = YES;
     }
     
@@ -348,6 +358,7 @@
             //全部
             self.title = @"我的订单";
             allkeyImg.hidden = NO;
+            needpayImg.hidden = YES;
             needcommkeyImg.hidden = YES;
             needHandlekeyImg.hidden = YES;
             howEnter = 1;
@@ -356,20 +367,36 @@
             break;
         case 101:
         {
+            //待付款
+            self.title = @"待付款";
+            allkeyImg.hidden = YES;
+            needpayImg.hidden = NO;
+            needcommkeyImg.hidden = YES;
+            needHandlekeyImg.hidden = YES;
+            howEnter = 4;
+            [self getData];
+            
+       
+        }
+            break;
+        case 102:
+        {
             //待评价
             self.title = @"待评价";
             allkeyImg.hidden = YES;
+            needpayImg.hidden = YES;
             needcommkeyImg.hidden = NO;
             needHandlekeyImg.hidden = YES;
             howEnter = 3;
             [self getData];
         }
             break;
-        case 102:
+        case 103:
         {
             //待处理s
             self.title = @"待处理";
             allkeyImg.hidden = YES;
+            needpayImg.hidden = YES;
             needcommkeyImg.hidden = YES;
             needHandlekeyImg.hidden = NO;
             howEnter = 2;
@@ -406,6 +433,11 @@
             [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
             self.enterWhere = YES;
             break;
+        case 4://待付款
+            [mainSev getOrderlists:@"nopay" andPage:PageCurr andPer_page:@"10"];
+            [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+            self.enterWhere = YES;
+            break;
         default:
             break;
     }
@@ -433,6 +465,11 @@
             break;
         case 3://待评价
             [mainSev getOrderlists:@"norates" andPage:PageCurr andPer_page:@"10"];
+            [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+            self.enterWhere = YES;
+            break;
+        case 4://待付款
+            [mainSev getOrderlists:@"nopay" andPage:PageCurr andPer_page:@"10"];
             [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
             self.enterWhere = YES;
             break;

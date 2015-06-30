@@ -11,16 +11,18 @@
 
 @interface MoerUserinfo : NSObject <NSCoding>
 
-@property (nonatomic, retain) NSString *isbind;
-@property (nonatomic, retain) NSString *validScore;
-@property (nonatomic, retain) NSString *ordernum;
-@property (nonatomic, assign) double shopcartcount;
-@property (nonatomic, retain) NSString *orderCount;
-@property (nonatomic, assign) double norates;
-@property (nonatomic, retain) NSString *username;
-@property (nonatomic, retain) NSString *nodispose;
-@property (nonatomic, retain) NSString *addressnum;
-@property (nonatomic, retain) NSString *ordcancel;
+@property (nonatomic, retain) NSString *isbind; //是否绑定手机
+@property (nonatomic, retain) NSString *validScore; //积分
+@property (nonatomic, retain) NSString *ordernum; //订单数
+@property (nonatomic, assign) double shopcartcount; //购物车商品数
+@property (nonatomic, retain) NSString *orderCount; //近三个月 订单数
+@property (nonatomic, assign) NSString* norates;   //未评论数
+@property (nonatomic, retain) NSString *username; //用户名
+@property (nonatomic, retain) NSString *nodispose; //待处理 订单数
+@property (nonatomic, retain) NSString *nopay; //未付款 订单数
+
+@property (nonatomic, retain) NSString *addressnum; //地址数
+@property (nonatomic, retain) NSString *ordcancel;  //已取消 订单数
 @property (nonatomic, retain) NSString *favoritenum;
 @property (nonatomic, retain) NSString *userface;
 

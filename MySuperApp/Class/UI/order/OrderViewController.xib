@@ -16,6 +16,8 @@
                 <outlet property="needHandlekeyImg" destination="gMG-OS-ITt" id="swD-9K-Xdc"/>
                 <outlet property="needcommbtn" destination="bg5-Di-CNL" id="UmM-dS-Tci"/>
                 <outlet property="needcommkeyImg" destination="azR-yM-RvV" id="8Zi-zl-dzB"/>
+                <outlet property="needpayBtn" destination="R1z-ty-2r2" id="yFg-aD-IGu"/>
+                <outlet property="needpayImg" destination="0xj-hP-WMY" id="5ER-Z5-vmW"/>
                 <outlet property="tableList" destination="9" id="13"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
@@ -27,7 +29,7 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="220" sectionHeaderHeight="22" sectionFooterHeight="22" id="9" customClass="PullToRefreshTableView">
                     <rect key="frame" x="0.0" y="39" width="320" height="529"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="10"/>
@@ -43,9 +45,9 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7Ou-Rm-C8C">
-                            <rect key="frame" x="0.0" y="-2" width="106" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="80" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="全部">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,8 +62,26 @@
                                 <action selector="orderBtnClick:" destination="-1" eventType="touchUpInside" id="kwZ-nc-Zdr"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bg5-Di-CNL">
-                            <rect key="frame" x="107" y="-2" width="106" height="44"/>
+                        <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="R1z-ty-2r2">
+                            <rect key="frame" x="80" y="0.0" width="80" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="代付款">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.75686281919999998" green="0.062745101750000004" blue="0.18823531269999999" alpha="1" colorSpace="deviceRGB"/>
+                            </state>
+                            <state key="highlighted">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="orderBtnClick:" destination="-1" eventType="touchUpInside" id="Zq8-PL-X1w"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bg5-Di-CNL">
+                            <rect key="frame" x="160" y="0.0" width="80" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="待评价">
@@ -78,8 +98,8 @@
                                 <action selector="orderBtnClick:" destination="-1" eventType="touchUpInside" id="B1q-4u-8Gk"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IlO-N3-bHL">
-                            <rect key="frame" x="212" y="-2" width="108" height="44"/>
+                        <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IlO-N3-bHL">
+                            <rect key="frame" x="240" y="0.0" width="80" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <inset key="imageEdgeInsets" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -102,19 +122,28 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="orderlistline.jpg" id="qqT-H3-koS">
-                            <rect key="frame" x="3" y="33" width="100" height="7"/>
+                            <rect key="frame" x="3" y="33" width="76" height="7"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="orderlistline.jpg" id="azR-yM-RvV">
-                            <rect key="frame" x="110" y="33" width="100" height="7"/>
+                            <rect key="frame" x="163" y="33" width="76" height="7"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="orderlistline.jpg" id="0xj-hP-WMY">
+                            <rect key="frame" x="83" y="33" width="76" height="7"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="orderlistline.jpg" id="gMG-OS-ITt">
-                            <rect key="frame" x="218" y="33" width="100" height="7"/>
+                            <rect key="frame" x="244" y="33" width="76" height="7"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
                         </imageView>
                         <view contentMode="scaleToFill" id="fPW-nT-tVs">
-                            <rect key="frame" x="106" y="8" width="1" height="26"/>
+                            <rect key="frame" x="80" y="8" width="1" height="26"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" id="Ybe-Df-HFL">
+                            <rect key="frame" x="159" y="7" width="1" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -129,7 +158,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="MRk-ML-9Cc">
-                            <rect key="frame" x="213" y="8" width="1" height="26"/>
+                            <rect key="frame" x="240" y="8" width="1" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
@@ -138,7 +167,7 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="25" y="61"/>
+            <point key="canvasLocation" x="-128" y="43"/>
         </view>
     </objects>
     <resources>

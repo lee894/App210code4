@@ -7539,7 +7539,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "3cf4f35c-4511-42a7-a25c-bdacb1336886";
+				PROVISIONING_PROFILE = "59dddc46-b007-4d08-9233-0a9816e1604d";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -7575,7 +7575,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "3cf4f35c-4511-42a7-a25c-bdacb1336886";
+				PROVISIONING_PROFILE = "59dddc46-b007-4d08-9233-0a9816e1604d";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -7635,7 +7635,7 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = MyAimerApp;
-				PROVISIONING_PROFILE = "3cf4f35c-4511-42a7-a25c-bdacb1336886";
+				PROVISIONING_PROFILE = "59dddc46-b007-4d08-9233-0a9816e1604d";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -7696,7 +7696,7 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = MyAimerApp;
-				PROVISIONING_PROFILE = "3cf4f35c-4511-42a7-a25c-bdacb1336886";
+				PROVISIONING_PROFILE = "59dddc46-b007-4d08-9233-0a9816e1604d";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALID_ARCHS = "armv7 armv7s arm64";

@@ -46,8 +46,6 @@
     
     myallscrollView.delegate = self;
     [myallscrollView setContentSize:CGSizeMake(0, 700)];
-    [myallView setBackgroundColor:[UIColor whiteColor]];
-    [myallscrollView setBackgroundColor:[UIColor whiteColor]];
     
     [self createBackBtnWithType:0];
     //创建右边按钮
@@ -143,9 +141,8 @@
 //            }
 //        }
 //    }
-//    
-    
-    NSLog(@"system:-------%d",[[[UIDevice currentDevice] systemVersion] intValue]);
+//
+//    NSLog(@"system:-------%d",[[[UIDevice currentDevice] systemVersion] intValue]);
     
 //    doneButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 163, 106, 53)];
 }
@@ -226,24 +223,12 @@
     NSMutableString *newtxt = [NSMutableString stringWithString:textField.text];
     [newtxt replaceCharactersInRange:range withString:string];
     
-    
-  //  NSLog(@"tag-----%ld----newtxt-%@----text-%@",(long)textField.tag,newtxt,textField.text);
-
-    
     if (textField.tag == 11110) {
         if (newtxt.length > 6)
         {
             return NO;
         }
     }
-    
-//    if (textField.tag == 11111) {
-//        if (newtxt.length > 11)
-//        {
-//            return NO;
-//        }
-//    }
-
     return YES;
 }
 
@@ -339,9 +324,12 @@
     if (addressPicker == nil) {
         addressPicker = [[[NSBundle mainBundle] loadNibNamed:@"AddressPickerView" owner:self options:nil] lastObject];
     }
-   
+    
+    CGSize newsize = CGSizeMake(ScreenWidth, 222);
     addressPicker.delegate =self;
     [addressPicker setOrigin:CGPointMake(0, self.view.frame.size.height)];
+    [addressPicker setSize:newsize];
+
     [UIView animateWithDuration:0.3 animations:^{
         [addressPicker setOrigin:CGPointMake(0, self.view.frame.size.height - 222)];
         

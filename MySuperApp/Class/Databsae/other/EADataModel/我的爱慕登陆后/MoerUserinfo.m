@@ -24,10 +24,10 @@
 @synthesize norates = _norates;
 @synthesize username = _username;
 @synthesize nodispose = _nodispose;
+@synthesize nopay = _nopay;
 @synthesize addressnum = _addressnum;
 @synthesize ordcancel = _ordcancel;
 @synthesize favoritenum = _favoritenum;
-
 
 + (MoerUserinfo *)modelObjectWithDictionary:(NSDictionary *)dict
 {
@@ -47,7 +47,6 @@
             self.ordernum = [self objectOrNilForKey:@"ordernum" fromDictionary:dict];
             self.shopcartcount = [[dict objectForKey:@"shopcartcount"] doubleValue];
             self.orderCount = [self objectOrNilForKey:@"order_count" fromDictionary:dict];
-            self.norates = [[dict objectForKey:@"norates"] doubleValue];
             self.username = [self objectOrNilForKey:@"username" fromDictionary:dict];
             self.nodispose = [self objectOrNilForKey:@"nodispose" fromDictionary:dict];
             self.addressnum = [self objectOrNilForKey:@"addressnum" fromDictionary:dict];
@@ -55,6 +54,9 @@
             self.favoritenum = [self objectOrNilForKey:@"favoritenum" fromDictionary:dict];
             self.userface = [self objectOrNilForKey:@"userface" fromDictionary:dict];
 
+        self.norates = [[dict objectForKey:@"norates" isDictionary:nil] description];//[[self objectOrNilForKey:@"norates" fromDictionary:dict] description];
+
+            self.nopay = [self objectOrNilForKey:@"nopay" fromDictionary:dict];
 
     }
     
@@ -70,13 +72,16 @@
     [mutableDict setValue:self.ordernum forKey:@"ordernum"];
     [mutableDict setValue:[NSNumber numberWithDouble:self.shopcartcount] forKey:@"shopcartcount"];
     [mutableDict setValue:self.orderCount forKey:@"order_count"];
-    [mutableDict setValue:[NSNumber numberWithDouble:self.norates] forKey:@"norates"];
+    [mutableDict setValue:self.norates forKey:@"norates"];
     [mutableDict setValue:self.username forKey:@"username"];
     [mutableDict setValue:self.nodispose forKey:@"nodispose"];
     [mutableDict setValue:self.addressnum forKey:@"addressnum"];
     [mutableDict setValue:self.ordcancel forKey:@"ordcancel"];
     [mutableDict setValue:self.favoritenum forKey:@"favoritenum"];
     [mutableDict setValue:self.userface forKey:@"userface"];
+    
+    [mutableDict setValue:self.nopay forKey:@"nopay"];
+
 
     return [NSDictionary dictionaryWithDictionary:mutableDict];
 }
@@ -105,12 +110,14 @@
     self.ordernum = [aDecoder decodeObjectForKey:@"ordernum"];
     self.shopcartcount = [aDecoder decodeDoubleForKey:@"shopcartcount"];
     self.orderCount = [aDecoder decodeObjectForKey:@"orderCount"];
-    self.norates = [aDecoder decodeDoubleForKey:@"norates"];
+    self.norates =  [[aDecoder decodeObjectForKey:@"norates"] description];
     self.username = [aDecoder decodeObjectForKey:@"username"];
     self.nodispose = [aDecoder decodeObjectForKey:@"nodispose"];
     self.addressnum = [aDecoder decodeObjectForKey:@"addressnum"];
     self.ordcancel = [aDecoder decodeObjectForKey:@"ordcancel"];
     self.favoritenum = [aDecoder decodeObjectForKey:@"favoritenum"];
+    self.nopay = [aDecoder decodeObjectForKey:@"nopay"];
+
     return self;
 }
 
@@ -122,12 +129,13 @@
     [aCoder encodeObject:_ordernum forKey:@"ordernum"];
     [aCoder encodeDouble:_shopcartcount forKey:@"shopcartcount"];
     [aCoder encodeObject:_orderCount forKey:@"orderCount"];
-    [aCoder encodeDouble:_norates forKey:@"norates"];
+    [aCoder encodeObject:_norates forKey:@"norates"];
     [aCoder encodeObject:_username forKey:@"username"];
     [aCoder encodeObject:_nodispose forKey:@"nodispose"];
     [aCoder encodeObject:_addressnum forKey:@"addressnum"];
     [aCoder encodeObject:_ordcancel forKey:@"ordcancel"];
     [aCoder encodeObject:_favoritenum forKey:@"favoritenum"];
+    [aCoder encodeObject:_nopay forKey:@"nopay"];
 }
 
 @end
