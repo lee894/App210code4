@@ -31,7 +31,7 @@
 
 @property (nonatomic, retain)StoresStores *store;
 
-@property (nonatomic, assign)int index;
+@property (nonatomic, assign)NSInteger index;
 
 
 

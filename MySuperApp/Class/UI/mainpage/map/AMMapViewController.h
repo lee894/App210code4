@@ -16,7 +16,7 @@
 
 //lee999附近的店200
 
-@interface AMMapViewController : LBaseViewController<BMKMapViewDelegate,ServiceDelegate,CLLocationManagerDelegate,UITableViewDelegate,UITableViewDataSource,StoreDetail20Delegate,BMKLocationServiceDelegate>
+@interface AMMapViewController : LBaseViewController<UIAlertViewDelegate,BMKMapViewDelegate,ServiceDelegate,CLLocationManagerDelegate,UITableViewDelegate,UITableViewDataSource,StoreDetail20Delegate,BMKLocationServiceDelegate>
 {
     __weak IBOutlet UILabel *sizelab;
 }

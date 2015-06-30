@@ -70,13 +70,17 @@
     //设置定位精确度，默认：kCLLocationAccuracyBest
     [BMKLocationService setLocationDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
     //指定最小距离更新(米)，默认：kCLDistanceFilterNone
-    [BMKLocationService setLocationDistanceFilter:100.f];
+    [BMKLocationService setLocationDistanceFilter:200.f];
     //初始化BMKLocationService
+    
     _locService = [[BMKLocationService alloc]init];
     _locService.delegate = self;
     //启动LocationService
     [_locService startUserLocationService];
     
+    if (_mapView) {
+        [_mapView removeFromSuperview];
+    }
     _mapView = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, mapHight)];
     _mapView.zoomLevel = macroot;
     oldReido = _mapView.zoomLevel;
@@ -87,7 +91,7 @@
     
     UIImage *image = [UIImage imageNamed:@"pin_purple.png"]; //pin_red2.png
     UIImageView *iamgeV = [[UIImageView alloc] initWithImage:image];
-    [iamgeV setFrame:CGRectMake((320-image.size.width)/2, (mapHight-image.size.height)/2, image.size.width, image.size.height)];
+    [iamgeV setFrame:CGRectMake((ScreenWidth-image.size.width)/2, (mapHight-image.size.height)/2, image.size.width, image.size.height)];
     [iamgeV setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:iamgeV];
         
@@ -122,9 +126,9 @@
     //判断用户定位服务是否开启
     if (![CLLocationManager locationServicesEnabled]||status < 3) {
         
-        LCommentAlertView *alert = [[LCommentAlertView alloc] initWithTitle:@"爱慕提醒" Message:@"检测到您没有开启定位开关,请您在设置--隐私--定位服务，允许获取您的位置信息" tag:999 btns:@"确定", nil];
-        [alert show];
+        LCommentAlertView *alert = [[LCommentAlertView alloc] initWithTitle:@"爱慕提醒" Message:@"检测到您没有开启定位开关,请您在设置--隐私--定位服务，允许获取您的位置信息" tag:99988 btns:@"确定", nil];
         alert.delegate = self;
+        [alert show];
         return NO;
     }
     else
@@ -140,13 +144,6 @@
     _mapView.delegate = self;
     _locService.delegate = self;
 
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:YES];
-    //lee999修改，不是每次都定位----
-//    firstRequestnum = 1;//判断是否是第一次请求
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -261,13 +258,34 @@
 static NSInteger indexex = 100;
 
 #pragma mark -- 百度地图代理
+#pragma mark ---  定位的相关代码
+
+/**
+ *在地图View将要启动定位时，会调用此函数
+ *@param mapView 地图View
+ */
+- (void)mapViewDidStopLocatingUser:(BMKMapView *)mapView
+{
+    NSLog(@"MapView UserLocation");
+    
+}
+
+/**
+ *定位失败后，会调用此函数
+ *@param mapView 地图View
+ *@param error 错误号，参考CLError.h中定义的错误号
+ */
+- (void)mapView:(BMKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
+{
+    NSLog(@"mapViewUserLocation Error");
+}
 
 
 //实现相关delegate 处理位置信息更新
 //处理方向变更信息
 - (void)didUpdateUserHeading:(BMKUserLocation *)userLocation
 {
-    //NSLog(@"heading is %@",userLocation.heading);
+    NSLog(@"heading is %@",userLocation.heading);
 }
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
@@ -288,6 +306,7 @@ static NSInteger indexex = 100;
 }
 
 
+#pragma mark--- 地图相关回调
 //自定义大头针和弹出的view
 - (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
 {
@@ -336,17 +355,87 @@ static NSInteger indexex = 100;
     NSLog(@"maplat：--------%@----maplon：--------%@",maplat,maplon);
     
     
+//    if (firstRequestnum == 1) {
+//        if (!storeModel) {
+//            
+//            [mainSer getShopLocation:lat andLng:lon andDistance:@"10"];
+//            [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+//        }
+//        firstRequestnum = 2;
+//        
+//        CLLocationCoordinate2D location;
+//        location.latitude = userLocation.location.coordinate.latitude;
+//        location.longitude = userLocation.location.coordinate.longitude;
+//        [_mapView setCenterCoordinate:location];
+//        [_mapView setZoomLevel:macroot];
+//        
+//    }else if(firstRequestnum == 2){
+//        
+//        if (([lan floatValue] > [maplat floatValue] + 0.002 || [lan floatValue] < [maplat floatValue] - 0.002)  && ([lng floatValue] > [maplon floatValue] + 0.002 || [lng floatValue] < [maplon floatValue] - 0.002)) {
+//            
+//            
+//            if (storeModel) {
+//                
+//                //数据正在加载中的话，就不在请求数据
+//                if (isloadingData) {
+//                    return;
+//                }
+//                
+//                [mainSer getShopLocation:maplat andLng:maplon andDistance:@"10"];
+//                [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+//            }
+//            //lee999 重置地图的中心位置！！
+//            [_mapView setCenterCoordinate:_mapView.centerCoordinate];
+//            //[_mapView setZoomLevel:13];
+//        }
+//    }
+//    lan = maplat;
+//    lng = maplon;
+}
+
+
+//点击弹出的paopao触发的事件
+- (void)mapView:(BMKMapView *)mapView annotationViewForBubble:(BMKAnnotationView *)view
+{
+    if (view.rightCalloutAccessoryView.tag != 0) {
+        if (view.rightCalloutAccessoryView.tag - 100 < [storeModel.stores count]) {
+            
+            [self gotoStoreVC:view.rightCalloutAccessoryView.tag-100];
+        }
+    }
+}
+
+- (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view
+{
+    
+}
+
+- (void)mapView:(BMKMapView *)mapView annotationView:(BMKAnnotationView *)view didChangeDragState:(BMKAnnotationViewDragState)newState
+   fromOldState:(BMKAnnotationViewDragState)oldState {
+    
+}
+
+//移动完成之后 执行
+- (void)mapView:(BMKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    
+    NSString *maplat = [NSString stringWithFormat:@"%f",_mapView.centerCoordinate.latitude];
+    NSString *maplon = [NSString stringWithFormat:@"%f",_mapView.centerCoordinate.longitude];
+    NSLog(@"maplat：-222-----%@----maplon：-------%@",maplat,maplon);
+    
+    
+    //lee999999
+    
     if (firstRequestnum == 1) {
         if (!storeModel) {
             
-            [mainSer getShopLocation:lat andLng:lon andDistance:@"10"];
+            [mainSer getShopLocation:maplat andLng:maplon andDistance:@"10"];
             [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
         }
         firstRequestnum = 2;
         
         CLLocationCoordinate2D location;
-        location.latitude = userLocation.location.coordinate.latitude;
-        location.longitude = userLocation.location.coordinate.longitude;
+       // location.latitude = mapView.userLocation.location.coordinate.latitude;
+       // location.longitude = mapView.userLocation.location.coordinate.longitude;
         [_mapView setCenterCoordinate:location];
         [_mapView setZoomLevel:macroot];
         
@@ -372,58 +461,6 @@ static NSInteger indexex = 100;
     }
     lan = maplat;
     lng = maplon;
-}
-
-
-//点击弹出的paopao触发的事件
-- (void)mapView:(BMKMapView *)mapView annotationViewForBubble:(BMKAnnotationView *)view
-{
-    if (view.rightCalloutAccessoryView.tag != 0) {
-        if (view.rightCalloutAccessoryView.tag - 100 < [storeModel.stores count]) {
-            
-            [self gotoStoreVC:view.rightCalloutAccessoryView.tag-100];
-        }
-    }
-}
-
-- (void)mapView:(BMKMapView *)mapView didSelectAnnotationView:(BMKAnnotationView *)view
-{
-    
-}
-/**
- *在地图View将要启动定位时，会调用此函数
- *@param mapView 地图View
- */
-- (void)mapViewDidStopLocatingUser:(BMKMapView *)mapView
-{
-    NSLog(@"MapView UserLocation");
-    
-}
-
-/**
- *定位失败后，会调用此函数
- *@param mapView 地图View
- *@param error 错误号，参考CLError.h中定义的错误号
- */
-- (void)mapView:(BMKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
-{
-    NSLog(@"mapViewUserLocation Error");
-}
-
-
-- (void)mapView:(BMKMapView *)mapView annotationView:(BMKAnnotationView *)view didChangeDragState:(BMKAnnotationViewDragState)newState
-   fromOldState:(BMKAnnotationViewDragState)oldState {
-    
-}
-
-//移动完成之后 执行
-- (void)mapView:(BMKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    
-    NSString *maplat = [NSString stringWithFormat:@"%f",_mapView.centerCoordinate.latitude];
-    NSString *maplon = [NSString stringWithFormat:@"%f",_mapView.centerCoordinate.longitude];
-    NSLog(@"maplat：-222-----%@----maplon：-------%@",maplat,maplon);
-
-    //    sizelab.text = [NSString stringWithFormat:@"%@公里",[arr objectAtIndex:(NSInteger)_mapView.zoomLevel -3]];
 }
 
 
@@ -456,7 +493,7 @@ static NSInteger indexex = 100;
     StoresStores *store = (StoresStores *)[storeModel.stores objectAtIndex:section];
 
     
-    UILabel *namelab = [[UILabel alloc] initWithFrame:CGRectMake(15, 8, 230, 30)];
+    UILabel *namelab = [[UILabel alloc] initWithFrame:CGRectMake(15, 8, ScreenWidth-90, 30)];
     [namelab setNumberOfLines:1];
     [namelab setTextAlignment:NSTextAlignmentLeft];
     namelab.font = [UIFont systemFontOfSize:LabMidSize];
@@ -464,7 +501,7 @@ static NSInteger indexex = 100;
     [namelab setText:store.storeName];
     [bgv addSubview:namelab];
     
-    UILabel *desclab = [[UILabel alloc] initWithFrame:CGRectMake(15, 38, 280, 20)];
+    UILabel *desclab = [[UILabel alloc] initWithFrame:CGRectMake(15, 38, ScreenWidth-60, 20)];
     [desclab setNumberOfLines:1];
     [desclab setTextAlignment:NSTextAlignmentLeft];
     desclab.font = [UIFont systemFontOfSize:LablitileSmallSize];
@@ -485,7 +522,7 @@ static NSInteger indexex = 100;
     
     
     //距离
-    UILabel *distancelab = [[UILabel alloc] initWithFrame:CGRectMake(240, 8, 60, 30)];
+    UILabel *distancelab = [[UILabel alloc] initWithFrame:CGRectMake(160, 8, ScreenWidth-200, 30)];
     [distancelab setNumberOfLines:1];
     [distancelab setTextAlignment:NSTextAlignmentRight];
     distancelab.font = [UIFont systemFontOfSize:LabMidSize];
@@ -592,7 +629,7 @@ static NSInteger indexex = 100;
 }
 
 
--(void)gotoStoreVC:(int)index{
+-(void)gotoStoreVC:(NSInteger)index{
     StoresStores *store = (StoresStores *)[storeModel.stores objectAtIndex:index];
     NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:store.storeName, @"storename",nil];
     [TalkingData trackEvent:@"5007" label:@"查找门店" parameters:dic1];

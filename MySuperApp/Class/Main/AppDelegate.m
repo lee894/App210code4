@@ -63,6 +63,9 @@
     mySingle = [SingletonState sharedStateInstance];
 
     
+    [self createbaiduMap];
+
+    
     //注册微信
     [WXApi registerApp:kWeiXinKey];
     
@@ -78,7 +81,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window setBackgroundColor:[UIColor whiteColor]];
     
-    [self createbaiduMap];
     //加载视图
     [self loadMainView];
     
