@@ -12,6 +12,9 @@
 
 @property(nonatomic,retain) MyClosetInfo *closetinfo;
 
+@property(nonatomic,retain) NSMutableArray *arr_selectStyle;
+
+
 
 - (IBAction)nextBtnAction:(id)sender;
 

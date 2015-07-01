@@ -12,14 +12,24 @@
 #import "MyClosetListViewController.h"
 #import "ZHPickView.h"
 
-@interface MyCloset4ViewController ()<ZHPickViewDelegate>
+@interface MyCloset4ViewController ()<ServiceDelegate,ZHPickViewDelegate>
 {
+    
+    MainpageServ *mainSev;
+
     
     IBOutlet UIButton* btn1;
     IBOutlet UIButton* btn2;
     IBOutlet UIButton* btn3;
 
     NSInteger selectIndex;
+    
+    NSString *str1;
+    NSString *str2;
+    NSString *str3;
+
+    
+    NSMutableArray *arr_selectSize;
 
 
 }
@@ -27,13 +37,31 @@
 
 @implementation MyCloset4ViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        
+        self.arr_selectStyle = [[NSMutableArray alloc] initWithCapacity:0];
+        arr_selectSize = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    return self;
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    
     [self setTitle:@"私人衣橱4"];
     [self createBackBtnWithType:0];
-
+    
+    str1 = @"";
+    str2 = @"";
+    str3 = @"";
+    
+    mainSev = [[MainpageServ alloc] init];
+    mainSev.delegate = self;
 }
 
 
@@ -72,26 +100,50 @@
     
     if (selectIndex==1) {
         [btn1 setTitle:[NSString stringWithFormat:@"文胸尺码 (%@)",resultString] forState:UIControlStateNormal];
+        str1 = resultString;
+
     }
     
     if (selectIndex==2) {
         [btn2 setTitle:[NSString stringWithFormat:@"底裤尺码 (%@)",resultString] forState:UIControlStateNormal];
+        str2 = resultString;
+
     }
     
     if (selectIndex==3) {
         [btn3 setTitle:[NSString stringWithFormat:@"睡衣尺码 (%@)",resultString] forState:UIControlStateNormal];
+        str3 = resultString;
+
     }
 }
 
+-(BOOL)selectMySize{
+    
+    
+    if (str1.length<1 || str2.length<1  || str3.length<1 ) {
+        [SBPublicAlert showMBProgressHUD:@"请您选择完您的尺码" andWhereView:self.view hiddenTime:AlertShowTime];
+        return NO;
+    }
+    
+    [arr_selectSize addObject:str1];
+    [arr_selectSize addObject:str2];
+    [arr_selectSize addObject:str3];
+    
+    return YES;
+}
 
 
-
-//选择更换频次
+//确定尺码，下一步   《选择更换频次》
 - (IBAction)slectPerAction:(id)sender {
+    
+    if (![self selectMySize]) {
+        return;
+    }
 
     MyCloset5ViewController *clv2 = [[MyCloset5ViewController alloc] initWithNibName:@"MyCloset5ViewController" bundle:nil];
+    [clv2.arr_selectSize addObjectsFromArray:arr_selectSize];
+    [clv2.arr_selectStyle addObjectsFromArray:self.arr_selectStyle];
     [self.navigationController pushViewController:clv2 animated:YES];
-    
 }
 
 
@@ -103,12 +155,64 @@
 }
 
 
+// 跳过===  去衣橱了！！！
 - (IBAction)gotoClosetListAction:(id)sender {
+
+    if (![self selectMySize]) {
+        return;
+    }
     
-    MyClosetListViewController *lstvc = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
-    [self.navigationController pushViewController:lstvc animated:YES];
+    
+    NSString *size = [arr_selectSize componentsJoinedByString:@","];
+    NSString *style = [self.arr_selectStyle componentsJoinedByString:@","];
+
+    [mainSev getaddwardrobeupdata:@"女士"
+                         andcrowd:@"女士"
+                     andfrequency:@""
+                          andsize:size
+                         andprops:style
+                          andtype:@"woman"];
     
 }
+
+-(void)gotoClosetList{
+
+    MyClosetListViewController *lstvc = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
+    [self.navigationController pushViewController:lstvc animated:YES];
+}
+
+
+
+#pragma mark--- Severvice
+-(void)serviceStarted:(ServiceType)aHandle{
+}
+
+-(void)serviceFailed:(ServiceType)aHandle{
+    [SBPublicAlert hideMBprogressHUD:self.view];
+    
+}
+
+-(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel{
+    [SBPublicAlert hideMBprogressHUD:self.view];
+    
+    if(![amodel isKindOfClass:[LBaseModel class]])
+    {
+        switch ((NSUInteger)aHandle) {
+            case Http_addwardrobeup20_Tag:
+            {
+                [self gotoClosetList];
+            }
+                break;
+                
+            default:
+                break;
+        }
+        return;
+    }
+}
+
+
+
 
 
 - (void)didReceiveMemoryWarning {

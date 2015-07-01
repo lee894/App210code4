@@ -59,7 +59,7 @@
 //    [self.tbPackage setTableFooterView:vFooter];
     [self.view addSubview:self.vToolbar];
     [self.view addConstraints:[self viewConstraints]];
-    [mainSev getPackageInfoWithPid:@"8"];
+    [mainSev getPackageInfoWithPid:self.pid];
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 
     

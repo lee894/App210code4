@@ -8,6 +8,12 @@
 
 #import "LBaseViewController.h"
 
+
 @interface MyCloset5ViewController : LBaseViewController<ServiceDelegate>
+
+@property(nonatomic,retain) NSMutableArray* arr_selectSize;
+@property(nonatomic,retain) NSMutableArray* arr_selectStyle;
+
+
 
 @end

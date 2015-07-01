@@ -10,6 +10,8 @@
 
 @interface MyCloset4ViewController : LBaseViewController
 
+@property(nonatomic,strong)NSMutableArray *arr_selectStyle;
+
 @end
 
 

@@ -739,6 +739,7 @@
 		96F2A50C1ADAC0B200E1A04B /* NewMaginzeListInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2A50B1ADAC0B200E1A04B /* NewMaginzeListInfo.m */; };
 		96F2A50F1ADAC20100E1A04B /* NewMaginzeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2A50E1ADAC20100E1A04B /* NewMaginzeParser.m */; };
 		96F632641AEFE21E00F4BE14 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96F632631AEFE21E00F4BE14 /* Accelerate.framework */; };
+		96F6DE601B43859400E156A4 /* MyAimerParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F6DE5F1B43859400E156A4 /* MyAimerParser.m */; };
 		96FF99F81B268CE400AA82BF /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96FF99F51B268CE400AA82BF /* libWeiboSDK.a */; };
 		96FF99F91B268CE400AA82BF /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96FF99F61B268CE400AA82BF /* WeiboSDK.bundle */; };
 		9B0882FF18F7C21400F76D65 /* YKChoseGiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0882FD18F7C21400F76D65 /* YKChoseGiftViewController.m */; };
@@ -2180,6 +2181,8 @@
 		96F2A50D1ADAC20100E1A04B /* NewMaginzeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMaginzeParser.h; sourceTree = "<group>"; };
 		96F2A50E1ADAC20100E1A04B /* NewMaginzeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMaginzeParser.m; sourceTree = "<group>"; };
 		96F632631AEFE21E00F4BE14 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		96F6DE5E1B43859400E156A4 /* MyAimerParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAimerParser.h; sourceTree = "<group>"; };
+		96F6DE5F1B43859400E156A4 /* MyAimerParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAimerParser.m; sourceTree = "<group>"; };
 		96F8A50A1B4178D400A806BB /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
 		96F8A50B1B4178D400A806BB /* WBHttpRequest+WeiboToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboToken.h"; sourceTree = "<group>"; };
 		96F8A50C1B4178D400A806BB /* WBHttpRequest+WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboUser.h"; sourceTree = "<group>"; };
@@ -3178,6 +3181,7 @@
 		9601E0D11B26D84D002C32E0 /* myAimer20 */ = {
 			isa = PBXGroup;
 			children = (
+				96F6DE5D1B43859400E156A4 /* data */,
 				9601E0D21B26D84D002C32E0 /* MyAimerV20ViewController.h */,
 				9601E0D31B26D84D002C32E0 /* MyAimerV20ViewController.m */,
 				9601E0D41B26D84D002C32E0 /* MyAimerV20ViewController.xib */,
@@ -3843,25 +3847,9 @@
 		9665907D1B159942004CF036 /* myCloset20 */ = {
 			isa = PBXGroup;
 			children = (
-				9670D3A01B3412E6002ED503 /* MyCloset7ViewController.h */,
-				9670D3A11B3412E6002ED503 /* MyCloset7ViewController.m */,
-				9670D3A21B3412E6002ED503 /* MyCloset7ViewController.xib */,
-				A6F395001B2E7DAE004566CA /* data */,
-				968AE8991B2540AB004A1A85 /* MyClosetKidGril3ViewController.h */,
-				968AE89A1B2540AB004A1A85 /* MyClosetKidGril3ViewController.m */,
-				968AE89B1B2540AB004A1A85 /* MyClosetKidGril3ViewController.xib */,
 				966590831B159963004CF036 /* MyCloset1ViewController.h */,
 				966590841B159963004CF036 /* MyCloset1ViewController.m */,
 				966590851B159963004CF036 /* MyCloset1ViewController.xib */,
-				968AE8941B253E29004A1A85 /* MyClosetKid3ViewController.h */,
-				968AE8951B253E29004A1A85 /* MyClosetKid3ViewController.m */,
-				968AE8961B253E29004A1A85 /* MyClosetKid3ViewController.xib */,
-				968AE88F1B253917004A1A85 /* MyClosetKid2ViewController.h */,
-				968AE8901B253917004A1A85 /* MyClosetKid2ViewController.m */,
-				968AE8911B253917004A1A85 /* MyClosetKid2ViewController.xib */,
-				968AE8781B24A7E1004A1A85 /* MyClosetNan3ViewController.h */,
-				968AE8791B24A7E1004A1A85 /* MyClosetNan3ViewController.m */,
-				968AE87A1B24A7E1004A1A85 /* MyClosetNan3ViewController.xib */,
 				966590BA1B15F420004CF036 /* MyCloset2ViewController.h */,
 				966590BB1B15F420004CF036 /* MyCloset2ViewController.m */,
 				966590BC1B15F420004CF036 /* MyCloset2ViewController.xib */,
@@ -3877,12 +3865,28 @@
 				9699D5E31B1707DD006D3A37 /* MyCloset6ViewController.h */,
 				9699D5E41B1707DD006D3A37 /* MyCloset6ViewController.m */,
 				9699D5E51B1707DD006D3A37 /* MyCloset6ViewController.xib */,
-				9699D5E81B17098B006D3A37 /* MyClosetListViewController.h */,
-				9699D5E91B17098B006D3A37 /* MyClosetListViewController.m */,
-				9699D5EA1B17098B006D3A37 /* MyClosetListViewController.xib */,
+				9670D3A01B3412E6002ED503 /* MyCloset7ViewController.h */,
+				9670D3A11B3412E6002ED503 /* MyCloset7ViewController.m */,
+				9670D3A21B3412E6002ED503 /* MyCloset7ViewController.xib */,
+				A6F395001B2E7DAE004566CA /* data */,
+				968AE88F1B253917004A1A85 /* MyClosetKid2ViewController.h */,
+				968AE8901B253917004A1A85 /* MyClosetKid2ViewController.m */,
+				968AE8911B253917004A1A85 /* MyClosetKid2ViewController.xib */,
+				968AE8941B253E29004A1A85 /* MyClosetKid3ViewController.h */,
+				968AE8951B253E29004A1A85 /* MyClosetKid3ViewController.m */,
+				968AE8961B253E29004A1A85 /* MyClosetKid3ViewController.xib */,
+				968AE8991B2540AB004A1A85 /* MyClosetKidGril3ViewController.h */,
+				968AE89A1B2540AB004A1A85 /* MyClosetKidGril3ViewController.m */,
+				968AE89B1B2540AB004A1A85 /* MyClosetKidGril3ViewController.xib */,
 				968AE8691B24A25A004A1A85 /* MyClosetNan2ViewController.h */,
 				968AE86A1B24A25A004A1A85 /* MyClosetNan2ViewController.m */,
 				968AE86B1B24A25A004A1A85 /* MyClosetNan2ViewController.xib */,
+				968AE8781B24A7E1004A1A85 /* MyClosetNan3ViewController.h */,
+				968AE8791B24A7E1004A1A85 /* MyClosetNan3ViewController.m */,
+				968AE87A1B24A7E1004A1A85 /* MyClosetNan3ViewController.xib */,
+				9699D5E81B17098B006D3A37 /* MyClosetListViewController.h */,
+				9699D5E91B17098B006D3A37 /* MyClosetListViewController.m */,
+				9699D5EA1B17098B006D3A37 /* MyClosetListViewController.xib */,
 				968AE8731B24A55B004A1A85 /* MyClosetMade2ViewController.h */,
 				968AE8741B24A55B004A1A85 /* MyClosetMade2ViewController.m */,
 				968AE8751B24A55B004A1A85 /* MyClosetMade2ViewController.xib */,
@@ -4457,6 +4461,15 @@
 				969D60301AED2A7500D499C0 /* NewBrandDetailInfo.m */,
 			);
 			path = newBrand20;
+			sourceTree = "<group>";
+		};
+		96F6DE5D1B43859400E156A4 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				96F6DE5E1B43859400E156A4 /* MyAimerParser.h */,
+				96F6DE5F1B43859400E156A4 /* MyAimerParser.m */,
+			);
+			path = data;
 			sourceTree = "<group>";
 		};
 		96F8A5091B4178D400A806BB /* weiboClass */ = {
@@ -7364,6 +7377,7 @@
 				9BCA829A18C47FA300B81CA5 /* LBaseViewController.m in Sources */,
 				96A75EA619517E3000C66DB6 /* CommonListCell.m in Sources */,
 				9B7CB15818D59C4300D8DAA5 /* HomeHomeBanner.m in Sources */,
+				96F6DE601B43859400E156A4 /* MyAimerParser.m in Sources */,
 				9BD58CFB18E40D57008CD881 /* RKTabView.m in Sources */,
 				9BB306231917E24400CD4BCD /* V6CardCell.m in Sources */,
 				9B7CB10A18D59C4300D8DAA5 /* YKItem.m in Sources */,

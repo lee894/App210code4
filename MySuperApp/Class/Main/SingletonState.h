@@ -52,6 +52,9 @@
 @property (nonatomic, assign) BOOL isNewHomePageScrollToTop;//是否滚动到最顶部
 
 
+//lee999
+@property (nonatomic, retain) NSArray* arr_selectFrequence;//我选中的更换频次
+
 
 + (SingletonState*)sharedStateInstance;
 

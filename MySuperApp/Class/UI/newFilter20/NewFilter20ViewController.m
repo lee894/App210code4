@@ -245,7 +245,6 @@
     }
     
     
-    
     //    int H = filterSp + (30 +filterSp)* lineNum;
     //    [bgv setFrame:CGRectMake(0, 0, ScreenWidth, H)];
     

@@ -140,7 +140,7 @@
                 <constraint firstItem="WNB-Bb-Wl2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hKC-MS-exa"/>
                 <constraint firstItem="WNB-Bb-Wl2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nVU-Qc-zmH"/>
             </constraints>
-            <point key="canvasLocation" x="243" y="229"/>
+            <point key="canvasLocation" x="-9" y="291"/>
         </view>
     </objects>
     <resources>

@@ -29,6 +29,17 @@
 
 @implementation MyCloset3ViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        
+        self.arr_selectStyle = [[NSMutableArray alloc] initWithCapacity:0];
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -38,6 +49,7 @@
     
     str_selectStyle = @"";
     arr_btnStyle = [[NSMutableArray alloc] initWithCapacity:0];
+    
     
     [myScrollV addSubview:[self createCellView:self.closetinfo.chuanyizhidao]];
     
@@ -121,6 +133,7 @@
     for (MyButton *btns in arr_btnStyle) {
         btns.selected = NO;
     }
+    
     MyButton *btn = (MyButton*)sender;
     btn.selected = YES;
     str_selectStyle = btn.btntype;
@@ -134,8 +147,12 @@
         return;
     }
     
+    [self.arr_selectStyle addObject:str_selectStyle];
+    
+    NSLog(@"arr_selectStyle---%@",self.arr_selectStyle);
     
     MyCloset4ViewController *clv2 = [[MyCloset4ViewController alloc] initWithNibName:@"MyCloset4ViewController" bundle:nil];
+    [clv2.arr_selectStyle addObjectsFromArray:self.arr_selectStyle];
     [self.navigationController pushViewController:clv2 animated:YES];
     
 }

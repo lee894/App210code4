@@ -197,7 +197,7 @@
     int lineNum = 2; //每行的数量
     
     int ySP = 12;  //距离顶部的位置
-    int SP = 28;  //左右间距
+    int SP = 20;  //左右间距
     int SH = 22;  //上下间距
     int pW = lee1fitAllScreen(127);  //商品宽度
     int pH = lee1fitAllScreen(180);  //商品高度

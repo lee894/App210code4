@@ -16,6 +16,8 @@
     __weak IBOutlet UIScrollView *myScrollV;
     
     NSMutableArray *arr_selectStyle; //已选中的风格。
+    
+    NSMutableArray *arr_SelctV;  //
 
 }
 @end
@@ -29,6 +31,7 @@
     [self createBackBtnWithType:0];
     
     arr_selectStyle = [[NSMutableArray alloc] initWithCapacity:0];
+    arr_SelctV = [[NSMutableArray alloc] initWithCapacity:0];
     
     [myScrollV addSubview:[self createCellView:self.closetinfo.style]];
     
@@ -109,13 +112,13 @@
 
 -(IBAction)typeBtnAction:(id)sender{
     
-    
-    if ([arr_selectStyle count] == 3) {
+    MyButton*btn = (MyButton*)sender;
+
+    if ([arr_selectStyle count] == 3 && btn.selected == NO) {
         [SBPublicAlert showMBProgressHUD:@"您最多可选择3项" andWhereView:self.view hiddenTime:AlertShowTime];
         return;
     }
  
-    MyButton*btn = (MyButton*)sender;
     btn.selected = !btn.selected;
     
     if (btn.selected) {
@@ -138,6 +141,7 @@
     
     MyCloset3ViewController *clv2 = [[MyCloset3ViewController alloc] initWithNibName:@"MyCloset3ViewController" bundle:nil];
     clv2.closetinfo = self.closetinfo;
+    [clv2.arr_selectStyle addObjectsFromArray:arr_selectStyle];
     [self.navigationController pushViewController:clv2 animated:YES];
 }
 

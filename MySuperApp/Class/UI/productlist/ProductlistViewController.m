@@ -150,16 +150,22 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    UIButton *tmpBut = nil;
-    if (self.isHot) {
-        tmpBut = (UIButton *)[viewbtns viewWithTag:101];
-    }else  if (self.isOrder){
-        tmpBut = (UIButton *)[viewbtns viewWithTag:102];
-    }else {
-        tmpBut = (UIButton *)[viewbtns viewWithTag:100];
+    
+    //lee 150701 判断有数据的话，就不在请求了
+    if (contentArr.count < 1) {
+        UIButton *tmpBut = nil;
+        if (self.isHot) {
+            tmpBut = (UIButton *)[viewbtns viewWithTag:101];
+        }else  if (self.isOrder){
+            tmpBut = (UIButton *)[viewbtns viewWithTag:102];
+        }else {
+            tmpBut = (UIButton *)[viewbtns viewWithTag:100];
+        }
+        
+        [self sortBtnClick:tmpBut];
     }
-
-    [self sortBtnClick:tmpBut];
+    
+    
     
 }
 

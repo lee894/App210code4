@@ -48,10 +48,7 @@
     
     mainSev = [[MainpageServ alloc] init];
     mainSev.delegate = self;
-    [mainSev getHomePage20data];
-    
-
-    [BfdAgent recommendP:self recommendIds:nil options:nil];
+//    [mainSev getwardrobeinfo];
 }
 
 

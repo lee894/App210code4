@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>08DDEF1C-DD6B-42E3-9259-57082B475786</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>MyAimerApp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>6C78AC63A775F41BF6879FDE5F1F1DB591FF0F4E</key>
 		<string>https://github.com/lee894/App210code4.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>MyAimerApp.xcodeproj/project.xcworkspace</string>
+	<string>MyAimerApp.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>6C78AC63A775F41BF6879FDE5F1F1DB591FF0F4E</key>

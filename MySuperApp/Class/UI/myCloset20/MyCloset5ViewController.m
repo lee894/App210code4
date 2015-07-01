@@ -11,6 +11,7 @@
 #import "ZHPickView.h"
 #import "BindPhoneViewController.h"
 #import "MyClosetListViewController.h"
+#import "SingletonState.h"
 
 @interface MyCloset5ViewController ()<ZHPickViewDelegate>
 {
@@ -26,10 +27,27 @@
     IBOutlet UIButton *btn2;
     
     NSInteger selectIndex;
+    
+    NSMutableArray *arr_selectFreque;
 }
 @end
 
 @implementation MyCloset5ViewController
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        
+        self.arr_selectStyle = [[NSMutableArray alloc] initWithCapacity:0];
+        self.arr_selectSize = [[NSMutableArray alloc] initWithCapacity:0];
+        arr_selectFreque = [[NSMutableArray alloc] initWithCapacity:0];
+
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -106,19 +124,60 @@
 //定期更换提醒
 -(IBAction)aLertChangeAction:(id)sender{
     
-    
+    if (![self isSelectFrequence]) {
+        return;
+    }
+
+    [mainSev alertChangeMyClost:selectBra andDown:selectUnderpants];
+}
+
+
+
+-(BOOL)isSelectFrequence{
+
     if ([selectBra isEqualToString:@""]) {
         [SBPublicAlert showMBProgressHUD:@"请您选择文胸的更换频率" andWhereView:self.view hiddenTime:AlertShowTime];
-        return;
+        return NO;
     }
     
     if ([selectUnderpants isEqualToString:@""]) {
         
         [SBPublicAlert showMBProgressHUD:@"请您选择底裤的更换频率" andWhereView:self.view hiddenTime:AlertShowTime];
+        return NO;
+    }
+    
+    [arr_selectFreque addObject:selectBra];
+    [arr_selectFreque addObject:selectUnderpants];
+
+    return YES;
+}
+
+//跳过直接进入 衣橱
+- (IBAction)gotoClosetListAction:(id)sender {
+    
+    if (![self isSelectFrequence]) {
         return;
     }
+    
+    NSString *size = [self.arr_selectSize componentsJoinedByString:@","];
+    NSString *style = [self.arr_selectStyle componentsJoinedByString:@","];
+    NSString *freeq = [arr_selectFreque componentsJoinedByString:@","];
 
-    [mainSev alertChangeMyClost:selectBra andDown:selectUnderpants];
+    [mainSev getaddwardrobeupdata:@"女士"
+                         andcrowd:@"女士"
+                     andfrequency:freeq
+                          andsize:size
+                         andprops:style
+                          andtype:@"woman"];
+}
+
+
+
+-(void)gotoMyclosetList
+{
+    MyClosetListViewController *lstvc = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
+    [self.navigationController pushViewController:lstvc animated:YES];
+
 }
 
 
@@ -158,6 +217,13 @@
             }
                 break;
                 
+                
+            case Http_addwardrobeup20_Tag:
+            {
+                [self gotoMyclosetList];
+            }
+                break;
+                
             default:
                 break;
         }
@@ -178,19 +244,11 @@
     }
     
     if (alertView.tag == 1100) {
-
-        MyClosetListViewController *lstvc = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
-        [self.navigationController pushViewController:lstvc animated:YES];        
+        [self gotoClosetListAction:nil];
     }
 }
 
 
-- (IBAction)gotoClosetListAction:(id)sender {
-    
-    MyClosetListViewController *lstvc = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
-    [self.navigationController pushViewController:lstvc animated:YES];
-    
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
