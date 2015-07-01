@@ -406,7 +406,7 @@
 		UrlImageView* shoppingImg = [[UrlImageView alloc] init];
 		[shoppingImg setImageFromUrl:YES withUrl:item.imgurl];
 		shoppingImg.frame = CGRectMake(14, 15, 84, 103);
-		shoppingImg.backgroundColor = [UIColor clearColor];
+		//shoppingImg.backgroundColor = [UIColor clearColor];
 		[Cell.contentView addSubview:shoppingImg];
         
 		//lee999recode
@@ -632,7 +632,7 @@
             UrlImageView* shoppingImg = [[UrlImageView alloc] init];
             [shoppingImg setImageFromUrl:YES withUrl:pItem.pic];
             shoppingImg.frame = CGRectMake(xOffset, 12, lee1fitAllScreen(70), lee1fitAllScreen(90));
-            shoppingImg.backgroundColor = [UIColor clearColor];
+            //shoppingImg.backgroundColor = [UIColor clearColor];
             [Cell addSubview:shoppingImg];
             
             CGFloat fTextWidth = ScreenWidth - shoppingImg.frame.size.width - xOffset - 12 - 16;
@@ -932,7 +932,7 @@
             UrlImageView* shoppingImg = [[UrlImageView alloc] init];
             [shoppingImg setImageFromUrl:YES withUrl:pItem.pic];
             shoppingImg.frame = CGRectMake(xOffset, 12, lee1fitAllScreen(70), lee1fitAllScreen(90));
-            shoppingImg.backgroundColor = [UIColor clearColor];
+            //shoppingImg.backgroundColor = [UIColor clearColor];
             [Cell addSubview:shoppingImg];
             
             CGFloat fTextWidth = ScreenWidth - shoppingImg.frame.size.width - xOffset - 12 - 16;

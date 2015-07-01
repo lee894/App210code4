@@ -199,7 +199,10 @@
         }else
         {
             //>0
-            if (pointX + tempLabW + filterSp <ScreenWidth) {
+//            if (pointX + tempLabW + filterSp <ScreenWidth) {
+            //修改ip6p 上不能显示全部的bug
+            if (pointX + tempLabW <ScreenWidth) {
+
                 //如果当前的X 加上 当前的宽度 < 300的时候，不分行
                 
                 //pointX = pointX;
