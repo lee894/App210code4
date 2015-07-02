@@ -14,6 +14,9 @@
     __weak IBOutlet UIButton *nextBtn;
 }
 
+@property(nonatomic,strong)NSString *strselecttype; //已选中的风格
+@property(nonatomic,assign)BOOL isaddPeople; //已选中的风格
+
 
 - (IBAction)typeSelectAction:(id)sender;
 

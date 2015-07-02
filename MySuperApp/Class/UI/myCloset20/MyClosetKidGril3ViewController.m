@@ -9,19 +9,25 @@
 #import "MyClosetKidGril3ViewController.h"
 #import "ZHPickView.h"
 #import "MyClosetListViewController.h"
+#import "MyCloset6ViewController.h"
 
 
-@interface MyClosetKidGril3ViewController ()<ZHPickViewDelegate>
+@interface MyClosetKidGril3ViewController ()<ZHPickViewDelegate,ServiceDelegate>
 {
     IBOutlet UIButton* dibtn;
     IBOutlet UIButton* fubtn;
     IBOutlet UIButton* fubtn3;
 
-    
+    MainpageServ *mainSev;
     NSInteger selectIndex;
-
-
+    
+    
+    NSString *str1;
+    NSString *str2;
+    NSString *str3;
+    NSMutableArray *arr_selectSize;
 }
+
 @end
 
 @implementation MyClosetKidGril3ViewController
@@ -33,9 +39,13 @@
     [self createBackBtnWithType:0];
     [self NewHiddenTableBarwithAnimated:YES];
     
+    arr_selectSize = [[NSMutableArray alloc] initWithCapacity:0];
+
     
-    // Do any additional setup after loading the view from its nib.
+    mainSev = [[MainpageServ alloc] init];
+    mainSev.delegate = self;
 }
+
 
 - (IBAction)typeSelectAction:(id)sender {
     UIButton *btn = (UIButton*)sender;
@@ -70,16 +80,37 @@
 
     if (selectIndex==1) {
         [dibtn setTitle:[NSString stringWithFormat:@"文胸尺码 (%@)",resultString] forState:UIControlStateNormal];
+        str1 = resultString;
+
     }
     
     if (selectIndex==2) {
         [fubtn setTitle:[NSString stringWithFormat:@"底裤尺码 (%@)",resultString] forState:UIControlStateNormal];
+        str2 = resultString;
+
     }
     
     if (selectIndex==3) {
         [fubtn3 setTitle:[NSString stringWithFormat:@"睡衣尺码 (%@)",resultString] forState:UIControlStateNormal];
+        str3 = resultString;
     }
 }
+
+-(BOOL)selectMySize{
+    
+    
+    if (str1.length<1 || str2.length<1  || str3.length<1 ) {
+        [SBPublicAlert showMBProgressHUD:@"请您选择完您的尺码" andWhereView:self.view hiddenTime:AlertShowTime];
+        return NO;
+    }
+    
+    [arr_selectSize addObject:str1];
+    [arr_selectSize addObject:str2];
+    [arr_selectSize addObject:str3];
+    
+    return YES;
+}
+
 
 
 - (IBAction)nextBtnAction:(id)sender {
@@ -87,15 +118,70 @@
     UIButton *btn = (UIButton*)sender;
     if (btn.tag == 1) {
         
-        MyClosetListViewController *vc = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
-        [self.navigationController pushViewController:vc animated:YES];
+        //进入衣橱~
+        
+        if (![self selectMySize]) {
+            return;
+        }
+        
+        
+        NSString *size = [arr_selectSize componentsJoinedByString:@","];
+        
+        [mainSev getaddwardrobeupdata:@"少女"
+                             andcrowd:@"少女"
+                         andfrequency:@""
+                              andsize:size
+                             andprops:@""
+                              andtype:@"lass"];
         
     }else{
     
+        //预约测体
+        
+        MyCloset6ViewController *lstvc = [[MyCloset6ViewController alloc] initWithNibName:@"MyCloset6ViewController" bundle:nil];
+        [self.navigationController pushViewController:lstvc animated:YES];
+        
     }
-    
-
 }
+
+
+#pragma mark--- Severvice
+-(void)serviceStarted:(ServiceType)aHandle{
+}
+
+-(void)serviceFailed:(ServiceType)aHandle{
+    [SBPublicAlert hideMBprogressHUD:self.view];
+    
+}
+
+-(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel{
+    [SBPublicAlert hideMBprogressHUD:self.view];
+    
+    if(![amodel isKindOfClass:[LBaseModel class]])
+    {
+        switch ((NSUInteger)aHandle) {
+            case Http_addwardrobeup20_Tag:
+            {
+                [self gotoClosetList];
+            }
+                break;
+                
+            default:
+                break;
+        }
+        return;
+    }
+}
+
+
+
+-(void)gotoClosetList{
+    
+    MyClosetListViewController *lstvc = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
+    [self.navigationController pushViewController:lstvc animated:YES];
+}
+
+
 
 
 - (void)didReceiveMemoryWarning {

@@ -10,18 +10,34 @@
 #import "MyClosetListViewController.h"
 #import "ZHPickView.h"
 
-@interface MyClosetNan3ViewController ()<ZHPickViewDelegate>
+@interface MyClosetNan3ViewController ()<ZHPickViewDelegate,ServiceDelegate>
 {
     IBOutlet UIButton* dibtn;
     IBOutlet UIButton* fubtn;
     
-    int selectIndex;
+    NSString *str1;
+    NSString *str2;
+    
+    NSInteger selectIndex;
+    MainpageServ *mainSev;
 
-
+    NSMutableArray *arr_selectSize;
 }
 @end
 
 @implementation MyClosetNan3ViewController
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        
+        self.arr_selectStyle = [[NSMutableArray alloc] initWithCapacity:0];
+        arr_selectSize = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,9 +46,14 @@
     [self createBackBtnWithType:0];
     [self NewHiddenTableBarwithAnimated:YES];
     
+    str1 = @"";
+    str2 = @"";
     
-    // Do any additional setup after loading the view from its nib.
+    mainSev = [[MainpageServ alloc] init];
+    mainSev.delegate = self;
 }
+
+
 
 - (IBAction)typeSelectAction:(id)sender {
     UIButton *btn = (UIButton*)sender;
@@ -42,7 +63,6 @@
     
     if (btn.tag == 1) {
         //支持自定义数组： 男  内裤
-        //NSArray *array=@[@[@"1",@"小明",@"aa"],@[@"2",@"大黄",@"bb"],@[@"3",@"企鹅",@"cc"]];
         NSArray *array=@[@[@"165",@"170",@"175",@"180",@"185",@"190"]];
        ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
         _pickview.delegate = self;
@@ -50,7 +70,6 @@
     }
    else if (btn.tag == 2) {
         //支持自定义数组：
-        //NSArray *array=@[@[@"1",@"小明",@"aa"],@[@"2",@"大黄",@"bb"],@[@"3",@"企鹅",@"cc"]];
        NSArray *array=@[@[@"165",@"170",@"175",@"180",@"185",@"190"]];
         ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
        _pickview.delegate = self;
@@ -62,17 +81,82 @@
 
     if (selectIndex==1) {
         [dibtn setTitle:[NSString stringWithFormat:@"底裤尺码 (%@)",resultString] forState:UIControlStateNormal];
+        str1 = resultString;
     }
     
     if (selectIndex==2) {
         [fubtn setTitle:[NSString stringWithFormat:@"家居服尺码 (%@)",resultString] forState:UIControlStateNormal];
+        str2 = resultString;
     }
 }
 
 
+-(BOOL)selectMySize{
+    
+    if (str1.length<1 || str2.length<1) {
+        [SBPublicAlert showMBProgressHUD:@"请您选择完您的尺码" andWhereView:self.view hiddenTime:AlertShowTime];
+        return NO;
+    }
+    
+    [arr_selectSize addObject:str1];
+    [arr_selectSize addObject:str2];
+    return YES;
+}
+
 - (IBAction)nextBtnAction:(id)sender {
-        MyClosetListViewController *lstvc = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
-        [self.navigationController pushViewController:lstvc animated:YES];
+    
+    if (![self selectMySize]) {
+        return;
+    }
+    
+    NSString *size = [arr_selectSize componentsJoinedByString:@","];
+    NSString *style = [self.arr_selectStyle componentsJoinedByString:@","];
+    
+    [mainSev getaddwardrobeupdata:@"男士"
+                         andcrowd:@"男士"
+                     andfrequency:@""
+                          andsize:size
+                         andprops:style
+                          andtype:@"man"];
+}
+
+
+
+
+#pragma mark--- Severvice
+-(void)serviceStarted:(ServiceType)aHandle{
+}
+
+-(void)serviceFailed:(ServiceType)aHandle{
+    [SBPublicAlert hideMBprogressHUD:self.view];
+    
+}
+
+-(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel{
+    [SBPublicAlert hideMBprogressHUD:self.view];
+    
+    if(![amodel isKindOfClass:[LBaseModel class]])
+    {
+        switch ((NSUInteger)aHandle) {
+            case Http_addwardrobeup20_Tag:
+            {
+                [self gotoClosetList];
+            }
+                break;
+                
+            default:
+                break;
+        }
+        return;
+    }
+}
+
+
+-(void)gotoClosetList{
+
+    MyClosetListViewController *lstvc = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
+    [self.navigationController pushViewController:lstvc animated:YES];
+    
 }
 
 

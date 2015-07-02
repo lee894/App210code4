@@ -68,7 +68,14 @@
 -(NewhomeNormalData*)home_limitsale;
 -(NewhomeNormalData*)home_hot;
 -(NewhomeNormalData*)home_news;
+
+-(NSString*)is_wardrobe;
+
+
 @end
+
+
+
 
 
 

@@ -20,7 +20,6 @@
     MainpageServ *mainSev;
     MyClosetInfo *_closetinfo;
 
-    
     NSInteger selectTag;
 
     IBOutlet UILabel *nameLab1;
@@ -33,6 +32,9 @@
     IBOutlet UIButton *namebtn2;
     IBOutlet UIButton *namebtn3;
     IBOutlet UIButton *namebtn4;
+    
+    NSArray *arr_selecttype;
+    
 }
 @end
 
@@ -48,7 +50,11 @@
     
     mainSev = [[MainpageServ alloc] init];
     mainSev.delegate = self;
-//    [mainSev getwardrobeinfo];
+
+    arr_selecttype = [self.strselecttype componentsSeparatedByString:@","];
+    
+    
+    
 }
 
 
@@ -255,10 +261,7 @@
         switch ((NSUInteger)aHandle) {
             case Http_wardrobe_Tag:
             {
-                _closetinfo = [[[MyClosetParser alloc] init] parseClosetInfo:amodel];
-                
-                NSLog(@"--%@",((MyClosetData*)[_closetinfo.chuanyizhidao objectAtIndex:1]).wardrobe_name);
-            
+                _closetinfo = [[[MyClosetParser alloc] init] parseClosetInfo:amodel];            
                 [self jumpNextPage];
             }
                 break;
@@ -275,6 +278,13 @@
     switch (selectTag) {
         case 1:
         {
+            if ([arr_selecttype containsObject:@"1"] && self.isaddPeople) {
+                [SBPublicAlert showMBProgressHUD:@"您已添加过女士，请添加其他成员" andWhereView:self.view hiddenTime:AlertShowTime];
+                return;
+            }
+            
+            
+            //去女士~~
             MyCloset2ViewController *clv2 = [[MyCloset2ViewController alloc] initWithNibName:@"MyCloset2ViewController" bundle:nil];
             clv2.selectType = selectTag;
             clv2.closetinfo = _closetinfo;
@@ -284,6 +294,12 @@
             
         case 2:
         {
+            if ([arr_selecttype containsObject:@"2"]&& self.isaddPeople) {
+                [SBPublicAlert showMBProgressHUD:@"您已添加过男士，请添加其他成员" andWhereView:self.view hiddenTime:AlertShowTime];
+                return;
+            }
+            
+            //去男士~
             MyClosetNan2ViewController *clv2 = [[MyClosetNan2ViewController alloc] initWithNibName:@"MyClosetNan2ViewController" bundle:nil];
             clv2.closetinfo = _closetinfo;
             [self.navigationController pushViewController:clv2 animated:YES];
@@ -293,6 +309,11 @@
             
         case 3:
         {
+            if ([arr_selecttype containsObject:@"3"]&& self.isaddPeople) {
+                [SBPublicAlert showMBProgressHUD:@"您已添加过儿童，请添加其他成员" andWhereView:self.view hiddenTime:AlertShowTime];
+                return;
+            }
+            //去儿童！
             MyClosetKid2ViewController *clv2 = [[MyClosetKid2ViewController alloc] initWithNibName:@"MyClosetKid2ViewController" bundle:nil];
             [self.navigationController pushViewController:clv2 animated:YES];
             
