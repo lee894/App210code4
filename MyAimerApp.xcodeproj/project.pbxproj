@@ -740,6 +740,8 @@
 		96F2A50F1ADAC20100E1A04B /* NewMaginzeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2A50E1ADAC20100E1A04B /* NewMaginzeParser.m */; };
 		96F632641AEFE21E00F4BE14 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96F632631AEFE21E00F4BE14 /* Accelerate.framework */; };
 		96F6DE601B43859400E156A4 /* MyAimerParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F6DE5F1B43859400E156A4 /* MyAimerParser.m */; };
+		96F6DE641B44E57F00E156A4 /* MyClosetSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F6DE621B44E57F00E156A4 /* MyClosetSettingVC.m */; };
+		96F6DE651B44E57F00E156A4 /* MyClosetSettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE631B44E57F00E156A4 /* MyClosetSettingVC.xib */; };
 		96FF99F81B268CE400AA82BF /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96FF99F51B268CE400AA82BF /* libWeiboSDK.a */; };
 		96FF99F91B268CE400AA82BF /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96FF99F61B268CE400AA82BF /* WeiboSDK.bundle */; };
 		9B0882FF18F7C21400F76D65 /* YKChoseGiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0882FD18F7C21400F76D65 /* YKChoseGiftViewController.m */; };
@@ -2183,6 +2185,9 @@
 		96F632631AEFE21E00F4BE14 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		96F6DE5E1B43859400E156A4 /* MyAimerParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAimerParser.h; sourceTree = "<group>"; };
 		96F6DE5F1B43859400E156A4 /* MyAimerParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAimerParser.m; sourceTree = "<group>"; };
+		96F6DE611B44E57F00E156A4 /* MyClosetSettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClosetSettingVC.h; sourceTree = "<group>"; };
+		96F6DE621B44E57F00E156A4 /* MyClosetSettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClosetSettingVC.m; sourceTree = "<group>"; };
+		96F6DE631B44E57F00E156A4 /* MyClosetSettingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyClosetSettingVC.xib; sourceTree = "<group>"; };
 		96F8A50A1B4178D400A806BB /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
 		96F8A50B1B4178D400A806BB /* WBHttpRequest+WeiboToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboToken.h"; sourceTree = "<group>"; };
 		96F8A50C1B4178D400A806BB /* WBHttpRequest+WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboUser.h"; sourceTree = "<group>"; };
@@ -3868,6 +3873,18 @@
 				9670D3A01B3412E6002ED503 /* MyCloset7ViewController.h */,
 				9670D3A11B3412E6002ED503 /* MyCloset7ViewController.m */,
 				9670D3A21B3412E6002ED503 /* MyCloset7ViewController.xib */,
+				968AE8691B24A25A004A1A85 /* MyClosetNan2ViewController.h */,
+				968AE86A1B24A25A004A1A85 /* MyClosetNan2ViewController.m */,
+				968AE86B1B24A25A004A1A85 /* MyClosetNan2ViewController.xib */,
+				968AE8781B24A7E1004A1A85 /* MyClosetNan3ViewController.h */,
+				968AE8791B24A7E1004A1A85 /* MyClosetNan3ViewController.m */,
+				968AE87A1B24A7E1004A1A85 /* MyClosetNan3ViewController.xib */,
+				9699D5E81B17098B006D3A37 /* MyClosetListViewController.h */,
+				9699D5E91B17098B006D3A37 /* MyClosetListViewController.m */,
+				9699D5EA1B17098B006D3A37 /* MyClosetListViewController.xib */,
+				96F6DE611B44E57F00E156A4 /* MyClosetSettingVC.h */,
+				96F6DE621B44E57F00E156A4 /* MyClosetSettingVC.m */,
+				96F6DE631B44E57F00E156A4 /* MyClosetSettingVC.xib */,
 				A6F395001B2E7DAE004566CA /* data */,
 				968AE88F1B253917004A1A85 /* MyClosetKid2ViewController.h */,
 				968AE8901B253917004A1A85 /* MyClosetKid2ViewController.m */,
@@ -3878,15 +3895,6 @@
 				968AE8991B2540AB004A1A85 /* MyClosetKidGril3ViewController.h */,
 				968AE89A1B2540AB004A1A85 /* MyClosetKidGril3ViewController.m */,
 				968AE89B1B2540AB004A1A85 /* MyClosetKidGril3ViewController.xib */,
-				968AE8691B24A25A004A1A85 /* MyClosetNan2ViewController.h */,
-				968AE86A1B24A25A004A1A85 /* MyClosetNan2ViewController.m */,
-				968AE86B1B24A25A004A1A85 /* MyClosetNan2ViewController.xib */,
-				968AE8781B24A7E1004A1A85 /* MyClosetNan3ViewController.h */,
-				968AE8791B24A7E1004A1A85 /* MyClosetNan3ViewController.m */,
-				968AE87A1B24A7E1004A1A85 /* MyClosetNan3ViewController.xib */,
-				9699D5E81B17098B006D3A37 /* MyClosetListViewController.h */,
-				9699D5E91B17098B006D3A37 /* MyClosetListViewController.m */,
-				9699D5EA1B17098B006D3A37 /* MyClosetListViewController.xib */,
 				968AE8731B24A55B004A1A85 /* MyClosetMade2ViewController.h */,
 				968AE8741B24A55B004A1A85 /* MyClosetMade2ViewController.m */,
 				968AE8751B24A55B004A1A85 /* MyClosetMade2ViewController.xib */,
@@ -6929,6 +6937,7 @@
 				9B53949218EBEA4300084F6B /* YKProductDetailCell.xib in Resources */,
 				9B69572B18E3E7110051B562 /* ActiveLoginViewController.xib in Resources */,
 				962694921A135FB700A0BC7F /* search_bg_icon.png in Resources */,
+				96F6DE651B44E57F00E156A4 /* MyClosetSettingVC.xib in Resources */,
 				A6F394FC1B2E7D7A004566CA /* lp_btn_shop_normal@2x.png in Resources */,
 				9698F6451AEAA713009A29EC /* brand_3_s@2x.png in Resources */,
 				9685FA631ADD75ED00BF2DE8 /* t_ico_back_hover@2x.png in Resources */,
@@ -7479,6 +7488,7 @@
 				9BD58CFC18E40D57008CD881 /* UIButton+Badge.m in Sources */,
 				9B7CB0E618D59C4300D8DAA5 /* VersionComment.m in Sources */,
 				9B7CB10018D59C4300D8DAA5 /* GetexchangescorerecordGetModel.m in Sources */,
+				96F6DE641B44E57F00E156A4 /* MyClosetSettingVC.m in Sources */,
 				968C290D1AE17E0E00D1ABFD /* DSURLView.m in Sources */,
 				2F79CC0E18E1C81600E4A38B /* ShareMsgView.m in Sources */,
 				961182EF1AD80F5E00D14A00 /* NSObject+ArrayGetData.m in Sources */,
@@ -7553,7 +7563,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "59dddc46-b007-4d08-9233-0a9816e1604d";
+				PROVISIONING_PROFILE = "51fa3914-3cc0-4835-a804-966ec2411c35";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -7589,7 +7599,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "59dddc46-b007-4d08-9233-0a9816e1604d";
+				PROVISIONING_PROFILE = "51fa3914-3cc0-4835-a804-966ec2411c35";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -7649,7 +7659,7 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = MyAimerApp;
-				PROVISIONING_PROFILE = "59dddc46-b007-4d08-9233-0a9816e1604d";
+				PROVISIONING_PROFILE = "51fa3914-3cc0-4835-a804-966ec2411c35";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -7710,7 +7720,7 @@
 					"-fobjc-arc",
 				);
 				PRODUCT_NAME = MyAimerApp;
-				PROVISIONING_PROFILE = "59dddc46-b007-4d08-9233-0a9816e1604d";
+				PROVISIONING_PROFILE = "51fa3914-3cc0-4835-a804-966ec2411c35";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALID_ARCHS = "armv7 armv7s arm64";
