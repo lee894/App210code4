@@ -177,6 +177,7 @@
             UIView* v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, _vToolbar.frame.size.height)];
             [_tbPackage setTableFooterView:v];
             
+            [self createEditbtn];
 //            UIButton* btnShowPackage = [UIButton buttonWithType:UIButtonTypeCustom];
 //            [btnShowPackage setFrame:CGRectMake(0, 0, 0, 0)];
 //            [btnShowPackage addTarget:self action:@selector(showPackage:) forControlEvents:UIControlEventTouchUpInside];
@@ -791,23 +792,31 @@
         [vUnit addSubview:uiv];
         
         UILabel* lblName = [[UILabel alloc] init];
-        [lblName setFont:[UIFont systemFontOfSize:11]];
+//        [lblName setFont:[UIFont systemFontOfSize:11]];
         [lblName setNumberOfLines:2];
-        [lblName setText:pgi.name];
-        [lblName setTextColor:[UIColor colorWithHexString:@"#333333"]];
+//        [lblName setText:pgi.name];
+//        [lblName setTextColor:[UIColor colorWithHexString:@"#333333"]];
         [lblName setLineBreakMode:NSLineBreakByTruncatingTail];
         NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
         [mps setLineBreakMode:NSLineBreakByCharWrapping];
-        CGRect rcName = [lblName.text boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 36) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSParagraphStyleAttributeName : mps, NSFontAttributeName : lblName.font} context:nil];
+        [mps setLineSpacing:6];
+
+        NSMutableAttributedString* maStr = [[NSMutableAttributedString alloc] initWithString:pgi.name];
+        NSUInteger nLen = pgi.name.length;
+        [maStr addAttribute:NSParagraphStyleAttributeName value:mps range:NSMakeRange(0, nLen)];
+        [maStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:lee1fitAllScreen(11)] range:NSMakeRange(0, nLen)];
+        [lblName setAttributedText:maStr];
+        
+        CGRect rcName = [lblName.attributedText boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 40) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil];
         [lblName setFrame:CGRectMake(10, uiv.frame.size.height + uiv.frame.origin.y + 12, rcName.size.width, rcName.size.height)];
         [vUnit addSubview:lblName];
         
         UILabel* lblPrice = [[UILabel alloc] init];
-        [lblPrice setFont:[UIFont systemFontOfSize:11]];
+        [lblPrice setFont:[UIFont systemFontOfSize:lee1fitAllScreen(11)]];
         [lblPrice setText:[NSString stringWithFormat:@"￥%@", pgi.price]];
         [lblPrice setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
-        CGRect rcPrice = [lblName.text boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 36) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblPrice.font} context:nil];
-        [lblPrice setFrame:CGRectMake(lblName.frame.origin.x, vUnit.frame.size.height - 15 - rcPrice.size.height, rcPrice.size.width, rcPrice.size.height)];
+        CGRect rcPrice = [lblPrice.text boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 36) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblPrice.font} context:nil];
+        [lblPrice setFrame:CGRectMake(lblName.frame.origin.x, lblName.frame.size.height + lblName.frame.origin.y + 10 - (rcPrice.size.height - lblPrice.font.pointSize), rcPrice.size.width, rcPrice.size.height)];
         [vUnit addSubview:lblPrice];
         
         UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -979,4 +988,18 @@
     }
 }
 
+#pragma mark---  编辑购车按钮的相关功能
+//创建说明
+-(void)createEditbtn{
+    //创建右边按钮
+    [self createRightBtn];
+    [self.navbtnRight setTitle:@"说明" forState:UIControlStateNormal];
+    [self.navbtnRight setFrame:CGRectMake(242, 7, 66, 32)];
+    [self.navbtnRight addTarget:self action:@selector(showInfo:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)showInfo:(UIButton*)sender
+{
+    
+}
 @end
