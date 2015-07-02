@@ -606,13 +606,13 @@
         if (orderDetail.itemSuit.count == 0) {
             four = 4 + orderDetail.itemSuit.count;
             five = 5 + orderDetail.itemSuit.count;
-            six = 6 +orderDetail.itemSuit.count;
-            seven = 7+orderDetail.itemSuit.count;
+            six = 6 +  orderDetail.itemSuit.count;
+            seven = 7+ orderDetail.itemSuit.count;
         }else {
             four = 3 + orderDetail.itemSuit.count;
             five = 4 + orderDetail.itemSuit.count;
-            six = 5 +orderDetail.itemSuit.count;
-            seven = 6+orderDetail.itemSuit.count;
+            six = 5 +  orderDetail.itemSuit.count;
+            seven = 6+ orderDetail.itemSuit.count;
         }
         
         if (section == 0) {

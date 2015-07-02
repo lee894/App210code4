@@ -24,6 +24,7 @@
 #import "MyCloset1ViewController.h"
 #import "MyClosetListViewController.h"
 #import "BrandListViewController.h"
+#import "MyAimerParser.h"
 
 
 #import "ImproveInformationViewController.h"
@@ -34,8 +35,9 @@
 {
     UIImageView *bgBut;
     MainpageServ *mainSer;
+    MyAimerInfo *myAimerInfo;
 }
-@property (nonatomic, retain) MoerMoreModel  *moreModel;
+
 @property (nonatomic, weak) IBOutlet UITableView *tableList;
 @end
 
@@ -127,7 +129,7 @@
     switch (sender.tag) {
         case 11://代付款
         {
-            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
             [TalkingData trackEvent:@"5010" label:@"待付款" parameters:dic1];
             
             OrderViewController *tempOrder = [[OrderViewController alloc] initWithNibName:@"OrderViewController" bundle:nil];
@@ -138,7 +140,7 @@
             break;
         case 12://待处理
         {
-            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
             [TalkingData trackEvent:@"5010" label:@"待处理" parameters:dic1];
             
             OrderViewController *tempOrder = [[OrderViewController alloc] initWithNibName:@"OrderViewController" bundle:nil];
@@ -149,7 +151,7 @@
             break;
         case 13://待评价
         {
-            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
             [TalkingData trackEvent:@"5010" label:@"待评价" parameters:dic1];
             
             OrderViewController *tempOrder = [[OrderViewController alloc] initWithNibName:@"OrderViewController" bundle:nil];
@@ -185,17 +187,16 @@
     [SBPublicAlert hideMBprogressHUD:self.view];
     LBaseModel *model = (LBaseModel *)amodel;
     
-    switch (model.requestTag) {
-        case Http_More_Tag:
-            if (!model.errorMessage) {
-                _moreModel = (MoerMoreModel *)model;
+    //lee999 新增more20解析
+    if(![amodel isKindOfClass:[LBaseModel class]])
+    {
+        switch ((NSUInteger)aHandle) {
+            case Http_More20_Tag:
+            {
+                myAimerInfo = [[MyAimerParser alloc] parsemyAimerInfo:amodel];
                 
-                
-                [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%.f",[[_moreModel userinfo] shopcartcount]] forKey:@"totalNUM"];
-                
-                
+                [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",[[myAimerInfo userinfo] shopcartcount]] forKey:@"totalNUM"];
                 [UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
-                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TotleNumber" object:nil];
                 
                 //lee999 设置气泡
@@ -210,14 +211,54 @@
                 
                 [SBPublicAlert hideMBprogressHUD:self.view];
                 
-                NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
+                NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
                 [TalkingData trackEvent:@"5010" label:@"我的爱慕" parameters:dic1];
                 
                 [_tableList reloadData];
-            }else{
-                [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:1.0];
             }
-            break;
+                break;
+                
+            default:
+                break;
+        }
+        return;
+    }
+    //end
+    
+    
+    switch (model.requestTag) {
+//        case Http_More_Tag:
+//            if (!model.errorMessage) {
+//                _moreModel = (MoerMoreModel *)model;
+//                
+//                
+//                [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%.f",[[_moreModel userinfo] shopcartcount]] forKey:@"totalNUM"];
+//                
+//                
+//                [UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
+//                
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"TotleNumber" object:nil];
+//                
+//                //lee999 设置气泡
+//                AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//                if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue] > 0) {
+//                    
+//                    [[[[app.mytabBarController tabBar] items] objectAtIndex:3] setBadgeValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]];
+//                }else{
+//                    [[[[app.mytabBarController tabBar] items] objectAtIndex:3] setBadgeValue:@""];
+//                }
+//                
+//                
+//                [SBPublicAlert hideMBprogressHUD:self.view];
+//                
+//                NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
+//                [TalkingData trackEvent:@"5010" label:@"我的爱慕" parameters:dic1];
+//                
+//                [_tableList reloadData];
+//            }else{
+//                [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:1.0];
+//            }
+//            break;
         case Http_Logout_Tag:
         {
             //退出登录
@@ -351,8 +392,8 @@
             [btn setFrame:CGRectMake((headAllV.width - imag.size.width)/2, 12, imag.size.width, imag.size.height)];
             [headAllV addSubview:btn];
             
-            if ([_moreModel.userinfo.userface description].length > 0) {
-                [btn setImageWithURL:[NSURL URLWithString:_moreModel.userinfo.userface] placeholderImage:[UIImage imageNamed:@"defaulthead.jpg"]];
+            if ([myAimerInfo.userinfo.userface description].length > 0) {
+                [btn setImageWithURL:[NSURL URLWithString:myAimerInfo.userinfo.userface] placeholderImage:[UIImage imageNamed:@"defaulthead.jpg"]];
             }
             
             
@@ -369,7 +410,7 @@
             
             //name
             UILabel * noticeTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, btn.frame.size.height + lee1fitAllScreen(12), headAllV.width - 20, 30)];
-            noticeTitle.text = _moreModel.userinfo.username;
+            noticeTitle.text = myAimerInfo.userinfo.username;
             noticeTitle.textColor = [UIColor colorWithHexString:@"0xe4a1a1"];//UIColorFromRGB(0xB90023);
             noticeTitle.backgroundColor = [UIColor clearColor];
             noticeTitle.font = [UIFont systemFontOfSize:14];
@@ -420,9 +461,9 @@
             
             UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn1 setTitle:[NSString stringWithFormat:@"待付款"] forState:UIControlStateNormal];
-            if ([[_moreModel.userinfo.nopay description] intValue] > 0) {
+            if ([[myAimerInfo.userinfo.nopay description] intValue] > 0) {
                 
-                NSInteger num = [[_moreModel.userinfo.nopay description] intValue];
+                NSInteger num = [[myAimerInfo.userinfo.nopay description] intValue];
                 NSString *strnum = @"";
                 if (num>99) {
                     strnum = @"99+";
@@ -444,9 +485,9 @@
             
             UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn2 setTitle:[NSString stringWithFormat:@"待评价"] forState:UIControlStateNormal];
-            if ([_moreModel.userinfo.norates class] != [NSNull class] && [[_moreModel.userinfo.norates description] intValue] > 0) {
+            if ([myAimerInfo.userinfo.norates class] != [NSNull class] && [[myAimerInfo.userinfo.norates description] intValue] > 0) {
                 
-                NSInteger num = [[_moreModel.userinfo.norates description] intValue];
+                NSInteger num = [[myAimerInfo.userinfo.norates description] intValue];
                 NSString *strnum = @"";
                 if (num>99) {
                     strnum = @"99+";
@@ -468,9 +509,9 @@
             
             UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn3 setTitle:[NSString stringWithFormat:@"待处理"] forState:UIControlStateNormal];
-            if ([[_moreModel.userinfo.nodispose description] intValue] > 0) {
+            if ([[myAimerInfo.userinfo.nodispose description] intValue] > 0) {
                 
-                NSInteger num = [[_moreModel.userinfo.nodispose description] intValue];
+                NSInteger num = [[myAimerInfo.userinfo.nodispose description] intValue];
                 NSString *strnum = @"";
                 if (num>99) {
                     strnum = @"99+";
@@ -485,10 +526,6 @@
             [btn3 setTag:12];
             [btn3 addTarget:self action:@selector(shopOrUnhandelOrUnaccess:) forControlEvents:UIControlEventTouchUpInside];
             [cell addSubview:btn3];
-            
-//            UIView *sepV3 = [[UIView alloc] initWithFrame:CGRectMake(0, 43.5, ScreenWidth, 0.5)];
-//            [sepV3 setBackgroundColor:[UIColor colorWithHexString:@"333333"]];
-//            [cell addSubview:sepV3];
             
             return cell;
         }
@@ -555,9 +592,9 @@
             {
                 universalCell.labelTitle.text = @"绑定手机";
                 
-                if ([_moreModel.userinfo.isbind isEqualToString:@"0"]) {
+                if ([myAimerInfo.userinfo.isbind isEqualToString:@"0"]) {
                     universalCell.labelDetail.text = @"未绑定";
-                }else if([_moreModel.userinfo.isbind isEqualToString:@"1"]){
+                }else if([myAimerInfo.userinfo.isbind isEqualToString:@"1"]){
                     universalCell.labelDetail.text = @"已绑定";
                     universalCell.imgViewBg.hidden = YES;
                 }
@@ -690,7 +727,7 @@
         case 2:
         {
             //我的收藏
-            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
             [TalkingData trackEvent:@"5010" label:@"收藏" parameters:dic1];
             
             MyFavAll20ViewController *favvc = [[MyFavAll20ViewController alloc] init];
@@ -723,8 +760,16 @@
         case 6:
         {
             //私人衣橱
-            MyClosetListViewController *vc1 = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
-            [self.navigationController pushViewController:vc1 animated:YES];
+            if ([myAimerInfo.userinfo.is_wardrobe isEqualToString:@""]) {
+                
+                MyCloset1ViewController *vc1 = [[MyCloset1ViewController alloc] initWithNibName:@"MyCloset1ViewController" bundle:nil];
+                [self.navigationController pushViewController:vc1 animated:YES];
+            }else{
+                
+                MyClosetListViewController *vc1 = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
+                vc1.strselectStr = myAimerInfo.userinfo.is_wardrobe;
+                [self.navigationController pushViewController:vc1 animated:YES];
+            }
         }
             break;
         case 7:
@@ -755,7 +800,7 @@
             tempOrder.howEnter = 1;
             tempOrder.ishowHeadView = YES;
             //lee999
-            MoerUserinfo*info = _moreModel.userinfo;
+            UserInfo *info = myAimerInfo.userinfo;
             tempOrder.bandgeNum1 = [info.nodispose isKindOfClass:[NSNull class]] ? @"0" : info.nodispose;
             int noaccess = (int)info.norates;
             tempOrder.bandgeNum2 = [NSString stringWithFormat:@"%d",noaccess];
@@ -773,7 +818,7 @@
         case 5:
         {
             //@"绑定手机";
-            if ([_moreModel.userinfo.isbind isEqualToString:@"0"]) {
+            if ([myAimerInfo.userinfo.isbind isEqualToString:@"0"]) {
                 BindPhoneViewController *tempBindPhone = [[BindPhoneViewController alloc] initWithNibName:@"BindPhoneViewController" bundle:nil];
                 [self.navigationController  pushViewController:tempBindPhone animated:YES];
             }
@@ -908,7 +953,7 @@
 #pragma mark-- 积分优惠
 - (void)jifenYouHui {
     
-    NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
+    NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
     [TalkingData trackEvent:@"5010" label:@"积分优惠" parameters:dic1];
     
     BonusTableViewController *ctrl = [[BonusTableViewController alloc] init];
@@ -941,7 +986,6 @@
     } else if (buttonIndex == 1) {//从相册中获取
         imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self.navigationController presentModalViewController:imagePickerController animated:YES];
-        
     }
 }
 
