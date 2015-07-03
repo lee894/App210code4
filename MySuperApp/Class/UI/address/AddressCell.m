@@ -41,8 +41,6 @@
 //        labelPhone.frame = CGRectMake(33, imageBackground.frame.origin.y+55, 150, 21);
 //        tempArrow.frame = CGRectMake(265,imageBackground.frame.origin.y+35, 7, 11);
         
-        
-        
         labelName.frame = CGRectMake(25, 20, lee1fitAllScreen(100), 21);
         labelMessage.frame = CGRectMake(25, 43, lee1fitAllScreen(220), 30);
         labelPhone.frame = CGRectMake(24, 73, lee1fitAllScreen(100), 21);
@@ -62,8 +60,9 @@
 - (void)setContentWithArray:(AddressAddresslist *)address
 {
     labelName.text = address.userName;
-    labelMessage.text = [NSString stringWithFormat:@"%@%@%@%@",address.province,address.city,address.county,address.address];
-    labelPhone.text = address.mobile;
+    labelMessage.text = [NSString stringWithFormat:@"地址：%@%@%@%@",address.province,address.city,address.county,address.address];
+    labelPhone.text = [NSString stringWithFormat:@"电话：%@",address.mobile];
+    
 }
 
 @end

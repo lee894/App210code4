@@ -424,11 +424,11 @@
     //lee999 新增头部banner
     if ([_homeinfo.top_banner count]>0) {
         
-        UIView *headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(110))];
+        UIView *headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(180))];
         [headV setBackgroundColor:[UIColor whiteColor]];
         [myTableV setTableHeaderView:headV];
         
-        UrlImageButton *bannerBtn = [[UrlImageButton alloc] initWithFrame:CGRectMake(0,5,ScreenWidth,lee1fitAllScreen(100))];
+        UrlImageButton *bannerBtn = [[UrlImageButton alloc] initWithFrame:CGRectMake(0,5,ScreenWidth,lee1fitAllScreen(170))];
         NewhomeNormalData *topbannerModel = [_homeinfo.top_banner objectAtIndex:0 isArray:nil];
         [bannerBtn setImageFromUrl:NO withUrl:topbannerModel.pic];
         bannerBtn.imageView.layer.masksToBounds = YES;

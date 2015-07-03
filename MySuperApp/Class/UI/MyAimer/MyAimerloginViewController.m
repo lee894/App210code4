@@ -227,38 +227,6 @@
     
     
     switch (model.requestTag) {
-//        case Http_More_Tag:
-//            if (!model.errorMessage) {
-//                _moreModel = (MoerMoreModel *)model;
-//                
-//                
-//                [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%.f",[[_moreModel userinfo] shopcartcount]] forKey:@"totalNUM"];
-//                
-//                
-//                [UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
-//                
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"TotleNumber" object:nil];
-//                
-//                //lee999 设置气泡
-//                AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//                if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue] > 0) {
-//                    
-//                    [[[[app.mytabBarController tabBar] items] objectAtIndex:3] setBadgeValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]];
-//                }else{
-//                    [[[[app.mytabBarController tabBar] items] objectAtIndex:3] setBadgeValue:@""];
-//                }
-//                
-//                
-//                [SBPublicAlert hideMBprogressHUD:self.view];
-//                
-//                NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
-//                [TalkingData trackEvent:@"5010" label:@"我的爱慕" parameters:dic1];
-//                
-//                [_tableList reloadData];
-//            }else{
-//                [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:1.0];
-//            }
-//            break;
         case Http_Logout_Tag:
         {
             //退出登录
@@ -343,12 +311,12 @@
             return 44;
             break;
         case 3:
-            return lee1fitAllScreen(160);
+            return lee1fitAllScreen(165);
             break;
         case 4:
             return 44;
             break;
-        case 8:
+        case 9:
             return lee1fitAllScreen(120);
             break;
         default:
@@ -361,7 +329,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 9;
+    return 10; //+1 增加联系客服
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -480,7 +448,7 @@
             [cell addSubview:btn1];
             
             UIView *sepV1 = [[UIView alloc] initWithFrame:CGRectMake(ScreenWidth/3, 0, 0.5, 44)];
-            [sepV1 setBackgroundColor:[UIColor colorWithHexString:@"333333"]];
+            [sepV1 setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
             [cell addSubview:sepV1];
             
             UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -504,7 +472,7 @@
             [cell addSubview:btn2];
             
             UIView *sepV2 = [[UIView alloc] initWithFrame:CGRectMake((ScreenWidth/3)*2, 0, 0.5, 44)];
-            [sepV2 setBackgroundColor:[UIColor colorWithHexString:@"333333"]];
+            [sepV2 setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
             [cell addSubview:sepV2];
             
             UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -541,12 +509,15 @@
                 tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
                 [cell setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6"]];
                 
+                NSInteger sp = 10; //间隔10
+                NSInteger BW = (ScreenWidth-5*sp)/4;
+                
                 for (NSInteger i = 0; i < 8; ++i) {
                     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-                    [btn setFrame:CGRectMake((i % 4) * (lee1fitAllScreen(68) + 10) + 10, i / 4 * (lee1fitAllScreen(66) + 10) + 10, lee1fitAllScreen(66), lee1fitAllScreen(66))];
+                    [btn setFrame:CGRectMake((i % 4) * (BW + 10) + 10, i / 4 * (BW + 10) + 10, BW, BW)];
                     [btn setTag:i];
                     NSString* strImgName = [NSString stringWithFormat:@"my_am_ico_%ld", (long)(i + 1)];
-                    [btn setImage:[UIImage imageNamed:strImgName] forState:UIControlStateNormal];
+                    [btn setBackgroundImage:[UIImage imageNamed:strImgName] forState:UIControlStateNormal];
                     [btn addTarget:self action:@selector(toNextFromThridCell:) forControlEvents:UIControlEventTouchUpInside];
                     [cell addSubview:btn];
                 }
@@ -558,7 +529,7 @@
             break;
             
             //尾部
-        case 8:
+        case 9:
         {
             UITableViewCell *endCell = [[[NSBundle mainBundle] loadNibNamed:@"AimerLastCell" owner:self options:nil] lastObject];
             endCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -570,7 +541,7 @@
     }
     
     //中间分区
-    if (indexPath.row != 0 && indexPath.row != 8) {
+    if (indexPath.row != 0 && indexPath.row != 9) {
         
         UniversalCell *universalCell = [tableView dequeueReusableCellWithIdentifier:identifierUniversal];
         //if (universalCell == nil) {
@@ -602,77 +573,21 @@
                 break;
             case 6:
             {
-                universalCell.labelTitle.text = @"退出登录";
-            }
-                break;
-            case 7:
-            {
-                universalCell.labelTitle.text = @"应用评分";
+                universalCell.labelTitle.text = @"联系客服";
             }
                 break;
                 
-                //            {
-                //                if (indexPath.row == 0) {
-                //
-                //                    universalCell.imgViewBg.image = [UIImage imageNamed:@"list_bg_01.png"];
-                //
-                //                }else if (indexPath.row >0 && indexPath.row < 4){
-                //
-                //                    universalCell.imgViewBg.image = [UIImage imageNamed:@"list_bg_02.png"];
-                //
-                //                }else if(indexPath.row == 4){
-                //
-                //                    UIButton *but = [UIButton buttonWithType:UIButtonTypeCustom];
-                //                    [but setFrame:CGRectMake(270, 10, 24, 24)];
-                //                    [but setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                //                    [but setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-                //
-                //                    [but setTitle:@"关" forState:UIControlStateNormal];
-                //                    [but setTitle:@"开" forState:UIControlStateSelected];
-                //                    [but setBackgroundImage:[UIImage imageNamed:@"switch_bar.png"] forState:UIControlStateNormal];
-                //                    [but setBackgroundImage:[UIImage imageNamed:@"switch_bar.png"] forState:UIControlStateSelected];
-                //
-                //                    [but addTarget:self action:@selector(clearCacheInMemoryCell:) forControlEvents:UIControlEventTouchUpInside];
-                //
-                //                    bgBut = [[UIImageView alloc] initWithFrame:CGRectMake(270-24, 10, 24*2, 24)];
-                //                    [bgBut setImage:[UIImage imageNamed:@"switch_on_bg.png"]];
-                //
-                //                    [universalCell addSubview:bgBut];
-                //
-                //                    [universalCell addSubview:but];
-                //
-                //                    universalCell.imgViewBg.image = [UIImage imageNamed:@"list_bg_03.png"];
-                //                }
-                //
-                //                universalCell.labelTitle.text = [arraySectionThird objectAtIndex:indexPath.row];
-                //                universalCell.labelDetail.text = [arraySectionThird objectAtIndex:indexPath.row + 5];
-                //                if (indexPath.row == 3) {
-                //                    if ([_moreModel.userinfo.isbind isEqualToString:@"0"]) {
-                //                        universalCell.labelDetail.text = @"未绑定";
-                //                    }else if([_moreModel.userinfo.isbind isEqualToString:@"1"])
-                //                        universalCell.labelDetail.text = @"已绑定";
-                //                }
-                ////            }
-                //                break;
-                //
-                //            case 3:
-                //            {
-                //                universalCell.imgViewBg.image = [UIImage imageNamed:@"list_one.png"];
-                //                universalCell.labelTitle.text = @"爱慕简介";
-                //                universalCell.labelDetail.text = @"爱慕集团简介";
-                //            }
-                //                break;
-                //            case 4:
-                //            {
-                //                universalCell.imgViewBg.image = [UIImage imageNamed:@"list_one"];
-                //                if (indexPath.row == 0) {
-                //                    universalCell.labelTitle.text = @"退出登录";
-                //                }else{
-                //                    universalCell.labelTitle.text = @"应用评分";
-                //                    universalCell.labelDetail.text = @"如果你喜欢爱慕，请给我个好评!";
-                //                }
-                //            }
-                //                break;
+            case 7:
+            {
+                universalCell.labelTitle.text = @"退出登录";
+            }
+                break;
+            case 8:
+            {
+                universalCell.labelTitle.text = @"应用评分";
+                universalCell.labelDetail.text= @"如果你喜欢爱慕，请给我个好评";
+            }
+                break;
             default:
                 break;
         }
@@ -826,12 +741,22 @@
             break;
         case 6:
         {
+            //@"联系客服";
+            YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
+            webView.strURL = @"http://xiaoqu.qq.com/mobile/barindex.html?_bid=128&_wv=1027&bid=51413";
+            webView.strTitle = @"联系客服";
+            [self.navigationController pushViewController:webView animated:YES];
+            
+        }
+            break;
+        case 7:
+        {
             //@"退出登录";
             [mainSer getuserLogout];
             [SBPublicAlert showMBProgressHUD:@"正在退出···" andWhereView:self.view states:NO];
         }
             break;
-        case 7:
+        case 8:
         {
             //@"应用评分";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=515651364"]];
@@ -840,111 +765,6 @@
         default:
             break;
     }
-    
-    
-    /*
-    if (indexPath.section == 1) {
-        switch (indexPath.row) {
-            case 0:
-            {
-                //积分优惠
-                [self jifenYouHui];
-            }
-                break;
-            case 1:
-            {
-                //我的收藏
-                NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
-                [TalkingData trackEvent:@"5010" label:@"收藏" parameters:dic1];
-                
-                MyFavAll20ViewController *favvc = [[MyFavAll20ViewController alloc] init];
-                [self.navigationController pushViewController:favvc animated:YES];
-            }
-                break;
-            case 2:
-            {
-                //订单列表
-                OrderViewController *tempOrder = [[OrderViewController alloc] initWithNibName:@"OrderViewController" bundle:nil];
-                tempOrder.howEnter = 1;
-                tempOrder.ishowHeadView = YES;
-                //lee999
-                MoerUserinfo*info = _moreModel.userinfo;
-                tempOrder.bandgeNum1 = [info.nodispose isKindOfClass:[NSNull class]] ? @"0" : info.nodispose;
-                int noaccess = (int)info.norates;
-                tempOrder.bandgeNum2 = [NSString stringWithFormat:@"%d",noaccess];
-                //end
-                [self.navigationController pushViewController:tempOrder animated:YES];
-            }
-                
-                break;
-            default:
-                break;
-        }
-    }else if (indexPath.section == 2){
-        switch (indexPath.row) {
-            case 0:
-            {
-                //地址列表
-                AddressViewController *tempAddress = [[AddressViewController alloc] initWithNibName:@"AddressViewController" bundle:nil];
-                tempAddress.isCar = NO;
-                [self.navigationController pushViewController:tempAddress animated:YES];
-            }
-                break;
-            case 1:
-            {
-                //服务中心
-                AMServerCenterViewController *tempService = [[AMServerCenterViewController alloc] initWithNibName:@"AMServerCenterViewController" bundle:nil];
-                [self.navigationController pushViewController:tempService animated:YES];
-            }
-                break;
-            case 2:
-            {
-                //修改密码
-                ChangePwdViewController *updatePwdVC = [[ChangePwdViewController alloc] initWithNibName:@"ChangePwdViewController" bundle:nil];
-                [self.navigationController pushViewController:updatePwdVC animated:YES];
-            }
-                break;
-            case 3:
-            {
-                //绑定手机
-                BindPhoneViewController *tempBindPhone = [[BindPhoneViewController alloc] initWithNibName:@"BindPhoneViewController" bundle:nil];
-                [self.navigationController  pushViewController:tempBindPhone animated:YES];
-            }
-                break;
-            case 4:
-            {
-                
-            }
-                break;
-            default:
-                break;
-        }
-    }else if (indexPath.section == 3){
-        //爱慕简介
-        YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
-        webView.strURL = @"http://m.aimer.com.cn/method/about";
-        webView.strTitle = @"爱慕简介";
-        [self.navigationController pushViewController:webView animated:YES];
-        
-    }else if (indexPath.section == 4){
-        switch (indexPath.row) {
-            case 0:
-                //退出登录
-                [mainSer getuserLogout];
-                [SBPublicAlert showMBProgressHUD:@"正在退出···" andWhereView:self.view states:NO];
-                break;
-            case 1:
-            {
-                //应用评分
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=515651364"]];
-            }
-                
-                break;
-            default:
-                break;
-        }
-    }
-     */
 }
 
 
@@ -1028,3 +848,212 @@
 }
 
 @end
+
+
+
+//            {
+//                if (indexPath.row == 0) {
+//
+//                    universalCell.imgViewBg.image = [UIImage imageNamed:@"list_bg_01.png"];
+//
+//                }else if (indexPath.row >0 && indexPath.row < 4){
+//
+//                    universalCell.imgViewBg.image = [UIImage imageNamed:@"list_bg_02.png"];
+//
+//                }else if(indexPath.row == 4){
+//
+//                    UIButton *but = [UIButton buttonWithType:UIButtonTypeCustom];
+//                    [but setFrame:CGRectMake(270, 10, 24, 24)];
+//                    [but setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//                    [but setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+//
+//                    [but setTitle:@"关" forState:UIControlStateNormal];
+//                    [but setTitle:@"开" forState:UIControlStateSelected];
+//                    [but setBackgroundImage:[UIImage imageNamed:@"switch_bar.png"] forState:UIControlStateNormal];
+//                    [but setBackgroundImage:[UIImage imageNamed:@"switch_bar.png"] forState:UIControlStateSelected];
+//
+//                    [but addTarget:self action:@selector(clearCacheInMemoryCell:) forControlEvents:UIControlEventTouchUpInside];
+//
+//                    bgBut = [[UIImageView alloc] initWithFrame:CGRectMake(270-24, 10, 24*2, 24)];
+//                    [bgBut setImage:[UIImage imageNamed:@"switch_on_bg.png"]];
+//
+//                    [universalCell addSubview:bgBut];
+//
+//                    [universalCell addSubview:but];
+//
+//                    universalCell.imgViewBg.image = [UIImage imageNamed:@"list_bg_03.png"];
+//                }
+//
+//                universalCell.labelTitle.text = [arraySectionThird objectAtIndex:indexPath.row];
+//                universalCell.labelDetail.text = [arraySectionThird objectAtIndex:indexPath.row + 5];
+//                if (indexPath.row == 3) {
+//                    if ([_moreModel.userinfo.isbind isEqualToString:@"0"]) {
+//                        universalCell.labelDetail.text = @"未绑定";
+//                    }else if([_moreModel.userinfo.isbind isEqualToString:@"1"])
+//                        universalCell.labelDetail.text = @"已绑定";
+//                }
+////            }
+//                break;
+//
+//            case 3:
+//            {
+//                universalCell.imgViewBg.image = [UIImage imageNamed:@"list_one.png"];
+//                universalCell.labelTitle.text = @"爱慕简介";
+//                universalCell.labelDetail.text = @"爱慕集团简介";
+//            }
+//                break;
+//            case 4:
+//            {
+//                universalCell.imgViewBg.image = [UIImage imageNamed:@"list_one"];
+//                if (indexPath.row == 0) {
+//                    universalCell.labelTitle.text = @"退出登录";
+//                }else{
+//                    universalCell.labelTitle.text = @"应用评分";
+//                    universalCell.labelDetail.text = @"如果你喜欢爱慕，请给我个好评!";
+//                }
+//            }
+//                break;
+
+
+
+
+
+/*
+ if (indexPath.section == 1) {
+ switch (indexPath.row) {
+ case 0:
+ {
+ //积分优惠
+ [self jifenYouHui];
+ }
+ break;
+ case 1:
+ {
+ //我的收藏
+ NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
+ [TalkingData trackEvent:@"5010" label:@"收藏" parameters:dic1];
+ 
+ MyFavAll20ViewController *favvc = [[MyFavAll20ViewController alloc] init];
+ [self.navigationController pushViewController:favvc animated:YES];
+ }
+ break;
+ case 2:
+ {
+ //订单列表
+ OrderViewController *tempOrder = [[OrderViewController alloc] initWithNibName:@"OrderViewController" bundle:nil];
+ tempOrder.howEnter = 1;
+ tempOrder.ishowHeadView = YES;
+ //lee999
+ MoerUserinfo*info = _moreModel.userinfo;
+ tempOrder.bandgeNum1 = [info.nodispose isKindOfClass:[NSNull class]] ? @"0" : info.nodispose;
+ int noaccess = (int)info.norates;
+ tempOrder.bandgeNum2 = [NSString stringWithFormat:@"%d",noaccess];
+ //end
+ [self.navigationController pushViewController:tempOrder animated:YES];
+ }
+ 
+ break;
+ default:
+ break;
+ }
+ }else if (indexPath.section == 2){
+ switch (indexPath.row) {
+ case 0:
+ {
+ //地址列表
+ AddressViewController *tempAddress = [[AddressViewController alloc] initWithNibName:@"AddressViewController" bundle:nil];
+ tempAddress.isCar = NO;
+ [self.navigationController pushViewController:tempAddress animated:YES];
+ }
+ break;
+ case 1:
+ {
+ //服务中心
+ AMServerCenterViewController *tempService = [[AMServerCenterViewController alloc] initWithNibName:@"AMServerCenterViewController" bundle:nil];
+ [self.navigationController pushViewController:tempService animated:YES];
+ }
+ break;
+ case 2:
+ {
+ //修改密码
+ ChangePwdViewController *updatePwdVC = [[ChangePwdViewController alloc] initWithNibName:@"ChangePwdViewController" bundle:nil];
+ [self.navigationController pushViewController:updatePwdVC animated:YES];
+ }
+ break;
+ case 3:
+ {
+ //绑定手机
+ BindPhoneViewController *tempBindPhone = [[BindPhoneViewController alloc] initWithNibName:@"BindPhoneViewController" bundle:nil];
+ [self.navigationController  pushViewController:tempBindPhone animated:YES];
+ }
+ break;
+ case 4:
+ {
+ 
+ }
+ break;
+ default:
+ break;
+ }
+ }else if (indexPath.section == 3){
+ //爱慕简介
+ YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
+ webView.strURL = @"http://m.aimer.com.cn/method/about";
+ webView.strTitle = @"爱慕简介";
+ [self.navigationController pushViewController:webView animated:YES];
+ 
+ }else if (indexPath.section == 4){
+ switch (indexPath.row) {
+ case 0:
+ //退出登录
+ [mainSer getuserLogout];
+ [SBPublicAlert showMBProgressHUD:@"正在退出···" andWhereView:self.view states:NO];
+ break;
+ case 1:
+ {
+ //应用评分
+ [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=515651364"]];
+ }
+ 
+ break;
+ default:
+ break;
+ }
+ }
+ */
+
+
+
+
+//        case Http_More_Tag:
+//            if (!model.errorMessage) {
+//                _moreModel = (MoerMoreModel *)model;
+//
+//
+//                [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%.f",[[_moreModel userinfo] shopcartcount]] forKey:@"totalNUM"];
+//
+//
+//                [UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
+//
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"TotleNumber" object:nil];
+//
+//                //lee999 设置气泡
+//                AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//                if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue] > 0) {
+//
+//                    [[[[app.mytabBarController tabBar] items] objectAtIndex:3] setBadgeValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]];
+//                }else{
+//                    [[[[app.mytabBarController tabBar] items] objectAtIndex:3] setBadgeValue:@""];
+//                }
+//
+//
+//                [SBPublicAlert hideMBprogressHUD:self.view];
+//
+//                NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:_moreModel.userinfo.username, @"UserName",nil];
+//                [TalkingData trackEvent:@"5010" label:@"我的爱慕" parameters:dic1];
+//
+//                [_tableList reloadData];
+//            }else{
+//                [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:1.0];
+//            }
+//            break;
