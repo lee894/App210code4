@@ -10,4 +10,7 @@
 
 @interface MyClosetListViewController : LBaseViewController
 
+@property(nonatomic,strong)NSString *strselectStr;
+
+
 @end

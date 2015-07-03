@@ -32,6 +32,7 @@
 @property (nonatomic, assign) BOOL isFromCar;
 @property (nonatomic, retain) NSString *tf_tradeNo;
 @property(nonatomic,retain) NSMutableArray* suitlistcell;//套装
+@property(nonatomic,retain) NSMutableArray* packagelistcell;
 
 @property (nonatomic, assign) BOOL isOrderPayOK;//是否支付成功
 

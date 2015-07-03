@@ -11,6 +11,7 @@
 #import "MyCloset1ViewController.h"
 #import "MyButton.h"
 #import "ProductDetailViewController.h"
+#import "MyClosetSettingVC.h"
 
 @interface MyClosetListViewController ()<ServiceDelegate,UIScrollViewDelegate>
 {
@@ -55,7 +56,8 @@
 
 -(void)rightButAction{
 
-    MyCloset1ViewController *vc1 = [[MyCloset1ViewController alloc] initWithNibName:@"MyCloset1ViewController" bundle:nil];
+    MyClosetSettingVC *vc1 = [[MyClosetSettingVC alloc] initWithNibName:@"MyClosetSettingVC" bundle:nil];
+    vc1.strselecttype = self.strselectStr;
     [self.navigationController pushViewController:vc1 animated:YES];
 }
 
@@ -197,9 +199,9 @@
     int lineNum = 2; //每行的数量
     
     int ySP = 12;  //距离顶部的位置
-    int SP = 20;  //左右间距
-    int SH = 22;  //上下间距
-    int pW = lee1fitAllScreen(127);  //商品宽度
+    int SP = 15;  //左右间距
+    int SH = 20;  //上下间距
+    int pW = lee1fitAllScreen(138);  //商品宽度
     int pH = lee1fitAllScreen(180);  //商品高度
     int imgH = lee1fitAllScreen(154); //商品图片的高度
     
@@ -251,10 +253,8 @@
         }
     }
     
-    NSInteger H = SP + (pH +SP)* subSortbtnNum;
+    NSInteger H = SP + (pH +SP)* subSortbtnNum  + 10;
     [bgv setContentSize:CGSizeMake(ScreenWidth, H)];
-    
-//    [bgv setFrame:CGRectMake(0, bgvH, ScreenWidth, H)];
     
     return bgv;
 }

@@ -132,7 +132,7 @@
                 <constraint firstItem="Rrh-Gm-9Ph" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hRx-RL-Hkf"/>
                 <constraint firstAttribute="trailing" secondItem="Rrh-Gm-9Ph" secondAttribute="trailing" id="x6T-DA-byk"/>
             </constraints>
-            <point key="canvasLocation" x="96" y="283"/>
+            <point key="canvasLocation" x="222" y="334"/>
         </view>
     </objects>
     <resources>

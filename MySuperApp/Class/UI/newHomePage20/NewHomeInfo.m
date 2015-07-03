@@ -165,5 +165,9 @@
 }
 
 
+-(NSString*)is_wardrobe{
+    return [[self attributeForKey:@"is_wardrobe"] description];
+}
+
 @end
 

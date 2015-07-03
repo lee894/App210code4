@@ -254,7 +254,7 @@
 
 //获取用户信息
 -(void)getUserInfo{
-    [self sendPostWithURL:MORE tag:Http_More_Tag beforeRequest:^{
+    [self sendPostWithURL:MORE tag:Http_More20_Tag beforeRequest:^{
     }];
 }
 

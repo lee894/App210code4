@@ -41,7 +41,8 @@
     
     _itemList = [[NSMutableArray alloc] init];
     _itemSuit = [[NSMutableArray alloc] init];
-
+//    _itemPackage = [[NSMutableArray alloc] init];
+    
     //lee999 新增支付方式
     _itemAllowpaytype = [[NSMutableArray alloc] init];
     if(self && [dict isKindOfClass:[NSDictionary class]]) {
@@ -84,11 +85,43 @@
             item.save = [[dicdate objectForKey:@"save"] floatValue];
             item.number = [[dicdate objectForKey:@"number"] intValue];
             item.suitid = [dicdate objectForKey:@"suitid"];
+            item.name = [dicdate objectForKey:@"name"];
             [self.itemSuit addObject:item];
 
         }
-            self.iscancle = [[dict objectForKey:@"iscancle"] boolValue];
-            self.orderdetailInfo = [OrderInfoOrderdetailInfo modelObjectWithDictionary:[dict objectForKey:@"orderdetail_info"]];
+    }
+    if(self && [dict isKindOfClass:[NSDictionary class]]) {
+        //礼包信息
+        for (id dicdate in [dict objectForKey:@"packagelist"]) {
+            YKSuitListItem * item = [[YKSuitListItem alloc] init];
+            for (id aSuit in [dicdate objectForKey:@"package"]) {
+                YKProductsItem *product=[[YKProductsItem alloc] init];
+                product.package_id = [aSuit objectForKey:@"package_id"];
+                product.product_id = [aSuit objectForKey:@"product_id"];
+                product.name = [aSuit objectForKey:@"name"];
+                product.pic = [aSuit objectForKey:@"pic"];
+                product.mkt_price = [[aSuit objectForKey:@"mkt_price"] floatValue];
+                product.price = [[aSuit objectForKey:@"price"] floatValue];
+                product.size = [aSuit objectForKey:@"size"];
+                product.color = [aSuit objectForKey:@"color"];
+                //lee999recode这个字段弃用了，会导致崩溃
+                //                product.rate_flag = [[aSuit objectForKey:@"rate_flag"]boolValue];
+                product.goodsid = [aSuit objectForKey:@"goods_id"];
+                [item.suits addObject:product];
+                
+            }
+            //            item.goodsid   = [itemDic objectForKey:@"goods_id"];
+            
+            item.disountprice =[[dicdate objectForKey:@"discountprice"] floatValue];
+            item.price = [[dicdate objectForKey:@"price"] floatValue];
+            item.save = [[dicdate objectForKey:@"save"] floatValue];
+            item.number = [[dicdate objectForKey:@"number"] intValue];
+            item.packageid = [dicdate objectForKey:@"package_id"];
+            item.name = [dicdate objectForKey:@"name"];
+            [self.itemSuit addObject:item];
+        }
+        self.iscancle = [[dict objectForKey:@"iscancle"] boolValue];
+        self.orderdetailInfo = [OrderInfoOrderdetailInfo modelObjectWithDictionary:[dict objectForKey:@"orderdetail_info"]];
         
         NSDictionary * productlistDic = [dict objectForKey:@"orderdetail_productlist"];
         if ([productlistDic count] > 0) {

@@ -17,8 +17,9 @@
 @property (nonatomic, assign) BOOL ispay;
 @property (nonatomic, retain) OrderInfoOrderdetailReceiveinfo *orderdetailReceiveinfo;
 @property (nonatomic, retain) NSString *response;
-@property(nonatomic,retain) NSMutableArray* itemSuit;//套装列表
-@property(nonatomic, retain) NSMutableArray* itemList;
+@property (nonatomic, retain) NSMutableArray* itemSuit;//套装列表
+//@property (nonatomic, retain) NSMutableArray* itemPackage;//套装列表
+@property (nonatomic, retain) NSMutableArray* itemList;
 
 @property(nonatomic, retain) NSMutableArray* itemAllowpaytype;//允许的支付方式
 

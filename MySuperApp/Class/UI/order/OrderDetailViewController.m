@@ -525,7 +525,7 @@
                 [SBPublicAlert hideMBprogressHUD:self.view];
                 orderDetail = (OrderInfoOrderInfoModel *)model;
                 
-                NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:orderDetail.orderdetailReceiveinfo.name, @"UserName",self.orderID, @"CoId",orderDetail.orderdetailInfo.price, @"Coprice",orderDetail.orderdetailInfo.payway, @"Payment",[NSNumber numberWithInt:[orderDetail.itemList count] + [orderDetail.itemSuit count]], @"Number",nil];
+                NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:orderDetail.orderdetailReceiveinfo.name, @"UserName",self.orderID, @"CoId",orderDetail.orderdetailInfo.price, @"Coprice",orderDetail.orderdetailInfo.payway, @"Payment",[NSNumber numberWithInteger:[orderDetail.itemList count] + [orderDetail.itemSuit count]], @"Number",nil];
                 [TalkingData trackEvent:@"5011" label:@"订单详情" parameters:dic1];
 
                 //lee999 创建套装cell
@@ -606,13 +606,13 @@
         if (orderDetail.itemSuit.count == 0) {
             four = 4 + orderDetail.itemSuit.count;
             five = 5 + orderDetail.itemSuit.count;
-            six = 6 +orderDetail.itemSuit.count;
-            seven = 7+orderDetail.itemSuit.count;
+            six = 6 +  orderDetail.itemSuit.count;
+            seven = 7+ orderDetail.itemSuit.count;
         }else {
             four = 3 + orderDetail.itemSuit.count;
             five = 4 + orderDetail.itemSuit.count;
-            six = 5 +orderDetail.itemSuit.count;
-            seven = 6+orderDetail.itemSuit.count;
+            six = 5 +  orderDetail.itemSuit.count;
+            seven = 6+ orderDetail.itemSuit.count;
         }
         
         if (section == 0) {
@@ -1282,16 +1282,38 @@
         int yOffset = 0;
         int height = (70-yOffset-10)/2;
         
+        UILabel* desc = [[UILabel alloc] init];
+        desc.backgroundColor = [UIColor clearColor];
+        NSString *str = @"";
+        if (item.packageid) {
+            str = @"礼包: ";
+        }else if(item.suitid)
+        {
+            str = @"套装: ";
+        }
+        desc.text = [NSString stringWithFormat:@"%@: %@", str, item.name];
+        desc.font = [UIFont systemFontOfSize:13];
+        desc.textColor = UIColorFromRGB(0xc8002c);
+        CGRect rc = [desc.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : desc.font} context:nil];
+        [desc setFrame:CGRectMake(xOffset, yOffset, rc.size.width, rc.size.height)];
+        [viewSuitlistCell3.contentView addSubview:desc];
         
-        UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset, 200, height)];
+        desc = [[UILabel alloc] init];//WithFrame:CGRectMake(xOffset, yOffset, 200, height)];
         desc.backgroundColor = [UIColor clearColor];
 //        desc.lineBreakMode = UILineBreakModeMiddleTruncation;
         desc.text = [NSString stringWithFormat:@"数量: %d", item.number];
         desc.font = [UIFont systemFontOfSize:13];
         desc.textColor = UIColorFromRGB(0x666666);
+        rc = [desc.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : desc.font} context:nil];
+        [desc setFrame:CGRectMake(ScreenWidth - 20 - rc.size.width, yOffset, rc.size.width, rc.size.height)];
         [viewSuitlistCell3.contentView addSubview:desc];
         
-        NSString *str = @"套装价: ";
+        if (item.packageid) {
+            str = @"套装价: ";
+        }else if(item.suitid)
+        {
+            str = @"礼包价: ";
+        }
         int strWidth = [str sizeWithFont:font].width;
         desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset+height-10, strWidth, height)];
         desc.backgroundColor = [UIColor clearColor];

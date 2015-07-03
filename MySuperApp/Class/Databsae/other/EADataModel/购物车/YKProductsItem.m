@@ -162,6 +162,19 @@
     [self setAttribute:[NSNumber numberWithBool:aSelected] forKey:@"selected"];
 }
 
+-(NSString*)package_id
+{
+    id value = [self attributeForKey:@"package_id"];
+    if ([value isKindOfClass:[NSNull class]]) {
+        return @"";
+    }
+    return [value description];
+}
+-(void)setPackage_id:(NSString*)aPackage_id
+{
+    [self setAttribute:aPackage_id forKey:@"package_id"];
+}
+
 @end
 @implementation YKColor_Size
 -(NSString*)ID{

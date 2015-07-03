@@ -82,6 +82,8 @@
 -(BOOL)selected;
 -(void)setSelected:(BOOL)aSelected;
 
+-(NSString*)package_id;
+-(void)setPackage_id:(NSString*)aPackage_id;
 @end
 @interface YKColor_Size : YKBaseEntity {
 }

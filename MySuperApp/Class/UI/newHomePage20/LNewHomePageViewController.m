@@ -816,21 +816,28 @@
             UILabel *pricelab2 = [[UILabel alloc] initWithFrame:CGRectMake(10+ pricelabSize.width, imgH+45, pW-10, 26)];
             [pricelab2 setNumberOfLines:1];
             [pricelab2 setTextAlignment:NSTextAlignmentLeft];
-            if (!isRecommend) {
-            pricelab2.text = [NSString stringWithFormat:@"￥%@",item.price1.value];
+            if (isRecommend) {
+                pricelab2.text = [NSString stringWithFormat:@"￥%@",[itemdic objectForKey:@"mktp" isDictionary:nil]];
+            }else{
+                pricelab2.text = [NSString stringWithFormat:@"￥%@",item.price1.value];
             }
             pricelab2.font = [UIFont systemFontOfSize:LabMidSize];
             [pricelab2 setTextColor:[UIColor colorWithHexString:@"#888888"]];
             [sortV addSubview:pricelab2];
             
             //价格上的划线
-            if (!isRecommend) {
-            CGSize pricelab2Size = [[NSString stringWithFormat:@"￥%@",item.price1.value] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 15)];
-            
+            CGSize pricelab2Size;
+            if (isRecommend) {
+               pricelab2Size  = [[NSString stringWithFormat:@"￥%@",[itemdic objectForKey:@"mktp" isDictionary:nil]] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 15)];
+            }
+            else{
+                pricelab2Size  = [[NSString stringWithFormat:@"￥%@",item.price1.value] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 15)];
+
+            }
+
             UIView *pricelab2V = [[UIView alloc] initWithFrame:CGRectMake(15+ pricelabSize.width, pricelab2.frame.origin.y + 14, pricelab2Size.width, 0.5)];
             [pricelab2V setBackgroundColor:[UIColor colorWithHexString:@"888888"]];
             [sortV addSubview:pricelab2V];
-            }
             
             MyButton *sortbtn = [MyButton buttonWithType:UIButtonTypeCustom];
             [sortbtn setFrame:CGRectMake(SP + j*(pW+SP), ySP + i*(pH + ySP), pW, pH)];
@@ -902,15 +909,15 @@
 -(void)gotoSearchViewC{
     
     
-#warning ----test lee999
-    
-    MyCloset1ViewController *vc1 = [[MyCloset1ViewController alloc] initWithNibName:@"MyCloset1ViewController" bundle:nil];
-    [self.navigationController pushViewController:vc1 animated:YES];
-    
-//    MyClosetListViewController *vc1 = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
+//#warning ----test lee999
+//    
+//    MyCloset1ViewController *vc1 = [[MyCloset1ViewController alloc] initWithNibName:@"MyCloset1ViewController" bundle:nil];
 //    [self.navigationController pushViewController:vc1 animated:YES];
-
-    return;
+//    
+////    MyClosetListViewController *vc1 = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
+////    [self.navigationController pushViewController:vc1 animated:YES];
+//
+//    return;
     
     
     SearchpageViewController *searchVC = [[SearchpageViewController alloc] init];
@@ -1253,11 +1260,32 @@
     
     
     if ([indexPath section] == 4) {
-        MyCloset1ViewController *vc1 = [[MyCloset1ViewController alloc] initWithNibName:@"MyCloset1ViewController" bundle:nil];
-        [self.navigationController pushViewController:vc1 animated:YES];
+        
+        if ([SingletonState sharedStateInstance].userHasLogin) {
+            
+            if ([_homeinfo.is_wardrobe isEqualToString:@""]) {
+                
+                MyCloset1ViewController *vc1 = [[MyCloset1ViewController alloc] initWithNibName:@"MyCloset1ViewController" bundle:nil];
+                [self.navigationController pushViewController:vc1 animated:YES];
+            }else{
+                
+                MyClosetListViewController *vc1 = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
+                vc1.strselectStr = _homeinfo.is_wardrobe;
+                [self.navigationController pushViewController:vc1 animated:YES];
+            }
+        }else{
+            [self changeToMyaimer];
+        }
     }
+}
+
+
+//登录的回调函数
+-(void)loginOKCallBack:(NSString *)prama{
+   
     
 }
+
 
 
 

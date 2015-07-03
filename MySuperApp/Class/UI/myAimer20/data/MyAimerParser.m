@@ -77,6 +77,13 @@
     return [[self attributeForKey:[str substringToIndex:str.length - 1]] description];
 }  //用户图片下载地址
 
+
+-(NSString*)is_wardrobe{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [[self attributeForKey:[str substringToIndex:str.length - 1]] description];
+}   //私人衣橱的信息
+
+
 @end
 
 @implementation MyAimerInfo
@@ -98,7 +105,7 @@
 
 @implementation MyAimerParser
 
--(MyAimerInfo *)parsebespeakInfo:(NSDictionary*)dic{
+-(MyAimerInfo *)parsemyAimerInfo:(NSDictionary*)dic{
     
     dicClassNames = @{@"topkey" : @"MyAimerInfo",
                       @"userinfo" : @"UserInfo",

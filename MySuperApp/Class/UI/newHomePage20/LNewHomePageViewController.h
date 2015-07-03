@@ -8,12 +8,12 @@
 
 #import "LBaseViewController.h"
 #import "UIScrollView+MJRefresh.h"
-
+#import "MyAimerViewController.h"
 #import "SGFocusImageFrame.h"
 #import "SGFocusImageItem.h"
 
 
-@interface LNewHomePageViewController : LBaseViewController<UITableViewDataSource,UITableViewDelegate,ServiceDelegate,SGFocusImageFrameDelegate,UIAlertViewDelegate>
+@interface LNewHomePageViewController : LBaseViewController<UITableViewDataSource,UITableViewDelegate,ServiceDelegate,SGFocusImageFrameDelegate,UIAlertViewDelegate,LoginCallbackDelegate>
 {
     MainpageServ *mainSev;
 

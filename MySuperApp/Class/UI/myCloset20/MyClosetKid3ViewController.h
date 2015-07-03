@@ -11,7 +11,7 @@
 @interface MyClosetKid3ViewController : LBaseViewController
 
 
-@property(nonatomic,assign)int itype; //1 女童   2 男童
+@property(nonatomic,assign)NSInteger itype; //1 女童   2 男童
 
 @end
 

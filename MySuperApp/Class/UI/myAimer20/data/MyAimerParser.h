@@ -27,6 +27,8 @@
 -(NSString*)favoritenum; //收藏数
 -(NSString*)userface;  //用户图片下载地址
 
+-(NSString*)is_wardrobe;  //私人衣橱的信息
+
 @end
 
 @interface MyAimerInfo : YKBaseEntity
@@ -39,6 +41,6 @@
 
 @interface MyAimerParser : BaseParser
 
--(MyAimerInfo *)parsebespeakInfo:(NSDictionary*)dic;
+-(MyAimerInfo *)parsemyAimerInfo:(NSDictionary*)dic;
 
 @end

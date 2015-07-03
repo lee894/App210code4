@@ -461,6 +461,7 @@
 #define Http_wardrobeinfo20_Tag 305 //我的衣橱列表
 #define Http_addwardrobeup20_Tag      306 //存储私人衣橱
 
+#define Http_More20_Tag 307 //获取我的爱慕页面更多推荐的信息
 
 
 
