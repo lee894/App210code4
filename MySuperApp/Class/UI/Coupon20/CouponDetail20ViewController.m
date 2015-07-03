@@ -8,6 +8,7 @@
 
 #import "QRCodeGenerator.h"
 #import "CouponListInfoParser.h"
+#import "ManageGiftViewController.h"
 #import "CouponDetail20ViewController.h"
 
 @interface CouponDetail20ViewController ()
@@ -49,7 +50,7 @@
         case kO2O:
         {
             self.title = @"优惠券详情";
-            textColor = [UIColor colorWithHexString:@"ffdc00"];
+            textColor = [UIColor colorWithHexString:@"fd890a"];
             ci = _data;
         }
             break;
@@ -75,7 +76,7 @@
     UILabel* lblPrice = [[UILabel alloc] init];
     [lblPrice setTextColor:textColor];
     if (ci) {
-        [lblPrice setText:ci.price];
+        [lblPrice setText:[NSString stringWithFormat:@"%.0f", [ci.price floatValue]]];
     }else if (fpci)
     {
         [lblPrice setText:[[NSNumber numberWithInteger:[fpci.total_times integerValue] - [fpci.used_times integerValue]] description]];
@@ -108,12 +109,13 @@
     [self.view addSubview:lblTime];
     
     if (ci) {
-        lblTitle.text = ci.title;
+        lblTitle.text = ci.desc;
         lblTime.text = [NSString stringWithFormat:@"有效期至%@", ci.failtime];
     }
     else if (fpci)
     {
-        lblTitle.text = [NSString stringWithFormat:@"%@共计%@次", fpci.name, fpci.total_times];
+        lblTitle.text = fpci.desc;
+//        lblTitle.text = [NSString stringWithFormat:@"%@共计%@次", fpci.name, fpci.total_times];
         lblTime.text = [NSString stringWithFormat:@"有效期至%@", [[fpci.end_time componentsSeparatedByString:@" "] firstObject]];
     }
     
@@ -162,10 +164,10 @@
     [lblContent setFont:[UIFont systemFontOfSize:14]];
     [lblContent setTextColor:[UIColor colorWithHexString:@"#666666"]];
     if (ci) {
-        [lblContent setText:ci.desc];
+        [lblContent setText:ci.info];
     }else if(fpci)
     {
-        [lblContent setText:fpci.desc];
+        [lblContent setText:fpci.info];
     }
     CGRect rcContent = [lblContent.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 48, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblContent.font} context:nil];
     [lblContent setFrame:CGRectMake(24, lblSep.frame.origin.y + lblSep.frame.size.height + 16, SCREEN_WIDTH - 48, rcContent.size.height)];
@@ -179,8 +181,11 @@
     {
         [btnUse setFrame:CGRectMake(40, lblContent.frame.size.height + lblContent.frame.origin.y + 30, SCREEN_WIDTH - 80, lee1fitAllScreen(36))];
     }
-    [btnUse setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_normal_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateNormal];
-    [btnUse setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_hover_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateHighlighted];
+//    [btnUse setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_normal_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateNormal];
+//    [btnUse setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_hover_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateHighlighted];
+    [btnUse setBackgroundColor:textColor];
+    [btnUse.layer setCornerRadius:btnUse.frame.size.height / 2];
+    [btnUse.layer setMasksToBounds:YES];
     [btnUse setTitle:@"立即使用" forState:UIControlStateNormal];
     [btnUse.titleLabel setFont:[UIFont systemFontOfSize:17]];
     [btnUse addTarget:self action:@selector(toHome:) forControlEvents:UIControlEventTouchUpInside];
@@ -233,6 +238,20 @@
     CouponInfo* ci = _data;
     UIImage *viewImage = [QRCodeGenerator qrImageForString:ci.code imageSize:220];
     UIImageWriteToSavedPhotosAlbum(viewImage, nil, nil, nil);
+}
+
+-(void)toHome:(UIButton*)sender
+{
+    if (_dType == kGift) {
+        ManageGiftViewController* mgvc = [[ManageGiftViewController alloc] init];
+        CouponInfo* ci = _data;
+        [mgvc setCouponInfo:ci];
+        [self.navigationController pushViewController:mgvc animated:YES];
+    }
+    else
+    {
+        [self changetableBarto:0];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated

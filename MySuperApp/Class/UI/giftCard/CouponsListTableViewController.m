@@ -41,7 +41,7 @@
     _arrCard = [[NSMutableArray alloc] init];
     _contentArr = [[NSMutableArray alloc] init];
     
-    self.title = @"我的优惠券";
+    self.title = @"我的优惠";
     
     [self NewHiddenTableBarwithAnimated:YES];
     
@@ -469,7 +469,13 @@
         [Cell addSubview:lblSep];
         
         UILabel* lblContent = [[UILabel alloc] initWithFrame:CGRectMake(12.5, lblSep.frame.size.height + lblSep.frame.origin.y + 15, [UIScreen mainScreen].bounds.size.width - 25, 12)];
-        [lblContent setText:@"点击优惠券可查看使用规则"];
+        if(_contentArr.count)
+        {
+            [lblContent setText:@"点击优惠券可查看使用规则"];
+        }else
+        {
+            [lblContent setText:@"您暂无优惠券"];
+        }
         [lblContent setFont:[UIFont systemFontOfSize:12]];
         [lblContent setTextColor:[UIColor colorWithHexString:@"#666666"]];
         [Cell addSubview:lblContent];
@@ -521,11 +527,12 @@
         NSString* strTime = @"";
         UIImage* iBg = nil;
         id data = [self.contentArr objectAtIndex:indexPath.row isArray:nil];
+        UIButton* btnAction = [UIButton buttonWithType:UIButtonTypeCustom];
         if ([data class] == [CouponInfo class]) {
             strStatus = ((CouponInfo*)data).stuatus;
             type = ((CouponInfo*)data).type;
             strTitle = ((CouponInfo*)data).title;
-            strPrice = [NSString stringWithFormat:@"￥%@", ((CouponInfo*)data).price];
+            strPrice = [NSString stringWithFormat:@"￥%.0f", [((CouponInfo*)data).price floatValue]];
             strTime = [NSString stringWithFormat:@"有效期至%@", ((CouponInfo*)data).failtime];
         }
         else if ([data class] == [FreePostCardInfo class])
@@ -534,6 +541,7 @@
             strTitle = [NSString stringWithFormat:@"%@共计%@次", ((FreePostCardInfo*)data).name, ((FreePostCardInfo*)data).total_times];
             strPrice = [[NSNumber numberWithInteger:[((FreePostCardInfo*)data).total_times integerValue] - [((FreePostCardInfo*)data).used_times integerValue]] description];
             iBg = [UIImage imageNamed:@"laber_byk"];
+            [btnAction setTitleColor:[UIColor colorWithHexString:@"#fd4081"] forState:UIControlStateNormal];
             strTime = [NSString stringWithFormat:@"有效期至%@", [[((FreePostCardInfo*)data).end_time componentsSeparatedByString:@" "] firstObject]];
         }
         if (strStatus) {
@@ -552,21 +560,22 @@
             else
             {
                 [ivState setBackgroundColor:[UIColor colorWithHexString:@"c6c6c6"]];
-                UIButton* btnAction = [UIButton buttonWithType:UIButtonTypeCustom];
                 if ([type isEqualToString:@"o2o"])
                 {
                     iBg = [UIImage imageNamed:@"laber_o2o"];
+                    [btnAction setTitleColor:[UIColor colorWithHexString:@"#fd890a"] forState:UIControlStateNormal];
                 }
                 else if([type isEqualToString:@"coupon"])
                 {
                     iBg = [UIImage imageNamed:@"laber_yh"];
+                    [btnAction setTitleColor:[UIColor colorWithHexString:@"#c8002c"] forState:UIControlStateNormal];
                 }
                 else if([type isEqualToString:@"gift"])
                 {
                     iBg = [UIImage imageNamed:@"laber_lpk"];
+                    [btnAction setTitleColor:[UIColor colorWithHexString:@"#ff6767"] forState:UIControlStateNormal];
                 }
                 [btnAction setTitle:@"使用" forState:UIControlStateNormal];
-                [btnAction setTitleColor:[UIColor colorWithHexString:@"#c8002c"] forState:UIControlStateNormal];
                 [btnAction.titleLabel setFont:[UIFont systemFontOfSize:14]];
                 [btnAction setFrame:CGRectMake(ivState.frame.origin.x, 0, lee1fitAllScreen(63), ivBg.frame.size.height)];
                 [btnAction setTag:indexPath.row];
@@ -666,11 +675,6 @@
     return nil;
 }
 
--(void)toHome:(UIButton*)sender
-{
-    
-}
-
 //lee999 修改绑定
 - (void)btnBindClicked:(UIButton *)sender {
     
@@ -709,29 +713,38 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id data = [self.contentArr objectAtIndex:indexPath.row isArray:nil];
-    CouponDetail20ViewController* cdvc = [[CouponDetail20ViewController alloc] init];
-    if ([data class] == [CouponInfo class]) {
-        NSString* type = ((CouponInfo*)data).type;
-        if ([type isEqualToString:@"o2o"])
+    switch (indexPath.section) {
+        case 2:
         {
-            cdvc.dType = kO2O;
+            id data = [self.contentArr objectAtIndex:indexPath.row isArray:nil];
+            CouponDetail20ViewController* cdvc = [[CouponDetail20ViewController alloc] init];
+            if ([data class] == [CouponInfo class]) {
+                NSString* type = ((CouponInfo*)data).type;
+                if ([type isEqualToString:@"o2o"])
+                {
+                    cdvc.dType = kO2O;
+                }
+                else if([type isEqualToString:@"coupon"])
+                {
+                    cdvc.dType = kCoupon;
+                }
+                else if([type isEqualToString:@"gift"])
+                {
+                    cdvc.dType = kGift;
+                }
+            }
+            else if ([data class] == [FreePostCardInfo class])
+            {
+                cdvc.dType = kFreePost;
+            }
+            cdvc.data = data;
+            [self.navigationController pushViewController:cdvc animated:YES];
         }
-        else if([type isEqualToString:@"coupon"])
-        {
-            cdvc.dType = kCoupon;
-        }
-        else if([type isEqualToString:@"gift"])
-        {
-            cdvc.dType = kGift;
-        }
+            break;
+            
+        default:
+            break;
     }
-    else if ([data class] == [FreePostCardInfo class])
-    {
-        cdvc.dType = kFreePost;
-    }
-    cdvc.data = data;
-    [self.navigationController pushViewController:cdvc animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -903,7 +916,7 @@
             case Http_CouponList20_Tag:
             {
                 _cli = [[[CouponListInfoParser alloc] init] parseCouponListInfo:amodel];
-                if ([_strType isEqualToString:@"c"] || [_strType isEqualToString:@"g"]) {
+                if ([_strType isEqualToString:@"c"] || [_strType isEqualToString:@"g"] || [_strType isEqualToString:@"u"]) {
                     if (current == 1) {
 //                        [self.arrCard removeAllObjects];
 //                        [self.arrCard addObjectsFromArray:_cli.coupons];
