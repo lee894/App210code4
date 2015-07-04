@@ -942,9 +942,13 @@
             
             //lee999 优化 加入购物车需先登录
             if (![SingletonState sharedStateInstance].userHasLogin) {
-                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您尚未登录，请先登录。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-                alert.tag=111;
-                [alert show];
+                
+                [self changeToMyaimer];
+
+                
+//                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您尚未登录，请先登录。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
+//                alert.tag=111;
+//                [alert show];
                 return;
             }
             
@@ -1035,9 +1039,13 @@
                 [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
                 
             }else{
-                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您尚未登录，请先登录。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-                alert.tag=111;
-                [alert show];
+                
+                [self changeToMyaimer];
+
+                
+//                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您尚未登录，请先登录。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
+//                alert.tag=111;
+//                [alert show];
             }
         }
             break;

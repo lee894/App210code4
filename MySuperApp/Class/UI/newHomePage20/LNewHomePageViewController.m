@@ -172,6 +172,15 @@
 -(void)serviceFailed:(ServiceType)aHandle{
     [SBPublicAlert hideMBprogressHUD:self.view];
     [myTableV headerEndRefreshing];
+    
+    //lee999 150703 修改首页数据缓存  如果数据加载失败的话
+    NSDictionary *dic = [[NSUserDefaults standardUserDefaults] objectForKey:@"homepagedata"];
+    if (dic) {
+        _homeinfo = [[NewHomeParser alloc] parseNewHomeInfo:dic];
+        [self creatCellView];
+        [myTableV reloadData];
+    }
+    
 }
 
 -(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel{
@@ -224,6 +233,10 @@
         return;
     }
     
+    //lee999 150703 修改首页数据缓存
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"homepagedata"];
+    [[NSUserDefaults standardUserDefaults] setObject:amodel forKey:@"homepagedata"];
+    //end
     
     _homeinfo = [[NewHomeParser alloc] parseNewHomeInfo:amodel];
     

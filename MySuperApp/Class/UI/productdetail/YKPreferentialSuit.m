@@ -350,9 +350,12 @@
 {
     //lee999 加入购物车的判断
     if (![SingletonState sharedStateInstance].userHasLogin) {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您尚未登录，请先登录。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-        alert.tag=111222;
-        [alert show];
+        
+        [self changeToMyaimer];
+        
+//        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您尚未登录，请先登录。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
+//        alert.tag=111222;
+//        [alert show];
         return;
     }
     

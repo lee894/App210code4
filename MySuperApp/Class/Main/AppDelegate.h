@@ -28,7 +28,7 @@
 @class SingletonState;
 @class MyAimerViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,UIScrollViewDelegate,WXApiDelegate,WeiboSDKDelegate,SinaWeiboRequestDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,UIScrollViewDelegate,WXApiDelegate,SinaWeiboRequestDelegate>
 {
     BMKMapManager* _mapManager;
     

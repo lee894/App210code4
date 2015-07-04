@@ -184,7 +184,7 @@
                 [mstrUks appendFormat:@"%@|", item.uk];
             }
         }
-        [mainSer getDelcar:[mstrUks substringToIndex:mstrUks.length - 1]];
+        [mainSer getDelcar:[mstrUks substringToIndex:[mstrUks description].length - 1]];
         return;
     }
     if (self.carModel.showwarn) {
@@ -207,9 +207,11 @@
         [self.navigationController pushViewController:chectOut animated:YES];
 	} else {
         
-		UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录",nil];
-		alert.tag = 10000000;
-		[alert show];
+//		UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录",nil];
+//		alert.tag = 10000000;
+//		[alert show];
+        
+        [self changeToMyaimer];
 	}
 }
 
@@ -872,9 +874,12 @@
         [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
         
     }else{
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您尚未登录，请先登录。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-        alert.tag=10000000;
-        [alert show];
+        
+        [self changeToMyaimer];
+        
+//        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您尚未登录，请先登录。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
+//        alert.tag=10000000;
+//        [alert show];
     }
 }
 

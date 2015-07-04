@@ -111,9 +111,12 @@
         [SBPublicAlert showMBProgressHUD:@"正在领取···" andWhereView:self.view states:NO];
         
     }else {
+
+        [self changeToMyaimer];
+
         
-        UIAlertView *arelt = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-        [arelt show];
+//        UIAlertView *arelt = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
+//        [arelt show];
     }
 
     } else if (btn.tag == 6) {
@@ -135,9 +138,12 @@
         [self.navigationController pushViewController:ctrl animated:YES];
 
     }else {
+
+        [self changeToMyaimer];
+
         
-        UIAlertView *arelt = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-        [arelt show];
+//        UIAlertView *arelt = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
+//        [arelt show];
         
 //        MyAimerViewController* checkOrder = [[MyAimerViewController alloc] initWithNibName:@"MyAimerViewController" bundle:nil];
 //        checkOrder.isPush = YES;

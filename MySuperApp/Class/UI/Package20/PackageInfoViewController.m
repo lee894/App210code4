@@ -507,9 +507,13 @@
 -(void)addToCart:(UIButton*)sender
 {
     if (![SingletonState sharedStateInstance].userHasLogin) {
-        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您尚未登录，请先登录。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-        alert.tag=111;
-        [alert show];
+        
+        [self changeToMyaimer];
+
+        
+//        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您尚未登录，请先登录。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
+//        alert.tag=111;
+//        [alert show];
         return;
     }
     
@@ -868,13 +872,11 @@
         height += 44;
     }
     NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count;
-<<<<<<< HEAD
     height += lee1fitAllScreen((285-15)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2));
-=======
-    height += lee1fitAllScreen((285 - 15)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2));
->>>>>>> origin/master
     return height;
 }
+
+
 #pragma mark picker delegate&dataSource
 //====================================================
 // 函数名称: picker delegate&dataSource

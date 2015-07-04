@@ -297,6 +297,8 @@
     
     NSString * deviceTokenStr = [XGPush registerDevice:deviceToken successCallback:successBlock errorCallback:errorBlock];
     
+    [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:@"deviceToken"];
+    
     //如果不需要回调
     //[XGPush registerDevice:deviceToken];
     
@@ -319,7 +321,7 @@
     //推送反馈(app运行时)
     [XGPush handleReceiveNotification:userInfo];
     
-    UIAlertView *aler = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+    UIAlertView *aler = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil];
     aler.tag = 100999;
     [aler show];
     

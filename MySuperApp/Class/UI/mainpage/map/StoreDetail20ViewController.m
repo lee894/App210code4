@@ -347,11 +347,13 @@
     if (btn.tag == 1009) {
         
         if (![SingletonState sharedStateInstance].userHasLogin) {
+
+            [self changeToMyaimer];
             
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录",nil];
-            alert.tag = 10000000;
-            alert.delegate = self;
-            [alert show];
+//            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录",nil];
+//            alert.tag = 10000000;
+//            alert.delegate = self;
+//            [alert show];
             
             return;
         }
