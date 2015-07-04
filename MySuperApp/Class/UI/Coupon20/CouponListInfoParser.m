@@ -63,6 +63,11 @@
     return [[self attributeForKey:[str substringToIndex:str.length - 1]] description];
 }
 
+-(NSString*)info
+{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [[self attributeForKey:[str substringToIndex:str.length - 1]] description];
+}
 @end
 
 @implementation V6CardInfo

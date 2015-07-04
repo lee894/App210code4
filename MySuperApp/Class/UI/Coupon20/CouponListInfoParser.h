@@ -19,6 +19,7 @@
 -(NSString*)user_update_time;
 -(NSString*)status;
 -(NSString*)desc;
+-(NSString*)info;
 @end
 
 @interface V6CardInfo : YKBaseEntity

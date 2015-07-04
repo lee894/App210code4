@@ -103,7 +103,13 @@
                 UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"提醒" message: @"成功加入购物车" delegate:self cancelButtonTitle: @"去购物车" otherButtonTitles: @"继续购物",nil];
                 someError.tag = 110011;
                 [someError show];
-                
+                currentColor = 0;
+                currentSize = 0;
+                goodsInfo = nil;
+                btnColor = nil;
+                btnSize = nil;
+                [marrColor removeAllObjects];
+                [marrSize removeAllObjects];
             }else{
                 [SBPublicAlert showMBProgressHUD:@"加入购物车失败" andWhereView:self.view hiddenTime:1.];
             }
@@ -783,7 +789,7 @@
 {
     UIView* v = [[UIView alloc] init];
     for (NSInteger i = 0; i < ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count; ++i) {
-        PackageGoodsInfo* pgi = [((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods objectAtIndex:i];
+        PackageGoodsInfo* pgi = [((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods objectAtIndex:i];
         UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(15 + (i % 2) * (lee1fitAllScreen(140) + 10), (i / 2) * (lee1fitAllScreen((180 + 105))), lee1fitAllScreen(140), lee1fitAllScreen((180 + 105)))];
         UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
         [uiv setImageWithURL:[NSURL URLWithString:pgi.image_url] placeholderImage:nil];
