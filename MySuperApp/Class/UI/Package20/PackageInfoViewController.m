@@ -349,7 +349,7 @@
     
     UILabel* lblColor = [[UILabel alloc] init];
     [lblColor setFont:[UIFont systemFontOfSize:12]];
-    [lblColor setText:[NSString stringWithFormat:@"%@：", firstSepc.view_name]];
+    [lblColor setText:[NSString stringWithFormat:@"%@：", [firstSepc.view_name stringByReplacingOccurrencesOfString:@"分类" withString:@""]]];
     [lblColor setTextColor:[UIColor colorWithHexString:@"#666666"]];
     [lblColor setFrame:CGRectMake(lblName.frame.origin.x, 76, 100, 12)];
     [vBG addSubview:lblColor];
@@ -790,7 +790,7 @@
     UIView* v = [[UIView alloc] init];
     for (NSInteger i = 0; i < ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count; ++i) {
         PackageGoodsInfo* pgi = [((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods objectAtIndex:i];
-        UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(15 + (i % 2) * (lee1fitAllScreen(140) + 10), (i / 2) * (lee1fitAllScreen((180 + 105))), lee1fitAllScreen(140), lee1fitAllScreen((180 + 105)))];
+        UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(15 + (i % 2) * (lee1fitAllScreen(140) + 10), (i / 2) * (lee1fitAllScreen((180 + 90))), lee1fitAllScreen(140), lee1fitAllScreen((180 + 90)))];
         UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
         [uiv setImageWithURL:[NSURL URLWithString:pgi.image_url] placeholderImage:nil];
         [vUnit addSubview:uiv];
@@ -871,7 +871,7 @@
         height += 44;
     }
     NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count;
-    height += lee1fitAllScreen(285) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2));
+    height += lee1fitAllScreen((285 - 15)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2));
     return height;
 }
 #pragma mark picker delegate&dataSource

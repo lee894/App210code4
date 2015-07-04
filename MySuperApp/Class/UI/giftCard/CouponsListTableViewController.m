@@ -25,6 +25,7 @@
     UIButton* selectedBtn;
     UIView* vCouponMenu;
     NSInteger nSelectedIndexInMenu;
+    UIImageView* ivSelected;
 }
 @property (nonatomic, retain) UIView* vToolbar;
 @property (nonatomic, retain) NSString* strType;
@@ -73,6 +74,11 @@
     [btnShowCouponMenu setSelected:YES];
     [btnShowCouponMenu setExclusiveTouch:NO];
     [_vToolbar addSubview:btnShowCouponMenu];
+    
+    ivSelected = [[UIImageView alloc] initWithFrame:CGRectMake(0, btnShowCouponMenu.frame.size.height - 1, btnShowCouponMenu.frame.size.width, 1)];
+    [ivSelected setBackgroundColor:[UIColor colorWithHexString:@"#c8002c"]];
+    [btnShowCouponMenu addSubview:ivSelected];
+    
     selectedBtn = btnShowCouponMenu;
     nSelectedIndexInMenu = 10001;
     
@@ -1063,6 +1069,12 @@
         vCouponMenu = nil;
         return;
     }
+    if (ivSelected) {
+        [ivSelected removeFromSuperview];
+    }
+    ivSelected = [[UIImageView alloc] initWithFrame:CGRectMake(0, sender.frame.size.height - 1, sender.frame.size.width, 1)];
+    [ivSelected setBackgroundColor:[UIColor colorWithHexString:@"#c8002c"]];
+    [sender addSubview:ivSelected];
     [selectedBtn setSelected:NO];
     selectedBtn = sender;
     [sender setSelected:YES];
@@ -1137,6 +1149,12 @@
 
 -(void)toFreeShippingCard:(UIButton*)sender
 {
+    if (ivSelected) {
+        [ivSelected removeFromSuperview];
+    }
+    ivSelected = [[UIImageView alloc] initWithFrame:CGRectMake(0, sender.frame.size.height - 1, sender.frame.size.width, 1)];
+    [ivSelected setBackgroundColor:[UIColor colorWithHexString:@"#c8002c"]];
+    [sender addSubview:ivSelected];
     [selectedBtn setSelected:NO];
     selectedBtn = sender;
     [sender setSelected:YES];
@@ -1150,6 +1168,12 @@
 
 -(void)toGiftCard:(UIButton*)sender
 {
+    if (ivSelected) {
+        [ivSelected removeFromSuperview];
+    }
+    ivSelected = [[UIImageView alloc] initWithFrame:CGRectMake(0, sender.frame.size.height - 1, sender.frame.size.width, 1)];
+    [ivSelected setBackgroundColor:[UIColor colorWithHexString:@"#c8002c"]];
+    [sender addSubview:ivSelected];
     [selectedBtn setSelected:NO];
     selectedBtn = sender;
     [sender setSelected:YES];
