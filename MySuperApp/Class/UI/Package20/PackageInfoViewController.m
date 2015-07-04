@@ -349,7 +349,7 @@
     
     UILabel* lblColor = [[UILabel alloc] init];
     [lblColor setFont:[UIFont systemFontOfSize:12]];
-    [lblColor setText:[NSString stringWithFormat:@"%@：", firstSepc.view_name]];
+    [lblColor setText:[NSString stringWithFormat:@"%@：", [firstSepc.view_name stringByReplacingOccurrencesOfString:@"分类" withString:@""]]];
     [lblColor setTextColor:[UIColor colorWithHexString:@"#666666"]];
     [lblColor setFrame:CGRectMake(lblName.frame.origin.x, 76, 100, 12)];
     [vBG addSubview:lblColor];
@@ -868,7 +868,11 @@
         height += 44;
     }
     NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count;
+<<<<<<< HEAD
     height += lee1fitAllScreen((285-15)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2));
+=======
+    height += lee1fitAllScreen((285 - 15)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2));
+>>>>>>> origin/master
     return height;
 }
 #pragma mark picker delegate&dataSource

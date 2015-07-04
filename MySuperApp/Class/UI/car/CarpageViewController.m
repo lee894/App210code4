@@ -791,13 +791,23 @@
         [lblPrice setFrame:CGRectMake(0, uiv.frame.size.height + uiv.frame.origin.y + 45, unitWidth, 13)];
         [vUnit addSubview:lblPrice];
         
-        UILabel* lblMPrice = [[UILabel alloc] init];
-        [lblMPrice setTextColor:[UIColor colorWithHexString:@"#888888"]];
-        [lblMPrice setText:[NSString stringWithFormat:@"￥%.0f", [item.price floatValue]]];
-        [lblMPrice setFont:[UIFont systemFontOfSize:12]];
-        [lblMPrice setTextAlignment:NSTextAlignmentRight];
-        [lblMPrice setFrame:CGRectMake(0, uiv.frame.size.height + uiv.frame.origin.y + 45, unitWidth, 13)];
-        [vUnit addSubview:lblMPrice];
+        if([item.strdiscountprice floatValue] != [item.price floatValue])
+        {
+            UILabel* lblMPrice = [[UILabel alloc] init];
+            [lblMPrice setTextColor:[UIColor colorWithHexString:@"#888888"]];
+            [lblMPrice setFont:[UIFont systemFontOfSize:12]];
+            [lblMPrice setTextAlignment:NSTextAlignmentRight];
+            NSString* str = [NSString stringWithFormat:@"￥%.0f", [item.price floatValue]];
+            NSMutableAttributedString* mattStr = [[NSMutableAttributedString alloc] initWithString:str];
+            [mattStr addAttribute:NSStrikethroughColorAttributeName value:lblMPrice.textColor range:NSMakeRange(0, str.length)];
+            [mattStr addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInteger:1] range:NSMakeRange(0, str.length)];
+            [mattStr addAttribute:NSForegroundColorAttributeName value:lblMPrice.textColor range:NSMakeRange(0, str.length)];
+            [mattStr addAttribute:NSFontAttributeName value:lblMPrice.font range:NSMakeRange(0, str.length)];
+            [lblMPrice setAttributedText:mattStr];
+//            [lblMPrice setText:];
+            [lblMPrice setFrame:CGRectMake(0, uiv.frame.size.height + uiv.frame.origin.y + 45, unitWidth, 13)];
+            [vUnit addSubview:lblMPrice];
+        }
         
         [footView addSubview:vUnit];
 //		if (i >= 3)
@@ -1049,10 +1059,8 @@
     }
     
     
-    [self creatFootView];
+//    [self creatFootView];
 
-    
-    
 //    [self editCarNumber];
     
 //    [shoppingCarTab setEditing:!shoppingCarTab.editing animated:YES];
@@ -1069,6 +1077,14 @@
             
             YKItem *item = (YKItem *)[self.carModel.carProductlist objectAtIndex:i];
             
+            if(number == 0)
+            {
+                [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"数量不得小于1"];
+                textfield.text = [NSString stringWithFormat:@"%d", 1];
+                shoppingCarTab.editing = NO;
+                isEditing = NO;
+                return;
+            }
             //获取库存 和当前数量进行比对
             if (number > item.count) {
                 [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"您有商品库存不足！"];
