@@ -742,14 +742,14 @@
 		96F6DE601B43859400E156A4 /* MyAimerParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F6DE5F1B43859400E156A4 /* MyAimerParser.m */; };
 		96F6DE641B44E57F00E156A4 /* MyClosetSettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F6DE621B44E57F00E156A4 /* MyClosetSettingVC.m */; };
 		96F6DE651B44E57F00E156A4 /* MyClosetSettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE631B44E57F00E156A4 /* MyClosetSettingVC.xib */; };
-		96F6DE6E1B46739700E156A4 /* my_am_ico_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE661B46739700E156A4 /* my_am_ico_1@3x.png */; };
-		96F6DE6F1B46739700E156A4 /* my_am_ico_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE671B46739700E156A4 /* my_am_ico_2@3x.png */; };
-		96F6DE701B46739700E156A4 /* my_am_ico_3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE681B46739700E156A4 /* my_am_ico_3@3x.png */; };
-		96F6DE711B46739700E156A4 /* my_am_ico_4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE691B46739700E156A4 /* my_am_ico_4@3x.png */; };
-		96F6DE721B46739700E156A4 /* my_am_ico_5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE6A1B46739700E156A4 /* my_am_ico_5@3x.png */; };
-		96F6DE731B46739700E156A4 /* my_am_ico_6@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE6B1B46739700E156A4 /* my_am_ico_6@3x.png */; };
-		96F6DE741B46739700E156A4 /* my_am_ico_7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE6C1B46739700E156A4 /* my_am_ico_7@3x.png */; };
-		96F6DE751B46739700E156A4 /* my_am_ico_8@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE6D1B46739700E156A4 /* my_am_ico_8@3x.png */; };
+		96F6DE7E1B46874F00E156A4 /* my_am_ico_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE761B46874F00E156A4 /* my_am_ico_1@3x.png */; };
+		96F6DE7F1B46874F00E156A4 /* my_am_ico_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE771B46874F00E156A4 /* my_am_ico_2@3x.png */; };
+		96F6DE801B46874F00E156A4 /* my_am_ico_3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE781B46874F00E156A4 /* my_am_ico_3@3x.png */; };
+		96F6DE811B46874F00E156A4 /* my_am_ico_4@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE791B46874F00E156A4 /* my_am_ico_4@3x.png */; };
+		96F6DE821B46874F00E156A4 /* my_am_ico_5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE7A1B46874F00E156A4 /* my_am_ico_5@3x.png */; };
+		96F6DE831B46874F00E156A4 /* my_am_ico_6@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE7B1B46874F00E156A4 /* my_am_ico_6@3x.png */; };
+		96F6DE841B46874F00E156A4 /* my_am_ico_7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE7C1B46874F00E156A4 /* my_am_ico_7@3x.png */; };
+		96F6DE851B46874F00E156A4 /* my_am_ico_8@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE7D1B46874F00E156A4 /* my_am_ico_8@3x.png */; };
 		96FF99F81B268CE400AA82BF /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96FF99F51B268CE400AA82BF /* libWeiboSDK.a */; };
 		96FF99F91B268CE400AA82BF /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96FF99F61B268CE400AA82BF /* WeiboSDK.bundle */; };
 		9B0882FF18F7C21400F76D65 /* YKChoseGiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0882FD18F7C21400F76D65 /* YKChoseGiftViewController.m */; };
@@ -2196,14 +2196,14 @@
 		96F6DE611B44E57F00E156A4 /* MyClosetSettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClosetSettingVC.h; sourceTree = "<group>"; };
 		96F6DE621B44E57F00E156A4 /* MyClosetSettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClosetSettingVC.m; sourceTree = "<group>"; };
 		96F6DE631B44E57F00E156A4 /* MyClosetSettingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyClosetSettingVC.xib; sourceTree = "<group>"; };
-		96F6DE661B46739700E156A4 /* my_am_ico_1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_1@3x.png"; sourceTree = "<group>"; };
-		96F6DE671B46739700E156A4 /* my_am_ico_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_2@3x.png"; sourceTree = "<group>"; };
-		96F6DE681B46739700E156A4 /* my_am_ico_3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_3@3x.png"; sourceTree = "<group>"; };
-		96F6DE691B46739700E156A4 /* my_am_ico_4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_4@3x.png"; sourceTree = "<group>"; };
-		96F6DE6A1B46739700E156A4 /* my_am_ico_5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_5@3x.png"; sourceTree = "<group>"; };
-		96F6DE6B1B46739700E156A4 /* my_am_ico_6@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_6@3x.png"; sourceTree = "<group>"; };
-		96F6DE6C1B46739700E156A4 /* my_am_ico_7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_7@3x.png"; sourceTree = "<group>"; };
-		96F6DE6D1B46739700E156A4 /* my_am_ico_8@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_8@3x.png"; sourceTree = "<group>"; };
+		96F6DE761B46874F00E156A4 /* my_am_ico_1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_1@3x.png"; sourceTree = "<group>"; };
+		96F6DE771B46874F00E156A4 /* my_am_ico_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_2@3x.png"; sourceTree = "<group>"; };
+		96F6DE781B46874F00E156A4 /* my_am_ico_3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_3@3x.png"; sourceTree = "<group>"; };
+		96F6DE791B46874F00E156A4 /* my_am_ico_4@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_4@3x.png"; sourceTree = "<group>"; };
+		96F6DE7A1B46874F00E156A4 /* my_am_ico_5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_5@3x.png"; sourceTree = "<group>"; };
+		96F6DE7B1B46874F00E156A4 /* my_am_ico_6@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_6@3x.png"; sourceTree = "<group>"; };
+		96F6DE7C1B46874F00E156A4 /* my_am_ico_7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_7@3x.png"; sourceTree = "<group>"; };
+		96F6DE7D1B46874F00E156A4 /* my_am_ico_8@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_am_ico_8@3x.png"; sourceTree = "<group>"; };
 		96F8A50A1B4178D400A806BB /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
 		96F8A50B1B4178D400A806BB /* WBHttpRequest+WeiboToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboToken.h"; sourceTree = "<group>"; };
 		96F8A50C1B4178D400A806BB /* WBHttpRequest+WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboUser.h"; sourceTree = "<group>"; };
@@ -3183,14 +3183,14 @@
 		9601E0B51B26D65D002C32E0 /* MyAimer20 */ = {
 			isa = PBXGroup;
 			children = (
-				96F6DE661B46739700E156A4 /* my_am_ico_1@3x.png */,
-				96F6DE671B46739700E156A4 /* my_am_ico_2@3x.png */,
-				96F6DE681B46739700E156A4 /* my_am_ico_3@3x.png */,
-				96F6DE691B46739700E156A4 /* my_am_ico_4@3x.png */,
-				96F6DE6A1B46739700E156A4 /* my_am_ico_5@3x.png */,
-				96F6DE6B1B46739700E156A4 /* my_am_ico_6@3x.png */,
-				96F6DE6C1B46739700E156A4 /* my_am_ico_7@3x.png */,
-				96F6DE6D1B46739700E156A4 /* my_am_ico_8@3x.png */,
+				96F6DE761B46874F00E156A4 /* my_am_ico_1@3x.png */,
+				96F6DE771B46874F00E156A4 /* my_am_ico_2@3x.png */,
+				96F6DE781B46874F00E156A4 /* my_am_ico_3@3x.png */,
+				96F6DE791B46874F00E156A4 /* my_am_ico_4@3x.png */,
+				96F6DE7A1B46874F00E156A4 /* my_am_ico_5@3x.png */,
+				96F6DE7B1B46874F00E156A4 /* my_am_ico_6@3x.png */,
+				96F6DE7C1B46874F00E156A4 /* my_am_ico_7@3x.png */,
+				96F6DE7D1B46874F00E156A4 /* my_am_ico_8@3x.png */,
 				9677E7981B32B5A400EC9008 /* service_btn2@2x.png */,
 				A6F395171B2E7EE9004566CA /* my_am_ico_1@2x.png */,
 				A6F395181B2E7EE9004566CA /* my_am_ico_2@2x.png */,
@@ -6494,7 +6494,7 @@
 				A6F3954B1B2ED352004566CA /* yhq_laber_bg@2x.png in Resources */,
 				9626944B1A135FB700A0BC7F /* tab02_icon_hot.png in Resources */,
 				962694B01A135FB700A0BC7F /* brand_09_pic_02.png in Resources */,
-				96F6DE711B46739700E156A4 /* my_am_ico_4@3x.png in Resources */,
+				96F6DE811B46874F00E156A4 /* my_am_ico_4@3x.png in Resources */,
 				96F2A5091ADAB92600E1A04B /* PPBuyCircleCommonCell.xib in Resources */,
 				9698F6441AEAA713009A29EC /* brand_3_n@2x.png in Resources */,
 				962693E41A135FB700A0BC7F /* sort_pic_01.png in Resources */,
@@ -6552,7 +6552,7 @@
 				9626946D1A135FB700A0BC7F /* gift_icon.png in Resources */,
 				A6F395221B2E7EE9004566CA /* my_am_ico_4@2x.png in Resources */,
 				9698F64C1AEAA713009A29EC /* brand_7_n@2x.png in Resources */,
-				96F6DE721B46739700E156A4 /* my_am_ico_5@3x.png in Resources */,
+				96F6DE821B46874F00E156A4 /* my_am_ico_5@3x.png in Resources */,
 				9B23E76918F63C0800E9B317 /* NewBigViewController.xib in Resources */,
 				96296C051B097A9600435740 /* mapapi.bundle in Resources */,
 				9685FA7A1ADD75ED00BF2DE8 /* zz_arrow@2x.png in Resources */,
@@ -6594,7 +6594,7 @@
 				9626938A1A135FB700A0BC7F /* fashion_brand_logo_12.png in Resources */,
 				962693E91A135FB700A0BC7F /* sort_pic_06.png in Resources */,
 				5881E6B718D6AFB100E90868 /* BrandCell.xib in Resources */,
-				96F6DE6F1B46739700E156A4 /* my_am_ico_2@3x.png in Resources */,
+				96F6DE7F1B46874F00E156A4 /* my_am_ico_2@3x.png in Resources */,
 				962693D51A135FB700A0BC7F /* sort_brand_04.png in Resources */,
 				962694B61A135FB700A0BC7F /* brand_story_bg02.png in Resources */,
 				A6218D9F1B395F5C00D9ED93 /* tb_ico_gwc_w@2x.png in Resources */,
@@ -6668,7 +6668,7 @@
 				2F27FC3E18E1DAE200C7A7EA /* AMMapViewController.xib in Resources */,
 				962694051A135FB700A0BC7F /* list02_bg_01.png in Resources */,
 				A6F395401B2ED352004566CA /* laber_o2o@2x.png in Resources */,
-				96F6DE731B46739700E156A4 /* my_am_ico_6@3x.png in Resources */,
+				96F6DE831B46874F00E156A4 /* my_am_ico_6@3x.png in Resources */,
 				9685FA671ADD75ED00BF2DE8 /* t_ico_like_hover@2x.png in Resources */,
 				9618A96C1AFA75C800FC3C56 /* icon120.png in Resources */,
 				A6F395201B2E7EE9004566CA /* my_am_ico_2@2x.png in Resources */,
@@ -6676,7 +6676,7 @@
 				A6218DB91B417B7400D9ED93 /* lp_add@2x.png in Resources */,
 				9685FA821ADD75ED00BF2DE8 /* zz_text_end@2x.png in Resources */,
 				9685FA721ADD75ED00BF2DE8 /* wx_ico@2x.png in Resources */,
-				96F6DE6E1B46739700E156A4 /* my_am_ico_1@3x.png in Resources */,
+				96F6DE7E1B46874F00E156A4 /* my_am_ico_1@3x.png in Resources */,
 				962693ED1A135FB700A0BC7F /* top3_arrow_up@2x.png in Resources */,
 				962693DB1A135FB700A0BC7F /* sort_girl_pic_02.png in Resources */,
 				962694091A135FB700A0BC7F /* list_bg_02.png in Resources */,
@@ -6736,7 +6736,7 @@
 				9685FA651ADD75ED00BF2DE8 /* t_ico_edit_hover@2x.png in Resources */,
 				962694831A135FB700A0BC7F /* nav_bg22@2x.png in Resources */,
 				962694131A135FB700A0BC7F /* login_sns_netease_press.png in Resources */,
-				96F6DE741B46739700E156A4 /* my_am_ico_7@3x.png in Resources */,
+				96F6DE841B46874F00E156A4 /* my_am_ico_7@3x.png in Resources */,
 				962694B71A135FB700A0BC7F /* brand_story_icon_close.png in Resources */,
 				9685FA701ADD75ED00BF2DE8 /* time_trailer_bg@2x.png in Resources */,
 				9698F6501AEAA713009A29EC /* brand_9_n@2x.png in Resources */,
@@ -6840,7 +6840,7 @@
 				A6218D9C1B395F5C00D9ED93 /* lp_option_hover@2x.png in Resources */,
 				9626947D1A135FB700A0BC7F /* magzine_share_devider.png in Resources */,
 				9BACBF721913EA6D00CEF33F /* BindViewController.xib in Resources */,
-				96F6DE751B46739700E156A4 /* my_am_ico_8@3x.png in Resources */,
+				96F6DE851B46874F00E156A4 /* my_am_ico_8@3x.png in Resources */,
 				9685FA751ADD75ED00BF2DE8 /* zf_hdfk_@2x.png in Resources */,
 				969541B31B25F63300206FAB /* AlipaySDK.bundle in Resources */,
 				9685FA441ADD75ED00BF2DE8 /* dl_zc_arrow@2x.png in Resources */,
@@ -6968,7 +6968,7 @@
 				9B53949218EBEA4300084F6B /* YKProductDetailCell.xib in Resources */,
 				9B69572B18E3E7110051B562 /* ActiveLoginViewController.xib in Resources */,
 				962694921A135FB700A0BC7F /* search_bg_icon.png in Resources */,
-				96F6DE701B46739700E156A4 /* my_am_ico_3@3x.png in Resources */,
+				96F6DE801B46874F00E156A4 /* my_am_ico_3@3x.png in Resources */,
 				96F6DE651B44E57F00E156A4 /* MyClosetSettingVC.xib in Resources */,
 				A6F394FC1B2E7D7A004566CA /* lp_btn_shop_normal@2x.png in Resources */,
 				9698F6451AEAA713009A29EC /* brand_3_s@2x.png in Resources */,
@@ -7707,7 +7707,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = MyAimerApp/MyAimerApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lei Wang (XP5XW9D974)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lei Wang (XP5XW9D974)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/QQShare",

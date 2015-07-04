@@ -1153,7 +1153,7 @@
                                                            reuseIdentifier:CellIdentifier2];
             Cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
-            UIImageView *icon = nil;
+//            UIImageView *icon = nil;
             if (k==0) {
                 
                 UIImageView *topImageV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300, 160)];
@@ -1161,9 +1161,9 @@
                 
                 [Cell.contentView addSubview:topImageV];
                 
-                icon  = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 21, 38)];
-                [icon setImage:[UIImage imageNamed:@"icon_suit.png"]];
-                [Cell.contentView addSubview:icon];
+//                icon  = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 21, 38)];
+//                [icon setImage:[UIImage imageNamed:@"icon_suit.png"]];
+//                [Cell.contentView addSubview:icon];
                 
             }else {
                 UIImageView *modile = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300, 160)];
@@ -1238,7 +1238,7 @@
             priceValue.textColor = UIColorFromRGB(0xB90023);
             [Cell.contentView addSubview:priceValue];
             
-            [Cell.contentView bringSubviewToFront:icon];
+//            [Cell.contentView bringSubviewToFront:icon];
             
             
             //lee999
@@ -1291,7 +1291,7 @@
         {
             str = @"套装: ";
         }
-        desc.text = [NSString stringWithFormat:@"%@: %@", str, item.name];
+        desc.text = [NSString stringWithFormat:@"%@%@", str, item.name];
         desc.font = [UIFont systemFontOfSize:13];
         desc.textColor = UIColorFromRGB(0xc8002c);
         CGRect rc = [desc.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : desc.font} context:nil];

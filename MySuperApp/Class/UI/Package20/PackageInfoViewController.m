@@ -16,7 +16,7 @@
 {
     MainpageServ* mainSev;
     UIView* vGoods;
-    
+    UIView* vInfo;
     UIPickerView *pickerForSelectColor;//颜色下拉列表
     UIToolbar *toolBarForPicker;//picker上的toolbar
     
@@ -84,7 +84,6 @@
         [vGoods removeFromSuperview];
         vGoods = nil;
     }
-    
 }
 
 -(void)serviceStarted:(ServiceType)aHandle
@@ -178,6 +177,7 @@
             [_tbPackage setTableFooterView:v];
             
             [self createEditbtn];
+//            [self showPackage:nil];
 //            UIButton* btnShowPackage = [UIButton buttonWithType:UIButtonTypeCustom];
 //            [btnShowPackage setFrame:CGRectMake(0, 0, 0, 0)];
 //            [btnShowPackage addTarget:self action:@selector(showPackage:) forControlEvents:UIControlEventTouchUpInside];
@@ -187,8 +187,6 @@
         default:
             break;
     }
-    
-    [self showPackage:nil];
 }
 
 -(void)serviceFailed:(ServiceType)aHandle
@@ -313,7 +311,7 @@
     
     
     vGoods = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - lee1fitAllScreen(59))];
-    [vGoods setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1]];
+    [vGoods setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
     UIView* vBG = [[UIView alloc] initWithFrame:CGRectMake(0, 0, lee1fitAllScreen(270), lee1fitAllScreen(212))];
     [vBG setBackgroundColor:[UIColor colorWithHexString:@"#eaeaea"]];
 //    [vBG setAlpha:0.8];
@@ -998,8 +996,37 @@
     [self.navbtnRight addTarget:self action:@selector(showInfo:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+-(void)closeInfoView:(UIButton*)sender
+{
+    if (vInfo) {
+        [vInfo removeFromSuperview];
+        vInfo = nil;
+    }
+}
+
 -(void)showInfo:(UIButton*)sender
 {
+    vInfo = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    [vInfo setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
+    [((AppDelegate*)[UIApplication sharedApplication].delegate).window addSubview:vInfo];
     
+    UrlImageView* iv = [[UrlImageView alloc] init];
+    [vInfo addSubview:iv];
+//    [iv setImageWithURL:[NSURL URLWithString:_pInfo.packageinfo.image_file_path] placeholderImage:nil];
+    __block UrlImageView* blockuiv = iv;
+    [iv setImageWithURL:[NSURL URLWithString:_pInfo.packageinfo.image_file_path] placeholderImage:nil afterDownload:^(UIImage *image) {
+        [blockuiv setFrame:CGRectMake(0, 0, image.size.width / 2, image.size.height / 2)];
+        [blockuiv setCenter:vInfo.center];
+        
+        UIImageView* ivClose = [[UIImageView alloc] init];
+        [ivClose setImage:[UIImage imageNamed:@"lp_shut_b"]];
+        [ivClose setFrame:CGRectMake(iv.frame.origin.x + iv.frame.size.width - (lee1fitAllScreen(25) / 2), iv.frame.origin.y - (lee1fitAllScreen(25) / 2), lee1fitAllScreen(25), lee1fitAllScreen(25))];
+        [vInfo addSubview:ivClose];
+        
+        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn addTarget:self action:@selector(closeInfoView:) forControlEvents:UIControlEventTouchUpInside];
+        [btn setFrame:CGRectMake(iv.frame.origin.x + iv.frame.size.width - (lee1fitAllScreen(40) / 2), iv.frame.origin.y - (lee1fitAllScreen(40) / 2), lee1fitAllScreen(40), lee1fitAllScreen(40))];
+        [vInfo addSubview:btn];
+    }];
 }
 @end

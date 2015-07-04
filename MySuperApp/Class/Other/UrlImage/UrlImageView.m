@@ -40,8 +40,11 @@
 
 @end
 
-@implementation UrlImageView
+@interface UrlImageView ()
+@property (nonatomic, copy) UrlImageBlock block;
+@end
 
+@implementation UrlImageView
 @synthesize iconIndex;
 @synthesize _animated;
 - (id)initWithFrame:(CGRect)frame {
@@ -210,6 +213,12 @@
     [self setImageWithURL:url placeholderImage:[self getDefaultImage]];
 }
 
+- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder afterDownload:(UrlImageBlock)block
+{
+    self.block = block;
+    [self setImageWithURL:url placeholderImage:placeholder];
+}
+
 - (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder
 {
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
@@ -316,16 +325,22 @@
     {
         [UIView commitAnimations];
     }
-    if ([NSStringFromCGSize(self.frame.size) isEqualToString:NSStringFromCGSize(CGRectZero.size)]) {
-        if (self.contentMode != UIViewContentModeScaleToFill) {
+    if (self.block) {
+        self.block(image);
+    }else
+    {
+        if ([NSStringFromCGSize(self.frame.size) isEqualToString:NSStringFromCGSize(CGRectZero.size)]) {
+            if (self.contentMode != UIViewContentModeScaleToFill) {
+                CGRect rcTemp = self.frame;
+                rcTemp.size = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width);
+                self.frame = rcTemp;
+                return;
+            }
             CGRect rcTemp = self.frame;
-            rcTemp.size = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width);
+            rcTemp.size = CGSizeMake(lee1fitAllScreen(self.image.size.width / 2), lee1fitAllScreen(self.image.size.height / 2));
+            rcTemp.origin = CGPointMake((self.superview.frame.size.width - rcTemp.size.width) / 2, (self.superview.frame.size.height - rcTemp.size.height) / 2);
             self.frame = rcTemp;
-            return;
         }
-        CGRect rcTemp = self.frame;
-        rcTemp.size = CGSizeMake(lee1fitAllScreen(self.image.size.width), lee1fitAllScreen(self.image.size.height));
-        self.frame = rcTemp;
     }
 }
 

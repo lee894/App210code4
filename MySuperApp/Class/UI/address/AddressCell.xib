@@ -36,7 +36,7 @@
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
                     <imageView userInteractionEnabled="NO" tag="31" contentMode="scaleToFill" image="arrow.png" id="7">
-                        <rect key="frame" x="289" y="51" width="7" height="11"/>
+                        <rect key="frame" x="286" y="51" width="7" height="11"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon_checked.png" id="16">

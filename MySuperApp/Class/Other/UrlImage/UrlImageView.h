@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SDWebImageCompat.h"
 #import "SDWebImageManagerDelegate.h"
-
+typedef void (^UrlImageBlock)(UIImage* image);
 @interface UrlImageView : UIImageView <SDWebImageManagerDelegate> {	
 	NSInteger iconIndex;
 
@@ -30,6 +30,7 @@
 
 - (void)setImageWithURL:(NSURL *)url;
 - (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder;
+- (void)setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder afterDownload:(UrlImageBlock)block;
 - (void)cancelCurrentImageLoad;
 
 //lee新增
