@@ -143,7 +143,7 @@
         [lblTime setFrame:CGRectMake((SCREEN_WIDTH - rcTime.size.width - 20 - 20) / 2, 20 + 14 + 16 + lblSep.frame.origin.y + 0.5, rcTime.size.width, 14)];
         [self.view addSubview:lblTime];
         
-        UIImageView* ivQR = [[UIImageView alloc] initWithFrame:CGRectMake(lblTime.frame.size.width + 20 + lblTime.frame.origin.y, 20 + 14 + 18 + lblSep.frame.origin.y + 0.5, 20, 20)];
+        UIImageView* ivQR = [[UIImageView alloc] initWithFrame:CGRectMake(lblTime.frame.size.width + 20 + lblTime.frame.origin.x, 46 + lblSep.frame.origin.y + 0.5, 20, 20)];
         [ivQR setImage:[UIImage imageNamed:@"yhq_ewm"]];
         [self.view addSubview:ivQR];
         
@@ -170,7 +170,7 @@
         [lblContent setText:fpci.info];
     }
     CGRect rcContent = [lblContent.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 48, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblContent.font} context:nil];
-    [lblContent setFrame:CGRectMake(24, lblSep.frame.origin.y + lblSep.frame.size.height + 16, SCREEN_WIDTH - 48, rcContent.size.height)];
+    [lblContent setFrame:CGRectMake(24, totalHeight + 16, SCREEN_WIDTH - 48, rcContent.size.height)];
     [self.view addSubview:lblContent];
     
     UIButton* btnUse = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -194,13 +194,16 @@
     if (_dType == kO2O) {
         UIButton* btnSave = [UIButton buttonWithType:UIButtonTypeCustom];
         [btnSave setFrame:CGRectMake(btnUse.frame.size.width + btnUse.frame.origin.x + 20, lblContent.frame.size.height + lblContent.frame.origin.y + 30, lee1fitAllScreen(115), lee1fitAllScreen(36))];
-        [btnSave setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_normal_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateNormal];
-        [btnSave setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_hover_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateHighlighted];
+//        [btnSave setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_normal_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateNormal];
+//        [btnSave setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_hover_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateHighlighted];
+        [btnSave setBackgroundColor:btnUse.backgroundColor];
+        [btnSave.layer setCornerRadius:btnSave.frame.size.height / 2];
+        [btnSave.layer setMasksToBounds:YES];
         [btnSave setTitle:@"保存" forState:UIControlStateNormal];
         [btnSave setTitle:@"保存" forState:UIControlStateHighlighted];
         [btnSave.titleLabel setFont:[UIFont systemFontOfSize:17]];
         [btnSave addTarget:self action:@selector(saveCard:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btnUse];
+        [self.view addSubview:btnSave];
 
     }
 }
@@ -212,9 +215,9 @@
     _qrcodeV = [[[NSBundle mainBundle] loadNibNamed:@"QrcodeView" owner:self options:nil] lastObject];
     _qrcodeV.delegate = self;
     //将视图移除屏幕外
-    CGRect oldViewR = _qrcodeV.frame;
-    oldViewR.origin.y = self.view.frame.size.height;
-    [_qrcodeV setFrame:oldViewR];
+//    CGRect oldViewR = _qrcodeV.frame;
+//    oldViewR.origin.y = self.view.frame.size.height;
+    [_qrcodeV setCenter:app.window.center];
     
     CouponInfo* ci = _data;
     
@@ -262,6 +265,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)hiddenView
+{
+    _qrcodeV.hidden = YES;
 }
 
 @end

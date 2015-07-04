@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MySuperApp/Class/UI/Package20/PackageInfoViewController.m"
-            timestampString = "457602173.492714"
+            timestampString = "457663709.647714"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
             landmarkName = "-selectGoods:"
             landmarkType = "5">
          </BreakpointContent>
