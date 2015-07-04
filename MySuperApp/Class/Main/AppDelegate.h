@@ -12,7 +12,6 @@
 
 #import "YKSplashView.h"
 #import "SinaClass.h"
-//#import "AKTabBarController.h"
 #import "SingletonState.h"
 #import "WeixinManager.h"
 #import <ShareSDK/ShareSDK.h>

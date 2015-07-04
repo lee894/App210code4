@@ -589,14 +589,14 @@
 
 -(void)createtoolbarandpicker{
     //toolbar上地按钮
-    UIBarButtonItem *buttonForCancel_Number=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel_Number=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForCancel_Number.tintColor = [UIColor whiteColor];
     }
     buttonForCancel_Number.tag=101;
     UIBarButtonItem *buttonForFix_Number=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:@selector(BarButtonClick:)];
     buttonForFix_Number.width=lee1fitAllScreen(225);
-    UIBarButtonItem *buttonForDone_Number=[[UIBarButtonItem alloc] initWithTitle:@"  完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForDone_Number=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForDone_Number.tintColor = [UIColor whiteColor];
     }
@@ -630,14 +630,14 @@
     [[MyAppDelegate window] addSubview:toolBarForSizePicker];
     
     //toolbar上地按钮
-    UIBarButtonItem *buttonForCancel=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForCancel.tintColor = [UIColor whiteColor];
     }
     buttonForCancel.tag=101;
     UIBarButtonItem *buttonForFix=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:@selector(BarButtonClick:)];
     buttonForFix.width=lee1fitAllScreen(225);
-    UIBarButtonItem *buttonForDone=[[UIBarButtonItem alloc] initWithTitle:@"  完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForDone=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForDone.tintColor = [UIColor whiteColor];
     }
@@ -645,14 +645,14 @@
     [toolBarForPicker setItems:[NSArray arrayWithObjects:buttonForCancel,buttonForFix,buttonForDone,nil]];
     
     
-    UIBarButtonItem *buttonForCancel_size=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel_size=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForCancel_size.tintColor = [UIColor whiteColor];
     }
     buttonForCancel_size.tag=101+100;
     UIBarButtonItem *buttonForFix_size=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:@selector(BarButtonClick:)];
     buttonForFix_size.width=lee1fitAllScreen(220);
-    UIBarButtonItem *buttonForDone_size=[[UIBarButtonItem alloc] initWithTitle:@"  完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForDone_size=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForDone_size.tintColor = [UIColor whiteColor];
     }
@@ -790,16 +790,13 @@
     UIView* v = [[UIView alloc] init];
     for (NSInteger i = 0; i < ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count; ++i) {
         PackageGoodsInfo* pgi = [((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods objectAtIndex:i];
-        UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(15 + (i % 2) * (lee1fitAllScreen(140) + 10), (i / 2) * (lee1fitAllScreen((180 + 105))), lee1fitAllScreen(140), lee1fitAllScreen((180 + 105)))];
+        UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(15 + (i % 2) * (lee1fitAllScreen(140) + 10), (i / 2) * (lee1fitAllScreen((180 + 90))), lee1fitAllScreen(140), lee1fitAllScreen((180 + 90)))];
         UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
         [uiv setImageWithURL:[NSURL URLWithString:pgi.image_url] placeholderImage:nil];
         [vUnit addSubview:uiv];
         
         UILabel* lblName = [[UILabel alloc] init];
-//        [lblName setFont:[UIFont systemFontOfSize:11]];
         [lblName setNumberOfLines:2];
-//        [lblName setText:pgi.name];
-//        [lblName setTextColor:[UIColor colorWithHexString:@"#333333"]];
         [lblName setLineBreakMode:NSLineBreakByTruncatingTail];
         NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
         [mps setLineBreakMode:NSLineBreakByCharWrapping];
@@ -857,7 +854,7 @@
         [cell addSubview:vGroup];
         height = lee1fitAllScreen(44);
     }
-    [v setFrame:CGRectMake(0, height, SCREEN_WIDTH, lee1fitAllScreen(285) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2)))];
+    [v setFrame:CGRectMake(0, height, SCREEN_WIDTH, lee1fitAllScreen((285-15)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2)))];
     [cell setFrame:CGRectMake(0, 0, v.frame.size.width, v.frame.size.height + height)];
     [cell addSubview:v];
     return cell;
@@ -871,7 +868,7 @@
         height += 44;
     }
     NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count;
-    height += lee1fitAllScreen(285) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2));
+    height += lee1fitAllScreen((285-15)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2));
     return height;
 }
 #pragma mark picker delegate&dataSource
@@ -893,7 +890,7 @@
 }
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, 220, 44) ];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, ScreenWidth-100, 44) ];
     NSString *pickerText=@"";
     UrlImageView *image=[[UrlImageView alloc]init];
     if (pickerView == pickerForSelectColor) {
@@ -909,6 +906,7 @@
         PackageSpecValueInfo* sepcValueInfo = [marrSize objectAtIndex:row isArray:nil];
         pickerText= sepcValueInfo.spec_alias;
         
+        titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     titleLabel.text = pickerText;
     titleLabel.backgroundColor = [UIColor clearColor];

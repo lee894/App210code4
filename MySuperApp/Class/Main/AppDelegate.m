@@ -34,7 +34,6 @@
 #import "NewMaginzeListViewController.h"
 #import "NewSortViewController.h"
 
-#import "APService.h"
 #import "ShareMsgView.h"
 #import "MYCommentAlertView.h"
 #import "WBHttpRequest+WeiboUser.h"
@@ -48,6 +47,12 @@
 #import <RennSDK/RennSDK.h>
 //百分点代理
 #import "BfdAgent.h"
+
+
+#import "XGPush.h"
+#import "XGSetting.h"
+#define _IPHONE80_ 80000
+
 
 @implementation AppDelegate
 //@synthesize aktabBarVerticalController;
@@ -146,9 +151,9 @@
 
     
     
-    [self initJpushData];
+    [self initQQXGWithOptions:launchOptions];
+
     // Required
-    [APService setupWithOption:launchOptions];
     
     return YES;
 }
@@ -158,50 +163,171 @@
 
 #pragma mark Jpush
     
--(void)initJpushData{
-
-    // Required
-#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1
-    if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
-        //可以添加自定义categories
-        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
-                                                       UIUserNotificationTypeSound |
-                                                       UIUserNotificationTypeAlert)
-                                           categories:nil];
-    } else {
-        //categories 必须为nil
-        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                       UIRemoteNotificationTypeSound |
-                                                       UIRemoteNotificationTypeAlert)
-                                           categories:nil];
-    }
+- (void)initQQXGWithOptions:(NSDictionary *)launchOptions
+{
+    [XGPush startApp:2200129596 appKey:@"I11XVJ5J6Z3F"];
+    
+    // 注销之后需要再次注册前的准备
+    void (^successCallback)(void) = ^(void){
+        // 如果变成需要注册状态
+        if (![XGPush isUnRegisterStatus])
+        {
+            // iOS8注册push方法
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
+            float sysVer = [[[UIDevice currentDevice] systemVersion] floatValue];
+            if (sysVer < 8){
+                [self registerPush];
+            }
+            else {
+                [self registerPushForIOS8];
+            }
 #else
-    //categories 必须为nil
-    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                   UIRemoteNotificationTypeSound |
-                                                   UIRemoteNotificationTypeAlert)
-                                       categories:nil];
+            // iOS8之前注册push方法
+            // 注册Push服务，注册后才能收到推送
+            [self registerPush];
+#endif
+        }
+    };
+    [XGPush initForReregister:successCallback];
+    
+    // 推送反馈回调版本示例
+    void (^successBlock)(void) = ^(void) {
+        // 成功之后的处理
+
+        //去掉状态栏里面的push
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    };
+    
+    void (^errorBlock)(void) = ^(void) {
+    };
+    
+    // 推送反馈(app不在前台运行时，点击推送激活时)
+    [XGPush handleLaunching:launchOptions successCallback:successBlock errorCallback:errorBlock];
+}
+
+
+//注册通知
+- (void)registerPushForIOS8
+{
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
+    // Types
+    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    
+    // Actions
+    UIMutableUserNotificationAction *acceptAction = [[UIMutableUserNotificationAction alloc] init];
+    
+    acceptAction.identifier = @"ACCEPT_IDENTIFIER";
+    acceptAction.title = @"Accept";
+    
+    acceptAction.activationMode = UIUserNotificationActivationModeForeground;
+    acceptAction.destructive = NO;
+    acceptAction.authenticationRequired = NO;
+    
+    // Categories
+    UIMutableUserNotificationCategory *inviteCategory = [[UIMutableUserNotificationCategory alloc] init];
+    
+    inviteCategory.identifier = @"INVITE_CATEGORY";
+    
+    [inviteCategory setActions:@[acceptAction] forContext:UIUserNotificationActionContextDefault];
+    
+    [inviteCategory setActions:@[acceptAction] forContext:UIUserNotificationActionContextMinimal];
+    
+    NSSet *categories = [NSSet setWithObjects:inviteCategory, nil];
+    
+    
+    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:categories];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
 #endif
 }
-    
-- (void)application:(UIApplication *)application
-didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    // Required
-    [APService registerDeviceToken:deviceToken];
-}
 
-- (void)application:(UIApplication *)application
-didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    // Required
-    
-    //lee999埋点
-    [TalkingData trackEvent:@"3" label:@"收到push" parameters:userInfo];
-
-    [APService handleRemoteNotification:userInfo];
+- (void)registerPush
+{
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
 }
 
 
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    //notification是发送推送时传入的字典信息
+    [XGPush localNotificationAtFrontEnd:notification userInfoKey:@"clockID" userInfoValue:@"myid"];
+    
+    //删除推送列表中的这一条
+    [XGPush delLocalNotification:notification];
+}
 
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
+
+//注册UserNotification成功的回调
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    //用户已经允许接收以下类型的推送
+//    UIUserNotificationType allowedTypes = [notificationSettings types];
+}
+
+//按钮点击事件回调
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)())completionHandler{
+    if([identifier isEqualToString:@"ACCEPT_IDENTIFIER"]){
+        NSLog(@"ACCEPT_IDENTIFIER is clicked");
+    }
+    
+    completionHandler();
+}
+
+#endif
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    //NSString * deviceTokenStr = [XGPush registerDevice:deviceToken];
+    
+    void (^successBlock)(void) = ^(void){
+        //成功之后的处理
+        NSLog(@"[XGPush]register successBlock");
+    };
+    
+    void (^errorBlock)(void) = ^(void){
+        //失败之后的处理
+        NSLog(@"[XGPush]register errorBlock");
+    };
+    
+    //注册设备
+    [[XGSetting getInstance] setChannel:@"appstore"];
+    
+    NSString * deviceTokenStr = [XGPush registerDevice:deviceToken successCallback:successBlock errorCallback:errorBlock];
+    
+    //如果不需要回调
+    //[XGPush registerDevice:deviceToken];
+    
+    //打印获取的deviceToken的字符串
+    NSLog(@"deviceTokenStr is %@",deviceTokenStr);
+    
+    
+}
+
+//如果deviceToken获取不到会进入此事件
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+    
+    NSString *str = [NSString stringWithFormat: @"Error: %@",err];
+    NSLog(@"%@",str);
+}
+
+//app 正在运行的时候，收到通知
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
+{
+    //推送反馈(app运行时)
+    [XGPush handleReceiveNotification:userInfo];
+    
+    UIAlertView *aler = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+    aler.tag = 100999;
+    [aler show];
+    
+    
+}
+
+
+#pragma mark -- 百度地图
 -(void)createbaiduMap{
     // 要使用百度地图，请先启动BaiduMapManager
     _mapManager = [[BMKMapManager alloc]init];
@@ -219,7 +345,6 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
     self.splashView = gudeView;
     [self.window addSubview:self.splashView];
     [self.window makeKeyAndVisible];
-    
     
 //    //先判断是否是第一次使用
 //    if (![YKSplashView getIsOpenGuideView]) {

@@ -180,8 +180,7 @@
                 
                 
                 //lee999 150513 设置设备tag
-                NSSet * set = [[NSSet alloc] initWithObjects:@"注册", nil];
-                [APService setTags:set callbackSelector:@selector(nullAction) object:nil];
+                //end
 
                 
                 [self dismissModalViewControllerAnimated:YES];

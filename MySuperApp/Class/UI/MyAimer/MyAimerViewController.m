@@ -541,14 +541,8 @@
                 [[NSUserDefaults standardUserDefaults] synchronize];
 
                 //lee999 150513 设置设备别名
-                [APService setAlias:loginModel.userid callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:nil];
-                
-                //lee999 150513 设置设备tag
-                NSSet * set = [[NSSet alloc] initWithObjects:@"登录", nil];
-                [APService setTags:set callbackSelector:@selector(tagsAliasCallback:tags:alias:) object:nil];
-                
-//                [[APService setTags:[NSSet set] alias:[NSString stringWithFormat:@"%@",loginModel.userid] callbackSelector:@selector(nullAction) object:nil];
-//                userid
+            
+                //end
                 
                 //lee999 new
                 [SingletonState sharedStateInstance].userHasLogin = YES;

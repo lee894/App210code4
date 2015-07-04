@@ -13,7 +13,6 @@
 #import "SinaClass.h"
 #import "RegisterViewController.h"
 #import "QQLogin.h"
-#import "APService.h"
 #import "WBHttpRequest.h"
 #import "WeiboSDK.h"
 

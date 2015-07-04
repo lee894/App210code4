@@ -22,7 +22,6 @@
 #import "MyCloset1ViewController.h"
 #import "MyClosetListViewController.h"
 #import "MyButton.h"
-#import "APService.h"
 #import "BfdAgent.h"
 
 
@@ -91,14 +90,6 @@
     if (app.splashView) {
         [app.splashView removeFromSuperview];
     }
-    
-    
-//    [LCommentAlertView showMessage:[APService registrationID] target:nil];
-
-//    NSSet *set = [NSSet setWithObjects:@"test",@"test2", nil];
-//    [APService setAlias:@"妹妹" callbackSelector:@selector(tagsAliasCallback:tags:alias) object:self];
-//    [APService setTags:set alias:@"小纪" callbackSelector:@selector(tags) object:nil];
-//    [APService setAlias:@"妹妹" callbackSelector:@selector(succ) object:self];
 }
 
 -(void)success{
@@ -304,11 +295,11 @@
     myTableV.delegate = self;
     myTableV.dataSource = self;
     [self.view addSubview:myTableV];
-    [myTableV setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
+    [myTableV setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
     
     //底部view
     UIView *footV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 260)];
-    [footV setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E6"]];
+    [footV setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
     [myTableV setTableFooterView:footV];
     
     
@@ -424,11 +415,11 @@
     //lee999 新增头部banner
     if ([_homeinfo.top_banner count]>0) {
         
-        UIView *headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(180))];
-        [headV setBackgroundColor:[UIColor whiteColor]];
+        UIView *headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(100))];
+        [headV setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
         [myTableV setTableHeaderView:headV];
         
-        UrlImageButton *bannerBtn = [[UrlImageButton alloc] initWithFrame:CGRectMake(0,5,ScreenWidth,lee1fitAllScreen(170))];
+        UrlImageButton *bannerBtn = [[UrlImageButton alloc] initWithFrame:CGRectMake(0,lee1fitAllScreen(10),ScreenWidth,lee1fitAllScreen(80))];
         NewhomeNormalData *topbannerModel = [_homeinfo.top_banner objectAtIndex:0 isArray:nil];
         [bannerBtn setImageFromUrl:NO withUrl:topbannerModel.pic];
         bannerBtn.imageView.layer.masksToBounds = YES;
@@ -462,7 +453,7 @@
         [magizeView addSubview:homeV1];
     }
     UIView *homeV1 = [[UIView alloc] initWithFrame:CGRectMake(0,3*(mageH+0.5),ScreenWidth, 0.5)];
-    [homeV1 setBackgroundColor:[UIColor colorWithHexString:@"#E6E6E6"]];
+    [homeV1 setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
     [magizeView addSubview:homeV1];
     
     
@@ -712,8 +703,8 @@
     }else{
         [formeView addSubview:[self createCellView:_homeinfo.home_more andisfromReconnend:NO]];
     }
-    
 }
+
 
 //为我推荐的商品
 -(UIView *)createCellView:(NSArray*)subSortArray andisfromReconnend:(BOOL)isRecommend{
@@ -1123,7 +1114,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
 
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 10)];
-    [view setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
+    [view setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
     return view;
 }
 

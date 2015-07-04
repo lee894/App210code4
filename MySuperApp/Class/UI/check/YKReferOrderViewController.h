@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "Umpay.h"
 #import "LBaseViewController.h"
 #import "UPPayPluginDelegate.h"
-#import "APService.h"
 
 
 @interface YKReferOrderViewController : LBaseViewController <ServiceDelegate, UITableViewDelegate,UITableViewDataSource,UPPayPluginDelegate> {//UmpayDelegate

@@ -10,7 +10,6 @@
 #import "AlertView.h"
 #import "MainpageServ.h"
 #import "LBaseViewController.h"
-#import "APService.h"
 
 @protocol RegisterViewControllerDelegate <NSObject>
 

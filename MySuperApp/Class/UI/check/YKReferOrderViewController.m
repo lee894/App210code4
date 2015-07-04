@@ -71,8 +71,9 @@
 
     
     //lee999 150513 设置设备tag
-    NSSet * set = [[NSSet alloc] initWithObjects:@"提交订单成功", nil];
-    [APService setTags:set callbackSelector:@selector(nullAction) object:nil];
+    
+    //end
+    
 //#warning -------- 注释了
 //    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(payOKChangeLabelAndBtn) name:@"alipayOKanjumptoOrderDetail" object:nil];
     
