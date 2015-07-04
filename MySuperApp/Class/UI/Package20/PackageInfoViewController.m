@@ -136,16 +136,21 @@
             [_tbPackage setDelegate:self];
             [_tbPackage setDataSource:self];
             [_tbPackage reloadData];
+
+            UIImageView* ivPointer = [[UIImageView alloc] initWithFrame:CGRectMake((_vToolbar.frame.size.width - lee1fitAllScreen(30)) / 2, 8, lee1fitAllScreen(30), lee1fitAllScreen(8))];
+            [ivPointer setImage:[UIImage imageNamed:@"lp_arrow_up"]];
+            [ivPointer setTag:109323];
+            [_vToolbar addSubview:ivPointer];
             
             UIButton* btnAddtoCart = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btnAddtoCart setFrame:CGRectMake(_vToolbar.frame.size.width - 13 - lee1fitAllScreen(49), 8, lee1fitAllScreen(49), lee1fitAllScreen(44))];
+            [btnAddtoCart setFrame:CGRectMake(_vToolbar.frame.size.width - 13 - lee1fitAllScreen(64), 8, lee1fitAllScreen(64), lee1fitAllScreen(44))];
             [btnAddtoCart setImage:[UIImage imageNamed:@"lp_btn_shop_normal"] forState:UIControlStateNormal];
             [btnAddtoCart setImage:[UIImage imageNamed:@"lp_btn_shop_hover"] forState:UIControlStateHighlighted];
             [btnAddtoCart addTarget:self action:@selector(addToCart:) forControlEvents:UIControlEventTouchUpInside];
             [_vToolbar addSubview:btnAddtoCart];
             
             UIButton* btnReset = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btnReset setFrame:CGRectMake(btnAddtoCart.frame.origin.x - 10 - lee1fitAllScreen(70), 8, lee1fitAllScreen(70), lee1fitAllScreen(44))];
+            [btnReset setFrame:CGRectMake(btnAddtoCart.frame.origin.x - 10 - lee1fitAllScreen(50), 8, lee1fitAllScreen(50), lee1fitAllScreen(44))];
             [btnReset setBackgroundImage:[UIImage imageNamed:@"lp_btn_reset_normal"] forState:UIControlStateNormal];
             [btnReset setBackgroundImage:[UIImage imageNamed:@"lp_btn_reset_hover"] forState:UIControlStateHighlighted];
             [btnReset setTitle:@"重置" forState:UIControlStateNormal];
@@ -214,6 +219,10 @@
         _svPackage = nil;
         UIView* v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, _vToolbar.frame.size.height)];
         [_tbPackage setTableFooterView:v];
+        UIImageView* iv = (UIImageView*)[gesture.view viewWithTag:109323];
+        if (iv) {
+            [iv setImage:[UIImage imageNamed:@"lp_arrow_up"]];
+        }
     }else
     {
         AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -249,6 +258,10 @@
         [app.window addSubview:_svPackage];
         if (_vToolbar) {
             [app.window bringSubviewToFront:_svPackage];
+        }
+        UIImageView* iv = (UIImageView*)[gesture.view viewWithTag:109323];
+        if (iv) {
+            [iv setImage:[UIImage imageNamed:@"lp_arrow_down"]];
         }
     }
 }

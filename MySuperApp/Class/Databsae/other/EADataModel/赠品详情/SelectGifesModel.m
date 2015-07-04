@@ -46,7 +46,6 @@
                 NSMutableArray *sizeArray = [[NSMutableArray alloc] init];
                 NSMutableArray *colorArray = [[NSMutableArray alloc] init];
                 NSMutableArray *valueids = [[NSMutableArray alloc] init];
-                
                 NSDictionary* giftDic = (NSDictionary*)[action objectAtIndex:j];
                 NSArray* productArray = [giftDic objectForKey:@"products"];
                 NSMutableArray *pro_array=[[NSMutableArray alloc]init];
