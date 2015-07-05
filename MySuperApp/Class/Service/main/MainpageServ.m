@@ -379,7 +379,7 @@
     }];
 }
 //修改地址
-- (void)getAddressEdit:(NSString *)addressID  andName:(NSString *)name andArea:(NSString *)area andMobilephone:(NSString *)mobilephone andCity:(NSString *)city andDetail:(NSString *)detail andProvince:(NSString *)province andTelephone:(NSString *)telephone andZipcode:(NSString *)zipcode andEmail:(NSString *)email{
+- (void)getAddressEdit:(NSString *)addressID  andName:(NSString *)name andArea:(NSString *)area andMobilephone:(NSString *)mobilephone andCity:(NSString *)city andDetail:(NSString *)detail andProvince:(NSString *)province andTelephone:(NSString *)telephone andZipcode:(NSString *)zipcode andEmail:(NSString *)email  andSetDefautAddress:(NSString*)isdefault{
     
     [self sendPostWithURL:ADDRESS_EDIT_API tag:Http_AddressEdit_Tag beforeRequest:^{
         [self addParam:@"id" withValue:addressID];
@@ -392,11 +392,13 @@
         [self addParam:@"telephone" withValue:telephone];
         [self addParam:@"zipcode" withValue:zipcode];
         [self addParam:@"email" withValue:email];
+        [self addParam:@"default_flag" withValue:isdefault];
+
     }];
 }
 
 //添加地址
-- (void)getAddressAdd:(NSString *)name andArea:(NSString *)area andMobilephone:(NSString *)mobilephone andCity:(NSString *)city andDetail:(NSString *)detail andProvince:(NSString *)province andTelephone:(NSString *)telephone andZipcode:(NSString *)zipcode andEmail:(NSString *)email{
+- (void)getAddressAdd:(NSString *)name andArea:(NSString *)area andMobilephone:(NSString *)mobilephone andCity:(NSString *)city andDetail:(NSString *)detail andProvince:(NSString *)province andTelephone:(NSString *)telephone andZipcode:(NSString *)zipcode andEmail:(NSString *)email andSetDefautAddress:(NSString*)isdefault{
     
     [self sendPostWithURL:ADDRESS_ADD_API tag:Http_Addressadd_Tag beforeRequest:^{
         [self addParam:@"name" withValue:name];
@@ -408,6 +410,7 @@
         [self addParam:@"telephone" withValue:telephone];
         [self addParam:@"zipcode" withValue:zipcode];
         [self addParam:@"email" withValue:email];
+        [self addParam:@"default_flag" withValue:isdefault];
     }];
 }
 
@@ -593,6 +596,17 @@
         [self addParam:@"payprice" withValue:payprice];
         [self addParam:@"remarkmsg" withValue:remarkmsg];
         [self addParam:@"cards_id" withValue:card_id];
+        
+        
+        //lee999 150703 提交订单的时候，上传设备号
+        NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+        NSLog(@"---%@",str);
+        if ([str description].length > 10) {
+            [self addParam:@"push_device_token" withValue:str];
+        }
+
+        
+        //end
 
     }];
 }

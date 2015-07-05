@@ -36,11 +36,5 @@
 //单元格上按钮的点击事件
 - (void)btnClicked:(UIButton *) btn onCell:(UITableViewCell *)cell;
 
-- (void)initRequest;
-
-
-
 @end
 
-
-//CouponsListTableViewController<UITextFieldDelegate>

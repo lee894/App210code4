@@ -242,7 +242,7 @@
         [_svPackage setBackgroundColor:[UIColor colorWithHexString:@"f8f8f8"]];
 //        [_svPackage setAlpha:0.8];
         [_svPackage.layer setMasksToBounds:YES];
-        CGFloat originY = 26.f;
+        CGFloat originY = 22.f;
         CGFloat spacing = 15.f;
         [_svPackage setContentSize:CGSizeMake(([_pInfo.packageinfo.need_select_count integerValue] * (60 + spacing) + spacing), _svPackage.frame.size.height)];
         for (NSInteger i = 0; i < [_pInfo.packageinfo.need_select_count integerValue]; ++i) {
@@ -412,7 +412,7 @@
     [vBG addSubview:btnSize];
     
     UILabel* lblSep = [[UILabel alloc] initWithFrame:CGRectMake(0, uiv.frame.origin.y + uiv.frame.size.height + 11, vBG.frame.size.width, 0.5)];
-    [lblSep setBackgroundColor:[UIColor colorWithHexString:@"#d1d1d1"]];
+    [lblSep setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
     [vBG addSubview:lblSep];
     
     UIButton* btnToDetail = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -617,13 +617,13 @@
 
 -(void)createtoolbarandpicker{
     //toolbar上地按钮
-    UIBarButtonItem *buttonForCancel_Number=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel_Number=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForCancel_Number.tintColor = [UIColor whiteColor];
     }
     buttonForCancel_Number.tag=101;
     UIBarButtonItem *buttonForFix_Number=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:@selector(BarButtonClick:)];
-    buttonForFix_Number.width=lee1fitAllScreen(225);
+    buttonForFix_Number.width=lee1fitAllScreen(210);
     UIBarButtonItem *buttonForDone_Number=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForDone_Number.tintColor = [UIColor whiteColor];
@@ -658,13 +658,13 @@
     [[MyAppDelegate window] addSubview:toolBarForSizePicker];
     
     //toolbar上地按钮
-    UIBarButtonItem *buttonForCancel=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForCancel.tintColor = [UIColor whiteColor];
     }
     buttonForCancel.tag=101;
     UIBarButtonItem *buttonForFix=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:@selector(BarButtonClick:)];
-    buttonForFix.width=lee1fitAllScreen(225);
+    buttonForFix.width=lee1fitAllScreen(210);
     UIBarButtonItem *buttonForDone=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForDone.tintColor = [UIColor whiteColor];
@@ -673,7 +673,7 @@
     [toolBarForPicker setItems:[NSArray arrayWithObjects:buttonForCancel,buttonForFix,buttonForDone,nil]];
     
     
-    UIBarButtonItem *buttonForCancel_size=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel_size=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForCancel_size.tintColor = [UIColor whiteColor];
     }
@@ -816,6 +816,56 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIView* v = [[UIView alloc] init];
+<<<<<<< HEAD
+=======
+    for (NSInteger i = 0; i < ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count; ++i) {
+        PackageGoodsInfo* pgi = [((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods objectAtIndex:i];
+        UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(15 + (i % 2) * (lee1fitAllScreen(140) + 10), (i / 2) * (lee1fitAllScreen((180 + 90))), lee1fitAllScreen(140), lee1fitAllScreen((180 + 90)))];
+        UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
+        [uiv setImageWithURL:[NSURL URLWithString:pgi.image_url] placeholderImage:nil];
+        [vUnit addSubview:uiv];
+        
+        UILabel* lblName = [[UILabel alloc] init];
+        [lblName setNumberOfLines:2];
+        [lblName setTextColor:[UIColor colorWithHexString:@"494949"]];
+        [lblName setLineBreakMode:NSLineBreakByTruncatingTail];
+//        NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
+//        [mps setLineBreakMode:NSLineBreakByTruncatingTail];
+//        [mps setLineSpacing:6];
+
+        NSMutableAttributedString* maStr = [[NSMutableAttributedString alloc] initWithString:pgi.name];
+        NSUInteger nLen = pgi.name.length;
+//        [maStr addAttribute:NSParagraphStyleAttributeName value:mps range:NSMakeRange(0, nLen)];
+        [maStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:lee1fitAllScreen(12)] range:NSMakeRange(0, nLen)];
+        [lblName setAttributedText:maStr];
+        
+        CGRect rcName = [lblName.attributedText boundingRectWithSize:CGSizeMake(vUnit.frame.size.width, 40) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil];
+        [lblName setFrame:CGRectMake(0, uiv.frame.size.height + uiv.frame.origin.y + 12, rcName.size.width, rcName.size.height)];
+        [vUnit addSubview:lblName];
+        
+        UILabel* lblPrice = [[UILabel alloc] init];
+        [lblPrice setFont:[UIFont systemFontOfSize:lee1fitAllScreen(11)]];
+        [lblPrice setText:[NSString stringWithFormat:@"￥%@", pgi.price]];
+        [lblPrice setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
+        CGRect rcPrice = [lblPrice.text boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 36) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblPrice.font} context:nil];
+        [lblPrice setFrame:CGRectMake(lblName.frame.origin.x, lblName.frame.size.height + lblName.frame.origin.y + 10 - (rcPrice.size.height - lblPrice.font.pointSize), rcPrice.size.width, rcPrice.size.height)];
+        [vUnit addSubview:lblPrice];
+        
+        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setFrame:CGRectMake(0, 0, vUnit.frame.size.width, vUnit.frame.size.height)];
+        [btn addTarget:self action:@selector(selectGoods:) forControlEvents:UIControlEventTouchUpInside];
+        [btn setTag:indexPath.row * 10000 + i];
+        [vUnit addSubview:btn];
+        
+        [v addSubview:vUnit];
+        
+        if (i % 2 == 1) {
+            UILabel* lblSep = [[UILabel alloc] initWithFrame:CGRectMake(15, vUnit.frame.origin.y + vUnit.frame.size.height, [UIScreen mainScreen].bounds.size.width - 30, 0.5)];
+            [lblSep setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+            [v addSubview:lblSep];
+        }
+    }
+>>>>>>> origin/master
     
     UITableViewCell* cell = [[UITableViewCell alloc] init];
     NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods.count;
@@ -828,6 +878,12 @@
         [lblGroupName setText:((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).name];
         [lblGroupName setTextColor:[UIColor colorWithHexString:@"#181818"]];
         [vGroup addSubview:lblGroupName];
+        
+        //lee999 新增分割线
+        UIView* splineV = [[UIView alloc] initWithFrame:CGRectMake(0, 43.5, ScreenWidth, 0.5)];
+        [splineV setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+        [vGroup addSubview:splineV];
+        //end
         
         UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setFrame:CGRectMake(0, 0, tableView.frame.size.width, lee1fitAllScreen(44))];

@@ -583,13 +583,13 @@
 
 -(void)createtoolbarandpicker{
     //toolbar上地按钮
-    UIBarButtonItem *buttonForCancel_Number=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel_Number=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForCancel_Number.tintColor = [UIColor whiteColor];
     }
     buttonForCancel_Number.tag=101;
     UIBarButtonItem *buttonForFix_Number=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:@selector(BarButtonClick:)];
-    buttonForFix_Number.width=225;
+    buttonForFix_Number.width=210;
     UIBarButtonItem *buttonForDone_Number=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForDone_Number.tintColor = [UIColor whiteColor];
@@ -624,13 +624,13 @@
     [[MyAppDelegate window] addSubview:toolBarForSizePicker];
     
     //toolbar上地按钮
-    UIBarButtonItem *buttonForCancel=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForCancel.tintColor = [UIColor whiteColor];
     }
     buttonForCancel.tag=101;
     UIBarButtonItem *buttonForFix=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:@selector(BarButtonClick:)];
-    buttonForFix.width=225;
+    buttonForFix.width=210;
     UIBarButtonItem *buttonForDone=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForDone.tintColor = [UIColor whiteColor];
@@ -639,13 +639,13 @@
     [toolBarForPicker setItems:[NSArray arrayWithObjects:buttonForCancel,buttonForFix,buttonForDone,nil]];
     
     
-    UIBarButtonItem *buttonForCancel_size=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel_size=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForCancel_size.tintColor = [UIColor whiteColor];
     }
     buttonForCancel_size.tag=101+100;
     UIBarButtonItem *buttonForFix_size=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:@selector(BarButtonClick:)];
-    buttonForFix_size.width=220;
+    buttonForFix_size.width=210;
     UIBarButtonItem *buttonForDone_size=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForDone_size.tintColor = [UIColor whiteColor];

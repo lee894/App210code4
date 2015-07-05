@@ -25,6 +25,7 @@
 #import "MyClosetListViewController.h"
 #import "BrandListViewController.h"
 #import "MyAimerParser.h"
+#import "NSString+WPAttributedMarkup.h"
 
 
 #import "ImproveInformationViewController.h"
@@ -317,7 +318,8 @@
             return 44;
             break;
         case 9:
-            return lee1fitAllScreen(120);
+            //底部更多，联系我们
+            return lee1fitAllScreen(150);
             break;
         default:
             return 44;
@@ -427,8 +429,20 @@
                 tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             }
             
+            NSDictionary* style1 = @{@"body":[UIFont fontWithName:@"HelveticaNeue" size:14],
+                                     @"bold":[UIFont fontWithName:@"HelveticaNeue-Bold" size:14],
+                                     @"red": [UIColor redColor]};
+            
+            
             UIButton *btn1 = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btn1 setTitle:[NSString stringWithFormat:@"待付款"] forState:UIControlStateNormal];
+            [btn1 setFrame:CGRectMake(0,0,ScreenWidth/3,44)];
+            [btn1 setTag:11];
+            [btn1 addTarget:self action:@selector(shopOrUnhandelOrUnaccess:) forControlEvents:UIControlEventTouchUpInside];
+            [cell addSubview:btn1];
+            
+            //代付款lab
+            UILabel *lab1 = [[UILabel alloc] initWithFrame:CGRectMake(0,0,ScreenWidth/3,44)];
+            [lab1 setFont:[UIFont systemFontOfSize:14.]];
             if ([[myAimerInfo.userinfo.nopay description] intValue] > 0) {
                 
                 NSInteger num = [[myAimerInfo.userinfo.nopay description] intValue];
@@ -438,22 +452,28 @@
                 }else{
                     strnum = [NSString stringWithFormat:@"%ld",(long)num];
                 }
-                [btn1 setTitle:[NSString stringWithFormat:@"待付款（%@）",strnum] forState:UIControlStateNormal];
+                lab1.attributedText = [[NSString stringWithFormat:@"待付款（<red>%@</red>）",strnum] attributedStringWithStyleBook:style1];
+            }else{
+                [lab1 setText:[NSString stringWithFormat:@"待付款"]];
             }
-            [btn1 setFrame:CGRectMake(0,0,ScreenWidth/3,44)];
-            btn1.titleLabel.font = [UIFont systemFontOfSize:14];
-            [btn1 setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
-            [btn1 setTag:11];
-            [btn1 addTarget:self action:@selector(shopOrUnhandelOrUnaccess:) forControlEvents:UIControlEventTouchUpInside];
-            [cell addSubview:btn1];
-            
+            lab1.textAlignment = NSTextAlignmentCenter;
+            [cell addSubview:lab1];
+
             UIView *sepV1 = [[UIView alloc] initWithFrame:CGRectMake(ScreenWidth/3, 0, 0.5, 44)];
             [sepV1 setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
             [cell addSubview:sepV1];
             
+            
             UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btn2 setTitle:[NSString stringWithFormat:@"待评价"] forState:UIControlStateNormal];
-            if ([myAimerInfo.userinfo.norates class] != [NSNull class] && [[myAimerInfo.userinfo.norates description] intValue] > 0) {
+            [btn2 setFrame:CGRectMake(ScreenWidth/3,0,ScreenWidth/3,44)];
+            [btn2 setTag:13];
+            [btn2 addTarget:self action:@selector(shopOrUnhandelOrUnaccess:) forControlEvents:UIControlEventTouchUpInside];
+            [cell addSubview:btn2];
+            
+            
+            //待评价lab
+            UILabel *lab2 = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth/3,0,ScreenWidth/3,44)];
+            if ([[myAimerInfo.userinfo.norates description] intValue] > 0) {
                 
                 NSInteger num = [[myAimerInfo.userinfo.norates description] intValue];
                 NSString *strnum = @"";
@@ -462,21 +482,28 @@
                 }else{
                     strnum = [NSString stringWithFormat:@"%ld",(long)num];
                 }
-                [btn2 setTitle:[NSString stringWithFormat:@"待评价（%@）",strnum] forState:UIControlStateNormal];
+                lab2.attributedText = [[NSString stringWithFormat:@"待评价（<red>%@</red>）",strnum] attributedStringWithStyleBook:style1];
+            }else{
+                [lab2 setText:[NSString stringWithFormat:@"待评价"]];
             }
-            [btn2 setFrame:CGRectMake(ScreenWidth/3,0,ScreenWidth/3,44)];
-            btn2.titleLabel.font = [UIFont systemFontOfSize:14];
-            [btn2 setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
-            [btn2 setTag:13];
-            [btn2 addTarget:self action:@selector(shopOrUnhandelOrUnaccess:) forControlEvents:UIControlEventTouchUpInside];
-            [cell addSubview:btn2];
+            [lab2 setFont:[UIFont systemFontOfSize:14.]];
+            lab2.textAlignment = NSTextAlignmentCenter;
+            [cell addSubview:lab2];
+            
+            
             
             UIView *sepV2 = [[UIView alloc] initWithFrame:CGRectMake((ScreenWidth/3)*2, 0, 0.5, 44)];
             [sepV2 setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
             [cell addSubview:sepV2];
             
             UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btn3 setTitle:[NSString stringWithFormat:@"待处理"] forState:UIControlStateNormal];
+            [btn3 setTag:12];
+            [btn3 addTarget:self action:@selector(shopOrUnhandelOrUnaccess:) forControlEvents:UIControlEventTouchUpInside];
+            [cell addSubview:btn3];
+            
+            //待处理lab
+            UILabel *lab3 = [[UILabel alloc] initWithFrame:CGRectMake((ScreenWidth/3)*2,0,ScreenWidth/3,44)];
+            [lab3 setFont:[UIFont systemFontOfSize:14.]];
             if ([[myAimerInfo.userinfo.nodispose description] intValue] > 0) {
                 
                 NSInteger num = [[myAimerInfo.userinfo.nodispose description] intValue];
@@ -486,14 +513,12 @@
                 }else{
                     strnum = [NSString stringWithFormat:@"%ld",(long)num];
                 }
-                [btn3 setTitle:[NSString stringWithFormat:@"待处理（%@）",strnum] forState:UIControlStateNormal];
+                lab3.attributedText = [[NSString stringWithFormat:@"待处理（<red>%@</red>）",strnum] attributedStringWithStyleBook:style1];
+            }else{
+                [lab3 setText:[NSString stringWithFormat:@"待处理"]];
             }
-            [btn3 setFrame:CGRectMake((ScreenWidth/3)*2,0,ScreenWidth/3,44)];
-            btn3.titleLabel.font = [UIFont systemFontOfSize:14];
-            [btn3 setTitleColor:[UIColor colorWithHexString:@"333333"] forState:UIControlStateNormal];
-            [btn3 setTag:12];
-            [btn3 addTarget:self action:@selector(shopOrUnhandelOrUnaccess:) forControlEvents:UIControlEventTouchUpInside];
-            [cell addSubview:btn3];
+            lab3.textAlignment = NSTextAlignmentCenter;
+            [cell addSubview:lab3];
             
             return cell;
         }

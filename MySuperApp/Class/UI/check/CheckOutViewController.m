@@ -1736,6 +1736,17 @@ NSLog(@"createOtherCells  come out");
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+#pragma mark--- 处理section的不悬浮
+//uitableview处理section的不悬浮，禁止section停留的方法，主要是这段代码
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat sectionHeaderHeight = 50;
+    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {

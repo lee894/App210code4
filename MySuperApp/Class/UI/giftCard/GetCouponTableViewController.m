@@ -11,8 +11,8 @@
 #import "Coupon.h"
 #import "BonusTableViewController.h"
 #import "MyAimerViewController.h"
+#import "CouponDetail20ViewController.h"
 #import "CouponDetailViewController.h"
-
 #import "CFunction.h"
 
 @interface GetCouponTableViewController ()
@@ -93,41 +93,37 @@
     if (buttonIndex != 0) {
         
         [self changeToMyaimer];
-        
-//        MyAimerViewController* checkOrder = [[MyAimerViewController alloc] initWithNibName:@"MyAimerViewController" bundle:nil];
-//        checkOrder.isPushBack = YES;
-//        [self.navigationController pushViewController:checkOrder animated:YES];
     }
 }
 
 //单元格上按钮的点击事件
-- (void)btnClicked:(UIButton *) btn onCell:(UITableViewCell *)cell
-{
-    int index = [[mytableView indexPathForCell:cell] row];
-    if (btn.tag == 7) {//领取按钮
-    if ([SingletonState sharedStateInstance].userHasLogin) {
-           
-        [mainSer getGetscouponup:[[couponModel.coupon objectAtIndex:index] objectForKey:@"id"]];
-        [SBPublicAlert showMBProgressHUD:@"正在领取···" andWhereView:self.view states:NO];
-        
-    }else {
-
-        [self changeToMyaimer];
-
-        
-//        UIAlertView *arelt = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-//        [arelt show];
-    }
-
-    } else if (btn.tag == 6) {
-        
-        CouponDetailViewController *userCtrl = [[CouponDetailViewController alloc] initWithNibName:@"CouponDetailViewController" bundle:nil];
-        //是不是我自己的优惠券，（自己的能显示二维码，不是自己的没有二维码）
-        userCtrl.isMycard = NO;
-        userCtrl.couponDic = [couponModel.coupon objectAtIndex:index];
-        [self.navigationController pushViewController:userCtrl animated:YES];
-    }
-}
+//- (void)btnClicked:(UIButton *) btn onCell:(UITableViewCell *)cell
+//{
+//    NSInteger index = [[mytableView indexPathForCell:cell] row];
+//    if (btn.tag == 7) {//领取按钮
+//    if ([SingletonState sharedStateInstance].userHasLogin) {
+//           
+//        [mainSer getGetscouponup:[[couponModel.coupon objectAtIndex:index] objectForKey:@"id"]];
+//        [SBPublicAlert showMBProgressHUD:@"正在领取···" andWhereView:self.view states:NO];
+//        
+//    }else {
+//
+//        [self changeToMyaimer];
+//
+//        
+////        UIAlertView *arelt = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
+////        [arelt show];
+//    }
+//
+//    } else if (btn.tag == 6) {
+//        
+//        CouponDetailViewController *userCtrl = [[CouponDetailViewController alloc] initWithNibName:@"CouponDetailViewController" bundle:nil];
+//        //是不是我自己的优惠券，（自己的能显示二维码，不是自己的没有二维码）
+//        userCtrl.isMycard = NO;
+//        userCtrl.couponDic = [couponModel.coupon objectAtIndex:index];
+//        [self.navigationController pushViewController:userCtrl animated:YES];
+//    }
+//}
 
 -(void)rightButAction {
 
@@ -140,14 +136,6 @@
     }else {
 
         [self changeToMyaimer];
-
-        
-//        UIAlertView *arelt = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-//        [arelt show];
-        
-//        MyAimerViewController* checkOrder = [[MyAimerViewController alloc] initWithNibName:@"MyAimerViewController" bundle:nil];
-//        checkOrder.isPush = YES;
-//        [self.navigationController pushViewController:checkOrder animated:YES];
     }
 }
 
@@ -164,96 +152,246 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//-------V2
 {
-    static NSString *CellIdentifier = @"BonusCellIdentifier";
-    BonusCell *cell = (BonusCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-    if (cell == nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"BonusCell" owner:self options:nil] lastObject];
-        cell.parent = self;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell.buttonUsed setTitle:@"领取" forState:UIControlStateNormal];
-        [cell.buttonUsed setTitle:@"领取" forState:UIControlStateHighlighted];
-    }
-
-    NSDictionary *dic = [couponModel.coupon objectAtIndex:indexPath.row];
-
-    cell.labelTitle.text = LegalObject([dic objectForKey:@"name"],[NSString class]);//@"线上全场通用劵";
-    cell.labelDesc.text = LegalObject([dic objectForKey:@"memo"],[NSString class]);
-    NSString *startTime = LegalObject([dic objectForKey:@"start_time"],[NSString class]);
-    if ([startTime isEqualToString:@""] || !startTime) {
-        startTime = /*@"0000-00-00 00:00:00"*/@"";
-    }
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [cell setBackgroundColor:[UIColor clearColor]];
+    
+    UIImageView* ivBg = [[UIImageView alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - (lee1fitAllScreen(295))) / 2, 0, lee1fitAllScreen(295), lee1fitAllScreen(76))];
+    [cell.contentView addSubview:ivBg];
+    
+    UILabel* lblPrice = [[UILabel alloc] initWithFrame:CGRectMake(0, (lee1fitAllScreen(76) - 18) / 2, lee1fitAllScreen(72), 18)];
+    [lblPrice setTextAlignment:NSTextAlignmentCenter];
+    [lblPrice setFont:[UIFont boldSystemFontOfSize:15]];
+    [lblPrice setTextColor:[UIColor whiteColor]];
+    [ivBg addSubview:lblPrice];
+    
+    UILabel* lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(72) + 10, 22, lee1fitAllScreen(160), 12)];
+    [lblTitle setFont:[UIFont boldSystemFontOfSize:12]];
+    [lblTitle setLineBreakMode:NSLineBreakByTruncatingTail];
+    [lblTitle setTextColor:[UIColor colorWithHexString:@"#666666"]];
+    [ivBg addSubview:lblTitle];
+    
+    UILabel* lblTime = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(72) + 10, lblTitle.frame.size.height + lblTitle.frame.origin.y + 6, lee1fitAllScreen(160), 12)];
+    [lblTime setFont:[UIFont systemFontOfSize:12]];
+    [lblTime setLineBreakMode:NSLineBreakByTruncatingTail];
+    [lblTime setTextColor:[UIColor colorWithHexString:@"#666666"]];
+    [ivBg addSubview:lblTime];
+    
+    UIImageView* ivState = [[UIImageView alloc] initWithFrame:CGRectMake(ivBg.frame.size.width - (lee1fitAllScreen(63)), 5, 0.5, ivBg.frame.size.height - 10)];
+    [ivBg addSubview:ivState];
+    
+    // NSString* strStatus = @"";
+    NSString* type = @"";
+    NSString* strPrice = @"";
+    NSString* strTitle = @"";
+    NSString* strTime = @"";
+    UIImage* iBg = nil;
+    //优惠券
+        NSDictionary *dic = [couponModel.coupon objectAtIndex:indexPath.row];
     NSString *failtime = LegalObject([dic objectForKey:@"end_time"],[NSString class]);
-    if ([failtime isEqualToString:@""] || !startTime) {
-        failtime = /*@"0000-00-00 00:00:00"*/@"";
+    if ([failtime isEqualToString:@""]) {
+        failtime =@"";
     }
-    cell.labelTime.text = [NSString stringWithFormat:@"%@ 至\n%@",[startTime substringToIndex:10],[failtime substringToIndex:10]];
+
+
+        type = LegalObject([dic objectForKey:@"type"],[NSString class]);
+        strTitle =  LegalObject([dic objectForKey:@"name"],[NSString class]);
+        strPrice = [NSString stringWithFormat:@"￥%@", LegalObject([dic objectForKey:@"amount"],[NSString class])];
+        strTime = [NSString stringWithFormat:@"有效期至%@", [failtime substringToIndex:10]];
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *dateStr = [formatter stringFromDate:[NSDate date]];
- 
-    NSComparisonResult compareResult = [dateStr compare:failtime];
-    NSString *status = LegalObject([dic objectForKey:@"status"],[NSString class]);
-    
-    if ([status isEqualToString:@"已过期优惠劵"]||[status isEqualToString:@"已过期优惠劵状态"]) {
-            BtnSetImg(cell.btnBonus, @"card_ticket02", @"", @"");
-            cell.imageViewIsUsed.image = [UIImage imageNamed:@"ticket_status_out"];
-            cell.buttonUsed.hidden = YES;
+    {
         
-        //lee999 已经过期的优惠券不可点击
-        cell.btnBonus.enabled = NO;
-        //end
+        [ivState setBackgroundColor:[UIColor colorWithHexString:@"c6c6c6"]];
         
-    } else if ([status isEqualToString:@"已使用"]){//已使用
-        BtnSetImg(cell.btnBonus,@"card_aimer01",@"",@"");
-        cell.buttonUsed.hidden = YES;
-        cell.imageViewIsUsed.image = [UIImage imageNamed:@"ticket_status_used"];
-        
-    }else if ([status isEqualToString:@"未使用"]) {
-        if(compareResult == NSOrderedAscending || compareResult == NSOrderedSame) {//没有过期
-            [cell.btnBonus setImage:[UIImage imageNamed:@"card_aimer01.png"] forState:UIControlStateNormal];
-            cell.imageViewIsUsed.image = [UIImage imageNamed:@""];
-            cell.buttonUsed.hidden = NO;
-        } else if (compareResult == NSOrderedDescending){//已过期
-            BtnSetImg(cell.btnBonus, @"card_ticket02", @"", @"")
-            cell.imageViewIsUsed.image = [UIImage imageNamed:@"ticket_status_out"];
-            cell.buttonUsed.hidden = YES;
-            
-            //lee999 已经过期的优惠券不可点击
-            cell.btnBonus.enabled = NO;
-            //end
+        UIButton* btnAction = [UIButton buttonWithType:UIButtonTypeCustom];
+        if ([type isEqualToString:@"o2o"])
+        {
+            iBg = [UIImage imageNamed:@"laber_o2o"];
+            [btnAction setTitleColor:[UIColor colorWithHexString:@"#fd890a"] forState:UIControlStateNormal];
         }
+        else if([type isEqualToString:@"coupon"])
+        {
+            iBg = [UIImage imageNamed:@"laber_yh"];
+            [btnAction setTitleColor:[UIColor colorWithHexString:@"#c8002c"] forState:UIControlStateNormal];
+        }
+        else if([type isEqualToString:@"gift"])
+        {
+            iBg = [UIImage imageNamed:@"laber_lpk"];
+            [btnAction setTitleColor:[UIColor colorWithHexString:@"#ff6767"] forState:UIControlStateNormal];
+        }
+        
+        
+        [btnAction setTitle:@"领取" forState:UIControlStateNormal];
+        [btnAction.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        [btnAction setFrame:CGRectMake(ivState.frame.origin.x, 0, lee1fitAllScreen(63), ivBg.frame.size.height)];
+        [btnAction setTag:indexPath.row];
+        [btnAction addTarget:self action:@selector(getCardaction:) forControlEvents:UIControlEventTouchUpInside];
+        [ivBg addSubview:btnAction];
     }
-    
-    cell.labelPrice.text = LegalObject([dic objectForKey:@"amount"],[NSString class]);
-    
-    //lee增加o2o优惠券的显示
-    NSString *cardtype = @"";
-    cardtype = LegalObject([dic objectForKey:@"type"],[NSString class]);
-    NSLog(@"cardtype---:%@",cardtype);
-    if ([cardtype isEqualToString:@"o2o"]) {
-        [cell.btnBonus setImage:[UIImage imageNamed:@"card_lb03.png"] forState:UIControlStateNormal];
-        
-        //lee987 修改020的优惠券展示
-        [cell.buttonUsed setBackgroundImage:[UIImage imageNamed:@"alert-yellow-button.png"] forState:UIControlStateNormal];
-        
-//        cell.labelTitle.text = @"线上线下通用O2O券";
-        
-//        啊实打实大师的
-        
+    [ivBg setImage:iBg];
+    [ivBg setUserInteractionEnabled:YES];
+    [lblPrice setText:strPrice];
+    [lblTitle setText:strTitle];
+    [lblTime setText:strTime];
+    CGRect rcTitle = [lblTitle.text boundingRectWithSize:CGSizeMake(lblTitle.frame.size.width, lee1fitAllScreen(62)) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblTitle.font} context:nil];
+    NSLog(@"%@", NSStringFromCGRect(rcTitle));
+    if (rcTitle.size.height > 15) {
+        float originY = (ivBg.frame.size.height - rcTitle.size.height - 6 - 12) / 2;
+        [lblTitle setFrame:CGRectMake(lblTitle.frame.origin.x, originY, rcTitle.size.width, rcTitle.size.height)];
+        [lblTitle setNumberOfLines:2];
+        [lblTime setFrame:CGRectMake(lee1fitAllScreen(72) + 10, lblTitle.frame.size.height + lblTitle.frame.origin.y + 6, lee1fitAllScreen(160), 12)];
     }
+
+    
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+//    CouponDetailViewController *userCtrl = [[CouponDetailViewController alloc] initWithNibName:@"CouponDetailViewController" bundle:nil];
+//    //是不是我自己的优惠券，（自己的能显示二维码，不是自己的没有二维码）
+//    userCtrl.isMycard = NO;
+//    userCtrl.couponDic = [couponModel.coupon objectAtIndex:[indexPath row]];
+//    [self.navigationController pushViewController:userCtrl animated:YES];
+    
+    id data = [couponModel.coupon objectAtIndex:indexPath.row];
+    CouponDetail20ViewController* cdvc = [[CouponDetail20ViewController alloc] init];
+    
+    NSString* type = (LegalObject([data objectForKey:@"type"],[NSString class]));
+    if ([type isEqualToString:@"o2o"])
+    {
+        cdvc.dType = kO2O;
+    }
+    else if([type isEqualToString:@"coupon"])
+    {
+        cdvc.dType = kCoupon;
+    }
+    else if([type isEqualToString:@"gift"])
+    {
+        cdvc.dType = kGift;
+    }
+    cdvc.data = data;
+    cdvc.isMycard = 1; // 1不是我的优惠券
+    [self.navigationController pushViewController:cdvc animated:YES];
+}
+
+
+
+-(void)getCardaction:(UIButton*)sender
+{
+    
+    if ([SingletonState sharedStateInstance].userHasLogin) {
+        
+        [mainSer getGetscouponup:[[couponModel.coupon objectAtIndex:sender.tag isArray:nil] objectForKey:@"id"]];
+        [SBPublicAlert showMBProgressHUD:@"正在领取···" andWhereView:self.view states:NO];
+        
+    }else {
+        
+        [self changeToMyaimer];
+    }
+    
+}
+
+
+//{
+//    static NSString *CellIdentifier = @"BonusCellIdentifier";
+//    BonusCell *cell = (BonusCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//
+//    if (cell == nil) {
+//        cell = [[[NSBundle mainBundle] loadNibNamed:@"BonusCell" owner:self options:nil] lastObject];
+//        cell.parent = self;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        [cell.buttonUsed setTitle:@"领取" forState:UIControlStateNormal];
+//        [cell.buttonUsed setTitle:@"领取" forState:UIControlStateHighlighted];
+//    }
+//
+//    NSDictionary *dic = [couponModel.coupon objectAtIndex:indexPath.row];
+//
+//    cell.labelTitle.text = LegalObject([dic objectForKey:@"name"],[NSString class]);//@"线上全场通用劵";
+//    cell.labelDesc.text = LegalObject([dic objectForKey:@"memo"],[NSString class]);
+//    NSString *startTime = LegalObject([dic objectForKey:@"start_time"],[NSString class]);
+//    if ([startTime isEqualToString:@""] || !startTime) {
+//        startTime = /*@"0000-00-00 00:00:00"*/@"";
+//    }
+//    NSString *failtime = LegalObject([dic objectForKey:@"end_time"],[NSString class]);
+//    if ([failtime isEqualToString:@""] || !startTime) {
+//        failtime = /*@"0000-00-00 00:00:00"*/@"";
+//    }
+//    cell.labelTime.text = [NSString stringWithFormat:@"%@ 至\n%@",[startTime substringToIndex:10],[failtime substringToIndex:10]];
+//    
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    NSString *dateStr = [formatter stringFromDate:[NSDate date]];
+// 
+//    NSComparisonResult compareResult = [dateStr compare:failtime];
+//    NSString *status = LegalObject([dic objectForKey:@"status"],[NSString class]);
+//    
+//    if ([status isEqualToString:@"已过期优惠劵"]||[status isEqualToString:@"已过期优惠劵状态"]) {
+//            BtnSetImg(cell.btnBonus, @"card_ticket02", @"", @"");
+//            cell.imageViewIsUsed.image = [UIImage imageNamed:@"ticket_status_out"];
+//            cell.buttonUsed.hidden = YES;
+//        
+//        //lee999 已经过期的优惠券不可点击
+//        cell.btnBonus.enabled = NO;
+//        //end
+//        
+//    } else if ([status isEqualToString:@"已使用"]){//已使用
+//        BtnSetImg(cell.btnBonus,@"card_aimer01",@"",@"");
+//        cell.buttonUsed.hidden = YES;
+//        cell.imageViewIsUsed.image = [UIImage imageNamed:@"ticket_status_used"];
+//        
+//    }else if ([status isEqualToString:@"未使用"]) {
+//        if(compareResult == NSOrderedAscending || compareResult == NSOrderedSame) {//没有过期
+//            [cell.btnBonus setImage:[UIImage imageNamed:@"card_aimer01.png"] forState:UIControlStateNormal];
+//            cell.imageViewIsUsed.image = [UIImage imageNamed:@""];
+//            cell.buttonUsed.hidden = NO;
+//        } else if (compareResult == NSOrderedDescending){//已过期
+//            BtnSetImg(cell.btnBonus, @"card_ticket02", @"", @"")
+//            cell.imageViewIsUsed.image = [UIImage imageNamed:@"ticket_status_out"];
+//            cell.buttonUsed.hidden = YES;
+//            
+//            //lee999 已经过期的优惠券不可点击
+//            cell.btnBonus.enabled = NO;
+//            //end
+//        }
+//    }
+//    
+//    cell.labelPrice.text = LegalObject([dic objectForKey:@"amount"],[NSString class]);
+//    
+//    //lee增加o2o优惠券的显示
+//    NSString *cardtype = @"";
+//    cardtype = LegalObject([dic objectForKey:@"type"],[NSString class]);
+//    NSLog(@"cardtype---:%@",cardtype);
+//    if ([cardtype isEqualToString:@"o2o"]) {
+//        [cell.btnBonus setImage:[UIImage imageNamed:@"card_lb03.png"] forState:UIControlStateNormal];
+//        
+//        //lee987 修改020的优惠券展示
+//        [cell.buttonUsed setBackgroundImage:[UIImage imageNamed:@"alert-yellow-button.png"] forState:UIControlStateNormal];
+//    }
+//    
+//    return cell;
+//}
 
 #pragma mark - Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 134.0f;
+    return lee1fitAllScreen(76) + 10;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return nil;
+}
+
 
 
 #pragma mark -- NETrequest delegate
@@ -303,27 +441,8 @@
             [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:1.];
             break;
     }
-    
 }
 
-//iOS 5
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-	return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
-}
-//iOS 6
-- (BOOL)shouldAutorotate
-{
-	return NO;
-}
-- (NSUInteger)supportedInterfaceOrientations
-{
-	return UIInterfaceOrientationMaskPortrait;
-}
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-	return UIInterfaceOrientationPortrait;
-}
 
 - (void)didReceiveMemoryWarning
 {

@@ -428,6 +428,8 @@
 		96570D791AF46343006183C2 /* OTPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96570D771AF46343006183C2 /* OTPageView.m */; };
 		96570D7C1AF463AC006183C2 /* NewMaginzeBViewControllerV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 96570D7B1AF463AC006183C2 /* NewMaginzeBViewControllerV2.m */; };
 		96570D7F1AF47E97006183C2 /* PPBuyOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96570D7E1AF47E97006183C2 /* PPBuyOptionView.m */; };
+		9657A2CB1B48B6110070612B /* NSMutableString+TagReplace.m in Sources */ = {isa = PBXBuildFile; fileRef = 9657A2C81B48B6110070612B /* NSMutableString+TagReplace.m */; };
+		9657A2CC1B48B6110070612B /* NSString+WPAttributedMarkup.m in Sources */ = {isa = PBXBuildFile; fileRef = 9657A2CA1B48B6110070612B /* NSString+WPAttributedMarkup.m */; };
 		965DF5C11B3A862300FCD4C8 /* UIScrollView+LoadingMore.m in Sources */ = {isa = PBXBuildFile; fileRef = 965DF5BC1B3A862300FCD4C8 /* UIScrollView+LoadingMore.m */; };
 		965DF5C21B3A862400FCD4C8 /* ZBFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 965DF5BE1B3A862300FCD4C8 /* ZBFlowView.m */; };
 		965DF5C31B3A862400FCD4C8 /* ZBWaterView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 965DF5C01B3A862300FCD4C8 /* ZBWaterView.mm */; };
@@ -1695,6 +1697,10 @@
 		96570D7B1AF463AC006183C2 /* NewMaginzeBViewControllerV2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMaginzeBViewControllerV2.m; sourceTree = "<group>"; };
 		96570D7D1AF47E97006183C2 /* PPBuyOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPBuyOptionView.h; sourceTree = "<group>"; };
 		96570D7E1AF47E97006183C2 /* PPBuyOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPBuyOptionView.m; sourceTree = "<group>"; };
+		9657A2C71B48B6110070612B /* NSMutableString+TagReplace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+TagReplace.h"; sourceTree = "<group>"; };
+		9657A2C81B48B6110070612B /* NSMutableString+TagReplace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+TagReplace.m"; sourceTree = "<group>"; };
+		9657A2C91B48B6110070612B /* NSString+WPAttributedMarkup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+WPAttributedMarkup.h"; sourceTree = "<group>"; };
+		9657A2CA1B48B6110070612B /* NSString+WPAttributedMarkup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+WPAttributedMarkup.m"; sourceTree = "<group>"; };
 		965DF5BB1B3A862300FCD4C8 /* UIScrollView+LoadingMore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+LoadingMore.h"; sourceTree = "<group>"; };
 		965DF5BC1B3A862300FCD4C8 /* UIScrollView+LoadingMore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+LoadingMore.m"; sourceTree = "<group>"; };
 		965DF5BD1B3A862300FCD4C8 /* ZBFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBFlowView.h; sourceTree = "<group>"; };
@@ -3876,6 +3882,17 @@
 			path = OTPageView;
 			sourceTree = "<group>";
 		};
+		9657A2C61B48B6110070612B /* WPAttributedMarkup */ = {
+			isa = PBXGroup;
+			children = (
+				9657A2C71B48B6110070612B /* NSMutableString+TagReplace.h */,
+				9657A2C81B48B6110070612B /* NSMutableString+TagReplace.m */,
+				9657A2C91B48B6110070612B /* NSString+WPAttributedMarkup.h */,
+				9657A2CA1B48B6110070612B /* NSString+WPAttributedMarkup.m */,
+			);
+			path = WPAttributedMarkup;
+			sourceTree = "<group>";
+		};
 		965DF5BA1B3A862300FCD4C8 /* WaterView */ = {
 			isa = PBXGroup;
 			children = (
@@ -5685,6 +5702,7 @@
 		9BD58AE518E40D56008CD881 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				9657A2C61B48B6110070612B /* WPAttributedMarkup */,
 				9629ED7F1B478E7900F61EE2 /* XinGepush */,
 				965DF5BA1B3A862300FCD4C8 /* WaterView */,
 				961BEF191B35109E003BEF9D /* Baifendian */,
@@ -7248,6 +7266,7 @@
 				C598E65018FAA8C900C5A7B0 /* OrderEndCell.m in Sources */,
 				9BD58D5918E4160F008CD881 /* LoginViewController.m in Sources */,
 				9B7CB10F18D59C4300D8DAA5 /* COCheckoutConsigneeinfo.m in Sources */,
+				9657A2CB1B48B6110070612B /* NSMutableString+TagReplace.m in Sources */,
 				2F27FC3D18E1DAE200C7A7EA /* AMMapViewController.m in Sources */,
 				9B0882FF18F7C21400F76D65 /* YKChoseGiftViewController.m in Sources */,
 				C598E65218FAA8C900C5A7B0 /* OrderMessageCell.m in Sources */,
@@ -7496,6 +7515,7 @@
 				9B7CB14F18D59C4300D8DAA5 /* CouponcardListCheckoutCouponcard.m in Sources */,
 				9BDABAA6190F679A004A5D1B /* ASIHTTPRequest.m in Sources */,
 				9B7CB14818D59C4300D8DAA5 /* MoerUserinfo.m in Sources */,
+				9657A2CC1B48B6110070612B /* NSString+WPAttributedMarkup.m in Sources */,
 				585A66E418D9E57B00390E86 /* BrandDetailCell.m in Sources */,
 				969542621B25F7C500206FAB /* split.c in Sources */,
 				9B7CB15B18D59C4300D8DAA5 /* Usev6cardusev6cardModel.m in Sources */,

@@ -181,7 +181,7 @@
     [[MyAppDelegate window] addSubview:toolBarForSizePicker];
 
     //toolbar上地按钮
-    UIBarButtonItem *buttonForCancel=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForCancel.tintColor = [UIColor whiteColor];
     }
@@ -196,7 +196,7 @@
     [toolBarForPicker setItems:[NSArray arrayWithObjects:buttonForCancel,buttonForFix,buttonForDone,nil]];
     
    
-    UIBarButtonItem *buttonForCancel_size=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel_size=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
         buttonForCancel_size.tintColor = [UIColor whiteColor];
     }
@@ -335,8 +335,8 @@
     
     UIButton *buttonForAction=[UIButton buttonWithType:UIButtonTypeCustom];
     buttonForAction.frame=CGRectMake(lee1fitAllScreen(185), 40, 110, 35);
-    [buttonForAction setBackgroundImage:[UIImage imageNamed:@"login_btn.png"] forState:UIControlStateNormal];
-    [buttonForAction setBackgroundImage:[UIImage imageNamed:@"login_btn_press.png"] forState:UIControlStateHighlighted];
+    [buttonForAction setBackgroundImage:[UIImage imageNamed:@"lp_btn_normal.png"] forState:UIControlStateNormal];
+    [buttonForAction setBackgroundImage:[UIImage imageNamed:@"lp_btn_select.png"] forState:UIControlStateHighlighted];
     [buttonForAction setTitle:@"加入购物车" forState:UIControlStateNormal];
     [buttonForAction addTarget:self action:@selector(clickToAddCart:) forControlEvents:UIControlEventTouchUpInside];
     buttonForAction.titleLabel.font = [UIFont systemFontOfSize:18];
@@ -407,8 +407,8 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.backgroundColor = [UIColor clearColor];
         
-        UIImageView *cellBg = [[UIImageView alloc] initWithFrame:CGRectMake(10, 164, ScreenWidth-20, 1)];
-        [cellBg setBackgroundColor:[UIColor blackColor]];
+        UIImageView *cellBg = [[UIImageView alloc] initWithFrame:CGRectMake(10, 164, ScreenWidth-20, 0.5)];
+        [cellBg setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
 //        [cellBg setImage:[UIImage imageNamed:@"edit_infor_bg.png"]];
         //lee给view设置为圆角，不再使用图片了。 -140512
 //        [SingletonState setViewRadioSider:cellBg];
@@ -425,9 +425,7 @@
 		UrlImageView* shoppingImg = [[UrlImageView alloc] init];
         [shoppingImg setImageWithURL:[NSURL URLWithString:item.pic]];
 		shoppingImg.frame = CGRectMake(14, 26, 84, 103);
-		
-		shoppingImg.backgroundColor = [UIColor clearColor];
-		[cell.contentView addSubview:shoppingImg];
+        [cell.contentView addSubview:shoppingImg];
         
         UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(110, 10,lee1fitAllScreen(200), 45)];
         desc.backgroundColor = [UIColor clearColor];
@@ -443,7 +441,7 @@
         UIFont *font = [UIFont systemFontOfSize:12];
         desc = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(110), 58, 75, 31)];
         desc.backgroundColor = [UIColor clearColor];
-        desc.text = @"选择颜色:";
+        desc.text = @"颜色：";
         desc.font = font;
         desc.textColor = [UIColor colorWithHexString:@"0x666666"];
         [cell.contentView addSubview:desc];
@@ -451,8 +449,8 @@
         //下拉列表选择颜色按钮
         item.buttonForSelect = [UrlImageButton buttonWithType:UIButtonTypeCustom];
         [item.buttonForSelect setFrame:CGRectMake(lee1fitAllScreen(175), 58, 79, 31)];
-        [item.buttonForSelect setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
-        [item.buttonForSelect setBackgroundImage:[UIImage imageNamed:@"signup_btn_press.png"] forState:UIControlStateHighlighted];
+        [item.buttonForSelect setBackgroundImage:[UIImage imageNamed:@"lp_option.png"] forState:UIControlStateNormal];
+        [item.buttonForSelect setBackgroundImage:[UIImage imageNamed:@"lp_option_hover.png"] forState:UIControlStateHighlighted];
         [item.buttonForSelect addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
         item.buttonForSelect.tag = i * 10 + 0;
         if ([item.colorlist count]!=0) {
@@ -464,15 +462,15 @@
         item.buttonForSelect.titleLabel.font = font;
         [item.buttonForSelect setTitleColor:[UIColor colorWithHexString:@"0x666666"] forState:UIControlStateNormal];
         //lee999 添加向下箭头//sort_arrow_down.png  {top, left, bottom, right}
-        [item.buttonForSelect setImageEdgeInsets:UIEdgeInsetsMake(12, 65, 12, 4)];
-        [item.buttonForSelect setImage:[UIImage imageNamed:@"choice_btn_arrow.png"] forState:UIControlStateNormal];
-            [item.buttonForSelect setImage:[UIImage imageNamed:@"choice_btn_arrow.png"] forState:UIControlStateHighlighted];
+//        [item.buttonForSelect setImageEdgeInsets:UIEdgeInsetsMake(12, 65, 12, 4)];
+//        [item.buttonForSelect setImage:[UIImage imageNamed:@"choice_btn_arrow.png"] forState:UIControlStateNormal];
+//            [item.buttonForSelect setImage:[UIImage imageNamed:@"choice_btn_arrow.png"] forState:UIControlStateHighlighted];
         [cell.contentView addSubview:item.buttonForSelect];
             
         
         desc = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(110), 103, 75, 31)];
         desc.backgroundColor = [UIColor clearColor];
-        desc.text = @"选择尺码:";
+        desc.text = @"尺码：";
         desc.font = font;
         desc.textColor = [UIColor colorWithHexString:@"0x666666"];
         [cell.contentView addSubview:desc];
@@ -480,8 +478,8 @@
             
         item.buttonForSize=[UrlImageButton buttonWithType:UIButtonTypeCustom];
         [item.buttonForSize setFrame:CGRectMake(lee1fitAllScreen(175), 103, 79, 31)];
-        [item.buttonForSize setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
-        [item.buttonForSize setBackgroundImage:[UIImage imageNamed:@"signup_btn_press.png"] forState:UIControlStateHighlighted];
+        [item.buttonForSize setBackgroundImage:[UIImage imageNamed:@"lp_option.png"] forState:UIControlStateNormal];
+        [item.buttonForSize setBackgroundImage:[UIImage imageNamed:@"lp_option_hover.png"] forState:UIControlStateHighlighted];
         [item.buttonForSize addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
         item.buttonForSize.tag = i * 10 + 1;
 
@@ -500,9 +498,9 @@
         item.buttonForSize.titleLabel.font = font;
             [item.buttonForSize setTitleColor:[UIColor colorWithHexString:@"0x666666"] forState:UIControlStateNormal];
             //lee999 添加向下箭头//sort_arrow_down.png  {top, left, bottom, right}
-            [item.buttonForSize setImageEdgeInsets:UIEdgeInsetsMake(12, 65, 12, 4)];
-            [item.buttonForSize setImage:[UIImage imageNamed:@"sort_arrow_down.png"] forState:UIControlStateNormal];
-            [item.buttonForSize setImage:[UIImage imageNamed:@"sort_arrow_down.png"] forState:UIControlStateHighlighted];
+//            [item.buttonForSize setImageEdgeInsets:UIEdgeInsetsMake(12, 65, 12, 4)];
+//            [item.buttonForSize setImage:[UIImage imageNamed:@"sort_arrow_down.png"] forState:UIControlStateNormal];
+//            [item.buttonForSize setImage:[UIImage imageNamed:@"sort_arrow_down.png"] forState:UIControlStateHighlighted];
         [cell.contentView addSubview:item.buttonForSize];
         
         if (i != [self.suitListModel.suitArray count]) {

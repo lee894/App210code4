@@ -16,6 +16,7 @@
     IBOutlet UILabel *labelMessage;
     IBOutlet UILabel *labelPhone;
 
+    __weak IBOutlet UIView *lineView;
 }
 
 @property(nonatomic,retain) IBOutlet UIImageView *imageCheck;//选择收货地址显示的图片

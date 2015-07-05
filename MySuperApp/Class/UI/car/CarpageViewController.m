@@ -13,6 +13,7 @@
 #import "UIImage+ImageSize.h"
 #import "YKChoseGiftViewController.h"
 #import "CheckOutViewController.h"
+#import "MyButton.h"
 
 @interface CarpageViewController () <mobideaRecProtocol>
 {
@@ -184,6 +185,7 @@
                 [mstrUks appendFormat:@"%@|", item.uk];
             }
         }
+#warning  崩溃-------- Terminating app due to uncaught exception 'NSRangeException', reason: '*** -[__NSCFString substringToIndex:]: Index 18446744073709551615 out of bounds; string length 0'
         [mainSer getDelcar:[mstrUks substringToIndex:[mstrUks description].length - 1]];
         return;
     }
@@ -291,7 +293,7 @@
         }
     }
     
-	if ([self.carModel.carProductlist count]>0 || [self.carModel.suitlist count] > 0) {
+	if ([self.carModel.carProductlist count]>0 || [self.carModel.suitlist count] > 0  || [self.carModel.packagelist count] > 0) {
         //购物车中有商品
         if (self.nullView) {
             [self.nullView removeFromSuperview];
@@ -673,10 +675,14 @@
 }
 
 //进入商品详情
--(void)touchAction:(id)sender{
+-(void)touchAction:(UITapGestureRecognizer*)sender{
     
-    UIButton* button = (UIButton*)sender;
-	YKItem* item = (YKItem*)[self.carModel.hotlist objectAtIndex:button.tag];
+    UITapGestureRecognizer *tap = (UITapGestureRecognizer *)sender;
+    
+    NSLog(@"------tap:%ld",(long)tap.view.tag);
+    
+    //MyButton* button = (MyButton*)sender;
+	YKItem* item = (YKItem*)[self.carModel.hotlist objectAtIndex:tap.view.tag];
 	ProductDetailViewController* detail = [[ProductDetailViewController alloc] init];
 	detail.thisProductId = item.productid;
     detail.ThisPorductName=item.name;
@@ -768,6 +774,12 @@
 	for (NSInteger i = 0; i < count; ++i) {
 		YKItem* item = (YKItem *)[self.carModel.hotlist objectAtIndex:i];
         UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(originX + (i % 3) * (spacing + unitWidth), (i / 3) * (unitHeight) + originY, unitWidth, unitHeight)];
+        vUnit.tag = i;
+        // 单击的 Recognizer
+        UITapGestureRecognizer* singleRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchAction:)];
+        singleRecognizer.numberOfTapsRequired = 1; // 单击
+        [vUnit addGestureRecognizer:singleRecognizer];
+        
         UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 0, unitWidth, lee1fitAllScreen(110))];
         [uiv setImageWithURL:[NSURL URLWithString:item.imgurl] placeholderImage:nil];
         [vUnit addSubview:uiv];
@@ -810,6 +822,15 @@
             [lblMPrice setFrame:CGRectMake(0, uiv.frame.size.height + uiv.frame.origin.y + 45, unitWidth, 13)];
             [vUnit addSubview:lblMPrice];
         }
+        
+//        //lee999 增加商品跳转
+//        MyButton* touchButton = [MyButton buttonWithType:UIButtonTypeCustom];
+//        touchButton.frame = CGRectMake(originX + (i % 3) * (spacing + unitWidth), (i / 3) * (unitHeight) + originY, unitWidth, unitHeight);
+//        [touchButton setBackgroundColor:[UIColor greenColor]];
+//        touchButton.tag = i;
+//        touchButton.addstring = item.productid;
+//        [touchButton addTarget:self action:@selector(touchAction:) forControlEvents:UIControlEventTouchUpInside];
+//        [vUnit addSubview:touchButton];
         
         [footView addSubview:vUnit];
 //		if (i >= 3)

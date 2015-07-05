@@ -152,13 +152,13 @@
     toolBarForPicker.barStyle=UIBarStyleBlackTranslucent;
     [self.view addSubview:toolBarForPicker];
     
-    UIBarButtonItem *buttonForCancel=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     buttonForCancel.tag=103;
     if (isIOS7up) {
         buttonForCancel.tintColor = [UIColor whiteColor];
     }
     UIBarButtonItem *buttonForFix=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:nil];
-    buttonForFix.width=225;
+    buttonForFix.width=210;
     UIBarButtonItem *buttonForDone=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     buttonForDone.tag=105;
     if (isIOS7up) {
@@ -226,7 +226,7 @@
     mytoolbar.barStyle = UIBarStyleBlackOpaque;
     
     //lee999recode
-    UIBarButtonItem *buttonForCancel=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(hiddenBarAndSheet)];
+    UIBarButtonItem *buttonForCancel=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(hiddenBarAndSheet)];
     buttonForCancel.tag=103;
     if (isIOS7up) {
         buttonForCancel.tintColor = [UIColor whiteColor];
