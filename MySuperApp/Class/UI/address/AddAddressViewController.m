@@ -88,6 +88,18 @@
     textFieldPhone.keyboardType = UIKeyboardTypeNumberPad;
     textFieldTel.keyboardType = UIKeyboardTypeNumberPad;
     
+    //lee999 150703 设置默认地址
+    if (addOrEdit) {
+        //新增地址进入的
+        [setDefaultAddress setOn:YES];
+    }else{
+        if ([[addressList.defaultFlag description] isEqualToString:@"yes"]) {
+            [setDefaultAddress setOn:YES];
+        }else{
+            [setDefaultAddress setOn:NO];
+        }
+    }
+    
     
     int frameH2 = self.view.frame.size.height;
     NSLog(@"-----------%d----model---%@",frameH2,[[UIDevice currentDevice] model]);
@@ -300,15 +312,17 @@
             [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"请输入正确的手机号码"];
             return;
         }
+    
+        NSString *strDefault = setDefaultAddress.isOn?@"yes":@"no";
                 
         if (!addOrEdit) {//编辑进入
-            [mainSer getAddressEdit:self.addressList.addresslistIdentifier andName:textFieldName.text andArea:areaId andMobilephone:textFieldPhone.text andCity:cityId  andDetail:textFieldDetail.text andProvince:provinceId andTelephone:textFieldTel.text andZipcode:textFieldZip.text andEmail:textFieldEmail.text];
+            [mainSer getAddressEdit:self.addressList.addresslistIdentifier andName:textFieldName.text andArea:areaId andMobilephone:textFieldPhone.text andCity:cityId  andDetail:textFieldDetail.text andProvince:provinceId andTelephone:textFieldTel.text andZipcode:textFieldZip.text andEmail:textFieldEmail.text andSetDefautAddress:strDefault];
             [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 
             
         }else{//新增进入
         
-            [mainSer getAddressAdd:textFieldName.text andArea:areaId andMobilephone:textFieldPhone.text andCity:cityId andDetail:textFieldDetail.text andProvince:provinceId andTelephone:textFieldTel.text andZipcode:textFieldZip.text andEmail:textFieldEmail.text];
+            [mainSer getAddressAdd:textFieldName.text andArea:areaId andMobilephone:textFieldPhone.text andCity:cityId andDetail:textFieldDetail.text andProvince:provinceId andTelephone:textFieldTel.text andZipcode:textFieldZip.text andEmail:textFieldEmail.text andSetDefautAddress:strDefault];
             [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 
 

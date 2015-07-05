@@ -24,6 +24,7 @@
     IBOutlet UITextField *textFieldEmail;
     
     IBOutlet UILabel *labelCity;
+    __weak IBOutlet UISwitch *setDefaultAddress;
     
     AddressPickerView *addressPicker;
     

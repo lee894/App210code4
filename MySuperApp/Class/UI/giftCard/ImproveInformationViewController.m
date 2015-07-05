@@ -97,13 +97,13 @@
     //lee999recode
     
     //这个是选择生日
-    UIBarButtonItem *buttonForCancel_Number=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
+    UIBarButtonItem *buttonForCancel_Number=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
     [buttonForCancel_Number setTintColor:[UIColor whiteColor]];
     }
     buttonForCancel_Number.tag = 107;
     UIBarButtonItem *buttonForFix_Number=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:nil];
-    buttonForFix_Number.width=225;
+    buttonForFix_Number.width=210;
     UIBarButtonItem *buttonForDone_Number=[[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleBordered target:self action:@selector(BarButtonClick:)];
     if (isIOS7up) {
     [buttonForDone_Number setTintColor:[UIColor whiteColor]];
@@ -135,7 +135,7 @@
     toolbar.barStyle = UIBarStyleBlackOpaque;
     
     //lee999recode
-    UIBarButtonItem *buttonForCancel_Number2=[[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleBordered target:self action:@selector(hiddenActionSheet)];
+    UIBarButtonItem *buttonForCancel_Number2=[[UIBarButtonItem alloc] initWithTitle:@"  取消" style:UIBarButtonItemStyleBordered target:self action:@selector(hiddenActionSheet)];
     if (isIOS7up) {
         buttonForCancel_Number2.tintColor = [UIColor whiteColor];
     }

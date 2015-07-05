@@ -10,6 +10,7 @@
                 <outlet property="labelCity" destination="47" id="52"/>
                 <outlet property="myallView" destination="1" id="IiO-Ij-GgO"/>
                 <outlet property="myallscrollView" destination="bys-Gk-1pY" id="Rqh-vE-SH4"/>
+                <outlet property="setDefaultAddress" destination="M58-le-JSP" id="JbW-9h-kVw"/>
                 <outlet property="textFieldDetail" destination="18" id="39"/>
                 <outlet property="textFieldEmail" destination="30" id="53"/>
                 <outlet property="textFieldName" destination="13" id="41"/>
@@ -144,6 +145,17 @@
                                     <color key="textColor" red="0.270588249" green="0.270588249" blue="0.270588249" alpha="1" colorSpace="deviceRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list_bg_02.png" id="HvX-TN-GFX">
+                                    <rect key="frame" x="0.0" y="323" width="320" height="45"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="设为默认地址：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nod-NG-7oK">
+                                    <rect key="frame" x="20" y="333" width="112" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <color key="textColor" red="0.270588249" green="0.270588249" blue="0.270588249" alpha="1" colorSpace="deviceRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="30">
                                     <rect key="frame" x="105" y="278" width="205" height="45"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -193,6 +205,10 @@
                                         <action selector="chooseCity:" destination="-1" eventType="touchUpInside" id="50"/>
                                     </connections>
                                 </button>
+                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="M58-le-JSP">
+                                    <rect key="frame" x="247" y="328" width="51" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </switch>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
@@ -200,7 +216,7 @@
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="53" y="390"/>
+            <point key="canvasLocation" x="-61" y="269"/>
         </view>
     </objects>
     <resources>

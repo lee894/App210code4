@@ -23,6 +23,7 @@
 #import "MyClosetListViewController.h"
 #import "MyButton.h"
 #import "BfdAgent.h"
+#import "YKStrikePriceLabel.h"
 
 
 @interface LNewHomePageViewController ()<mobideaRecProtocol>
@@ -399,7 +400,7 @@
         
         UIImage *image = [UIImage imageNamed:[arrimage objectAtIndex:i]];
 //        UIImageView *imagev = [[UIImageView alloc] initWithFrame:CGRectMake(20+i*(image.size.width+50), totalHight, image.size.width,image.size.height)];
-        UIImageView *imagev = [[UIImageView alloc] initWithFrame:CGRectMake(37+i*(ScreenWidth/4), totalHight, image.size.width,image.size.height)];
+        UIImageView *imagev = [[UIImageView alloc] initWithFrame:CGRectMake(20+i*(ScreenWidth/4), totalHight, image.size.width,image.size.height)];
 
         [imagev setImage:image];
         [footV addSubview:imagev];
@@ -428,11 +429,11 @@
     //lee999 新增头部banner
     if ([_homeinfo.top_banner count]>0) {
         
-        UIView *headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(100))];
+        UIView *headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(90))];
         [headV setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
         [myTableV setTableHeaderView:headV];
         
-        UrlImageButton *bannerBtn = [[UrlImageButton alloc] initWithFrame:CGRectMake(0,lee1fitAllScreen(10),ScreenWidth,lee1fitAllScreen(80))];
+        UrlImageButton *bannerBtn = [[UrlImageButton alloc] initWithFrame:CGRectMake(0,5,ScreenWidth,lee1fitAllScreen(80))];
         NewhomeNormalData *topbannerModel = [_homeinfo.top_banner objectAtIndex:0 isArray:nil];
         [bannerBtn setImageFromUrl:NO withUrl:topbannerModel.pic];
         bannerBtn.imageView.layer.masksToBounds = YES;
@@ -816,10 +817,11 @@
             [pricelab setTextColor:[UIColor colorWithHexString:@"#C70000"]];
             [sortV addSubview:pricelab];
             
-            
-            UILabel *pricelab2 = [[UILabel alloc] initWithFrame:CGRectMake(10+ pricelabSize.width, imgH+45, pW-10, 26)];
+           CGSize pricelab2Size  = [[NSString stringWithFormat:@"￥%@",[itemdic objectForKey:@"mktp" isDictionary:nil]] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 15)];
+
+            YKStrikePriceLabel *pricelab2 = [[YKStrikePriceLabel alloc] initWithFrame:CGRectMake(pW- pricelab2Size.width-10, imgH+45, pricelab2Size.width, 26)];
             [pricelab2 setNumberOfLines:1];
-            [pricelab2 setTextAlignment:NSTextAlignmentLeft];
+            [pricelab2 setTextAlignment:NSTextAlignmentRight];
             if (isRecommend) {
                 pricelab2.text = [NSString stringWithFormat:@"￥%@",[itemdic objectForKey:@"mktp" isDictionary:nil]];
             }else{
@@ -830,18 +832,18 @@
             [sortV addSubview:pricelab2];
             
             //价格上的划线
-            CGSize pricelab2Size;
-            if (isRecommend) {
-               pricelab2Size  = [[NSString stringWithFormat:@"￥%@",[itemdic objectForKey:@"mktp" isDictionary:nil]] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 15)];
-            }
-            else{
-                pricelab2Size  = [[NSString stringWithFormat:@"￥%@",item.price1.value] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 15)];
-
-            }
-
-            UIView *pricelab2V = [[UIView alloc] initWithFrame:CGRectMake(15+ pricelabSize.width, pricelab2.frame.origin.y + 14, pricelab2Size.width, 0.5)];
-            [pricelab2V setBackgroundColor:[UIColor colorWithHexString:@"888888"]];
-            [sortV addSubview:pricelab2V];
+//            CGSize pricelab2Size;
+//            if (isRecommend) {
+//               pricelab2Size  = [[NSString stringWithFormat:@"￥%@",[itemdic objectForKey:@"mktp" isDictionary:nil]] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 15)];
+//            }
+//            else{
+//                pricelab2Size  = [[NSString stringWithFormat:@"￥%@",item.price1.value] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 15)];
+//
+//            }
+//
+//            UIView *pricelab2V = [[UIView alloc] initWithFrame:CGRectMake(pW-(pW-pricelab2Size.width), pricelab2.frame.origin.y + 14, pricelab2Size.width, 0.5)];
+//            [pricelab2V setBackgroundColor:[UIColor colorWithHexString:@"888888"]];
+            //[sortV addSubview:pricelab2V];
             
             MyButton *sortbtn = [MyButton buttonWithType:UIButtonTypeCustom];
             [sortbtn setFrame:CGRectMake(SP + j*(pW+SP), ySP + i*(pH + ySP), pW, pH)];

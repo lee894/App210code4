@@ -47,50 +47,6 @@
     [self.view addSubview:self.mytableView];
     [self.view addConstraints:[self viewConstraints]];
     
-//    [self.contentArr removeAllObjects];
-//    
-//    if (self.couponcardListModel.checkoutCouponcard && [self.couponcardListModel.checkoutCouponcard count]) {
-//        [self.contentArr addObjectsFromArray:(NSMutableArray *)self.couponcardListModel.checkoutCouponcard];
-//    }
-    
-    
-//    UIImageView* ivBG = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yhq_laber_bg"]];
-//    [ivBG setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, lee1fitAllScreen(35))];
-//    [_vToolbar addSubview:ivBG];
-//    
-//    UIButton* btnShowCouponMenu = [UIButton buttonWithType:UIButtonTypeCustom];
-//    CGFloat btnWidth = ([UIScreen mainScreen].bounds.size.width - 4) / 3;
-//    [btnShowCouponMenu setFrame:CGRectMake(0, 0, btnWidth, lee1fitAllScreen(35))];
-//    [btnShowCouponMenu addTarget:self action:@selector(showCouponMenu:) forControlEvents:UIControlEventTouchUpInside];
-//    [btnShowCouponMenu setTitle:@"优惠券" forState:UIControlStateNormal];
-//    [btnShowCouponMenu setTitle:@"优惠券" forState:UIControlStateSelected];
-//    [btnShowCouponMenu setTitleColor:[UIColor colorWithHexString:@"#6c6c6c"] forState:UIControlStateNormal];
-//    [btnShowCouponMenu setTitleColor:[UIColor colorWithHexString:@"#181818"] forState:UIControlStateSelected];
-//    [btnShowCouponMenu setSelected:YES];
-//    [btnShowCouponMenu setExclusiveTouch:NO];
-//    [_vToolbar addSubview:btnShowCouponMenu];
-//    selectedBtn = btnShowCouponMenu;
-//    nSelectedIndexInMenu = 10001;
-//    
-//    UIButton* btnToFreeShippingCard = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [btnToFreeShippingCard setFrame:CGRectMake(btnShowCouponMenu.frame.size.width + btnShowCouponMenu.frame.origin.x + 2, 0, btnWidth, lee1fitAllScreen(35))];
-//    [btnToFreeShippingCard addTarget:self action:@selector(toFreeShippingCard:) forControlEvents:UIControlEventTouchUpInside];
-//    [btnToFreeShippingCard setTitle:@"包邮卡" forState:UIControlStateNormal];
-//    [btnToFreeShippingCard setTitle:@"包邮卡" forState:UIControlStateSelected];
-//    [btnToFreeShippingCard setTitleColor:[UIColor colorWithHexString:@"#6c6c6c"] forState:UIControlStateNormal];
-//    [btnToFreeShippingCard setTitleColor:[UIColor colorWithHexString:@"#181818"] forState:UIControlStateSelected];
-//    [btnToFreeShippingCard setExclusiveTouch:NO];
-//    [_vToolbar addSubview:btnToFreeShippingCard];
-//    
-//    UIButton* btnToGiftCard = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [btnToGiftCard setFrame:CGRectMake(btnToFreeShippingCard.frame.size.width + btnToFreeShippingCard.frame.origin.x + 2, 0, btnWidth, lee1fitAllScreen(35))];
-//    [btnToGiftCard addTarget:self action:@selector(toGiftCard:) forControlEvents:UIControlEventTouchUpInside];
-//    [btnToGiftCard setTitle:@"礼包卡" forState:UIControlStateNormal];
-//    [btnToGiftCard setTitle:@"礼包卡" forState:UIControlStateSelected];
-//    [btnToGiftCard setTitleColor:[UIColor colorWithHexString:@"#6c6c6c"] forState:UIControlStateNormal];
-//    [btnToGiftCard setTitleColor:[UIColor colorWithHexString:@"#181818"] forState:UIControlStateSelected];
-//    [btnToGiftCard setExclusiveTouch:NO];
-//    [_vToolbar addSubview:btnToGiftCard];
 }
 
 
@@ -241,7 +197,7 @@
                     
                 }
             } else {
-                NSDictionary *dic = [self.contentArr objectAtIndex:index isArray:nil];
+               // NSDictionary *dic = [self.contentArr objectAtIndex:index isArray:nil];
 //                self.checkOutViewCtrl.vouId = LegalObject([dic objectForKey:@"code"],[NSString class]);
                 [self.navigationController popViewControllerAnimated:YES];
             }
@@ -397,7 +353,7 @@
         UIImageView* ivState = [[UIImageView alloc] initWithFrame:CGRectMake(ivBg.frame.size.width - (lee1fitAllScreen(63)), 5, 0.5, ivBg.frame.size.height - 10)];
         [ivBg addSubview:ivState];
         
-        NSString* strStatus = @"";
+       // NSString* strStatus = @"";
         NSString* type = @"";
         NSString* strPrice = @"";
         NSString* strTitle = @"";
@@ -436,18 +392,20 @@
             if ([type isEqualToString:@"o2o"])
             {
                 iBg = [UIImage imageNamed:@"laber_o2o"];
+                [btnAction setTitleColor:[UIColor colorWithHexString:@"#fd890a"] forState:UIControlStateNormal];
             }
             else if([type isEqualToString:@"coupon"])
             {
                 iBg = [UIImage imageNamed:@"laber_yh"];
+                [btnAction setTitleColor:[UIColor colorWithHexString:@"#c8002c"] forState:UIControlStateNormal];
             }
             else if([type isEqualToString:@"gift"])
             {
                 iBg = [UIImage imageNamed:@"laber_lpk"];
+                [btnAction setTitleColor:[UIColor colorWithHexString:@"#ff6767"] forState:UIControlStateNormal];
             }
             [btnAction addTarget:self action:@selector(toHome:) forControlEvents:UIControlEventTouchUpInside];
             [btnAction setTitle:@"使用" forState:UIControlStateNormal];
-            [btnAction setTitleColor:[UIColor colorWithHexString:@"#c8002c"] forState:UIControlStateNormal];
             [btnAction.titleLabel setFont:[UIFont systemFontOfSize:14]];
             [btnAction setFrame:CGRectMake(ivState.frame.origin.x, 0, lee1fitAllScreen(63), ivBg.frame.size.height)];
             [ivBg addSubview:btnAction];
@@ -525,31 +483,6 @@
         
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
-    
-//    id data = [self.contentArr objectAtIndex:indexPath.row isArray:nil];
-//    CouponDetail20ViewController* cdvc = [[CouponDetail20ViewController alloc] init];
-//    if ([data class] == [CouponInfo class]) {
-//        NSString* type = ((CouponInfo*)data).type;
-//        if ([type isEqualToString:@"o2o"])
-//        {
-//            cdvc.dType = kO2O;
-//        }
-//        else if([type isEqualToString:@"coupon"])
-//        {
-//            cdvc.dType = kCoupon;
-//        }
-//        else if([type isEqualToString:@"gift"])
-//        {
-//            cdvc.dType = kGift;
-//        }
-//    }
-//    else if ([data class] == [FreePostCardInfo class])
-//    {
-//        cdvc.dType = kFreePost;
-//    }
-//    cdvc.data = data;
-//    [self.navigationController pushViewController:cdvc animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -583,59 +516,6 @@
 {
     [super didReceiveMemoryWarning];
 }
-
-
--(void)showCouponMenu:(UIButton*)sender
-{
-    if (vCouponMenu) {
-        [vCouponMenu removeFromSuperview];
-        vCouponMenu = nil;
-        return;
-    }
-    [selectedBtn setSelected:NO];
-    selectedBtn = sender;
-    [sender setSelected:YES];
-    
-    vCouponMenu = [[UIView alloc] initWithFrame:CGRectMake(0, sender.frame.size.height, sender.frame.size.width, sender.frame.size.height * 2)];
-    [self.view addSubview:vCouponMenu];
-    [self.view bringSubviewToFront:vCouponMenu];
-    
-    UIButton* btnShowAllCoupon = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnShowAllCoupon setFrame:CGRectMake(0, 0, vCouponMenu.frame.size.width, vCouponMenu.frame.size.height / 2)];
-    [btnShowAllCoupon setTag:10001];
-    [btnShowAllCoupon addTarget:self action:@selector(showCouponWithType:) forControlEvents:UIControlEventTouchUpInside];
-    [btnShowAllCoupon setTitle:@"全部优惠券" forState:UIControlStateNormal];
-    [btnShowAllCoupon setTitleColor:[UIColor colorWithHexString:@"#6c6c6c"] forState:UIControlStateNormal];
-    [btnShowAllCoupon setExclusiveTouch:NO];
-    [btnShowAllCoupon setBackgroundColor:[UIColor colorWithHexString:@"#ffffff"]];
-    [vCouponMenu addSubview:btnShowAllCoupon];
-    
-    UIButton* btnShowUnusedCoupon = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnShowUnusedCoupon setFrame:CGRectMake(0, btnShowAllCoupon.frame.size.height, vCouponMenu.frame.size.width, vCouponMenu.frame.size.height / 2)];
-    [btnShowUnusedCoupon setTag:10002];
-    [btnShowUnusedCoupon addTarget:self action:@selector(showCouponWithType:) forControlEvents:UIControlEventTouchUpInside];
-    [btnShowUnusedCoupon setTitle:@"未使用" forState:UIControlStateNormal];
-    [btnShowUnusedCoupon setTitleColor:[UIColor colorWithHexString:@"#6c6c6c"] forState:UIControlStateNormal];
-    [btnShowUnusedCoupon setExclusiveTouch:NO];
-    [btnShowUnusedCoupon setBackgroundColor:[UIColor colorWithHexString:@"#ffffff"]];
-    [vCouponMenu addSubview:btnShowUnusedCoupon];
-    
-    switch (nSelectedIndexInMenu) {
-        case 10001:
-        {
-            [btnShowAllCoupon setBackgroundColor:[UIColor colorWithHexString:@"#f6f6f6"]];
-        }
-            break;
-        case 10002:
-        {
-            [btnShowUnusedCoupon setBackgroundColor:[UIColor colorWithHexString:@"#f6f6f6"]];
-        }
-            break;
-        default:
-            break;
-    }
-}
-
 
 -(void)toFreeShippingCard:(UIButton*)sender
 {
@@ -704,3 +584,134 @@
     return _mytableView;
 }
 @end
+
+
+
+
+//    [self.contentArr removeAllObjects];
+//
+//    if (self.couponcardListModel.checkoutCouponcard && [self.couponcardListModel.checkoutCouponcard count]) {
+//        [self.contentArr addObjectsFromArray:(NSMutableArray *)self.couponcardListModel.checkoutCouponcard];
+//    }
+
+
+//    UIImageView* ivBG = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yhq_laber_bg"]];
+//    [ivBG setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, lee1fitAllScreen(35))];
+//    [_vToolbar addSubview:ivBG];
+//
+//    UIButton* btnShowCouponMenu = [UIButton buttonWithType:UIButtonTypeCustom];
+//    CGFloat btnWidth = ([UIScreen mainScreen].bounds.size.width - 4) / 3;
+//    [btnShowCouponMenu setFrame:CGRectMake(0, 0, btnWidth, lee1fitAllScreen(35))];
+//    [btnShowCouponMenu addTarget:self action:@selector(showCouponMenu:) forControlEvents:UIControlEventTouchUpInside];
+//    [btnShowCouponMenu setTitle:@"优惠券" forState:UIControlStateNormal];
+//    [btnShowCouponMenu setTitle:@"优惠券" forState:UIControlStateSelected];
+//    [btnShowCouponMenu setTitleColor:[UIColor colorWithHexString:@"#6c6c6c"] forState:UIControlStateNormal];
+//    [btnShowCouponMenu setTitleColor:[UIColor colorWithHexString:@"#181818"] forState:UIControlStateSelected];
+//    [btnShowCouponMenu setSelected:YES];
+//    [btnShowCouponMenu setExclusiveTouch:NO];
+//    [_vToolbar addSubview:btnShowCouponMenu];
+//    selectedBtn = btnShowCouponMenu;
+//    nSelectedIndexInMenu = 10001;
+//
+//    UIButton* btnToFreeShippingCard = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [btnToFreeShippingCard setFrame:CGRectMake(btnShowCouponMenu.frame.size.width + btnShowCouponMenu.frame.origin.x + 2, 0, btnWidth, lee1fitAllScreen(35))];
+//    [btnToFreeShippingCard addTarget:self action:@selector(toFreeShippingCard:) forControlEvents:UIControlEventTouchUpInside];
+//    [btnToFreeShippingCard setTitle:@"包邮卡" forState:UIControlStateNormal];
+//    [btnToFreeShippingCard setTitle:@"包邮卡" forState:UIControlStateSelected];
+//    [btnToFreeShippingCard setTitleColor:[UIColor colorWithHexString:@"#6c6c6c"] forState:UIControlStateNormal];
+//    [btnToFreeShippingCard setTitleColor:[UIColor colorWithHexString:@"#181818"] forState:UIControlStateSelected];
+//    [btnToFreeShippingCard setExclusiveTouch:NO];
+//    [_vToolbar addSubview:btnToFreeShippingCard];
+//
+//    UIButton* btnToGiftCard = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [btnToGiftCard setFrame:CGRectMake(btnToFreeShippingCard.frame.size.width + btnToFreeShippingCard.frame.origin.x + 2, 0, btnWidth, lee1fitAllScreen(35))];
+//    [btnToGiftCard addTarget:self action:@selector(toGiftCard:) forControlEvents:UIControlEventTouchUpInside];
+//    [btnToGiftCard setTitle:@"礼包卡" forState:UIControlStateNormal];
+//    [btnToGiftCard setTitle:@"礼包卡" forState:UIControlStateSelected];
+//    [btnToGiftCard setTitleColor:[UIColor colorWithHexString:@"#6c6c6c"] forState:UIControlStateNormal];
+//    [btnToGiftCard setTitleColor:[UIColor colorWithHexString:@"#181818"] forState:UIControlStateSelected];
+//    [btnToGiftCard setExclusiveTouch:NO];
+//    [_vToolbar addSubview:btnToGiftCard];
+
+
+
+
+//    id data = [self.contentArr objectAtIndex:indexPath.row isArray:nil];
+//    CouponDetail20ViewController* cdvc = [[CouponDetail20ViewController alloc] init];
+//    if ([data class] == [CouponInfo class]) {
+//        NSString* type = ((CouponInfo*)data).type;
+//        if ([type isEqualToString:@"o2o"])
+//        {
+//            cdvc.dType = kO2O;
+//        }
+//        else if([type isEqualToString:@"coupon"])
+//        {
+//            cdvc.dType = kCoupon;
+//        }
+//        else if([type isEqualToString:@"gift"])
+//        {
+//            cdvc.dType = kGift;
+//        }
+//    }
+//    else if ([data class] == [FreePostCardInfo class])
+//    {
+//        cdvc.dType = kFreePost;
+//    }
+//    cdvc.data = data;
+//    [self.navigationController pushViewController:cdvc animated:YES];
+
+
+//-(void)showCouponMenu:(UIButton*)sender
+////{
+////    if (vCouponMenu) {
+////        [vCouponMenu removeFromSuperview];
+////        vCouponMenu = nil;
+////        return;
+////    }
+////    [selectedBtn setSelected:NO];
+////    selectedBtn = sender;
+////    [sender setSelected:YES];
+////
+////    vCouponMenu = [[UIView alloc] initWithFrame:CGRectMake(0, sender.frame.size.height, sender.frame.size.width, sender.frame.size.height * 2)];
+////    [self.view addSubview:vCouponMenu];
+////    [self.view bringSubviewToFront:vCouponMenu];
+////
+////    UIButton* btnShowAllCoupon = [UIButton buttonWithType:UIButtonTypeCustom];
+////    [btnShowAllCoupon setFrame:CGRectMake(0, 0, vCouponMenu.frame.size.width, vCouponMenu.frame.size.height / 2)];
+////    [btnShowAllCoupon setTag:10001];
+////    [btnShowAllCoupon addTarget:self action:@selector(showCouponWithType:) forControlEvents:UIControlEventTouchUpInside];
+////    [btnShowAllCoupon setTitle:@"全部优惠券" forState:UIControlStateNormal];
+////    [btnShowAllCoupon setTitleColor:[UIColor colorWithHexString:@"#6c6c6c"] forState:UIControlStateNormal];
+////    [btnShowAllCoupon setExclusiveTouch:NO];
+////    [btnShowAllCoupon setBackgroundColor:[UIColor colorWithHexString:@"#ffffff"]];
+////    [vCouponMenu addSubview:btnShowAllCoupon];
+////
+////    UIButton* btnShowUnusedCoupon = [UIButton buttonWithType:UIButtonTypeCustom];
+////    [btnShowUnusedCoupon setFrame:CGRectMake(0, btnShowAllCoupon.frame.size.height, vCouponMenu.frame.size.width, vCouponMenu.frame.size.height / 2)];
+////    [btnShowUnusedCoupon setTag:10002];
+////    [btnShowUnusedCoupon addTarget:self action:@selector(showCouponWithType:) forControlEvents:UIControlEventTouchUpInside];
+////    [btnShowUnusedCoupon setTitle:@"未使用" forState:UIControlStateNormal];
+////    [btnShowUnusedCoupon setTitleColor:[UIColor colorWithHexString:@"#6c6c6c"] forState:UIControlStateNormal];
+////    [btnShowUnusedCoupon setExclusiveTouch:NO];
+////    [btnShowUnusedCoupon setBackgroundColor:[UIColor colorWithHexString:@"#ffffff"]];
+////    [vCouponMenu addSubview:btnShowUnusedCoupon];
+////
+////    switch (nSelectedIndexInMenu) {
+////        case 10001:
+////        {
+////            [btnShowAllCoupon setBackgroundColor:[UIColor colorWithHexString:@"#f6f6f6"]];
+////        }
+////            break;
+////        case 10002:
+////        {
+////            [btnShowUnusedCoupon setBackgroundColor:[UIColor colorWithHexString:@"#f6f6f6"]];
+////        }
+////            break;
+////        default:
+////            break;
+////    }
+////}
+
+
+
+

@@ -213,6 +213,9 @@
         addressCell = [[[NSBundle mainBundle] loadNibNamed:@"AddressCell" owner:self options:nil] lastObject];
     }
     
+    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+
+    
     AddressAddresslist *addressList = [addresslistModel.addresslist objectAtIndex:indexPath.row];
     
     if ([self.PublicStringAddressId isEqualToString:addressList.addresslistIdentifier]&&!tableView.editing) {

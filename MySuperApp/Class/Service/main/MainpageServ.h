@@ -115,10 +115,10 @@
 - (void)getAddressdel:(NSString *)addressID;
 
 //修改地址
-- (void)getAddressEdit:(NSString *)addressID  andName:(NSString *)name andArea:(NSString *)area andMobilephone:(NSString *)mobilephone andCity:(NSString *)city andDetail:(NSString *)detail andProvince:(NSString *)province andTelephone:(NSString *)telephone andZipcode:(NSString *)zipcode andEmail:(NSString *)email;
+- (void)getAddressEdit:(NSString *)addressID  andName:(NSString *)name andArea:(NSString *)area andMobilephone:(NSString *)mobilephone andCity:(NSString *)city andDetail:(NSString *)detail andProvince:(NSString *)province andTelephone:(NSString *)telephone andZipcode:(NSString *)zipcode andEmail:(NSString *)email andSetDefautAddress:(NSString*)isdefault;
 
 //添加地址
-- (void)getAddressAdd:(NSString *)name andArea:(NSString *)area andMobilephone:(NSString *)mobilephone andCity:(NSString *)city andDetail:(NSString *)detail andProvince:(NSString *)province andTelephone:(NSString *)telephone andZipcode:(NSString *)zipcode andEmail:(NSString *)email;
+- (void)getAddressAdd:(NSString *)name andArea:(NSString *)area andMobilephone:(NSString *)mobilephone andCity:(NSString *)city andDetail:(NSString *)detail andProvince:(NSString *)province andTelephone:(NSString *)telephone andZipcode:(NSString *)zipcode andEmail:(NSString *)email andSetDefautAddress:(NSString*)isdefault;
 
 //我的爱慕，个人信息
 - (void)getuserInfo;
