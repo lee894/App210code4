@@ -132,6 +132,16 @@
                 }
             }
             
+            if (_pInfo.packageinfo.groups.count > 1) {
+                for (PackageGoodsInfo* pgi in _pInfo.packageinfo.groups) {
+                    [pgi setAttribute:[NSNumber numberWithBool:NO] forKey:@"isOpen"];
+                }
+            }else
+            {
+                for (PackageGoodsInfo* pgi in _pInfo.packageinfo.groups) {
+                    [pgi setAttribute:[NSNumber numberWithBool:YES] forKey:@"isOpen"];
+                }
+            }
             self.title = _pInfo.packageinfo.name;
             [_tbPackage setDelegate:self];
             [_tbPackage setDataSource:self];
@@ -601,7 +611,8 @@
 
 -(void)changeCellDisplay:(UIButton*)sender
 {
-    
+    [((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:sender.tag isArray:nil]) setAttribute:[NSNumber numberWithBool:!((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:sender.tag isArray:nil]).isOpen] forKey:@"isOpen"];
+    [_tbPackage reloadData];
 }
 
 -(void)createtoolbarandpicker{
@@ -805,52 +816,6 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIView* v = [[UIView alloc] init];
-    for (NSInteger i = 0; i < ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count; ++i) {
-        PackageGoodsInfo* pgi = [((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods objectAtIndex:i];
-        UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(15 + (i % 2) * (lee1fitAllScreen(140) + 10), (i / 2) * (lee1fitAllScreen((180 + 90))), lee1fitAllScreen(140), lee1fitAllScreen((180 + 90)))];
-        UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
-        [uiv setImageWithURL:[NSURL URLWithString:pgi.image_url] placeholderImage:nil];
-        [vUnit addSubview:uiv];
-        
-        UILabel* lblName = [[UILabel alloc] init];
-        [lblName setNumberOfLines:2];
-        [lblName setLineBreakMode:NSLineBreakByTruncatingTail];
-        NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
-        [mps setLineBreakMode:NSLineBreakByCharWrapping];
-        [mps setLineSpacing:6];
-
-        NSMutableAttributedString* maStr = [[NSMutableAttributedString alloc] initWithString:pgi.name];
-        NSUInteger nLen = pgi.name.length;
-        [maStr addAttribute:NSParagraphStyleAttributeName value:mps range:NSMakeRange(0, nLen)];
-        [maStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:lee1fitAllScreen(11)] range:NSMakeRange(0, nLen)];
-        [lblName setAttributedText:maStr];
-        
-        CGRect rcName = [lblName.attributedText boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 40) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil];
-        [lblName setFrame:CGRectMake(10, uiv.frame.size.height + uiv.frame.origin.y + 12, rcName.size.width, rcName.size.height)];
-        [vUnit addSubview:lblName];
-        
-        UILabel* lblPrice = [[UILabel alloc] init];
-        [lblPrice setFont:[UIFont systemFontOfSize:lee1fitAllScreen(11)]];
-        [lblPrice setText:[NSString stringWithFormat:@"￥%@", pgi.price]];
-        [lblPrice setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
-        CGRect rcPrice = [lblPrice.text boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 36) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblPrice.font} context:nil];
-        [lblPrice setFrame:CGRectMake(lblName.frame.origin.x, lblName.frame.size.height + lblName.frame.origin.y + 10 - (rcPrice.size.height - lblPrice.font.pointSize), rcPrice.size.width, rcPrice.size.height)];
-        [vUnit addSubview:lblPrice];
-        
-        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setFrame:CGRectMake(0, 0, vUnit.frame.size.width, vUnit.frame.size.height)];
-        [btn addTarget:self action:@selector(selectGoods:) forControlEvents:UIControlEventTouchUpInside];
-        [btn setTag:indexPath.row * 10000 + i];
-        [vUnit addSubview:btn];
-        
-        [v addSubview:vUnit];
-        
-        if (i % 2 == 1) {
-            UILabel* lblSep = [[UILabel alloc] initWithFrame:CGRectMake(15, vUnit.frame.origin.y + vUnit.frame.size.height, [UIScreen mainScreen].bounds.size.width - 30, 0.5)];
-            [lblSep setBackgroundColor:[UIColor colorWithHexString:@"#d1d1d1"]];
-            [v addSubview:lblSep];
-        }
-    }
     
     UITableViewCell* cell = [[UITableViewCell alloc] init];
     NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods.count;
@@ -867,11 +832,73 @@
         UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setFrame:CGRectMake(0, 0, tableView.frame.size.width, lee1fitAllScreen(44))];
         [btn addTarget:self action:@selector(changeCellDisplay:) forControlEvents:UIControlEventTouchUpInside];
+        btn.tag = indexPath.row;
         [vGroup addSubview:btn];
         [cell addSubview:vGroup];
+        
+        if (((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).isOpen) {
+            UIImageView* ivPointer = [[UIImageView alloc] initWithFrame:CGRectMake(tableView.frame.size.width - 15 - lee1fitAllScreen(8), (lee1fitAllScreen(44) - lee1fitAllScreen(12)) / 2, lee1fitAllScreen(8), lee1fitAllScreen(12))];
+            [ivPointer setImage:[UIImage imageNamed:@"dl_zc_arrow"]];
+            [vGroup addSubview:ivPointer];
+        }else
+        {
+            UIImageView* ivPointer = [[UIImageView alloc] initWithFrame:CGRectMake(tableView.frame.size.width - 12 - lee1fitAllScreen(17), (lee1fitAllScreen(44) - lee1fitAllScreen(8)) / 2, lee1fitAllScreen(17), lee1fitAllScreen(8))];
+            [ivPointer setImage:[UIImage imageNamed:@"sryc_class_arrow"]];
+            [vGroup addSubview:ivPointer];
+        }
+        
         height = lee1fitAllScreen(44);
     }
-    [v setFrame:CGRectMake(0, height, SCREEN_WIDTH, lee1fitAllScreen((285-15)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2)))];
+    
+    if (((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).isOpen) {
+        for (NSInteger i = 0; i < ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count; ++i) {
+            PackageGoodsInfo* pgi = [((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods objectAtIndex:i];
+            UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(15 + (i % 2) * (lee1fitAllScreen(140) + 10), (i / 2) * (lee1fitAllScreen((180 + 90))), lee1fitAllScreen(140), lee1fitAllScreen((180 + 90)))];
+            UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
+            [uiv setImageWithURL:[NSURL URLWithString:pgi.image_url] placeholderImage:nil];
+            [vUnit addSubview:uiv];
+            
+            UILabel* lblName = [[UILabel alloc] init];
+            [lblName setNumberOfLines:2];
+            [lblName setLineBreakMode:NSLineBreakByTruncatingTail];
+            NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
+            [mps setLineBreakMode:NSLineBreakByCharWrapping];
+            [mps setLineSpacing:6];
+            
+            NSMutableAttributedString* maStr = [[NSMutableAttributedString alloc] initWithString:pgi.name];
+            NSUInteger nLen = pgi.name.length;
+            [maStr addAttribute:NSParagraphStyleAttributeName value:mps range:NSMakeRange(0, nLen)];
+            [maStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:lee1fitAllScreen(11)] range:NSMakeRange(0, nLen)];
+            [lblName setAttributedText:maStr];
+            
+            CGRect rcName = [lblName.attributedText boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 40) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil];
+            [lblName setFrame:CGRectMake(10, uiv.frame.size.height + uiv.frame.origin.y + 12, rcName.size.width, rcName.size.height)];
+            [vUnit addSubview:lblName];
+            
+            UILabel* lblPrice = [[UILabel alloc] init];
+            [lblPrice setFont:[UIFont systemFontOfSize:lee1fitAllScreen(11)]];
+            [lblPrice setText:[NSString stringWithFormat:@"￥%@", pgi.price]];
+            [lblPrice setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
+            CGRect rcPrice = [lblPrice.text boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 36) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblPrice.font} context:nil];
+            [lblPrice setFrame:CGRectMake(lblName.frame.origin.x, lblName.frame.size.height + lblName.frame.origin.y + 10 - (rcPrice.size.height - lblPrice.font.pointSize), rcPrice.size.width, rcPrice.size.height)];
+            [vUnit addSubview:lblPrice];
+            
+            UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btn setFrame:CGRectMake(0, 0, vUnit.frame.size.width, vUnit.frame.size.height)];
+            [btn addTarget:self action:@selector(selectGoods:) forControlEvents:UIControlEventTouchUpInside];
+            [btn setTag:indexPath.row * 10000 + i];
+            [vUnit addSubview:btn];
+            
+            [v addSubview:vUnit];
+            
+            if (i % 2 == 1) {
+                UILabel* lblSep = [[UILabel alloc] initWithFrame:CGRectMake(15, vUnit.frame.origin.y + vUnit.frame.size.height, [UIScreen mainScreen].bounds.size.width - 30, 0.5)];
+                [lblSep setBackgroundColor:[UIColor colorWithHexString:@"#d1d1d1"]];
+                [v addSubview:lblSep];
+            }
+        }
+        [v setFrame:CGRectMake(0, height, SCREEN_WIDTH, lee1fitAllScreen((285-15)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2)))];
+    }
     [cell setFrame:CGRectMake(0, 0, v.frame.size.width, v.frame.size.height + height)];
     [cell addSubview:v];
     return cell;
@@ -884,8 +911,10 @@
     if (count) {
         height += 44;
     }
-    NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count;
-    height += lee1fitAllScreen((285-15)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2));
+    if (((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).isOpen) {
+        NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count;
+        height += lee1fitAllScreen((285-15)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2));
+    }
     return height;
 }
 

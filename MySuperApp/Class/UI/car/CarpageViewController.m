@@ -1486,6 +1486,13 @@
             
         }
 		
+        xOffset = 28 + lee1fitAllScreen(28);
+        
+        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setFrame:CGRectMake(xOffset, 0, ScreenWidth - xOffset, lee1fitAllScreen(146))];
+        [btn setTag:i];
+        [btn addTarget:self action:@selector(simpleProductAction:) forControlEvents:UIControlEventTouchUpInside];
+        [shoppingCarCell addSubview:btn];
 		[self.tableCells addObject:shoppingCarCell];
 	}
     //    添加收藏
@@ -1732,6 +1739,13 @@
 
 //            [Cell bringSubviewToFront:icon];
             [array addObject:Cell];
+            xOffset = 28 + lee1fitAllScreen(28);
+            
+            UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btn setFrame:CGRectMake(xOffset, 0, ScreenWidth - xOffset, lee1fitAllScreen(116))];
+            [btn setTag:k + j * 10000];
+            [btn addTarget:self action:@selector(suitProductAction:) forControlEvents:UIControlEventTouchUpInside];
+            [Cell addSubview:btn];
         }
         
         [self.suitlistcell addObject:array];
@@ -1903,8 +1917,14 @@
             
 //            [Cell bringSubviewToFront:icon];
             [array addObject:Cell];
+            
+            xOffset = 28 + lee1fitAllScreen(28);
+            UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btn setFrame:CGRectMake(xOffset, 0, ScreenWidth - xOffset, lee1fitAllScreen(116))];
+            [btn setTag:k + j * 10000];
+            [btn addTarget:self action:@selector(packageProductAction:) forControlEvents:UIControlEventTouchUpInside];
+            [Cell addSubview:btn];
         }
-        
         [self.packagelistcell addObject:array];
     }
 }
@@ -2257,53 +2277,108 @@
     }
 }
 
+-(void)simpleProductAction:(UIButton*)sender
+{
+    YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:sender.tag];
+    
+    if ([item.type isEqualToString:@"gift"]) {
+        return;
+    }
+    ProductDetailViewController* detail = [[ProductDetailViewController alloc] init];
+    detail.thisProductId = item.goodsid;
+    detail.isShop = YES;
+    
+    detail.isPush = YES;
+    [self.navigationController pushViewController:detail animated:YES];
+
+}
+
+-(void)suitProductAction:(UIButton*)sender
+{
+//    if ([indexPath section] < 0 || [indexPath section] >= [self.carModel.suitlist count]) {
+//        return ;
+//    }
+    NSInteger row = sender.tag % 10000;
+    NSInteger section = (sender.tag - row) / 10000;
+    YKSuitListItem *item = [self.carModel.suitlist objectAtIndex:section];
+//    if (indexPath.row == 0) {
+//        return ;
+//    }
+    YKProductsItem *pItem = [item.suits objectAtIndex:row];
+    ProductDetailViewController *controller = [[ProductDetailViewController alloc] init];
+    controller.isPush = YES;
+    controller.isShop = YES;
+    controller.thisProductId = pItem.product_id;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+-(void)packageProductAction:(UIButton*)sender
+{
+//    if ([indexPath section] < 0 || ([indexPath section] - suitCount) >= [self.carModel.packagelist count]) {
+//        return ;
+//    }
+    NSInteger row = sender.tag % 10000;
+    NSInteger section = (sender.tag - row) / 10000;
+    YKSuitListItem *item = [self.carModel.packagelist objectAtIndex:section];
+//    if (indexPath.row == 0) {
+//        return ;
+//    }
+    YKProductsItem *pItem = [item.suits objectAtIndex:row];
+    ProductDetailViewController *controller = [[ProductDetailViewController alloc] init];
+    controller.isPush = YES;
+    controller.isShop = YES;
+    controller.thisProductId = pItem.product_id;
+    [self.navigationController pushViewController:controller animated:YES];
+
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    //套装进入商品详情
-    if (indexPath.section < suitCount) {
-        if ([indexPath section] < 0 || [indexPath section] >= [self.carModel.suitlist count]) {
-            return ;
-        }
-        YKSuitListItem *item = [self.carModel.suitlist objectAtIndex:[indexPath section]];
-        if (indexPath.row == 0) {
-            return ;
-        }
-        YKProductsItem *pItem = [item.suits objectAtIndex:indexPath.row - 1];
-        ProductDetailViewController *controller = [[ProductDetailViewController alloc] init];
-        controller.isPush = YES;
-        controller.isShop = YES;
-        controller.thisProductId = pItem.product_id;
-        [self.navigationController pushViewController:controller animated:YES];
-    }
-    else if (indexPath.section - suitCount < packageCount) {
-        if ([indexPath section] < 0 || ([indexPath section] - suitCount) >= [self.carModel.packagelist count]) {
-            return ;
-        }
-        YKSuitListItem *item = [self.carModel.packagelist objectAtIndex:[indexPath section] - suitCount];
-        if (indexPath.row == 0) {
-            return ;
-        }
-        YKProductsItem *pItem = [item.suits objectAtIndex:indexPath.row - 1];
-        ProductDetailViewController *controller = [[ProductDetailViewController alloc] init];
-        controller.isPush = YES;
-        controller.isShop = YES;
-        controller.thisProductId = pItem.product_id;
-        [self.navigationController pushViewController:controller animated:YES];
-    }
-    //普通商品进入商品详情
-	else if (indexPath.section - suitCount - packageCount == 0) {
-		YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:indexPath.row];
-        
-        if ([item.type isEqualToString:@"gift"]) {
-            return;
-        }
-		ProductDetailViewController* detail = [[ProductDetailViewController alloc] init];
-		detail.thisProductId = item.goodsid;
-        detail.isShop = YES;
-        
-        detail.isPush = YES;
-		[self.navigationController pushViewController:detail animated:YES];
-	}
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+//    //套装进入商品详情
+//    if (indexPath.section < suitCount) {
+//        if ([indexPath section] < 0 || [indexPath section] >= [self.carModel.suitlist count]) {
+//            return ;
+//        }
+//        YKSuitListItem *item = [self.carModel.suitlist objectAtIndex:[indexPath section]];
+//        if (indexPath.row == 0) {
+//            return ;
+//        }
+//        YKProductsItem *pItem = [item.suits objectAtIndex:indexPath.row - 1];
+//        ProductDetailViewController *controller = [[ProductDetailViewController alloc] init];
+//        controller.isPush = YES;
+//        controller.isShop = YES;
+//        controller.thisProductId = pItem.product_id;
+//        [self.navigationController pushViewController:controller animated:YES];
+//    }
+//    else if (indexPath.section - suitCount < packageCount) {
+//        if ([indexPath section] < 0 || ([indexPath section] - suitCount) >= [self.carModel.packagelist count]) {
+//            return ;
+//        }
+//        YKSuitListItem *item = [self.carModel.packagelist objectAtIndex:[indexPath section] - suitCount];
+//        if (indexPath.row == 0) {
+//            return ;
+//        }
+//        YKProductsItem *pItem = [item.suits objectAtIndex:indexPath.row - 1];
+//        ProductDetailViewController *controller = [[ProductDetailViewController alloc] init];
+//        controller.isPush = YES;
+//        controller.isShop = YES;
+//        controller.thisProductId = pItem.product_id;
+//        [self.navigationController pushViewController:controller animated:YES];
+//    }
+//    //普通商品进入商品详情
+//	else if (indexPath.section - suitCount - packageCount == 0) {
+//		YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:indexPath.row];
+//        
+//        if ([item.type isEqualToString:@"gift"]) {
+//            return;
+//        }
+//		ProductDetailViewController* detail = [[ProductDetailViewController alloc] init];
+//		detail.thisProductId = item.goodsid;
+//        detail.isShop = YES;
+//        
+//        detail.isPush = YES;
+//		[self.navigationController pushViewController:detail animated:YES];
+//	}
+//    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 

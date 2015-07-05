@@ -51,6 +51,7 @@
 -(NSString*)total_goods_count;
 -(NSString*)page_size;
 -(NSString*)need_select_count;
+-(BOOL)isOpen;
 @end
 
 @interface PackageData : YKBaseEntity
@@ -73,8 +74,4 @@
 
 @interface PackageInfoParser : BaseParser
 -(PackageInfo *)parsePackageInfo:(NSDictionary*)dic;
-
-
-
-
 @end
