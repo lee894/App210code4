@@ -113,7 +113,7 @@
         NSInteger m = 0;
         for (GiftProductInfo* gpi in _mgi.productlist) {
             UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-            
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             UILabel* lblName = [[UILabel alloc] init];
             [lblName setText:gpi.product_name];
             [lblName setTextColor:[UIColor colorWithHexString:@"#181818"]];

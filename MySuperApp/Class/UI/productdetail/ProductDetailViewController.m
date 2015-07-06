@@ -459,8 +459,22 @@
         //view_scroll.backgroundColor=[UIColor blackColor];
 //        UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 170, 212)];
 //        imageView.image=[UIImage imageNamed:@"same_pic_bg.png"];
-        UrlImageButton *imgView = [[UrlImageButton alloc] initWithFrame:CGRectMake(i * SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_WIDTH)];
-        [imgView setImageFromUrl:YES withUrl:[[productModel.bannerlist objectAtIndex:i]BannerPic]];
+        UrlImageView *imgView = [[UrlImageView alloc] init];
+        [imgView setUserInteractionEnabled:YES];
+        [_scrollViewForHeader setClipsToBounds:YES];
+        [_scrollViewForHeader addSubview:imgView];
+        
+        __block UrlImageView* blkImgView = imgView;
+        [imgView setImageWithURL:[NSURL URLWithString:[[productModel.bannerlist objectAtIndex:i] BannerPic]] placeholderImage:nil afterDownload:^(UIImage *image) {
+            [blkImgView  setFrame:CGRectMake(i * SCREEN_WIDTH, (ScreenWidth - lee1fitAllScreen((image.size.height * ScreenWidth / image.size.width))) / 2, SCREEN_WIDTH, lee1fitAllScreen((image.size.height * ScreenWidth / image.size.width)))];
+            
+            UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btn setFrame:CGRectMake(0, 0, blkImgView.frame.size.width, blkImgView.frame.size.height)];
+            btn.tag = 100+i;
+            [btn addTarget:self action:@selector(showBigBanner:) forControlEvents:UIControlEventTouchUpInside];
+            [blkImgView addSubview:btn];
+        }];
+//        [imgView setImageFromUrl:YES withUrl:[[productModel.bannerlist objectAtIndex:i] BannerPic]];
 //        if (isRetina) {
 //            imgView=[[UrlImageButton alloc] initWithFrame:CGRectMake(10, 10, 149, 190)];
 //            [imgView setImageFromUrl:YES withUrl:[self ImageSize:[[productModel.bannerlist objectAtIndex:i] BannerPic] Size:@"340x424"]];
@@ -477,12 +491,11 @@
         }
         
 //        imageView.tag = 100+i;
-        imgView.adjustsImageWhenHighlighted=NO;
-        [imgView addTarget:self action:@selector(showBigBanner:) forControlEvents:UIControlEventTouchUpInside];
+//        imgView.adjustsImageWhenHighlighted=NO;
+//        [imgView addTarget:self action:@selector(showBigBanner:) forControlEvents:UIControlEventTouchUpInside];
 //        [view_scroll addSubview:imageView];
 //        [view_scroll addSubview:imgView];
 //        imgView.tag=200+i;
-        [_scrollViewForHeader addSubview:imgView];
     }
 }
 #pragma mark  商品大图
@@ -1700,7 +1713,7 @@
                 [productView.ButProductdetail addTarget:self action:@selector(Productdetail_ActiveShow:) forControlEvents:UIControlEventTouchUpInside];
                 //商品评价~~~~~~
                 [productView.ButProductPingjian addTarget:self action:@selector(Productdetail_PingjianShow:) forControlEvents:UIControlEventTouchUpInside];
-                productView.LabelPingJiancount.text = productModel.commentcount==nil?@"":productModel.commentcount;
+                productView.LabelPingJiancount.text = [NSString stringWithFormat:@"%@人评论", productModel.commentcount==nil?@"":productModel.commentcount];
         
                 [cell.contentView addSubview:productView];
 //
@@ -1731,9 +1744,9 @@
             break;
         case 4:
         {//详情描述、问答、评价
-            UIImageView * imageView_recommend = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"same_recommand_bg.png"]];
-            imageView_recommend.frame = CGRectMake(0, 0+10, ScreenWidth, 28);
-            [cell.contentView addSubview:imageView_recommend];
+//            UIImageView * imageView_recommend = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"same_recommand_bg.png"]];
+//            imageView_recommend.frame = CGRectMake(0, 0+10, ScreenWidth, 28);
+//            [cell.contentView addSubview:imageView_recommend];
 
             UILabel *label_recommend = [[UILabel alloc]initWithFrame:CGRectMake(0, 0+10, ScreenWidth, 28)];
             label_recommend.textAlignment = UITextAlignmentCenter;
