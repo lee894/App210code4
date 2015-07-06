@@ -178,7 +178,7 @@
 //    [lblContent setFrame:CGRectMake(24, totalHeight + 16, SCREEN_WIDTH - 48, rcContent.size.height)];
 //    [self.view addSubview:lblContent];
     
-    UIWebView* wbInfo = [[UIWebView alloc] initWithFrame:CGRectMake(24, totalHeight + 16, SCREEN_WIDTH - 48, 0)];
+    UIWebView* wbInfo = [[UIWebView alloc] initWithFrame:CGRectMake(24, totalHeight + 16, SCREEN_WIDTH - 48, 1)];
     [wbInfo setDelegate:self];
     wbInfo.scrollView.bounces = NO;
     [wbInfo setBackgroundColor:[UIColor clearColor]];
@@ -291,8 +291,8 @@
     
     CGFloat fWebViewMaxHeight = self.view.bounds.size.height - (lee1fitAllScreen(36) + 30 + 30) - webView.frame.origin.y;
     
-    NSString *height_str= [webView stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"];
-    NSInteger height = [height_str integerValue];
+//    NSString *height_str= [webView stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"];
+    CGFloat height = webView.scrollView.contentSize.height;
     CGRect oldFrame = webView.frame;
     oldFrame.size.height = (height > fWebViewMaxHeight ? fWebViewMaxHeight : height);
     webView.frame = oldFrame;
