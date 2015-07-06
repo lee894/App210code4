@@ -37,7 +37,14 @@
 {
     [super viewDidLoad];
     
-    self.title = @"我的优惠券";
+    
+    if (self.selectType == 1) {
+        self.title = @"我的优惠券";
+    }else if(self.selectType == 2){
+        self.title = @"我的电子券";
+    }else if (self.selectType == 3){
+        self.title = @"我的包邮卡";
+    }
     
     [self NewHiddenTableBarwithAnimated:YES];
     [self createBackBtnWithType:0];

@@ -1200,7 +1200,7 @@
             [Cell.contentView addSubview:name];
             
             
-            if (!mycheckOutModel.checkout_usecouponcard && !mycheckOutModel.checkout_usev6cards) {
+            if (!mycheckOutModel.checkout_usecouponcard) {
                 
                 UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 7, ScreenWidth-60, 30)];
                 [name2 setTextAlignment:NSTextAlignmentRight];
@@ -1649,6 +1649,11 @@ NSLog(@"createOtherCells  come out");
         {//已使用
             
         } else {
+            
+            
+            if ([mycheckOutModel.arrCheckout_couponcard count] == 0) {
+                return;
+            }
 
             //进入优惠券列表页
             SelectCouponTableViewController *ctrl = [[SelectCouponTableViewController alloc] init];
@@ -1680,10 +1685,22 @@ NSLog(@"createOtherCells  come out");
     {
     //电子券
         
+        if ([mycheckOutModel.checkout_usev6cards count] == 0) {
+            return;
+        }
+        
+        
         
     }else if (section ==5)
     {
     //包邮卡
+        
+        
+        if ([mycheckOutModel.checkout_freepostcard count] == 0) {
+            return;
+        }
+        
+        
         //进入优惠券列表页
         if ([self.usefreepostcardId isEqualToString:@""]){
             

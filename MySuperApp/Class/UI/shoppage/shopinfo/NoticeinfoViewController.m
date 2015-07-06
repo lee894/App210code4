@@ -50,15 +50,7 @@
 //    [self.navbtnRight addTarget:self action:@selector(gotoUserCenter) forControlEvents:UIControlEventTouchUpInside];
     
     
-    makedonetable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height) style:UITableViewStyleGrouped];
-    //判断如果是IOS7的话，适配屏幕的宽度和高度
-    if (isIOS7up) {
-        [makedonetable setFrame:CGRectMake(0, 0, ScreenWidth, NowViewsHight -20)];
-    }else if (isIOS6Down) {
-        [makedonetable setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height)];
-    } else{
-        [makedonetable setFrame:CGRectMake(0, 0, ScreenWidth, NowViewsHight)];
-    }
+    makedonetable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height) style:UITableViewStylePlain];
     makedonetable.backgroundColor = [UIColor clearColor];
     makedonetable.backgroundView = nil;
     makedonetable.delegate = self;
@@ -110,7 +102,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return noticeModel.notice.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -155,7 +147,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return noticeModel.notice.count;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)atableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
