@@ -1290,9 +1290,10 @@
 //        UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(14, 15, 88, 110)];
 //        // [bgImageView setImage:[UIImage imageNamed:@"same_pic_bg.png"]];
 //        [shoppingCarCell addSubview:bgImageView];
-		
+        
         UIButton* btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnCheckBox setFrame:CGRectMake(14, 44, lee1fitAllScreen(22), lee1fitAllScreen(22))];
+        [btnCheckBox setFrame:CGRectMake(6, 36, lee1fitAllScreen(22) + 16, lee1fitAllScreen(22) + 16)];
+        [btnCheckBox setImageEdgeInsets:UIEdgeInsetsMake(-8, -8, -8, -8)];
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
         [btnCheckBox addTarget:self action:@selector(productCheckBoxAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -1587,7 +1588,8 @@
         CGFloat height = 14;
         
         UIButton* btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnCheckBox setFrame:CGRectMake(14, 20, lee1fitAllScreen(22), lee1fitAllScreen(22))];
+        [btnCheckBox setFrame:CGRectMake(6, 16, lee1fitAllScreen(22) + 16, lee1fitAllScreen(22) + 16)];
+        [btnCheckBox setImageEdgeInsets:UIEdgeInsetsMake(-8, -8, -8, -8)];
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
         [btnCheckBox addTarget:self action:@selector(suitCheckBoxAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -1803,7 +1805,8 @@
 //        int height = (70-yOffset-10)/2;
         
         UIButton* btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnCheckBox setFrame:CGRectMake(14, 20, lee1fitAllScreen(22), lee1fitAllScreen(22))];
+        [btnCheckBox setFrame:CGRectMake(6, 16, lee1fitAllScreen(22) + 16, lee1fitAllScreen(22) + 16)];
+        [btnCheckBox setImageEdgeInsets:UIEdgeInsetsMake(-8, -8, -8, -8)];
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
         [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
         btnCheckBox.selected = item.selected;
