@@ -169,24 +169,23 @@
 {
     if (sender && sender.selected) {
         //删除
-        NSMutableString* mstrUks = [[NSMutableString alloc] initWithCapacity:1];
+        NSMutableArray* marrUks = [[NSMutableArray alloc] initWithCapacity:1];
         for (YKItem* item in _carModel.carProductlist) {
             if (item.selected) {
-                [mstrUks appendFormat:@"%@|", item.uk];
+                [marrUks addObject:item.uk];
             }
         }
         for (YKSuitListItem* item in _carModel.suitlist) {
             if (item.selected) {
-                [mstrUks appendFormat:@"%@|", item.uk];
+                [marrUks addObject:item.uk];
             }
         }
         for (YKSuitListItem* item in _carModel.packagelist) {
             if (item.selected) {
-                [mstrUks appendFormat:@"%@|", item.uk];
+                [marrUks addObject:item.uk];
             }
         }
-#warning  崩溃-------- Terminating app due to uncaught exception 'NSRangeException', reason: '*** -[__NSCFString substringToIndex:]: Index 18446744073709551615 out of bounds; string length 0'
-        [mainSer getDelcar:[mstrUks substringToIndex:[mstrUks description].length - 1]];
+        [mainSer getDelcar:[marrUks componentsJoinedByString:@"|"]];
         return;
     }
     if (self.carModel.showwarn) {
@@ -1509,11 +1508,15 @@
 		
         xOffset = 28 + lee1fitAllScreen(28);
         
-        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setFrame:CGRectMake(xOffset, 0, ScreenWidth - xOffset, lee1fitAllScreen(146))];
-        [btn setTag:i];
-        [btn addTarget:self action:@selector(simpleProductAction:) forControlEvents:UIControlEventTouchUpInside];
-        [shoppingCarCell addSubview:btn];
+        UIView* vTap = [[UIView alloc] initWithFrame:CGRectMake(xOffset, 0, ScreenWidth - xOffset, lee1fitAllScreen(146))];
+//        [btn setFrame:CGRectMake(xOffset, 0, ScreenWidth - xOffset, lee1fitAllScreen(146))];
+        [vTap setTag:i];
+//        [btn addTarget:self action:@selector(simpleProductAction:) forControlEvents:UIControlEventTouchUpInside];
+        [shoppingCarCell addSubview:vTap];
+        
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(simpleProductAction:)];
+        [vTap setUserInteractionEnabled:YES];
+        [vTap addGestureRecognizer:tap];
 		[self.tableCells addObject:shoppingCarCell];
 	}
     //    添加收藏
@@ -2298,9 +2301,9 @@
     }
 }
 
--(void)simpleProductAction:(UIButton*)sender
+-(void)simpleProductAction:(UITapGestureRecognizer*)gesture
 {
-    YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:sender.tag];
+    YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:gesture.view.tag];
     
     if ([item.type isEqualToString:@"gift"]) {
         return;
