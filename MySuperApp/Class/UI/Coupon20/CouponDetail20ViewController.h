@@ -16,7 +16,7 @@ typedef enum : NSUInteger {
     kO2O
 } EDetailType;
 
-@interface CouponDetail20ViewController : LBaseViewController <QrcodeViewDelegate>
+@interface CouponDetail20ViewController : LBaseViewController <QrcodeViewDelegate, UIWebViewDelegate>
 @property (nonatomic, retain) id data;
 @property (nonatomic, assign) EDetailType dType;
 

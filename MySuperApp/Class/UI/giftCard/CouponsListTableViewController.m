@@ -1064,6 +1064,19 @@
 
 -(void)showCouponMenu:(UIButton*)sender
 {
+    if(sender != selectedBtn)
+    {
+        if (ivSelected) {
+            [ivSelected removeFromSuperview];
+        }
+        ivSelected = [[UIImageView alloc] initWithFrame:CGRectMake(0, sender.frame.size.height - 1, sender.frame.size.width, 1)];
+        [ivSelected setBackgroundColor:[UIColor colorWithHexString:@"#c8002c"]];
+        [sender addSubview:ivSelected];
+        
+        _strType = @"c";
+        [self getData];
+        return;
+    }
     if (vCouponMenu) {
         [vCouponMenu removeFromSuperview];
         vCouponMenu = nil;

@@ -12,6 +12,10 @@
 #import "CouponDetail20ViewController.h"
 
 @interface CouponDetail20ViewController ()
+{
+    UIButton* btnSave;
+    UIButton* btnUse;
+}
 @property (nonatomic, retain) QrcodeView *qrcodeV;
 @end
 
@@ -159,27 +163,37 @@
         totalHeight += 85;
     }
     
-    UILabel* lblContent = [[UILabel alloc] init];
-    [lblContent setNumberOfLines:0];
-    [lblContent setFont:[UIFont systemFontOfSize:14]];
-    [lblContent setTextColor:[UIColor colorWithHexString:@"#666666"]];
+//    UILabel* lblContent = [[UILabel alloc] init];
+//    [lblContent setNumberOfLines:0];
+//    [lblContent setFont:[UIFont systemFontOfSize:14]];
+//    [lblContent setTextColor:[UIColor colorWithHexString:@"#666666"]];
+    NSString* webtext = @"";
     if (ci) {
-        [lblContent setText:ci.info];
+        webtext = ci.info;
     }else if(fpci)
     {
-        [lblContent setText:fpci.info];
+        webtext = fpci.info;
     }
-    CGRect rcContent = [lblContent.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 48, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblContent.font} context:nil];
-    [lblContent setFrame:CGRectMake(24, totalHeight + 16, SCREEN_WIDTH - 48, rcContent.size.height)];
-    [self.view addSubview:lblContent];
+//    CGRect rcContent = [lblContent.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 48, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblContent.font} context:nil];
+//    [lblContent setFrame:CGRectMake(24, totalHeight + 16, SCREEN_WIDTH - 48, rcContent.size.height)];
+//    [self.view addSubview:lblContent];
     
-    UIButton* btnUse = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIWebView* wbInfo = [[UIWebView alloc] initWithFrame:CGRectMake(24, totalHeight + 16, SCREEN_WIDTH - 48, 0)];
+    [wbInfo setDelegate:self];
+    wbInfo.scrollView.bounces = NO;
+    [wbInfo setBackgroundColor:[UIColor clearColor]];
+    [wbInfo setOpaque:NO];
+    [wbInfo.scrollView setShowsVerticalScrollIndicator:NO];
+    [wbInfo loadHTMLString:[NSString stringWithFormat:@"%@14px;}</style>%@", [NSString stringWithFormat:@"<style type=\"text/css\">img{width:%.0fpx;}.newtext{text-indent:2em;font-size:", wbInfo.frame.size.width], webtext] baseURL:nil];
+    [self.view addSubview:wbInfo];
+    
+    btnUse = [UIButton buttonWithType:UIButtonTypeCustom];
     if (_dType == kO2O) {
         //o2o券 frame不一样
-        [btnUse setFrame:CGRectMake(35, lblContent.frame.size.height + lblContent.frame.origin.y + 30, lee1fitAllScreen(115), lee1fitAllScreen(36))];
+        [btnUse setFrame:CGRectMake(35, wbInfo.frame.size.height + wbInfo.frame.origin.y + 30, lee1fitAllScreen(115), lee1fitAllScreen(36))];
     }else
     {
-        [btnUse setFrame:CGRectMake(40, lblContent.frame.size.height + lblContent.frame.origin.y + 30, SCREEN_WIDTH - 80, lee1fitAllScreen(36))];
+        [btnUse setFrame:CGRectMake(40, wbInfo.frame.size.height + wbInfo.frame.origin.y + 30, SCREEN_WIDTH - 80, lee1fitAllScreen(36))];
     }
 //    [btnUse setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_normal_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateNormal];
 //    [btnUse setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_hover_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateHighlighted];
@@ -192,8 +206,8 @@
     [self.view addSubview:btnUse];
     
     if (_dType == kO2O) {
-        UIButton* btnSave = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnSave setFrame:CGRectMake(btnUse.frame.size.width + btnUse.frame.origin.x + 20, lblContent.frame.size.height + lblContent.frame.origin.y + 30, lee1fitAllScreen(115), lee1fitAllScreen(36))];
+        btnSave = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnSave setFrame:CGRectMake(btnUse.frame.size.width + btnUse.frame.origin.x + 20, wbInfo.frame.size.height + wbInfo.frame.origin.y + 30, lee1fitAllScreen(115), lee1fitAllScreen(36))];
 //        [btnSave setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_normal_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateNormal];
 //        [btnSave setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_hover_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateHighlighted];
         [btnSave setBackgroundColor:btnUse.backgroundColor];
@@ -270,6 +284,27 @@
 -(void)hiddenView
 {
     _qrcodeV.hidden = YES;
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    
+    CGFloat fWebViewMaxHeight = self.view.bounds.size.height - (lee1fitAllScreen(36) + 30 + 30) - webView.frame.origin.y;
+    
+    NSString *height_str= [webView stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"];
+    NSInteger height = [height_str integerValue];
+    CGRect oldFrame = webView.frame;
+    oldFrame.size.height = (height > fWebViewMaxHeight ? fWebViewMaxHeight : height);
+    webView.frame = oldFrame;
+    
+    if (_dType == kO2O) {
+        //o2o券 frame不一样
+        [btnUse setFrame:CGRectMake(35, webView.frame.size.height + webView.frame.origin.y + 30, lee1fitAllScreen(115), lee1fitAllScreen(36))];
+        [btnSave setFrame:CGRectMake(btnUse.frame.size.width + btnUse.frame.origin.x + 20, webView.frame.size.height + webView.frame.origin.y + 30, lee1fitAllScreen(115), lee1fitAllScreen(36))];
+    }else
+    {
+        [btnUse setFrame:CGRectMake(40, webView.frame.size.height + webView.frame.origin.y + 30, SCREEN_WIDTH - 80, lee1fitAllScreen(36))];
+    }
 }
 
 @end
