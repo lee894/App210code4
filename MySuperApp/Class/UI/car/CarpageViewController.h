@@ -25,6 +25,7 @@
 
     NSInteger suitCount;  //套装拥有数量
     NSInteger packageCount;
+    NSInteger productCount;
     UIButton *toChectButton;
     UIButton *editButton;
     UIButton *toChectButton2;
