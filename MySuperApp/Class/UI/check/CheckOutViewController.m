@@ -1206,7 +1206,7 @@
                 [name2 setTextAlignment:NSTextAlignmentRight];
                 name2.text = [NSString stringWithFormat:@"您有%lu张优惠券可用",(unsigned long)[mycheckOutModel.arrCheckout_couponcard count]];
                 name2.backgroundColor = [UIColor clearColor];
-                name2.font = [UIFont systemFontOfSize:LabMidSize];
+                name2.font = [UIFont systemFontOfSize:LabSmallSize];
                 name2.textColor = [UIColor colorWithHexString:@"0x666666"];;
                 [Cell.contentView addSubview:name2];
                 
@@ -1217,7 +1217,7 @@
                 UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 8, ScreenWidth-120, 30)];
                 name2.text = @"已使用";
                 name2.backgroundColor = [UIColor clearColor];
-                name2.font = [UIFont systemFontOfSize:LabMidSize];
+                name2.font = [UIFont systemFontOfSize:LabSmallSize];
                 name2.textColor = [UIColor redColor];
                 [Cell.contentView addSubview:name2];
                 
@@ -1260,7 +1260,7 @@
                     name2.text = [NSString stringWithFormat:@"您没有可用的电子券"];
                 }
                 name2.backgroundColor = [UIColor clearColor];
-                name2.font = [UIFont systemFontOfSize:LabMidSize];
+                name2.font = [UIFont systemFontOfSize:LabSmallSize];
                 name2.textColor = [UIColor colorWithHexString:@"0x666666"];;
                 [Cell.contentView addSubview:name2];
                 
@@ -1270,7 +1270,7 @@
                 UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 8, ScreenWidth-120, 30)];
                 name2.text = @"已使用";
                 name2.backgroundColor = [UIColor clearColor];
-                name2.font = [UIFont systemFontOfSize:LabMidSize];
+                name2.font = [UIFont systemFontOfSize:LabSmallSize];
                 name2.textColor = [UIColor redColor];
                 [Cell.contentView addSubview:name2];
                 
@@ -1303,7 +1303,7 @@
                 [name2 setTextAlignment:NSTextAlignmentRight];
                 name2.text = [NSString stringWithFormat:@"您有%lu张包邮卡可用",(unsigned long)[mycheckOutModel.checkout_freepostcard count]];
                 name2.backgroundColor = [UIColor clearColor];
-                name2.font = [UIFont systemFontOfSize:LabMidSize];
+                name2.font = [UIFont systemFontOfSize:LabSmallSize];
                 name2.textColor = [UIColor colorWithHexString:@"0x666666"];;
                 [Cell.contentView addSubview:name2];
                 
@@ -1313,7 +1313,7 @@
                 UILabel* name2 = [[UILabel alloc] initWithFrame:CGRectMake(100, 8, ScreenWidth-120, 30)];
                 name2.text = @"已使用";
                 name2.backgroundColor = [UIColor clearColor];
-                name2.font = [UIFont systemFontOfSize:LabMidSize];
+                name2.font = [UIFont systemFontOfSize:LabSmallSize];
                 name2.textColor = [UIColor redColor];
                 [Cell.contentView addSubview:name2];
                 

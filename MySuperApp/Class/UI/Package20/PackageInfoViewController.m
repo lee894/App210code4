@@ -84,6 +84,9 @@
         [vGoods removeFromSuperview];
         vGoods = nil;
     }
+    
+    //lee999 150706 当离开的时候隐藏toolbar
+    [self hiddenBar];
 }
 
 -(void)serviceStarted:(ServiceType)aHandle
@@ -458,6 +461,13 @@
 
 -(void)addToPackage:(UIButton*)sender
 {
+    //lee999  当加入第一个物品到礼包的时候，默认展开
+    if (!_svPackage) {
+        [self showPackage:nil];
+    }
+    //end
+    
+    
     PackageProductInfo* ppInfo = nil;
     PackageSpecValueInfo* colorSpecValueInfo = [marrColor objectAtIndex:currentColor isArray:nil];
     PackageSpecValueInfo* sizeSpecValueInfo = [marrSize objectAtIndex:currentSize isArray:nil];

@@ -544,7 +544,7 @@
 -(NSArray*)viewConstraints
 {
     NSDictionary *views = @{@"mytableView" : self.mytableView, @"vToolbar" : self.vToolbar};
-    NSDictionary *metrics = @{@"barHeight" : [NSNumber numberWithFloat:lee1fitAllScreen(35)]};
+    NSDictionary *metrics = @{@"barHeight" : [NSNumber numberWithFloat:lee1fitAllScreen(10)]};
     
     NSMutableArray *constraints = [[NSMutableArray alloc] init];
     if (self.clType == EAll) {
