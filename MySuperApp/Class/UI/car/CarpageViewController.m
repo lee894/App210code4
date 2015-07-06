@@ -691,6 +691,14 @@
     [TalkingData trackEvent:@"5008" label:@"购物车推荐" parameters:dic1];
     
 	[self.navigationController pushViewController:detail animated:YES];
+    
+    
+    //lee999 新增百分点
+    if (tap.view.tag < 3) {
+        NSString *str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+        [BfdAgent feedback:self recommendId:@"rec_FDFEE10D_5A29_BE14_3808_3C336BA76303" itemId:item.productid options:@{@"uid":str}];
+    }
+    
 }
 
 - (void)creatFootView

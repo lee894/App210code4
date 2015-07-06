@@ -142,9 +142,10 @@
     
     recordNUM=1;
     
-    
-    [BfdAgent visit:self itemId:self.thisProductId options:nil];
+    NSString *str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+    [BfdAgent visit:self itemId:self.thisProductId options:@{@"uid":str}];
 }
+
 
 -(NSArray*)viewConstraints
 {

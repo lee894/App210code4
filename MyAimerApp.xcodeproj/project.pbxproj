@@ -456,6 +456,8 @@
 		967F00591B12074500B7E639 /* Deafult1242.png in Resources */ = {isa = PBXBuildFile; fileRef = 967F00561B12074500B7E639 /* Deafult1242.png */; };
 		967F005A1B12074500B7E639 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 967F00571B12074500B7E639 /* Default.png */; };
 		968295AC19D3B5D700FE1806 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 968295AB19D3B5D700FE1806 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9683D3111B4A7C0300B2B6AC /* V6CardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9683D30F1B4A7C0300B2B6AC /* V6CardVC.m */; };
+		9683D3121B4A7C0300B2B6AC /* V6CardVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9683D3101B4A7C0300B2B6AC /* V6CardVC.xib */; };
 		968468FA1AEE596300C24E71 /* t_ico_info_hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 968468F81AEE596300C24E71 /* t_ico_info_hover@2x.png */; };
 		968468FB1AEE596300C24E71 /* t_ico_info_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 968468F91AEE596300C24E71 /* t_ico_info_normal@2x.png */; };
 		968468FD1AEE599800C24E71 /* t_ico_like2_hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 968468FC1AEE599800C24E71 /* t_ico_like2_hover@2x.png */; };
@@ -1738,6 +1740,9 @@
 		967F00571B12074500B7E639 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		968295AA19D3B5D700FE1806 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
 		968295AB19D3B5D700FE1806 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
+		9683D30E1B4A7C0300B2B6AC /* V6CardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = V6CardVC.h; sourceTree = "<group>"; };
+		9683D30F1B4A7C0300B2B6AC /* V6CardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = V6CardVC.m; sourceTree = "<group>"; };
+		9683D3101B4A7C0300B2B6AC /* V6CardVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = V6CardVC.xib; sourceTree = "<group>"; };
 		968468F81AEE596300C24E71 /* t_ico_info_hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "t_ico_info_hover@2x.png"; sourceTree = "<group>"; };
 		968468F91AEE596300C24E71 /* t_ico_info_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "t_ico_info_normal@2x.png"; sourceTree = "<group>"; };
 		968468FC1AEE599800C24E71 /* t_ico_like2_hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "t_ico_like2_hover@2x.png"; sourceTree = "<group>"; };
@@ -5373,6 +5378,9 @@
 				9BC4E1C819220A8000085529 /* QrcodeView.h */,
 				9BC4E1C919220A8000085529 /* QrcodeView.m */,
 				9BC4E1C619220A6300085529 /* QrcodeView.xib */,
+				9683D30E1B4A7C0300B2B6AC /* V6CardVC.h */,
+				9683D30F1B4A7C0300B2B6AC /* V6CardVC.m */,
+				9683D3101B4A7C0300B2B6AC /* V6CardVC.xib */,
 			);
 			path = giftCard;
 			sourceTree = "<group>";
@@ -6606,6 +6614,7 @@
 				962694681A135FB700A0BC7F /* devider_03.png in Resources */,
 				9626940E1A135FB700A0BC7F /* login_btn_press.png in Resources */,
 				962694781A135FB700A0BC7F /* login_sns_sina.png in Resources */,
+				9683D3121B4A7C0300B2B6AC /* V6CardVC.xib in Resources */,
 				96D465751AD558C800BA5700 /* tb_3_normal@2x.png in Resources */,
 				962694A51A135FB700A0BC7F /* top3_search_latest.png in Resources */,
 				9626944F1A135FB700A0BC7F /* tab02_icon_search.png in Resources */,
@@ -7170,6 +7179,7 @@
 				9B7CB11618D59C4300D8DAA5 /* YKAdressItem.m in Sources */,
 				968AE89C1B2540AB004A1A85 /* MyClosetKidGril3ViewController.m in Sources */,
 				9B53948D18EBEA3300084F6B /* ProductDetailViewController.m in Sources */,
+				9683D3111B4A7C0300B2B6AC /* V6CardVC.m in Sources */,
 				9BD58CF918E40D57008CD881 /* SinaWeiboRequest.m in Sources */,
 				9BD58C9518E40D57008CD881 /* YzdHUDImageView.m in Sources */,
 				9B486AD2191C895C0021E57D /* YKMarqueeView.m in Sources */,

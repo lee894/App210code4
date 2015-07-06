@@ -252,6 +252,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+#warning ----- 还没写完  你alloc一个couponinfo传过去也行
+    
 //    CouponDetailViewController *userCtrl = [[CouponDetailViewController alloc] initWithNibName:@"CouponDetailViewController" bundle:nil];
 //    //是不是我自己的优惠券，（自己的能显示二维码，不是自己的没有二维码）
 //    userCtrl.isMycard = NO;
