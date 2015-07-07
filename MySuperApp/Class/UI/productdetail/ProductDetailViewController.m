@@ -142,7 +142,10 @@
     
     recordNUM=1;
     
-    NSString *str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+    NSString *str = @"";
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"]) {
+        str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+    }
     [BfdAgent visit:self itemId:self.thisProductId options:@{@"uid":str}];
 }
 

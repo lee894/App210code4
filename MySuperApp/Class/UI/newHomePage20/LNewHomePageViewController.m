@@ -884,9 +884,13 @@
 
 
 -(void)gotoProductDetailViewAciton:(MyButton*)btn{
-    
-    NSString *str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+
+    NSString *str = @"";
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"]) {
+        str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+    }
     [BfdAgent feedback:self recommendId:@"rec_2142096B_FB0B_FCD1_8DD8_0D235639F12F" itemId:btn.addstring options:@{@"uid":str}];
+
     
     ProductDetailViewController *jumpVC=[[ProductDetailViewController alloc]init];
     jumpVC.thisProductId=btn.addstring;
