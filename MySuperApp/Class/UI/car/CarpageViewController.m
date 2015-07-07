@@ -24,6 +24,9 @@
     BOOL isEditing; //是否编辑状态
     UIView* vToolbar;
     UIButton* btnCheckOut;
+    
+    NSString* straddfavAndRemoveFromCardID;  //将下架商品，添加收藏，并且移除购物车
+    
 }
 @property (nonatomic, retain) NSMutableArray* selectedList;
 @property (nonatomic, retain) UIButton* btnCheckBox;
@@ -120,6 +123,7 @@
     }
 }
 
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     //lee新增 是否选择放弃赠品
@@ -166,6 +170,7 @@
 //		[textfield resignFirstResponder];
 //	}}
 
+
 #pragma mark-- 去结算中心 & 删除按钮
 -(void)gotoChectViewC:(UIButton*)sender
 {
@@ -210,10 +215,6 @@
         [self.navigationController pushViewController:chectOut animated:YES];
 	} else {
         
-//		UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录",nil];
-//		alert.tag = 10000000;
-//		[alert show];
-        
         [self changeToMyaimer];
 	}
 }
@@ -234,6 +235,7 @@
     }
     [mainSer getDelcar:str];
 }
+
 
 #pragma mark--- 创建没有商品的view 和 表格
 -(void)createNoGoodView{
@@ -377,8 +379,6 @@
         }
     }
     
-    
-    
     LBaseModel *model = (LBaseModel *)amodel;
     
     switch (model.requestTag) {
@@ -389,7 +389,6 @@
                 return;
             }
             
-
             self.carModel = (CarCarModel *)model;
             
             BOOL hasContent = NO;
@@ -478,7 +477,12 @@
             if (!model.errorMessage) {
                 [SBPublicAlert showMBProgressHUD:@"收藏成功" andWhereView:self.view hiddenTime:0.6];
                 
-                //lee999
+                
+#warning ------ 购物车收藏后，移除掉购物车
+                //lee999 150707 straddfavAndRemoveFromCardID
+                //将下架商品，添加收藏，并且移除购物车
+                [mainSer getDelcar:[NSString stringWithFormat:@"%@:product",straddfavAndRemoveFromCardID]];
+
                 
             }else {
                 [SBPublicAlert showMBProgressHUD:@"收藏失败" andWhereView:self.view hiddenTime:0.6];
@@ -895,10 +899,12 @@
     if ([SingletonState sharedStateInstance].userHasLogin) {
         NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:item.productid, @"GoodsID",item.name, @"GoodsName",nil];
         [TalkingData trackEvent:@"1006" label:@"加入收藏夹" parameters:dic1];
-        
-        
+
         UIButton *btn = (UIButton*)sender;
         [btn setImage:[UIImage imageNamed:@"icon_like_red.png"] forState:UIControlStateNormal];
+
+        
+        straddfavAndRemoveFromCardID = item.goodsid;
         
         [mainSer getFavoriteadd:item.goodsid andType:@"goods"];
         [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
@@ -1308,7 +1314,8 @@
             
             showStock = YES;
             
-            if ([item.stock isEqualToString:@"缺货"]) {
+            //lee999 150707 新增已下架商品的判断 如果商品已下架，也显示删除按钮
+            if ([item.stock isEqualToString:@"缺货"] || [item.stock isEqualToString:@"商品已下架"]) {
                 isShowStock = YES;
             }
         }
@@ -1516,7 +1523,8 @@
             buttonForAction.frame = CGRectMake(180, 80, 120, 40);
             [buttonForAction setImage:[UIImage imageNamed:@"icon_like_gray.png"] forState:UIControlStateNormal];
             
-            if ([item.isSollection intValue] == 0) {
+            if ([item.isSollection intValue] == 0 ) {
+                
                 [buttonForAction setTitle:@"加入收藏" forState:UIControlStateNormal];
                 [buttonForAction setImage:[UIImage imageNamed:@"icon_like_gray.png"] forState:UIControlStateNormal];
                 [buttonForAction addTarget:self action:@selector(add_LikeChick:) forControlEvents:UIControlEventTouchUpInside];
@@ -2013,6 +2021,7 @@
     }
 }
 
+#pragma mark--- 勾选  礼包
 -(void)packageCheckBoxAction:(UIButton*)sender
 {
     UITableViewCell* cell = nil;
@@ -2032,6 +2041,7 @@
     }
 }
 
+#pragma mark--- 勾选  套装
 -(void)suitCheckBoxAction:(UIButton*)sender
 {
     UITableViewCell* cell = nil;
@@ -2052,7 +2062,7 @@
 }
 
 
-#pragma mark--- 购物车  勾选按钮
+#pragma mark---勾选 单品 购物车
 -(void)productCheckBoxAction:(UIButton*)sender
 {
     UITableViewCell* cell = nil;
@@ -2065,7 +2075,7 @@
         cell = (UITableViewCell*)sender.superview.superview;
     }
     if (cell) {
-        NSInteger index = [shoppingCarTab indexPathForCell:cell].section;
+        NSInteger index = [shoppingCarTab indexPathForCell:cell].section-suitCount-packageCount;
         YKSuitListItem* item = [_carModel.carProductlist objectAtIndex:index isArray:nil];
         [mainSer PartChangeItemWithUk:item.uk andType:@"part"];
         [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
@@ -2316,10 +2326,6 @@
 	return nil;
 }
 
--(void)createGiftcell{
-
-}
-
 //lee999 是否可以编辑，这个地方也需要修改~~~~  选择赠品的提示，原来是区头，改到cell之后，这个界面也不能进行编辑了
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([indexPath section] < suitCount) {
@@ -2354,6 +2360,8 @@
     }
 }
 
+
+#pragma mark---- 商品详情 点击进入
 -(void)simpleProductAction:(UITapGestureRecognizer*)gesture
 {
     YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:gesture.view.tag];
@@ -2369,7 +2377,7 @@
     [self.navigationController pushViewController:detail animated:YES];
 
 }
-
+#pragma mark---- 套装 点击进入
 -(void)suitProductAction:(UIButton*)sender
 {
 //    if ([indexPath section] < 0 || [indexPath section] >= [self.carModel.suitlist count]) {
@@ -2389,6 +2397,7 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+#pragma mark---- 礼包 点击进入
 -(void)packageProductAction:(UIButton*)sender
 {
 //    if ([indexPath section] < 0 || ([indexPath section] - suitCount) >= [self.carModel.packagelist count]) {
@@ -2409,7 +2418,7 @@
 
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //    //套装进入商品详情
 //    if (indexPath.section < suitCount) {
 //        if ([indexPath section] < 0 || [indexPath section] >= [self.carModel.suitlist count]) {
@@ -2456,7 +2465,7 @@
 //		[self.navigationController pushViewController:detail animated:YES];
 //	}
 //    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-}
+//}
 
 
 - (void)didReceiveMemoryWarning
@@ -2464,25 +2473,6 @@
     [super didReceiveMemoryWarning];
 }
 
-
-//iOS 5
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-	return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
-}
-//iOS 6
-- (BOOL)shouldAutorotate
-{
-	return NO;
-}
-- (NSUInteger)supportedInterfaceOrientations
-{
-	return UIInterfaceOrientationMaskPortrait;
-}
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-	return UIInterfaceOrientationPortrait;		
-}
 
 
 @end
