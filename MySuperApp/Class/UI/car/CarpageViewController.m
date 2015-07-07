@@ -987,10 +987,18 @@
     }
     if(vToolbar)
     {
-        for (UIView* v in vToolbar.subviews) {
-            if (v != btnCheckOut) {
-                [v setHidden:YES];
+        for (id v in vToolbar.subviews) {
+            if([v class] == [UILabel class])
+            {
+                UILabel* lbl = (UILabel*)v;
+                if ([lbl.text isEqualToString:@"全选"]) {
+                    continue;
+                }
             }
+            if ([v class] == [UIButton class]) {
+                continue;
+            }
+            [v setHidden:YES];
         }
     }
     
@@ -1405,7 +1413,7 @@
             [shoppingCarCell addSubview:desc];
             yOffset += 20;
         }
-        
+        UITextField* numberValue = nil;
         if (!isShowStock) {
             
             //UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(110, yOffset, isEditing?75:105, 20)];
@@ -1433,7 +1441,7 @@
             
             //lee999 商品数量
            // UITextField* numberValue = [[UITextField alloc] initWithFrame:CGRectMake(isEditing?228:245, yOffset+1, 36, 20)];
-            UITextField* numberValue = [[UITextField alloc] initWithFrame:CGRectMake(lee1fitAllScreen(255), numberName.frame.origin.y - 3, 36, 20)];
+            numberValue = [[UITextField alloc] initWithFrame:CGRectMake(lee1fitAllScreen(255), numberName.frame.origin.y - 3, 36, 20)];
             numberValue.textAlignment=UITextAlignmentCenter;
             numberValue.tag = 100992;
             
@@ -1523,7 +1531,7 @@
 //            [vBG addSubview:v];
             
         }else {
-            
+            [btnCheckBox setHidden:YES];
             UIButton *buttonForAction=[UIButton buttonWithType:UIButtonTypeCustom];
             buttonForAction.frame = CGRectMake(180, 80, 120, 40);
             [buttonForAction setImage:[UIImage imageNamed:@"icon_like_gray.png"] forState:UIControlStateNormal];
@@ -1559,6 +1567,11 @@
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(simpleProductAction:)];
         [vTap setUserInteractionEnabled:YES];
         [vTap addGestureRecognizer:tap];
+        
+        if (numberValue) {
+            [shoppingCarCell bringSubviewToFront:vTap];
+        }
+        
         [self.tableCells addObject:shoppingCarCell];
 	}
     //    添加收藏
@@ -2369,6 +2382,40 @@
 #pragma mark---- 商品详情 点击进入
 -(void)simpleProductAction:(UITapGestureRecognizer*)gesture
 {
+    if (isEditing) {
+        CGPoint pTouchInView = [gesture locationInView:gesture.view.superview];
+        UITextField* tf = nil;
+        for (id v in gesture.view.superview.subviews) {
+            if ([v class] == [UITextField class]) {
+                tf = v;
+                break;
+            }
+        }
+        if (tf) {
+            if (CGRectContainsPoint(tf.frame, pTouchInView)) {
+                [tf becomeFirstResponder];
+                return;
+            }
+        }
+        UIButton* btn = nil;
+        for (id v in gesture.view.superview.subviews) {
+            if ([v class] == [UIButton class]) {
+                btn = v;
+                if ([[btn titleForState:UIControlStateNormal] isEqualToString:@"加入收藏"]) {
+                    break;
+                }else
+                {
+                    btn = nil;
+                }
+            }
+        }
+        if (btn) {
+            if (CGRectContainsPoint(btn.frame, pTouchInView)) {
+                [btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+                return;
+            }
+        }
+    }
     YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:gesture.view.tag];
     
     if ([item.type isEqualToString:@"gift"]) {

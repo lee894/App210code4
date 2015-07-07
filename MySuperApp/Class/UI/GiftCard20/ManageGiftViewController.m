@@ -262,6 +262,7 @@
         case 1:
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             if (_mgi.address.address_id != nil) {
                 //有地址
                 UILabel* lblName = [[UILabel alloc] init];
