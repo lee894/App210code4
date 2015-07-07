@@ -133,7 +133,8 @@
     [self.view addSubview:lblSep];
     
     CGFloat totalHeight = lblSep.frame.size.height + lblSep.frame.origin.y;
-    if (_dType == kO2O) {
+    
+    if (_dType == kO2O && self.isMycard != 1) {
         //o2o券 多一段
         
         UILabel* lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 18 + lblSep.frame.origin.y + 0.5, SCREEN_WIDTH, 18)];
@@ -148,6 +149,7 @@
         [lblTime setTextAlignment:NSTextAlignmentCenter];
         [lblTime setTextColor:[UIColor colorWithHexString:@"#666666"]];
         lblTime.text = @"点击查看二维码";
+        
         CGRect rcTime = [lblTime.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblTime.font} context:nil];
         [lblTime setFrame:CGRectMake((SCREEN_WIDTH - rcTime.size.width - 20 - 20) / 2, 20 + 14 + 16 + lblSep.frame.origin.y + 0.5, rcTime.size.width, 14)];
         [self.view addSubview:lblTime];
@@ -193,12 +195,22 @@
     [self.view addSubview:wbInfo];
     
     btnUse = [UIButton buttonWithType:UIButtonTypeCustom];
+    
     if (_dType == kO2O) {
         //o2o券 frame不一样
         [btnUse setFrame:CGRectMake(35, wbInfo.frame.size.height + wbInfo.frame.origin.y + 30, lee1fitAllScreen(115), lee1fitAllScreen(36))];
+        
+        if (self.isMycard == 1) {
+            btnUse.hidden = YES;
+        }
+        
     }else
     {
         [btnUse setFrame:CGRectMake(40, wbInfo.frame.size.height + wbInfo.frame.origin.y + 30, SCREEN_WIDTH - 80, lee1fitAllScreen(36))];
+        
+        if (self.isMycard == 1) {
+            btnUse.hidden = YES;
+        }
     }
 //    [btnUse setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_normal_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateNormal];
 //    [btnUse setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_hover_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateHighlighted];
@@ -210,7 +222,7 @@
     [btnUse addTarget:self action:@selector(toHome:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btnUse];
     
-    if (_dType == kO2O) {
+    if (_dType == kO2O  && self.isMycard != 1) {
         btnSave = [UIButton buttonWithType:UIButtonTypeCustom];
         [btnSave setFrame:CGRectMake(btnUse.frame.size.width + btnUse.frame.origin.x + 20, wbInfo.frame.size.height + wbInfo.frame.origin.y + 30, lee1fitAllScreen(115), lee1fitAllScreen(36))];
 //        [btnSave setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_normal_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateNormal];
