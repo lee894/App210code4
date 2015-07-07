@@ -1203,7 +1203,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSInteger index = indexPath.row;
+//	NSInteger index = indexPath.row;
     if (indexPath.section < suitCount) {
         if ([indexPath section] < 0 || [indexPath section] >= [self.carModel.suitlist count]) {
             return ;
@@ -2050,7 +2050,7 @@
         cell = (UITableViewCell*)sender.superview.superview;
     }
     if (cell) {
-        NSInteger index = [shoppingCarTab indexPathForCell:cell].row;
+        NSInteger index = [shoppingCarTab indexPathForCell:cell].section;
         YKSuitListItem* item = [_carModel.carProductlist objectAtIndex:index isArray:nil];
         [mainSer PartChangeItemWithUk:item.uk andType:@"part"];
         [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
