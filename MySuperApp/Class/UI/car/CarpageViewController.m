@@ -559,7 +559,7 @@
     [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_normal"] forState:UIControlStateSelected];
     [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_hoverl"] forState:UIControlStateHighlighted];
     [btnCheckOut setTitle:[NSString stringWithFormat:@"结算(%@)", _carModel.itemNumber] forState:UIControlStateNormal];
-    [btnCheckOut setTitle:@"" forState:UIControlStateHighlighted];
+    [btnCheckOut setTitle:@" " forState:UIControlStateHighlighted];
     [btnCheckOut setTitle:[NSString stringWithFormat:@"删除(%@)", _carModel.itemNumber] forState:UIControlStateSelected];
     [btnCheckOut addTarget:self action:@selector(gotoChectViewC:) forControlEvents:UIControlEventTouchUpInside];
     [vToolbar addSubview:btnCheckOut];
@@ -974,6 +974,14 @@
     if (btnCheckOut) {
         [btnCheckOut setSelected:YES];
     }
+    if(vToolbar)
+    {
+        for (UIView* v in vToolbar.subviews) {
+            if (v != btnCheckOut) {
+                [v setHidden:YES];
+            }
+        }
+    }
     
     [self.navbtnRight setTitle:@"完成" forState:UIControlStateNormal];
     [self.navbtnRight setTitle:@"完成" forState:UIControlStateHighlighted];
@@ -1074,6 +1082,15 @@
 //    sku :   货品ID:数量:类型(product、gift)|货品ID:数量:类型(product、gift)  如果是赠品：11052064707566:1:gift:549 549为赠品活动的id
     
     isEditing = NO;
+    if (btnCheckOut) {
+        [btnCheckOut setSelected:NO];
+    }
+    if(vToolbar)
+    {
+        for (UIView* v in vToolbar.subviews) {
+            [v setHidden:NO];
+        }
+    }
     
 //    [shoppingCarTab setEditing:isEditing animated:YES];
 
@@ -1120,7 +1137,6 @@
                 [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"数量不得小于1"];
                 textfield.text = [NSString stringWithFormat:@"%d", 1];
                 isEditing = NO;
-                isEditing = NO;
                 return;
             }
             //获取库存 和当前数量进行比对
@@ -1128,7 +1144,6 @@
                 [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"您有商品库存不足！"];
                 //isEditing = !isEditing;
                 textfield.text = [NSString stringWithFormat:@"%@",item.number];//textfield.text;//[NSString stringWithFormat:@"%d",item.count];
-                isEditing = NO;
                 isEditing = NO;
                 return;
                 
