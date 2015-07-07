@@ -34,7 +34,7 @@
                         <rect key="frame" x="152" y="16" width="72" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" red="0.231372565" green="0.231372565" blue="0.231372565" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="订单状态:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="11">
@@ -171,7 +171,7 @@
                 <outlet property="orderImage" destination="ff6-GT-Sb1" id="wCY-SD-KAT"/>
                 <outlet property="redBtn" destination="449-Da-I0L" id="ysn-1l-7Wb"/>
             </connections>
-            <point key="canvasLocation" x="-173" y="100"/>
+            <point key="canvasLocation" x="-262" y="-15"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -145,6 +145,7 @@
             item.save = [[dicdate objectForKey:@"save"] floatValue];
             item.number = [[dicdate objectForKey:@"number"] intValue];
             item.suitid = [dicdate objectForKey:@"suitid"];
+            item.name = [dicdate objectForKey:@"name"];
             //lee999 新增套装积分
             item.suit_score = [[dicdate objectForKey:@"suit_score"] intValue];
             NSLog(@"arrSuit:%@",item);
@@ -175,6 +176,8 @@
             item.packageid = [dicdate objectForKey:@"packageid"];
             item.selected = [[dicdate objectForKey:@"selected"] boolValue];
             item.uk = [dicdate objectForKey:@"uk"];
+            item.name = [dicdate objectForKey:@"name"];
+
             NSLog(@"arrSuit:%@",item);
             [self.packagelist addObject:item];
             

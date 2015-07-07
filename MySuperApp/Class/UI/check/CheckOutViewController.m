@@ -22,6 +22,8 @@
 #import "CouponcardListCouponcardListModel.h"
 #import "OHAttributedLabel.h"
 #import "NSAttributedString+Attributes.h"
+#import "NSString+WPAttributedMarkup.h"
+
 
 @interface CheckOutViewController ()<SelectCouponDelegate>
 {
@@ -346,7 +348,7 @@
 	}
 	
 	for (int i = 0; i < [nameArray count]; i ++) {
-		UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(210), 10+20*i, 110, 20)];
+		UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(200), 10+20*i, 110, 20)];
 		colorName.backgroundColor = [UIColor clearColor];
 		switch (i) {
 			case 0:
@@ -508,16 +510,6 @@
         [seplineView setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
         [Cell addSubview:seplineView];
         
-        if (i != [mycheckOutModel.checkoutProductlist count]-1) {
-            
-            UIView *seplineView2 = [[UIView alloc] init];
-            //        [seplineView2 setFrame:CGRectMake(0, 169.5, ScreenWidth, 8)];
-            [seplineView2 setFrame:CGRectMake(0, lee1fitAllScreen(142), ScreenWidth, 8)];
-            
-            [seplineView2 setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
-            [Cell addSubview:seplineView2];
-        }
-        
         //积分
         UILabel *jifenLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 137, 88, 25)];
         jifenLabel.backgroundColor = [UIColor clearColor];
@@ -541,6 +533,16 @@
 		caseValue.font = font;
 		caseValue.textColor = [UIColor colorWithHexString:@"0xB90023"] ;
 		[Cell.contentView addSubview:caseValue];
+        
+        if (i != [mycheckOutModel.checkoutProductlist count]-1) {
+            
+            UIView *seplineView2 = [[UIView alloc] init];
+            //        [seplineView2 setFrame:CGRectMake(0, 169.5, ScreenWidth, 8)];
+            [seplineView2 setFrame:CGRectMake(0, caseValue.frame.origin.y+caseValue.frame.size.height+8, ScreenWidth, 8)];
+            
+            [seplineView2 setBackgroundColor:[UIColor colorWithHexString:@"E6E6E6"]];
+            [Cell addSubview:seplineView2];
+        }
 		
 		[tableCells addObject:Cell];
 	}
@@ -564,46 +566,41 @@
         
         
         UIFont *font = [UIFont systemFontOfSize:13];
-        CGFloat xOffset = 20;//28 + lee1fitAllScreen(28);
+        CGFloat xOffset = 20;
         CGFloat yOffset = 16;
         CGFloat height = 14;
         
         UILabel* pName = [[UILabel alloc] init];
         pName.backgroundColor = [UIColor clearColor];
-        pName.lineBreakMode = UILineBreakModeMiddleTruncation;
-        pName.text = [NSString stringWithFormat:@"套装%d", j + 1];
+        pName.lineBreakMode = UILineBreakModeTailTruncation;
+        pName.text = [NSString stringWithFormat:@"套装：%@",item.name];
         pName.font = [UIFont systemFontOfSize:14];
-        pName.textColor = UIColorFromRGB(0x666666);
-        CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font} context:nil];
-        [pName setFrame:CGRectMake(xOffset, yOffset - (rcName.size.height > pName.font.pointSize ? rcName.size.height - pName.font.pointSize : 0), rcName.size.width, rcName.size.height)];
+        pName.textColor = UIColorFromRGB(0xc8002c);//[UIColor blackColor];//UIColorFromRGB(0x666666);
+        NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
+        [mps setLineBreakMode:pName.lineBreakMode];
+        CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake((lee1fitAllScreen(204) - xOffset), MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font, NSParagraphStyleAttributeName : mps} context:nil];
+        [pName setFrame:CGRectMake(xOffset, yOffset - (rcName.size.height > pName.font.pointSize ? rcName.size.height - pName.font.pointSize : 0), (lee1fitAllScreen(204) - xOffset), rcName.size.height)];
         [viewSuitlistCell3 addSubview:pName];
-        UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset + pName.frame.size.width + 24, pName.frame.origin.y, 200, rcName.size.height)];
-        desc.backgroundColor = [UIColor clearColor];
-        desc.lineBreakMode = UILineBreakModeMiddleTruncation;
-        desc.text = [NSString stringWithFormat:@"数量: %d", item.number];
-        desc.font = [UIFont systemFontOfSize:14];
-        desc.textColor = UIColorFromRGB(0x181818);
-        [viewSuitlistCell3 addSubview:desc];
         
         NSString *str = @"套装价: ";
         int strWidth = [str sizeWithFont:font].width;
-        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset + 20, strWidth, height)];
+        UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset + 20, strWidth, height)];
         desc.backgroundColor = [UIColor clearColor];
         desc.text = str;
         desc.font = [UIFont systemFontOfSize:14];
         desc.textColor = UIColorFromRGB(0x181818);/*UIColorFromRGB(0x666666)*/
         [viewSuitlistCell3 addSubview:desc];
-        //xOffset += strWidth;
+        xOffset += strWidth;
         
-        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset + strWidth, desc.frame.origin.y, 90, height)];
+        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, desc.frame.origin.y, 90, height)];
         desc.backgroundColor = [UIColor clearColor];
         desc.text = [NSString stringWithFormat:@"￥%.2f", item.disountprice];
         desc.font = [UIFont systemFontOfSize:14];
         desc.textColor = UIColorFromRGB(0xc8002c);
         [viewSuitlistCell3 addSubview:desc];
-        //xOffset = lee1fitAllScreen(204);
+        xOffset = lee1fitAllScreen(204);
         
-        desc = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(204), desc.frame.origin.y, 110, height)];
+        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, desc.frame.origin.y, 110, height)];
         desc.backgroundColor = [UIColor clearColor];
         desc.lineBreakMode = UILineBreakModeMiddleTruncation;
         desc.text = [NSString stringWithFormat:@"优惠: ￥%.2f", item.save];
@@ -611,9 +608,25 @@
         desc.textColor = UIColorFromRGB(0x666666);
         [viewSuitlistCell3 addSubview:desc];
         
+        
+        NSDictionary* style1 = @{@"body":[UIFont fontWithName:@"HelveticaNeue" size:14],
+                                 @"bold":[UIFont fontWithName:@"HelveticaNeue-Bold" size:14],
+                                 @"red": [UIColor colorWithHexString:@"666666"]};
+        
+        
+        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, pName.frame.origin.y, ScreenWidth - xOffset - 12, rcName.size.height)];
+        desc.backgroundColor = [UIColor clearColor];
+        desc.lineBreakMode = UILineBreakModeMiddleTruncation;
+        desc.attributedText = [[NSString stringWithFormat:@"<red>数量：</red>%d",item.number] attributedStringWithStyleBook:style1];
+        //        desc.text = [NSString stringWithFormat:@"数量: %d", item.number];
+        desc.font = [UIFont systemFontOfSize:14];
+        [viewSuitlistCell3 addSubview:desc];
+        
         [array addObject:viewSuitlistCell3];
         
-        //xOffset = 28 + lee1fitAllScreen(28);
+        
+        xOffset = 20;
+        
         for (int k = 0; k<[item.suits count]; k++) {
             static NSString	*CellIdentifier2 = @"Cell2";
             UITableViewCell *Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
@@ -866,23 +879,18 @@
         CGFloat xOffset = 20;//28 + lee1fitAllScreen(28);
         CGFloat yOffset = 16;
         
+        
         UILabel* pName = [[UILabel alloc] init];
         pName.backgroundColor = [UIColor clearColor];
-        pName.lineBreakMode = UILineBreakModeMiddleTruncation;
-        pName.text = [NSString stringWithFormat:@"礼包%d", j + 1];
+        pName.lineBreakMode = UILineBreakModeTailTruncation;
+        pName.text = [NSString stringWithFormat:@"礼包：%@",item.name];
         pName.font = [UIFont systemFontOfSize:14];
-        pName.textColor = UIColorFromRGB(0x666666);
-        CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font} context:nil];
-        [pName setFrame:CGRectMake(xOffset, yOffset - (rcName.size.height > pName.font.pointSize ? rcName.size.height - pName.font.pointSize : 0), rcName.size.width, rcName.size.height)];
+        pName.textColor = [UIColor colorWithHexString:@"0xc8002c"];//UIColorFromRGB(0x666666);
+        NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
+        [mps setLineBreakMode:pName.lineBreakMode];
+        CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake((lee1fitAllScreen(204) - xOffset), MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font, NSParagraphStyleAttributeName : mps} context:nil];
+        [pName setFrame:CGRectMake(xOffset, yOffset - (rcName.size.height > pName.font.pointSize ? rcName.size.height - pName.font.pointSize : 0), (lee1fitAllScreen(204) - xOffset), rcName.size.height)];
         [viewSuitlistCell3 addSubview:pName];
-        
-        UILabel* number = [[UILabel alloc] initWithFrame:CGRectMake(xOffset + pName.frame.size.width + 24, pName.frame.origin.y, 200, rcName.size.height)];
-        number.backgroundColor = [UIColor clearColor];
-        number.lineBreakMode = UILineBreakModeMiddleTruncation;
-        number.text = [NSString stringWithFormat:@"数量: %d", 1];
-        number.font = [UIFont systemFontOfSize:14];
-        number.textColor = UIColorFromRGB(0x181818);
-        [viewSuitlistCell3 addSubview:number];
         
         NSString *str = @"礼包价: ";
         CGFloat strWidth = [str sizeWithFont:font].width;
@@ -892,27 +900,86 @@
         price.font = [UIFont systemFontOfSize:14];
         price.textColor = UIColorFromRGB(0x181818);/*UIColorFromRGB(0x666666)*/
         [viewSuitlistCell3 addSubview:price];
-        //xOffset += strWidth;
+        xOffset += strWidth;
         
-        UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset + strWidth, price.frame.origin.y, 90, rcName.size.height)];
+        UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, price.frame.origin.y, 90, rcName.size.height)];
         desc.backgroundColor = [UIColor clearColor];
         desc.text = [NSString stringWithFormat:@"￥%.2f", item.disountprice];
         desc.font = [UIFont systemFontOfSize:14];
         desc.textColor = UIColorFromRGB(0xc8002c);
         [viewSuitlistCell3 addSubview:desc];
-        //xOffset = lee1fitAllScreen(204);
+        xOffset = lee1fitAllScreen(204);
         
         UILabel* save = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, price.frame.origin.y, 110, rcName.size.height)];
         save.backgroundColor = [UIColor clearColor];
         save.lineBreakMode = UILineBreakModeMiddleTruncation;
         save.text = [NSString stringWithFormat:@"优惠: ￥%.2f", item.save];
         save.font = [UIFont systemFontOfSize:14];
-        save.textColor = UIColorFromRGB(0x666666);
-        [viewSuitlistCell3 addSubview:desc];
+        save.textColor = UIColorFromRGB(0x666666);//UIColorFromRGB(0x666666);
+        [viewSuitlistCell3 addSubview:save];
+        
+        NSDictionary* style1 = @{@"body":[UIFont fontWithName:@"HelveticaNeue" size:14],
+                                 @"bold":[UIFont fontWithName:@"HelveticaNeue-Bold" size:14],
+                                 @"red": [UIColor colorWithHexString:@"666666"]};
+        
+        UILabel* number = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, pName.frame.origin.y, ScreenWidth - xOffset - 12, rcName.size.height)];
+        number.backgroundColor = [UIColor clearColor];
+        number.lineBreakMode = UILineBreakModeMiddleTruncation;
+        number.attributedText = [[NSString stringWithFormat:@"<red>数量：</red>%d",1] attributedStringWithStyleBook:style1];
+        number.font = [UIFont systemFontOfSize:14];
+        [viewSuitlistCell3 addSubview:number];
         
         [array addObject:viewSuitlistCell3];
         
-        //xOffset = 28 + lee1fitAllScreen(28);
+        
+//        UILabel* pName = [[UILabel alloc] init];
+//        pName.backgroundColor = [UIColor clearColor];
+//        pName.lineBreakMode = UILineBreakModeMiddleTruncation;
+//        pName.text = [NSString stringWithFormat:@"礼包：%@", item.name];
+//        pName.font = [UIFont systemFontOfSize:14];
+//        pName.textColor = UIColorFromRGB(0xc8002c);
+//        CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font} context:nil];
+//        [pName setFrame:CGRectMake(xOffset, yOffset - (rcName.size.height > pName.font.pointSize ? rcName.size.height - pName.font.pointSize : 0), rcName.size.width, rcName.size.height)];
+//        [viewSuitlistCell3 addSubview:pName];
+//        
+//        UILabel* number = [[UILabel alloc] initWithFrame:CGRectMake(xOffset + pName.frame.size.width + 24, pName.frame.origin.y, 200, rcName.size.height)];
+//        number.backgroundColor = [UIColor clearColor];
+//        number.lineBreakMode = UILineBreakModeMiddleTruncation;
+//        number.text = [NSString stringWithFormat:@"数量: %d", 1];
+//        number.font = [UIFont systemFontOfSize:14];
+//        number.textColor = UIColorFromRGB(0x666666);
+//        [viewSuitlistCell3 addSubview:number];
+//        
+//        NSString *str = @"礼包价: ";
+//        CGFloat strWidth = [str sizeWithFont:font].width;
+//        UILabel* price = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset + 20, strWidth, rcName.size.height)];
+//        price.backgroundColor = [UIColor clearColor];
+//        price.text = str;
+//        price.font = [UIFont systemFontOfSize:14];
+//        price.textColor = UIColorFromRGB(0x181818);/*UIColorFromRGB(0x666666)*/
+//        [viewSuitlistCell3 addSubview:price];
+//        //xOffset += strWidth;
+//        
+//        UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset + strWidth, price.frame.origin.y, 90, rcName.size.height)];
+//        desc.backgroundColor = [UIColor clearColor];
+//        desc.text = [NSString stringWithFormat:@"￥%.2f", item.disountprice];
+//        desc.font = [UIFont systemFontOfSize:14];
+//        desc.textColor = UIColorFromRGB(0xc8002c);
+//        [viewSuitlistCell3 addSubview:desc];
+//        //xOffset = lee1fitAllScreen(204);
+//        
+//        UILabel* save = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, price.frame.origin.y, 110, rcName.size.height)];
+//        save.backgroundColor = [UIColor clearColor];
+//        save.lineBreakMode = UILineBreakModeMiddleTruncation;
+//        save.text = [NSString stringWithFormat:@"优惠: ￥%.2f", item.save];
+//        save.font = [UIFont systemFontOfSize:14];
+//        save.textColor = UIColorFromRGB(0x666666);
+//        [viewSuitlistCell3 addSubview:desc];
+//        
+//        [array addObject:viewSuitlistCell3];
+        
+        xOffset = 20;
+        
         for (int k = 0; k<[item.suits count]; k++) {
             static NSString	*CellIdentifier2 = @"Cell5";
             UITableViewCell *Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
@@ -1533,7 +1600,7 @@ NSLog(@"createOtherCells  come out");
                 
             }else{
                 //lee999  这个地方是普通商品的cell
-                return lee1fitAllScreen(150);
+                return 180;//lee1fitAllScreen(150);
             }
             
             

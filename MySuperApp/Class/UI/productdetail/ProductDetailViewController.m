@@ -167,7 +167,7 @@
     _detailTab=[[UITableView alloc] init];
 //    _detailTab.delegate=self;
 //    _detailTab.dataSource=self;
-    _detailTab.backgroundColor=[UIColor clearColor];
+    _detailTab.backgroundColor=[UIColor whiteColor];
     _detailTab.separatorStyle=UITableViewCellSeparatorStyleNone;
     [_detailTab setTranslatesAutoresizingMaskIntoConstraints:NO];
     _detailTab.hidden = YES;
@@ -1023,6 +1023,12 @@
             break;
         case 200 + 1://联系客服
         {
+            //lee999 增加联系客服
+            YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
+            webView.strURL = [NSString stringWithFormat:@"%@=%@",kefuUrl,self.product_id];
+            webView.strTitle = @"联系客服";
+            [self.navigationController pushViewController:webView animated:YES];
+            
             
         }
             break;

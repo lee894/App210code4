@@ -90,18 +90,36 @@
         needpayImg.hidden = YES;
         needcommkeyImg.hidden = YES;
         needHandlekeyImg.hidden = YES;
+        
+        [allbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [needpayBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+        [needcommbtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+        [needHandlebtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+        
     }else if(howEnter == 2){
         self.title = @"待处理";
         allkeyImg.hidden = YES;
         needpayImg.hidden = YES;
         needcommkeyImg.hidden = YES;
         needHandlekeyImg.hidden = NO;
+        
+        [allbtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+        [needpayBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+        [needcommbtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+        [needHandlebtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
     }else if(howEnter == 3){
         self.title = @"待评价";
         allkeyImg.hidden = YES;
         needpayImg.hidden = YES;
         needcommkeyImg.hidden = NO;
         needHandlekeyImg.hidden = YES;
+        
+        [allbtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+        [needpayBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+        [needcommbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [needHandlebtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+        
     }
     else if(howEnter == 4){
         self.title = @"待付款";
@@ -109,6 +127,11 @@
         needpayImg.hidden = NO;
         needcommkeyImg.hidden = YES;
         needHandlekeyImg.hidden = YES;
+        
+        [allbtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+        [needpayBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [needcommbtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+        [needHandlebtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
     }
     
     [SingletonState sharedStateInstance].isInCheckOKView = NO;
@@ -362,6 +385,12 @@
             needcommkeyImg.hidden = YES;
             needHandlekeyImg.hidden = YES;
             howEnter = 1;
+            
+            [allbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [needpayBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+            [needcommbtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+            [needHandlebtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+            
             [self getData];
         }
             break;
@@ -374,6 +403,12 @@
             needcommkeyImg.hidden = YES;
             needHandlekeyImg.hidden = YES;
             howEnter = 4;
+            
+            [allbtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+            [needpayBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [needcommbtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+            [needHandlebtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+            
             [self getData];
             
        
@@ -388,6 +423,12 @@
             needcommkeyImg.hidden = NO;
             needHandlekeyImg.hidden = YES;
             howEnter = 3;
+            
+            [allbtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+            [needpayBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+            [needcommbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [needHandlebtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+            
             [self getData];
         }
             break;
@@ -400,6 +441,12 @@
             needcommkeyImg.hidden = YES;
             needHandlekeyImg.hidden = NO;
             howEnter = 2;
+            
+            [allbtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+            [needpayBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+            [needcommbtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:UIControlStateNormal];
+            [needHandlebtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            
             [self getData];
         }
             break;

@@ -171,6 +171,8 @@
 //====================================================
 
 #define SPlashViewUrl @"http://mtest.aimer.com.cn:8888/method/appslogoios"
+#define kefuUrl @"www.aimer.com.cn/index/talker?gid"
+
 
 //API的host路径
 #define OFFICIALDOMAIN @"http://mobiletest.aimer.com.cn:8888/mobile/"

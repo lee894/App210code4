@@ -92,7 +92,7 @@ CGFloat InnerMargin = 4;
 
     if (theType == 1) {
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(81, 2, 28, 28)];
-        imgView.image = [UIImage imageNamed:@"icon_checked.png"];
+        imgView.image = [UIImage imageNamed:@"choice_checked.png"];
         [self addSubview:imgView];
     }
     

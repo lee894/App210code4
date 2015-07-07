@@ -26,6 +26,10 @@
     UIView* vCouponMenu;
     NSInteger nSelectedIndexInMenu;
     UIImageView* ivSelected;
+    
+    int selectIndex;
+    
+    
 }
 @property (nonatomic, retain) UIView* vToolbar;
 @property (nonatomic, retain) NSString* strType;
@@ -55,6 +59,10 @@
 //    [self.navbtnRight setTitle:@"绑定" forState:UIControlStateNormal];
 //    [self.navbtnRight setTitle:@"绑定" forState:UIControlStateHighlighted];
     
+    
+    selectIndex = 1;
+    
+    
     [self.view addSubview:self.vToolbar];
     [self.view addSubview:self.mytableView];
     [self.view addConstraints:[self viewConstraints]];
@@ -74,6 +82,14 @@
     [btnShowCouponMenu setSelected:YES];
     [btnShowCouponMenu setExclusiveTouch:NO];
     [_vToolbar addSubview:btnShowCouponMenu];
+    
+    [btnShowCouponMenu setImage:[UIImage imageNamed:@"yhq_arrow_d.png"] forState:UIControlStateNormal];
+    [btnShowCouponMenu setImage:[UIImage imageNamed:@"yhq_arrow_d.png"] forState:UIControlStateSelected];
+    [btnShowCouponMenu setImageEdgeInsets:UIEdgeInsetsMake(15, btnWidth-17, 7, 7)];
+    
+//    UIImageView *imagv = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 20, 20)];
+//    [imagv setImage:[UIImage imageNamed:@"yhq_arrow_d.png"]];
+//    [_vToolbar addSubview:imagv];
     
     ivSelected = [[UIImageView alloc] initWithFrame:CGRectMake(0, btnShowCouponMenu.frame.size.height - 1, btnShowCouponMenu.frame.size.width, 1)];
     [ivSelected setBackgroundColor:[UIColor colorWithHexString:@"#c8002c"]];
@@ -438,6 +454,21 @@
         [nametextfield setLeftView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, lee1fitAllScreen(17), nametextfield.frame.size.height)]];
         [nametextfield setLeftViewMode:UITextFieldViewModeAlways];
         
+        //lee999 150706 进行判断啊！！！
+        if ([_strType isEqualToString:@"c"] || [_strType isEqualToString:@"u"]) {
+            //优惠券
+            nametextfield.placeholder = @"请输入您的优惠券号";
+        }else if ([_strType isEqualToString:@"g"]){
+            //礼包卡
+            nametextfield.placeholder = @"请输入您的礼包卡号";
+        }else if ([_strType isEqualToString:@"f"]){
+            //包邮卡
+            nametextfield.placeholder = @"请输入您的包邮卡号";
+        }
+        
+        
+        
+        
         MyButton *but = [MyButton buttonWithType:UIButtonTypeCustom];
         [but setFrame:CGRectMake(nametextfield.frame.origin.x + nametextfield.frame.size.width + 10, 15, lee1fitAllScreen(65), lee1fitAllScreen(44))];
         [but setTitle:@"绑定" forState:UIControlStateNormal];
@@ -474,15 +505,42 @@
         [lblSep setBackgroundColor:[UIColor colorWithHexString:@"#d0d0d0"]];
         [Cell addSubview:lblSep];
         
-        UILabel* lblContent = [[UILabel alloc] initWithFrame:CGRectMake(12.5, lblSep.frame.size.height + lblSep.frame.origin.y + 15, [UIScreen mainScreen].bounds.size.width - 25, 12)];
+        UILabel* lblContent = [[UILabel alloc] initWithFrame:CGRectMake(10, lblSep.frame.size.height + lblSep.frame.origin.y + 15, ScreenWidth - 20, 15)];
         if(_contentArr.count)
         {
             [lblContent setText:@"点击优惠券可查看使用规则"];
         }else
         {
-            [lblContent setText:@"您暂无优惠券"];
+            float oldy = lblContent.frame.origin.y + lblContent.frame.size.height;
+            oldy += 20;
+            
+            UIImage *img = [UIImage imageNamed:@"yhq_icon_none.png"];
+            UIImageView *imav = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth-img.size.width)/2, oldy, img.size.width, img.size.height)];
+            [imav setImage:img];
+            [Cell addSubview:imav];
+            
+            oldy = oldy + img.size.height +30;
+            
+            [lblContent setFrame:CGRectMake(10, oldy, ScreenWidth-20, 15)];
+            [lblContent setTextAlignment:NSTextAlignmentCenter];
+            
+            //lee999 150706 进行判断啊！！！
+            if ([_strType isEqualToString:@"c"] || [_strType isEqualToString:@"u"]) {
+                //优惠券
+                [lblContent setText:@"您暂无优惠券"];
+                
+            }else if ([_strType isEqualToString:@"g"]){
+            //礼包卡
+                [lblContent setText:@"您暂无礼包卡"];
+                
+            }else if ([_strType isEqualToString:@"f"]){
+            //包邮卡
+                [lblContent setText:@"您暂无包邮卡"];
+            }
+            
         }
-        [lblContent setFont:[UIFont systemFontOfSize:12]];
+        
+        [lblContent setFont:[UIFont systemFontOfSize:LabSmallSize]];
         [lblContent setTextColor:[UIColor colorWithHexString:@"#666666"]];
         [Cell addSubview:lblContent];
         
@@ -534,13 +592,18 @@
         UIImage* iBg = nil;
         id data = [self.contentArr objectAtIndex:indexPath.row isArray:nil];
         UIButton* btnAction = [UIButton buttonWithType:UIButtonTypeCustom];
+        
         if ([data class] == [CouponInfo class]) {
             strStatus = ((CouponInfo*)data).stuatus;
             type = ((CouponInfo*)data).type;
             strTitle = ((CouponInfo*)data).title;
             strPrice = [NSString stringWithFormat:@"￥%.0f", [((CouponInfo*)data).price floatValue]];
-            strTime = [NSString stringWithFormat:@"有效期至%@", ((CouponInfo*)data).failtime];
+            
+           // strTime = [NSString stringWithFormat:@"有效期至%@", ((CouponInfo*)data).failtime];
+            //lee999 150706 要求截取 时分秒
+            strTime = [NSString stringWithFormat:@"有效期至%@", [[((CouponInfo*)data).failtime componentsSeparatedByString:@" "] firstObject]];
         }
+        
         else if ([data class] == [FreePostCardInfo class])
         {
             strStatus = ((FreePostCardInfo*)data).status;
@@ -1062,9 +1125,12 @@
 }
 
 
+#pragma mark--  显示我的优惠券
+
 -(void)showCouponMenu:(UIButton*)sender
 {
-    if(sender != selectedBtn)
+//    if(sender != selectedBtn)
+    if(selectIndex != 1)
     {
         if (ivSelected) {
             [ivSelected removeFromSuperview];
@@ -1072,6 +1138,8 @@
         ivSelected = [[UIImageView alloc] initWithFrame:CGRectMake(0, sender.frame.size.height - 1, sender.frame.size.width, 1)];
         [ivSelected setBackgroundColor:[UIColor colorWithHexString:@"#c8002c"]];
         [sender addSubview:ivSelected];
+        
+        selectIndex = 1;
         
         _strType = @"c";
         [self getData];
@@ -1115,6 +1183,7 @@
     [btnShowUnusedCoupon setExclusiveTouch:NO];
     [btnShowUnusedCoupon setBackgroundColor:[UIColor colorWithHexString:@"#ffffff"]];
     [vCouponMenu addSubview:btnShowUnusedCoupon];
+    
     
     switch (nSelectedIndexInMenu) {
         case 10001:
@@ -1160,8 +1229,14 @@
     }
 }
 
+#pragma mark--  显示我的包邮卡
+
 -(void)toFreeShippingCard:(UIButton*)sender
 {
+    
+    selectIndex = 3;
+
+    
     if (ivSelected) {
         [ivSelected removeFromSuperview];
     }
@@ -1179,8 +1254,13 @@
     [self getData];
 }
 
+#pragma mark--  显示我的电子券
+
 -(void)toGiftCard:(UIButton*)sender
 {
+    
+    selectIndex = 2;
+
     if (ivSelected) {
         [ivSelected removeFromSuperview];
     }

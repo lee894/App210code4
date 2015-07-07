@@ -14,6 +14,8 @@
 #import "YKChoseGiftViewController.h"
 #import "CheckOutViewController.h"
 #import "MyButton.h"
+#import "NSString+WPAttributedMarkup.h"
+
 
 @interface CarpageViewController () <mobideaRecProtocol>
 {
@@ -164,7 +166,7 @@
 //		[textfield resignFirstResponder];
 //	}}
 
-#pragma mark-- 去结算中心
+#pragma mark-- 去结算中心 & 删除按钮
 -(void)gotoChectViewC:(UIButton*)sender
 {
     if (sender && sender.selected) {
@@ -923,7 +925,7 @@
     [self.navbtnRight setTitle:@"" forState:UIControlStateNormal];
     [self.navbtnRight setTitle:@"" forState:UIControlStateHighlighted];
     [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_icon_edit_press.png"] forState:UIControlStateHighlighted];
-    [self.navbtnRight setFrame:CGRectMake(225, 10, 25, 25)];
+    [self.navbtnRight setFrame:CGRectMake(ScreenWidth-110, 10, 25, 25)];
     
     [self.navbtnRight addTarget:self action:@selector(editCarNumber) forControlEvents:UIControlEventTouchUpInside];
     
@@ -961,6 +963,8 @@
 //    [self.navbtnRight addTarget:self action:@selector(finishEditCar) forControlEvents:UIControlEventTouchUpInside];
 }
 
+
+#pragma mark---- 编辑按钮的Action  转为编辑状态
 -(void)editCarNumber{
     
     isEditing = YES;
@@ -971,14 +975,13 @@
         [btnCheckOut setSelected:YES];
     }
     
-    [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_btn.png"] forState:UIControlStateNormal];
     [self.navbtnRight setTitle:@"完成" forState:UIControlStateNormal];
     [self.navbtnRight setTitle:@"完成" forState:UIControlStateHighlighted];
-    [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_btn_press.png"] forState:UIControlStateHighlighted];
-    [self.navbtnRight setFrame:CGRectMake(242, 7, 66, 32)];
+    [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateHighlighted];
+    [self.navbtnRight setFrame:CGRectMake(ScreenWidth- 80, 7, 66, 32)];
     
     [self.navbtnRight addTarget:self action:@selector(finishEditCar) forControlEvents:UIControlEventTouchUpInside];
-    
     
     //lee999 150503 修改输入框
 //    for (UITableViewCell *tbvc in self.tableCells) {
@@ -1064,6 +1067,8 @@
 //	}
 }
 
+
+#pragma mark---- 完成按钮的Action  转为编辑完状态
 -(void)finishEditCar{
     
 //    sku :   货品ID:数量:类型(product、gift)|货品ID:数量:类型(product、gift)  如果是赠品：11052064707566:1:gift:549 549为赠品活动的id
@@ -1077,13 +1082,12 @@
     [self.navbtnRight setTitle:@"" forState:UIControlStateNormal];
     [self.navbtnRight setTitle:@"" forState:UIControlStateHighlighted];
     [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_icon_edit_press.png"] forState:UIControlStateHighlighted];
-    [self.navbtnRight setFrame:CGRectMake(225, 10, 25, 25)];
+    [self.navbtnRight setFrame:CGRectMake(ScreenWidth-110, 10, 25, 25)];
     
     [self.navbtnRight addTarget:self action:@selector(editCarNumber) forControlEvents:UIControlEventTouchUpInside];
     
     
     //    [shoppingCarTab reloadData];
-
     
     //清除掉框框
     for (int i=0; i<[textproductNumArray count]; i++) {
@@ -1301,8 +1305,8 @@
         UIButton* btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
         [btnCheckBox setFrame:CGRectMake(6, 36, lee1fitAllScreen(22) + 16, lee1fitAllScreen(22) + 16)];
         [btnCheckBox setImageEdgeInsets:UIEdgeInsetsMake(-8, -8, -8, -8)];
-        [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
-        [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
+        [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked.png"] forState:UIControlStateNormal];
+        [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked.png"] forState:UIControlStateSelected];
         [btnCheckBox addTarget:self action:@selector(productCheckBoxAction:) forControlEvents:UIControlEventTouchUpInside];
         btnCheckBox.selected = item.selected;
         [shoppingCarCell addSubview:btnCheckBox];
@@ -1339,7 +1343,7 @@
 			shoppingName.numberOfLines = 0;
 			shoppingName.lineBreakMode = UILineBreakModeWordWrap;
 			shoppingName.text = [NSString stringWithFormat:@"              %@",item.name];
-			shoppingName.font = [UIFont systemFontOfSize:13];
+			shoppingName.font = [UIFont systemFontOfSize:14];
 			shoppingName.textColor = [UIColor blackColor];
 			[shoppingCarCell addSubview:shoppingName];
             
@@ -1392,6 +1396,7 @@
             //}else {
               //  numberName.frame=CGRectMake(isEditing?198:213, yOffset, 110, 20);
             //}
+
             numberName.frame=CGRectMake(xOffset + fTextWidth / 2, colorName.frame.origin.y, 110, 13);
             numberName.backgroundColor = [UIColor clearColor];
             numberName.text = @"数量：";
@@ -1427,7 +1432,7 @@
             sizeName.backgroundColor = [UIColor clearColor];
             sizeName.text = [NSString stringWithFormat:@"尺码：%@",item.size];
             sizeName.font = [UIFont systemFontOfSize:13];
-            sizeName.textColor = UIColorFromRGB(0x3b3b3b);
+            sizeName.textColor = UIColorFromRGB(0x666666);
             [shoppingCarCell addSubview:sizeName];
             
 //            int xOffset = 110;
@@ -1610,7 +1615,7 @@
         pName.lineBreakMode = UILineBreakModeTailTruncation;
         pName.text = item.name;
         pName.font = [UIFont systemFontOfSize:14];
-        pName.textColor = UIColorFromRGB(0x666666);
+        pName.textColor = [UIColor blackColor];//UIColorFromRGB(0x666666);
         NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
         [mps setLineBreakMode:pName.lineBreakMode];
         CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake((lee1fitAllScreen(204) - xOffset), MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font, NSParagraphStyleAttributeName : mps} context:nil];
@@ -1664,12 +1669,18 @@
         desc.textColor = UIColorFromRGB(0x666666);
         [viewSuitlistCell3 addSubview:desc];
         
+        
+        NSDictionary* style1 = @{@"body":[UIFont fontWithName:@"HelveticaNeue" size:14],
+                                 @"bold":[UIFont fontWithName:@"HelveticaNeue-Bold" size:14],
+                                 @"red": [UIColor colorWithHexString:@"666666"]};
+
+        
         desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, pName.frame.origin.y, ScreenWidth - xOffset - 12, rcName.size.height)];
         desc.backgroundColor = [UIColor clearColor];
         desc.lineBreakMode = UILineBreakModeMiddleTruncation;
-        desc.text = [NSString stringWithFormat:@"数量: %d", item.number];
+        desc.attributedText = [[NSString stringWithFormat:@"<red>数量：</red>%d",item.number] attributedStringWithStyleBook:style1];
+//        desc.text = [NSString stringWithFormat:@"数量: %d", item.number];
         desc.font = [UIFont systemFontOfSize:14];
-        desc.textColor = UIColorFromRGB(0x181818);
         [viewSuitlistCell3 addSubview:desc];
         
         [array addObject:viewSuitlistCell3];
@@ -1826,7 +1837,7 @@
         pName.lineBreakMode = UILineBreakModeTailTruncation;
         pName.text = item.name;
         pName.font = [UIFont systemFontOfSize:14];
-        pName.textColor = UIColorFromRGB(0x666666);
+        pName.textColor = [UIColor blackColor];//UIColorFromRGB(0x666666);
         NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
         [mps setLineBreakMode:pName.lineBreakMode];
         CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake((lee1fitAllScreen(204) - xOffset), MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font, NSParagraphStyleAttributeName : mps} context:nil];
@@ -1856,15 +1867,21 @@
         save.lineBreakMode = UILineBreakModeMiddleTruncation;
         save.text = [NSString stringWithFormat:@"优惠: ￥%.2f", item.save];
         save.font = [UIFont systemFontOfSize:14];
-        save.textColor = UIColorFromRGB(0x666666);
+        save.textColor = UIColorFromRGB(0x666666);//UIColorFromRGB(0x666666);
         [viewSuitlistCell3 addSubview:save];
         
+        NSDictionary* style1 = @{@"body":[UIFont fontWithName:@"HelveticaNeue" size:14],
+                                 @"bold":[UIFont fontWithName:@"HelveticaNeue-Bold" size:14],
+                                 @"red": [UIColor colorWithHexString:@"666666"]};
+
         UILabel* number = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, pName.frame.origin.y, ScreenWidth - xOffset - 12, rcName.size.height)];
         number.backgroundColor = [UIColor clearColor];
         number.lineBreakMode = UILineBreakModeMiddleTruncation;
-        number.text = [NSString stringWithFormat:@"数量: %d", 1];
+        number.attributedText = [[NSString stringWithFormat:@"<red>数量：</red>%d",1] attributedStringWithStyleBook:style1];
+
+//        number.attributedText = [[NSString stringWithFormat:@"数量：<black>%d</black>",1]attributedStringWithStyleBook:style1];//[NSString stringWithFormat:@"数量: %d", 1];
         number.font = [UIFont systemFontOfSize:14];
-        number.textColor = UIColorFromRGB(0x181818);
+//        number.textColor = UIColorFromRGB(0x181818);
         [viewSuitlistCell3 addSubview:number];
         
         [array addObject:viewSuitlistCell3];
@@ -2019,6 +2036,8 @@
     }
 }
 
+
+#pragma mark--- 购物车  勾选按钮
 -(void)productCheckBoxAction:(UIButton*)sender
 {
     UITableViewCell* cell = nil;

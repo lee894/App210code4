@@ -15,6 +15,7 @@
 {
     UIButton* btnSave;
     UIButton* btnUse;
+    UIView *mgvB;  //背景图
 }
 @property (nonatomic, retain) QrcodeView *qrcodeV;
 @end
@@ -120,7 +121,11 @@
     {
         lblTitle.text = fpci.desc;
 //        lblTitle.text = [NSString stringWithFormat:@"%@共计%@次", fpci.name, fpci.total_times];
-        lblTime.text = [NSString stringWithFormat:@"有效期至%@", [[fpci.end_time componentsSeparatedByString:@" "] firstObject]];
+//        lblTime.text = [NSString stringWithFormat:@"有效期至%@", [[fpci.end_time componentsSeparatedByString:@" "] firstObject]];
+        
+        
+        //lee999 150706 显示到时分秒
+        lblTime.text = [NSString stringWithFormat:@"有效期至%@", fpci.end_time];
     }
     
     UILabel* lblSep = [[UILabel alloc] initWithFrame:CGRectMake(12, 85 + vWhite.frame.size.height, SCREEN_WIDTH - 24, 0.5)];
@@ -224,6 +229,18 @@
 
 -(void)showQR:(UIButton*)sender
 {
+    if (!mgvB) {
+        mgvB = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
+    }else{
+        mgvB.hidden = NO;
+    }
+    
+    [mgvB setBackgroundColor:[UIColor blackColor]];
+    [mgvB setAlpha:0.7];
+    self.view.userInteractionEnabled = NO;
+    [self.view addSubview:mgvB];
+    
+    
     AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     //创建二维码界面~~
     _qrcodeV = [[[NSBundle mainBundle] loadNibNamed:@"QrcodeView" owner:self options:nil] lastObject];
@@ -267,6 +284,8 @@
     }
     else
     {
+        [self.navigationController popToRootViewControllerAnimated:NO];
+        
         [self changetableBarto:0];
     }
 }
@@ -274,6 +293,11 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [_qrcodeV removeFromSuperview];
+    self.view.userInteractionEnabled = YES;
+    if (mgvB) {
+        [mgvB removeFromSuperview];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -284,6 +308,11 @@
 -(void)hiddenView
 {
     _qrcodeV.hidden = YES;
+    
+    if (mgvB)
+    mgvB.hidden = YES;
+    self.view.userInteractionEnabled = YES;
+
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView

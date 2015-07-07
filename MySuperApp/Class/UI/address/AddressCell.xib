@@ -39,8 +39,8 @@
                         <rect key="frame" x="286" y="51" width="7" height="11"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="icon_checked.png" id="16">
-                        <rect key="frame" x="278" y="39" width="28" height="28"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="choice_checked.png" id="16">
+                        <rect key="frame" x="283" y="39" width="25" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                     <view hidden="YES" contentMode="scaleToFill" id="J6f-11-yst">
@@ -57,12 +57,12 @@
                 <outlet property="labelPhone" destination="6" id="15"/>
                 <outlet property="lineView" destination="J6f-11-yst" id="1vF-uV-Q2W"/>
             </connections>
-            <point key="canvasLocation" x="-761" y="-166"/>
+            <point key="canvasLocation" x="-978" y="-150"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="arrow.png" width="14" height="22"/>
-        <image name="icon_checked.png" width="56" height="56"/>
+        <image name="choice_checked.png" width="22" height="22"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

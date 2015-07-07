@@ -50,11 +50,12 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zlq-sJ-b5b">
                             <rect key="frame" x="34" y="328" width="90" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="关闭" backgroundImage="app5_r5_c3_0.png">
+                            <color key="backgroundColor" red="0.99215686274509807" green="0.61176470588235299" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" title="关闭">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="highlighted" title="关闭" backgroundImage="app5_r5_c3_0.png"/>
+                            <state key="highlighted" title="关闭"/>
                             <connections>
                                 <action selector="btnqrcodeclose:" destination="iN0-l3-epB" eventType="touchUpInside" id="Yey-zS-7Yf"/>
                             </connections>
@@ -62,11 +63,12 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="CKc-Yx-aco">
                             <rect key="frame" x="210" y="328" width="90" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="保存" backgroundImage="app5_r5_c3_0.png">
+                            <color key="backgroundColor" red="0.99215686270000003" green="0.61176470589999998" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" title="保存">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
-                            <state key="highlighted" title="保存" backgroundImage="app5_r5_c3_0.png"/>
+                            <state key="highlighted" title="保存"/>
                             <connections>
                                 <action selector="btnqrcodesave:" destination="iN0-l3-epB" eventType="touchUpInside" id="vve-fN-hmt"/>
                             </connections>
@@ -85,11 +87,9 @@
                 <outlet property="qrcodetime" destination="EIB-w6-imC" id="eDH-Cn-v1W"/>
                 <outlet property="qrcodetitle" destination="IU1-HD-hKI" id="2Ue-aF-Exd"/>
             </connections>
+            <point key="canvasLocation" x="193" y="320"/>
         </view>
     </objects>
-    <resources>
-        <image name="app5_r5_c3_0.png" width="182" height="60"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

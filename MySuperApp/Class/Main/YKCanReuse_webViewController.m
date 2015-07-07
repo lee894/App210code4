@@ -152,6 +152,11 @@
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     
+    NSURL *requestUrl = request.URL;
+    NSString *urlString = requestUrl.absoluteString;
+    NSLog(@"----------html URL:%@", urlString);
+
+    
 //    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 
     return YES;
@@ -163,6 +168,9 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [SBPublicAlert hideMBprogressHUD:self.view];
+    
+    
+    
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{

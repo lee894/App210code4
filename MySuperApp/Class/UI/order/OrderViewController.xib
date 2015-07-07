@@ -122,20 +122,24 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="orderlistline.jpg" id="qqT-H3-koS">
-                            <rect key="frame" x="3" y="33" width="76" height="7"/>
+                            <rect key="frame" x="3" y="35" width="76" height="2"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
+                            <color key="backgroundColor" red="0.78431372549019607" green="0.0" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="orderlistline.jpg" id="azR-yM-RvV">
-                            <rect key="frame" x="163" y="33" width="76" height="7"/>
+                            <rect key="frame" x="163" y="35" width="76" height="2"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
+                            <color key="backgroundColor" red="0.7843137255" green="0.0" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="orderlistline.jpg" id="0xj-hP-WMY">
-                            <rect key="frame" x="83" y="33" width="76" height="7"/>
+                            <rect key="frame" x="83" y="35" width="76" height="2"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
+                            <color key="backgroundColor" red="0.7843137255" green="0.0" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="orderlistline.jpg" id="gMG-OS-ITt">
-                            <rect key="frame" x="244" y="33" width="76" height="7"/>
+                            <rect key="frame" x="243" y="35" width="76" height="2"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
+                            <color key="backgroundColor" red="0.7843137255" green="0.0" blue="0.17254901959999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </imageView>
                         <view contentMode="scaleToFill" id="fPW-nT-tVs">
                             <rect key="frame" x="80" y="8" width="1" height="26"/>
