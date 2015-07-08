@@ -300,7 +300,7 @@
         [cell setBackgroundColor:[UIColor clearColor]];
         
         UIImageView* ivBg = [[UIImageView alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - (lee1fitAllScreen(295))) / 2, 0, lee1fitAllScreen(295), lee1fitAllScreen(76))];
-        [cell.contentView addSubview:ivBg];
+        [cell addSubview:ivBg];
         
         UILabel* lblPrice = [[UILabel alloc] initWithFrame:CGRectMake(0, (lee1fitAllScreen(76) - 18) / 2, lee1fitAllScreen(72), 18)];
         [lblPrice setTextAlignment:NSTextAlignmentCenter];
@@ -379,6 +379,9 @@
             {
                 iBg = [UIImage imageNamed:@"laber_lpk"];
                 [btnAction setTitleColor:[UIColor colorWithHexString:@"#ff6767"] forState:UIControlStateNormal];
+            }else{
+                iBg = [UIImage imageNamed:@"laber_byk"];
+                [btnAction setTitleColor:[UIColor colorWithHexString:@"#fd4081"] forState:UIControlStateNormal];
             }
             [btnAction addTarget:self action:@selector(toHome:) forControlEvents:UIControlEventTouchUpInside];
             [btnAction setTitle:@"使用" forState:UIControlStateNormal];
