@@ -154,7 +154,7 @@
     
     NSURL *requestUrl = request.URL;
     NSString *urlString = requestUrl.absoluteString;
-    NSLog(@"----------html URL:%@", urlString);
+    NSLog(@"html URL:----------%@", urlString);
 
     
 //    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];

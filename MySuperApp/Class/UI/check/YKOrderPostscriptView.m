@@ -57,9 +57,14 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-	if (range.location >=50) {
+    
+    
+    NSInteger number = [textView.text length];
+
+	if (number >=50) {
+        [SBPublicAlert showMBProgressHUD:@"您最多可以输入50个字" andWhereView:self.view hiddenTime:AlertShowTime];
 		return NO;
-	}
+    }
 	return YES;
 }
 

@@ -102,6 +102,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+//    if ([noticeModel.notice count]>0)
+//    {
+//        tableView.separatorStyle=UITableViewCellSeparatorStyleSingleLine;
+//    }
+    
     return noticeModel.notice.count;
 }
 
@@ -142,6 +147,22 @@
 
 
     [cell addSubview:label3];
+    
+    
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
+//    NSString *content = a.content;
+//    SHLUILabel *namelab = [[SHLUILabel alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth-30, 20)];
+//    namelab.text = content;
+//    namelab.font = [UIFont systemFontOfSize:LabSmallSize];
+//    namelab.lineBreakMode = NSLineBreakByWordWrapping;
+//    namelab.numberOfLines = 0;
+//    int contentHight = [namelab getAttributedStringHeightWidthValue:ScreenWidth-30]  + 70;
+    UIView *splineV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+    [splineV setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+    [cell addSubview:splineV];
+    
+    
     return cell;
 }
 

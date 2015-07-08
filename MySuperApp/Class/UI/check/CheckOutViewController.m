@@ -575,7 +575,7 @@
         pName.lineBreakMode = UILineBreakModeTailTruncation;
         pName.text = [NSString stringWithFormat:@"套装：%@",item.name];
         pName.font = [UIFont systemFontOfSize:14];
-        pName.textColor = UIColorFromRGB(0xc8002c);//[UIColor blackColor];//UIColorFromRGB(0x666666);
+        pName.textColor = [UIColor blackColor];//UIColorFromRGB(0xc8002c);//;//UIColorFromRGB(0x666666);
         NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
         [mps setLineBreakMode:pName.lineBreakMode];
         CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake((lee1fitAllScreen(204) - xOffset), MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font, NSParagraphStyleAttributeName : mps} context:nil];
@@ -603,7 +603,7 @@
         desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, desc.frame.origin.y, 110, height)];
         desc.backgroundColor = [UIColor clearColor];
         desc.lineBreakMode = UILineBreakModeMiddleTruncation;
-        desc.text = [NSString stringWithFormat:@"优惠: ￥%.2f", item.save];
+        desc.text = [NSString stringWithFormat:@"积分: %d", item.suit_score];
         desc.font = [UIFont systemFontOfSize:14];
         desc.textColor = UIColorFromRGB(0x666666);
         [viewSuitlistCell3 addSubview:desc];
@@ -648,7 +648,7 @@
             //shoppingImg.backgroundColor = [UIColor clearColor];
             [Cell addSubview:shoppingImg];
             
-            CGFloat fTextWidth = ScreenWidth - shoppingImg.frame.size.width - xOffset - 12 - 16;
+            CGFloat fTextWidth = ScreenWidth - shoppingImg.frame.size.width - xOffset - 12;
             
             int yOffset = 6;
             if (!showStock) {
@@ -885,7 +885,7 @@
         pName.lineBreakMode = UILineBreakModeTailTruncation;
         pName.text = [NSString stringWithFormat:@"礼包：%@",item.name];
         pName.font = [UIFont systemFontOfSize:14];
-        pName.textColor = [UIColor colorWithHexString:@"0xc8002c"];//UIColorFromRGB(0x666666);
+        pName.textColor = [UIColor blackColor];//[UIColor colorWithHexString:@"0xc8002c"];//UIColorFromRGB(0x666666);
         NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
         [mps setLineBreakMode:pName.lineBreakMode];
         CGRect rcName = [pName.text boundingRectWithSize:CGSizeMake((lee1fitAllScreen(204) - xOffset), MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : pName.font, NSParagraphStyleAttributeName : mps} context:nil];
@@ -913,7 +913,7 @@
         UILabel* save = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, price.frame.origin.y, 110, rcName.size.height)];
         save.backgroundColor = [UIColor clearColor];
         save.lineBreakMode = UILineBreakModeMiddleTruncation;
-        save.text = [NSString stringWithFormat:@"优惠: ￥%.2f", item.save];
+        save.text = [NSString stringWithFormat:@"积分: %d", item.suit_score];
         save.font = [UIFont systemFontOfSize:14];
         save.textColor = UIColorFromRGB(0x666666);//UIColorFromRGB(0x666666);
         [viewSuitlistCell3 addSubview:save];
@@ -1084,13 +1084,13 @@
 			if (self.addressItem_ben != nil)
             {
 				self.straddressID = self.addressItem_ben.addresslistIdentifier;
-				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(20, 5,ScreenWidth-40, 30)];
+				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5,ScreenWidth-40, 30)];
 				name.backgroundColor = [UIColor clearColor];
 				name.font = [UIFont systemFontOfSize:LabMidSize];
 				name.text = self.addressItem_ben.userName;
 				[Cell addSubview:name];
 
-				UILabel* address2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, ScreenWidth-60, 35)];
+				UILabel* address2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 40, ScreenWidth-60, 35)];
 				address2.backgroundColor = [UIColor clearColor];
 				address2.font = [UIFont systemFontOfSize:14];
 				NSString* addresss1 = [NSString stringWithFormat:@"地址：%@%@%@%@",self.addressItem_ben.province,self.addressItem_ben.city,self.addressItem_ben.county,self.addressItem_ben.address];
@@ -1102,7 +1102,7 @@
 				address2.textColor = [UIColor colorWithHexString:@"0x666666"];;
 				[Cell addSubview:address2];
 
-				UILabel* phone = [[UILabel alloc] initWithFrame:CGRectMake(20, 75, lee1fitAllScreen(280), 25)];
+				UILabel* phone = [[UILabel alloc] initWithFrame:CGRectMake(10, 75, lee1fitAllScreen(280), 25)];
 				phone.backgroundColor = [UIColor clearColor];
 				phone.font = [UIFont systemFontOfSize:14];
 				phone.textColor = [UIColor colorWithHexString:@"0x666666"];;
@@ -1127,14 +1127,14 @@
 				self.straddressID = addressItem.addressId;
                 self.province = addressItem.province;
                 
-				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, ScreenWidth-40, 30)];
+				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, ScreenWidth-40, 30)];
 				name.backgroundColor = [UIColor clearColor];
 				name.font = [UIFont systemFontOfSize:LabMidSize];
 				name.text = addressItem.user_name;
 				[Cell addSubview:name];
 
 				
-				UILabel* address2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 40, ScreenWidth-40, 35)];
+				UILabel* address2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 40, ScreenWidth-60, 35)];
 				address2.backgroundColor = [UIColor clearColor];
 				address2.font = [UIFont systemFontOfSize:14];
 				NSString* addresss1 = [NSString stringWithFormat:@"地址：%@%@%@%@",addressItem.province,addressItem.city,addressItem.county,addressItem.address];
@@ -1145,7 +1145,7 @@
 				[Cell addSubview:address2];
 
 				
-				UILabel* phone = [[UILabel alloc] initWithFrame:CGRectMake(20, 75, 280, 25)];
+				UILabel* phone = [[UILabel alloc] initWithFrame:CGRectMake(10, 75, 280, 25)];
 				phone.backgroundColor = [UIColor clearColor];
 				phone.font = [UIFont systemFontOfSize:14];
 				phone.textColor = [UIColor colorWithHexString:@"0x666666"];;
@@ -1205,9 +1205,7 @@
                     name.font = [UIFont systemFontOfSize:LabMidSize];
                 }
 			}
-        
 			Cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            
 		}
         else if (i == 2) { //新增付款方式选择
             
@@ -1708,6 +1706,9 @@ NSLog(@"createOtherCells  come out");
         page_paymethod.m_pay_id = self.str_pay_Way;
         [page_paymethod initPayMethod:mycheckOutModel.checkoutPaywayNew];
         
+        if ([self.usefreepostcardId description].length > 0) {
+            page_paymethod.isSelectFreePostCard = YES;
+        }
         [self.navigationController pushViewController:page_paymethod animated:YES];
     }
     

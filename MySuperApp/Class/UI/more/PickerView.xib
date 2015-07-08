@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FeedBackViewController">
@@ -25,23 +25,24 @@
                         <outlet property="delegate" destination="-1" id="15"/>
                     </connections>
                 </pickerView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="chose_bg_kong.png" id="3">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="3">
                     <rect key="frame" x="0.0" y="44" width="320" height="221"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="chose_top_bg.png" id="10">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="10">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.28627450980000002" green="0.28627450980000002" blue="0.28627450980000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </imageView>
                 <button opaque="NO" tag="201" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="12">
                     <rect key="frame" x="10" y="7" width="60" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" title="取消" backgroundImage="chose_no_btn.png">
+                    <state key="normal" title="取消">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" title="取消" backgroundImage="chose_no_btn_press.png">
+                    <state key="highlighted" title="取消">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -52,18 +53,18 @@
                     <rect key="frame" x="251" y="7" width="60" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" title="确认" backgroundImage="chose_yes_btn.png">
+                    <state key="normal" title="确认">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" title="确认" backgroundImage="chose_yes_btn_press.png">
+                    <state key="highlighted" title="确认">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="confirmOrCancel:" destination="-1" eventType="touchUpInside" id="18"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="chose_list_bg.png" id="13">
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="chose_list_bg.png" id="13">
                     <rect key="frame" x="32" y="129" width="257" height="48"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -74,13 +75,7 @@
         </view>
     </objects>
     <resources>
-        <image name="chose_bg_kong.png" width="640" height="442"/>
         <image name="chose_list_bg.png" width="514" height="96"/>
-        <image name="chose_no_btn.png" width="120" height="60"/>
-        <image name="chose_no_btn_press.png" width="120" height="60"/>
-        <image name="chose_top_bg.png" width="640" height="88"/>
-        <image name="chose_yes_btn.png" width="120" height="60"/>
-        <image name="chose_yes_btn_press.png" width="120" height="60"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

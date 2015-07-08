@@ -117,8 +117,8 @@
     UIButton* btnToGiftCard = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnToGiftCard setFrame:CGRectMake(btnToFreeShippingCard.frame.size.width + btnToFreeShippingCard.frame.origin.x + 2, 0, btnWidth, lee1fitAllScreen(35))];
     [btnToGiftCard addTarget:self action:@selector(toGiftCard:) forControlEvents:UIControlEventTouchUpInside];
-    [btnToGiftCard setTitle:@"礼包卡" forState:UIControlStateNormal];
-    [btnToGiftCard setTitle:@"礼包卡" forState:UIControlStateSelected];
+    [btnToGiftCard setTitle:@"礼品卡" forState:UIControlStateNormal];
+    [btnToGiftCard setTitle:@"礼品卡" forState:UIControlStateSelected];
     [btnToGiftCard setTitleColor:[UIColor colorWithHexString:@"#6c6c6c"] forState:UIControlStateNormal];
     [btnToGiftCard setTitleColor:[UIColor colorWithHexString:@"#181818"] forState:UIControlStateSelected];
     [btnToGiftCard setExclusiveTouch:NO];
@@ -476,8 +476,8 @@
             //优惠券
             nametextfield.placeholder = @"请输入您的优惠券号";
         }else if ([_strType isEqualToString:@"g"]){
-            //礼包卡
-            nametextfield.placeholder = @"请输入您的礼包卡号";
+            //礼品卡
+            nametextfield.placeholder = @"请输入您的礼品卡号";
         }else if ([_strType isEqualToString:@"f"]){
             //包邮卡
             nametextfield.placeholder = @"请输入您的包邮卡号";
@@ -547,8 +547,8 @@
                 [lblContent setText:@"您暂无优惠券"];
                 
             }else if ([_strType isEqualToString:@"g"]){
-            //礼包卡
-                [lblContent setText:@"您暂无礼包卡"];
+            //礼品卡
+                [lblContent setText:@"您暂无礼品卡"];
                 
             }else if ([_strType isEqualToString:@"f"]){
             //包邮卡

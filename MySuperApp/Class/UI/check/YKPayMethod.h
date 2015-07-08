@@ -21,6 +21,8 @@
 @property (nonatomic, retain) NSMutableArray * m_payMethod;
 
 
+@property (nonatomic, assign)BOOL isSelectFreePostCard; //是否选择了包邮卡
+
 @property(nonatomic, retain) NSString *m_pay_id;
 
 - (void)initPayMethod:(NSMutableArray*)data;

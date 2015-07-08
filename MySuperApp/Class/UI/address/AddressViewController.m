@@ -213,8 +213,11 @@
         addressCell = [[[NSBundle mainBundle] loadNibNamed:@"AddressCell" owner:self options:nil] lastObject];
     }
     
-    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 
+    UIView *splineV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+    [splineV setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+    [addressCell addSubview:splineV];
+    
     
     AddressAddresslist *addressList = [addresslistModel.addresslist objectAtIndex:indexPath.row];
     
@@ -222,7 +225,7 @@
         addressCell.imageCheck.hidden = NO;
         
         CGRect oldf = addressCell.imageCheck.frame;
-        oldf.origin.x = ScreenWidth-50;
+        oldf.origin.x = ScreenWidth-40;
         [addressCell.imageCheck setFrame:oldf];
         
     }else {

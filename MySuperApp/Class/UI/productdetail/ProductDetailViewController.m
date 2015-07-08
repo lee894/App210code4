@@ -618,7 +618,7 @@
                     }
 
                     //                    NSLog(@"_++++++++++++++++++++++++++++++++++++++++++++++%d",leftNUM);
-                    _buttonView_height= 11+130*([productModel.recommendlist count]/3+([productModel.recommendlist count]%3==0?0:1)) + 20;
+                    _buttonView_height= 11+130*([productModel.recommendlist count]/3+([productModel.recommendlist count]%3==0?0:1)) + 10;
                     _buttonView_height = lee1fitAllScreen(_buttonView_height);
                     self.selectedSize=nil;
                     [self loadScrollSubViews];
@@ -1028,7 +1028,7 @@
         {
             //lee999 增加联系客服
             YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
-            webView.strURL = [NSString stringWithFormat:@"%@=%@",kefuUrl,self.product_id];
+            webView.strURL = [NSString stringWithFormat:@"%@?gid=%@",kefuUrl,self.product_id];
             webView.strTitle = @"联系客服";
             [self.navigationController pushViewController:webView animated:YES];
             
@@ -1421,6 +1421,7 @@
                     }
                         break;
                     case 1://商品编号
+                    {
                         if ([productModel.arr_desc count] < 3) {
                             [cellWith0Lab setFrame:CGRectMake(20,10+24+37, 180, 24)];
                         } else {
@@ -1431,8 +1432,16 @@
                         }
                         cellWith0Lab.font=[UIFont systemFontOfSize:12];
                         cellWith0Lab.textColor=[UIColor colorWithHexString:@"#666666"];
+                        
+                        //lee999 150708 添加分割线
+                        UIView *splineV = [[UIView alloc] initWithFrame:CGRectMake(0, cellWith0Lab.frame.origin.y -4, ScreenWidth, 0.5)];
+                        [splineV setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+                        [cell addSubview:splineV];
+                        //end
+                    }
                         break;
                     case 2://品牌
+                    {
                         if ([productModel.arr_desc count] < 3) {
                             [cellWith0Lab setFrame:CGRectMake((ScreenWidth / 2) + 20, 10+24+37, 180, 24)];
                         } else {
@@ -1443,6 +1452,7 @@
                         }
                         cellWith0Lab.font=[UIFont systemFontOfSize:12];
                         cellWith0Lab.textColor=[UIColor colorWithHexString:@"#666666"];
+                    }
                         break;
                     case 3://
                         [cellWith0Lab setFrame:CELL_WITH_0_LAB_FRAME_4];
@@ -1477,7 +1487,7 @@
             imageview_split.frame=CGRectMake(0,2, ScreenWidth, 2);
             [cell.contentView addSubview:imageview_split];
 
-            
+            //售价
             UILabel *aimer_price=[[UILabel alloc]init];
             [aimer_price setFrame:CELL_WITH_0_LAB_FRAME_PRICE];
             [aimer_price setText:[NSString stringWithFormat:@"%@  : ￥%@",productModel.price_aimer_label,productModel.price_aimer]];//, [[simple SimplePrice1] NVValue]]];
@@ -1486,6 +1496,7 @@
             aimer_price.backgroundColor=[UIColor clearColor];
             [cell.contentView addSubview:aimer_price];
             
+            //原价
             UILabel *aimer_price_label=[[UILabel alloc]init];
             [aimer_price_label setFrame:CELL_WITH_0_LAB_FRAME_PRICE_MARKET];
             [aimer_price_label setText:[NSString stringWithFormat:@"%@  :",productModel.price_market_label]];//, [[simple SimplePrice1] NVValue]]];
@@ -1512,6 +1523,7 @@
         }
             break;
         case 1:{
+            
             //下拉列表选择颜色按钮
             self.buttonForSelect=[UrlImageButton buttonWithType:UIButtonTypeCustom];
             [self.buttonForSelect setFrame:CGRectMake(62, 10, 79, 31)];
@@ -1523,6 +1535,13 @@
             [self.buttonForSelect addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
             self.buttonForSelect.tag=COLORBUTTON;
             [cell.contentView addSubview:self.buttonForSelect];
+            
+            
+            //lee999 150708 添加分割线
+            UIView *splineV = [[UIView alloc] initWithFrame:CGRectMake(0, self.buttonForSelect.frame.origin.y -8, ScreenWidth, 0.5)];
+            [splineV setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+            [cell addSubview:splineV];
+            //end
             
             //===
             //by:kaisuki 添加标签到颜色按钮上去
@@ -1630,7 +1649,10 @@
             buttonForNum.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
             buttonForNum.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
             
-            buttonForNum.textColor=[UIColor blackColor];
+//            buttonForNum.textColor=[UIColor blackColor];
+            //lee999 0708 修改文字颜色为灰色  数量上的文字
+            buttonForNum.textColor=[UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1.0];
+
             buttonForNum.keyboardType=UIKeyboardTypeNumberPad;
             buttonForNum.backgroundColor=[UIColor clearColor];
             buttonForNum.returnKeyType=UIReturnKeyDone;
@@ -1759,18 +1781,18 @@
 
             UILabel *label_recommend = [[UILabel alloc]initWithFrame:CGRectMake(0, 0+10, ScreenWidth, 28)];
             label_recommend.textAlignment = UITextAlignmentCenter;
-            label_recommend.textColor = [UIColor blackColor];
+            label_recommend.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1.0];
             label_recommend.text = @"同系列产品推荐";
-            label_recommend.font = [UIFont systemFontOfSize:12];
+            label_recommend.font = [UIFont systemFontOfSize:LabSmallSize];
             label_recommend.backgroundColor = [UIColor clearColor];
             [cell.contentView addSubview:label_recommend];
          }
             break;
         case 5: {
-            int height=11;
+            int height= 1;
             for (int i=0; i<[productModel.recommendlist count]/3+1; i++) {
                 for (int j=0; j<3&&i*3+j<[productModel.recommendlist count]; j++) {
-                    UIView *view_button=[[UIView alloc]initWithFrame:CGRectMake(j*lee1fitAllScreen(104), height+i* lee1fitAllScreen(124), lee1fitAllScreen(112), lee1fitAllScreen(124))];
+                    UIView *view_button=[[UIView alloc]initWithFrame:CGRectMake(j*lee1fitAllScreen(104), height+i* lee1fitAllScreen(114), lee1fitAllScreen(112), lee1fitAllScreen(124))];
                     
                     UIButton *control = [[UIButton alloc] initWithFrame:CGRectMake(10, 9, lee1fitAllScreen(91), lee1fitAllScreen(111))];
                     control.tag =i*3+j ;
@@ -1907,11 +1929,12 @@
                 if ([productModel.recommendlist count]==0) {
                     return 0;
                 }else{
-                    return 35;
+                    return 15;
                 }
             case 5:
                 if ([productModel.recommendlist count]==0) {
-                    return 20;
+                    //同系列产品推荐
+                    return 10;
                 }else{
                     return self.buttonView_height;
                 }
@@ -1973,27 +1996,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"avoidReload" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"cancelConnection" object:nil];
 }
-
-
-//iOS 5
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-	return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
-}
-//iOS 6
-- (BOOL)shouldAutorotate
-{
-	return NO;
-}
-- (NSUInteger)supportedInterfaceOrientations
-{
-	return UIInterfaceOrientationMaskPortrait;
-}
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-	return UIInterfaceOrientationPortrait;
-}
-
 
 
 - (void)didReceiveMemoryWarning

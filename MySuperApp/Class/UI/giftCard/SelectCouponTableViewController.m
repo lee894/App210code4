@@ -349,10 +349,16 @@
         //包邮卡
             
            // strStatus = ((FreePostCardInfo*)data).status;
-            strTitle = [NSString stringWithFormat:@"%@  共计%@次", [data objectForKey:@"name" isDictionary:nil],[data objectForKey:@"total_times" isDictionary:nil]];
+//            strTitle = [NSString stringWithFormat:@"%@  共计%@次", [data objectForKey:@"name" isDictionary:nil],[data objectForKey:@"total_times" isDictionary:nil]];
+            
+            strTitle = [NSString stringWithFormat:@"%@", [data objectForKey:@"name" isDictionary:nil]];
+
             strPrice = [[NSNumber numberWithInteger:[[data objectForKey:@"total_times" isDictionary:nil] integerValue] - [[data objectForKey:@"used_times" isDictionary:nil] integerValue]] description];
             iBg = [UIImage imageNamed:@"laber_byk"];
-            strTime = [NSString stringWithFormat:@"有效期至%@", [data objectForKey:@"end_time" isDictionary:nil]];
+            
+//            strTime = [NSString stringWithFormat:@"有效期至%@", [data objectForKey:@"end_time" isDictionary:nil]];
+            strTime = [NSString stringWithFormat:@"有效期至%@",[[[data objectForKey:@"end_time" isDictionary:nil] componentsSeparatedByString:@" "] firstObject]];
+
         }
         
         {
@@ -671,8 +677,8 @@
 //    UIButton* btnToGiftCard = [UIButton buttonWithType:UIButtonTypeCustom];
 //    [btnToGiftCard setFrame:CGRectMake(btnToFreeShippingCard.frame.size.width + btnToFreeShippingCard.frame.origin.x + 2, 0, btnWidth, lee1fitAllScreen(35))];
 //    [btnToGiftCard addTarget:self action:@selector(toGiftCard:) forControlEvents:UIControlEventTouchUpInside];
-//    [btnToGiftCard setTitle:@"礼包卡" forState:UIControlStateNormal];
-//    [btnToGiftCard setTitle:@"礼包卡" forState:UIControlStateSelected];
+//    [btnToGiftCard setTitle:@"礼品卡" forState:UIControlStateNormal];
+//    [btnToGiftCard setTitle:@"礼品卡" forState:UIControlStateSelected];
 //    [btnToGiftCard setTitleColor:[UIColor colorWithHexString:@"#6c6c6c"] forState:UIControlStateNormal];
 //    [btnToGiftCard setTitleColor:[UIColor colorWithHexString:@"#181818"] forState:UIControlStateSelected];
 //    [btnToGiftCard setExclusiveTouch:NO];

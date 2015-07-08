@@ -98,11 +98,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.isSelectFreePostCard) {
+        [SBPublicAlert showMBProgressHUD:@"您已选包邮卡，不能使用货到付款" andWhereView:self.view hiddenTime:AlertShowTime];
+        return;
+    }
+    
+    
+    
     NSInteger nIndex = 0;
     for (NSDictionary * a in m_payMethod) {
         if (nIndex == [indexPath row]) {
             NSInteger  abc = [[a objectForKey:@"id"] intValue];
-            NSString * selectIndex = [[NSString alloc] initWithFormat:@"%d", abc];
+            NSString * selectIndex = [[NSString alloc] initWithFormat:@"%ld", (long)abc];
             
             
             if (abc == 4) {
