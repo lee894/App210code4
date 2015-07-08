@@ -34,7 +34,7 @@
 @property (nonatomic, retain) UITableView *mytableView;
 @property (nonatomic, assign) ECouponListType clType;
 //单元格上按钮的点击事件
-- (void)btnClicked:(UIButton *) btn onCell:(UITableViewCell *)cell;
+- (void)btnClicked:(UIButton *)btn onCell:(UITableViewCell *)cell;
 
 @end
 

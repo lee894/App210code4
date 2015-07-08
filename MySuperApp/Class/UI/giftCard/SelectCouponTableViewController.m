@@ -24,6 +24,9 @@
     UIButton* selectedBtn;
     UIView* vCouponMenu;
     NSInteger nSelectedIndexInMenu;
+    
+    NSString *strselectV6card; //已选中的v6卡
+    
 }
 @property (nonatomic, retain) UIView* vToolbar;
 @property (nonatomic, retain) NSString* strType;
@@ -48,6 +51,12 @@
     
     [self NewHiddenTableBarwithAnimated:YES];
     [self createBackBtnWithType:0];
+    
+    strselectV6card = @"";
+    
+    
+    mainSer  = [[MainpageServ alloc] init];
+    mainSer.delegate = self;
     
     
     [self.view addSubview:self.vToolbar];
@@ -77,12 +86,21 @@
     [self.navigationController pushViewController:ctrl animated:YES];
 }
 
-
-- (void)Sendcodes
+#pragma mark---- v6card 发送验证码
+- (void)Sendcodesandtf:(id)sender
 {
+    UITextField *tf = (UITextField *)sender;
+    [tf resignFirstResponder];
+    
     NSRange numRange = NSMakeRange(self.phoneNum.length-12, 11);;
     //发送验证码
     [mainSer getProveMobile:[self.phoneNum substringWithRange:numRange] andType:@"v6card"];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    
+    [self.view endEditing:YES];
 }
 
 //单元格上按钮的点击事件
@@ -92,12 +110,17 @@
     switch (btn.tag) {
         case 1:
         {
+            if (self.clType == EV6Card) {
+                
+                return;
+            }
+            
+            
             YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
             webView.strURL = @"http://m.aimer.com.cn/method/v6codeinfo";
             webView.strTitle = @"使用规则";
             //            webView.webViewFrame = self.view.frame;
             [self.navigationController pushViewController:webView animated:YES];
-            
         }
             break;
         case 2:
@@ -126,10 +149,16 @@
                 alert.delegate = self;
                 [alert setDestructiveButtonWithTitle:@"确定" block:^{
                     if (!textFieldalert.text || [textFieldalert.text isEqualToString:@""]) {
-                        [SBPublicAlert showMBProgressHUD:@"请输入验证码" andWhereView:self.view hiddenTime:1.5];
+                        [SBPublicAlert showMBProgressHUD:@"请输入验证码" andWhereView:self.view hiddenTime:AlertShowTime];
                         return;
                     }
-                    //[mainSer usev6card:[[self.arrCard objectAtIndex:0 isArray:nil] objectForKey:@"card_id"] mobile:[self.phoneNum substringWithRange:NSMakeRange(self.phoneNum.length-12, 11)] checkcode:textFieldalert.text];
+                    
+                    NSDictionary* dic = [self.contentArr objectAtIndex:index isArray:nil];
+                    
+                    strselectV6card = [dic objectForKey:@"card_id" isDictionary:nil];
+                    [mainSer usev6card:[dic objectForKey:@"card_id" isDictionary:nil]
+                                mobile:[self.phoneNum substringWithRange:NSMakeRange(self.phoneNum.length-12, 11)]
+                             checkcode:textFieldalert.text];
                 }];
                 
                 [alert setCancelButtonWithTitle:@"取消" block:nil];
@@ -156,7 +185,6 @@
             YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
             webView.strURL = @"http://m.aimer.com.cn/method/v6codedescribe";
             webView.strTitle = @"积分说明";
-            //            webView.webViewFrame = self.view.frame;
             [self.navigationController pushViewController:webView animated:YES];
         }
             break;
@@ -164,15 +192,14 @@
         {
             //POBJECT(@"自助兑换记录");
             ExchangeRecordViewController *ctrl = [[ExchangeRecordViewController alloc] init];
-            //ctrl.cardId = [[self.arrCard objectAtIndex:0 isArray:nil] objectForKey:@"card_id"];
+            ctrl.cardId = [[self.contentArr objectAtIndex:0 isArray:nil] objectForKey:@"card_id"];
             [self.navigationController pushViewController:ctrl animated:YES];
         }
             break;
         case 6:
         {
             //POBJECT(@"优惠券详情");
-            NSLog(@"----%@",[self.contentArr objectAtIndex:index isArray:nil]);
-            
+//            NSLog(@"----%@",[self.contentArr objectAtIndex:index isArray:nil]);
 //            if (isAimer) {
 //                CouponDetailViewController *userCtrl = [[CouponDetailViewController alloc] initWithNibName:@"CouponDetailViewController" bundle:nil];
 //                //是不是我自己的优惠券，（自己的能显示二维码，不是自己的没有二维码）
@@ -198,7 +225,7 @@
                     [self.navigationController pushViewController:webView animated:YES];
                     
                 }else{
-                    //                    lee999切换到我的爱慕，直接显示到首页
+                    //lee999切换到我的爱慕，直接显示到首页
                     [self changeToShop];
                     [self.navigationController popToRootViewControllerAnimated:YES];
                     
@@ -242,94 +269,30 @@
     
     NSLog(@"----title:%@------",self.title);
     
-    //尊享卡
-//    if (indexPath.section==0) {
-//        static NSString *CellIdentifier = @"BonusCardCellIdentifier";
-//        BonusCardCell *cell = (BonusCardCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//        
-//        if (!cell) {
-//            cell = [[[NSBundle mainBundle] loadNibNamed:@"BonusCardCell" owner:self options:nil] lastObject];
-//            cell.parent = self;
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        }
-//        NSDictionary *dic = [self.arrCard objectAtIndex:indexPath.row isArray:nil];
-//        cell.labelTitle.text = [NSString stringWithFormat:@"%@",LegalObject([dic objectForKey:@"name"],[NSString class])];
-//        cell.labelId.text = [NSString stringWithFormat:@"NO. %@",[dic objectForKey:@"card_id"]];
-//        cell.labelBalance.text = [dic objectForKey:@"balance"];
-//        cell.labelFrozenBalance.text = [NSString stringWithFormat:@"%@",LegalObject([dic objectForKey:@"frozenBalance"],[NSNumber class])];
-//        cell.labelIntegral.text = [NSString stringWithFormat:@"冻结%@   可用%@",
-//                                   LegalObject([dic objectForKey:@"frozenScore"],[NSNumber class]),LegalObject([dic objectForKey:@"canUseScore"],[NSNumber class])];;
-//        
-//        
-//        if ([[dic objectForKey:@"canUseScore"] integerValue] < 2000) {
-//            [cell.btnExchange setEnabled:NO];
-//        }
-//        
-//        return cell;
-//    } else if(indexPath.section==1) {
-//    
-//        UITableViewCell *Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-//                                                       reuseIdentifier:nil];
-//        //        UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300, 44)];
-//        //        [SingletonState setViewRadioSider:view];
-//        //        [Cell.contentView addSubview:view];
-//        Cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        [Cell setBackgroundColor:[UIColor clearColor]];
-//        //        UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 25)];
-//        //        name.backgroundColor = [UIColor clearColor];
-//        //        name.font = [UIFont systemFontOfSize:14];
-//        //        name.text = @"优惠券号码：";
-//        //        [Cell.contentView addSubview:name];
-//        
-//        nametextfield = [[UITextField alloc] initWithFrame:CGRectMake(15, 15, lee1fitAllScreen(215), lee1fitAllScreen(44))];
-//        nametextfield.delegate = self;
-//        nametextfield.backgroundColor = [UIColor whiteColor];
-//        nametextfield.placeholder = @"请输入您的优惠券号";
-//        nametextfield.font = [UIFont systemFontOfSize:17];
-//        nametextfield.keyboardType = UIKeyboardTypeNumberPad;
-//        [Cell.contentView addSubview:nametextfield];
-//        [nametextfield.layer setBorderColor:[UIColor colorWithHexString:@"#d0d0d0"].CGColor];
-//        [nametextfield.layer setBorderWidth:0.5];
-//        [nametextfield.layer setCornerRadius:2];
-//        [nametextfield.layer setMasksToBounds:YES];
-//        [nametextfield setLeftView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, lee1fitAllScreen(17), nametextfield.frame.size.height)]];
-//        [nametextfield setLeftViewMode:UITextFieldViewModeAlways];
-//        
-//        MyButton *but = [MyButton buttonWithType:UIButtonTypeCustom];
-//        [but setFrame:CGRectMake(nametextfield.frame.origin.x + nametextfield.frame.size.width + 10, 15, lee1fitAllScreen(65), lee1fitAllScreen(44))];
-//        [but setTitle:@"绑定" forState:UIControlStateNormal];
-//        [but setTitle:@"绑定" forState:UIControlStateHighlighted];
-//        but.titleLabel.font = [UIFont systemFontOfSize:17.0];
-//        
-//        //lee999recode
-//        if ([self.title isEqualToString:@"使用优惠券"]) {
-//            [but setTitle:@"使用" forState:UIControlStateNormal];
-//            [but setTitle:@"使用" forState:UIControlStateHighlighted];
-//            
-//            [but addTarget:self action:@selector(UserCouns:) forControlEvents:UIControlEventTouchUpInside];
-//            
-//        }else{
-//            [but addTarget:self action:@selector(btnBindClicked:) forControlEvents:UIControlEventTouchUpInside];
-//        }
-//        [but setBackgroundImage:[UIImage imageNamed:@"yhq_btn_normal"] forState:UIControlStateNormal];
-//        [but setImage:[UIImage imageNamed:@"yhq_btn_hover"] forState:UIControlStateHighlighted];
-//        
-//        [Cell addSubview:but];
-//        
-//        UILabel* lblSep = [[UILabel alloc] initWithFrame:CGRectMake(0, but.frame.size.height + but.frame.origin.y + 15, [UIScreen mainScreen].bounds.size.width, 0.5)];
-//        [lblSep setBackgroundColor:[UIColor colorWithHexString:@"#d0d0d0"]];
-//        [Cell addSubview:lblSep];
-//        
-//        UILabel* lblContent = [[UILabel alloc] initWithFrame:CGRectMake(12.5, lblSep.frame.size.height + lblSep.frame.origin.y + 15, [UIScreen mainScreen].bounds.size.width - 25, 12)];
-//        [lblContent setText:@"点击优惠券可查看使用规则"];
-//        [lblContent setFont:[UIFont systemFontOfSize:12]];
-//        [lblContent setTextColor:[UIColor colorWithHexString:@"#666666"]];
-//        [Cell addSubview:lblContent];
-//        
-//        return Cell;
-//    }
-    //优惠券
-//    else if(indexPath.section==2)
+    //电子券
+    if (self.selectType == 2){
+        static NSString *CellIdentifier = @"BonusCardCellIdentifier";
+        BonusCardCell *cell = (BonusCardCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        
+        if (!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"BonusCardCell" owner:self options:nil] lastObject];
+            cell.parent = self;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        NSDictionary* dic = [self.contentArr objectAtIndex:indexPath.row isArray:nil];
+        cell.labelTitle.text = [NSString stringWithFormat:@"%@",LegalObject([dic objectForKey:@"name"],[NSString class])];
+        cell.labelId.text = [NSString stringWithFormat:@"NO. %@",[dic objectForKey:@"card_id"]];
+        cell.labelBalance.text = [dic objectForKey:@"balance"];
+        cell.labelFrozenBalance.text = [NSString stringWithFormat:@"%@",LegalObject([dic objectForKey:@"frozenBalance"],[NSNumber class])];
+        cell.labelIntegral.text = [NSString stringWithFormat:@"冻结%@   可用%@",LegalObject([dic objectForKey:@"frozenScore"],[NSNumber class]),LegalObject([dic objectForKey:@"canUseScore"],[NSNumber class])];
+        
+        if ([LegalObject([dic objectForKey:@"canUseScore"],[NSNumber class]) integerValue] < 2000) {
+            [cell.btnExchange setEnabled:NO];
+        }
+        
+        return cell;
+    }
+    
     
     {
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
@@ -481,7 +444,11 @@
         if (self.selectType == 1) {
             strid = [data objectForKey:@"code" isDictionary:nil];
         }else if(self.selectType == 2){
-            strid = [data objectForKey:@"card_id" isDictionary:nil];
+            //lee999 150708 使用优惠券不是进入到全部的界面
+            //新的使用成功，在下面
+            return;
+            
+//            strid = [data objectForKey:@"card_id" isDictionary:nil];
         }else if (self.selectType == 3){
             strid = [data objectForKey:@"id" isDictionary:nil];
         }
@@ -494,6 +461,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.clType == EV6Card) {
+        return 270;
+    }
+    
         return lee1fitAllScreen(76) + 10;
 }
 
@@ -590,6 +561,73 @@
     [_mytableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     return _mytableView;
 }
+
+
+
+#pragma mark -- NETrequest delegate
+-(void)serviceStarted:(ServiceType)aHandle{
+}
+
+-(void)serviceFailed:(ServiceType)aHandle{
+    [SBPublicAlert hideMBprogressHUD:self.view];
+}
+
+-(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel
+{
+    [SBPublicAlert hideMBprogressHUD:self.view];
+    
+    LBaseModel *model = (LBaseModel *)amodel;
+    
+    switch (model.requestTag) {
+        case Http_Sendcodes_Tag:
+        {
+            if (!model.errorMessage) {
+                
+                [SBPublicAlert showMBProgressHUDTextOnly:((CodeBindBindCodeModel *)model).content andWhereView:self.view hiddenTime:AlertShowTime];
+                
+            }else{
+                [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:AlertShowTime];
+            }
+        }
+            break;
+        case Http_usev6card_Tag:
+        {
+            if (!model.errorMessage) {
+                
+                //V6卡  使用成功
+                [self.delegate SelectCouponIndex:0 withslelectTag:2 withCodeValue:strselectV6card];
+                [self.navigationController popViewControllerAnimated:YES];
+
+            }else{
+                [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:AlertShowTime];
+            }
+        }
+            break;
+        case Http_exchangecoupon_Tag:
+        {
+            if (!model.errorMessage) {
+                //兑换成功
+                [SBPublicAlert showMBProgressHUD:@"兑换成功" andWhereView:self.view hiddenTime:AlertShowTime];
+            }else{
+                [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:AlertShowTime];
+            }
+        }
+            break;
+        case 10086:
+        {
+            [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:1.];
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+
+
+
+
 @end
 
 
@@ -721,4 +759,92 @@
 
 
 
+//尊享卡
+//    if (indexPath.section==0) {
+//        static NSString *CellIdentifier = @"BonusCardCellIdentifier";
+//        BonusCardCell *cell = (BonusCardCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//
+//        if (!cell) {
+//            cell = [[[NSBundle mainBundle] loadNibNamed:@"BonusCardCell" owner:self options:nil] lastObject];
+//            cell.parent = self;
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        }
+//        NSDictionary *dic = [self.arrCard objectAtIndex:indexPath.row isArray:nil];
+//        cell.labelTitle.text = [NSString stringWithFormat:@"%@",LegalObject([dic objectForKey:@"name"],[NSString class])];
+//        cell.labelId.text = [NSString stringWithFormat:@"NO. %@",[dic objectForKey:@"card_id"]];
+//        cell.labelBalance.text = [dic objectForKey:@"balance"];
+//        cell.labelFrozenBalance.text = [NSString stringWithFormat:@"%@",LegalObject([dic objectForKey:@"frozenBalance"],[NSNumber class])];
+//        cell.labelIntegral.text = [NSString stringWithFormat:@"冻结%@   可用%@",
+//                                   LegalObject([dic objectForKey:@"frozenScore"],[NSNumber class]),LegalObject([dic objectForKey:@"canUseScore"],[NSNumber class])];;
+//
+//
+//        if ([[dic objectForKey:@"canUseScore"] integerValue] < 2000) {
+//            [cell.btnExchange setEnabled:NO];
+//        }
+//
+//        return cell;
+//    } else if(indexPath.section==1) {
+//
+//        UITableViewCell *Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+//                                                       reuseIdentifier:nil];
+//        //        UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300, 44)];
+//        //        [SingletonState setViewRadioSider:view];
+//        //        [Cell.contentView addSubview:view];
+//        Cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        [Cell setBackgroundColor:[UIColor clearColor]];
+//        //        UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 25)];
+//        //        name.backgroundColor = [UIColor clearColor];
+//        //        name.font = [UIFont systemFontOfSize:14];
+//        //        name.text = @"优惠券号码：";
+//        //        [Cell.contentView addSubview:name];
+//
+//        nametextfield = [[UITextField alloc] initWithFrame:CGRectMake(15, 15, lee1fitAllScreen(215), lee1fitAllScreen(44))];
+//        nametextfield.delegate = self;
+//        nametextfield.backgroundColor = [UIColor whiteColor];
+//        nametextfield.placeholder = @"请输入您的优惠券号";
+//        nametextfield.font = [UIFont systemFontOfSize:17];
+//        nametextfield.keyboardType = UIKeyboardTypeNumberPad;
+//        [Cell.contentView addSubview:nametextfield];
+//        [nametextfield.layer setBorderColor:[UIColor colorWithHexString:@"#d0d0d0"].CGColor];
+//        [nametextfield.layer setBorderWidth:0.5];
+//        [nametextfield.layer setCornerRadius:2];
+//        [nametextfield.layer setMasksToBounds:YES];
+//        [nametextfield setLeftView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, lee1fitAllScreen(17), nametextfield.frame.size.height)]];
+//        [nametextfield setLeftViewMode:UITextFieldViewModeAlways];
+//
+//        MyButton *but = [MyButton buttonWithType:UIButtonTypeCustom];
+//        [but setFrame:CGRectMake(nametextfield.frame.origin.x + nametextfield.frame.size.width + 10, 15, lee1fitAllScreen(65), lee1fitAllScreen(44))];
+//        [but setTitle:@"绑定" forState:UIControlStateNormal];
+//        [but setTitle:@"绑定" forState:UIControlStateHighlighted];
+//        but.titleLabel.font = [UIFont systemFontOfSize:17.0];
+//
+//        //lee999recode
+//        if ([self.title isEqualToString:@"使用优惠券"]) {
+//            [but setTitle:@"使用" forState:UIControlStateNormal];
+//            [but setTitle:@"使用" forState:UIControlStateHighlighted];
+//
+//            [but addTarget:self action:@selector(UserCouns:) forControlEvents:UIControlEventTouchUpInside];
+//
+//        }else{
+//            [but addTarget:self action:@selector(btnBindClicked:) forControlEvents:UIControlEventTouchUpInside];
+//        }
+//        [but setBackgroundImage:[UIImage imageNamed:@"yhq_btn_normal"] forState:UIControlStateNormal];
+//        [but setImage:[UIImage imageNamed:@"yhq_btn_hover"] forState:UIControlStateHighlighted];
+//
+//        [Cell addSubview:but];
+//
+//        UILabel* lblSep = [[UILabel alloc] initWithFrame:CGRectMake(0, but.frame.size.height + but.frame.origin.y + 15, [UIScreen mainScreen].bounds.size.width, 0.5)];
+//        [lblSep setBackgroundColor:[UIColor colorWithHexString:@"#d0d0d0"]];
+//        [Cell addSubview:lblSep];
+//
+//        UILabel* lblContent = [[UILabel alloc] initWithFrame:CGRectMake(12.5, lblSep.frame.size.height + lblSep.frame.origin.y + 15, [UIScreen mainScreen].bounds.size.width - 25, 12)];
+//        [lblContent setText:@"点击优惠券可查看使用规则"];
+//        [lblContent setFont:[UIFont systemFontOfSize:12]];
+//        [lblContent setTextColor:[UIColor colorWithHexString:@"#666666"]];
+//        [Cell addSubview:lblContent];
+//
+//        return Cell;
+//    }
+//优惠券
+//    else if(indexPath.section==2)
 

@@ -15,7 +15,7 @@ typedef BOOL(^TextFieldReturnCallBack)(BlockTextPromptAlertView *);
 
 @protocol BlockAlertViewDelegate
 
--(void)Sendcodes;
+-(void)Sendcodesandtf:(id)sender;
 
 @end
 

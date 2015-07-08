@@ -97,7 +97,7 @@
 {
     //发送验证码
 //    if([self.delegate respondsToSelector:@selector(Sendcodes)]) {
-        [self.delegate Sendcodes];
+    [self.delegate Sendcodesandtf:self.textField];
 //    }
 }
 

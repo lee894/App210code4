@@ -153,7 +153,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
-            <point key="canvasLocation" x="248" y="312"/>
+            <point key="canvasLocation" x="24" y="239"/>
         </view>
     </objects>
     <resources>

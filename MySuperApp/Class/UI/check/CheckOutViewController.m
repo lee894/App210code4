@@ -104,15 +104,15 @@
         self.useCouponcardId = @"";
     }
     
-    if (![self.usev6useCardId isEqualToString:@""] && self.usev6useCardId) {
-        self.useCouponcardId = self.usev6useCardId;
-        
-        //lee999recode
-        [mainSev getCheckout:self.straddressID andV6usercard_id:self.useCouponcardId andCouponcard:@"" payway:self.m_strPayMethod andfreepostcard:self.usefreepostcardId];
-    } else {
-        
-        [mainSev getCheckout:self.straddressID andV6usercard_id:@"" andCouponcard:self.useCouponcardId payway:self.m_strPayMethod andfreepostcard:self.usefreepostcardId];
-    }
+//    if (![self.usev6useCardId isEqualToString:@""] && self.usev6useCardId) {
+//        self.usev6useCardId = self.usev6useCardId;
+//        
+//        //lee999recode
+//        [mainSev getCheckout:self.straddressID andV6usercard_id:self.useCouponcardId andCouponcard:@"" payway:self.m_strPayMethod andfreepostcard:self.usefreepostcardId];
+//    } else {
+    
+        [mainSev getCheckout:self.straddressID andV6usercard_id:self.useCouponcardId  andCouponcard:self.useCouponcardId payway:self.m_strPayMethod andfreepostcard:self.usefreepostcardId];
+//    }
     
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
     //重新加载界面
@@ -1431,6 +1431,7 @@ NSLog(@"createOtherCells  come out");
 
 #pragma mark --- 取消使用
 - (void) cancleCouponcard {
+    
     self.useCouponcardId = @"";
     
     if (!self.useCouponcardId) {
@@ -1727,7 +1728,6 @@ NSLog(@"createOtherCells  come out");
             ctrl.delegate = self;
             ctrl.selectType = 1;
             
-//            ctrl.phoneNum = mycheckOutModel.checkout_usev6cardsres;
 //            ctrl.checkOutViewCtrl = self;
             //            if (mycheckOutModel.checkoutCountv6 == 0) {
             //                couponcardListModel.cards_count = 0;
@@ -1752,8 +1752,18 @@ NSLog(@"createOtherCells  come out");
     {
     //电子券
         
-        if ([mycheckOutModel.checkout_usev6cards count] == 0) {
+        if ([mycheckOutModel.checkoutV6cards count] == 0) {
             return;
+        }else{
+        
+            SelectCouponTableViewController *ctrl = [[SelectCouponTableViewController alloc] init];
+            ctrl.delegate = self;
+            ctrl.selectType = 2;
+            ctrl.clType = EV6Card;
+            ctrl.phoneNum = mycheckOutModel.checkout_usev6cardsres;
+            ctrl.contentArr = mycheckOutModel.checkoutV6cards;
+            
+            [self.navigationController pushViewController:ctrl animated:YES];
         }
         
         

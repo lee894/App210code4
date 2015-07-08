@@ -17,9 +17,10 @@
 // 全部的优惠券
 typedef enum : NSUInteger {
     EAll,
-    ECoupon,
-    EFreeShippingCard,
-    EGiftCard
+    ECoupon,  //优惠券
+    EFreeShippingCard, //包邮卡
+    EGiftCard,  //礼品卡
+    EV6Card   //V6卡
 } ECouponListType;
 
 @interface CouponsListTableViewController : LBaseViewController <UITableViewDelegate,UITableViewDataSource,ServiceDelegate,UIAlertViewDelegate,UIScrollViewDelegate,BlockAlertViewDelegate,UITextFieldDelegate>

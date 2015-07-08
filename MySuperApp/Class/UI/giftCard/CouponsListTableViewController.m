@@ -54,18 +54,24 @@
     mainSer  = [[MainpageServ alloc] init];
     mainSer.delegate = self;
     self.strType = @"c";
-//    //创建右边按钮
-//    [self createRightBtn];
-//    [self.navbtnRight setTitle:@"绑定" forState:UIControlStateNormal];
-//    [self.navbtnRight setTitle:@"绑定" forState:UIControlStateHighlighted];
     
+    //V6 卡
+    if (self.clType == EV6Card) {
+        self.strType = @"v6card";
+    }
     
     selectIndex = 1;
     
     
-    [self.view addSubview:self.vToolbar];
     [self.view addSubview:self.mytableView];
+    
+    
+    if (self.clType != EV6Card) {
+        [self.view addSubview:self.vToolbar];
+    }
     [self.view addConstraints:[self viewConstraints]];
+
+    
     
     UIImageView* ivBG = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yhq_laber_bg"]];
     [ivBG setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, lee1fitAllScreen(35))];
@@ -317,7 +323,9 @@
         {
             //POBJECT(@"自助兑换记录");
             ExchangeRecordViewController *ctrl = [[ExchangeRecordViewController alloc] init];
-            ctrl.cardId = [[self.arrCard objectAtIndex:0 isArray:nil] objectForKey:@"card_id"];
+            
+            V6CardInfo *v6info = [self.arrCard objectAtIndex:0 isArray:nil];
+            ctrl.cardId = v6info.card_id;
             [self.navigationController pushViewController:ctrl animated:YES];
         }
             break;
@@ -375,22 +383,33 @@
     [self.view endEditing:YES];
 }
 
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    if ([self.strType isEqualToString:@"v6card"]) {
+        return 1;
+    }
+    
     return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    
+    NSLog(@"-----%lu",(unsigned long)self.arrCard.count);
+    
     if (section == 0) {
         return [self.arrCard count];
     }else if (section == 1) {
         if (self.isAimer) {
-//            return 0;
+            //return 0;
         }
         return 1;
     }else {
+        
         return [self.contentArr count];
     }
     
@@ -402,7 +421,7 @@
     NSLog(@"----title:%@------",self.title);
     
     //尊享卡
-    if (indexPath.section==0) {
+    if (indexPath.section == 0) {
         static NSString *CellIdentifier = @"BonusCardCellIdentifier";
         BonusCardCell *cell = (BonusCardCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
@@ -411,34 +430,32 @@
             cell.parent = self;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        NSDictionary *dic = [self.arrCard objectAtIndex:indexPath.row isArray:nil];
-        cell.labelTitle.text = [NSString stringWithFormat:@"%@",LegalObject([dic objectForKey:@"name"],[NSString class])];
-        cell.labelId.text = [NSString stringWithFormat:@"NO. %@",[dic objectForKey:@"card_id"]];
-        cell.labelBalance.text = [dic objectForKey:@"balance"];
-        cell.labelFrozenBalance.text = [NSString stringWithFormat:@"%@",LegalObject([dic objectForKey:@"frozenBalance"],[NSNumber class])];
-        cell.labelIntegral.text = [NSString stringWithFormat:@"冻结%@   可用%@",
-                                   LegalObject([dic objectForKey:@"frozenScore"],[NSNumber class]),LegalObject([dic objectForKey:@"canUseScore"],[NSNumber class])];;
+        V6CardInfo *dic = [self.arrCard objectAtIndex:indexPath.row isArray:nil];
+        cell.labelTitle.text = [NSString stringWithFormat:@"%@",dic.name];
+        //LegalObject([dic objectForKey:@"name"],[NSString class])
+        cell.labelId.text = [NSString stringWithFormat:@"NO. %@",dic.card_id];
+        //[dic objectForKey:@"card_id"]
+        cell.labelBalance.text = dic.balance;
+        //[dic objectForKey:@"balance"];
+        cell.labelFrozenBalance.text = [NSString stringWithFormat:@"%@",dic.frozenBalance];
+        //LegalObject([dic objectForKey:@"frozenBalance"],[NSNumber class])
+        cell.labelIntegral.text = [NSString stringWithFormat:@"冻结%@   可用%@",dic.frozenScore,dic.canUseScore];
+        //LegalObject([dic objectForKey:@"frozenScore"],[NSNumber class]),LegalObject([dic objectForKey:@"canUseScore"],[NSNumber class])
         
         
-        if ([[dic objectForKey:@"canUseScore"] integerValue] < 2000) {
+        if ([dic.canUseScore integerValue] < 2000) {
             [cell.btnExchange setEnabled:NO];
         }
         
         return cell;
-    } else if(indexPath.section==1) {
+        
+        
+    } else if(indexPath.section == 1) {
         
         UITableViewCell *Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                        reuseIdentifier:nil];
-//        UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300, 44)];
-//        [SingletonState setViewRadioSider:view];
-//        [Cell.contentView addSubview:view];
         Cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [Cell setBackgroundColor:[UIColor clearColor]];
-//        UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 25)];
-//        name.backgroundColor = [UIColor clearColor];
-//        name.font = [UIFont systemFontOfSize:14];
-//        name.text = @"优惠券号码：";
-//        [Cell.contentView addSubview:name];
 
         nametextfield = [[UITextField alloc] initWithFrame:CGRectMake(15, 15, lee1fitAllScreen(215), lee1fitAllScreen(44))];
         nametextfield.delegate = self;
@@ -985,6 +1002,21 @@
             case Http_CouponList20_Tag:
             {
                 _cli = [[[CouponListInfoParser alloc] init] parseCouponListInfo:amodel];
+                
+                
+                //lee999 150707 新增礼品卡解析
+                if ([_strType isEqualToString:@"v6card"]) {
+                    if (current == 1) {
+                        [self.arrCard removeAllObjects];
+                        [self.arrCard addObjectsFromArray:_cli.v6cards];
+                    }else {
+                        [self.arrCard addObjectsFromArray:_cli.v6cards];
+                    }
+                    [self updateTableView];
+//                    [self.mytableView reloadData];
+                }
+                //end
+                
                 if ([_strType isEqualToString:@"c"] || [_strType isEqualToString:@"g"] || [_strType isEqualToString:@"u"]) {
                     if (current == 1) {
 //                        [self.arrCard removeAllObjects];
@@ -1018,6 +1050,9 @@
         }
         return;
     }
+    
+    
+    
     LBaseModel *model = (LBaseModel *)amodel;
     
     switch (model.requestTag) {

@@ -650,6 +650,8 @@
     return path ;
 }
 
+#pragma mark---  8个按钮的点击
+
 -(void)toNextFromThridCell:(UIButton*)sender
 {
     switch (sender.tag) {
@@ -662,6 +664,19 @@
         case 1:
         {
             //会员卡
+                    
+            BonusTableViewController *ctrl = [[BonusTableViewController alloc] init];
+            ctrl.isAimer = YES;
+            ctrl.clType = EV6Card;
+            [self.navigationController pushViewController:ctrl animated:YES];
+            return;
+            
+            /*
+            CouponsListTableViewController *vc = [[CouponsListTableViewController alloc] init];
+            vc.clType = EV6Card;
+            [self.navigationController pushViewController:vc animated:YES];
+             */
+            
         }
             break;
         case 2:
