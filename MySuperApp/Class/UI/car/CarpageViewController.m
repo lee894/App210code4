@@ -938,7 +938,7 @@
     [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_icon_edit_press.png"] forState:UIControlStateHighlighted];
     [self.navbtnRight setFrame:CGRectMake(ScreenWidth-110, 10, 25, 25)];
     
-    [self.navbtnRight addTarget:self action:@selector(editCarNumber) forControlEvents:UIControlEventTouchUpInside];
+//    [self.navbtnRight addTarget:self action:@selector(editCarNumber) forControlEvents:UIControlEventTouchUpInside];
     
     
 }
@@ -974,6 +974,15 @@
 //    [self.navbtnRight addTarget:self action:@selector(finishEditCar) forControlEvents:UIControlEventTouchUpInside];
 }
 
+-(void)rightButAction
+{
+    if (isEditing) {
+        [self finishEditCar];
+    }else
+    {
+        [self editCarNumber];
+    }
+}
 
 #pragma mark---- 编辑按钮的Action  转为编辑状态
 -(void)editCarNumber{
@@ -1008,7 +1017,7 @@
     [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateHighlighted];
     [self.navbtnRight setFrame:CGRectMake(ScreenWidth- 80, 7, 66, 32)];
     
-    [self.navbtnRight addTarget:self action:@selector(finishEditCar) forControlEvents:UIControlEventTouchUpInside];
+//    [self.navbtnRight addTarget:self action:@selector(finishEditCar) forControlEvents:UIControlEventTouchUpInside];
     
     //lee999 150503 修改输入框
 //    for (UITableViewCell *tbvc in self.tableCells) {
@@ -1120,7 +1129,7 @@
     [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_icon_edit_press.png"] forState:UIControlStateHighlighted];
     [self.navbtnRight setFrame:CGRectMake(ScreenWidth-110, 10, 25, 25)];
     
-    [self.navbtnRight addTarget:self action:@selector(editCarNumber) forControlEvents:UIControlEventTouchUpInside];
+//    [self.navbtnRight addTarget:self action:@selector(editCarNumber) forControlEvents:UIControlEventTouchUpInside];
     
     
     //    [shoppingCarTab reloadData];
