@@ -56,6 +56,7 @@
     mainSer = [[MainpageServ alloc] init];
     mainSer.delegate = self;
     
+    isAddtoCar = NO;
     
     mytable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height) style:UITableViewStylePlain];
     mytable.backgroundColor = [UIColor clearColor];
@@ -350,12 +351,8 @@
 {
     //lee999 加入购物车的判断
     if (![SingletonState sharedStateInstance].userHasLogin) {
-        
+        isAddtoCar = YES;
         [self changeToMyaimer];
-        
-//        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您尚未登录，请先登录。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-//        alert.tag=111222;
-//        [alert show];
         return;
     }
     
@@ -386,6 +383,7 @@
     }
     NSLog(@"suitString:%@", suitString);
     [mainSer getAddsuittocar:self.suitListModel.suitid andSuitid:suitString];
+    
     [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
 }
 
@@ -401,30 +399,30 @@
     cellArray = [[NSMutableArray alloc] initWithCapacity:1];
     for (int i = 0; i < [self.suitListModel.suitArray count]; i++) {
         static NSString	*CellIdentifier = @"Cell1";
-		UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
-																   reuseIdentifier:CellIdentifier];
-		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                       reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.backgroundColor = [UIColor clearColor];
         
         UIImageView *cellBg = [[UIImageView alloc] initWithFrame:CGRectMake(10, 164, ScreenWidth-20, 0.5)];
         [cellBg setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
-//        [cellBg setImage:[UIImage imageNamed:@"edit_infor_bg.png"]];
+        //        [cellBg setImage:[UIImage imageNamed:@"edit_infor_bg.png"]];
         //lee给view设置为圆角，不再使用图片了。 -140512
-//        [SingletonState setViewRadioSider:cellBg];
+        //        [SingletonState setViewRadioSider:cellBg];
         [cell.contentView addSubview:cellBg];
         
         
-//		UIImageView* bgview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cart_pic_bg.png"]];
-//		bgview.frame = CGRectMake(10, 21, 93, 113);
-//        bgview.backgroundColor = [UIColor clearColor];
-//		[cell.contentView addSubview:bgview];
+        //		UIImageView* bgview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cart_pic_bg.png"]];
+        //		bgview.frame = CGRectMake(10, 21, 93, 113);
+        //        bgview.backgroundColor = [UIColor clearColor];
+        //		[cell.contentView addSubview:bgview];
         
-		
+        
         YKSuitItem *item = [self.suitListModel.suitArray objectAtIndex:i];
-		UrlImageView* shoppingImg = [[UrlImageView alloc] init];
+        UrlImageView* shoppingImg = [[UrlImageView alloc] init];
         [shoppingImg setImageWithURL:[NSURL URLWithString:item.pic]];
-		shoppingImg.frame = CGRectMake(14, 26, 84, 103);
+        shoppingImg.frame = CGRectMake(14, 26, 84, 103);
         [cell.contentView addSubview:shoppingImg];
         
         UILabel* desc = [[UILabel alloc] initWithFrame:CGRectMake(110, 10,lee1fitAllScreen(200), 45)];
@@ -438,73 +436,80 @@
         
         if (item.productlist) {
             
-        UIFont *font = [UIFont systemFontOfSize:12];
-        desc = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(110), 58, 75, 31)];
-        desc.backgroundColor = [UIColor clearColor];
-        desc.text = @"颜色：";
-        desc.font = font;
-        desc.textColor = [UIColor colorWithHexString:@"0x666666"];
-        [cell.contentView addSubview:desc];
-        
-        //下拉列表选择颜色按钮
-        item.buttonForSelect = [UrlImageButton buttonWithType:UIButtonTypeCustom];
-        [item.buttonForSelect setFrame:CGRectMake(lee1fitAllScreen(175), 58, 79, 31)];
-        [item.buttonForSelect setBackgroundImage:[UIImage imageNamed:@"lp_option.png"] forState:UIControlStateNormal];
-        [item.buttonForSelect setBackgroundImage:[UIImage imageNamed:@"lp_option_hover.png"] forState:UIControlStateHighlighted];
-        [item.buttonForSelect addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
-        item.buttonForSelect.tag = i * 10 + 0;
-        if ([item.colorlist count]!=0) {
-            [item.buttonForSelect setTitle:[[item.colorlist objectAtIndex:item.currentColor] Spec_alias] forState:UIControlStateNormal];
-        }
-        UIEdgeInsets inserts = item.buttonForSelect.titleEdgeInsets;
-        inserts.right = 20;
-        item.buttonForSelect.titleEdgeInsets = inserts;
-        item.buttonForSelect.titleLabel.font = font;
-        [item.buttonForSelect setTitleColor:[UIColor colorWithHexString:@"0x666666"] forState:UIControlStateNormal];
-        //lee999 添加向下箭头//sort_arrow_down.png  {top, left, bottom, right}
-//        [item.buttonForSelect setImageEdgeInsets:UIEdgeInsetsMake(12, 65, 12, 4)];
-//        [item.buttonForSelect setImage:[UIImage imageNamed:@"choice_btn_arrow.png"] forState:UIControlStateNormal];
-//            [item.buttonForSelect setImage:[UIImage imageNamed:@"choice_btn_arrow.png"] forState:UIControlStateHighlighted];
-        [cell.contentView addSubview:item.buttonForSelect];
+            UIFont *font = [UIFont systemFontOfSize:12];
+            desc = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(110), 58, 75, 31)];
+            desc.backgroundColor = [UIColor clearColor];
+            desc.text = @"颜色：";
+            desc.font = font;
+            desc.textColor = [UIColor colorWithHexString:@"0x666666"];
+            [cell.contentView addSubview:desc];
             
-        
-        desc = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(110), 103, 75, 31)];
-        desc.backgroundColor = [UIColor clearColor];
-        desc.text = @"尺码：";
-        desc.font = font;
-        desc.textColor = [UIColor colorWithHexString:@"0x666666"];
-        [cell.contentView addSubview:desc];
-
+            //下拉列表选择颜色按钮
+            item.buttonForSelect = [UrlImageButton buttonWithType:UIButtonTypeCustom];
+            [item.buttonForSelect setFrame:CGRectMake(lee1fitAllScreen(175), 58, 79, 31)];
+            [item.buttonForSelect setBackgroundImage:[UIImage imageNamed:@"lp_option.png"] forState:UIControlStateNormal];
+            [item.buttonForSelect setBackgroundImage:[UIImage imageNamed:@"lp_option_hover.png"] forState:UIControlStateHighlighted];
+            [item.buttonForSelect addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
+            item.buttonForSelect.tag = i * 10 + 0;
+            if ([item.colorlist count]!=0) {
+                [item.buttonForSelect setTitle:[[item.colorlist objectAtIndex:item.currentColor] Spec_alias] forState:UIControlStateNormal];
+            }
+            UIEdgeInsets inserts = item.buttonForSelect.titleEdgeInsets;
+            inserts.right = 20;
+            item.buttonForSelect.titleEdgeInsets = inserts;
+            item.buttonForSelect.titleLabel.font = font;
+            [item.buttonForSelect setTitleColor:[UIColor colorWithHexString:@"0x666666"] forState:UIControlStateNormal];
+            //lee999 添加向下箭头//sort_arrow_down.png  {top, left, bottom, right}
+            //        [item.buttonForSelect setImageEdgeInsets:UIEdgeInsetsMake(12, 65, 12, 4)];
+            //        [item.buttonForSelect setImage:[UIImage imageNamed:@"choice_btn_arrow.png"] forState:UIControlStateNormal];
+            //            [item.buttonForSelect setImage:[UIImage imageNamed:@"choice_btn_arrow.png"] forState:UIControlStateHighlighted];
+            [cell.contentView addSubview:item.buttonForSelect];
             
-        item.buttonForSize=[UrlImageButton buttonWithType:UIButtonTypeCustom];
-        [item.buttonForSize setFrame:CGRectMake(lee1fitAllScreen(175), 103, 79, 31)];
-        [item.buttonForSize setBackgroundImage:[UIImage imageNamed:@"lp_option.png"] forState:UIControlStateNormal];
-        [item.buttonForSize setBackgroundImage:[UIImage imageNamed:@"lp_option_hover.png"] forState:UIControlStateHighlighted];
-        [item.buttonForSize addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
-        item.buttonForSize.tag = i * 10 + 1;
-
+            
+            desc = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(110), 103, 75, 31)];
+            desc.backgroundColor = [UIColor clearColor];
+            desc.text = @"尺码：";
+            desc.font = font;
+            desc.textColor = [UIColor colorWithHexString:@"0x666666"];
+            [cell.contentView addSubview:desc];
+            
+            
+            item.buttonForSize=[UrlImageButton buttonWithType:UIButtonTypeCustom];
+            [item.buttonForSize setFrame:CGRectMake(lee1fitAllScreen(175), 103, 79, 31)];
+            [item.buttonForSize setBackgroundImage:[UIImage imageNamed:@"lp_option.png"] forState:UIControlStateNormal];
+            [item.buttonForSize setBackgroundImage:[UIImage imageNamed:@"lp_option_hover.png"] forState:UIControlStateHighlighted];
+            [item.buttonForSize addTarget:self action:@selector(showPicker:) forControlEvents:UIControlEventTouchUpInside];
+            item.buttonForSize.tag = i * 10 + 1;
+            
+//            //lee999 150708 增加默认选中的尺码
+//            if ([item.array_size count]!=0) {
+//                [item.buttonForSelect setTitle:[[item.colorlist objectAtIndex:item.currentColor] Spec_alias] forState:UIControlStateNormal];
+//            }
+//            //end
+            
+//            [[item.array_size objectAtIndex:item.currentColor] objectForKey:[[item.colorlist objectAtIndex:item.currentColor] ID]]
             NSDictionary *dicColor = [item.array_size objectAtIndex:0];
-            if ([(NSArray*)[dicColor objectForKey:[[item.colorlist objectAtIndex:0 isArray:nil] ID]] count]!=0) {
+            if ([(NSArray*)[dicColor objectForKey:[[item.colorlist objectAtIndex:item.currentColor] ID]] count]!=0) {
                 NSString* selectedSize;
                 selectedSize = [[[[item.array_size objectAtIndex:item.currentColor] objectForKey:[[item.colorlist objectAtIndex:item.currentColor] ID]] objectAtIndex:item.currentSize]objectForKey:@"spec_alias"];
                 
                 item.currentSize = 0;
                 [item.buttonForSize setTitle:selectedSize forState:UIControlStateNormal];
             }
-
-        inserts = item.buttonForSize.titleEdgeInsets;
-        inserts.right = 20;
-        item.buttonForSize.titleEdgeInsets = inserts;
-        item.buttonForSize.titleLabel.font = font;
+            
+            inserts = item.buttonForSize.titleEdgeInsets;
+            inserts.right = 20;
+            item.buttonForSize.titleEdgeInsets = inserts;
+            item.buttonForSize.titleLabel.font = font;
             [item.buttonForSize setTitleColor:[UIColor colorWithHexString:@"0x666666"] forState:UIControlStateNormal];
             //lee999 添加向下箭头//sort_arrow_down.png  {top, left, bottom, right}
-//            [item.buttonForSize setImageEdgeInsets:UIEdgeInsetsMake(12, 65, 12, 4)];
-//            [item.buttonForSize setImage:[UIImage imageNamed:@"sort_arrow_down.png"] forState:UIControlStateNormal];
-//            [item.buttonForSize setImage:[UIImage imageNamed:@"sort_arrow_down.png"] forState:UIControlStateHighlighted];
-        [cell.contentView addSubview:item.buttonForSize];
-        
-        if (i != [self.suitListModel.suitArray count]) {
-        }
+            //            [item.buttonForSize setImageEdgeInsets:UIEdgeInsetsMake(12, 65, 12, 4)];
+            //            [item.buttonForSize setImage:[UIImage imageNamed:@"sort_arrow_down.png"] forState:UIControlStateNormal];
+            //            [item.buttonForSize setImage:[UIImage imageNamed:@"sort_arrow_down.png"] forState:UIControlStateHighlighted];
+            [cell.contentView addSubview:item.buttonForSize];
+            
+            if (i != [self.suitListModel.suitArray count]) {
+            }
         }else {
             UIFont *font = [UIFont systemFontOfSize:18];
             desc = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(110), 58, 180, 31)];
@@ -513,10 +518,10 @@
             desc.font = font;
             desc.textColor = [UIColor colorWithHexString:@"#c8002e"];
             [cell.contentView addSubview:desc];
-
+            
         }
         [cellArray addObject:cell];
-
+        
     }
 }
 
@@ -712,6 +717,17 @@
 -(void)JumpToCarpage{
     [self changetableBarto:3];
 }
+
+
+#pragma mark--  登录成功之后的回调函数
+-(void)loginOKCallBack:(NSString *)prama{
+    if (isAddtoCar) {
+        
+        isAddtoCar = NO;
+        [self clickToAddCart:nil];
+    }
+}
+
 
 
 @end

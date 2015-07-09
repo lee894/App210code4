@@ -24,39 +24,62 @@
     [self.navbtnRight setTitle:@"保存" forState:UIControlStateHighlighted];
     [self.navbtnRight setFrame:CGRectMake(242, 7, 66, 32)];
 
-	
-//	UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(10, isIOS7up?44+20:20, 200, 25)];
-    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 200, 25)];
-
-	label.backgroundColor = [UIColor clearColor];
-    label.text = @"请输入附言（50字以内）"; 
-	label.font = [UIFont systemFontOfSize:14];
-	[self.view addSubview:label];
-
-	UIImageView* bgtextview = [[UIImageView alloc] init];//WithImage:[[UIImage imageNamed:@"list_one.png"] resizableImageWithCap:UIEdgeInsetsMake(14, 14, 14, 14)]
-    //lee给view设置为圆角，不再使用图片了。 -140512
-//    [SingletonState setViewRadioSider:bgtextview];
-    bgtextview.frame = CGRectMake(10, 50, ScreenWidth-20, 130);
+    
+	UIImageView* bgtextview = [[UIImageView alloc] init];//WithImage:[[UIImage imageNamed:@"list_one.png"]
+    bgtextview.frame = CGRectMake(0, 20, ScreenWidth, 130);
     [bgtextview setBackgroundColor:[UIColor whiteColor]];
 	[self.view addSubview:bgtextview];
 
-	
-//	postText = [[UITextView alloc] initWithFrame:CGRectMake(10, isIOS7up?44+ 50:50, 300, 120)];
-    postText = [[UITextView alloc] initWithFrame:CGRectMake(10, 50,  ScreenWidth-20, 120)];
-
+    if ([self.postStr isEqualToString:@""]) {
+        self.postStr = @"请输入留言";
+    }
+    
+    postText = [[UITextView alloc] initWithFrame:CGRectMake(10, 25,  ScreenWidth-20, 120)];
 	postText.font = [UIFont systemFontOfSize:14];
 	postText.delegate = self;
 	postText.backgroundColor = [UIColor clearColor];
+    [postText setTextColor:[UIColor colorWithHexString:@"777777"]];
     postText.text=self.postStr;
 	[self.view addSubview:postText];
+    
+    
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(10, 155, ScreenWidth-20, 25)];
+    label.backgroundColor = [UIColor clearColor];
+    label.text = @"50字以内";
+    [label setTextColor:[UIColor colorWithHexString:@"777777"]];
+    [label setTextAlignment:NSTextAlignmentRight];
+    label.font = [UIFont systemFontOfSize:14];
+    [self.view addSubview:label];
+    
 }
 
 - (void)rightButAction {
+    
+    [postText resignFirstResponder];
+    
+    if ([self.postStr isEqualToString:@"请输入留言"]) {
+    
+        [SBPublicAlert showMBProgressHUD:@"请您输入留言内容" andWhereView:self.view hiddenTime:AlertShowTime];
+        return;
+    }
+    
     checkOut.postText = postText.text;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+
+    if ([postText.text isEqualToString:@"请输入留言"]) {
+        postText.text = @"";
+        self.postStr = @"";
+    }
+    
+    return YES;
+}
+
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    
     
     
     NSInteger number = [textView.text length];

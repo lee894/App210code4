@@ -266,10 +266,18 @@
     
     _qrcodeV.qrcodeNum.text = [NSString stringWithFormat:@"优惠券号：%@", ci.code];
     _qrcodeV.qrcodeimg.image = [QRCodeGenerator qrImageForString:ci.code imageSize:220];
-    _qrcodeV.qrcodetime.text = [NSString stringWithFormat:@"有效期:%@至%@", ci.start_time, ci.failtime];
+    _qrcodeV.qrcodetime.text = [NSString stringWithFormat:@"有效期至%@", ci.failtime];
     _qrcodeV.qrcodetitle.text = ci.title;
     _qrcodeV.qrcodedesc.text = ci.desc;
     _qrcodeV.userInteractionEnabled = YES;
+    
+    
+    [_qrcodeV.btnClose.layer setCornerRadius:_qrcodeV.btnClose.frame.size.height / 2];
+    [_qrcodeV.btnClose.layer setMasksToBounds:YES];
+    
+    [_qrcodeV.btnSave.layer setCornerRadius:_qrcodeV.btnSave.frame.size.height / 2];
+    [_qrcodeV.btnSave.layer setMasksToBounds:YES];
+    
     [app.window addSubview:_qrcodeV];
 }
 

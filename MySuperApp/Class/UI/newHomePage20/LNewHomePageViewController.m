@@ -921,7 +921,10 @@
 //搜索
 -(void)gotoSearchViewC{
     
-    
+    GiftCheckOutFinishViewController *vc = [[GiftCheckOutFinishViewController alloc]init];
+    vc.orderId = @"123123";
+    [self.navigationController pushViewController:vc animated:YES];
+    return;
 //#warning ----test lee999
 //    
 //    MyCloset1ViewController *vc1 = [[MyCloset1ViewController alloc] initWithNibName:@"MyCloset1ViewController" bundle:nil];
@@ -1154,7 +1157,8 @@
         case 1:
             //banner
             //return 405 + sepViewH;
-            return lee1fitAllScreen(405)+sepViewH;//ScreenWidth*1.2656 + sepViewH;
+            //lee999 banner 下面的区域  缩短宽度 -10px
+            return lee1fitAllScreen(405)+sepViewH -10;//ScreenWidth*1.2656 + sepViewH;
 
             break;
             
@@ -1208,7 +1212,7 @@
         case 1:
         {
             //banner
-            [cell setBackgroundColor:[UIColor colorWithHexString:@"F1F1F1"]];
+            [cell setBackgroundColor:[UIColor colorWithHexString:@"ff0000"]];
             [cell addSubview:bannerView];
             [cell addSubview:firstLab];
             [cell addSubview:secondLab];

@@ -26,6 +26,8 @@
 @property (retain, nonatomic) IBOutlet UILabel *qrcodetime;
 @property (retain, nonatomic) IBOutlet UILabel *qrcodedesc;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnSave;
+@property (weak, nonatomic) IBOutlet UIButton *btnClose;
 
 @property (nonatomic, assign) id <QrcodeViewDelegate>delegate;
 

@@ -24,6 +24,9 @@
     UIToolbar *toolBarForSizePicker;//尺寸picker的toolbar
     
     NSInteger currentSelectRow;   //当前选中的行
+    
+    BOOL isAddtoCar; //未登录的时候，是否添加到购物车
+    
 }
 @property (nonatomic, assign) BOOL isFromMyAimer;
 @property (nonatomic, assign) BOOL isHiddenBar;

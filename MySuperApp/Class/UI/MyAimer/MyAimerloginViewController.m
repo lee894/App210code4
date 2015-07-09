@@ -783,7 +783,7 @@
         {
             //@"联系客服";
             YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
-            webView.strURL = @"http://xiaoqu.qq.com/mobile/barindex.html?_bid=128&_wv=1027&bid=51413";
+            webView.strURL = kefuUrl;
             webView.strTitle = @"联系客服";
             [self.navigationController pushViewController:webView animated:YES];
             

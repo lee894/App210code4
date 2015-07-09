@@ -34,6 +34,9 @@
     UIButton* btnColor;
     UIButton* btnSize;
     PackageGoodsInfo* goodsInfo;
+    
+    BOOL isAddtoCar;
+    
 }
 @property (nonatomic, retain) PackageInfo* pInfo;
 @property (nonatomic, retain) UITableView* tbPackage;
@@ -62,6 +65,8 @@
     [mainSev getPackageInfoWithPid:self.pid];
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 
+    
+    isAddtoCar = NO;
     
     currentColor = 0;
     currentSize = 0;
@@ -281,6 +286,8 @@
 
 -(void)closeGoodsView:(UIButton*)sender
 {
+    [self hiddenBar];
+    
     [vGoods removeFromSuperview];
     vGoods = nil;
 }
@@ -539,17 +546,6 @@
 
 -(void)addToCart:(UIButton*)sender
 {
-    if (![SingletonState sharedStateInstance].userHasLogin) {
-        
-        [self changeToMyaimer];
-
-        
-//        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"您尚未登录，请先登录。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录", nil];
-//        alert.tag=111;
-//        [alert show];
-        return;
-    }
-    
     BOOL pickGoodsDone = YES;
     for (NSInteger i = 0; i < _pInfo.packageinfo.groups.count; ++i) {
         NSInteger count = 0;
@@ -570,6 +566,14 @@
             return;
         }
     }
+    
+    if (![SingletonState sharedStateInstance].userHasLogin) {
+        isAddtoCar = YES;
+        [self changeToMyaimer];
+        
+        return;
+    }
+    
     mainSev = [[MainpageServ alloc] init];
     mainSev.delegate = self;
     [mainSev addPackageToCartWithData:_marrGoods andPid:self.pid];
@@ -851,15 +855,30 @@
         [vGroup addSubview:btn];
         [cell addSubview:vGroup];
         
+//        if (((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).isOpen) {
+//            UIImageView* ivPointer = [[UIImageView alloc] initWithFrame:CGRectMake(tableView.frame.size.width - 15 - lee1fitAllScreen(17), (lee1fitAllScreen(44) - lee1fitAllScreen(8)) / 2, lee1fitAllScreen(17), lee1fitAllScreen(8))];
+//            [ivPointer setImage:[UIImage imageNamed:@"sryc_class_arrow"]];
+//            [vGroup addSubview:ivPointer];
+//        }else
+//        {
+//            UIImageView* ivPointer = [[UIImageView alloc] initWithFrame:CGRectMake(tableView.frame.size.width - 10 - lee1fitAllScreen(10), (lee1fitAllScreen(44) - lee1fitAllScreen(17)) / 2, lee1fitAllScreen(10), lee1fitAllScreen(17))];
+//            [ivPointer setImage:[UIImage imageNamed:@"dl_zc_arrow"]];
+//            [vGroup addSubview:ivPointer];
+//        }
+        
+        
+        UIImageView* ivPointer = [[UIImageView alloc] initWithFrame:CGRectMake(tableView.frame.size.width - 15 - lee1fitAllScreen(17), (lee1fitAllScreen(44) - lee1fitAllScreen(8)) / 2, lee1fitAllScreen(17), lee1fitAllScreen(8))];
+        [ivPointer setImage:[UIImage imageNamed:@"sryc_class_arrow"]];
+        [vGroup addSubview:ivPointer];
         if (((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).isOpen) {
-            UIImageView* ivPointer = [[UIImageView alloc] initWithFrame:CGRectMake(tableView.frame.size.width - 15 - lee1fitAllScreen(8), (lee1fitAllScreen(44) - lee1fitAllScreen(12)) / 2, lee1fitAllScreen(8), lee1fitAllScreen(12))];
-            [ivPointer setImage:[UIImage imageNamed:@"dl_zc_arrow"]];
-            [vGroup addSubview:ivPointer];
+            //收起
+            ivPointer.transform=CGAffineTransformMakeRotation(360*M_PI/180);
+
         }else
         {
-            UIImageView* ivPointer = [[UIImageView alloc] initWithFrame:CGRectMake(tableView.frame.size.width - 12 - lee1fitAllScreen(17), (lee1fitAllScreen(44) - lee1fitAllScreen(8)) / 2, lee1fitAllScreen(17), lee1fitAllScreen(8))];
-            [ivPointer setImage:[UIImage imageNamed:@"sryc_class_arrow"]];
-            [vGroup addSubview:ivPointer];
+            //展开
+            ivPointer.transform=CGAffineTransformMakeRotation(270*M_PI/180);
+
         }
         
         height = lee1fitAllScreen(44);
@@ -883,15 +902,16 @@
             NSMutableAttributedString* maStr = [[NSMutableAttributedString alloc] initWithString:pgi.name];
             NSUInteger nLen = pgi.name.length;
             [maStr addAttribute:NSParagraphStyleAttributeName value:mps range:NSMakeRange(0, nLen)];
-            [maStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:lee1fitAllScreen(11)] range:NSMakeRange(0, nLen)];
+            [maStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, nLen)];
             [lblName setAttributedText:maStr];
             
             CGRect rcName = [lblName.attributedText boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 40) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin context:nil];
             [lblName setFrame:CGRectMake(10, uiv.frame.size.height + uiv.frame.origin.y + 12, rcName.size.width, rcName.size.height)];
+            [lblName setTextColor:[UIColor colorWithHexString:@"494949"]];
             [vUnit addSubview:lblName];
             
             UILabel* lblPrice = [[UILabel alloc] init];
-            [lblPrice setFont:[UIFont systemFontOfSize:lee1fitAllScreen(11)]];
+            [lblPrice setFont:[UIFont systemFontOfSize:12]];
             [lblPrice setText:[NSString stringWithFormat:@"￥%@", pgi.price]];
             [lblPrice setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
             CGRect rcPrice = [lblPrice.text boundingRectWithSize:CGSizeMake(vUnit.frame.size.width - 20, 36) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lblPrice.font} context:nil];
@@ -1096,4 +1116,18 @@
         [vInfo addSubview:btn];
     }];
 }
+
+
+
+#pragma mark--  登录成功之后的回调函数
+-(void)loginOKCallBack:(NSString *)prama{
+    if (isAddtoCar) {
+        
+        isAddtoCar = NO;
+        [mainSev addPackageToCartWithData:_marrGoods andPid:self.pid];
+    }
+}
+
+
+
 @end

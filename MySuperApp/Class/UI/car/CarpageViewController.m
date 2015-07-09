@@ -211,6 +211,14 @@
             return;
         }
         
+        //lee999 150708 新增判断 如果没选中商品的话，不能进入结算中心
+        if ([_carModel.itemNumber integerValue] == 0) {
+            [SBPublicAlert showMBProgressHUD:@"请您勾选购物车中的商品" andWhereView:self.view hiddenTime:AlertShowTime];
+            return;
+        }
+        //end
+        
+        
         CheckOutViewController* chectOut = [[CheckOutViewController alloc] init];
         [self.navigationController pushViewController:chectOut animated:YES];
 	} else {
@@ -406,9 +414,30 @@
             }
             if (hasContent) {
                 [self creatToolBar];
-                //lee999 百分点
-                [BfdAgent recommend:self recommendId:@"rec_FDFEE10D_5A29_BE14_3808_3C336BA76303" options:nil];
+                //lee999 百分点  150708 增加百分点参数
+                //在购物车页面需要在recommend中传字段ids(服务器推荐商品id）和iid（传加入购物车的商品id）
+                
+                NSMutableArray *arrItem = [[NSMutableArray alloc] initWithCapacity:0];
+                for (YKItem *item in _carModel.hotlist) {
+                    [arrItem addObject:item.productid];
+                }
+                NSString *str1 = @"";
+                if (arrItem.count>0) {
+                    str1 = [arrItem componentsJoinedByString:@","];
+                }
+                [arrItem removeAllObjects];
+                
+                for (YKItem *item in _carModel.carProductlist) {
+                    [arrItem addObject:item.productid];
+                }
+                NSString *str2 = @"";
+                if (arrItem.count>0) {
+                    str2 = [arrItem componentsJoinedByString:@","];
+                }
+
+                [BfdAgent recommend:self recommendId:@"rec_FDFEE10D_5A29_BE14_3808_3C336BA76303" options:@{@"ids":str1,@"iid":str2}];
             }
+            
 
             [self checkTable];
             [shoppingCarTab reloadData];
@@ -502,11 +531,19 @@
 //    [self creatToolBar];
     
     //lee999 设置气泡
-    [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%.f",[self.carModel.itemNumber floatValue]] forKey:@"totalNUM"];
+#warning ---- 修改购物车 气泡的需求
+    NSString *strbadge = @"0";
+    if ([_carModel.itemNumber integerValue] == 0) {
+        strbadge = _carModel.itemNumber;
+    }else{
+        strbadge = _carModel.itemNumber;
+    }
+    //end
+    
+    [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%.f",[strbadge floatValue]] forKey:@"totalNUM"];
     [UIApplication sharedApplication].applicationIconBadgeNumber = [[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
     
     if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue] > 0) {
-        
         AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
         [[[[app.mytabBarController tabBar] items] objectAtIndex:3] setBadgeValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]];
     }else{
@@ -685,6 +722,13 @@
     UITapGestureRecognizer *tap = (UITapGestureRecognizer *)sender;
     
     NSLog(@"------tap:%ld",(long)tap.view.tag);
+    
+    
+    //lee999 150708 新增编辑状态不能进入商品详情
+    if (btnCheckOut.selected) {
+        return;
+    }
+    //end
     
     //MyButton* button = (MyButton*)sender;
 	YKItem* item = (YKItem*)[self.carModel.hotlist objectAtIndex:tap.view.tag];
@@ -2430,6 +2474,13 @@
     if ([item.type isEqualToString:@"gift"]) {
         return;
     }
+    
+    //lee999 150708 新增编辑状态不能进入商品详情
+    if (btnCheckOut.selected) {
+        return;
+    }
+    //end
+    
     ProductDetailViewController* detail = [[ProductDetailViewController alloc] init];
     detail.thisProductId = item.goodsid;
     detail.isShop = YES;
@@ -2450,6 +2501,13 @@
 //    if (indexPath.row == 0) {
 //        return ;
 //    }
+    
+    //lee999 150708 新增编辑状态不能进入商品详情
+    if (btnCheckOut.selected) {
+        return;
+    }
+    //end
+    
     YKProductsItem *pItem = [item.suits objectAtIndex:row];
     ProductDetailViewController *controller = [[ProductDetailViewController alloc] init];
     controller.isPush = YES;
@@ -2470,6 +2528,13 @@
 //    if (indexPath.row == 0) {
 //        return ;
 //    }
+    
+    //lee999 150708 新增编辑状态不能进入商品详情
+    if (btnCheckOut.selected) {
+        return;
+    }
+    //end
+    
     YKProductsItem *pItem = [item.suits objectAtIndex:row];
     ProductDetailViewController *controller = [[ProductDetailViewController alloc] init];
     controller.isPush = YES;

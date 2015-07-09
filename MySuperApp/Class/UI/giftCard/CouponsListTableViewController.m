@@ -30,6 +30,11 @@
     int selectIndex;
     
     
+    UIButton* btnShowCouponMenu; //全部
+    UIButton* btnToFreeShippingCard; //包邮卡
+    UIButton* btnToGiftCard;   //礼品卡
+    
+    
 }
 @property (nonatomic, retain) UIView* vToolbar;
 @property (nonatomic, retain) NSString* strType;
@@ -77,7 +82,7 @@
     [ivBG setFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, lee1fitAllScreen(35))];
     [_vToolbar addSubview:ivBG];
     
-    UIButton* btnShowCouponMenu = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnShowCouponMenu = [UIButton buttonWithType:UIButtonTypeCustom];
     CGFloat btnWidth = ([UIScreen mainScreen].bounds.size.width - 4) / 3;
     [btnShowCouponMenu setFrame:CGRectMake(0, 0, btnWidth, lee1fitAllScreen(35))];
     [btnShowCouponMenu addTarget:self action:@selector(showCouponMenu:) forControlEvents:UIControlEventTouchUpInside];
@@ -88,6 +93,7 @@
     [btnShowCouponMenu setSelected:YES];
     [btnShowCouponMenu setExclusiveTouch:NO];
     [_vToolbar addSubview:btnShowCouponMenu];
+    btnShowCouponMenu.tag = 1;
     
     [btnShowCouponMenu setImage:[UIImage imageNamed:@"yhq_arrow_d.png"] forState:UIControlStateNormal];
     [btnShowCouponMenu setImage:[UIImage imageNamed:@"yhq_arrow_d.png"] forState:UIControlStateSelected];
@@ -104,23 +110,25 @@
     selectedBtn = btnShowCouponMenu;
     nSelectedIndexInMenu = 10001;
     
-    UIButton* btnToFreeShippingCard = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnToFreeShippingCard = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnToFreeShippingCard setFrame:CGRectMake(btnShowCouponMenu.frame.size.width + btnShowCouponMenu.frame.origin.x + 2, 0, btnWidth, lee1fitAllScreen(35))];
     [btnToFreeShippingCard addTarget:self action:@selector(toFreeShippingCard:) forControlEvents:UIControlEventTouchUpInside];
     [btnToFreeShippingCard setTitle:@"包邮卡" forState:UIControlStateNormal];
     [btnToFreeShippingCard setTitle:@"包邮卡" forState:UIControlStateSelected];
     [btnToFreeShippingCard setTitleColor:[UIColor colorWithHexString:@"#6c6c6c"] forState:UIControlStateNormal];
     [btnToFreeShippingCard setTitleColor:[UIColor colorWithHexString:@"#181818"] forState:UIControlStateSelected];
+    btnToFreeShippingCard.tag = 2;
     [btnToFreeShippingCard setExclusiveTouch:NO];
     [_vToolbar addSubview:btnToFreeShippingCard];
     
-    UIButton* btnToGiftCard = [UIButton buttonWithType:UIButtonTypeCustom];
+    btnToGiftCard = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnToGiftCard setFrame:CGRectMake(btnToFreeShippingCard.frame.size.width + btnToFreeShippingCard.frame.origin.x + 2, 0, btnWidth, lee1fitAllScreen(35))];
     [btnToGiftCard addTarget:self action:@selector(toGiftCard:) forControlEvents:UIControlEventTouchUpInside];
     [btnToGiftCard setTitle:@"礼品卡" forState:UIControlStateNormal];
     [btnToGiftCard setTitle:@"礼品卡" forState:UIControlStateSelected];
     [btnToGiftCard setTitleColor:[UIColor colorWithHexString:@"#6c6c6c"] forState:UIControlStateNormal];
     [btnToGiftCard setTitleColor:[UIColor colorWithHexString:@"#181818"] forState:UIControlStateSelected];
+    btnToGiftCard.tag = 3;
     [btnToGiftCard setExclusiveTouch:NO];
     [_vToolbar addSubview:btnToGiftCard];
 }
@@ -1164,6 +1172,10 @@
 
 -(void)showCouponMenu:(UIButton*)sender
 {
+    
+    btnShowCouponMenu.selected = YES;
+    btnToFreeShippingCard.selected = NO;
+    btnToGiftCard.selected = NO;
 //    if(sender != selectedBtn)
     if(selectIndex != 1)
     {
@@ -1175,6 +1187,8 @@
         [sender addSubview:ivSelected];
         
         selectIndex = 1;
+        
+        sender.selected = YES;
         
         _strType = @"c";
         [self getData];
@@ -1268,6 +1282,10 @@
 
 -(void)toFreeShippingCard:(UIButton*)sender
 {
+ 
+    btnShowCouponMenu.selected = NO;
+    btnToFreeShippingCard.selected = YES;
+    btnToGiftCard.selected = NO;
     
     selectIndex = 3;
 
@@ -1293,6 +1311,10 @@
 
 -(void)toGiftCard:(UIButton*)sender
 {
+    
+    btnShowCouponMenu.selected = NO;
+    btnToFreeShippingCard.selected = NO;
+    btnToGiftCard.selected = YES;
     
     selectIndex = 2;
 

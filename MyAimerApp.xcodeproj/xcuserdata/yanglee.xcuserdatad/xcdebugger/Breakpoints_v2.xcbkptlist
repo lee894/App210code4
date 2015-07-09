@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MySuperApp/Class/UI/giftCard/SelectCouponTableViewController.m"
-            timestampString = "458019507.808806"
+            filePath = "MySuperApp/Class/UI/productdetail/YKPreferentialSuit.m"
+            timestampString = "458059077.112236"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "-btnClicked:onCell:"
+            startingLineNumber = "491"
+            endingLineNumber = "491"
+            landmarkName = "-createTableCells"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,13 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MySuperApp/Class/UI/giftCard/SelectCouponTableViewController.m"
-            timestampString = "458042563.843129"
+            filePath = "MySuperApp/Class/UI/car/CarpageViewController.m"
+            timestampString = "458067889.591757"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "594"
-            endingLineNumber = "594"
-            landmarkName = "-serviceFinished:withmodel:"
+            startingLineNumber = "738"
+            endingLineNumber = "738"
+            landmarkName = "-touchAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -51,13 +51,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MySuperApp/Class/UI/shoppage/shopinfo/NoticeListViewController.m"
-            timestampString = "458035946.233938"
+            filePath = "MySuperApp/Class/UI/car/CarpageViewController.m"
+            timestampString = "458067889.591757"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "2512"
+            endingLineNumber = "2512"
+            landmarkName = "-suitProductAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -67,13 +67,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MySuperApp/Class/UI/giftCard/SelectCouponTableViewController.m"
-            timestampString = "458042563.843129"
+            filePath = "MySuperApp/Class/UI/car/CarpageViewController.m"
+            timestampString = "458067889.591757"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "387"
-            endingLineNumber = "387"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "2541"
+            endingLineNumber = "2541"
+            landmarkName = "-packageProductAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -1130,6 +1130,8 @@
     }
 }
 
+
+#pragma mark--  登录成功之后的回调函数
 -(void)loginOKCallBack:(NSString *)prama{
     if (isAddtoCar) {
         
@@ -1138,8 +1140,6 @@
         [self buttonAction:btn];
         isAddtoCar = NO;
     }
-    
-    
 }
 
 

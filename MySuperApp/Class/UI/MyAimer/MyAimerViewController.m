@@ -18,13 +18,14 @@
 #import "MyAimerViewController.h"
 #import "ModelManager.h"
 #import "WeiboUser.h"
-
+#import "BfdAgent.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import <AlipaySDK/APayAuthInfo.h>
 #import "DataSigner.h"
 #import "WXApiObject.h"
 
-@interface MyAimerViewController () {
+@interface MyAimerViewController ()<mobideaRecProtocol>
+{
 
     int ailPayCount;
     
@@ -543,6 +544,15 @@
                 //lee999 150513 设置设备别名
             
                 //end
+                
+                //lee999 150708 设置百分点登录状态
+                NSString *str = @"";
+                if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"]) {
+                    str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+                }
+                [BfdAgent addUser:self userId:str options:nil];
+                //end
+                
                 
                 //lee999 new
                 [SingletonState sharedStateInstance].userHasLogin = YES;

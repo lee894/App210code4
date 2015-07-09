@@ -102,7 +102,7 @@
     [nextbtn addTarget:self action:@selector(nextBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [nextbtn setTitleColor:[UIColor colorWithHexString:@"#ffffff"] forState:UIControlStateNormal];
     [nextbtn setBackgroundImage:[UIImage imageNamed:@"big_btn_r_normal.png"] forState:UIControlStateNormal];
-    [nextbtn setBackgroundImage:[UIImage imageNamed:@"big_btn_r_select.png"] forState:UIControlStateHighlighted];
+    [nextbtn setBackgroundImage:[UIImage imageNamed:@"big_btn_r_hover.png"] forState:UIControlStateHighlighted];
     
     [nextbtn setBackgroundColor:[UIColor clearColor]];
     [nextbtn setTitle:@"申请预约" forState:UIControlStateNormal];

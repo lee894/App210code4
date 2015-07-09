@@ -195,6 +195,14 @@
             [lblSize setFrame:CGRectMake(lblPrice.frame.origin.x, btnSize.center.y - 6.5, 100, 13)];
             [cell addSubview:lblSize];
             
+//
+            UIView *spV = [[UIView alloc] initWithFrame:CGRectMake(0, uiv.frame.origin.y + uiv.frame.size.height+15, ScreenWidth, 0.5)];
+//            UIView *spV = [[UIView alloc] initWithFrame:CGRectMake(0, lee1fitAllScreen(168), ScreenWidth, 0.5)];
+
+            [spV setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+            [cell addSubview:spV];
+            
+            
             [_marrCell addObject:cell];
             ++m;
         }
@@ -343,6 +351,11 @@
     [lbl setFrame:CGRectMake(15, (v.frame.size.height - rc.size.height) / 2, rc.size.width, rc.size.height)];
     [v addSubview:lbl];
     
+    //lee999  增加分割线
+    UIView *spV = [[UIView alloc] initWithFrame:CGRectMake(0, lee1fitAllScreen(43), ScreenWidth, 0.5)];
+    [spV setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+    [v addSubview:spV];
+    
     return v;
 }
 
@@ -354,14 +367,18 @@
         {
             v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 42)];
             [v setBackgroundColor:[UIColor whiteColor]];
+            
             UILabel* lbl = [[UILabel alloc] init];
+            [lbl setFrame:CGRectMake(0, 0, v.frame.size.width, 42)];
             [lbl setText:@"温馨提示：赠品不予以退换，请您谅解"];
             [lbl setFont:[UIFont systemFontOfSize:12]];
             [lbl setTextAlignment:NSTextAlignmentCenter];
             [lbl setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
-            CGSize sz = [lbl.text sizeWithFont:lbl.font];
-            [lbl setFrame:CGRectMake(0, (42 - sz.height) / 2, v.frame.size.width, sz.height)];
+//            CGSize sz = [lbl.text sizeWithFont:lbl.font];
+            [lbl setBackgroundColor:[UIColor whiteColor]];
             [v addSubview:lbl];
+            
+            [v setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
         }
             break;
             

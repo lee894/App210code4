@@ -12,6 +12,7 @@
 #import "SGFocusImageFrame.h"
 #import "SGFocusImageItem.h"
 
+#import "GiftCheckOutFinishViewController.h"
 
 @interface LNewHomePageViewController : LBaseViewController<UITableViewDataSource,UITableViewDelegate,ServiceDelegate,SGFocusImageFrameDelegate,UIAlertViewDelegate,LoginCallbackDelegate>
 {
