@@ -417,25 +417,17 @@
                 //lee999 百分点  150708 增加百分点参数
                 //在购物车页面需要在recommend中传字段ids(服务器推荐商品id）和iid（传加入购物车的商品id）
                 
-                NSMutableArray *arrItem = [[NSMutableArray alloc] initWithCapacity:0];
+                NSMutableArray *arrItemids = [[NSMutableArray alloc] initWithCapacity:0];
                 for (YKItem *item in _carModel.hotlist) {
-                    [arrItem addObject:item.productid];
+                    [arrItemids addObject:item.productid];
                 }
-                NSString *str1 = @"";
-                if (arrItem.count>0) {
-                    str1 = [arrItem componentsJoinedByString:@","];
-                }
-                [arrItem removeAllObjects];
                 
+                NSMutableArray *arrItemiid = [[NSMutableArray alloc] initWithCapacity:0];
                 for (YKItem *item in _carModel.carProductlist) {
-                    [arrItem addObject:item.productid];
-                }
-                NSString *str2 = @"";
-                if (arrItem.count>0) {
-                    str2 = [arrItem componentsJoinedByString:@","];
+                    [arrItemiid addObject:item.productid];
                 }
 
-                [BfdAgent recommend:self recommendId:@"rec_FDFEE10D_5A29_BE14_3808_3C336BA76303" options:@{@"ids":str1,@"iid":str2}];
+                [BfdAgent recommend:self recommendId:@"rec_FDFEE10D_5A29_BE14_3808_3C336BA76303" options:@{@"ids":arrItemids,@"iid":arrItemiid}];
             }
             
 
