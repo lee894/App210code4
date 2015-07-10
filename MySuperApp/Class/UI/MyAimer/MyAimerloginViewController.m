@@ -26,7 +26,7 @@
 #import "BrandListViewController.h"
 #import "MyAimerParser.h"
 #import "NSString+WPAttributedMarkup.h"
-
+#import "HasBindPhoneViewController.h"
 
 #import "ImproveInformationViewController.h"
 
@@ -775,7 +775,22 @@
         {
             //@"绑定手机";
             if ([myAimerInfo.userinfo.isbind isEqualToString:@"0"]) {
+                
+                //未绑定手机
+                
                 BindPhoneViewController *tempBindPhone = [[BindPhoneViewController alloc] initWithNibName:@"BindPhoneViewController" bundle:nil];
+                [self.navigationController  pushViewController:tempBindPhone animated:YES];
+            }else{
+            
+                //已绑定手机
+                
+                HasBindPhoneViewController *tempBindPhone = [[HasBindPhoneViewController alloc] initWithNibName:@"HasBindPhoneViewController" bundle:nil];
+                
+                NSRange rang = {3,4};//location
+                NSMutableString *strphone = [NSMutableString stringWithFormat:@"%@",myAimerInfo.userinfo.bind_number];
+                [strphone replaceCharactersInRange:rang  withString:@"****"];
+
+                tempBindPhone.strLab = [NSString stringWithFormat:@"已绑定：  %@",strphone];
                 [self.navigationController  pushViewController:tempBindPhone animated:YES];
             }
         }

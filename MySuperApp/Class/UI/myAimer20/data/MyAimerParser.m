@@ -84,6 +84,12 @@
 }   //私人衣橱的信息
 
 
+-(NSString*)bind_number{
+    NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
+    return [[self attributeForKey:[str substringToIndex:str.length - 1]] description];
+}//绑定手机号
+
+
 @end
 
 @implementation MyAimerInfo

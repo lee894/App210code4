@@ -35,7 +35,8 @@
 
 - (IBAction)edit:(UIButton *)sender;//编辑
 - (IBAction)empty:(id)sender;//清空
-- (IBAction)clearComfirmOrCancel:(UIButton *)sender;//清空弹出视图确认or取消
+
+//- (IBAction)clearComfirmOrCancel:(UIButton *)sender;//清空弹出视图确认or取消
 
 
 @end

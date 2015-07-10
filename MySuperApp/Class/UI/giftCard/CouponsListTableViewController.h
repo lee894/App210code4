@@ -23,7 +23,7 @@ typedef enum : NSUInteger {
     EV6Card   //V6卡
 } ECouponListType;
 
-@interface CouponsListTableViewController : LBaseViewController <UITableViewDelegate,UITableViewDataSource,ServiceDelegate,UIAlertViewDelegate,UIScrollViewDelegate,BlockAlertViewDelegate,UITextFieldDelegate>
+@interface CouponsListTableViewController : LBaseViewController <UITableViewDelegate,UITableViewDataSource,ServiceDelegate,UIAlertViewDelegate,UIScrollViewDelegate,UITextFieldDelegate>
 {
     UILabel *_labelInfo;
     NSInteger totalCount;

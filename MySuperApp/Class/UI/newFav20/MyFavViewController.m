@@ -91,14 +91,7 @@
         return;
     }
     isEdit = 1;
-    
-//    [self.navbtnRight setTitle:@"清空" forState:UIControlStateNormal];
-//    [self.navbtnRight setTitle:@"清空" forState:UIControlStateHighlighted];
-//	[self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_btn.png"] forState:UIControlStateNormal];
-//    [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_btn_press.png"] forState:UIControlStateHighlighted];
-//    [self.navbtnRight setFrame:CGRectMake(242, 7, 66, 32)];
-//    [self.navbtnRight addTarget:self action:@selector(empty:) forControlEvents:UIControlEventTouchUpInside];
-
+ 
     [self.navbtnRight setTitle:@"完成" forState:UIControlStateNormal];
     [self.navbtnRight setTitle:@"完成" forState:UIControlStateHighlighted];
     [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_btn.png"] forState:UIControlStateNormal];
@@ -126,50 +119,7 @@
     [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_icon_edit_press.png"] forState:UIControlStateHighlighted];
     [self.navbtnRight setFrame:CGRectMake(225, 10, 25, 25)];
     [self.navbtnRight addTarget:self action:@selector(edit:) forControlEvents:UIControlEventTouchUpInside];
-    
-//    self.navbtnRight.enabled = NO;
-//
-//    clearView= [[[NSBundle mainBundle] loadNibNamed:@"ClearView" owner:self options:nil] lastObject];
-//    [self.view addSubview:clearView];
-//    
-//    isEditing = YES;
 }
-
-- (IBAction)clearComfirmOrCancel:(UIButton *)sender//清空弹出视图确认or取消
-{
-    self.navbtnRight.enabled = YES;
-    
-    switch (sender.tag) {
-        case 80:
-        {
-            [clearView removeFromSuperview];
-            
-            //            NSMutableString *str = [NSMutableString string];
-            //            for (int i = 0; i<favoriteModel.favoritePic.count; i++) {
-            //
-            //                [str appendString:((FavoriteFavoritePic *)[favoriteModel.favoritePic objectAtIndex:i]).productid];
-            //
-            //                if (i!=[favoriteModel.favoritePic count]-1) {
-            //                    [str appendString:@","];
-            //                }
-            //            }
-            [mainSer getFavoritedel:@"all" andType:@"goods"];
-            isClear = YES;
-            
-            [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
-            
-            [tableList reloadData:YES];
-        }
-            break;
-        case 81:
-            [clearView removeFromSuperview];
-            
-            break;
-        default:
-            break;
-    }
-}
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -221,7 +171,6 @@
                 }else{
                     hasMore = YES;
                 }
-                NSLog(@"totalCount:%d------current:%d-----hasmore:%d",totalCount,current,hasMore);
                 
                 [tableList reloadData];
             }else{
@@ -334,7 +283,7 @@
     
         NSInteger returnKey = [tableList tableViewDidEndDragging];
         if (returnKey != k_RETURN_DO_NOTHING) {
-            NSString * key = [NSString stringWithFormat:@"%d", returnKey];
+            NSString * key = [NSString stringWithFormat:@"%ld", (long)returnKey];
             [self updateThread:key];
             
     }
@@ -345,7 +294,7 @@
         
         NSInteger returnKey = [tableList tableViewDidDragging];
         if (returnKey == k_RETURN_LOADMORE) {
-            NSString * key = [NSString stringWithFormat:@"%d", returnKey];
+            NSString * key = [NSString stringWithFormat:@"%ld", (long)returnKey];
             [self updateThread:key];        
     }
 }
@@ -354,7 +303,7 @@
 -(void)getData
 {
     current = 1;
-    NSString *PageCurr = [NSString stringWithFormat:@"%d",current];
+    NSString *PageCurr = [NSString stringWithFormat:@"%ld",(long)current];
    [mainSer getFavList:PageCurr andPer_page:@"10" andtype:@"good"];
 
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
@@ -365,7 +314,7 @@
 - (void)nextPage
 {
     current ++;
-    NSString *PageCurr = [NSString stringWithFormat:@"%d",current];
+    NSString *PageCurr = [NSString stringWithFormat:@"%ld",(long)current];
     
     [mainSer getFavList:PageCurr andPer_page:@"10" andtype:@"good"];
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
@@ -424,5 +373,42 @@
 //{
 //	return UIInterfaceOrientationPortrait;
 //}
+
+
+//- (IBAction)clearComfirmOrCancel:(UIButton *)sender//清空弹出视图确认or取消
+//{
+//    self.navbtnRight.enabled = YES;
+//    
+//    switch (sender.tag) {
+//        case 80:
+//        {
+//            [clearView removeFromSuperview];
+//            
+//            //            NSMutableString *str = [NSMutableString string];
+//            //            for (int i = 0; i<favoriteModel.favoritePic.count; i++) {
+//            //
+//            //                [str appendString:((FavoriteFavoritePic *)[favoriteModel.favoritePic objectAtIndex:i]).productid];
+//            //
+//            //                if (i!=[favoriteModel.favoritePic count]-1) {
+//            //                    [str appendString:@","];
+//            //                }
+//            //            }
+//            [mainSer getFavoritedel:@"all" andType:@"goods"];
+//            isClear = YES;
+//            
+//            [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+//            
+//            [tableList reloadData:YES];
+//        }
+//            break;
+//        case 81:
+//            [clearView removeFromSuperview];
+//            
+//            break;
+//        default:
+//            break;
+//    }
+//}
+
 
 @end

@@ -25,7 +25,7 @@
 @property (nonatomic, retain) NSString *ordcancel;  //已取消 订单数
 @property (nonatomic, retain) NSString *favoritenum;
 @property (nonatomic, retain) NSString *userface;
-
+@property (nonatomic, retain) NSString *bind_number; //绑定的手机号
 
 + (MoerUserinfo *)modelObjectWithDictionary:(NSDictionary *)dict;
 - (id)initWithDictionary:(NSDictionary *)dict;

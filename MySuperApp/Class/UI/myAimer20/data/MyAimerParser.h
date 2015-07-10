@@ -29,6 +29,7 @@
 
 -(NSString*)is_wardrobe;  //私人衣橱的信息
 
+-(NSString*)bind_number; //绑定的手机号码
 @end
 
 @interface MyAimerInfo : YKBaseEntity

@@ -667,7 +667,6 @@
 		9698F6511AEAA713009A29EC /* brand_9_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9698F6371AEAA713009A29EC /* brand_9_s@2x.png */; };
 		9698F6521AEAA713009A29EC /* px_xl_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9698F6381AEAA713009A29EC /* px_xl_@2x.png */; };
 		9698F6531AEAA713009A29EC /* px_xl_no@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9698F6391AEAA713009A29EC /* px_xl_no@2x.png */; };
-		9698F6641AEBE31A009A29EC /* ClearView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9698F6551AEBE31A009A29EC /* ClearView.xib */; };
 		9698F6651AEBE31A009A29EC /* CollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9698F6571AEBE31A009A29EC /* CollectCell.m */; };
 		9698F6661AEBE31A009A29EC /* CollectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9698F6581AEBE31A009A29EC /* CollectCell.xib */; };
 		9698F6671AEBE31A009A29EC /* CollectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9698F65A1AEBE31A009A29EC /* CollectView.m */; };
@@ -754,6 +753,9 @@
 		96F6DE841B46874F00E156A4 /* my_am_ico_7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE7C1B46874F00E156A4 /* my_am_ico_7@3x.png */; };
 		96F6DE851B46874F00E156A4 /* my_am_ico_8@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6DE7D1B46874F00E156A4 /* my_am_ico_8@3x.png */; };
 		96FE58531B4FCCDD00AAE650 /* ESToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FE58521B4FCCDD00AAE650 /* ESToast.m */; };
+		96FE58571B4FFB8400AAE650 /* HasBindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FE58551B4FFB8400AAE650 /* HasBindPhoneViewController.m */; };
+		96FE58581B4FFB8400AAE650 /* HasBindPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96FE58561B4FFB8400AAE650 /* HasBindPhoneViewController.xib */; };
+		96FE585A1B5012EA00AAE650 /* hyk_none@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FE58591B5012EA00AAE650 /* hyk_none@2x.png */; };
 		96FF99F81B268CE400AA82BF /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96FF99F51B268CE400AA82BF /* libWeiboSDK.a */; };
 		96FF99F91B268CE400AA82BF /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96FF99F61B268CE400AA82BF /* WeiboSDK.bundle */; };
 		9B0882FF18F7C21400F76D65 /* YKChoseGiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0882FD18F7C21400F76D65 /* YKChoseGiftViewController.m */; };
@@ -1121,9 +1123,6 @@
 		9BE4C407192CE66A00E6FA21 /* libTalkingData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE4C405192CE66A00E6FA21 /* libTalkingData.a */; };
 		9BE4C409192CE6C900E6FA21 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE4C408192CE6C900E6FA21 /* AdSupport.framework */; };
 		9BE5658118D009BC00E5959A /* ServiceBaseWithMK.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BE5658018D009BC00E5959A /* ServiceBaseWithMK.m */; };
-		9BF57E1818E12F9E00B2A3E6 /* ZbarscanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF57E1718E12F9E00B2A3E6 /* ZbarscanViewController.m */; };
-		9BF57E1C18E12FDC00B2A3E6 /* ScanFrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF57E1A18E12FDC00B2A3E6 /* ScanFrameView.m */; };
-		9BF57E1D18E12FDC00B2A3E6 /* ScanFrameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BF57E1B18E12FDC00B2A3E6 /* ScanFrameView.xib */; };
 		9BF57E2F18E2749E00B2A3E6 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BF57E2E18E2749E00B2A3E6 /* MediaPlayer.framework */; };
 		9BF57E3418E27FFC00B2A3E6 /* MyAimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BF57E3218E27FFC00B2A3E6 /* MyAimerViewController.m */; };
 		9BF57E3518E27FFC00B2A3E6 /* MyAimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BF57E3318E27FFC00B2A3E6 /* MyAimerViewController.xib */; };
@@ -2091,7 +2090,6 @@
 		9698F6371AEAA713009A29EC /* brand_9_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "brand_9_s@2x.png"; sourceTree = "<group>"; };
 		9698F6381AEAA713009A29EC /* px_xl_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "px_xl_@2x.png"; sourceTree = "<group>"; };
 		9698F6391AEAA713009A29EC /* px_xl_no@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "px_xl_no@2x.png"; sourceTree = "<group>"; };
-		9698F6551AEBE31A009A29EC /* ClearView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClearView.xib; sourceTree = "<group>"; };
 		9698F6561AEBE31A009A29EC /* CollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectCell.h; sourceTree = "<group>"; };
 		9698F6571AEBE31A009A29EC /* CollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectCell.m; sourceTree = "<group>"; };
 		9698F6581AEBE31A009A29EC /* CollectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectCell.xib; sourceTree = "<group>"; };
@@ -2227,6 +2225,10 @@
 		96F8A5111B4178D400A806BB /* WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboUser.h; sourceTree = "<group>"; };
 		96FE58511B4FCCDD00AAE650 /* ESToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESToast.h; sourceTree = "<group>"; };
 		96FE58521B4FCCDD00AAE650 /* ESToast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESToast.m; sourceTree = "<group>"; };
+		96FE58541B4FFB8400AAE650 /* HasBindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HasBindPhoneViewController.h; sourceTree = "<group>"; };
+		96FE58551B4FFB8400AAE650 /* HasBindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HasBindPhoneViewController.m; sourceTree = "<group>"; };
+		96FE58561B4FFB8400AAE650 /* HasBindPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HasBindPhoneViewController.xib; sourceTree = "<group>"; };
+		96FE58591B5012EA00AAE650 /* hyk_none@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hyk_none@2x.png"; sourceTree = "<group>"; };
 		96FF99F51B268CE400AA82BF /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		96FF99F61B268CE400AA82BF /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		96FF99F71B268CE400AA82BF /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
@@ -2913,11 +2915,6 @@
 		9BE4C408192CE6C900E6FA21 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		9BE5657F18D009BC00E5959A /* ServiceBaseWithMK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceBaseWithMK.h; sourceTree = "<group>"; };
 		9BE5658018D009BC00E5959A /* ServiceBaseWithMK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceBaseWithMK.m; sourceTree = "<group>"; };
-		9BF57E1618E12F9E00B2A3E6 /* ZbarscanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZbarscanViewController.h; sourceTree = "<group>"; };
-		9BF57E1718E12F9E00B2A3E6 /* ZbarscanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZbarscanViewController.m; sourceTree = "<group>"; };
-		9BF57E1918E12FDC00B2A3E6 /* ScanFrameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanFrameView.h; sourceTree = "<group>"; };
-		9BF57E1A18E12FDC00B2A3E6 /* ScanFrameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanFrameView.m; sourceTree = "<group>"; };
-		9BF57E1B18E12FDC00B2A3E6 /* ScanFrameView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanFrameView.xib; sourceTree = "<group>"; };
 		9BF57E2E18E2749E00B2A3E6 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		9BF57E3118E27FFC00B2A3E6 /* MyAimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAimerViewController.h; sourceTree = "<group>"; };
 		9BF57E3218E27FFC00B2A3E6 /* MyAimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAimerViewController.m; sourceTree = "<group>"; };
@@ -4333,7 +4330,6 @@
 		9698F6541AEBE31A009A29EC /* newFav20 */ = {
 			isa = PBXGroup;
 			children = (
-				9698F6551AEBE31A009A29EC /* ClearView.xib */,
 				9698F6561AEBE31A009A29EC /* CollectCell.h */,
 				9698F6571AEBE31A009A29EC /* CollectCell.m */,
 				9698F6581AEBE31A009A29EC /* CollectCell.xib */,
@@ -6096,11 +6092,6 @@
 		9BF57E1518E12F9E00B2A3E6 /* zbar */ = {
 			isa = PBXGroup;
 			children = (
-				9BF57E1918E12FDC00B2A3E6 /* ScanFrameView.h */,
-				9BF57E1A18E12FDC00B2A3E6 /* ScanFrameView.m */,
-				9BF57E1B18E12FDC00B2A3E6 /* ScanFrameView.xib */,
-				9BF57E1618E12F9E00B2A3E6 /* ZbarscanViewController.h */,
-				9BF57E1718E12F9E00B2A3E6 /* ZbarscanViewController.m */,
 			);
 			path = zbar;
 			sourceTree = "<group>";
@@ -6161,6 +6152,9 @@
 				9B49753318E66B0500F3D140 /* ModifyInformationViewController.xib */,
 				9B49753F18E66C5C00F3D140 /* ModifyCell.h */,
 				9B49754018E66C5C00F3D140 /* ModifyCell.m */,
+				96FE58541B4FFB8400AAE650 /* HasBindPhoneViewController.h */,
+				96FE58551B4FFB8400AAE650 /* HasBindPhoneViewController.m */,
+				96FE58561B4FFB8400AAE650 /* HasBindPhoneViewController.xib */,
 			);
 			path = MyAimer;
 			sourceTree = "<group>";
@@ -6259,6 +6253,7 @@
 		A6F3952B1B2ED352004566CA /* Coupon20 */ = {
 			isa = PBXGroup;
 			children = (
+				96FE58591B5012EA00AAE650 /* hyk_none@2x.png */,
 				A6F3952C1B2ED352004566CA /* laber_byk@2x.png */,
 				A6F3952D1B2ED352004566CA /* laber_byk_use@2x.png */,
 				A6F3952E1B2ED352004566CA /* laber_lpk@2x.png */,
@@ -6439,7 +6434,6 @@
 				967F00591B12074500B7E639 /* Deafult1242.png in Resources */,
 				961BEF1F1B3557E6003BEF9D /* customInfo.plist in Resources */,
 				968AE8431B247C54004A1A85 /* sryc_arrow_btn_l@2x.png in Resources */,
-				9BF57E1D18E12FDC00B2A3E6 /* ScanFrameView.xib in Resources */,
 				9601E0CA1B26D65D002C32E0 /* my_am_user_bg@2x.png in Resources */,
 				A6218DD01B47ECE600D9ED93 /* lp_arrow_down@2x.png in Resources */,
 				96CD7C1A1AF7C73400831E3F /* Resource.bundle in Resources */,
@@ -6543,6 +6537,7 @@
 				96F2A5091ADAB92600E1A04B /* PPBuyCircleCommonCell.xib in Resources */,
 				9698F6441AEAA713009A29EC /* brand_3_n@2x.png in Resources */,
 				962693E41A135FB700A0BC7F /* sort_pic_01.png in Resources */,
+				96FE585A1B5012EA00AAE650 /* hyk_none@2x.png in Resources */,
 				9B69574E18E408020051B562 /* FeedBackViewController.xib in Resources */,
 				A6218DA21B395F5C00D9ED93 /* tb_ico_like_w@2x.png in Resources */,
 				9B486ACB191B69070021E57D /* CouponDetailViewController.xib in Resources */,
@@ -6588,7 +6583,6 @@
 				968AE8541B247C54004A1A85 /* sryc_img_girl@2x.png in Resources */,
 				962694841A135FB700A0BC7F /* nav_btn.png in Resources */,
 				9626944C1A135FB700A0BC7F /* tab02_icon_hot_press.png in Resources */,
-				9698F6641AEBE31A009A29EC /* ClearView.xib in Resources */,
 				962694961A135FB700A0BC7F /* search_icon_refresh_press.png in Resources */,
 				962693F61A135FB700A0BC7F /* chose_bg_kong.png in Resources */,
 				966590CD1B1604D3004CF036 /* MyCloset5ViewController.xib in Resources */,
@@ -6825,6 +6819,7 @@
 				9685FA6B1ADD75ED00BF2DE8 /* t_ico_share_hover@2x.png in Resources */,
 				968AE8681B247C54004A1A85 /* tk_size_bg@2x.png in Resources */,
 				962694731A135FB700A0BC7F /* icon_back_press@2x.png in Resources */,
+				96FE58581B4FFB8400AAE650 /* HasBindPhoneViewController.xib in Resources */,
 				9685FA5C1ADD75ED00BF2DE8 /* sx_laber_bg_normal@2x.png in Resources */,
 				2F2137D818E4574700F91104 /* AddAddressViewController.xib in Resources */,
 				962693C11A135FB700A0BC7F /* devider_line.png in Resources */,
@@ -7157,6 +7152,7 @@
 				9695425D1B25F7C500206FAB /* QRCodeGenerator.m in Sources */,
 				9BD58CAB18E40D57008CD881 /* AFURLConnectionOperation.m in Sources */,
 				9BB88A2A19A86BA700A3D371 /* WXPayClient.m in Sources */,
+				96FE58571B4FFB8400AAE650 /* HasBindPhoneViewController.m in Sources */,
 				9698F66B1AEBE31A009A29EC /* MyFavViewController.m in Sources */,
 				9B7CB10C18D59C4300D8DAA5 /* YKSpecitem.m in Sources */,
 				9BACBF7A1913EC1C00CEF33F /* BaseCell.m in Sources */,
@@ -7173,7 +7169,6 @@
 				C574D60718F98C6E00FB612A /* CheckOutViewController.m in Sources */,
 				9BACBF621910CE1800CEF33F /* CommModel.m in Sources */,
 				9B7CB16018D59C4300D8DAA5 /* ModelManager.m in Sources */,
-				9BF57E1C18E12FDC00B2A3E6 /* ScanFrameView.m in Sources */,
 				C598E64E18FAA8C900C5A7B0 /* OrderDetailViewController.m in Sources */,
 				9B7CB15C18D59C4300D8DAA5 /* LBaseModel.m in Sources */,
 				9B7CB11618D59C4300D8DAA5 /* YKAdressItem.m in Sources */,
@@ -7285,7 +7280,6 @@
 				9B7CB13418D59C4300D8DAA5 /* ShowcomMentShowcomMentModel.m in Sources */,
 				9B5840641904C732008DC48F /* MoreRateViewController.m in Sources */,
 				969542611B25F7C500206FAB /* rscode.c in Sources */,
-				9BF57E1818E12F9E00B2A3E6 /* ZbarscanViewController.m in Sources */,
 				9B7CB15218D59C4300D8DAA5 /* MagazineMagazineModel.m in Sources */,
 				9695421B1B25F63E00206FAB /* MD5DataSigner.m in Sources */,
 				C598E65418FAA8C900C5A7B0 /* OrderViewController.m in Sources */,

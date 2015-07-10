@@ -196,11 +196,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MySuperApp/Class/UI/giftCard/CouponsListTableViewController.m"
-            timestampString = "458220781.048586"
+            timestampString = "458232971.040304"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "-btnClicked:onCell:"
             landmarkType = "5">
          </BreakpointContent>

@@ -44,6 +44,15 @@
     }
 }
 
+-(void)clickBackButton:(UIButton*)sender{
+
+    if (self.isHasBindPhone) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

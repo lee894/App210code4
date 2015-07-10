@@ -19,8 +19,6 @@
 
     NewFavInfo *_storeinfo;
     
-    UIView *clearView;
-    
     NSString *delStoreID;
 
 
@@ -112,28 +110,28 @@
 }
 
 
-- (IBAction)clearComfirmOrCancel:(UIButton *)sender//清空弹出视图确认or取消
-{
-    self.navbtnRight.enabled = YES;
-    
-    switch (sender.tag) {
-        case 80:
-        {
-            [clearView removeFromSuperview];
-
-            [mainSer getFavoritedel:@"all" andType:@"store"];
-            //isClear = YES;
-            [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
-        }
-            break;
-        case 81:
-            [clearView removeFromSuperview];
-            
-            break;
-        default:
-            break;
-    }
-}
+//- (IBAction)clearComfirmOrCancel:(UIButton *)sender//清空弹出视图确认or取消
+//{
+//    self.navbtnRight.enabled = YES;
+//    
+//    switch (sender.tag) {
+//        case 80:
+//        {
+//            [clearView removeFromSuperview];
+//
+//            [mainSer getFavoritedel:@"all" andType:@"store"];
+//            //isClear = YES;
+//            [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+//        }
+//            break;
+//        case 81:
+//            [clearView removeFromSuperview];
+//            
+//            break;
+//        default:
+//            break;
+//    }
+//}
 
 
 //创建表格

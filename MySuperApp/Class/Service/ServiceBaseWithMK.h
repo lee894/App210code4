@@ -11,7 +11,7 @@
 #import "LBaseModel.h"
 #import "ModelManager.h"
 #import "JSON.h"
-#import "ASIHTTPRequest.h"
+//#import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 
 

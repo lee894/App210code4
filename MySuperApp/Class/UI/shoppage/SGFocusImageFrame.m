@@ -215,7 +215,7 @@ static CGFloat SWITCH_FOCUS_PICTURE_INTERVAL = 8.0; //switch interval time
             [_scrollView setContentOffset:CGPointMake(targetX, 0) animated:NO];
         }
     }
-    int page = (_scrollView.contentOffset.x+_scrollView.frame.size.width/2.0) / _scrollView.frame.size.width;
+    NSInteger page = (_scrollView.contentOffset.x+_scrollView.frame.size.width/2.0) / _scrollView.frame.size.width;
 
     if ([imageItems count] > 1)
     {
@@ -251,7 +251,7 @@ static CGFloat SWITCH_FOCUS_PICTURE_INTERVAL = 8.0; //switch interval time
 }
 
 
-- (void)scrollToIndex:(int)aIndex
+- (void)scrollToIndex:(NSInteger)aIndex
 {
     NSArray *imageItems = objc_getAssociatedObject(self, (const void *)CFBridgingRetain(SG_FOCUS_ITEM_ASS_KEY));
     if ([imageItems count]>1)

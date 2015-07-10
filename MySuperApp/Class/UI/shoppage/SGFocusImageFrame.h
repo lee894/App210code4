@@ -14,7 +14,7 @@
 @protocol SGFocusImageFrameDelegate <NSObject>
 @optional
 - (void)foucusImageFrame:(SGFocusImageFrame *)imageFrame didSelectItem:(id )item;
-- (void)foucusImageFrame:(SGFocusImageFrame *)imageFrame currentItem:(int)index;
+- (void)foucusImageFrame:(SGFocusImageFrame *)imageFrame currentItem:(NSInteger)index;
 
 @end
 
@@ -27,7 +27,7 @@
 
 - (id)initWithFrame:(CGRect)frame delegate:(id<SGFocusImageFrameDelegate>)delegate focusImageItems:(SGFocusImageItem *)items, ... NS_REQUIRES_NIL_TERMINATION;
 - (id)initWithFrame:(CGRect)frame delegate:(id<SGFocusImageFrameDelegate>)delegate imageItems:(NSArray *)items;
-- (void)scrollToIndex:(int)aIndex;
+- (void)scrollToIndex:(NSInteger)aIndex;
 
 @property (nonatomic, assign) id<SGFocusImageFrameDelegate> delegate;
 

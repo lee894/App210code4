@@ -22,6 +22,8 @@
     __weak IBOutlet UIView *myallView;
 }
 
+@property(nonatomic,assign)BOOL isHasBindPhone ; //是否已绑定手机
+
 
 - (IBAction)getCode:(id)sender;//获取验证码
 - (IBAction)bindPhone:(id)sender;//绑定手机

@@ -77,6 +77,9 @@
 
 //-(float)lee1fitAllScreen:(float)inF;
 
+//返回
+-(void)clickBackButton:(UIButton*)sender;
+
 -(NSMutableString*)ImageSize:(NSString*)url Size:(NSString*)size;
 
 //banner图片点击跳转
