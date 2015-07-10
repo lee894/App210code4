@@ -24,7 +24,7 @@
     sender.selected = !sender.selected;
     
     
-    NSLog(@"self.indexPath------%d----%d---%@---tag:%d",[self.indexPath section],[self.indexPath row],self.indexPath,sender.tag);
+//    NSLog(@"self.indexPath------%d----%d---%@---tag:%d",[self.indexPath section],[self.indexPath row],self.indexPath,sender.tag);
 
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(giftsCellWithStates:indexPath:)]) {

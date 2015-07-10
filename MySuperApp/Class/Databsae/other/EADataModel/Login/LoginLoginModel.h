@@ -24,7 +24,7 @@
 
 @property (nonatomic, retain) NSString *userfaceurl;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 

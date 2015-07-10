@@ -14,7 +14,7 @@
 @property (nonatomic, retain) NSArray *suitlist;
 @property (nonatomic, retain) NSString *response;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (SuitListSuitListModel *)modelObjectWithDictionary:(NSDictionary *)dict;

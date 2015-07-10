@@ -168,7 +168,7 @@
                                 {
                                     [MYCommentAlertView showMessage:@"分享失败" target:nil];
                                     
-                                    NSLog(@"分享失败,错误码:%d,错误描述:%@", [error errorCode], [error errorDescription]);
+                                    NSLog(@"分享失败,错误码:%ld,错误描述:%@", (long)[error errorCode], [error errorDescription]);
                                 }
                                 
                                 [SingletonState sharedStateInstance].isShareSDK = NO;

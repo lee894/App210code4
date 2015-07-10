@@ -274,7 +274,7 @@
                 }
                 //end
 
-            [mainSev getProductlist:self.params andOrder:self.orderStr andKeyword:self.key andPage:[NSString stringWithFormat:@"%d",current] andPer_page:@"10"];
+            [mainSev getProductlist:self.params andOrder:self.orderStr andKeyword:self.key andPage:[NSString stringWithFormat:@"%ld",(long)current] andPer_page:@"10"];
             [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 
             }

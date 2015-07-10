@@ -938,7 +938,13 @@
     return cell;
 }
 
--(UIView *)createCellView:(NSArray*)subSortArray withtype:(NSString *)atype withtypeid:(int)atypeid withgroup:(int)agroup withtitle:(NSString*)atitle withIsOpen:(BOOL)isOpen withIndex:(int)sectionindex{
+-(UIView *)createCellView:(NSArray*)subSortArray
+                 withtype:(NSString *)atype
+               withtypeid:(NSInteger)atypeid
+                withgroup:(NSInteger)agroup
+                withtitle:(NSString*)atitle
+               withIsOpen:(BOOL)isOpen
+                withIndex:(NSInteger)sectionindex{
 
     //行数
     NSInteger subSortbtnNum = ([subSortArray count]%filterCellNum == 0? [subSortArray count]/filterCellNum :[subSortArray count]/filterCellNum+1);

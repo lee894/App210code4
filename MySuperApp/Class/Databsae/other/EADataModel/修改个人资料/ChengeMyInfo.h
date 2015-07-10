@@ -12,7 +12,7 @@
 
 @property (nonatomic, retain) NSString *res;
 @property (nonatomic, retain) NSString *response;
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (ChengeMyInfo *)modelObjectWithDictionary:(NSDictionary *)dict;

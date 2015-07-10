@@ -12,7 +12,7 @@
 
 
 @property (retain, nonatomic) NSString *errorMessage;
-@property (nonatomic, assign) int requestTag; /*这个与相应的请求的tag是同步的*/
+@property (nonatomic, assign) NSInteger requestTag; /*这个与相应的请求的tag是同步的*/
 @property (nonatomic, retain) NSString *response;
 
 @end
@@ -23,7 +23,7 @@
 //
 //
 //@property (retain, nonatomic) NSString *errorMessage;
-//@property (nonatomic, assign) int requestTag; /*这个与相应的请求的tag是同步的*/
+//@property (nonatomic, assign) NSInteger requestTag; /*这个与相应的请求的tag是同步的*/
 //@property (nonatomic, retain) NSString *response;
 //
 //@end

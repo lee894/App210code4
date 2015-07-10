@@ -149,7 +149,7 @@
 - (void)countDown:(NSTimer *)timer
 {
     count -- ;
-    labelCount.text = [NSString stringWithFormat:@"%d",count];
+    labelCount.text = [NSString stringWithFormat:@"%ld",(long)count];
     if (count == 0) {
         [timerCode invalidate];
     }

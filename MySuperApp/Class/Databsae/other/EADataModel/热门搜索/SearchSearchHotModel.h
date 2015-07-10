@@ -15,7 +15,7 @@
 @property (nonatomic, retain) NSArray *keyword;
 @property (nonatomic, retain) NSString *response;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (SearchSearchHotModel *)modelObjectWithDictionary:(NSDictionary *)dict;

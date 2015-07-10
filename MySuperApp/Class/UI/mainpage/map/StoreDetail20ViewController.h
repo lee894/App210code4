@@ -20,7 +20,7 @@
 @protocol StoreDetail20Delegate <NSObject>
 @required
 
-- (void)sureFavStore:(BOOL)isfav withIndex:(int)index;
+- (void)sureFavStore:(BOOL)isfav withIndex:(NSInteger)index;
 
 @end
 

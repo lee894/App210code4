@@ -9,7 +9,7 @@
 
 @interface UIView (Hierarchy)
 
--(int)getSubviewIndex;
+-(NSInteger)getSubviewIndex;
 
 -(void)bringToFront;
 -(void)sentToBack;

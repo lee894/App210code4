@@ -768,7 +768,7 @@
 #pragma mark PicsViewDelegate
 - (void)didSelectItemAtIndex:(NogiftsItem *)nogifts{
 }
-- (void)giftsCellWithStates:(BOOL)states indexPath:(int)index{
+- (void)giftsCellWithStates:(BOOL)states indexPath:(NSInteger)index{
     
     NSDictionary *dic = [resultsArray objectAtIndex:index];
     NSArray *array = [dic objectForKey:@"gifts"];
@@ -785,7 +785,7 @@
         section = 0;
     }
     
-    NSLog(@"index是：%d-----section是：%ld",index,(long)section);
+    NSLog(@"index是：%ld-----section是：%ld",(long)index,(long)section);
     
     //lee 防止崩溃 增加判断
     //lee999 150608

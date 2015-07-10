@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSArray *zixunInfo;
 @property (nonatomic, retain) NSString *response;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (ZixunZixunZixunInfoModel *)modelObjectWithDictionary:(NSDictionary *)dict;

@@ -65,10 +65,13 @@
 
     
     //添加下拉刷新
-    [myTableV addHeaderWithCallback:^{
-        [mainSev getSort20data];
-    }];
+    [myTableV addHeaderWithTarget:self action:@selector(headerRereshing)];
 }
+
+-(void)headerRereshing{
+    [mainSev getSort20data];
+}
+
 
 
 

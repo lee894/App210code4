@@ -14,7 +14,7 @@
 @property (nonatomic, retain) NSString *offline;
 @property (nonatomic, retain) NSString *response;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (CheckCheckOffineMobile *)modelObjectWithDictionary:(NSDictionary *)dict;

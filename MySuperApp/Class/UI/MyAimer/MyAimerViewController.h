@@ -25,7 +25,7 @@
 @end
 
 
-@interface MyAimerViewController : LBaseViewController <UITextFieldDelegate,ServiceDelegate,sinaLoginDelegate,RegisterViewControllerDelegate,TencentLoginDelegate,WXApiDelegate,WBHttpRequestDelegate> {
+@interface MyAimerViewController : LBaseViewController <UITextFieldDelegate,ServiceDelegate,sinaLoginDelegate,RegisterViewControllerDelegate,TencentLoginDelegate,TencentSessionDelegate,WXApiDelegate,WBHttpRequestDelegate> {
 
     BOOL userStates;//是否是输入用户后显示提示框
     BOOL loginStates;//是否是登录后显示提示框
@@ -78,6 +78,6 @@
 - (IBAction)memberActive:(id)sender;//门店会员激活
 - (IBAction)thirdLogin:(UIButton *)sender;//第三方登录
 
-- (IBAction)yesOrNo:(UIButton *)sender;//判断是否是线下会员弹出view
+//- (IBAction)yesOrNo:(UIButton *)sender;//判断是否是线下会员弹出view
 
 @end

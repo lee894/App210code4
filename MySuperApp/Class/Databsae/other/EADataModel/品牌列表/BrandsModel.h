@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSString *response;
 @property (nonatomic, strong) NSArray *brandsWall;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (BrandsModel *)modelObjectWithDictionary:(NSDictionary *)dict;

@@ -23,9 +23,9 @@
 @property (nonatomic, retain) NSString *product_color;
 
 
-@property (nonatomic, assign) int sizeSelecttag;
-@property (nonatomic, assign) int braSelecttag;
-@property (nonatomic, assign) int degressSelecttag;
+@property (nonatomic, assign) NSInteger sizeSelecttag;
+@property (nonatomic, assign) NSInteger braSelecttag;
+@property (nonatomic, assign) NSInteger degressSelecttag;
 @property (nonatomic, retain) NSString *userInput;
 //end
 

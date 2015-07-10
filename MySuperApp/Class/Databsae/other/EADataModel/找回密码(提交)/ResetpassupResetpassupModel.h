@@ -15,7 +15,7 @@
 @property (nonatomic, retain) NSString *returnProperty;
 
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (ResetpassupResetpassupModel *)modelObjectWithDictionary:(NSDictionary *)dict;

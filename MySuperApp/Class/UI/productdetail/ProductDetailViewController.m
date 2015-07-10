@@ -842,7 +842,7 @@
     else if(barButton.tag==102+100)
     {
         NSLog(@"size完成arrTemSize:%@", self.arrTemSize);
-        NSLog(@"size完成currentSize:%ld", currentSize);
+        NSLog(@"size完成currentSize:%ld", (long)currentSize);
         if ([productModel.array_size count]!=0)
         {
 //            self.selectedSize=[[self.arrTemSize objectAtIndex:currentSize]objectForKey:@"spec_alias"];

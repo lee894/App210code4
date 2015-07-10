@@ -466,9 +466,9 @@
     
 }
 
--(void)changeChildBirthday:(int)index{
+-(void)changeChildBirthday:(NSInteger)index{
 
-    NSLog(@"-----index-----%d",index);
+    //NSLog(@"-----index-----%d",index);
     [self.view endEditing:YES];
     
     if (index == 1000){
@@ -624,7 +624,7 @@
 }
 
 
-- (void)selectReceiveview:(int)index{
+- (void)selectReceiveview:(NSInteger)index{
 
 }
 

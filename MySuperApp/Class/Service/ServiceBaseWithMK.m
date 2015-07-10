@@ -347,7 +347,7 @@
         //请先登录
         if ([[[jsonDic objectForKey:@"error"] objectForKey:@"text"] isEqualToString:@"请先登录"]) {
             
-            AppDelegate *app = [UIApplication sharedApplication].delegate;
+            AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
             MyAimerViewController *loginvc = [[MyAimerViewController alloc] initWithNibName:@"MyAimerViewController" bundle:nil];
             UINavigationController *navCtl = [[UINavigationController alloc] initWithRootViewController:loginvc];
             [app.mytabBarController presentViewController:navCtl animated:YES completion:^{}];

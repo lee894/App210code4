@@ -15,7 +15,7 @@
 @property (nonatomic, retain) LookCheckDetails *details;
 @property (nonatomic, retain) NSString *delivery_type;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 @property (nonatomic, retain) NSString *response;
 

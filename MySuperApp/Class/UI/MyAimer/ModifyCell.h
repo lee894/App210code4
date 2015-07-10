@@ -16,10 +16,10 @@ typedef  void (^DeleteMessage) (NSInteger index); ///声明块
 
 @protocol ModifyCellDelegate <NSObject>
 
-- (void)selectReceiveview:(int)index;
+- (void)selectReceiveview:(NSInteger)index;
 
 //修改孩子的生日
--(void)changeChildBirthday:(int)index;
+-(void)changeChildBirthday:(NSInteger)index;
 
 @end
 

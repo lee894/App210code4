@@ -19,7 +19,7 @@
 @property (retain, nonatomic) NSMutableArray *nogiftsItemArr;
 @property (nonatomic, retain) NSString *strSelect;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 

@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSString *response;
 @property (nonatomic, retain) NSString *background;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (ChaoliuChaoliuxinpinModel *)modelObjectWithDictionary:(NSDictionary *)dict;

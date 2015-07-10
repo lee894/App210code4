@@ -10,7 +10,7 @@
 
 @interface Usev6cardModel : NSObject
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 @end

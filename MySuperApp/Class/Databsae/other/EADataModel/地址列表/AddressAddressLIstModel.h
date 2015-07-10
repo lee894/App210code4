@@ -12,7 +12,7 @@
 @interface AddressAdd : LBaseModel
 
 @property (nonatomic, retain) NSString *response;
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (AddressAdd *)modelObjectWithDictionary:(NSDictionary *)dict;
@@ -30,7 +30,7 @@
 @property (nonatomic, assign) double pageCount;
 @property (nonatomic, retain) NSMutableArray *addresslist;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (AddressAddressLIstModel *)modelObjectWithDictionary:(NSDictionary *)dict;

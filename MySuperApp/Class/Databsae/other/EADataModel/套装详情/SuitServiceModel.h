@@ -71,7 +71,7 @@
 @property(nonatomic, assign)float save;
 @property(nonatomic, retain)NSString *suitid;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 

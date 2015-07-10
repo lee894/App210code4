@@ -69,7 +69,7 @@
 	return 3;
 }
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-	int row=0;
+	NSInteger row=0;
 	switch (component) {
 		case 0:
 			row=[pickerData count];

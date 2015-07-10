@@ -213,13 +213,13 @@
 }
 
 - (void)pageScrollView:(OTPageScrollView *)pageScrollView didTapPageAtIndex:(NSInteger)index{
-    NSLog(@"click cell at %d",index);
+//    NSLog(@"click cell at %d",index);
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    NSInteger index = scrollView.contentOffset.x / scrollView.frame.size.width;
-    NSLog(@"click cell at %d",index);
+    //NSInteger index = scrollView.contentOffset.x / scrollView.frame.size.width;
+    //NSLog(@"click cell at %d",index);
 }
 
 
@@ -371,9 +371,9 @@
 -(void)cellOnTap:(UITapGestureRecognizer*)gr
 {
     
-    int index = [gr.view tag];
+    NSInteger index = [gr.view tag];
     
-    NSLog(@"index------%d",index);
+    //NSLog(@"index------%d",index);
     
     //    good_id
     NewMaginzeDetailInfo_dataB* dataB = [arr_maginzelist objectAtIndex:index isArray:nil];

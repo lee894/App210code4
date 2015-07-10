@@ -12,7 +12,7 @@
 @interface ActiveModel : LBaseModel <NSCoding>
 
 @property (nonatomic, retain) NSString *response;
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (ActiveModel *)modelObjectWithDictionary:(NSDictionary *)dict;

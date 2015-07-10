@@ -27,7 +27,7 @@
 {
     id<YKPageControlDataSource> dataSource_PageControl;
     float spacing;
-    int itemCount;
+    NSInteger itemCount;
     NSString* curNodePic;
     NSString* otherNodePic;
     CGPoint origin;

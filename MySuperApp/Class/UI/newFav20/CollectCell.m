@@ -172,7 +172,7 @@
     if ([delegate respondsToSelector:@selector(forkWithTag:withProductId:)]) {
         
 
-        NSLog(@"tag:------%d",sender.tag);
+        //NSLog(@"tag:------%d",sender.tag);
 
 //        if (sender.tag == 11) {
         //lee999recode

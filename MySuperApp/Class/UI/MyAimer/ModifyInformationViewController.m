@@ -876,7 +876,7 @@
 }
 
 
-- (void)selectReceiveview:(int)index{
+- (void)selectReceiveview:(NSInteger)index{
 
     switch (index) {
         case 1:
@@ -900,7 +900,7 @@
     }
 }
 
--(void)changeChildBirthday:(int)index{
+-(void)changeChildBirthday:(NSInteger)index{
 
     [self.view endEditing:YES];
     

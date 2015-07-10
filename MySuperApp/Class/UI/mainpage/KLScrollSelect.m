@@ -106,7 +106,7 @@
 -(void) populateColumns {
     
     //lee999适配IOS8
-    NSLog(@"self.columns======%d",[self.columns count]);
+    //NSLog(@"self.columns======%d",[self.columns count]);
     if (isIOS8up && [self.columns count]>0) {
         return;
     }

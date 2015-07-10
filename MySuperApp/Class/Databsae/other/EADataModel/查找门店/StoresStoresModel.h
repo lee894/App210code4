@@ -15,7 +15,7 @@
 @property (nonatomic, retain) NSArray *stores;
 @property (nonatomic, retain) NSString *response;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (StoresStoresModel *)modelObjectWithDictionary:(NSDictionary *)dict;

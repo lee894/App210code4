@@ -16,7 +16,7 @@
 @property (nonatomic, assign) double pageCount;
 @property (nonatomic, retain) NSArray *ordersList;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (OrdersOrdersModel *)modelObjectWithDictionary:(NSDictionary *)dict;

@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSString *response;
 @property (nonatomic, strong) NSArray *categoriesPictext;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (CategoriesModel *)modelObjectWithDictionary:(NSDictionary *)dict;

@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSString *response;
 @property (nonatomic, assign) double pageCount;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (FavoriteFavoriteModel *)modelObjectWithDictionary:(NSDictionary *)dict;

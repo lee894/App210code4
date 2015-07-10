@@ -15,7 +15,7 @@
 @property (nonatomic, retain) NSString *userName;
 @property (nonatomic, retain) NSArray *detail;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 @property (nonatomic, retain) NSString *response;
 

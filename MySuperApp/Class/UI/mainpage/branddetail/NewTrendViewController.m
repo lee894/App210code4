@@ -176,7 +176,7 @@
     switch (indexPath.column) {
         case 0:
         {
-            int arrIndex = indexPath.row;
+            NSInteger arrIndex = indexPath.row;
             
             if (arrIndex < arrayFirst.count){
                 
@@ -207,8 +207,8 @@
             break;
         case 1:
         {
-            int arrIndex = indexPath.row-1 <0?0:indexPath.row;
-            NSLog(@"2  %d", arrIndex);
+            NSInteger arrIndex = indexPath.row-1 <0?0:indexPath.row;
+//            NSLog(@"2  %d", arrIndex);
             
             if (arrIndex < arraySecond.count){
                 ChaoliuChaoliuxinpinInfo *object = [arraySecond objectAtIndex:arrIndex];

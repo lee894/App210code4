@@ -89,7 +89,7 @@
 @property(nonatomic,retain) NSMutableString *str_append;
 @property(nonatomic,retain) NSString *product_id;
 @property(nonatomic,assign) int leftNUM;
-@property(nonatomic,assign) int buttonView_height;
+@property(nonatomic,assign) NSInteger buttonView_height;
 @property(nonatomic,retain) NSString *ThisPorductName;
 @property(nonatomic,retain) NSString *source_id;
 @property(nonatomic, retain) UIView *shareView;//弹出分享的视图

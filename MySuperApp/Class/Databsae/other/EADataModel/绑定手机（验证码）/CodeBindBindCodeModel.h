@@ -15,7 +15,7 @@
 @property (nonatomic, retain) NSString *content;
 @property (nonatomic, retain) NSString *response;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (CodeBindBindCodeModel *)modelObjectWithDictionary:(NSDictionary *)dict;

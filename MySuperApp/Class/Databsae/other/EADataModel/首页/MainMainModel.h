@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSString *background;
 @property (nonatomic, assign) NSInteger shopcartcount;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (MainMainModel *)modelObjectWithDictionary:(NSDictionary *)dict;

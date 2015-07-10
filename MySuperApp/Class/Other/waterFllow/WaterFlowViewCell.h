@@ -11,12 +11,12 @@
 @class IndexPath;
 @interface WaterFlowViewCell : UIView
 {
-    int _columnCount; //列数
+    NSInteger _columnCount; //列数
     IndexPath *_indexPath; //位置
     NSString *_strReuseIndentifier; //重用标识
 
 }
-@property (nonatomic,assign) int columnCount; 
+@property (nonatomic,assign) NSInteger columnCount; 
 @property (nonatomic, retain) IndexPath *indexPath;
 @property (nonatomic, retain) NSString *strReuseIndentifier;
 

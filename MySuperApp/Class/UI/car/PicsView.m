@@ -59,8 +59,8 @@ CGFloat InnerMargin = 4;
         NogiftsItem *nogifts = [datas objectAtIndex:i];
         NSInteger column = i%3;
         NSInteger row = i/3;
-        NSLog(@"%d %d", i, column);
-        NSLog(@"----%f", Margin + width * column);
+        //NSLog(@"%d %d", i, column);
+       // NSLog(@"----%f", Margin + width * column);
         UIImageView *imvBg = [[UIImageView alloc] initWithFrame:CGRectMake(Margin + width * column , row * RowHeight, width, 120)];
         imvBg.image = [UIImage imageNamed:@"same_pic_bg"];
 

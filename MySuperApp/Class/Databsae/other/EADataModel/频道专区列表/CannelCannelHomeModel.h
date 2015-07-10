@@ -14,7 +14,7 @@
 @property (nonatomic, retain) CannelChannel *channel;
 @property (nonatomic, retain) NSString *response;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (CannelCannelHomeModel *)modelObjectWithDictionary:(NSDictionary *)dict;

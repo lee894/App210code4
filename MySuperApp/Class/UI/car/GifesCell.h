@@ -12,7 +12,7 @@
 @protocol GifesCellDelegate <NSObject>
 
 @optional
-- (void)giftsCellWithStates:(BOOL)states indexPath:(int)index;
+- (void)giftsCellWithStates:(BOOL)states indexPath:(NSInteger)index;
 
 @end
 

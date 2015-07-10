@@ -13,6 +13,6 @@
 @interface AnnotationView : BMKPinAnnotationView
 @property (nonatomic,retain) UIImageView *imageAnnotation;
 
-@property (nonatomic,assign) int tag;
+@property (nonatomic,assign) NSInteger tag;
 
 @end

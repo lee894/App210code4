@@ -38,7 +38,7 @@
     UIView *magizeView;
     UIView *bannerView;
     SGFocusImageFrame *bannerSGFocus;
-    int bannerSGFocusIndex;
+    NSInteger bannerSGFocusIndex;
     UILabel *firstLab;
     UILabel *secondLab;
 
@@ -427,11 +427,12 @@
     }
     
     //添加下拉刷新
-    [myTableV addHeaderWithCallback:^{
-        [mainSev getHomePage20data];
-    }];
+    [myTableV addHeaderWithTarget:self action:@selector(headerRereshing)];
 }
 
+-(void)headerRereshing{
+    [mainSev getHomePage20data];
+}
 
 -(void)creatCellView{
 
@@ -1115,7 +1116,7 @@
 
 }
 
-- (void)foucusImageFrame:(SGFocusImageFrame *)imageFrame currentItem:(int)index{
+- (void)foucusImageFrame:(SGFocusImageFrame *)imageFrame currentItem:(NSInteger)index{
     
     bannerSGFocusIndex = index;
 

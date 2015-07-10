@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSString *response;
 @property (nonatomic, retain) VersionComment *comment;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (VersionVersionModel *)modelObjectWithDictionary:(NSDictionary *)dict;

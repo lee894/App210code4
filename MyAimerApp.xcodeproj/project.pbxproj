@@ -600,9 +600,6 @@
 		968C29191AE17F1A00D1ABFD /* DSStyleString.m in Sources */ = {isa = PBXBuildFile; fileRef = 968C29181AE17F1A00D1ABFD /* DSStyleString.m */; };
 		968C291B1AE17FE600D1ABFD /* picSearchBarBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 968C291A1AE17FE600D1ABFD /* picSearchBarBG@2x.png */; };
 		968C291D1AE17FF700D1ABFD /* btnCancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 968C291C1AE17FF700D1ABFD /* btnCancel@2x.png */; };
-		968C29211AE182C700D1ABFD /* CCMPlayNDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 968C29201AE182C700D1ABFD /* CCMPlayNDropView.m */; };
-		968C29241AE1835C00D1ABFD /* CCMBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 968C29231AE1835C00D1ABFD /* CCMBorderView.m */; };
-		968C29271AE1868C00D1ABFD /* UIViewController+MaryPopin.m in Sources */ = {isa = PBXBuildFile; fileRef = 968C29261AE1868C00D1ABFD /* UIViewController+MaryPopin.m */; };
 		968C292A1AE1FAD300D1ABFD /* PlayNDropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 968C29291AE1FAD300D1ABFD /* PlayNDropViewController.m */; };
 		969541B31B25F63300206FAB /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 969541B21B25F63300206FAB /* AlipaySDK.bundle */; };
 		969542151B25F63E00206FAB /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969541B41B25F63E00206FAB /* AlipaySDK.framework */; };
@@ -756,6 +753,9 @@
 		96FE58571B4FFB8400AAE650 /* HasBindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FE58551B4FFB8400AAE650 /* HasBindPhoneViewController.m */; };
 		96FE58581B4FFB8400AAE650 /* HasBindPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96FE58561B4FFB8400AAE650 /* HasBindPhoneViewController.xib */; };
 		96FE585A1B5012EA00AAE650 /* hyk_none@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FE58591B5012EA00AAE650 /* hyk_none@2x.png */; };
+		96FE58621B501E6400AAE650 /* CCMBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FE585D1B501E6400AAE650 /* CCMBorderView.m */; };
+		96FE58631B501E6400AAE650 /* CCMPlayNDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FE585F1B501E6400AAE650 /* CCMPlayNDropView.m */; };
+		96FE58641B501E6400AAE650 /* UIViewController+MaryPopin.m in Sources */ = {isa = PBXBuildFile; fileRef = 96FE58611B501E6400AAE650 /* UIViewController+MaryPopin.m */; };
 		96FF99F81B268CE400AA82BF /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96FF99F51B268CE400AA82BF /* libWeiboSDK.a */; };
 		96FF99F91B268CE400AA82BF /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96FF99F61B268CE400AA82BF /* WeiboSDK.bundle */; };
 		9B0882FF18F7C21400F76D65 /* YKChoseGiftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0882FD18F7C21400F76D65 /* YKChoseGiftViewController.m */; };
@@ -1898,12 +1898,6 @@
 		968C29181AE17F1A00D1ABFD /* DSStyleString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSStyleString.m; sourceTree = "<group>"; };
 		968C291A1AE17FE600D1ABFD /* picSearchBarBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "picSearchBarBG@2x.png"; sourceTree = "<group>"; };
 		968C291C1AE17FF700D1ABFD /* btnCancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btnCancel@2x.png"; sourceTree = "<group>"; };
-		968C291F1AE182C700D1ABFD /* CCMPlayNDropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMPlayNDropView.h; sourceTree = "<group>"; };
-		968C29201AE182C700D1ABFD /* CCMPlayNDropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMPlayNDropView.m; sourceTree = "<group>"; };
-		968C29221AE1835C00D1ABFD /* CCMBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMBorderView.h; sourceTree = "<group>"; };
-		968C29231AE1835C00D1ABFD /* CCMBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMBorderView.m; sourceTree = "<group>"; };
-		968C29251AE1868C00D1ABFD /* UIViewController+MaryPopin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MaryPopin.h"; sourceTree = "<group>"; };
-		968C29261AE1868C00D1ABFD /* UIViewController+MaryPopin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MaryPopin.m"; sourceTree = "<group>"; };
 		968C29281AE1FAD300D1ABFD /* PlayNDropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayNDropViewController.h; sourceTree = "<group>"; };
 		968C29291AE1FAD300D1ABFD /* PlayNDropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayNDropViewController.m; sourceTree = "<group>"; };
 		969541B21B25F63300206FAB /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
@@ -2229,6 +2223,12 @@
 		96FE58551B4FFB8400AAE650 /* HasBindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HasBindPhoneViewController.m; sourceTree = "<group>"; };
 		96FE58561B4FFB8400AAE650 /* HasBindPhoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HasBindPhoneViewController.xib; sourceTree = "<group>"; };
 		96FE58591B5012EA00AAE650 /* hyk_none@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hyk_none@2x.png"; sourceTree = "<group>"; };
+		96FE585C1B501E6400AAE650 /* CCMBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMBorderView.h; sourceTree = "<group>"; };
+		96FE585D1B501E6400AAE650 /* CCMBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMBorderView.m; sourceTree = "<group>"; };
+		96FE585E1B501E6400AAE650 /* CCMPlayNDropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCMPlayNDropView.h; sourceTree = "<group>"; };
+		96FE585F1B501E6400AAE650 /* CCMPlayNDropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCMPlayNDropView.m; sourceTree = "<group>"; };
+		96FE58601B501E6400AAE650 /* UIViewController+MaryPopin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MaryPopin.h"; sourceTree = "<group>"; };
+		96FE58611B501E6400AAE650 /* UIViewController+MaryPopin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MaryPopin.m"; sourceTree = "<group>"; };
 		96FF99F51B268CE400AA82BF /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
 		96FF99F61B268CE400AA82BF /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
 		96FF99F71B268CE400AA82BF /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
@@ -4038,19 +4038,6 @@
 			path = pickerView;
 			sourceTree = "<group>";
 		};
-		968C291E1AE182C700D1ABFD /* CCMPlayNDropView */ = {
-			isa = PBXGroup;
-			children = (
-				968C29251AE1868C00D1ABFD /* UIViewController+MaryPopin.h */,
-				968C29261AE1868C00D1ABFD /* UIViewController+MaryPopin.m */,
-				968C29221AE1835C00D1ABFD /* CCMBorderView.h */,
-				968C29231AE1835C00D1ABFD /* CCMBorderView.m */,
-				968C291F1AE182C700D1ABFD /* CCMPlayNDropView.h */,
-				968C29201AE182C700D1ABFD /* CCMPlayNDropView.m */,
-			);
-			path = CCMPlayNDropView;
-			sourceTree = "<group>";
-		};
 		969541B71B25F63E00206FAB /* openssl */ = {
 			isa = PBXGroup;
 			children = (
@@ -4551,6 +4538,19 @@
 				96F8A5111B4178D400A806BB /* WeiboUser.h */,
 			);
 			path = weiboClass;
+			sourceTree = "<group>";
+		};
+		96FE585B1B501E6400AAE650 /* CCMPlayNDropView */ = {
+			isa = PBXGroup;
+			children = (
+				96FE585C1B501E6400AAE650 /* CCMBorderView.h */,
+				96FE585D1B501E6400AAE650 /* CCMBorderView.m */,
+				96FE585E1B501E6400AAE650 /* CCMPlayNDropView.h */,
+				96FE585F1B501E6400AAE650 /* CCMPlayNDropView.m */,
+				96FE58601B501E6400AAE650 /* UIViewController+MaryPopin.h */,
+				96FE58611B501E6400AAE650 /* UIViewController+MaryPopin.m */,
+			);
+			path = CCMPlayNDropView;
 			sourceTree = "<group>";
 		};
 		9B23E76B18F64CAA00E9B317 /* shopinfo */ = {
@@ -5703,6 +5703,7 @@
 		9BD58AE518E40D56008CD881 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				96FE585B1B501E6400AAE650 /* CCMPlayNDropView */,
 				9657A2C61B48B6110070612B /* WPAttributedMarkup */,
 				9629ED7F1B478E7900F61EE2 /* XinGepush */,
 				965DF5BA1B3A862300FCD4C8 /* WaterView */,
@@ -5716,7 +5717,6 @@
 				96CD7C2E1AF7CAC600831E3F /* QQShare */,
 				96CD7BED1AF7C73400831E3F /* ShareSDK */,
 				96570D731AF46343006183C2 /* OTPageView */,
-				968C291E1AE182C700D1ABFD /* CCMPlayNDropView */,
 				96EDC3B61AC436070093FF25 /* RDVTabBarController */,
 				9BB0029D198E80850073992C /* yinlian */,
 				966B97AF1940091A004C6657 /* Alipay */,
@@ -6362,7 +6362,7 @@
 		9BCA81F418C47EAF00B81CA5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = aimer;
 				TargetAttributes = {
 					9BCA81FB18C47EAF00B81CA5 = {
@@ -7191,8 +7191,8 @@
 				9BD58D1918E40F92008CD881 /* SizeViewController.m in Sources */,
 				9B7CB12318D59C4300D8DAA5 /* BranddetailBranddetailModel.m in Sources */,
 				96CD7C3A1AF7CAC600831E3F /* sdkCall.m in Sources */,
+				96FE58641B501E6400AAE650 /* UIViewController+MaryPopin.m in Sources */,
 				9B7CB0EA18D59C4300D8DAA5 /* CodeBindBindCodeModel.m in Sources */,
-				968C29211AE182C700D1ABFD /* CCMPlayNDropView.m in Sources */,
 				9BD58CD118E40D57008CD881 /* MBProgressHUD.m in Sources */,
 				968C29101AE17E5000D1ABFD /* DSURLLabel.m in Sources */,
 				9B7CB12718D59C4300D8DAA5 /* ZixunZixunZixunInfoModel.m in Sources */,
@@ -7384,6 +7384,7 @@
 				585A677818DF1B0200390E86 /* BrandListViewController.m in Sources */,
 				9BD58CFE18E40D57008CD881 /* SDImageCache.m in Sources */,
 				9BD58CE418E40D57008CD881 /* YKRatingControl.m in Sources */,
+				96FE58631B501E6400AAE650 /* CCMPlayNDropView.m in Sources */,
 				9BD58CDE18E40D57008CD881 /* UIView+ChangeFrame.m in Sources */,
 				966590C71B1601BD004CF036 /* MyCloset4ViewController.m in Sources */,
 				96F2A5001ADAB6ED00E1A04B /* NewHomeInfo.m in Sources */,
@@ -7454,7 +7455,6 @@
 				968AE8891B25314B004A1A85 /* MyClosetMade3ViewController.m in Sources */,
 				2F2137BD18E453A400F91104 /* BindPhoneViewController.m in Sources */,
 				9B7CB0E818D59C4300D8DAA5 /* VersionVersionModel.m in Sources */,
-				968C29241AE1835C00D1ABFD /* CCMBorderView.m in Sources */,
 				9B7CB13118D59C4300D8DAA5 /* ShowcomMentModel.m in Sources */,
 				9BCA829A18C47FA300B81CA5 /* LBaseViewController.m in Sources */,
 				96A75EA619517E3000C66DB6 /* CommonListCell.m in Sources */,
@@ -7471,7 +7471,7 @@
 				9BD58CD718E40D57008CD881 /* iCarousel.m in Sources */,
 				9670D3A31B3412E6002ED503 /* MyCloset7ViewController.m in Sources */,
 				9695425B1B25F7C500206FAB /* bitstream.c in Sources */,
-				968C29271AE1868C00D1ABFD /* UIViewController+MaryPopin.m in Sources */,
+				96FE58621B501E6400AAE650 /* CCMBorderView.m in Sources */,
 				9B7CB0EF18D59C4300D8DAA5 /* BrandsBrandInfo.m in Sources */,
 				9B53943118EAC6B200084F6B /* GetSortDataArray.m in Sources */,
 				A6F395511B2F1552004566CA /* CouponListInfoParser.m in Sources */,
@@ -7607,7 +7607,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -7638,7 +7637,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "3cf4f35c-4511-42a7-a25c-bdacb1336886";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -7649,7 +7648,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -7685,7 +7683,6 @@
 		9BCA822918C47EAF00B81CA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = MyAimerApp/MyAimerApp.entitlements;
@@ -7747,7 +7744,6 @@
 		9BCA822A18C47EAF00B81CA5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = MyAimerApp/MyAimerApp.entitlements;

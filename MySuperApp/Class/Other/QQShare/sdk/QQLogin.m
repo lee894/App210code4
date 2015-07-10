@@ -74,6 +74,10 @@
     [alertView show];
 }
 
+-(void)onResp:(id)sender{
+}
+
+
 
 - (void)analysisResponse:(NSNotification *)notify
 {

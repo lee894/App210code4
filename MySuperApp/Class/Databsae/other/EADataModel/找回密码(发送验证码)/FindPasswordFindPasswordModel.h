@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSString *userId;
 
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (FindPasswordFindPasswordModel *)modelObjectWithDictionary:(NSDictionary *)dict;

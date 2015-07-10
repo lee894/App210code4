@@ -650,7 +650,7 @@ static NSInteger indexex = 100;
 }
 
 
--(void)sureFavStore:(BOOL)isfav withIndex:(int)index{
+-(void)sureFavStore:(BOOL)isfav withIndex:(NSInteger)index{
     StoresStores *store = (StoresStores *)[storeModel.stores objectAtIndex:index];
     if (isfav) {
         store.is_favorite = @"1";

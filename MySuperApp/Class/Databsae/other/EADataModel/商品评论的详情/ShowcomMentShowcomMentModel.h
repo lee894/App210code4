@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSArray *rate;
 
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 @property (nonatomic, retain) NSString *response;
 

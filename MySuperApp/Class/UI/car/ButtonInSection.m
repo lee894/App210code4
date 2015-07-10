@@ -37,7 +37,7 @@
         CGRect titleLabelFrame = CGRectMake(frame.origin.x+15, frame.origin.y, 40, frame.size.height);
         NSInteger fontSize = 14;
         if (![actionStr isKindOfClass:[NSNull class]]) {
-        CGSize size = [actionStr sizeWithFont:[UIFont systemFontOfSize:fontSize] constrainedToSize:CGSizeMake(200, 200) lineBreakMode:UILineBreakModeWordWrap];
+        CGSize size = [actionStr sizeWithFont:[UIFont systemFontOfSize:fontSize] constrainedToSize:CGSizeMake(200, 200) lineBreakMode:NSLineBreakByWordWrapping];
             titleLabelFrame.size.width = size.width;
         }
         

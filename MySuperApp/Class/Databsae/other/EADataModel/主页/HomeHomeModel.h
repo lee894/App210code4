@@ -18,7 +18,7 @@
 @property (nonatomic, assign) double cartNum;
 @property (nonatomic, retain) NSArray *homeBanner;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 
 + (HomeHomeModel *)modelObjectWithDictionary:(NSDictionary *)dict;

@@ -41,7 +41,7 @@
 @property (nonatomic, strong) NSString * akName1;
 
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 @property (nonatomic, retain) NSString *response;
 

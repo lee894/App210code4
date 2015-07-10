@@ -352,8 +352,8 @@
             //商品推荐
             if ([_mdetailinfo.magazine_info_a.goods_info respondsToSelector:@selector(objectAtIndex:)]) {
                 
-                int i = [_mdetailinfo.magazine_info_a.goods_info count];
-                int line = i%2 == 0? i/2: i/2+1;
+                NSInteger i = [_mdetailinfo.magazine_info_a.goods_info count];
+                NSInteger line = i%2 == 0? i/2: i/2+1;
                 return 50 + line *productcellH +10;
             }
             return 50;

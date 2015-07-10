@@ -431,7 +431,7 @@
 }
 
 
--(void)gotoStoreVC:(int)index{
+-(void)gotoStoreVC:(NSInteger)index{
     
     
     if (isEditing) {

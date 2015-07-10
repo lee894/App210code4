@@ -33,7 +33,7 @@
     NSArray *tmpArr = [theDic objectForKey:@"subTitleArr"];
     self.dicData = theDic;
 
-    int count = [tmpArr count];
+    NSInteger count = [tmpArr count];
     
     for (int i = 0; i < count; i++) {
         NSString *tmpName = [tmpArr objectAtIndex:i];
@@ -64,7 +64,7 @@
 #pragma mark-- 三级分类的按钮点击
 - (void)btnPinClick:(UIButton *)sender
 {
-    NSLog(@"%d",sender.tag);
+    //NSLog(@"%d",sender.tag);
     switch (type) {
         case 1:{//女士
             

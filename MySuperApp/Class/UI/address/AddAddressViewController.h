@@ -9,6 +9,8 @@
 #import "LBaseViewController.h"
 #import "AddressPickerView.h"
 @class CheckOutViewController;
+@class LBaseViewController;
+
 @interface AddAddressViewController : LBaseViewController <UITextFieldDelegate,AreaPickerDelegate,ServiceDelegate,UIScrollViewDelegate>
 {
     MainpageServ *mainSer;

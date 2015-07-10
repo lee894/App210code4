@@ -301,7 +301,7 @@
 #pragma mark-- 选择尺码  厚薄  罩杯
 -(IBAction)SelectSize:(UrlImageButton*)sender{
     
-    NSLog(@"sender的行是：%d------sender的索引是：%d-----buttonLast的行是:%d-----buttonLast的索引：%d",sender.cellIndex,sender.tag,buttonLast.cellIndex,buttonLast.tag);
+//    NSLog(@"sender的行是：%d------sender的索引是：%d-----buttonLast的行是:%d-----buttonLast的索引：%d",sender.cellIndex,sender.tag,buttonLast.cellIndex,buttonLast.tag);
     
     CommonListCell *mycellV = (CommonListCell*)[myscrollView viewWithTag:sender.cellIndex];
     UrlImageButton *btn11 = (UrlImageButton*)[mycellV viewWithTag:71];
@@ -319,7 +319,7 @@
     
     AssessDetail *assessdetail = [assessModel.detail objectAtIndex:sender.cellIndex];
     assessdetail.sizeSelecttag = sender.tag-70;
-    NSLog(@"SelectSize选中的tag是：%d",sender.tag);
+    //NSLog(@"SelectSize选中的tag是：%d",sender.tag);
     
 }
 //罩杯薄厚  面料厚度
@@ -341,7 +341,7 @@
     
     AssessDetail *assessdetail = [assessModel.detail objectAtIndex:sender.cellIndex];
     assessdetail.braSelecttag = sender.tag-80;
-    NSLog(@"SelectBra选中的tag是：%d",sender.tag);
+    //NSLog(@"SelectBra选中的tag是：%d",sender.tag);
     
 }
 //聚拢度
@@ -363,7 +363,7 @@
     
     AssessDetail *assessdetail = [assessModel.detail objectAtIndex:sender.cellIndex];
     assessdetail.degressSelecttag = sender.tag-90;
-    NSLog(@"SelectDegress选中的tag是：%d",sender.tag);
+    //NSLog(@"SelectDegress选中的tag是：%d",sender.tag);
     
 }
 

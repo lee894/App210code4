@@ -345,7 +345,7 @@ static UIFont *buttonFont = nil;
     
     [UIView animateWithDuration:0.4
                           delay:0.0
-                        options:UIViewAnimationCurveEaseOut
+                        options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          [BlockBackground sharedInstance].alpha = 1.0f;
                          _view.center = center;
@@ -388,7 +388,7 @@ static UIFont *buttonFont = nil;
                          completion:^(BOOL finished) {
                              [UIView animateWithDuration:0.4
                                                    delay:0.0 
-                                                 options:UIViewAnimationCurveEaseIn
+                                                 options:UIViewAnimationOptionCurveEaseIn
                                               animations:^{
                                                   CGRect frame = _view.frame;
                                                   frame.origin.y = -frame.size.height;
@@ -416,7 +416,7 @@ static UIFont *buttonFont = nil;
 - (void)buttonClicked:(id)sender 
 {
     /* Run the button's block */
-    int buttonIndex = [sender tag] - 1;
+    NSInteger buttonIndex = [sender tag] - 1;
     [self dismissWithClickedButtonIndex:buttonIndex animated:YES];
 }
 

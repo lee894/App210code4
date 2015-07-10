@@ -10,7 +10,7 @@
 
 @implementation UIView(Hierarchy)
 
--(int)getSubviewIndex
+-(NSInteger)getSubviewIndex
 {
 	return [self.superview.subviews indexOfObject:self];
 }
@@ -27,13 +27,13 @@
 
 -(void)bringOneLevelUp
 {
-	int currentIndex = [self getSubviewIndex];
+	NSInteger currentIndex = [self getSubviewIndex];
 	[self.superview exchangeSubviewAtIndex:currentIndex withSubviewAtIndex:currentIndex+1];
 }
 
 -(void)sendOneLevelDown
 {
-	int currentIndex = [self getSubviewIndex];
+	NSInteger currentIndex = [self getSubviewIndex];
 	[self.superview exchangeSubviewAtIndex:currentIndex withSubviewAtIndex:currentIndex-1];
 }
 

@@ -19,7 +19,7 @@
 @property (nonatomic, retain) NSString *type_name;
 @property (nonatomic, assign) double pageSize;
 
-@property (nonatomic, assign) int requestTag;
+@property (nonatomic, assign) NSInteger requestTag;
 @property (retain, nonatomic) NSString *errorMessage;
 @property (nonatomic, retain) NSString *response;
 
