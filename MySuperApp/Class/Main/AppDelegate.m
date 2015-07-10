@@ -47,7 +47,7 @@
 #import <RennSDK/RennSDK.h>
 //百分点代理
 #import "BfdAgent.h"
-
+#import <AdSupport/AdSupport.h>
 
 #import "XGPush.h"
 #import "XGSetting.h"
@@ -69,6 +69,13 @@
 
     
     [self createbaiduMap];
+    
+    
+    NSString *idfv =[[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    
+    NSString *adId =[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    
+    NSLog(@"\nidfv:%@\nidfa:%@",idfv,adId);
 
     
     //注册微信

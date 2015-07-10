@@ -350,6 +350,8 @@
     [self.navigationController pushViewController:tempOrderDetail animated:YES];
 }
 
+
+
 #pragma mark 刷新的代理方法
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {

@@ -44,7 +44,7 @@
     if (self.selectType == 1) {
         self.title = @"我的优惠券";
     }else if(self.selectType == 2){
-        self.title = @"我的电子券";
+        self.title = @"我的会员卡";
     }else if (self.selectType == 3){
         self.title = @"我的包邮卡";
     }
@@ -136,7 +136,7 @@
             } else {
                 
                 if (!self.phoneNum) {
-                    [SBPublicAlert showMBProgressHUD:@"暂无法使用尊享卡" andWhereView:self.view hiddenTime:0.6];
+                    [SBPublicAlert showMBProgressHUD:@"暂无法使用会员卡" andWhereView:self.view hiddenTime:0.6];
                     return;
                 }
                 
@@ -269,7 +269,7 @@
     
     NSLog(@"----title:%@------",self.title);
     
-    //电子券
+    //会员卡
     if (self.selectType == 2){
         static NSString *CellIdentifier = @"BonusCardCellIdentifier";
         BonusCardCell *cell = (BonusCardCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -340,7 +340,7 @@
             strTime = [NSString stringWithFormat:@"有效期至%@", [data objectForKey:@"time" isDictionary:nil]];
             
         }else if (self.selectType == 2){
-        //电子券
+        //会员卡
         
         }
         
@@ -768,7 +768,7 @@
 
 
 
-//尊享卡
+//会员卡
 //    if (indexPath.section==0) {
 //        static NSString *CellIdentifier = @"BonusCardCellIdentifier";
 //        BonusCardCell *cell = (BonusCardCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];

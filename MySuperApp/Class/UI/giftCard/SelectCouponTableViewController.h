@@ -25,7 +25,7 @@
     UITextField *nametextfield;
 }
 
-@property (nonatomic, assign) NSInteger selectType; //1 优惠券  2电子券  3 包邮卡
+@property (nonatomic, assign) NSInteger selectType; //1 优惠券  2会员卡  3 包邮卡
 
 @property (assign, nonatomic) id<SelectCouponDelegate> delegate;
 

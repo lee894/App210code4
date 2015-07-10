@@ -114,11 +114,6 @@
                         <color key="textColor" red="0.99127072704081631" green="0.014616754178810112" blue="0.18463959504776167" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <view contentMode="scaleToFill" id="Pou-9W-GXF">
-                        <rect key="frame" x="18" y="41" width="283" height="1"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.89863708941605835" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="449-Da-I0L">
                         <rect key="frame" x="60" y="165" width="120" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -149,11 +144,6 @@
                             <action selector="MyorderGray:" destination="-2" eventType="touchUpInside" id="lTg-lu-ezG"/>
                         </connections>
                     </button>
-                    <view contentMode="scaleToFill" id="Lu2-8r-a0c">
-                        <rect key="frame" x="0.0" y="220" width="320" height="10"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
@@ -171,7 +161,7 @@
                 <outlet property="orderImage" destination="ff6-GT-Sb1" id="wCY-SD-KAT"/>
                 <outlet property="redBtn" destination="449-Da-I0L" id="ysn-1l-7Wb"/>
             </connections>
-            <point key="canvasLocation" x="-262" y="-15"/>
+            <point key="canvasLocation" x="-400" y="-176"/>
         </tableViewCell>
     </objects>
     <resources>

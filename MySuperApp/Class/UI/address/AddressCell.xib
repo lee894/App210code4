@@ -51,7 +51,7 @@
                 <outlet property="labelName" destination="4" id="14"/>
                 <outlet property="labelPhone" destination="6" id="15"/>
             </connections>
-            <point key="canvasLocation" x="-1231" y="-432"/>
+            <point key="canvasLocation" x="-1357" y="-458"/>
         </tableViewCell>
     </objects>
     <resources>

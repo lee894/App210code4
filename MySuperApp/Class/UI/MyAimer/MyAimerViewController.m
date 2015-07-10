@@ -628,6 +628,8 @@
     [SBPublicAlert hideMBprogressHUD:self.view];
 }
 
+-(void) mobidea_Recs:(NSError*) error feedback:(id)feedback{
+}
 
 //#pragma mark 判断是否是线下会员弹出view
 //- (IBAction)yesOrNo:(UIButton *)sender

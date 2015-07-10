@@ -11,7 +11,7 @@
 
 @interface YKBaseEntityList : YKBaseEntity {
 }
--(int) count;
+-(NSInteger) count;
 
 -(NSMutableArray*) childArray;
 
@@ -21,13 +21,13 @@
 -(void) removeAllObjects;
 -(void) removeObject:(id) object;
 
--(int) pageCount;
+-(NSInteger) pageCount;
 -(void) setPageCount:(int) pageCount;
 
--(int) currentPage;
+-(NSInteger) currentPage;
 -(void)setCurrentPage:(int) page;
 
--(int)totalCount;
+-(NSInteger)totalCount;
 -(void) setTotalCount:(int) aTotalCount;
 
 

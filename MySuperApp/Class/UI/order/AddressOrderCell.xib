@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="106.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list_bg_big.png" id="7">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="list_bg_big.png" id="7">
                         <rect key="frame" x="10" y="5" width="300" height="96"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -39,6 +39,11 @@
                         <color key="textColor" red="0.22745099660000001" green="0.22745099660000001" blue="0.22745099660000001" alpha="1" colorSpace="deviceRGB"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
+                    <view contentMode="scaleToFill" id="dcP-W2-MzQ">
+                        <rect key="frame" x="10" y="100" width="300" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.89863708939999998" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -46,6 +51,7 @@
                 <outlet property="labelName" destination="6" id="32"/>
                 <outlet property="labelPhone" destination="4" id="33"/>
             </connections>
+            <point key="canvasLocation" x="205" y="202.5"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -233,7 +233,7 @@
 //积分兑换接口
 - (void)exchangecoupon:(NSString *)card_id;
 
-//使用尊享卡接口
+//使用会员卡接口
 - (void)usev6card:(NSString *)cardId mobile:(NSString *)mobile checkcode:(NSString *)checkcode;
 
 //完善资料 发送验证码

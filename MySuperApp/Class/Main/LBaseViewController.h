@@ -28,6 +28,7 @@
 //#import "AKTabBar.h"
 #import "TalkingData.h"
 #import "ShareUnit.h"
+#import "ESToast.h"
 
 @interface LBaseViewController : UIViewController<UIGestureRecognizerDelegate,UIAlertViewDelegate>//<AKTabBarDelegate>
 

@@ -63,6 +63,7 @@
     //V6 卡
     if (self.clType == EV6Card) {
         self.strType = @"v6card";
+        self.title = @"我的会员卡";
     }
     
     selectIndex = 1;
@@ -269,44 +270,45 @@
             break;
         case 2:
         {
-            //POBJECT(@"使用");
-            if([self.title isEqualToString:@"积分优惠"])
-            {
-                //lee999切换到我的爱慕，直接显示到首页
-                [self changetableBarto:0];
-                
-                //积分优惠界面，使用按钮不可用
-                //POBJECT(@"直接回首页");
-            } else {
-                
-                if (!self.phoneNum) {
-                    [SBPublicAlert showMBProgressHUD:@"暂无法使用尊享卡" andWhereView:self.view hiddenTime:0.6];
-                    return;
-                }
-                
-                UITextField *textFieldalert;
-                BlockTextPromptAlertView *alert = [BlockTextPromptAlertView promptWithTitle:@"爱慕提示" message:[NSString stringWithFormat:@"%@\n\n",self.phoneNum] textField:&textFieldalert block:^(BlockTextPromptAlertView *alert){
-                    
-                    return YES;
-                }];
-                
-                alert.delegate = self;
-                [alert setDestructiveButtonWithTitle:@"确定" block:^{
-                    if (!textFieldalert.text || [textFieldalert.text isEqualToString:@""]) {
-                        [SBPublicAlert showMBProgressHUD:@"请输入验证码" andWhereView:self.view hiddenTime:1.5];
-                        return;
-                    }
-                    [mainSer usev6card:[[self.arrCard objectAtIndex:0 isArray:nil] objectForKey:@"card_id"] mobile:[self.phoneNum substringWithRange:NSMakeRange(self.phoneNum.length-12, 11)] checkcode:textFieldalert.text];
-                }];
-                
-                [alert setCancelButtonWithTitle:@"取消" block:nil];
-                [alert show];
-                
-                
-                NSRange numRange = NSMakeRange(self.phoneNum.length-12, 11);
-                
-                NSLog(@"[self.phoneNum substringWithRange:numRange]----------%@",[self.phoneNum substringWithRange:numRange]);
-            }
+            //POBJECT(@"使用  会员卡");
+            [self changetableBarto:0];
+            
+//            if([self.title isEqualToString:@"我的会员卡"])
+//            {
+//                //lee999切换到我的爱慕，直接显示到首页
+//                
+//                //积分优惠界面，使用按钮不可用
+//                //POBJECT(@"直接回首页");
+//            } else {
+//                
+//                if (!self.phoneNum) {
+//                    [SBPublicAlert showMBProgressHUD:@"暂无法使用会员卡" andWhereView:self.view hiddenTime:0.6];
+//                    return;
+//                }
+//                
+//                UITextField *textFieldalert;
+//                BlockTextPromptAlertView *alert = [BlockTextPromptAlertView promptWithTitle:@"爱慕提示" message:[NSString stringWithFormat:@"%@\n\n",self.phoneNum] textField:&textFieldalert block:^(BlockTextPromptAlertView *alert){
+//                    
+//                    return YES;
+//                }];
+//                
+//                alert.delegate = self;
+//                [alert setDestructiveButtonWithTitle:@"确定" block:^{
+//                    if (!textFieldalert.text || [textFieldalert.text isEqualToString:@""]) {
+//                        [SBPublicAlert showMBProgressHUD:@"请输入验证码" andWhereView:self.view hiddenTime:1.5];
+//                        return;
+//                    }
+//                    [mainSer usev6card:[[self.arrCard objectAtIndex:0 isArray:nil] objectForKey:@"card_id"] mobile:[self.phoneNum substringWithRange:NSMakeRange(self.phoneNum.length-12, 11)] checkcode:textFieldalert.text];
+//                }];
+//                
+//                [alert setCancelButtonWithTitle:@"取消" block:nil];
+//                [alert show];
+//                
+//                
+//                NSRange numRange = NSMakeRange(self.phoneNum.length-12, 11);
+//                
+//                NSLog(@"[self.phoneNum substringWithRange:numRange]----------%@",[self.phoneNum substringWithRange:numRange]);
+//            }
         }
             break;
         case 3:
@@ -428,7 +430,7 @@
     
     NSLog(@"----title:%@------",self.title);
     
-    //尊享卡
+    //会员卡
     if (indexPath.section == 0) {
         static NSString *CellIdentifier = @"BonusCardCellIdentifier";
         BonusCardCell *cell = (BonusCardCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -490,7 +492,7 @@
             //包邮卡
             nametextfield.placeholder = @"请输入您的包邮卡号";
         }
-        
+        //end
         
         
         
@@ -533,7 +535,20 @@
         UILabel* lblContent = [[UILabel alloc] initWithFrame:CGRectMake(10, lblSep.frame.size.height + lblSep.frame.origin.y + 15, ScreenWidth - 20, 15)];
         if(_contentArr.count)
         {
-            [lblContent setText:@"点击优惠券可查看使用规则"];
+            
+            //lee999 150706 进行判断啊！！！
+            if ([_strType isEqualToString:@"c"] || [_strType isEqualToString:@"u"]) {
+                //优惠券
+                [lblContent setText:@"点击优惠券可查看使用规则"];
+            }else if ([_strType isEqualToString:@"g"]){
+                //礼品卡
+                [lblContent setText:@"点击礼品卡可查看使用规则"];
+            }else if ([_strType isEqualToString:@"f"]){
+                //包邮卡
+                [lblContent setText:@"点击包邮卡可查看使用规则"];
+            }
+            //end
+            
         }else
         {
             float oldy = lblContent.frame.origin.y + lblContent.frame.size.height;
@@ -1072,7 +1087,7 @@
                 _labelInfo.text = [NSString stringWithFormat:@"%@%d张会员卡  %ld张优惠券",([self.title  isEqualToString:@"使用优惠券"] ?  @"本单可用" : @"我有"),self.couponcardListModel.cards_count,(long)self.couponcardListModel.couponcard_count];
                 
                 if (self.couponcardListModel.recordCount == 0) {
-                    [SBPublicAlert showMBProgressHUD:@"您还没有尊享卡或优惠券可用" andWhereView:self.view hiddenTime:1.];
+                    [SBPublicAlert showMBProgressHUD:@"您还没有会员卡或优惠券可用" andWhereView:self.view hiddenTime:1.];
                     return;
                 }
                 if (current == 1) {
@@ -1307,7 +1322,7 @@
     [self getData];
 }
 
-#pragma mark--  显示我的电子券
+#pragma mark--  显示我的会员卡
 
 -(void)toGiftCard:(UIButton*)sender
 {

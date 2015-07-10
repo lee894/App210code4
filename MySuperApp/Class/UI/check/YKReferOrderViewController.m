@@ -69,15 +69,7 @@
     orderTable.separatorStyle   =   UITableViewCellSeparatorStyleNone;
 	[self.view addSubview:orderTable];
 
-    
-    //lee999 150513 设置设备tag
-    
-    //end
-    
-//#warning -------- 注释了
-//    [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(payOKChangeLabelAndBtn) name:@"alipayOKanjumptoOrderDetail" object:nil];
-    
-    
+
     [SingletonState sharedStateInstance].isInCheckOKView = YES;
     
     labeldesc = [[UILabel alloc] initWithFrame:CGRectMake(10, 235, 300, 40)];
@@ -93,8 +85,8 @@
     labeldesc.hidden = YES;
     
     if (isIOS7up) {
-        [labelok setFrame:CGRectMake(90, 60, 150, 60)];
-        [orderTable setFrame:CGRectMake(0, 80, 320, 150)];
+        [labelok setFrame:CGRectMake(90, 20, 150, 60)];
+        [orderTable setFrame:CGRectMake(0, 40, 320, 150)];
     }
 	
 	cells = [[NSMutableArray alloc] init];
@@ -106,8 +98,6 @@
     
     //lee999 150506 关闭下单接口请求订单详情
     [self loadData];
-
-//    [self hiddenFooterwithAnimated:YES];
 }
 
 -(void)nullAction{
@@ -118,13 +108,7 @@
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     
-    
-    if (!self.isBackBtnClick) {
-//        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//        [app.aktabBarVerticalController hideTabBar:AKShowHideFromLeft animated:YES];
-    }
 
-    
     [[NSNotificationCenter defaultCenter]  addObserver:self selector:@selector(payOKChangeLabelAndBtn) name:@"alipayOKanjumptoOrderDetail" object:nil];
 
 
@@ -134,7 +118,7 @@
         isNotGoBacktoRootCar = YES;
         //end
         
-        BlockAlertView *alert = [[BlockAlertView alloc]initWithTitle:@"爱慕提示" message:@"此次购物完成后可以成为爱慕集团尊享卡会员，请问您是否愿意加入？"];
+        BlockAlertView *alert = [[BlockAlertView alloc]initWithTitle:@"爱慕提示" message:@"此次购物完成后可以成为爱慕集团会员卡会员，请问您是否愿意加入？"];
         alert.isTag = YES;
         [alert setDestructiveButtonWithTitle:@"我为什么要入会？>" block:^(void) {
             
@@ -142,7 +126,7 @@
             
             YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
             webView.strURL = @"http://m.aimer.com.cn/method/v6codeinfo";
-            webView.strTitle = @"尊享卡会员";
+            webView.strTitle = @"会员卡会员";
             [self.navigationController pushViewController:webView animated:YES];
         }];
         
@@ -168,10 +152,6 @@
 
 -(void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:YES];
-    
-//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    [app.aktabBarVerticalController showTabBar:AKShowHideFromLeft animated:YES];
-    
 }
 
 #pragma mark ======UITableViewCell=======
@@ -230,36 +210,36 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideSeeButPay:) name:@"PaySeccuseed" object:nil];
         
         seeButtonPay = [UIButton buttonWithType:UIButtonTypeCustom];
-        seeButtonPay.frame = CGRectMake(50, isIOS7up?240+40:200+40, 220, 35);
+        seeButtonPay.frame = CGRectMake(30, isIOS7up?240+40:200+40, ScreenWidth-60, 40);
         seeButtonPay.titleLabel.font = [UIFont boldSystemFontOfSize:15];
         [seeButtonPay setTitle:@"立即支付" forState:UIControlStateNormal];
         [seeButtonPay setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [seeButtonPay addTarget:self action:@selector(aliPayorder:) forControlEvents:UIControlEventTouchUpInside];
-        [seeButtonPay setBackgroundImage:[UIImage imageNamed:@"login_btn.png"] forState:UIControlStateNormal];
-        [seeButtonPay setBackgroundImage:[UIImage imageNamed:@"login_btn_press.png"] forState:UIControlStateHighlighted];
+        [seeButtonPay setBackgroundImage:[UIImage imageNamed:@"big_btn_r_normal.png"] forState:UIControlStateNormal];
+        [seeButtonPay setBackgroundImage:[UIImage imageNamed:@"big_btn_r_hover.png"] forState:UIControlStateHighlighted];
         [self.view addSubview:seeButtonPay];
         //查看订单按钮
         UIButton * seeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        seeButton.frame = CGRectMake(50, isIOS7up?280+40:240+40, 220, 35);
+        seeButton.frame = CGRectMake(30, isIOS7up?280+45:240+45, ScreenWidth-60, 40);
         seeButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
         [seeButton setTitle:@"查看订单" forState:UIControlStateNormal];
         [seeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [seeButton addTarget:self action:@selector(gotoSeeorder) forControlEvents:UIControlEventTouchUpInside];
-        [seeButton setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
-        [seeButton setBackgroundImage:[UIImage imageNamed:@"signup_btn_press.png"] forState:UIControlStateHighlighted];
+        [seeButton setBackgroundImage:[UIImage imageNamed:@"sryc_btn_big_normal.png"] forState:UIControlStateNormal];
+        [seeButton setBackgroundImage:[UIImage imageNamed:@"sryc_btn_big_hover.png"] forState:UIControlStateHighlighted];
         [self.view addSubview:seeButton];
     } else {
         isRoot = YES;
         
         //查看订单按钮
         UIButton * seeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        seeButton.frame = CGRectMake(50,isIOS7up?240+40:200+40, 220, 35);
+        seeButton.frame = CGRectMake(30,isIOS7up?240+45:200+45,  ScreenWidth-60, 40);
         seeButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
         [seeButton setTitle:@"查看订单" forState:UIControlStateNormal];
         [seeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [seeButton addTarget:self action:@selector(gotoSeeorder) forControlEvents:UIControlEventTouchUpInside];
-        [seeButton setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
-        [seeButton setBackgroundImage:[UIImage imageNamed:@"signup_btn_press.png"] forState:UIControlStateHighlighted];
+        [seeButton setBackgroundImage:[UIImage imageNamed:@"sryc_btn_big_normal.png"] forState:UIControlStateNormal];
+        [seeButton setBackgroundImage:[UIImage imageNamed:@"sryc_btn_big_hover.png"] forState:UIControlStateHighlighted];
         [self.view addSubview:seeButton];
     }
     
@@ -272,16 +252,6 @@
     isRoot = YES;
     
     labeldesc.hidden = YES;
-    
-
-//    //lee999 设置气泡
-//    [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"0"] forKey:@"totalNUM"];
-//    [UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
-//        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//        [[[[app.mytabBarController tabBar] items] objectAtIndex:3] setBadgeValue:@""];
-//    //end
-    
-    
 }
 
 - (void)aliPayorder:(id)sender
@@ -297,15 +267,7 @@
         [AlipayHelper alipayActionwithPrice:self.price
                                  andOrderid:self.orderid];
         
-//        [AlipayHelper alipayActionwithPrice:self.orderInfoModel.orderdetailInfo.price
-//                                 andOrderid:self.orderid];
-    
-        
-        
     }else if ([self.payway rangeOfString:@"微信支付"].location != NSNotFound) {
-
-//        [[WXPayClient shareInstance] payProductwithorderid:self.orderid Money:self.orderInfoModel.orderdetailInfo.price];
-        
         
         if (![WXApi isWXAppInstalled]) {
             [LCommentAlertView showMessage:@"您还未安装微信，请换其他支付方式" target:nil];
@@ -485,84 +447,4 @@
     [super didReceiveMemoryWarning];
 }
 
-//iOS 5
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-	return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
-}
-//iOS 6
-- (BOOL)shouldAutorotate
-{
-	return NO;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-	return UIInterfaceOrientationMaskPortrait;
-}
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-	return UIInterfaceOrientationPortrait;
-}
-
 @end
-
-
-
-//#pragma mark--  支付宝支付
-//-(void)alipayAction{
-//
-//    AlixPayOrder *order = [[AlixPayOrder alloc] init];
-//    order.amount = [NSString stringWithFormat:@"%.2f",[self.orderInfoModel.orderdetailInfo.price floatValue]];
-//    order.tradeNO = self.orderid;
-//    order.productDescription = @"爱慕商城手机端订单详情";
-//
-//    //        [[WXPayClient shareInstance] payProduct];
-//
-//    AlipayHelper* aliHelp = [[AlipayHelper alloc] init];
-//    [aliHelp payWithOrder:order CallbackBlock:^(NSString* result){
-//        NSDictionary* dic = [result JSONValue];
-//        switch ([[dic objectForKey:@"ResultStatus"] intValue]) {
-//            case 6001:
-//            {
-//                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[dic objectForKey:@"memo"] delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-//                [alert show];
-//                [[Alipay defaultService] hideCashierIfExist];
-//            }
-//                break;
-//            case 6002:
-//            {
-//                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[dic objectForKey:@"memo"] delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-//                [alert show];
-//                [[Alipay defaultService] hideCashierIfExist];
-//            }
-//                break;
-//            case 4000:
-//            {
-//                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[dic objectForKey:@"memo"] delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-//                [alert show];
-//                [[Alipay defaultService] hideCashierIfExist];
-//            }
-//                break;
-//            case 8000:
-//            {
-//                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[dic objectForKey:@"memo"] delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-//                [alert show];
-//                [[Alipay defaultService] hideCashierIfExist];
-//            }
-//                break;
-//            case 9000:
-//            {
-//                UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"支付成功" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-//                [alert show];
-//                for (UIView* v in self.view.subviews) {
-//                    [v removeFromSuperview];
-//                }
-//            }
-//                break;
-//            default:
-//                break;
-//        }
-//    }];
-//}

@@ -69,7 +69,6 @@
     [self createBackBtnWithType:0];
     
     [chectOutTable setHidden:YES];
-
     
     //创建右边按钮
     [self createRightBtn];
@@ -104,15 +103,11 @@
         self.useCouponcardId = @"";
     }
     
-//    if (![self.usev6useCardId isEqualToString:@""] && self.usev6useCardId) {
-//        self.usev6useCardId = self.usev6useCardId;
-//        
-//        //lee999recode
-//        [mainSev getCheckout:self.straddressID andV6usercard_id:self.useCouponcardId andCouponcard:@"" payway:self.m_strPayMethod andfreepostcard:self.usefreepostcardId];
-//    } else {
-    
-        [mainSev getCheckout:self.straddressID andV6usercard_id:self.useCouponcardId  andCouponcard:self.useCouponcardId payway:self.m_strPayMethod andfreepostcard:self.usefreepostcardId];
-//    }
+        [mainSev getCheckout:self.straddressID
+            andV6usercard_id:self.usev6useCardId
+               andCouponcard:self.useCouponcardId
+                      payway:self.m_strPayMethod
+             andfreepostcard:self.usefreepostcardId];
     
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
     //重新加载界面
@@ -336,7 +331,7 @@
 	UIView * headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(140))];
 	headerView.backgroundColor = [UIColor clearColor];
 	
-	NSArray* nameArray = [[NSArray alloc] initWithObjects:@"商品金额：",@"运费：",@"优惠券抵扣：",@"活动优惠金额：",@"尊享卡电子劵抵扣：",@"订单总金额：",@"可获积分：",nil];
+	NSArray* nameArray = [[NSArray alloc] initWithObjects:@"商品金额：",@"运费：",@"优惠券抵扣：",@"活动优惠金额：",@"会员卡电子劵抵扣：",@"订单总金额：",@"可获积分：",nil];
 	for (int i = 0; i < [nameArray count]; i ++) {
 		UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(20, 10+20*i, 120, 20)];
 		colorName.backgroundColor = [UIColor clearColor];
@@ -1065,7 +1060,7 @@
                            @"订单附言",
                            @"支付方式",
                            @"使用优惠券",
-                           @"使用电子券",
+                           @"使用会员卡",
                            @"使用包邮卡",
                            nil];
     static NSString	* CellIdentifier = @"Cell";
@@ -1084,13 +1079,13 @@
 			if (self.addressItem_ben != nil)
             {
 				self.straddressID = self.addressItem_ben.addresslistIdentifier;
-				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5,ScreenWidth-40, 30)];
+				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5,ScreenWidth-50, 30)];
 				name.backgroundColor = [UIColor clearColor];
 				name.font = [UIFont systemFontOfSize:LabMidSize];
 				name.text = self.addressItem_ben.userName;
 				[Cell addSubview:name];
 
-				UILabel* address2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 40, ScreenWidth-60, 35)];
+				UILabel* address2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 40, ScreenWidth-50, 35)];
 				address2.backgroundColor = [UIColor clearColor];
 				address2.font = [UIFont systemFontOfSize:14];
 				NSString* addresss1 = [NSString stringWithFormat:@"地址：%@%@%@%@",self.addressItem_ben.province,self.addressItem_ben.city,self.addressItem_ben.county,self.addressItem_ben.address];
@@ -1127,14 +1122,14 @@
 				self.straddressID = addressItem.addressId;
                 self.province = addressItem.province;
                 
-				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, ScreenWidth-40, 30)];
+				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, ScreenWidth-50, 30)];
 				name.backgroundColor = [UIColor clearColor];
 				name.font = [UIFont systemFontOfSize:LabMidSize];
 				name.text = addressItem.user_name;
 				[Cell addSubview:name];
 
 				
-				UILabel* address2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 40, ScreenWidth-60, 35)];
+				UILabel* address2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 40, ScreenWidth-50, 35)];
 				address2.backgroundColor = [UIColor clearColor];
 				address2.font = [UIFont systemFontOfSize:14];
 				NSString* addresss1 = [NSString stringWithFormat:@"地址：%@%@%@%@",addressItem.province,addressItem.city,addressItem.county,addressItem.address];
@@ -1172,7 +1167,7 @@
         else if (i == 1) {//附言
             
 			if ([self.postText isEqualToString:@""] || self.postText == nil) {
-				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, ScreenWidth-60, 30)];
+				UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, ScreenWidth-50, 30)];
 				name.text = [titleArray objectAtIndex:i];
 				name.backgroundColor = [UIColor clearColor];
 				name.font = [UIFont systemFontOfSize:LabMidSize];
@@ -1181,7 +1176,7 @@
 				[Cell.contentView addSubview:name];
 			} else {
 				UIFont *font = [UIFont systemFontOfSize:14];
-                CGSize size = [self.postText sizeWithFont:font constrainedToSize:CGSizeMake(ScreenWidth-60, 10000) lineBreakMode:NSLineBreakByWordWrapping];
+                CGSize size = [self.postText sizeWithFont:font constrainedToSize:CGSizeMake(ScreenWidth-40, 10000) lineBreakMode:NSLineBreakByWordWrapping];
                 
                 CGFloat heigth;
                 heigth = size.height;
@@ -1192,7 +1187,7 @@
                     heigth+=10;
                 }
                 
-                UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, ScreenWidth-60, heigth)];
+                UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, ScreenWidth-50, heigth)];
 				name.text = self.postText;
 				name.numberOfLines = 0;
 				name.lineBreakMode = UILineBreakModeWordWrap;
@@ -1236,7 +1231,7 @@
                             [attributeStr setTextColor:[UIColor redColor]];
                             NSRange textRange = [str rangeOfString:@"支付方式："];
                             [attributeStr setTextColor:[UIColor colorWithHexString:@"0x666666"] range:textRange];
-                            [attributeStr setFont:[UIFont systemFontOfSize:14]];
+                            [attributeStr setFont:[UIFont systemFontOfSize:LabMidSize]];
                             
                             name.attributedText = attributeStr;
                         }
@@ -1301,7 +1296,7 @@
             }
         }
         else if (i == 4){
-            //电子券
+            //会员卡
             
             
             UILabel* name = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 150, 30)];
@@ -1320,9 +1315,9 @@
                 if (mycheckOutModel.checkoutCountv6 >0) {
                     NSArray *arr = mycheckOutModel.checkoutV6cards;
                     
-                    name2.text = [NSString stringWithFormat:@"您有%@元电子券可用",[[arr objectAtIndex:0]objectForKey:@"balance" isDictionary:nil]];
+                    name2.text = [NSString stringWithFormat:@"您有%@元会员卡可用",[[arr objectAtIndex:0]objectForKey:@"balance" isDictionary:nil]];
                 }else{
-                    name2.text = [NSString stringWithFormat:@"您没有可用的电子券"];
+                    name2.text = [NSString stringWithFormat:@"您没有可用的会员卡"];
                 }
                 name2.backgroundColor = [UIColor clearColor];
                 name2.font = [UIFont systemFontOfSize:LabSmallSize];
@@ -1410,7 +1405,7 @@ NSLog(@"createOtherCells  come out");
         self.useCouponcardId = value;
     }else if (tag == 2)
     {
-    //电子券
+    //会员卡
         self.usev6useCardId = value;
         
     }else if(tag == 3){
@@ -1418,13 +1413,13 @@ NSLog(@"createOtherCells  come out");
         self.usefreepostcardId = value;
     }
     
-    [mainSev getCheckout:self.straddressID
-        andV6usercard_id:self.usev6useCardId
-           andCouponcard:self.useCouponcardId
-                  payway:self.m_strPayMethod
-         andfreepostcard:self.usefreepostcardId];
-    
-    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+//    [mainSev getCheckout:self.straddressID
+//        andV6usercard_id:self.usev6useCardId
+//           andCouponcard:self.useCouponcardId
+//                  payway:self.m_strPayMethod
+//         andfreepostcard:self.usefreepostcardId];
+//    
+//    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 }
 
 #pragma mark --- 取消使用
@@ -1751,7 +1746,7 @@ NSLog(@"createOtherCells  come out");
         }
     }else if (section ==4)
     {
-    //电子券
+    //会员卡
         
         if ([mycheckOutModel.checkoutV6cards count] == 0) {
             return;
@@ -1832,15 +1827,30 @@ NSLog(@"createOtherCells  come out");
 }
 
 #pragma mark--- 处理section的不悬浮
-//uitableview处理section的不悬浮，禁止section停留的方法，主要是这段代码
+////uitableview处理section的不悬浮，禁止section停留的方法，主要是这段代码
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    
+//    CGFloat sectionHeaderHeight = 50;
+//    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+//        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+//    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+//        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+//    }
+//}
+
+//去掉UItableview headerview黏性
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat sectionHeaderHeight = 50;
-    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
-        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
-        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+    if (scrollView == chectOutTable)
+    {
+        CGFloat sectionHeaderHeight = 8.;
+        if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+            scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+        } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+            scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+        }
     }
 }
+
 
 
 - (void)didReceiveMemoryWarning

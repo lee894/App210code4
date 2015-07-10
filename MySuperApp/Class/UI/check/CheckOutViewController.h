@@ -38,7 +38,7 @@
 
 @property(nonatomic, retain) NSString* straddressID; //地址ID
 
-@property(nonatomic, retain) NSString* usev6useCardId; //使用的电子券
+@property(nonatomic, retain) NSString* usev6useCardId; //使用的会员卡
 @property(nonatomic, retain) NSString* useCouponcardId; //优惠劵ID
 @property(nonatomic, retain) NSString* usefreepostcardId;//使用的包邮卡ID
 

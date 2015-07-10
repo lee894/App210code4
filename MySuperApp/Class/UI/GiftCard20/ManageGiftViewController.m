@@ -49,6 +49,10 @@
     }
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [self hiddenBar];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createBackBtnWithType:0];
@@ -195,10 +199,8 @@
             [lblSize setFrame:CGRectMake(lblPrice.frame.origin.x, btnSize.center.y - 6.5, 100, 13)];
             [cell addSubview:lblSize];
             
-//
+            
             UIView *spV = [[UIView alloc] initWithFrame:CGRectMake(0, uiv.frame.origin.y + uiv.frame.size.height+15, ScreenWidth, 0.5)];
-//            UIView *spV = [[UIView alloc] initWithFrame:CGRectMake(0, lee1fitAllScreen(168), ScreenWidth, 0.5)];
-
             [spV setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
             [cell addSubview:spV];
             

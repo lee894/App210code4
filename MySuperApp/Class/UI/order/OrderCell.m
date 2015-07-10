@@ -7,7 +7,7 @@
 //
 
 #import "OrderCell.h"
-
+#import "MYMacro.h"
 
 @implementation OrderCell
 @synthesize labelOrderNum,labelTime,labelStatus,labelDelivery,labelDeliveryNum,labelName,labelMoney;
@@ -86,8 +86,16 @@
         CGRect oldframe3 = self.cellbg3.frame;
         oldframe3.origin.y -= 50;
         self.cellbg3.frame = oldframe3;
-
     }
+    
+    
+    UIView *splineV = [[UIView alloc] initWithFrame:CGRectMake(18, 41, ScreenWidth-36, 0.5)];
+    [splineV setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+    [self addSubview:splineV];
+    
+    UIView *splineV2 = [[UIView alloc] initWithFrame:CGRectMake(0, self.cellbg3.frame.origin.y+26, ScreenWidth, 8)];
+    [splineV2 setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
+    [self addSubview:splineV2];
     
     //end
 }

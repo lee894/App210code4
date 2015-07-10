@@ -68,7 +68,7 @@
 }
 
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView{
-
+    
     if ([postText.text isEqualToString:@"请输入留言"]) {
         postText.text = @"";
         self.postStr = @"";
@@ -77,15 +77,27 @@
     return YES;
 }
 
+//判断联想输入字符长度
+-(void)textViewDidChange:(UITextView *)textView
+{
+    if (textView.text.length > 51)
+    {
+        textView.text = [textView.text substringToIndex:51];
+    }
+}
+
+
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     
+    if ([text isEqualToString:@"\n"]){
+        return YES;
+    }
     
-    
-    NSInteger number = [textView.text length];
-
-	if (number >=50) {
-        [SBPublicAlert showMBProgressHUD:@"您最多可以输入50个字" andWhereView:self.view hiddenTime:AlertShowTime];
+    NSString * aString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+	if (aString.length >=50) {
+        [ESToast showDelayToastWithText:@"您最多可以输入50个字哦"];
+//        [SBPublicAlert showMBProgressHUD:@"您最多可以输入50个字" andWhereView:self.view hiddenTime:AlertShowTime];
 		return NO;
     }
 	return YES;

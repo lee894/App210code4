@@ -15,9 +15,12 @@
 
 //#define ChangeImageURL  @"186x226"
 #define ChangeImageURL  @"242x294"
-
-
 #define AlertShowTime 1.5
+
+
+
+#define ESAppDelegate  ((AppDelegate *)[UIApplication sharedApplication].delegate)
+#define AppKeyWindow  [UIApplication sharedApplication].keyWindow
 
 
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
@@ -423,7 +426,7 @@
 #define Http_Branddetail_Tag      176 //品牌馆详情
 
 #define Http_exchangecoupon_Tag  177 //积分兑换接口
-#define Http_usev6card_Tag  178 //使用尊享卡接口
+#define Http_usev6card_Tag  178 //使用会员卡接口
 #define Http_addCouponcard_Tag  179 //绑定优惠券接口
 #define Http_getexchangescorerecord_Tag  180 //积分兑换记录
 
@@ -536,7 +539,7 @@
 #define EXCHANGECOUPON  (@"exchangecoupon") //积分兑换
 #define COUPONCARD_ADD     (@"addCouponcard")//优惠卡增加接口
 #define COUPONCARD_LIST    (@"couponcardlist")//优惠卡增加接口
-#define USEV6CARD_API          (@"usev6card")//使用尊享卡
+#define USEV6CARD_API          (@"usev6card")//使用会员卡
 #define ADDCOUPONCARD       (@"add_couponcard") //绑定优惠券接口
 #define USERINFO_API       (@"/Userinfo/index/")
 

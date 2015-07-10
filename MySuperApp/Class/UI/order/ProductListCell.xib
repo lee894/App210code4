@@ -14,15 +14,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="157.5"/>
                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_01.png" id="36">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_01.png" id="36">
                         <rect key="frame" x="10" y="5" width="300" height="20"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_02.png" id="38">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_02.png" id="38">
                         <rect key="frame" x="10" y="15" width="300" height="123"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_03.png" id="37">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_03.png" id="37">
                         <rect key="frame" x="10" y="137" width="300" height="20"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -123,6 +123,11 @@
                         <rect key="frame" x="10" y="5" width="21" height="38"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
+                    <view contentMode="scaleToFill" id="9Cy-9U-xSo">
+                        <rect key="frame" x="10" y="154" width="300" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.89863708939999998" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -139,7 +144,7 @@
                 <outlet property="labelTextTotal" destination="27" id="40"/>
                 <outlet property="labelTotal" destination="26" id="35"/>
             </connections>
-            <point key="canvasLocation" x="237" y="261"/>
+            <point key="canvasLocation" x="92" y="242"/>
         </tableViewCell>
     </objects>
     <resources>

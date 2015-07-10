@@ -26,6 +26,9 @@
 #import "YKStrikePriceLabel.h"
 
 
+#import "YKReferOrderViewController.h"
+
+
 @interface LNewHomePageViewController ()<mobideaRecProtocol>
 {
     UITableView *myTableV;
@@ -243,7 +246,13 @@
     
     
     //lee999 百分点
-    [BfdAgent recommend:self recommendId:@"rec_2142096B_FB0B_FCD1_8DD8_0D235639F12F" options:nil];
+    
+    NSString *str = @"";
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"]) {
+        str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+    }
+    
+    [BfdAgent recommend:self recommendId:@"rec_2142096B_FB0B_FCD1_8DD8_0D235639F12F" options:@{@"uid":str}];
     //购物车：rec_FDFEE10D_5A29_BE14_3808_3C336BA76303
     
     [self creatCellView];
@@ -921,12 +930,25 @@
 //搜索
 -(void)gotoSearchViewC{
     
-    GiftCheckOutFinishViewController *vc = [[GiftCheckOutFinishViewController alloc]init];
-    vc.orderId = @"123123";
-    [self.navigationController pushViewController:vc animated:YES];
-    return;
-//#warning ----test lee999
-//    
+    
+    
+    
+//#warning ----test lee999    
+//    YKReferOrderViewController * refer = [[YKReferOrderViewController alloc] init];
+//    refer.dicID = [NSDictionary dictionaryWithObjectsAndKeys:@"1",@"1", nil];//self.dicTD;
+//    refer.price     =  @"123";//[priceModel value];
+//    refer.orderid   = @"123123";
+//    refer.payway    = @"123123";//submitOrderModel.payway;
+//    refer.m_bShowPay = YES;//submitOrderModel.ispay;
+//    refer.tf_tradeNo = @"asdasd";//submitOrderModel.tf_tradeNo;
+//    //lee999
+//    refer.isZhunxiangkaHUIyuanAlert = YES;//submitOrderModel.zunxiang;
+//    refer.sendStrng = @"123123";//submitOrderModel.key;
+//    //end
+//    [self.navigationController pushViewController:refer animated:YES];
+//    return;
+    
+//
 //    MyCloset1ViewController *vc1 = [[MyCloset1ViewController alloc] initWithNibName:@"MyCloset1ViewController" bundle:nil];
 //    [self.navigationController pushViewController:vc1 animated:YES];
 //    
@@ -1211,15 +1233,21 @@
             
         case 1:
         {
+            UIView *bgV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(405)+sepViewH -20)];
+            [bgV setBackgroundColor:[UIColor colorWithHexString:@"F1F1F1"]];
+            [cell addSubview:bgV];
+            
+            UIView *spV1 = [[UIView alloc] initWithFrame:CGRectMake(0, lee1fitAllScreen(405)+sepViewH -21, ScreenWidth, 0.5)];
+            [spV1 setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+            [cell addSubview:spV1];
+            
             //banner
-            [cell setBackgroundColor:[UIColor colorWithHexString:@"ff0000"]];
+            
             [cell addSubview:bannerView];
             [cell addSubview:firstLab];
             [cell addSubview:secondLab];
             
-            UIView *spV1 = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenWidth*1.2656 -0.5, ScreenWidth, 0.5)];
-            [spV1 setBackgroundColor:[UIColor colorWithHexString:@"d1d1d1"]];
-            [cell addSubview:spV1];
+            
 
         }
             break;

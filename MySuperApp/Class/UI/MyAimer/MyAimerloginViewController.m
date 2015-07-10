@@ -497,6 +497,7 @@
             [cell addSubview:sepV2];
             
             UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btn3 setFrame:CGRectMake((ScreenWidth/3)*2,0,ScreenWidth/3,44)];
             [btn3 setTag:12];
             [btn3 addTarget:self action:@selector(shopOrUnhandelOrUnaccess:) forControlEvents:UIControlEventTouchUpInside];
             [cell addSubview:btn3];
@@ -798,8 +799,11 @@
             break;
         case 8:
         {
-            //@"应用评分";
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=515651364"]];
+//            @"应用评分";
+            //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=515651364"]];
+
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=515651364&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"]];
+            
         }
             break;
         default:

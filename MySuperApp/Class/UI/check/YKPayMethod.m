@@ -98,7 +98,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.isSelectFreePostCard) {
+    if (self.isSelectFreePostCard && [indexPath row] == 3) {
         [SBPublicAlert showMBProgressHUD:@"您已选包邮卡，不能使用货到付款" andWhereView:self.view hiddenTime:AlertShowTime];
         return;
     }

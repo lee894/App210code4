@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Common"/>
@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="390"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2" id="Glh-1c-KKk">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="389"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="389.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="8" customClass="UrlImageView">
@@ -254,20 +254,23 @@
                             <action selector="SelectSize:" destination="-2" eventType="touchUpInside" id="ZGg-9M-zWm"/>
                         </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_01.png" id="Kgt-i3-ok9">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="Kgt-i3-ok9">
                         <rect key="frame" x="10" y="280" width="300" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_02.png" id="1m0-e9-IeE">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="1m0-e9-IeE">
                         <rect key="frame" x="10" y="300" width="300" height="65"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_03.png" id="IPx-r9-VZh">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="IPx-r9-VZh">
                         <rect key="frame" x="10" y="365" width="300" height="20"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </imageView>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="111" contentMode="scaleToFill" text="写点评价吧，对其他亲们帮助很大呦！" id="bTh-kR-9k9">
-                        <rect key="frame" x="14" y="283" width="292" height="90"/>
+                        <rect key="frame" x="14" y="285" width="292" height="90"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -298,12 +301,13 @@
                 <outlet property="urlbtn18" destination="0F0-UA-rWH" id="nl2-Ae-oqn"/>
                 <outlet property="urlbtn19" destination="Lzo-1F-6fu" id="GCc-yj-E8J"/>
             </connections>
+            <point key="canvasLocation" x="61" y="216"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" rowHeight="350" id="Bhu-kE-1Ke" customClass="CommonListCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="350"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bhu-kE-1Ke" id="EOE-uW-Nd9">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="349"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="349.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="a2L-zg-x9X" customClass="UrlImageView">
@@ -531,7 +535,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="307"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lHC-Vl-cXQ" id="ibc-yM-Y9W">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="306"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="306.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="Gnb-H5-0VC" customClass="UrlImageView">
@@ -695,7 +699,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="310"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oNg-g2-nk0" id="nWa-TF-td0">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="309"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="309.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="用户评分" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="63Y-rS-f5g">
@@ -789,4 +793,9 @@
         <image name="login_btn_press.png" width="238" height="74"/>
         <image name="select_yes.png" width="42" height="42"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

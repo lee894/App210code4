@@ -154,7 +154,7 @@
             label3.backgroundColor = [UIColor clearColor];
             label3.font = [UIFont systemFontOfSize:15.0f];
             label3.textColor = [UIColor redColor];
-            label3.text = @"电子券变化";
+            label3.text = @"会员卡变化";
             [view addSubview:label3];
 
             
@@ -265,7 +265,7 @@
         label3.backgroundColor = [UIColor clearColor];
         label3.font = [UIFont systemFontOfSize:15.0f];
         label3.textColor = [UIColor redColor];
-        label3.text = @"电子券变化";
+        label3.text = @"会员卡变化";
         [view addSubview:label3];
 
         

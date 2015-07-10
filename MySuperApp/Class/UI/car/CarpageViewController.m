@@ -421,13 +421,26 @@
                 for (YKItem *item in _carModel.hotlist) {
                     [arrItemids addObject:item.productid];
                 }
+                NSString *strids = @"";
+                if ([arrItemids count]>0) {
+                    strids = [arrItemids componentsJoinedByString:@"|"];
+                }
                 
                 NSMutableArray *arrItemiid = [[NSMutableArray alloc] initWithCapacity:0];
                 for (YKItem *item in _carModel.carProductlist) {
-                    [arrItemiid addObject:item.productid];
+                    [arrItemiid addObject:item.goodsid];
                 }
+                NSString *striid = @"";
+                if ([arrItemiid count]>0) {
+                    striid = [arrItemiid componentsJoinedByString:@"|"];
+                }
+                
 
-                [BfdAgent recommend:self recommendId:@"rec_FDFEE10D_5A29_BE14_3808_3C336BA76303" options:@{@"ids":arrItemids,@"iid":arrItemiid}];
+                NSString *str = @"";
+                if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"]) {
+                    str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+                }
+                [BfdAgent recommend:self recommendId:@"rec_FDFEE10D_5A29_BE14_3808_3C336BA76303" options:@{@"ids":strids,@"iid":striid,@"uid":str}];
             }
             
 

@@ -4,7 +4,7 @@
 //
 //  Created by 念肆 on 14-9-17.
 //  Copyright (c) 2014年 zan. All rights reserved.
-//尊享卡入会  完善个人资料
+//会员卡入会  完善个人资料
 
 #import "ImproveInformationViewController.h"
 #import "ModifyCell.h"

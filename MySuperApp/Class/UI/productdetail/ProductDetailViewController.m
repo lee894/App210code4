@@ -149,7 +149,6 @@
     [BfdAgent visit:self itemId:self.thisProductId options:@{@"uid":str}];
 }
 
-
 -(NSArray*)viewConstraints
 {
     NSDictionary *views = @{@"detailTab" : self.detailTab, @"vToolbar" : self.vToolbar};

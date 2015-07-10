@@ -551,7 +551,7 @@
             return couponcardListModel;
         }
             break;
-        case Http_usev6card_Tag:/*使用尊享卡接口*/
+        case Http_usev6card_Tag:/*使用会员卡接口*/
         {
             Usev6cardusev6cardModel *couponcardListModel = [Usev6cardusev6cardModel modelObjectWithDictionary:jsonDic];
             [couponcardListModel setRequestTag:Http_usev6card_Tag];

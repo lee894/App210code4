@@ -757,7 +757,7 @@
 }
 
 
-//使用尊享卡接口
+//使用会员卡接口
 - (void)usev6card:(NSString *)cardId mobile:(NSString *)mobile checkcode:(NSString *)checkcode{
 
     [self sendPostWithURL:USEV6CARD_API tag:Http_usev6card_Tag beforeRequest:^{

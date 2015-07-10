@@ -14,23 +14,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="349.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_03.png" id="19">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_03.png" id="19">
                         <rect key="frame" x="10" y="319" width="300" height="20"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_01.png" id="18">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_01.png" id="18">
                         <rect key="frame" x="10" y="154" width="300" height="20"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_02.png" id="17">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_02.png" id="17">
                         <rect key="frame" x="10" y="174" width="300" height="145"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_02.png" id="VOu-kk-XcN">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_02.png" id="VOu-kk-XcN">
                         <rect key="frame" x="10" y="25" width="300" height="105"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_03.png" id="tyE-aZ-okp">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_03.png" id="tyE-aZ-okp">
                         <rect key="frame" x="10" y="130" width="300" height="20"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -49,7 +49,7 @@
                             <action selector="OrderdetailBtnAciton:" destination="-2" eventType="touchUpInside" id="E08-VN-8QT"/>
                         </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_01.png" id="6jg-n3-LOG">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="list_one_01.png" id="6jg-n3-LOG">
                         <rect key="frame" x="10" y="5" width="300" height="20"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -193,14 +193,14 @@
                         <color key="textColor" red="0.99127072699999996" green="0.01461675418" blue="0.18463959499999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="活动优惠:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="102" userLabel="电子券抵扣">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="活动优惠:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="102" userLabel="会员卡抵扣">
                         <rect key="frame" x="18" y="287" width="85" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.231372565" green="0.231372565" blue="0.231372565" alpha="1" colorSpace="deviceRGB"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="可获积分:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yfO-ux-b2v" userLabel="电子券抵扣">
+                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="可获积分:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yfO-ux-b2v" userLabel="会员卡抵扣">
                         <rect key="frame" x="18" y="308" width="85" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -221,6 +221,21 @@
                         <color key="textColor" red="0.49803924560000001" green="0.49803924560000001" blue="0.49803924560000001" alpha="1" colorSpace="deviceRGB"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
+                    <view contentMode="scaleToFill" id="aZU-u6-eL8">
+                        <rect key="frame" x="11" y="5" width="300" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.89863708939999998" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view contentMode="scaleToFill" id="bM9-UC-PmM">
+                        <rect key="frame" x="10" y="152" width="300" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.89863708939999998" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <view contentMode="scaleToFill" id="d32-W4-Zfj">
+                        <rect key="frame" x="10" y="337" width="300" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.89863708939999998" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -239,6 +254,7 @@
                 <outlet property="labsendtype" destination="9Ty-1k-odc" id="v8X-Ss-vOh"/>
                 <outlet property="paynowBtn" destination="oyj-sR-SsP" id="e3G-SC-dBV"/>
             </connections>
+            <point key="canvasLocation" x="144" y="172"/>
         </tableViewCell>
     </objects>
     <resources>

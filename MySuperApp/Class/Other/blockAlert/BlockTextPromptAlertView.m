@@ -78,7 +78,7 @@
         theTextField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
         
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        BtnSetImg(btn, @"share_btn.png", @"share_btn_press.png", @"share_btn_press.png");
+        BtnSetImg(btn, @"btn_shop_a_normal.png", @"btn_shop_a_hoverl.png", @"btn_shop_a_hoverl.png");
         [btn setTitle:@"获取验证码" forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         btn.frame = CGRectMake(50, theTextField.frame.origin.y-theTextField.frame.size.height-10, 200, 74/2);

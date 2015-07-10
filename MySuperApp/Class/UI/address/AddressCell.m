@@ -74,10 +74,14 @@
     
     if ([address.defaultFlag isEqualToString:@"yes"]) {
         
+        
         labelName.attributedText = [[NSString stringWithFormat:@"%@     <red>默认地址</red>",address.userName] attributedStringWithStyleBook:style1];        
     }else{
         labelName.text = address.userName;
     }
+    
+    labelName.font = [UIFont fontWithName:@"System-Bold" size:15];
+
     
     labelMessage.text = [NSString stringWithFormat:@"地址：%@%@%@%@",address.province,address.city,address.county,address.address];
     labelPhone.text = [NSString stringWithFormat:@"电话：%@",address.mobile];

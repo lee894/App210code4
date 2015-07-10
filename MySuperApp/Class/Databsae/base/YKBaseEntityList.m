@@ -38,13 +38,13 @@ NSString* const YK_KEY_COUNT=@"total_count";
 //	[super dealloc];
 //}
 
--(int) count{
+-(NSInteger) count{
 	return [[self childArray] count];
 }
 
 -(id) objectAtIndex:(NSUInteger)index{
 	//	assert(index>=0 && index<[[self childArray] count]);
-	return [[self childArray] objectAtIndex:index];
+	return [[self childArray] objectAtIndex:index isArray:nil];
 }
 
 -(void) addObject:(id)object{
@@ -53,7 +53,7 @@ NSString* const YK_KEY_COUNT=@"total_count";
 -(void) addList:(id)alist{
     //lee999 150608
 	for(int i=0;i<[(NSArray*)alist count];++i){
-		[self addObject:[alist objectAtIndex:i]];
+		[self addObject:[alist objectAtIndex:i isArray:nil]];
 	}
 }
 -(void) removeAllObjects{
@@ -64,7 +64,7 @@ NSString* const YK_KEY_COUNT=@"total_count";
 	[[self childArray] removeObject:object];
 }
 
--(int) currentPage{
+-(NSInteger) currentPage{
 	int ret=0;
 	NSNumber* num=[self attributeForKey:YK_KEY_CURRENT_PAGE];	
 	if(nil!=num){
@@ -79,7 +79,7 @@ NSString* const YK_KEY_COUNT=@"total_count";
 
 
 
--(int) pageCount{
+-(NSInteger) pageCount{
 	int ret=0;
 	NSNumber* num=[self attributeForKey:YK_KEY_PAGE_COUNT];
 	if(num!=nil){
@@ -92,7 +92,7 @@ NSString* const YK_KEY_COUNT=@"total_count";
 	[self setAttribute:[NSNumber numberWithInt:pageCount] forKey:YK_KEY_PAGE_COUNT];
 }
 
--(int)totalCount{
+-(NSInteger)totalCount{
 	return [[self attributeForKey:@"total_count"] intValue];
 }
 -(void) setTotalCount:(int) aTotalCount{
