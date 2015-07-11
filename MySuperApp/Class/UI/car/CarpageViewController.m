@@ -2143,9 +2143,9 @@
                 }
                 if(item.selected)
                 {
-                    [marrUks addObject:item.uk];
-                    break;
+                    continue;
                 }
+                [marrUks addObject:item.uk];
             }
             for (YKSuitListItem* item in _carModel.suitlist) {
                 if(!item.is_valid)
@@ -2154,9 +2154,9 @@
                 }
                 if(item.selected)
                 {
-                    [marrUks addObject:item.uk];
-                    break;
+                    continue;
                 }
+                [marrUks addObject:item.uk];
             }
             for (YKSuitListItem* item in _carModel.packagelist) {
                 if(!item.is_valid)
@@ -2165,9 +2165,9 @@
                 }
                 if(item.selected)
                 {
-                    [marrUks addObject:item.uk];
-                    break;
+                    continue;
                 }
+                [marrUks addObject:item.uk];
             }
 
             if (marrUks && marrUks.count) {
