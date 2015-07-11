@@ -46,7 +46,7 @@
                 NSMutableArray *sizeArray = [[NSMutableArray alloc] init];
                 NSMutableArray *colorArray = [[NSMutableArray alloc] init];
                 NSMutableArray *valueids = [[NSMutableArray alloc] init];
-                NSDictionary* giftDic = (NSDictionary*)[action objectAtIndex:j];
+                NSDictionary* giftDic = (NSDictionary*)[action objectAtIndex:j isArray:nil];
                 NSArray* productArray = [giftDic objectForKey:@"products"];
                 NSMutableArray *pro_array=[[NSMutableArray alloc]init];
                 for (id pro in productArray) {
@@ -80,7 +80,7 @@
                 NSMutableArray *array_product=[[NSMutableArray alloc]init];
                 NSString *str_record=[[NSString alloc]init];
                 if ([pro_array count]!=0) {
-                    str_record=[[[pro_array objectAtIndex:0] objectForKey:@"_spec_value_ids"] objectForKey:@"1"];
+                    str_record=[[[pro_array objectAtIndex:0 isArray:nil] objectForKey:@"_spec_value_ids"] objectForKey:@"1"];
                     [array_product addObject:[[[pro_array objectAtIndex:0] objectForKey:@"_spec_value_ids"] objectForKey:@"1"]];
                 }
                 for (int i=0; i<[pro_array count]; i++) {

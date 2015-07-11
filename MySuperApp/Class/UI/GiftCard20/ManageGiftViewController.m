@@ -45,6 +45,8 @@
         if (![_straddressID isEqualToString:_mgi.address.address_id]) {
             NSLog(@"%@",  @"地址变化");
             [_mainSer getGiftWithCode:self.couponInfo.code andAddress:_straddressID];
+            [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
         }
     }
 }
@@ -64,6 +66,7 @@
     _mainSer = [[MainpageServ alloc] init];
     _mainSer.delegate = self;
     [_mainSer getGiftWithCode:self.couponInfo.code andAddress:@""];
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 }
 
 -(void)serviceStarted:(ServiceType)aHandle
@@ -73,11 +76,13 @@
 
 -(void)serviceFailed:(ServiceType)aHandle
 {
-    
+    [SBPublicAlert hideMBprogressHUD:self.view];
 }
 
 -(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel
 {
+    [SBPublicAlert hideMBprogressHUD:self.view];
+    
     switch ((NSUInteger)aHandle) {
         case Http_GetGiftCode20_Tag:
         {
@@ -806,6 +811,8 @@
             [products appendFormat:@"%@,", gpi.currentProduct.pid];
         }
         [_mainSer submitGiftOrderWithAddress:_mgi.address.address_id andCode:_couponInfo.code andProducts:[products substringToIndex:products.length - 1]];
+        [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
     }
 }
 

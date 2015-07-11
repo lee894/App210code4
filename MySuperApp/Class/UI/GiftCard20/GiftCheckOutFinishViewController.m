@@ -76,7 +76,7 @@
 -(void)clickBackButton:(UIButton*)sender{
     
     NSInteger index=[[self.navigationController viewControllers]indexOfObject:self];
-    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-2]animated:YES];
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:index-3 isArray:nil]animated:YES];
 }
 
 

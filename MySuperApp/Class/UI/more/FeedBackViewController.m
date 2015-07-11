@@ -9,6 +9,7 @@
 #import "FeedBackViewController.h"
 #import "UIView+ChangeFrame.h"
 #import "SBPublicFormatValidation.h"
+#import "GiftCheckOutFinishViewController.h"
 
 @interface FeedBackViewController ()
 
@@ -50,6 +51,17 @@
 
 - (IBAction)submit:(id)sender//提交
 {
+    
+//    
+//#warning ---  测试
+//    
+//    GiftCheckOutFinishViewController* gcovc = [[GiftCheckOutFinishViewController alloc] init];
+//    gcovc.orderId = @"asdasdasd";
+//    [self.navigationController pushViewController:gcovc animated:YES];
+//    
+//    return;
+    
+    
     if ([labelChoose.text isEqualToString:@"必选"])
     {
         [SBPublicAlert showMBProgressHUD:@"请选择反馈类型" andWhereView:self.view hiddenTime:AlertShowTime];

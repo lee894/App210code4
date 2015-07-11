@@ -33,7 +33,6 @@
         UIImageView *tempArrow = (UIImageView *) [self viewWithTag:31];
         
         
-        
         CGRect oldF = lineView.frame;
         oldF.size = CGSizeMake(ScreenWidth, 0.5);
         [lineView setFrame:oldF];
@@ -49,7 +48,7 @@
 //        labelPhone.frame = CGRectMake(33, imageBackground.frame.origin.y+55, 150, 21);
 //        tempArrow.frame = CGRectMake(265,imageBackground.frame.origin.y+35, 7, 11);
         
-        labelName.frame = CGRectMake(25, 20, lee1fitAllScreen(100), 21);
+        labelName.frame = CGRectMake(25, 20, lee1fitAllScreen(200), 21);
         labelMessage.frame = CGRectMake(25, 43, lee1fitAllScreen(220), 30);
         labelPhone.frame = CGRectMake(24, 73, lee1fitAllScreen(200), 21);
 
@@ -59,7 +58,7 @@
         //lee给view设置为圆角，不再使用图片了。 -140512
 //        [SingletonState setViewRadioSider:imageBackground];
 //        imageBackground.frame = CGRectMake(10, imageBackground.frame.origin.y, 300, 96);
-        labelName.frame = CGRectMake(25, 20, lee1fitAllScreen(150), 21);
+        labelName.frame = CGRectMake(25, 20, lee1fitAllScreen(230), 21);
         labelMessage.frame = CGRectMake(25, 43, lee1fitAllScreen(270), 30);
         labelPhone.frame = CGRectMake(24, 73, lee1fitAllScreen(200), 21);
     }

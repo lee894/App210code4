@@ -29,7 +29,7 @@
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="汪小木" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4">
-                        <rect key="frame" x="25" y="13" width="132" height="22"/>
+                        <rect key="frame" x="25" y="13" width="230" height="22"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <color key="textColor" red="0.22745099660000001" green="0.22745099660000001" blue="0.22745099660000001" alpha="1" colorSpace="deviceRGB"/>
@@ -51,7 +51,7 @@
                 <outlet property="labelName" destination="4" id="14"/>
                 <outlet property="labelPhone" destination="6" id="15"/>
             </connections>
-            <point key="canvasLocation" x="-1357" y="-458"/>
+            <point key="canvasLocation" x="-1635" y="-490"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -57,7 +57,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2525"
             endingLineNumber = "2525"
-            landmarkName = "-packageProductAction:"
+            landmarkName = "-suitProductAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,8 +73,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2554"
             endingLineNumber = "2554"
-            landmarkName = "@implementation CarpageViewController"
-            landmarkType = "3">
+            landmarkName = "-packageProductAction:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -250,6 +250,22 @@
             startingLineNumber = "155"
             endingLineNumber = "155"
             landmarkName = "-shopOrUnhandelOrUnaccess:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MySuperApp/Class/UI/GiftCard20/GiftCheckOutFinishViewController.m"
+            timestampString = "458277512.14081"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-clickBackButton:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
