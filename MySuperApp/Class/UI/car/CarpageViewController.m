@@ -627,6 +627,10 @@
     
     BOOL selectAll = YES;
     for (YKItem* item in _carModel.carProductlist) {
+        if(!item.is_valid)
+        {
+            continue;
+        }
         if(!item.selected)
         {
             selectAll = NO;
@@ -634,6 +638,10 @@
         }
     }
     for (YKSuitListItem* item in _carModel.suitlist) {
+        if(!item.is_valid)
+        {
+            continue;
+        }
         if(!item.selected)
         {
             selectAll = NO;
@@ -641,6 +649,10 @@
         }
     }
     for (YKSuitListItem* item in _carModel.packagelist) {
+        if(!item.is_valid)
+        {
+            continue;
+        }
         if(!item.selected)
         {
             selectAll = NO;
