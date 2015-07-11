@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MySuperApp/Class/UI/car/CarpageViewController.m"
-            timestampString = "458283555.852995"
+            timestampString = "458285095.694293"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "964"
-            endingLineNumber = "964"
+            startingLineNumber = "976"
+            endingLineNumber = "976"
             landmarkName = "-add_LikeChick:"
             landmarkType = "5">
          </BreakpointContent>

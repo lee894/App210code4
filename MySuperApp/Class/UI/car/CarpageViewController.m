@@ -2134,8 +2134,46 @@
             [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
         }else
         {
-            [mainSer PartChangeItemWithUk:@"" andType:@"all"];
-            [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
+            
+            NSMutableArray* marrUks = [[NSMutableArray alloc] initWithCapacity:1];
+            for (YKItem* item in _carModel.carProductlist) {
+                if(!item.is_valid)
+                {
+                    continue;
+                }
+                if(item.selected)
+                {
+                    [marrUks addObject:item.uk];
+                    break;
+                }
+            }
+            for (YKSuitListItem* item in _carModel.suitlist) {
+                if(!item.is_valid)
+                {
+                    continue;
+                }
+                if(item.selected)
+                {
+                    [marrUks addObject:item.uk];
+                    break;
+                }
+            }
+            for (YKSuitListItem* item in _carModel.packagelist) {
+                if(!item.is_valid)
+                {
+                    continue;
+                }
+                if(item.selected)
+                {
+                    [marrUks addObject:item.uk];
+                    break;
+                }
+            }
+
+            if (marrUks && marrUks.count) {
+                [mainSer PartChangeItemWithUk:[marrUks componentsJoinedByString:@"|"] andType:@"part"];
+                [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
+            }
         }
     }
 }
