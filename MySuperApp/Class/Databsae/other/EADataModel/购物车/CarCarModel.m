@@ -284,6 +284,7 @@
             item.disountprice =[[dicdate objectForKey:@"discountprice"] floatValue];
             item.price = [[dicdate objectForKey:@"price"] floatValue];
             item.save = [[dicdate objectForKey:@"save"] floatValue];
+            item.number = [[dicdate objectForKey:@"number"] intValue];
             item.packageid = [dicdate objectForKey:@"packageid"];
             item.selected = [[dicdate objectForKey:@"selected"] boolValue];
             item.uk = [dicdate objectForKey:@"uk"];

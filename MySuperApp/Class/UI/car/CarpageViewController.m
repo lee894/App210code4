@@ -228,21 +228,21 @@
 }
 
 #pragma mark--- 删除购车里的套装
-- (void)delCarSuit{
-    
-    NSMutableString *str = [NSMutableString string];
-    for (int i = 0; i < self.carModel.carProductlist.count; i++) {
-        YKItem *item = [self.carModel.carProductlist objectAtIndex:i];
-        if ([item.type isEqualToString:@"gift"]) {
-            if (i == self.carModel.carProductlist.count -1) {
-                [str appendString:[NSString stringWithFormat:@"%@:gift",item.productid]];
-            }else {
-                [str appendString:[NSString stringWithFormat:@"%@:gift|",item.productid]];
-            }
-        }
-    }
-    [mainSer getDelcar:str];
-}
+//- (void)delCarSuit{
+//    
+//    NSMutableString *str = [NSMutableString string];
+//    for (int i = 0; i < self.carModel.carProductlist.count; i++) {
+//        YKItem *item = [self.carModel.carProductlist objectAtIndex:i];
+//        if ([item.type isEqualToString:@"gift"]) {
+//            if (i == self.carModel.carProductlist.count -1) {
+//                [str appendString:[NSString stringWithFormat:@"%@:gift",item.productid]];
+//            }else {
+//                [str appendString:[NSString stringWithFormat:@"%@:gift|",item.productid]];
+//            }
+//        }
+//    }
+//    [mainSer getDelcar:str];
+//}
 
 
 #pragma mark--- 创建没有商品的view 和 表格
@@ -655,6 +655,10 @@
     CGRect rc = [lbl.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lbl.font} context:nil];
     [lbl setFrame:CGRectMake(_btnCheckBox.frame.size.width + _btnCheckBox.frame.origin.x + 12, (vToolbar.frame.size.height - rc.size.height) / 2, rc.size.width, rc.size.height)];
     [vToolbar addSubview:lbl];
+    if(isEditing)
+    {
+        [lbl setHidden:YES];
+    }
     
     lbl = [[UILabel alloc] init];
     [lbl setText:[NSString stringWithFormat:@"%.0f元", [_carModel.selectedItemCount floatValue]]];
@@ -663,6 +667,10 @@
     rc = [lbl.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lbl.font} context:nil];
     [lbl setFrame:CGRectMake(btnCheckOut.frame.origin.x - 14 - rc.size.width, 13, rc.size.width, rc.size.height)];
     [vToolbar addSubview:lbl];
+    if(isEditing)
+    {
+        [lbl setHidden:YES];
+    }
     
     CGRect lastlblFrame = lbl.frame;
     lbl = [[UILabel alloc] init];
@@ -672,6 +680,10 @@
     rc = [lbl.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lbl.font} context:nil];
     [lbl setFrame:CGRectMake(lastlblFrame.origin.x - rc.size.width, 16, rc.size.width, rc.size.height)];
     [vToolbar addSubview:lbl];
+    if(isEditing)
+    {
+        [lbl setHidden:YES];
+    }
     
     lbl = [[UILabel alloc] init];
     [lbl setText:@"不含运费"];
@@ -680,6 +692,10 @@
     rc = [lbl.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lbl.font} context:nil];
     [lbl setFrame:CGRectMake(btnCheckOut.frame.origin.x - 14 - rc.size.width, 38, rc.size.width, rc.size.height)];
     [vToolbar addSubview:lbl];
+    if(isEditing)
+    {
+        [lbl setHidden:YES];
+    }
     [self.view addSubview:vToolbar];
     [self.view bringSubviewToFront:vToolbar];
 }
