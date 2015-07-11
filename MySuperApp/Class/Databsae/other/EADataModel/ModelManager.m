@@ -384,6 +384,7 @@
         {
 //            LBaseModel *favoriteModel = [LBaseModel modelObjectWithDictionary:jsonDic];
             CommModel *favoriteModel = [[CommModel alloc] init];
+            favoriteModel.jsonDic = jsonDic;
             [favoriteModel setRequestTag:Http_FavoriteAdd_Tag];
             return favoriteModel;
         }

@@ -8,6 +8,7 @@
 //
 
 #import "BfdAgent.h"
+#import "CommModel.h"
 #import "CarpageViewController.h"
 #import "ProductDetailViewController.h"
 #import "UIImage+ImageSize.h"
@@ -511,13 +512,13 @@
         case Http_FavoriteAdd_Tag : {
             if (!model.errorMessage) {
                 [SBPublicAlert showMBProgressHUD:@"收藏成功" andWhereView:self.view hiddenTime:0.6];
-                
+                NSString* oid = [((CommModel*)model).jsonDic objectForKey:@"object_id" isDictionary:nil];
                 
 #warning ------ 购物车收藏后，移除掉购物车
                 //lee999 150707 straddfavAndRemoveFromCardID
                 //将下架商品，添加收藏，并且移除购物车
                 
-//                [mainSer getDelcar:[NSString stringWithFormat:@"%@:product", ]];
+                [mainSer getDelcar:[NSString stringWithFormat:@"%@:product", oid]];
 
                 
             }else {
@@ -962,7 +963,7 @@
 - (void)add_LikeChick:(UIButton *)sender {
     
     
-    YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:sender.tag-300];
+    YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:sender.tag - 300];
     
     if ([SingletonState sharedStateInstance].userHasLogin) {
         NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:item.productid, @"GoodsID",item.name, @"GoodsName",nil];
@@ -1485,7 +1486,7 @@
             yOffset += 20;
         }
         UITextField* numberValue = nil;
-        if (!isShowStock) {
+        if (item.is_valid) {
             
             //UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(110, yOffset, isEditing?75:105, 20)];
             UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, 62, fTextWidth / 2, 13)];
@@ -2472,8 +2473,8 @@
 #pragma mark---- 商品详情 点击进入
 -(void)simpleProductAction:(UITapGestureRecognizer*)gesture
 {
+    CGPoint pTouchInView = [gesture locationInView:gesture.view.superview];
     if (isEditing) {
-        CGPoint pTouchInView = [gesture locationInView:gesture.view.superview];
         UITextField* tf = nil;
         for (id v in gesture.view.superview.subviews) {
             if ([v class] == [UITextField class]) {
@@ -2487,25 +2488,27 @@
                 return;
             }
         }
-        UIButton* btn = nil;
-        for (id v in gesture.view.superview.subviews) {
-            if ([v class] == [UIButton class]) {
-                btn = v;
-                if ([[btn titleForState:UIControlStateNormal] isEqualToString:@"加入收藏"]) {
-                    break;
-                }else
-                {
-                    btn = nil;
-                }
-            }
-        }
-        if (btn) {
-            if (CGRectContainsPoint(btn.frame, pTouchInView)) {
-                [btn sendActionsForControlEvents:UIControlEventTouchUpInside];
-                return;
+    }
+    
+    UIButton* btn = nil;
+    for (id v in gesture.view.superview.subviews) {
+        if ([v class] == [UIButton class]) {
+            btn = v;
+            if ([[btn titleForState:UIControlStateNormal] isEqualToString:@"加入收藏"] || [[btn titleForState:UIControlStateNormal] isEqualToString:@"已收藏"]) {
+                break;
+            }else
+            {
+                btn = nil;
             }
         }
     }
+    if (btn) {
+        if (CGRectContainsPoint(btn.frame, pTouchInView)) {
+            [btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+            return;
+        }
+    }
+    
     YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:gesture.view.tag];
     
     if ([item.type isEqualToString:@"gift"]) {
