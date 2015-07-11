@@ -585,6 +585,7 @@
     mainSev = [[MainpageServ alloc] init];
     mainSev.delegate = self;
     [mainSev addPackageToCartWithData:_marrGoods andPid:self.pid];
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 }
 
 -(void)resetPackage:(UIButton*)sender
