@@ -58,7 +58,7 @@
     
     isEditing = NO;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delCarSuit) name:@"DelCarSuit" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(delCarSuit) name:@"DelCarSuit" object:nil];
     
     
     //创建编辑购物车按钮
@@ -1976,7 +1976,7 @@
         UILabel* number = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, pName.frame.origin.y, ScreenWidth - xOffset - 12, rcName.size.height)];
         number.backgroundColor = [UIColor clearColor];
         number.lineBreakMode = UILineBreakModeMiddleTruncation;
-        number.attributedText = [[NSString stringWithFormat:@"<red>数量：</red>%d",1] attributedStringWithStyleBook:style1];
+        number.attributedText = [[NSString stringWithFormat:@"<red>数量：</red>%d", item.number] attributedStringWithStyleBook:style1];
 
 //        number.attributedText = [[NSString stringWithFormat:@"数量：<black>%d</black>",1]attributedStringWithStyleBook:style1];//[NSString stringWithFormat:@"数量: %d", 1];
         number.font = [UIFont systemFontOfSize:14];
