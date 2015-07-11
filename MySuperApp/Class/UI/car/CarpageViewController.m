@@ -25,7 +25,7 @@
     UIView* vToolbar;
     UIButton* btnCheckOut;
     
-    NSString* straddfavAndRemoveFromCardID;  //将下架商品，添加收藏，并且移除购物车
+//    NSString* straddfavAndRemoveFromCardID;  //将下架商品，添加收藏，并且移除购物车
     
 }
 @property (nonatomic, retain) NSMutableArray* selectedList;
@@ -516,7 +516,8 @@
 #warning ------ 购物车收藏后，移除掉购物车
                 //lee999 150707 straddfavAndRemoveFromCardID
                 //将下架商品，添加收藏，并且移除购物车
-                [mainSer getDelcar:[NSString stringWithFormat:@"%@:product",straddfavAndRemoveFromCardID]];
+                
+//                [mainSer getDelcar:[NSString stringWithFormat:@"%@:product", ]];
 
                 
             }else {
@@ -971,7 +972,7 @@
         [btn setImage:[UIImage imageNamed:@"icon_like_red.png"] forState:UIControlStateNormal];
 
         
-        straddfavAndRemoveFromCardID = item.goodsid;
+//        straddfavAndRemoveFromCardID = item.goodsid;
         
         [mainSer getFavoriteadd:item.goodsid andType:@"goods"];
         [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
@@ -1443,7 +1444,6 @@
             CGSize textSize = [[NSString stringWithFormat:@"              %@",item.name] sizeWithFont:[UIFont systemFontOfSize:13.0] constrainedToSize:CGSizeMake(isEditing?160:180, 50) lineBreakMode:NSLineBreakByTruncatingTail];
             
 //			UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(105), yOffset, isEditing?160:180, textSize.height)];
-            
             UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset, isEditing?160:180, textSize.height)];
 			shoppingName.backgroundColor = [UIColor clearColor];
 			shoppingName.numberOfLines = 0;
@@ -1603,6 +1603,11 @@
             
         }else {
             [btnCheckBox setHidden:YES];
+            
+            UIImageView* ivLogo = [[UIImageView alloc] initWithFrame:CGRectMake((shoppingImg.frame.origin.x - 35) / 2, 46, 35, 20)];
+            [ivLogo setImage:[UIImage imageNamed:@"sign_bg_invalid_t"]];
+            [shoppingCarCell addSubview:ivLogo];
+            
             UIButton *buttonForAction=[UIButton buttonWithType:UIButtonTypeCustom];
             buttonForAction.frame = CGRectMake(180, 80, 120, 40);
             [buttonForAction setImage:[UIImage imageNamed:@"icon_like_gray.png"] forState:UIControlStateNormal];
@@ -1712,15 +1717,21 @@
         CGFloat yOffset = 16;
         CGFloat height = 14;
         
-        UIButton* btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnCheckBox setFrame:CGRectMake(6, 16, lee1fitAllScreen(22) + 16, lee1fitAllScreen(22) + 16)];
-        [btnCheckBox setImageEdgeInsets:UIEdgeInsetsMake(-8, -8, -8, -8)];
-        [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
-        [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
-        [btnCheckBox addTarget:self action:@selector(suitCheckBoxAction:) forControlEvents:UIControlEventTouchUpInside];
-        btnCheckBox.selected = item.selected;
-        [viewSuitlistCell3 addSubview:btnCheckBox];
-        
+        if (item.is_valid) {
+            UIButton* btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btnCheckBox setFrame:CGRectMake(6, 16, lee1fitAllScreen(22) + 16, lee1fitAllScreen(22) + 16)];
+            [btnCheckBox setImageEdgeInsets:UIEdgeInsetsMake(-8, -8, -8, -8)];
+            [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
+            [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
+            [btnCheckBox addTarget:self action:@selector(suitCheckBoxAction:) forControlEvents:UIControlEventTouchUpInside];
+            btnCheckBox.selected = item.selected;
+            [viewSuitlistCell3 addSubview:btnCheckBox];
+        }else
+        {
+            UIImageView* ivLogo = [[UIImageView alloc] initWithFrame:CGRectMake((50 - 35) / 2, 10, 35, 20)];
+            [ivLogo setImage:[UIImage imageNamed:@"sign_bg_invalid_t"]];
+            [viewSuitlistCell3 addSubview:ivLogo];
+        }
         
         UILabel* pName = [[UILabel alloc] init];
         pName.backgroundColor = [UIColor clearColor];
@@ -1935,14 +1946,22 @@
         CGFloat yOffset = 16;
 //        int height = (70-yOffset-10)/2;
         
-        UIButton* btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btnCheckBox setFrame:CGRectMake(6, 16, lee1fitAllScreen(22) + 16, lee1fitAllScreen(22) + 16)];
-        [btnCheckBox setImageEdgeInsets:UIEdgeInsetsMake(-8, -8, -8, -8)];
-        [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
-        [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
-        btnCheckBox.selected = item.selected;
-        [btnCheckBox addTarget:self action:@selector(packageCheckBoxAction:) forControlEvents:UIControlEventTouchUpInside];
-        [viewSuitlistCell3 addSubview:btnCheckBox];
+        
+        if (item.is_valid) {
+            UIButton* btnCheckBox = [UIButton buttonWithType:UIButtonTypeCustom];
+            [btnCheckBox setFrame:CGRectMake(6, 16, lee1fitAllScreen(22) + 16, lee1fitAllScreen(22) + 16)];
+            [btnCheckBox setImageEdgeInsets:UIEdgeInsetsMake(-8, -8, -8, -8)];
+            [btnCheckBox setImage:[UIImage imageNamed:@"choice_unchecked"] forState:UIControlStateNormal];
+            [btnCheckBox setImage:[UIImage imageNamed:@"choice_checked"] forState:UIControlStateSelected];
+            btnCheckBox.selected = item.selected;
+            [btnCheckBox addTarget:self action:@selector(packageCheckBoxAction:) forControlEvents:UIControlEventTouchUpInside];
+            [viewSuitlistCell3 addSubview:btnCheckBox];
+        }else
+        {
+            UIImageView* ivLogo = [[UIImageView alloc] initWithFrame:CGRectMake((50 - 35) / 2, 10, 35, 20)];
+            [ivLogo setImage:[UIImage imageNamed:@"sign_bg_invalid_t"]];
+            [viewSuitlistCell3 addSubview:ivLogo];
+        }
         
         UILabel* pName = [[UILabel alloc] init];
         pName.backgroundColor = [UIColor clearColor];

@@ -115,7 +115,7 @@
             item.isSollection = [dic objectForKey:@"isSollection"];
             item.uk = [dic objectForKey:@"uk"];
             item.selected = [[dic objectForKey:@"selected"] boolValue];
-            
+            item.is_valid = [[dic objectForKey:@"is_valid" isDictionary:nil] boolValue];
             [self.carProductlist addObject:item];
 //            [item release];
         }
@@ -258,6 +258,7 @@
             item.suitid = [dicdate objectForKey:@"suitid"];
             item.selected = [[dicdate objectForKey:@"selected"] boolValue];
             item.uk = [dicdate objectForKey:@"uk"];
+            item.is_valid = [dicdate objectForKey:@"@is_valid"];
             NSLog(@"arrSuit:%@",item);
             [self.suitlist addObject:item];
 
@@ -288,6 +289,7 @@
             item.packageid = [dicdate objectForKey:@"packageid"];
             item.selected = [[dicdate objectForKey:@"selected"] boolValue];
             item.uk = [dicdate objectForKey:@"uk"];
+            item.is_valid = [dicdate objectForKey:@"@is_valid"];
             NSLog(@"arrSuit:%@",item);
             [self.packagelist addObject:item];
             
