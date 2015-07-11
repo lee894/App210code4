@@ -408,14 +408,11 @@
     for (int i = 0; i<4; i++) {
         
         UIImage *image = [UIImage imageNamed:[arrimage objectAtIndex:i]];
-//        UIImageView *imagev = [[UIImageView alloc] initWithFrame:CGRectMake(20+i*(image.size.width+50), totalHight, image.size.width,image.size.height)];
         UIImageView *imagev = [[UIImageView alloc] initWithFrame:CGRectMake(20+i*(ScreenWidth/4), totalHight, image.size.width,image.size.height)];
 
         [imagev setImage:image];
         [footV addSubview:imagev];
         
-        
-//        UILabel *nameelab = [[UILabel alloc]   initWithFrame:CGRectMake(0+i*(image.size.width+50), totalHight + image.size.height, 80, 26)];
         UILabel *nameelab = [[UILabel alloc] initWithFrame:CGRectMake(i*(ScreenWidth/4), totalHight + image.size.height, (ScreenWidth/4), 26)];
         [nameelab setNumberOfLines:1];
         [nameelab setTextAlignment:NSTextAlignmentCenter];
@@ -439,11 +436,11 @@
     //lee999 新增头部banner
     if ([_homeinfo.top_banner count]>0) {
         
-        UIView *headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(90))];
+        UIView *headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lee1fitAllScreen(80) + 2)];
         [headV setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
         [myTableV setTableHeaderView:headV];
         
-        UrlImageButton *bannerBtn = [[UrlImageButton alloc] initWithFrame:CGRectMake(0,5,ScreenWidth,lee1fitAllScreen(80))];
+        UrlImageButton *bannerBtn = [[UrlImageButton alloc] initWithFrame:CGRectMake(0,0,ScreenWidth,lee1fitAllScreen(80))];
         NewhomeNormalData *topbannerModel = [_homeinfo.top_banner objectAtIndex:0 isArray:nil];
         [bannerBtn setImageFromUrl:NO withUrl:topbannerModel.pic];
         bannerBtn.imageView.layer.masksToBounds = YES;
@@ -1238,9 +1235,9 @@
             [bgV setBackgroundColor:[UIColor colorWithHexString:@"F1F1F1"]];
             [cell addSubview:bgV];
             
-            UIView *spV1 = [[UIView alloc] initWithFrame:CGRectMake(0, lee1fitAllScreen(405)+sepViewH -21, ScreenWidth, 0.5)];
-            [spV1 setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
-            [cell addSubview:spV1];
+//            UIView *spV1 = [[UIView alloc] initWithFrame:CGRectMake(0, lee1fitAllScreen(405)+sepViewH -21, ScreenWidth, 0.5)];
+//            [spV1 setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+//            [cell addSubview:spV1];
             
             //banner
             

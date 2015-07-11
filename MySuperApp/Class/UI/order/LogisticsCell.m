@@ -28,7 +28,7 @@
     if (count == 1) {
 //        self.imageBackground.image = [UIImage imageNamed:@"list02_bg.png"];
         //lee给view设置为圆角，不再使用图片了。 -140512
-        [SingletonState setViewRadioSider:self.imageBackground];
+//        [SingletonState setViewRadioSider:self.imageBackground];
         
     }else if(count == 2){
         switch (Row) {

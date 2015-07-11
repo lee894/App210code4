@@ -420,9 +420,7 @@
             shoppingName.lineBreakMode = UILineBreakModeWordWrap;
            // shoppingName.text = [NSString stringWithFormat:@"             %@",item.name];
             shoppingName.attributedText = [[NSString stringWithFormat:@"<red>【赠品】</red>%@",item.name] attributedStringWithStyleBook:style123];
-
             shoppingName.font = [UIFont systemFontOfSize:13];
-            shoppingName.textColor = [UIColor blackColor];
             
 //            UILabel* biaozhi = [[UILabel alloc] init];
 //            biaozhi.frame=CGRectMake(0, lee1fitAllScreen(13), 60, 18);

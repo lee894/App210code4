@@ -47,6 +47,8 @@
 
 #define tableViewBGC @"#E6E6E6"
 #define splineBGC @"#d1d1d1"
+#define GrayTitleBGC @"b8b8b8"
+
 
 //判断是否系统版本ios7以上
 #define isIOS7up [[[UIDevice currentDevice] systemVersion]floatValue]>=7

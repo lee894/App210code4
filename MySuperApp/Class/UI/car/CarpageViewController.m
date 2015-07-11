@@ -532,9 +532,6 @@
         default:
             break;
     }
-//    [self creatCells];
-//    [self checkTable];
-//    [self creatToolBar];
     
     //lee999 设置气泡
 #warning ---- 修改购物车 气泡的需求
@@ -793,74 +790,29 @@
     NSInteger row = count % 3 > 0 ? (count / 3 + 1) : (count / 3);
 	UIView* footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 39 + 65 + unitHeight * (row) + lee1fitAllScreen(60))];
 	footView.backgroundColor = [UIColor clearColor];
-	
-//	UIButton* gotoChectOut = [UIButton buttonWithType:UIButtonTypeCustom];
-//	gotoChectOut.frame = CGRectMake(10, 10, 130, 35);
-//	gotoChectOut.titleLabel.font = [UIFont systemFontOfSize:13];
-//	[gotoChectOut setTitle:@"去结算" forState:UIControlStateNormal];
-//	[gotoChectOut addTarget:self action:@selector(gotoChectViewC) forControlEvents:UIControlEventTouchUpInside];
-////	if (isEditing)
-//    if (isEditing)
-//    {
-//		[gotoChectOut setBackgroundImage:[UIImage imageNamed:@"login_btn_press.png"] forState:UIControlStateNormal];
-//		gotoChectOut.enabled = NO;
-//	}else {
-//		[gotoChectOut setBackgroundImage:[UIImage imageNamed:@"login_btn.png"] forState:UIControlStateNormal];
-//		gotoChectOut.enabled = YES;
-//	}
-//	[gotoChectOut setBackgroundImage:[UIImage imageNamed:@"login_btn_press.png"] forState:UIControlStateHighlighted];
-//	[footView addSubview:gotoChectOut];
-//	
-//	UIButton* goonShopping = [UIButton buttonWithType:UIButtonTypeCustom];
-//	goonShopping.frame = CGRectMake(180, 10, 130, 35);
-//	goonShopping.titleLabel.font = [UIFont systemFontOfSize:13];
-//	[goonShopping setTitle:@"继续购物" forState:UIControlStateNormal];
-//    [goonShopping setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [goonShopping setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-//	[goonShopping addTarget:self action:@selector(gotoShopping) forControlEvents:UIControlEventTouchUpInside];
-////	if (isEditing)
-//    if (isEditing)
-//    {
-//		[goonShopping setBackgroundImage:[UIImage imageNamed:@"signup_btn_press.png"] forState:UIControlStateNormal];
-//		goonShopping.enabled = NO;
-//	}else {
-//		[goonShopping setBackgroundImage:[UIImage imageNamed:@"signup_btn.png"] forState:UIControlStateNormal];
-//		goonShopping.enabled = YES;
-//	}
-//	[goonShopping setBackgroundImage:[UIImage imageNamed:@"signup_btn_press.png"] forState:UIControlStateHighlighted];
-//	[footView addSubview:goonShopping];
-    
-    //活动公告
-//    UILabel * noticeTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 14, 100, 20)];
-//	noticeTitle.text = @"";
-//	noticeTitle.textColor = [UIColor colorWithHexString:@"0xB90023"];//UIColorFromRGB(0xB90023);
-//	noticeTitle.backgroundColor = [UIColor clearColor];
-//	noticeTitle.font = [UIFont systemFontOfSize:14];
-//	[footView addSubview:noticeTitle];
-    
-    UILabel * notice = [[UILabel alloc] initWithFrame:CGRectMake(20, 14, ScreenWidth - 40, 65)];
+	    
+    UILabel * notice = [[UILabel alloc] initWithFrame:CGRectMake(25, 6, ScreenWidth - 40, 65)];
 	notice.text = [NSString stringWithFormat:@"温馨提示：%@", self.carModel.notice];
 	notice.textColor = [UIColor colorWithHexString:@"#181818"];//UIColorFromRGB(0xB90023);
 	notice.backgroundColor = [UIColor clearColor];
 	notice.font = [UIFont systemFontOfSize:14];
     notice.numberOfLines = 3;
 	[footView addSubview:notice];
-	
-    //推荐商品列表
-//	UIImageView* segbg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"banner_dot_bg.png"]];
-//	segbg.frame = CGRectMake(0, 40+80, ScreenWidth, lee1fitAllScreen(30));
-//	[footView addSubview:segbg];
-	
-	UILabel* tit = [[UILabel alloc] initWithFrame:CGRectMake(0, 65 + 12 + 1, ScreenWidth, 13)];
+		
+    UIView *splineV = [[UIView alloc] initWithFrame:CGRectMake(0, 65 + 12, ScreenWidth, 0.5)];
+    [splineV setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+    [footView addSubview:splineV];
+    
+	UILabel* tit = [[UILabel alloc] initWithFrame:CGRectMake(0, 65 + 12 + 12, ScreenWidth, 13)];
 	tit.text = @"热销商品推荐";
 	tit.textColor = [UIColor colorWithHexString:@"#181818"];
+    tit.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:13];
     tit.textAlignment = NSTextAlignmentCenter;
 	tit.backgroundColor = [UIColor clearColor];
-	tit.font = [UIFont systemFontOfSize:13];
 	[footView addSubview:tit];
 	
     CGFloat originX = 10;
-    CGFloat originY = 39 + 65;
+    CGFloat originY = 39 + 80;
     CGFloat unitWidth = lee1fitAllScreen(90);
     CGFloat spacing = (ScreenWidth - unitWidth * 3 - originX * 2) / 2;
 	for (NSInteger i = 0; i < count; ++i) {
@@ -1452,28 +1404,19 @@
         CGFloat nameHeight = showStock?40:50;
 		if ([item.type isEqualToString:@"gift"]) {
             
-            CGSize textSize = [[NSString stringWithFormat:@"              %@",item.name] sizeWithFont:[UIFont systemFontOfSize:13.0] constrainedToSize:CGSizeMake(isEditing?160:180, 50) lineBreakMode:NSLineBreakByTruncatingTail];
+            NSDictionary* style1 = @{@"body":[UIFont fontWithName:@"HelveticaNeue" size:14],
+                                     @"bold":[UIFont fontWithName:@"HelveticaNeue-Bold" size:14],
+                                     @"red": [UIColor redColor]};
             
-//			UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(105), yOffset, isEditing?160:180, textSize.height)];
-            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset, isEditing?160:180, textSize.height)];
+            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset, isEditing?160:180, 40)]; //textSize.height
 			shoppingName.backgroundColor = [UIColor clearColor];
-			shoppingName.numberOfLines = 0;
-			shoppingName.lineBreakMode = UILineBreakModeWordWrap;
-			shoppingName.text = [NSString stringWithFormat:@"              %@",item.name];
-			shoppingName.font = [UIFont systemFontOfSize:14];
-			shoppingName.textColor = [UIColor blackColor];
+			shoppingName.lineBreakMode = NSLineBreakByTruncatingTail;
+            shoppingName.attributedText = [[NSString stringWithFormat:@"<red>【赠品】</red>%@",item.name] attributedStringWithStyleBook:style1];
+            shoppingName.font = [UIFont systemFontOfSize:14];
 			[shoppingCarCell addSubview:shoppingName];
-            
-            UILabel* biaozhi = [[UILabel alloc] init];
-            biaozhi.frame=CGRectMake(0, 0, isEditing?160:180, 18);
-			biaozhi.backgroundColor = [UIColor clearColor];
-			biaozhi.text = @"【赠品】";
-			biaozhi.font = [UIFont systemFontOfSize:13];
-			biaozhi.textColor = [UIColor redColor];
-			[shoppingName addSubview:biaozhi];
+            shoppingName.numberOfLines = 2;
 		}
         else {
-			//UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, yOffset, isEditing?160:180, nameHeight)];
             UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset, fTextWidth, nameHeight)];
 			shoppingName.backgroundColor = [UIColor clearColor];
 			shoppingName.numberOfLines = 0;

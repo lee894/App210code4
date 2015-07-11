@@ -45,23 +45,7 @@
     mainSev = [[MainpageServ alloc] init];
     mainSev.delegate = self;
 
-     tableview_channel=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-50) style:UITableViewStylePlain];
-    
-    //leerecode
-    
-    int tableH = self.view.frame.size.height;
-    
-    NSLog(@"tableH-----%d",tableH);
-    
-    //lee999recode
-//    if (tableH < 500) {
-//        [tableview_channel setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-100)];
-//    }
-    if ([[[UIDevice currentDevice] systemVersion] intValue]<7) {
-        [tableview_channel setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-0)];
-    }
-    //end
-    
+     tableview_channel=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height-55) style:UITableViewStylePlain];
      tableview_channel.backgroundColor=[UIColor clearColor];
      tableview_channel.showsVerticalScrollIndicator=NO;
      tableview_channel.delegate=self;
@@ -69,18 +53,14 @@
      tableview_channel.separatorStyle=UITableViewCellSeparatorStyleNone;
      [self.view addSubview:tableview_channel];
     
+    // 防止最后一行地址不好操作
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+    [footerView setBackgroundColor:[UIColor clearColor]];
+    tableview_channel.tableFooterView = footerView;
+    //end
+    
     
     [self NewHiddenTableBarwithAnimated:YES];
-    
-    
-    //创建右边按钮
-//    [self createRightBtn];
-//    [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_icon_mine.png"] forState:UIControlStateNormal];
-//    [self.navbtnRight setTitle:@"" forState:UIControlStateNormal];
-//    [self.navbtnRight setTitle:@"" forState:UIControlStateHighlighted];
-//    [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_icon_mine_press.png"] forState:UIControlStateHighlighted];
-//    [self.navbtnRight setFrame:CGRectMake(0, 10, 25, 25)];
-//    [self.navbtnRight addTarget:self action:@selector(gotoUserCenter) forControlEvents:UIControlEventTouchUpInside];
     
      if (isSub) {
           [tableview_channel reloadData];
@@ -105,7 +85,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    return lee1fitAllScreen(48)+8;
+    return lee1fitAllScreen(48);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -140,15 +120,16 @@
      label.backgroundColor=[UIColor clearColor];
      label.text=[ca title];
     
-     UIImageView *imageview_arrow=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"arrow.png"]];
-     imageview_arrow.frame=CGRectMake(lee1fitAllScreen(290), 19, 7, 11);
+    UIImage *ima = [UIImage imageNamed:@"dl_zc_arrow.png"];
+     UIImageView *imageview_arrow=[[UIImageView alloc]initWithImage:ima];
+     imageview_arrow.frame=CGRectMake(lee1fitAllScreen(290), 19, ima.size.width, ima.size.height);
     
-     UIImageView *image_normal=[[UIImageView alloc]init];//WithImage:[UIImage imageNamed:@"list_one.png"]
-    //lee给view设置为圆角，不再使用图片了。 -140512
-    image_normal.frame= CGRectMake(10, 5, lee1fitAllScreen(300), cell.frame.size.height-4);
-    [SingletonState setViewRadioSider:image_normal];
+//     UIImageView *image_normal=[[UIImageView alloc]init];//WithImage:[UIImage imageNamed:@"list_one.png"]
+//    lee给view设置为圆角，不再使用图片了。 -140512
+//    image_normal.frame= CGRectMake(10, 5, lee1fitAllScreen(300), cell.frame.size.height-4);
+//    [SingletonState setViewRadioSider:image_normal];
     
-    [cell addSubview:image_normal];
+//    [cell addSubview:image_normal];
      [cell addSubview:label];
     [cell addSubview:imageview_arrow];
     
@@ -158,6 +139,10 @@
      label_selected.textColor=[UIColor colorWithHexString:@"#ffffff"];
      label_selected.backgroundColor=[UIColor clearColor];
      label_selected.text=[ca title];
+    
+    UIView *spV1 = [[UIView alloc] initWithFrame:CGRectMake(25, lee1fitAllScreen(48)-1, ScreenWidth-25, 0.5)];
+    [spV1 setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+    [cell addSubview:spV1];
     
      return cell;
 }
