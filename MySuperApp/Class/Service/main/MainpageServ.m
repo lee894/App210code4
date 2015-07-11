@@ -455,10 +455,11 @@
 }
 
 //添加到收藏夹
-- (void)getFavoriteadd:(NSString *)productid andType:(NSString*)atype{
+- (void)getFavoriteadd:(NSString *)productid andType:(NSString*)atype anduk:(NSString*)uk{
     [self.dataParams removeAllObjects];
     [self sendPostWithURL:FAVORITE_ADD_API tag:Http_FavoriteAdd_Tag beforeRequest:^{
         [self addParam:@"productid" withValue:productid];
+        [self addParam:@"uk" withValue:uk];
         [self addParam:@"type" withValue:atype];
     }];
 }

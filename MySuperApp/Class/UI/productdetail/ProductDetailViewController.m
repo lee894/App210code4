@@ -1056,7 +1056,7 @@
                 NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:self.thisProductId, @"GoodsID",productModel.prodcutName, @"GoodsName",nil];
                 [TalkingData trackEvent:@"1006" label:@"加入收藏夹" parameters:dic1];
                 
-                [mainSev getFavoriteadd:self.thisProductId andType:@"goods"];
+                [mainSev getFavoriteadd:self.thisProductId andType:@"goods" anduk:@""];
                 [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
                 
             }else{

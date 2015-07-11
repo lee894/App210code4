@@ -110,7 +110,7 @@
     //添加收藏
     if (!likebtn.selected) {
         //未中状态 添加收藏
-        [mainSev getFavoriteadd:self.strMaginzeId andType:@"magazine"];
+        [mainSev getFavoriteadd:self.strMaginzeId andType:@"magazine" anduk:@""];
     }else{
         //选中状态 取消收藏
         [mainSev getFavoritedel:self.strMaginzeId andType:@"magazine"];

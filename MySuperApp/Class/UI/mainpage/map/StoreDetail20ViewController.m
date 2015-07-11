@@ -364,7 +364,7 @@
         //添加收藏
         if (!favbtn.selected) {
             //未中状态 添加收藏
-            [mainSer getFavoriteadd:self.store.storeid andType:@"store"];
+            [mainSer getFavoriteadd:self.store.storeid andType:@"store" anduk:@""];
         }else{
             //选中状态 取消收藏
             [mainSer getFavoritedel:self.store.storeid andType:@"store"];

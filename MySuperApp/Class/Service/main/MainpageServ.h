@@ -127,7 +127,7 @@
 - (void)editUSerinfoBrasize:(NSString *)brasize andUnderpants:(NSString *)underpants andClothsize:(NSString *)clothsize andRealname:(NSString *)realname andGender:(NSString *)gender andNickname:(NSString *)nickname andBirthday:(NSString *)birthday andMobile:(NSString *)mobile andAddress:(NSString *)address andEmail:(NSString *)email andProfession:(NSString *)profession andIncome:(NSString *)income andChild1_Birthday:(NSString *)child1_birthday andAk_Name_1:(NSString *)ak_name_1 andAk_Name_2:(NSString *)ak_name_2 andAk_Sex_1:(NSString *)ak_sex_1 andAk_Sex_2:(NSString *)ak_sex_2 andChild1H:(NSString *)child1H andChild2H:(NSString *)child2H andZipcode:(NSString *)zipcode andChild2_Birthday:(NSString *)child2_birthday;
 
 //添加到收藏夹
-- (void)getFavoriteadd:(NSString *)productid andType:(NSString*)atype;
+- (void)getFavoriteadd:(NSString *)productid andType:(NSString*)atype anduk:(NSString*)uk;
 
 //从收藏夹删除
 - (void)getFavoritedel:(NSString *)productid andType:(NSString*)atype;

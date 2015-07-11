@@ -512,13 +512,11 @@
         case Http_FavoriteAdd_Tag : {
             if (!model.errorMessage) {
                 [SBPublicAlert showMBProgressHUD:@"收藏成功" andWhereView:self.view hiddenTime:0.6];
-                NSString* oid = [((CommModel*)model).jsonDic objectForKey:@"object_id" isDictionary:nil];
+                NSString* strUk = [((CommModel*)model).jsonDic objectForKey:@"uk" isDictionary:nil];
                 
-#warning ------ 购物车收藏后，移除掉购物车
-                //lee999 150707 straddfavAndRemoveFromCardID
                 //将下架商品，添加收藏，并且移除购物车
                 
-                [mainSer getDelcar:[NSString stringWithFormat:@"%@:product", oid]];
+                [mainSer getDelcar:strUk];
 
                 
             }else {
@@ -975,7 +973,7 @@
         
 //        straddfavAndRemoveFromCardID = item.goodsid;
         
-        [mainSer getFavoriteadd:item.goodsid andType:@"goods"];
+        [mainSer getFavoriteadd:item.goodsid andType:@"goods" anduk:item.productid];
         [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
         
     }else{
