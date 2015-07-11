@@ -57,7 +57,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2525"
             endingLineNumber = "2525"
-            landmarkName = "-suitProductAction:"
+            landmarkName = "-simpleProductAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,7 +73,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2554"
             endingLineNumber = "2554"
-            landmarkName = "-packageProductAction:"
+            landmarkName = "-suitProductAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
