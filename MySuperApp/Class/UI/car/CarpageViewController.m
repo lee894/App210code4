@@ -655,10 +655,6 @@
     CGRect rc = [lbl.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lbl.font} context:nil];
     [lbl setFrame:CGRectMake(_btnCheckBox.frame.size.width + _btnCheckBox.frame.origin.x + 12, (vToolbar.frame.size.height - rc.size.height) / 2, rc.size.width, rc.size.height)];
     [vToolbar addSubview:lbl];
-    if(isEditing)
-    {
-        [lbl setHidden:YES];
-    }
     
     lbl = [[UILabel alloc] init];
     [lbl setText:[NSString stringWithFormat:@"%.0f元", [_carModel.selectedItemCount floatValue]]];
