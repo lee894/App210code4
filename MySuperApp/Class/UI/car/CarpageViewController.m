@@ -502,6 +502,7 @@
             [self createSuitlistcells];
             [self createPackagelistcells];
             [self creatToolBar];
+            [self checkTable];
             [shoppingCarTab reloadData];
             
             [SBPublicAlert hideMBprogressHUD:self.view];
