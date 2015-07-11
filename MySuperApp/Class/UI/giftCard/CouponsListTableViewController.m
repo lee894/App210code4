@@ -583,7 +583,7 @@
             strTime = [NSString stringWithFormat:@"有效期至%@", [[((FreePostCardInfo*)data).end_time componentsSeparatedByString:@" "] firstObject]];
         }
         if (strStatus) {
-            if ([strStatus isEqualToString:@"已过期优惠劵"] || [strStatus isEqualToString:@"已过期优惠劵状态"] || [strStatus isEqualToString:@"失效"])
+            if ([strStatus isEqualToString:@"已过期优惠劵"] || [strStatus isEqualToString:@"已过期优惠劵状态"] || [strStatus isEqualToString:@"无效"])
             {
                 iBg = [UIImage imageNamed:@"laber_byk_use"];
                 [ivState setImage:[UIImage imageNamed:@"yhq_none_laber"]];
