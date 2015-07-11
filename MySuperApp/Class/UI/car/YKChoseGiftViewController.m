@@ -71,21 +71,14 @@
     giftTab.showsVerticalScrollIndicator=NO;
 	[giftTab setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
-//	[self createCells];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //隐藏footview
-//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    [app.aktabBarVerticalController hideTabBar:AKShowHideFromLeft animated:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-//    显示footview
-//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    [app.aktabBarVerticalController showTabBar:AKShowHideFromLeft animated:YES];
 }
 
 #pragma mark 赠品加入购物车
@@ -93,29 +86,29 @@
 -(void)addCarAction:(id)sender{
     
     UIButton *button=(UIButton*)sender;
-    NSMutableDictionary *dic = [resultsArray objectAtIndex:button.tag-100];
+    NSMutableDictionary *dic = [resultsArray objectAtIndex:button.tag-100 isArray:nil];
     NSArray *giftsarray = [dic objectForKey:@"gifts"];
     
     NSInteger index = button.tag-100;
     if ([_muArrSelectGift count] != 0) {
         index -= [_muArrSelectGift count];
     }
-    NSArray *array = [spseidArray objectAtIndex:index];
+    NSArray *array = [spseidArray objectAtIndex:index isArray:nil];
     
     NSMutableArray *itemIDArray = [NSMutableArray array];
     YKItem* item = nil;
     int i = 0;
     for (; i < [array count]; i++) {
         
-        YKGiftItem* gift = (YKGiftItem*)[giftsarray objectAtIndex:i];
-        NSDictionary *dic = [array objectAtIndex:i];
+        YKGiftItem* gift = (YKGiftItem*)[giftsarray objectAtIndex:i isArray:nil];
+        NSDictionary *dic = [array objectAtIndex:i isArray:nil];
         NSString *isselect = [dic objectForKey:@"isSelect"];
         NSString *colorStr = [dic objectForKey:@"color"];
         NSString *sizeStr = [dic objectForKey:@"size"];
         
         if ([isselect isEqualToString:@"1"] && colorStr.length != 0 && sizeStr.length != 0) {//可以加入购物车
             for (int i = 0; i < [gift.idArray count]; i ++) {
-                item = (YKItem*)[gift.idArray objectAtIndex:i];
+                item = (YKItem*)[gift.idArray objectAtIndex:i isArray:nil];
                 if ([item.color isEqualToString:colorStr] && [item.size isEqualToString:sizeStr]) {
                     NSString *tmpStr = [NSString stringWithFormat:@"%@:%@:gift:%@",item.productid,@"1",gift.promotion_id];
                     [itemIDArray addObject:tmpStr];
@@ -127,10 +120,13 @@
     }
     
     NSMutableString *tmpStr = [NSMutableString string];
+    
+    
+    
     if ([itemIDArray count] > 0) {
-        [tmpStr appendFormat:@"%@",[itemIDArray objectAtIndex:0]];
+        [tmpStr appendFormat:@"%@",[itemIDArray objectAtIndex:0 isArray:nil]];
         for (int i = 1; i < [itemIDArray count]; i++) {
-            [tmpStr appendFormat:@"|%@",[itemIDArray objectAtIndex:i]];
+            [tmpStr appendFormat:@"|%@",[itemIDArray objectAtIndex:i isArray:nil]];
         }
         
         NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:item.productid, @"GoodsID",item.name, @"GoodsName",@"gift", @"SelectType",tmpStr, @"SKU",[NSNumber numberWithShort:1],@"Number",nil];
@@ -188,16 +184,16 @@
         NSInteger section = (tagnumber - ChimaNum) / 100 - 1;
         
         NSInteger index = (tagnumber - ChimaNum) % 100;
-        NSMutableDictionary *dic = [resultsArray objectAtIndex:section];
+        NSMutableDictionary *dic = [resultsArray objectAtIndex:section isArray:nil];
         NSArray *giftsarray = [dic objectForKey:@"gifts"];
-        YKGiftItem* item = (YKGiftItem*)[giftsarray objectAtIndex:index];
+        YKGiftItem* item = (YKGiftItem*)[giftsarray objectAtIndex:index isArray:nil];
         
 		NSDictionary * specitem = nil;
         
         for (int j = 0; j<item.sizeArray.count; j++) {
-            if ([[[[item.sizeArray objectAtIndex:j] allKeys] lastObject] isEqualToString:[[item.colorArray objectAtIndex:currentColor] productid]]) {
+            if ([[[[item.sizeArray objectAtIndex:j isArray:nil] allKeys] lastObject] isEqualToString:[[item.colorArray objectAtIndex:currentColor] productid]]) {
                 
-                NSArray *arr = [[item.sizeArray objectAtIndex:j]objectForKey:[[item.colorArray objectAtIndex:currentColor]productid]];
+                NSArray *arr = [[item.sizeArray objectAtIndex:j isArray:nil]objectForKey:[[item.colorArray objectAtIndex:currentColor isArray:nil] productid]];
                 specitem = [arr objectAtIndex:row];
             }
         }
@@ -209,7 +205,7 @@
             sectionSpseid -= [_muArrSelectGift count];
         }
         
-        NSMutableDictionary *tmpDic = [[spseidArray objectAtIndex:sectionSpseid] objectAtIndex:index];
+        NSMutableDictionary *tmpDic = [[spseidArray objectAtIndex:sectionSpseid isArray:nil] objectAtIndex:index isArray:nil];
         [tmpDic setObject:[specitem objectForKey:@"id"] forKey:@"size"];
         
         GifesCell *cell = (GifesCell *)[giftTab cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:section]];
@@ -221,11 +217,11 @@
         
         NSInteger section = (tagnumber - ColorNum) / 100 - 1;
         NSInteger index = (tagnumber - ColorNum) % 100;
-        NSMutableDictionary *dic = [resultsArray objectAtIndex:section];
+        NSMutableDictionary *dic = [resultsArray objectAtIndex:section isArray:nil];
         NSArray *giftsarray = [dic objectForKey:@"gifts"];
-        YKGiftItem* item = (YKGiftItem*)[giftsarray objectAtIndex:index];
+        YKGiftItem* item = (YKGiftItem*)[giftsarray objectAtIndex:index isArray:nil];
         
-		YKSpecitem* specitem = (YKSpecitem*)[item.colorArray objectAtIndex:row];
+		YKSpecitem* specitem = (YKSpecitem*)[item.colorArray objectAtIndex:row isArray:nil];
         currentColor = row;
         
         //更换了颜色 对应的PIckview 要刷新数据
@@ -241,14 +237,14 @@
         //获取这个颜色id对应的尺码的id的第一个元素
         NSDictionary *sizeDic = nil;
         for (int j = 0; j<item.sizeArray.count; j++) {
-            if ([[[[item.sizeArray objectAtIndex:j] allKeys] lastObject] isEqualToString:[[item.colorArray objectAtIndex:currentColor] productid]]) {
+            if ([[[[item.sizeArray objectAtIndex:j isArray:nil] allKeys] lastObject] isEqualToString:[[item.colorArray objectAtIndex:currentColor] productid]]) {
                 
-                NSArray *arr = [[item.sizeArray objectAtIndex:j]objectForKey:[[item.colorArray objectAtIndex:currentColor]productid]];
-                sizeDic = [arr objectAtIndex:0];
+                NSArray *arr = [[item.sizeArray objectAtIndex:j isArray:nil]objectForKey:[[item.colorArray objectAtIndex:currentColor isArray:nil]productid] isDictionary:nil];
+                sizeDic = [arr objectAtIndex:0 isArray:nil];
             }
         }
         
-        NSMutableDictionary *tmpDic = [[spseidArray objectAtIndex:sectionSpaseid] objectAtIndex:index];
+        NSMutableDictionary *tmpDic = [[spseidArray objectAtIndex:sectionSpaseid isArray:nil] objectAtIndex:index isArray:nil];
         [tmpDic setObject:specitem.productid forKey:@"color"];
         //修改尺寸
         [tmpDic setObject:[sizeDic objectForKey:@"id"] forKey:@"size"];
@@ -292,13 +288,13 @@
                 //赠品
                 
                 for (int i = 0; i < [giftsModel.gifts count]; i++) {
-                    NSArray *tmpGiftArray = [giftsModel.gifts objectAtIndex:i];
+                    NSArray *tmpGiftArray = [giftsModel.gifts objectAtIndex:i isArray:nil];
                     NSInteger count = tmpGiftArray.count;
                     NSMutableDictionary *tmpDic = [NSMutableDictionary dictionary];
                     [tmpDic setObject:@"1" forKey:@"isopen"];
                     [tmpDic setObject:@"1" forKey:@"ismeet"];
-                    [tmpDic setObject:[tmpGiftArray objectAtIndex:count - 2] forKey:@"promotion_name"];
-                    [tmpDic setObject:[tmpGiftArray objectAtIndex:count - 1] forKey:@"actionname"];
+                    [tmpDic setObject:[tmpGiftArray objectAtIndex:count - 2 isArray:nil] forKey:@"promotion_name"];
+                    [tmpDic setObject:[tmpGiftArray objectAtIndex:count - 1 isArray:nil] forKey:@"actionname"];
                     
                     [resultsArray addObject:tmpDic];
 
@@ -307,20 +303,20 @@
                     for (int j = 0; j < count - 2; j++) {
                         NSMutableDictionary *muDic = [NSMutableDictionary dictionary];
                         
-                        YKGiftItem *giftItem  = [tmpGiftArray objectAtIndex:j];
+                        YKGiftItem *giftItem  = [tmpGiftArray objectAtIndex:j isArray:nil];
                         [mutArrayGifts addObject:giftItem];
                         //取颜色
-                        YKSpecitem *specitem = [giftItem.colorArray objectAtIndex:0];
+                        YKSpecitem *specitem = [giftItem.colorArray objectAtIndex:0 isArray:nil];
                         giftItem.colorNameStr = specitem.spec_alias;
                         //取大小
-                        NSDictionary *dic = [giftItem.sizeArray objectAtIndex:0];
-                        NSString *key = [[dic allKeys] objectAtIndex:0];
+                        NSDictionary *dic = [giftItem.sizeArray objectAtIndex:0 isArray:nil];
+                        NSString *key = [[dic allKeys] objectAtIndex:0 isArray:nil];
                         NSArray *arr = [dic objectForKey:key];
-                        NSDictionary *dicSize = [arr objectAtIndex:0];
-                        giftItem.sizeNameStr = [dicSize objectForKey:@"spec_value"];
+                        NSDictionary *dicSize = [arr objectAtIndex:0 isArray:nil];
+                        giftItem.sizeNameStr = [dicSize objectForKey:@"spec_value" isDictionary:nil];
                         
                         [muDic setObject:specitem.productid forKey:@"color"];
-                        [muDic setObject:[dicSize objectForKey:@"id"] forKey:@"size"];
+                        [muDic setObject:[dicSize objectForKey:@"id" isDictionary:nil] forKey:@"size"];
 
                         [array addObject:muDic];
                     }
@@ -333,16 +329,13 @@
                 
                 //不符合要求的赠品
                 for (int i = 0; i < [giftsModel.nogifts count]; i++) {
-                    NogiftsModel *nogiftsModel = [giftsModel.nogifts objectAtIndex:i];
+                    NogiftsModel *nogiftsModel = [giftsModel.nogifts objectAtIndex:i isArray:nil];
                     if (nogiftsModel.isSelect) {
                         continue;
                     }
                     NSMutableDictionary *tmpDic = [NSMutableDictionary dictionary];
                     [tmpDic setObject:@"0" forKey:@"isopen"];
                     [tmpDic setObject:@"0" forKey:@"ismeet"];
-//                    //lee999
-//                    [muDic setObject: forKey:@"select"];
-//                    //end
                     [tmpDic setObject:nogiftsModel.promotion_name forKey:@"promotion_name"];
                     [tmpDic setObject:nogiftsModel.actionname forKey:@"actionname"];
                     [tmpDic setObject:[NSArray array] forKey:@"gifts"];
@@ -352,7 +345,7 @@
                 //说明已经选择赠品
                 int k = 0;
                 for (int i = 0; i < [giftsModel.nogifts count]; i++) {
-                    NogiftsModel *nogiftsModel = [giftsModel.nogifts objectAtIndex:i];
+                    NogiftsModel *nogiftsModel = [giftsModel.nogifts objectAtIndex:i isArray:nil];
                     
                     if (nogiftsModel.isSelect) {
                         NSMutableDictionary *muDic = [NSMutableDictionary dictionary];
@@ -414,13 +407,13 @@
         
 		NSInteger section = (tagnumber - ChimaNum) / 100 - 1;
         NSInteger index = (tagnumber - ChimaNum) % 100;
-        NSDictionary *dic = [resultsArray objectAtIndex:section];
+        NSDictionary *dic = [resultsArray objectAtIndex:section isArray:nil];
         NSArray *array = [dic objectForKey:@"gifts"];
-        YKGiftItem* item = (YKGiftItem*)[array objectAtIndex:index];
+        YKGiftItem* item = (YKGiftItem*)[array objectAtIndex:index isArray:nil];
         for (int j = 0; j<item.sizeArray.count; j++) {
             if ([[[[item.sizeArray objectAtIndex:j] allKeys] lastObject] isEqualToString:[[item.colorArray objectAtIndex:currentColor] productid]]) {
                 
-                NSArray *arr = [[item.sizeArray objectAtIndex:j]objectForKey:[[item.colorArray objectAtIndex:currentColor]productid]];
+                NSArray *arr = [[item.sizeArray objectAtIndex:j isArray:nil]objectForKey:[[item.colorArray objectAtIndex:currentColor isArray:nil]productid]];
              
             return  [arr count];//[sizeArr count];
                 
@@ -430,9 +423,9 @@
 	}else if (tagnumber < ChimaNum && tagnumber > ColorNum) {
         NSInteger section = (tagnumber - ColorNum) / 100 - 1;
         NSInteger index = (tagnumber - ColorNum) % 100;
-        NSDictionary *dic = [resultsArray objectAtIndex:section];
-        NSArray *array = [dic objectForKey:@"gifts"];
-        YKGiftItem* item = (YKGiftItem*)[array objectAtIndex:index];
+        NSDictionary *dic = [resultsArray objectAtIndex:section isArray:nil];
+        NSArray *array = [dic objectForKey:@"gifts" isDictionary:nil];
+        YKGiftItem* item = (YKGiftItem*)[array objectAtIndex:index isArray:nil];
         
 		return [item.colorArray count];
 	}
@@ -464,15 +457,15 @@
         
         NSInteger section = (tagnumber - ChimaNum) / 100 - 1;
         NSInteger index = (tagnumber - ChimaNum) % 100;
-        NSDictionary *dic = [resultsArray objectAtIndex:section];
+        NSDictionary *dic = [resultsArray objectAtIndex:section isArray:nil];
         NSArray *array = [dic objectForKey:@"gifts"];
-        YKGiftItem* item = (YKGiftItem*)[array objectAtIndex:index];
+        YKGiftItem* item = (YKGiftItem*)[array objectAtIndex:index isArray:nil];
         
         for (int j = 0; j<item.sizeArray.count; j++) {
-            if ([[[[item.sizeArray objectAtIndex:j] allKeys] lastObject] isEqualToString:[[item.colorArray objectAtIndex:currentColor] productid]]) {
+            if ([[[[item.sizeArray objectAtIndex:j isArray:nil] allKeys] lastObject] isEqualToString:[[item.colorArray objectAtIndex:currentColor isArray:nil] productid]]) {
                 
-                NSArray *arr = [[item.sizeArray objectAtIndex:j]objectForKey:[[item.colorArray objectAtIndex:currentColor]productid]];
-                NSDictionary * specitem = [arr objectAtIndex:row];
+                NSArray *arr = [[item.sizeArray objectAtIndex:j isArray:nil]objectForKey:[[item.colorArray objectAtIndex:currentColor isArray:nil]productid]];
+                NSDictionary * specitem = [arr objectAtIndex:row isArray:nil];
                 
                 pickerText = [specitem objectForKey:@"spec_alias"];
                 url = [specitem objectForKey:@"imgurl"];
@@ -481,10 +474,10 @@
 	}else if (tagnumber < ChimaNum && tagnumber > ColorNum) {
         NSInteger section = (tagnumber - ColorNum) / 100 - 1;
         NSInteger index = (tagnumber - ColorNum) % 100;
-        NSDictionary *dic = [resultsArray objectAtIndex:section];
+        NSDictionary *dic = [resultsArray objectAtIndex:section isArray:nil];
         NSArray *array = [dic objectForKey:@"gifts"];
-        YKGiftItem* item = (YKGiftItem*)[array objectAtIndex:index];
-		YKSpecitem* specitem = (YKSpecitem*)[item.colorArray objectAtIndex:row];
+        YKGiftItem* item = (YKGiftItem*)[array objectAtIndex:index isArray:nil];
+		YKSpecitem* specitem = (YKSpecitem*)[item.colorArray objectAtIndex:row isArray:nil];
 		pickerText = specitem.spec_alias;
 		url = specitem.imgurl;
 	}
@@ -512,7 +505,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSDictionary *dic = [resultsArray objectAtIndex:section];
+    NSDictionary *dic = [resultsArray objectAtIndex:section isArray:nil];
     NSArray *array = [dic objectForKey:@"gifts"];
     
     NSInteger isMeet = [[dic objectForKey:@"ismeet"] integerValue];
@@ -527,7 +520,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSDictionary *dic = [resultsArray objectAtIndex:indexPath.section];
+    NSDictionary *dic = [resultsArray objectAtIndex:indexPath.section isArray:nil];
     NSArray *array = [dic objectForKey:@"gifts"];
     
     BOOL states = [[dic objectForKey:@"isSelect"] boolValue];
@@ -539,7 +532,7 @@
 
         GifesCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"GifesCell" owner:self options:nil] objectAtIndex:0];
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"GifesCell" owner:self options:nil] objectAtIndex:0 isArray:nil];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
@@ -557,7 +550,7 @@
         [cell.chimaBtn setTitleColor:[UIColor colorWithHexString:@"0x666666"] forState:UIControlStateNormal];
 
         
-        YKGiftItem* item = (YKGiftItem*)[array objectAtIndex:indexPath.row];
+        YKGiftItem* item = (YKGiftItem*)[array objectAtIndex:indexPath.row isArray:nil];
 
         cell.titleLabel.text = item.productname;
         [cell.picImgView setImageWithURL:[NSURL URLWithString:item.imageurl] placeholderImage:nil];
@@ -654,7 +647,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSDictionary *dic = [resultsArray objectAtIndex:indexPath.section];
+    NSDictionary *dic = [resultsArray objectAtIndex:indexPath.section isArray:nil];
     NSArray *array = [dic objectForKey:@"gifts"];
     BOOL states = [[dic objectForKey:@"isSelect"] boolValue];
     NSInteger isMeet = [[dic objectForKey:@"ismeet"] integerValue];
@@ -663,7 +656,7 @@
             return 145 + 60;
         }
     } else {
-        NSDictionary *dic = [resultsArray objectAtIndex:indexPath.section];
+        NSDictionary *dic = [resultsArray objectAtIndex:indexPath.section isArray:nil];
         NSArray *array = [dic objectForKey:@"gifts"];
         return [PicsView heightForDatas:array type:states];
     }
@@ -679,7 +672,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-      NSDictionary *dic = [resultsArray objectAtIndex:section];
+      NSDictionary *dic = [resultsArray objectAtIndex:section isArray:nil];
     BOOL states = [[dic objectForKey:@"isopen"] boolValue];
     ButtonInSection *titleForTb = [[ButtonInSection alloc]initWithFrame:CGRectMake(0, 0, 320, 44)
             title:dic
@@ -693,7 +686,7 @@
 #pragma mark ButtonInSeactionDelegate
 -(void)sectionHeaderView:(ButtonInSection*)sectionHeaderView sectionClosed:(NSInteger)section
 {
-    NSMutableDictionary *dic = [resultsArray objectAtIndex:section];
+    NSMutableDictionary *dic = [resultsArray objectAtIndex:section isArray:nil];
     [dic setObject:@"0" forKey:@"isopen"];
     
     NSArray *array = [dic objectForKey:@"gifts"];
@@ -718,7 +711,7 @@
 
 -(void)sectionHeaderView:(ButtonInSection*)sectionHeaderView sectionOpened:(NSInteger)section
 {
-    NSMutableDictionary *dic = [resultsArray objectAtIndex:section];
+    NSMutableDictionary *dic = [resultsArray objectAtIndex:section isArray:nil];
     [dic setObject:@"1" forKey:@"isopen"];
     
     BOOL isSelect = [[dic objectForKey:@"isSelect"] boolValue];
@@ -732,7 +725,7 @@
             indexInt -= [_muArrSelectGift count];
         }
         
-        NSMutableArray *ykgiftsArray = [NSMutableArray arrayWithArray:[selectGiftsModel.gifts objectAtIndex:indexInt]];
+        NSMutableArray *ykgiftsArray = [NSMutableArray arrayWithArray:[selectGiftsModel.gifts objectAtIndex:indexInt isArray:nil]];
         [ykgiftsArray removeLastObject];
         [ykgiftsArray removeLastObject];
         
@@ -743,7 +736,7 @@
         }
 
     } else if (isSelect) {//已添加到购物车
-        NogiftsModel *nogiftsModel = [_muArrSelectGift objectAtIndex:section];
+        NogiftsModel *nogiftsModel = [_muArrSelectGift objectAtIndex:section isArray:nil];
         NSMutableArray *nogiftsArray = [NSMutableArray arrayWithArray:nogiftsModel.nogiftsItemArr];
         [dic setObject:nogiftsArray forKey:@"gifts"];
         for (int i = 0; i < 1; i++) {
@@ -753,7 +746,7 @@
         
     } else {//nogifts   不满足条件
         NSInteger index = section - [selectGiftsModel.gifts count];
-        NogiftsModel *nogiftsModel = [selectGiftsModel.nogifts objectAtIndex:index];
+        NogiftsModel *nogiftsModel = [selectGiftsModel.nogifts objectAtIndex:index isArray:nil];
         NSMutableArray *nogiftsArray = [NSMutableArray arrayWithArray:nogiftsModel.nogiftsItemArr];
         [dic setObject:nogiftsArray forKey:@"gifts"];
 
@@ -770,11 +763,11 @@
 }
 - (void)giftsCellWithStates:(BOOL)states indexPath:(NSInteger)index{
     
-    NSDictionary *dic = [resultsArray objectAtIndex:index];
+    NSDictionary *dic = [resultsArray objectAtIndex:index isArray:nil];
     NSArray *array = [dic objectForKey:@"gifts"];
     
     if ([array count] != 0){
-        YKGiftItem* item = (YKGiftItem*)[array objectAtIndex:0];
+        YKGiftItem* item = (YKGiftItem*)[array objectAtIndex:0 isArray:nil];
         item.isSelect = states;
     }
     
@@ -790,8 +783,8 @@
     //lee 防止崩溃 增加判断
     //lee999 150608
     if ([spseidArray count] > index ||
-        [(NSArray*)[spseidArray objectAtIndex:index] count]> section) {
-        NSMutableDictionary *tmpDic = [[spseidArray objectAtIndex:index] objectAtIndex:section];
+        [(NSArray*)[spseidArray objectAtIndex:index isArray:nil] count]> section) {
+        NSMutableDictionary *tmpDic = [[spseidArray objectAtIndex:index isArray:nil] objectAtIndex:section isArray:nil];
         [tmpDic setObject:[NSString stringWithFormat:@"%d",states] forKey:@"isSelect"];
     }
 }
@@ -800,119 +793,8 @@
     [super didReceiveMemoryWarning];
 }
 
-//iOS 5
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-	return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
-}
-//iOS 6
-- (BOOL)shouldAutorotate
-{
-	return NO;
-}
-- (NSUInteger)supportedInterfaceOrientations
-{
-	return UIInterfaceOrientationMaskPortrait;
-}
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-	return UIInterfaceOrientationPortrait;
-}
-
 @end
 
 
 
-//-(void)createCells{
-//	[cells removeAllObjects];
-//	[buttonArray removeAllObjects];
-//	for (int i = 0; i<[giftArray count]; i++) {
-//		static NSString	*CellIdentifier = @"Cell1";
-//		UITableViewCell *shoppingCarCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-//                                                                  reuseIdentifier:CellIdentifier];
-//		shoppingCarCell.selectionStyle = UITableViewCellSelectionStyleGray;
-//
-//
-//		YKGiftItem* item = (YKGiftItem*)[giftArray objectAtIndex:i];
-//
-//		UrlImageView* shoppingImg = [[UrlImageView alloc] init];
-//		[shoppingImg setImageFromUrl:YES withUrl:item.imageurl];
-//		shoppingImg.frame = CGRectMake(14, 15, 84, 103);
-//		shoppingImg.backgroundColor = [UIColor clearColor];
-//		[shoppingCarCell.contentView addSubview:shoppingImg];
-//
-//		UILabel* shoppingName1 = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, 200, 45)];
-//		shoppingName1.backgroundColor = [UIColor clearColor];
-//		shoppingName1.numberOfLines = 0;
-//		shoppingName1.lineBreakMode = UILineBreakModeWordWrap;
-//		shoppingName1.text = item.productname;
-//		shoppingName1.font = [UIFont systemFontOfSize:13];
-//		shoppingName1.textColor = [UIColor blackColor];//UIColorFromRGB(0x666666)
-//		[shoppingCarCell.contentView addSubview:shoppingName1];
-//
-//		UILabel* colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 60, 70, 25)];
-//		colorLabel.backgroundColor = [UIColor clearColor];
-//		colorLabel.text = @"选择颜色：";
-//		colorLabel.font = [UIFont systemFontOfSize:13];
-//		colorLabel.textColor = [UIColor colorWithHexString:@"0x666666"];//UIColorFromRGB(0x666666);//UIColorFromRGB(0x666666)
-//		[shoppingCarCell.contentView addSubview:colorLabel];
-//
-//		UILabel* sizeLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 90, 70, 25)];
-//		sizeLabel.backgroundColor = [UIColor clearColor];
-//		sizeLabel.text = @"选择尺码：";
-//		sizeLabel.font = [UIFont systemFontOfSize:13];
-//		sizeLabel.textColor = [UIColor colorWithHexString:@"0x666666"];
-//		[shoppingCarCell.contentView addSubview:sizeLabel];
-//
-//		NSMutableArray* buttons = [[NSMutableArray alloc] init];
-//
-//		UIButton* colorButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//		colorButton.frame = CGRectMake(180, 60, 100, 25);
-//		colorButton.tag = 11+i;
-//		colorButton.titleLabel.font = [UIFont boldSystemFontOfSize:13];
-//        if ([item.colorArray count]==0) {
-//            colorButton.enabled=NO;
-//        }
-//		[colorButton setTitleColor:[UIColor colorWithHexString:@"0x666666"] forState:UIControlStateNormal];
-//		[colorButton setTitle:@"请选择  " forState:UIControlStateNormal];
-//		[colorButton setBackgroundImage:[UIImage imageNamed:@"btn_ys.png"] forState:UIControlStateNormal];
-//		[colorButton addTarget:self action:@selector(pickAction:) forControlEvents:UIControlEventTouchUpInside];
-//		[buttons addObject:colorButton];
-//		[shoppingCarCell addSubview:colorButton];
-//
-//		UIButton* sizeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//		sizeButton.frame = CGRectMake(180, 90, 100, 25);
-//		[sizeButton setTitleColor:[UIColor colorWithHexString:@"0x666666"] forState:UIControlStateNormal];
-//		sizeButton.titleLabel.font = [UIFont boldSystemFontOfSize:13];
-//		[sizeButton setTitle:@"请选择  " forState:UIControlStateNormal];
-//		sizeButton.tag = 22+i;
-//		[sizeButton setBackgroundImage:[UIImage imageNamed:@"btn_ys.png"] forState:UIControlStateNormal];
-//		[sizeButton addTarget:self action:@selector(pickAction:) forControlEvents:UIControlEventTouchUpInside];
-//        if ([item.colorArray count]==0) {
-//            sizeButton.enabled=NO;
-//        }
-//		[buttons addObject:sizeButton];
-//		[shoppingCarCell addSubview:sizeButton];
-//
-//		UIButton* addCartButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//		addCartButton.frame = CGRectMake(50, 125, 220, 35);
-//		addCartButton.titleLabel.font = [UIFont boldSystemFontOfSize:15];
-//
-//        if ([item.colorArray count]==0) {
-//           [addCartButton setTitle:@"已售完" forState:UIControlStateNormal];
-//            [addCartButton setEnabled:NO];
-//        }else{
-//           [addCartButton setTitle:@"加入购物车" forState:UIControlStateNormal];
-//            [addCartButton setEnabled:YES];
-//        }
-//		addCartButton.tag = i;
-//		[addCartButton addTarget:self action:@selector(addCarAction:) forControlEvents:UIControlEventTouchUpInside];
-//		[addCartButton setBackgroundImage:[UIImage imageNamed:@"big_btn.png"] forState:UIControlStateNormal];
-//		[addCartButton setBackgroundImage:[UIImage imageNamed:@"big_btn_hover.png"] forState:UIControlStateHighlighted];
-//		[shoppingCarCell addSubview:addCartButton];
-//
-//		[cells addObject:shoppingCarCell];
-//		[buttonArray addObject:buttons];
-//	}
-//}
 

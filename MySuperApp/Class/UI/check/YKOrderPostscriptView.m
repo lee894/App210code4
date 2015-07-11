@@ -94,6 +94,12 @@
         return YES;
     }
     
+    
+    if ([text isEqualToString:@""]) {
+        return YES;
+    }
+    
+    
     NSString * aString = [textView.text stringByReplacingCharactersInRange:range withString:text];
 	if (aString.length >=50) {
         [ESToast showDelayToastWithText:@"您最多可以输入50个字哦"];

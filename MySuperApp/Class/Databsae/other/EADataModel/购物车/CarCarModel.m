@@ -289,7 +289,7 @@
             item.packageid = [dicdate objectForKey:@"packageid"];
             item.selected = [[dicdate objectForKey:@"selected"] boolValue];
             item.uk = [dicdate objectForKey:@"uk"];
-            item.is_valid = [dicdate objectForKey:@"@is_valid"];
+            item.is_valid = [[dicdate objectForKey:@"is_valid"] boolValue];
             NSLog(@"arrSuit:%@",item);
             [self.packagelist addObject:item];
             

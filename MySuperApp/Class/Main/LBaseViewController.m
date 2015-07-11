@@ -50,18 +50,6 @@
 {
     [super viewDidLoad];
     
-    
-    
-    //重要，防止IOS7下手势冲突。iOS7上leftBarButtonItem无法实现滑动返回的完美解决方案，lee注释掉，防止出现界面偏移。
-//    if (isIOS7up) {
-//        [self.navigationItem setHidesBackButton:YES];
-//        self.navigationController.interactivePopGestureRecognizer.delegate = self;
-//    }
-    //添加细纹的背景图片
-//    UIImageView *imgvbg = [[UIImageView alloc] initWithFrame:self.view.frame];
-//    [imgvbg setImage:[UIImage imageNamed:@"page_bg_1136.png"]];
-//    [self.view addSubview:imgvbg];
-    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.navigationController.navigationBar.translucent = NO;
 
@@ -69,10 +57,6 @@
     [self.view setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
     
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-
-    
-//    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithHexString:@"#C60931"]];
-
     
     if (isIOS7up) {
         self.navigationController.navigationBar.barTintColor = [UIColor colorWithHexString:@"#C60931"];
@@ -142,8 +126,6 @@
 	[self.navbtnRight setTitle:@"保存" forState:UIControlStateNormal];
 	self.navbtnRight.titleLabel.font = [UIFont systemFontOfSize:LabSmallSize];
 	[self.navbtnRight setFrame:CGRectMake(254, 7, 66, 32)];
-	//[self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_btn.png"] forState:UIControlStateNormal];
-    //[self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_btn_press.png"] forState:UIControlStateHighlighted];
 	[self.navbtnRight addTarget:self action:@selector(rightButAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithCustomView:navbtnRight];
     self.navigationItem.rightBarButtonItem = backBtn;
@@ -175,11 +157,7 @@
     [self.navigationController popToRootViewControllerAnimated:NO];
     [self ShowFooterwithAnimated:YES];
     
-    
     [self changetableBarto:0];
-    
-    //lee999recode
-    //end
 }
 
 //返回根目录
@@ -232,25 +210,15 @@
 }
 
 -(void)showTitleAndFootwithAnimated:(BOOL)animated{
-//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    [self.navigationController setNavigationBarHidden:NO animated:animated];
-//    [app.mytabBarController setTabBarHidden:NO animated:YES];
 }
 
 -(void)hiddenTitleAndFootwithAnimated:(BOOL)animated{
-//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    [self.navigationController setNavigationBarHidden:YES animated:animated];
-//    [app.aktabBarVerticalController hideTabBar:AKShowHideFromLeft animated:animated];
 }
 
 -(void)ShowFooterwithAnimated:(BOOL)animated{
-//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    [app.mytabBarController setTabBarHidden:NO animated:animated];
 }
 
 -(void)hiddenFooterwithAnimated:(BOOL)animated{
-//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    [app.mytabBarController setTabBarHidden:YES animated:animated];
 }
 
 
@@ -477,14 +445,6 @@
     return nil;
 }
 
-//-(float)lee1fitAllScreen:(float)inF{
-//
-//    float f;
-//    f = (inF/320)*ScreenWidth;
-//    
-//    return f;
-//
-//}
 
 
 - (void)didReceiveMemoryWarning
