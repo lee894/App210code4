@@ -481,6 +481,7 @@
     PackageSpecInfo* firstSpec = (PackageSpecInfo*)[goodsInfo.specs firstObject];
     PackageSpecInfo* lastSpec = (PackageSpecInfo*)[goodsInfo.specs lastObject];
     for (PackageProductInfo* ppi in goodsInfo.products) {
+//        NSLog(@"%@ %@ %@ %@", [ppi._spec_value_ids attributeForKey:firstSpec.sId], colorSpecValueInfo.sid, [ppi._spec_value_ids attributeForKey:lastSpec.sId], sizeSpecValueInfo.sid);
         if ([[ppi._spec_value_ids attributeForKey:firstSpec.sId] isEqualToString:colorSpecValueInfo.sid] && [[ppi._spec_value_ids attributeForKey:lastSpec.sId] isEqualToString:sizeSpecValueInfo.sid]) {
             ppInfo = ppi;
             break;
@@ -516,6 +517,7 @@
             }
             if (i < [pGroupInfo.need_select_count integerValue]) {
                 [_marrGoods addObject:@{[NSString stringWithFormat:@"%@_%@",pGroupInfo.gid, ppInfo.product_id] : goodsInfo}];
+                
                 if (_svPackage) {
                     CGFloat spacing = 15;
                     for (NSInteger i = 0; i < _svPackage.subviews.count; ++i) {
@@ -534,6 +536,12 @@
                     }
 
                 }
+                
+                currentColor = 0;
+                currentSize = 0;
+                goodsInfo = nil;
+                btnColor = nil;
+                btnSize = nil;
             }else
             {
                 UIAlertView* av = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"%@最多只能购买%@件", pGroupInfo.name, pGroupInfo.need_select_count] delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
