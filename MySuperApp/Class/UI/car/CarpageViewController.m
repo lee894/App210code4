@@ -516,7 +516,7 @@
                 
                 //将下架商品，添加收藏，并且移除购物车
                 
-                [mainSer getDelcar:strUk];
+                [mainSer getDelcar:[NSString stringWithFormat:@"%@:product", strUk]];
 
                 
             }else {
