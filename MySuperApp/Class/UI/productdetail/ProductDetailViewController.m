@@ -762,7 +762,7 @@
             if (!model.errorMessage) {
                 
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"DelCarSuit" object:nil];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"DelCarSuit" object:nil];
                 
                 [SBPublicAlert hideMBprogressHUD:self.view];
                 
