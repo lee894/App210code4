@@ -485,7 +485,7 @@
             NSMutableString *str = [NSMutableString string];
             
             for (int i = 0; i < self.carModel.carProductlist.count; i++) {
-                YKItem *item = [self.carModel.carProductlist objectAtIndex:i];
+                YKItem *item = [self.carModel.carProductlist objectAtIndex:i isArray:nil];
                 if ([item.type isEqualToString:@"gift"]) {
                     if (i == self.carModel.carProductlist.count -1) {
                         [str appendString:[NSString stringWithFormat:@"%@:gift",item.productid]];
@@ -551,10 +551,10 @@
     
     if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue] > 0) {
         AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        [[[[app.mytabBarController tabBar] items] objectAtIndex:3] setBadgeValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]];
+        [[[[app.mytabBarController tabBar] items] objectAtIndex:3 isArray:nil] setBadgeValue:[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]];
     }else{
         AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        [[[[app.mytabBarController tabBar] items] objectAtIndex:3] setBadgeValue:@""];
+        [[[[app.mytabBarController tabBar] items] objectAtIndex:3 isArray:nil] setBadgeValue:@""];
     }
     //end
 }
@@ -761,7 +761,7 @@
     //end
     
     //MyButton* button = (MyButton*)sender;
-	YKItem* item = (YKItem*)[self.carModel.hotlist objectAtIndex:tap.view.tag];
+	YKItem* item = (YKItem*)[self.carModel.hotlist objectAtIndex:tap.view.tag isArray:nil];
 	ProductDetailViewController* detail = [[ProductDetailViewController alloc] init];
 	detail.thisProductId = item.productid;
     detail.ThisPorductName=item.name;
@@ -864,7 +864,7 @@
     CGFloat unitWidth = lee1fitAllScreen(90);
     CGFloat spacing = (ScreenWidth - unitWidth * 3 - originX * 2) / 2;
 	for (NSInteger i = 0; i < count; ++i) {
-		YKItem* item = (YKItem *)[self.carModel.hotlist objectAtIndex:i];
+		YKItem* item = (YKItem *)[self.carModel.hotlist objectAtIndex:i isArray:nil];
         UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(originX + (i % 3) * (spacing + unitWidth), (i / 3) * (unitHeight) + originY, unitWidth, unitHeight)];
         vUnit.tag = i;
         // 单击的 Recognizer
@@ -973,7 +973,7 @@
 - (void)add_LikeChick:(UIButton *)sender {
     
     
-    YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:sender.tag - 300];
+    YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:sender.tag - 300 isArray:nil];
     
     if ([SingletonState sharedStateInstance].userHasLogin) {
         NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:item.productid, @"GoodsID",item.name, @"GoodsName",nil];
@@ -1102,7 +1102,7 @@
 //    }
     
     for (int i=0; i<[textproductNumArray count]; i++) {
-        UITextField* textfield = (UITextField*)[textproductNumArray objectAtIndex:i];
+        UITextField* textfield = (UITextField*)[textproductNumArray objectAtIndex:i isArray:nil];
         [textfield setBackground:[UIImage imageNamed:@"sort_bg_02_press.png"]];
         [textfield resignFirstResponder];
     }
@@ -1156,7 +1156,7 @@
 //	}
     
 	for (int i=0; i<[textproductNumArray count]; i++) {
-		UITextField* textfield = (UITextField*)[textproductNumArray objectAtIndex:i];
+		UITextField* textfield = (UITextField*)[textproductNumArray objectAtIndex:i isArray:nil];
 		[textfield resignFirstResponder];
 	}
     //lee999
@@ -1210,7 +1210,7 @@
     
     //清除掉框框
     for (int i=0; i<[textproductNumArray count]; i++) {
-        UITextField* textfield = (UITextField*)[textproductNumArray objectAtIndex:i];
+        UITextField* textfield = (UITextField*)[textproductNumArray objectAtIndex:i isArray:nil];
         [textfield setBackground:[UIImage imageNamed:@""]];
         [textfield resignFirstResponder];
     }
@@ -1228,16 +1228,16 @@
         NSMutableString * sku = [NSMutableString string];
         for (int i=0; i<[textproductNumArray count]; i++) {
             
-            UITextField* textfield = (UITextField*)[textproductNumArray objectAtIndex:i];
+            UITextField* textfield = (UITextField*)[textproductNumArray objectAtIndex:i isArray:nil];
             [textfield resignFirstResponder];
             NSInteger number = [textfield.text intValue];
             
-            YKItem *item = (YKItem *)[self.carModel.carProductlist objectAtIndex:i];
+            YKItem *item = (YKItem *)[self.carModel.carProductlist objectAtIndex:i isArray:nil];
             
             if(number == 0)
             {
                 [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"数量不得小于1"];
-                textfield.text = [NSString stringWithFormat:@"%d", 1];
+                textfield.text = [NSString stringWithFormat:@"%@", item.number];
                 isEditing = NO;
                 return;
             }
@@ -1325,7 +1325,7 @@
         if ([indexPath section] < 0 || [indexPath section] >= [self.carModel.suitlist count]) {
             return ;
         }
-        YKSuitListItem *item = [self.carModel.suitlist objectAtIndex:[indexPath section]];
+        YKSuitListItem *item = [self.carModel.suitlist objectAtIndex:[indexPath section] isArray:nil];
         //删除套装
         //....
         [mainSer getDeletesuittocar:item.suitid];
@@ -1336,7 +1336,7 @@
         if ([indexPath section] < 0) {
             return ;
         }
-        YKSuitListItem *item = [self.carModel.packagelist objectAtIndex:[indexPath section] - suitCount];
+        YKSuitListItem *item = [self.carModel.packagelist objectAtIndex:[indexPath section] - suitCount  isArray:nil];
         [mainSer getDelcar:item.uk];
         [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
         //删除套装
@@ -1346,7 +1346,7 @@
         
     }
     else if ([indexPath section] - suitCount - packageCount < productCount && !isaddfav) {
-		YKItem* item = (YKItem *)[self.carModel.carProductlist objectAtIndex:indexPath.section - suitCount - packageCount];
+		YKItem* item = (YKItem *)[self.carModel.carProductlist objectAtIndex:indexPath.section - suitCount - packageCount  isArray:nil];
         NSString* sku = @"";
         if ([item.type isEqualToString:@"product"]) {
             sku = [NSString stringWithFormat:@"%@:product",item.productid];
@@ -1363,7 +1363,7 @@
     } else {
         //修改: 有赠品商品:删除按钮
         if ([indexPath section] - suitCount - packageCount < productCount && isaddfav) {
-            YKItem* item = (YKItem *)[self.carModel.carProductlist objectAtIndex:indexPath.section - suitCount - packageCount];
+            YKItem* item = (YKItem *)[self.carModel.carProductlist objectAtIndex:indexPath.section - suitCount - packageCount  isArray:nil];
             NSString* sku = @"";
             if ([item.type isEqualToString:@"product"]) {
                 sku = [NSString stringWithFormat:@"%@:product",item.productid];
@@ -1403,7 +1403,7 @@
 //        [shoppingCarCell addSubview:cellBg];
         
 		
-		YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:i];
+		YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:i  isArray:nil];
         BOOL showStock = NO;
         BOOL isShowStock = NO;
         if (item.stock && ![item.stock isKindOfClass:[NSNull class]] && ![item.stock isEqualToString:@""]) {
@@ -1710,7 +1710,7 @@
     suitCount = [self.carModel.suitlist count];
     
     for (int j=0; j<[self.carModel.suitlist count]; j++) {
-        YKSuitListItem* item = [self.carModel.suitlist objectAtIndex:j];
+        YKSuitListItem* item = [self.carModel.suitlist objectAtIndex:j isArray:nil];
         
         NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:1];
         
@@ -1846,7 +1846,7 @@
 //                [Cell addSubview:modile];
 //            }
             
-            YKProductsItem *pItem = [item.suits objectAtIndex:k];
+            YKProductsItem *pItem = [item.suits objectAtIndex:k isArray:nil];
             BOOL showStock = NO;
             if (pItem.stock && ![pItem.stock isKindOfClass:[NSNull class]] && ![pItem.stock isEqualToString:@""]) {
                 showStock = YES;
@@ -1938,7 +1938,7 @@
     packageCount = [self.carModel.packagelist count];
     
     for (int j=0; j<[self.carModel.packagelist count]; j++) {
-        YKSuitListItem* item = [self.carModel.packagelist objectAtIndex:j];
+        YKSuitListItem* item = [self.carModel.packagelist objectAtIndex:j isArray:nil];
         
         NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:1];
         
@@ -2039,7 +2039,7 @@
             [lblSep setBackgroundColor:[UIColor colorWithHexString:@"#d0d0d0"]];
             [Cell addSubview:lblSep];
             
-            YKProductsItem *pItem = [item.suits objectAtIndex:k];
+            YKProductsItem *pItem = [item.suits objectAtIndex:k isArray:nil];
             BOOL showStock = NO;
             if (pItem.stock && ![pItem.stock isKindOfClass:[NSNull class]] && ![pItem.stock isEqualToString:@""]) {
                 showStock = YES;
@@ -2363,10 +2363,10 @@
     
     //显示优惠套装
 	if (indexPath.section < suitCount) {
-		return [[self.suitlistcell objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+		return [[self.suitlistcell objectAtIndex:indexPath.section isArray:nil] objectAtIndex:indexPath.row isArray:nil];
 	}
     else if (indexPath.section - suitCount < packageCount) {
-        return [[self.packagelistcell objectAtIndex:indexPath.section - suitCount] objectAtIndex:indexPath.row];
+        return [[self.packagelistcell objectAtIndex:indexPath.section - suitCount isArray:nil] objectAtIndex:indexPath.row isArray:nil];
     }
     //显示普通商品
     else if (indexPath.section - suitCount - packageCount < productCount) {
@@ -2424,7 +2424,7 @@
 			return Cell;
 		}else {
             if (self.favCells.count > 0) {
-           		return [self.favCells objectAtIndex:indexPath.row];
+           		return [self.favCells objectAtIndex:indexPath.row isArray:nil];
             }
 		}
 	}
@@ -2557,7 +2557,7 @@
         }
     }
     
-    YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:gesture.view.tag];
+    YKItem* item = (YKItem*)[self.carModel.carProductlist objectAtIndex:gesture.view.tag isArray:nil];
     
     if ([item.type isEqualToString:@"gift"]) {
         return;
@@ -2585,7 +2585,7 @@
 //    }
     NSInteger row = sender.tag % 10000;
     NSInteger section = (sender.tag - row) / 10000;
-    YKSuitListItem *item = [self.carModel.suitlist objectAtIndex:section];
+    YKSuitListItem *item = [self.carModel.suitlist objectAtIndex:section isArray:nil];
 //    if (indexPath.row == 0) {
 //        return ;
 //    }
@@ -2596,7 +2596,7 @@
     }
     //end
     
-    YKProductsItem *pItem = [item.suits objectAtIndex:row];
+    YKProductsItem *pItem = [item.suits objectAtIndex:row isArray:nil];
     ProductDetailViewController *controller = [[ProductDetailViewController alloc] init];
     controller.isPush = YES;
     controller.isShop = YES;
@@ -2612,7 +2612,7 @@
 //    }
     NSInteger row = sender.tag % 10000;
     NSInteger section = (sender.tag - row) / 10000;
-    YKSuitListItem *item = [self.carModel.packagelist objectAtIndex:section];
+    YKSuitListItem *item = [self.carModel.packagelist objectAtIndex:section isArray:nil];
 //    if (indexPath.row == 0) {
 //        return ;
 //    }
@@ -2623,7 +2623,7 @@
     }
     //end
     
-    YKProductsItem *pItem = [item.suits objectAtIndex:row];
+    YKProductsItem *pItem = [item.suits objectAtIndex:row isArray:nil];
     ProductDetailViewController *controller = [[ProductDetailViewController alloc] init];
     controller.isPush = YES;
     controller.isShop = YES;

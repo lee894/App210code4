@@ -179,7 +179,7 @@
             }
 #pragma mark_colorlist
             if([[iSize objectForKey:@"spec_id"] isEqual:colorid]) {
-                NSLog(@"~~~~~~~~~~~~~~~~~~~~%d",[array_product indexOfObject:[sizeitem ID]]);
+               // NSLog(@"~~~~~~~~~~~~~~~~~~~~%d",[array_product indexOfObject:[sizeitem ID]]);
                 if ([array_product indexOfObject:[sizeitem ID]]!=2147483647) {
                     [self.colorlist addSize:sizeitem];
                 }
@@ -291,6 +291,8 @@
     self.size_url = [json objectForKey:@"size_url"];
     self.isSollection = [[json objectForKey:@"isSollection"] boolValue];
 
+    self.is_valid = [[json objectForKey:@"is_valid"] boolValue];
+        
 }
 
 return self;

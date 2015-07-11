@@ -53,12 +53,19 @@
 @property (nonatomic, retain) NSString *notice;
 @property (nonatomic, retain) NSString *size_url;  //尺码对照表的url
 
-@property (nonatomic, assign) BOOL isSollection;
+@property (nonatomic, assign) BOOL isSollection;  //是否收藏
+
+
+//lee999 150711 判断商品是否下架
+@property (nonatomic, assign) BOOL is_valid;
 
 
 @property (retain, nonatomic) NSString *errorMessage;
 @property (nonatomic, assign) NSInteger requestTag; /*这个与相应的请求的tag是同步的*/
 @property (nonatomic, retain) NSString *response;
+
+
+
 
 
 

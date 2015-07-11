@@ -577,6 +577,15 @@
                 NSDictionary *dic2 = [NSDictionary dictionaryWithObjectsAndKeys:productModel.productId, @"GoodsID",productModel.prodcutName, @"GoodsName",nil];
                 [TalkingData trackEvent:@"1002" label:@"商品详情" parameters:dic2];
                 
+                
+                //lee999 150711 修改商品已下架的提示
+                if (!productModel.is_valid) {
+                    [ESToast showDelayToastWithText:@"该商品已失效"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                    return;
+                }
+                //end
+                
                 if ([[productModel.detailSuper ProductdetailSuperDetail] count]==0) {
                     
                     if ([productModel.colorlist count]==0) {

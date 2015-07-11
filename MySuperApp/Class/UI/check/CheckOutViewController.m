@@ -408,21 +408,29 @@
         
 		//lee999recode
         if ([item.type isEqualToString:@"gift"]) {
+            
+            
+            NSDictionary* style123 = @{@"body":[UIFont fontWithName:@"HelveticaNeue" size:14],
+                                     @"bold":[UIFont fontWithName:@"HelveticaNeue-Bold" size:14],
+                                     @"red": [UIColor redColor]};
+            
             UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, ScreenWidth-100, 45)];
             shoppingName.backgroundColor = [UIColor clearColor];
             shoppingName.numberOfLines = 0;
             shoppingName.lineBreakMode = UILineBreakModeWordWrap;
-            shoppingName.text = [NSString stringWithFormat:@"             %@",item.name];
+           // shoppingName.text = [NSString stringWithFormat:@"             %@",item.name];
+            shoppingName.attributedText = [[NSString stringWithFormat:@"<red>【赠品】</red>%@",item.name] attributedStringWithStyleBook:style123];
+
             shoppingName.font = [UIFont systemFontOfSize:13];
             shoppingName.textColor = [UIColor blackColor];
             
-            UILabel* biaozhi = [[UILabel alloc] init];
-            biaozhi.frame=CGRectMake(0, lee1fitAllScreen(13), 60, 18);
-			biaozhi.backgroundColor = [UIColor clearColor];
-			biaozhi.text = @"【赠品】";
-			biaozhi.font = [UIFont systemFontOfSize:13];
-			biaozhi.textColor = [UIColor redColor];
-			[shoppingName addSubview:biaozhi];
+//            UILabel* biaozhi = [[UILabel alloc] init];
+//            biaozhi.frame=CGRectMake(0, lee1fitAllScreen(13), 60, 18);
+//			biaozhi.backgroundColor = [UIColor clearColor];
+//			biaozhi.text = @"【赠品】";
+//			biaozhi.font = [UIFont systemFontOfSize:13];
+//			biaozhi.textColor = [UIColor redColor];
+//			[shoppingName addSubview:biaozhi];
             
             [Cell.contentView addSubview:shoppingName];
 
