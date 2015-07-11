@@ -730,7 +730,6 @@
 		96F2A4FF1ADAB6ED00E1A04B /* LNewHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2A4F31ADAB6ED00E1A04B /* LNewHomePageViewController.m */; };
 		96F2A5001ADAB6ED00E1A04B /* NewHomeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2A4F51ADAB6ED00E1A04B /* NewHomeInfo.m */; };
 		96F2A5011ADAB6ED00E1A04B /* NewHomeParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2A4F71ADAB6ED00E1A04B /* NewHomeParser.m */; };
-		96F2A5021ADAB6ED00E1A04B /* NewMaginzeBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2A4FA1ADAB6ED00E1A04B /* NewMaginzeBViewController.m */; };
 		96F2A5031ADAB6ED00E1A04B /* NewMaginzeAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2A4FC1ADAB6ED00E1A04B /* NewMaginzeAViewController.m */; };
 		96F2A5041ADAB6ED00E1A04B /* NewMaginzeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2A4FE1ADAB6ED00E1A04B /* NewMaginzeListViewController.m */; };
 		96F2A5081ADAB92600E1A04B /* PPBuyCircleCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2A5061ADAB92600E1A04B /* PPBuyCircleCommonCell.m */; };
@@ -2183,8 +2182,6 @@
 		96F2A4F51ADAB6ED00E1A04B /* NewHomeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHomeInfo.m; sourceTree = "<group>"; };
 		96F2A4F61ADAB6ED00E1A04B /* NewHomeParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHomeParser.h; sourceTree = "<group>"; };
 		96F2A4F71ADAB6ED00E1A04B /* NewHomeParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHomeParser.m; sourceTree = "<group>"; };
-		96F2A4F91ADAB6ED00E1A04B /* NewMaginzeBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMaginzeBViewController.h; sourceTree = "<group>"; };
-		96F2A4FA1ADAB6ED00E1A04B /* NewMaginzeBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMaginzeBViewController.m; sourceTree = "<group>"; };
 		96F2A4FB1ADAB6ED00E1A04B /* NewMaginzeAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMaginzeAViewController.h; sourceTree = "<group>"; };
 		96F2A4FC1ADAB6ED00E1A04B /* NewMaginzeAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMaginzeAViewController.m; sourceTree = "<group>"; };
 		96F2A4FD1ADAB6ED00E1A04B /* NewMaginzeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMaginzeListViewController.h; sourceTree = "<group>"; };
@@ -4489,8 +4486,6 @@
 				96F2A4FE1ADAB6ED00E1A04B /* NewMaginzeListViewController.m */,
 				96F2A4FB1ADAB6ED00E1A04B /* NewMaginzeAViewController.h */,
 				96F2A4FC1ADAB6ED00E1A04B /* NewMaginzeAViewController.m */,
-				96F2A4F91ADAB6ED00E1A04B /* NewMaginzeBViewController.h */,
-				96F2A4FA1ADAB6ED00E1A04B /* NewMaginzeBViewController.m */,
 				96F2A5051ADAB92600E1A04B /* PPBuyCircleCommonCell.h */,
 				96F2A5061ADAB92600E1A04B /* PPBuyCircleCommonCell.m */,
 				96F2A5071ADAB92600E1A04B /* PPBuyCircleCommonCell.xib */,
@@ -7133,7 +7128,6 @@
 				2F27FC4118E1DD0C00C7A7EA /* AnnotationView.m in Sources */,
 				9BACBF711913EA6D00CEF33F /* BindViewController.m in Sources */,
 				9BD58CAA18E40D57008CD881 /* AFPropertyListRequestOperation.m in Sources */,
-				96F2A5021ADAB6ED00E1A04B /* NewMaginzeBViewController.m in Sources */,
 				9BD58CD318E40D57008CD881 /* ActivityIndicatorView.m in Sources */,
 				9B7CB0F918D59C4300D8DAA5 /* AddressAddresslist.m in Sources */,
 				9677E7971B32603800EC9008 /* MyClosetListParser.m in Sources */,

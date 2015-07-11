@@ -12,7 +12,6 @@
 #import "PPBuyCircleCommonCell.h"
 #import "NewMaginzeListInfo.h"
 #import "NewMaginzeAViewController.h"
-#import "NewMaginzeBViewController.h"
 #import "NewMaginzeBViewControllerV2.h"
 
 

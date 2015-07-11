@@ -39,17 +39,6 @@
     
     [self NewHiddenTableBarwithAnimated:YES];
     
-    
-    //创建右边按钮
-//    [self createRightBtn];
-//    [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_icon_mine.png"] forState:UIControlStateNormal];
-//    [self.navbtnRight setTitle:@"" forState:UIControlStateNormal];
-//    [self.navbtnRight setTitle:@"" forState:UIControlStateHighlighted];
-//    [self.navbtnRight setBackgroundImage:[UIImage imageNamed:@"nav_icon_mine_press.png"] forState:UIControlStateHighlighted];
-//    [self.navbtnRight setFrame:CGRectMake(0, 10, 25, 25)];
-//    [self.navbtnRight addTarget:self action:@selector(gotoUserCenter) forControlEvents:UIControlEventTouchUpInside];
-    
-    
     makedonetable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height) style:UITableViewStylePlain];
     makedonetable.backgroundColor = [UIColor clearColor];
     makedonetable.backgroundView = nil;
@@ -150,14 +139,6 @@
     
     
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
-//    NSString *content = a.content;
-//    SHLUILabel *namelab = [[SHLUILabel alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth-30, 20)];
-//    namelab.text = content;
-//    namelab.font = [UIFont systemFontOfSize:LabSmallSize];
-//    namelab.lineBreakMode = NSLineBreakByWordWrapping;
-//    namelab.numberOfLines = 0;
-//    int contentHight = [namelab getAttributedStringHeightWidthValue:ScreenWidth-30]  + 70;
     UIView *splineV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
     [splineV setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
     [cell addSubview:splineV];

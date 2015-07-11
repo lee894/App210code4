@@ -11,7 +11,6 @@
 #import "NewMaginzeListInfo.h"
 #import "NewMaginzeParser.h"
 #import "NewMaginzeAViewController.h"
-#import "NewMaginzeBViewController.h"
 #import "CollectCell.h"
 #import "NewMaginzeBViewControllerV2.h"
 

@@ -23,6 +23,9 @@
 #import "MyAimerViewController.h"
 #import "PackageInfoViewController.h"
 
+#import "NoticeListViewController.h"
+#import "NewMaginzeAViewController.h"
+#import "NewMaginzeBViewControllerV2.h"
 
 @interface LBaseViewController ()<LoginCallbackDelegate>
 
@@ -279,12 +282,12 @@
     filename = [SeparatedArray lastObject];
     filenames=[filename componentsSeparatedByString:@"?"];
     NSString *selectedName =[NSString stringWithFormat:@"%@_%@.%@",
-                             [[filenames objectAtIndex:0] stringByDeletingPathExtension],
+                             [[filenames objectAtIndex:0 isArray:nil] stringByDeletingPathExtension],
                              size,
-                             [[filenames objectAtIndex:0] pathExtension]];
+                             [[filenames objectAtIndex:0 isArray:nil] pathExtension]];
     NSMutableString *string=[[NSMutableString alloc]init];
     for (int i=0; i<[SeparatedArray count]-1; i++) {
-        [string appendFormat:@"%@",[SeparatedArray objectAtIndex:i]];
+        [string appendFormat:@"%@",[SeparatedArray objectAtIndex:i isArray:nil]];
         [string appendFormat:@"/"];
     }
     [string appendFormat:@"%@",selectedName];
@@ -308,9 +311,9 @@
             if (range.location!=NSNotFound) {
                 NSLog(@"Yes");
                 NSArray *arr = [str componentsSeparatedByString:@"|"]; //order:desc|category:1335
-                jumpVC.params = [[[arr objectAtIndex:1]componentsSeparatedByString:@":"] objectAtIndex:1];
-                NSArray *array=[[arr objectAtIndex:0] componentsSeparatedByString:@":"]; //order:desc|category:1335
-                jumpVC.orderStr = [array objectAtIndex:1];
+                jumpVC.params = [[[arr objectAtIndex:1 isArray:nil]componentsSeparatedByString:@":"] objectAtIndex:1];
+                NSArray *array=[[arr objectAtIndex:0 isArray:nil] componentsSeparatedByString:@":"]; //order:desc|category:1335
+                jumpVC.orderStr = [array objectAtIndex:1 isArray:nil];
             }else {
                 NSLog(@"NO");
                 jumpVC.orderStr = @"desc";
@@ -335,7 +338,7 @@
                 NSArray *array=[str componentsSeparatedByString:@":"];
                 ProductDetailViewController *jumpVC=[[ProductDetailViewController alloc]init];
                 jumpVC.isPush = YES;
-                jumpVC.thisProductId=[array objectAtIndex:1];
+                jumpVC.thisProductId=[array objectAtIndex:1 isArray:nil];
                 jumpVC.ThisPorductName=atitle;
                 jumpVC.source_id=@"1002";
                 jumpVC.isFromRight = right;
@@ -353,7 +356,7 @@
                 NSArray *array=[argu componentsSeparatedByString:@":"];
                 YKChannelViewController *jumpVC=[[YKChannelViewController alloc]init];
                 jumpVC.title_Name=atitle;
-                jumpVC.ThisChannelID=[array objectAtIndex:1];
+                jumpVC.ThisChannelID=[array objectAtIndex:1 isArray:nil];
                 jumpVC.isFromRight = right;
 
                 return jumpVC;
@@ -363,10 +366,15 @@
         case 4:
         {
             //活动公告
-            NoticeinfoViewController *jumpVC = [[NoticeinfoViewController alloc] init];
-            jumpVC.isFromRight = right;
-
-            return jumpVC;
+            NSRange range = [argu rangeOfString:@":"];
+            if (range.location!=NSNotFound) {
+                
+                NSArray *array=[argu componentsSeparatedByString:@":"];
+                NoticeListViewController *jumpVC = [[NoticeListViewController alloc] init];
+                jumpVC.noticeID = [array objectAtIndex:1 isArray:nil];
+            
+                return jumpVC;
+            }
         }
             break;
         case 5:
@@ -384,18 +392,55 @@
         case 6:
         {
             //对应套装列表
-            NSArray *array=[argu componentsSeparatedByString:@":"];
+            NSRange range = [argu rangeOfString:@":"];
+            if (range.location!=NSNotFound) {
+                
+                NSArray *array=[argu componentsSeparatedByString:@":"];
+                
+                ProductlistViewController *jumpVC=[[ProductlistViewController alloc]init];
+                [SingletonState sharedStateInstance].productlistType = 1;
+                jumpVC.isSuitlist = YES;
+                jumpVC.isSearch = YES;
+                jumpVC.suitname = [array objectAtIndex:1 isArray:nil];
+                jumpVC.titleName = atitle;
+                jumpVC.isFromRight = right;
+                return jumpVC;
+            }
+        }
+            break;
+            
+        case 7:
+        {
+            //跳转专辑  横版
+            NSRange range = [argu rangeOfString:@":"];
+            if (range.location!=NSNotFound) {
+                
+                NSArray *array=[argu componentsSeparatedByString:@":"];
+                
+                NewMaginzeBViewControllerV2 *jumpVC = [[NewMaginzeBViewControllerV2 alloc] init];
+                jumpVC.strMaginzeId = [array objectAtIndex:1 isArray:nil];
+                jumpVC.isFromHomePageAndShowSepBtn = NO;
 
-            ProductlistViewController *jumpVC=[[ProductlistViewController alloc]init];
-            [SingletonState sharedStateInstance].productlistType = 1;
-            //            [[NSUserDefaults standardUserDefaults]setObject:@"home" forKey:@"From"];
-            jumpVC.isSuitlist = YES;
-            jumpVC.isSearch = YES;
-            jumpVC.suitname = [array objectAtIndex:1];
-            jumpVC.titleName = atitle;
-            jumpVC.isFromRight = right;
+                return jumpVC;
+            }
+        }
+            break;
+            
+        case 8:
+        {
+            //跳转专辑  竖版
+            NSRange range = [argu rangeOfString:@":"];
+            if (range.location!=NSNotFound) {
+                
+                NSArray *array=[argu componentsSeparatedByString:@":"];
+                
+                NewMaginzeAViewController *jumpVC = [[NewMaginzeAViewController alloc] init];
+                jumpVC.strMaginzeId = [array objectAtIndex:1 isArray:nil];
+                jumpVC.isFromHomePageAndShowSepBtn = NO;
+                
+                return jumpVC;
+            }
 
-            return jumpVC;
         }
             break;
             
@@ -416,6 +461,7 @@
             break;
         case 10:
         {
+            //礼包
             NSArray* param = [argu componentsSeparatedByString:@":"];
             if (param.count > 1) {
                 NSString* strPackageId = [param objectAtIndex:1 isArray:nil];
