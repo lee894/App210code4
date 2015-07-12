@@ -388,6 +388,7 @@
                 
                 NewMaginzeBViewControllerV2 *jumpVC = [[NewMaginzeBViewControllerV2 alloc] init];
                 jumpVC.strMaginzeId = [array objectAtIndex:1 isArray:nil];
+                jumpVC.strname = atitle;
                 jumpVC.isFromHomePageAndShowSepBtn = NO;
 
                 return jumpVC;
@@ -405,6 +406,7 @@
                 
                 NewMaginzeAViewController *jumpVC = [[NewMaginzeAViewController alloc] init];
                 jumpVC.strMaginzeId = [array objectAtIndex:1 isArray:nil];
+                jumpVC.strname = atitle;
                 jumpVC.isFromHomePageAndShowSepBtn = NO;
                 
                 return jumpVC;

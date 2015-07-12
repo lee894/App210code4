@@ -30,6 +30,9 @@
 #import "ShareUnit.h"
 #import "ESToast.h"
 
+#import "DplusMobClick.h"
+
+
 @interface LBaseViewController : UIViewController<UIGestureRecognizerDelegate,UIAlertViewDelegate>//<AKTabBarDelegate>
 
 @property(nonatomic,strong) UIButton *navbtnback;

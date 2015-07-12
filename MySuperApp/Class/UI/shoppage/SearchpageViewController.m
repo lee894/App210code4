@@ -168,6 +168,9 @@
             rightJianImage.hidden = NO;
             
             tempButhot.selected = YES;
+            
+            [DplusMobClick track:@"首页/搜索" property:@{@"搜索方式":@"热门搜索"}];
+
         }
             break;
         case 101: //最近搜索
@@ -181,6 +184,9 @@
             leftJianImage.hidden = NO;
             tempBut.selected = YES;
             [tableViewConetnt reloadData];
+            
+            [DplusMobClick track:@"首页/搜索" property:@{@"搜索方式":@"最近搜索"}];
+
         }
             break;
         default:
@@ -205,7 +211,9 @@
         hotVC.isHiddenFilerbtn = NO;
         hotVC.isFromSearchPage = YES;
         [self.navigationController pushViewController:hotVC animated:YES];
-
+        
+        
+        
     }else {
         [mainSev getSearch];
         [SBPublicAlert showMBProgressHUD:nil andWhereView:self.view states:NO];
@@ -217,11 +225,17 @@
     if (ishot) { //热门列表的刷新
         isSerch = NO;
         [self sendRequest];
+        
+        [DplusMobClick track:@"搜索页面/刷新按钮"];
+
     }else { //最近列表的刷新
         NSFileManager *fileManager = [NSFileManager defaultManager];
         [fileManager removeItemAtPath:[self DoumentPath] error:nil];
         arrSearch = nil;
         [tableViewConetnt reloadData];
+        
+        [DplusMobClick track:@"搜索页面/清空按钮"];
+
     }
 }
 
@@ -260,8 +274,8 @@
 - (void)popBackAnimate:(UIButton *)sender{
     
     [serchField resignFirstResponder];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"GoToMillHome" object:[NSNumber numberWithInt:100] userInfo:@{@"mill_Tag": @(self.mill_Tag)}];
 }
+
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (serchField.text.length > 0) {
@@ -345,6 +359,14 @@
     hotVC.isHiddenFilerbtn = NO;
     hotVC.isFromSearchPage = YES;
     [self.navigationController pushViewController:hotVC animated:YES];
+    
+    if (ishot) {
+        [DplusMobClick track:@"热门搜索点击" property:@{@"标签名称":cell.contentLable.text}];
+    }else{
+        [DplusMobClick track:@"最近搜索" property:@{@"标签名称":cell.contentLable.text}];
+    }
+
+
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

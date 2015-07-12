@@ -582,6 +582,14 @@
         return;
     }
     
+    //套装
+    
+    [DplusMobClick track:@"加入购物车/礼包" property:@{@"加入类型":@"礼包",
+                                                @"商品id":self.pid,
+                                                @"商品Sku":_marrGoods,
+                                                @"商品名称":self.pInfo.packageinfo.name,
+                                                @"商品数量":@"1"}];
+    
     mainSev = [[MainpageServ alloc] init];
     mainSev.delegate = self;
     [mainSev addPackageToCartWithData:_marrGoods andPid:self.pid];

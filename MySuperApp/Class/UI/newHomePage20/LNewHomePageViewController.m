@@ -116,10 +116,11 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    
+    [DplusMobClick track:@"商城"];
 
     if ([SingletonState sharedStateInstance].isNewHomePageScrollToTop) {
         [SingletonState sharedStateInstance].isNewHomePageScrollToTop = NO;
-//        [myTableV setContentOffset:CGPointMake(0, 0) animated:YES];
     }
     myTableV.scrollEnabled = YES;
     
@@ -446,6 +447,7 @@
         NewhomeNormalData *topbannerModel = [_homeinfo.top_banner objectAtIndex:0 isArray:nil];
         [bannerBtn setImageFromUrl:NO withUrl:topbannerModel.pic];
         bannerBtn.imageView.layer.masksToBounds = YES;
+        bannerBtn.tag = 10112;
         [bannerBtn addTarget:self action:@selector(topbannerJump:) forControlEvents:UIControlEventTouchUpInside];
         [headV addSubview:bannerBtn];
     }
@@ -899,7 +901,6 @@
         str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
     }
     [BfdAgent feedback:self recommendId:@"rec_2142096B_FB0B_FCD1_8DD8_0D235639F12F" itemId:btn.addstring options:@{@"uid":str}];
-
     
     ProductDetailViewController *jumpVC=[[ProductDetailViewController alloc]init];
     jumpVC.thisProductId=btn.addstring;
@@ -907,23 +908,25 @@
     jumpVC.source_id=@"1002";
     jumpVC.isHiddenBar = YES;
     [self.navigationController pushViewController:jumpVC animated:YES];
+    
+    [DplusMobClick track:@"首页/为我推荐"property:@{@"商品ID":btn.addstring,
+                                              @"商品名称":btn.addtitle}];
 }
 
 
 //W为我推荐的  更多推荐
 -(void)gotoMoreRecommendViewC{
 
-    
+
     ProductlistViewController *hot = [[ProductlistViewController alloc] init];
     //lee999 新增   为我推荐的更多推荐   5
     [SingletonState sharedStateInstance].productlistType = 5;
     hot.titleName = @"更多推荐";
     hot.isHiddenFilerbtn = YES;
     //需要追加参数 category == 3267
-//    hot.isHot = NO;
-//    hot.isOrder = NO;
     [self.navigationController pushViewController:hot animated:YES];
-
+    
+    [DplusMobClick track:@"首页/更多推荐"];
 }
 
 
@@ -973,6 +976,7 @@
     AMMapViewController *nearByVC = [[AMMapViewController alloc] init];
     [self.navigationController pushViewController:nearByVC animated:YES];
     
+    [DplusMobClick track:@"首页/查找门店"];
 }
 
 //杂志
@@ -987,6 +991,8 @@
         str = [data.atype description];
     }
     
+    [DplusMobClick track:@"首页/杂志" property:@{@"类型":str}];
+
     NewMaginzeListViewController *mvc = [[NewMaginzeListViewController alloc] init];
     mvc.isShowSwitchBtn = YES;
     mvc.strtitle = str;
@@ -999,6 +1005,7 @@
 //限时特卖   跳入专题
 -(void)gotoBuyNowViewC{
     
+    [DplusMobClick track:@"首页/限时抢购"];
 
     [self.navigationController pushViewController:[LBaseViewController bannerJumpTo:[[_homeinfo.home_limitsale atype] intValue]
                                                                        withtypeArgu:[_homeinfo.home_limitsale type_argu]
@@ -1009,10 +1016,13 @@
 
 //热卖
 -(void)gotoHotViewC{
-
+    
     HotpageViewController *hot = [[HotpageViewController alloc] init];
     hot.isHot = YES;
     [self.navigationController pushViewController:hot animated:YES];
+    
+    [DplusMobClick track:@"首页/热卖"];
+
 }
 
 //搭配  搭配进入搭配杂志界面
@@ -1022,6 +1032,8 @@
     mvc.isShowSwitchBtn = NO;
     mvc.strtitle = _homeinfo.home_match.atype;
     [self.navigationController pushViewController:mvc animated:YES];
+    
+    [DplusMobClick track:@"首页/搭配"];
 }
 
 //新品
@@ -1032,6 +1044,8 @@
     hot.isHot = NO;
     hot.isOrder = NO;
     [self.navigationController pushViewController:hot animated:YES];
+    
+    [DplusMobClick track:@"首页/新品"];
 }
 
 //显示提示窗
@@ -1048,8 +1062,6 @@
     blurParameters.radius = 0.3;
     [popin setBlurParameters:blurParameters];
     [popin setPopinTransitionDirection:BKTPopinTransitionDirectionTop];
-    //popin.presentingController = self;
-    
     
     UIImageView *ercodeV = [[UIImageView alloc] initWithFrame:CGRectMake(30, 40, popin.view.bounds.size.width-20, popin.view.bounds.size.height - 50)];
     [popin.view addSubview:ercodeV];
@@ -1078,6 +1090,13 @@
     photoBtn.frame = CGRectMake(lee1fitAllScreen(270), 10, 20, 20);
     [popin.view addSubview:photoBtn];
     
+    if (btn.tag == 100) {
+        [DplusMobClick track:@"首页/微信二维码"];
+    }else{
+        [DplusMobClick track:@"首页/微博二维码"];
+    }
+
+    
     
     [self presentPopinController:popin animated:YES completion:^{
         NSLog(@"Popin presented !");
@@ -1094,6 +1113,18 @@
 -(void)topbannerJump:(id)sender{
 
     NewhomeNormalData *bannerModel = (NewhomeNormalData *)[_homeinfo.top_banner objectAtIndex:0 isArray:nil];
+    
+    
+    UIButton *btn = (UIButton*)sender;
+    NSString *str = @"首页/专题";
+    if (btn.tag == 10112) {
+        //首页小banner
+        str = @"首页/小banner";
+    }
+    [DplusMobClick track:str property:@{@"专题ID":[bannerModel atype],
+                                             @"专题名称":[bannerModel title]}];
+
+    
     [self.navigationController pushViewController:[LBaseViewController bannerJumpTo:[[bannerModel atype] intValue]
                                                                        withtypeArgu:[bannerModel type_argu]
                                                                           withTitle:[bannerModel title]

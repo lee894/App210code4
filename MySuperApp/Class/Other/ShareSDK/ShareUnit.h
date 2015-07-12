@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DplusMobClick.h"
 
 @interface ShareUnit : NSObject
+
++(NSString *)shareName:(NSString *)name;
++(NSString *)shareproductID:(NSString *)pid;
+
 
 +(void)ShareSDKwithTitle:(NSString*)atitle
                  content:(NSString*)content

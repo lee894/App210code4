@@ -146,6 +146,7 @@
         [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
     }
     
+    [DplusMobClick track:@"专辑"];
     
     AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (app.mytabBarController.selectedIndex == 2) {
@@ -685,6 +686,7 @@
     
         NewMaginzeAViewController *newMVC = [[NewMaginzeAViewController alloc] init];
         newMVC.strMaginzeId = item.magazine_id;
+        newMVC.strname = item.title;
         newMVC.isFromHomePageAndShowSepBtn = self.isShowSwitchBtn;
         [self.navigationController pushViewController:newMVC animated:YES];
         
@@ -697,6 +699,7 @@
         
         NewMaginzeBViewControllerV2 *newMVC = [[NewMaginzeBViewControllerV2 alloc] init];
         newMVC.strMaginzeId = item.magazine_id;
+        newMVC.strname = item.title;
         newMVC.isFromHomePageAndShowSepBtn = self.isShowSwitchBtn;
         [self.navigationController pushViewController:newMVC animated:YES];
 

@@ -315,6 +315,7 @@
         NewMaginzeAViewController *newMVC = [[NewMaginzeAViewController alloc] init];
         newMVC.strMaginzeId = item.magazine_id;
         newMVC.isFromHomePageAndShowSepBtn = NO;
+        newMVC.strname = item.title;
         [self.navigationController pushViewController:newMVC animated:YES];
         
     }else{
@@ -322,6 +323,7 @@
         
         NewMaginzeBViewControllerV2 *newMVC = [[NewMaginzeBViewControllerV2 alloc] init];
         newMVC.strMaginzeId = item.magazine_id;
+        newMVC.strname = item.title;
         newMVC.isFromHomePageAndShowSepBtn = NO;
         [self.navigationController pushViewController:newMVC animated:YES];
     }

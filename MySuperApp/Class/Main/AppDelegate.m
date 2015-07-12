@@ -51,6 +51,9 @@
 
 #import "XGPush.h"
 #import "XGSetting.h"
+
+#import "DplusMobClick.h"
+
 #define _IPHONE80_ 80000
 
 
@@ -76,7 +79,12 @@
     NSString *adId =[[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     
     NSLog(@"\nidfv:%@\nidfa:%@",idfv,adId);
-
+    
+    
+    //淘宝埋点
+    
+    [DplusMobClick setTokenProperty:@"7015c26d7775980cf62c"];
+    [DplusMobClick setTokenProperty:@"7015c26d7775980cf62c" model:START_SEND_MODEL wifi:YES];
     
     //注册微信
     [WXApi registerApp:kWeiXinKey];

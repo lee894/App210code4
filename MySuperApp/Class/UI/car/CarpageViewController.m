@@ -24,6 +24,9 @@
     BOOL isEditing; //是否编辑状态
     UIView* vToolbar;
     UIButton* btnCheckOut;
+    
+    
+    
 }
 @property (nonatomic, retain) NSMutableArray* selectedList;
 @property (nonatomic, retain) UIButton* btnCheckBox;
@@ -83,6 +86,9 @@
     }
     
     [self loadData];
+    
+    [DplusMobClick track:@"购物车"];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -579,8 +585,10 @@
     [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_normal"] forState:UIControlStateSelected];
     [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_hoverl"] forState:UIControlStateHighlighted];
     [btnCheckOut setTitle:[NSString stringWithFormat:@"结算(%@)", _carModel.itemNumber] forState:UIControlStateNormal];
-    [btnCheckOut setTitle:@"    " forState:UIControlStateHighlighted];
+    [btnCheckOut setTitle:@"" forState:UIControlStateHighlighted];
     [btnCheckOut setTitle:[NSString stringWithFormat:@"删除(%@)", _carModel.itemNumber] forState:UIControlStateSelected];
+    [btnCheckOut setTitle:@"" forState:UIControlStateDisabled];
+
     [btnCheckOut addTarget:self action:@selector(gotoChectViewC:) forControlEvents:UIControlEventTouchUpInside];
     [vToolbar addSubview:btnCheckOut];
     
@@ -748,6 +756,8 @@
     
 	[self.navigationController pushViewController:detail animated:YES];
     
+    
+    [DplusMobClick track:@"购物车推荐" property:@{@"商品ID":item.productid,@"商品名称":item.name}];
     
     //lee999 新增百分点
     if (tap.view.tag < 3) {

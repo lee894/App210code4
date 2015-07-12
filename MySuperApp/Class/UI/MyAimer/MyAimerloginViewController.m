@@ -116,6 +116,7 @@
     [mainSer getUserInfo];
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
     
+    [DplusMobClick track:@"我的爱慕"];
 }
 
 - (void)successMyziliao {

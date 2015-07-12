@@ -51,6 +51,9 @@
     [super viewWillAppear:YES];
     
     [self NewSHowTableBarwithAnimated:YES];
+    
+    [DplusMobClick track:@"分类"];
+
 }
 
 //创建表格

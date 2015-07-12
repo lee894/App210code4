@@ -16,6 +16,15 @@
 
 @implementation ShareUnit
 
++(NSString *)shareName:(NSString *)name{
+    return name;
+}
+
++(NSString *)shareproductID:(NSString *)pid{
+    return pid;
+}
+
+
 +(void)ShareSDKwithTitle:(NSString*)atitle
                  content:(NSString*)content
           defaultContent:(NSString*)adefaultContent
@@ -25,36 +34,8 @@
                 imageUrl:(NSString*)aimageURl
 {
     
-    NSLog(@"-------%@",[ShareSDK version]);
-    
-    
-    
     [SingletonState sharedStateInstance].isShareSDK = YES;
     
-    
-    //    NSString* imagePath ;//= [aurl hasSuffix:@".jpg"]?[aurl stringByReplacingOccurrencesOfString:@".jpg" withString:@"_169x210.jpg"]:aurl;
-    //
-    //    UIImage *shareIMG;
-    //    UrlImageView* ImgV;
-    //    if (aimg.length<1) {
-    //        imagePath = [[NSBundle mainBundle] pathForResource:@"icon120"  ofType:@"png"];
-    //        shareIMG  =[UIImage imageNamed:@"imagePath"];
-    //    }else{
-    //        ImgV = [[UrlImageView alloc] init];
-    //        [ImgV setImageWithURL:[NSURL URLWithString:imagePath]  placeholderImage:nil];
-    //        shareIMG = ImgV.image;
-    //    }
-    //
-    
-    
-    //    id<ISSContent> pengyouquanContent = [ShareSDK
-    //                                         content:content
-    //                                         defaultContent:content
-    //                                         image:nil
-    //                                         title:content
-    //                                         url:aurl
-    //                                         description:content
-    //                                         mediaType:SSPublishContentMediaTypeText];
     
     id<ISSShareActionSheetItem> myItem = [ShareSDK shareActionSheetItemWithTitle:@"微信朋友圈"
                                                                             icon:[UIImage imageNamed:@"sns_icon_23.png"]
@@ -79,21 +60,7 @@
                           SHARE_TYPE_NUMBER(ShareTypeRenren),
                           nil];
     
-    
-    
-    //    NSArray *shareList = [ShareSDK getShareListWithType:
-    //                          ShareTypeSinaWeibo,
-    //                          ShareTypeQQSpace,
-    //                          ShareTypeQQ,
-    //                          ShareTypeWeixiSession,
-    //                          pengyouquanItem,
-    //                          ShareTypeDouBan,
-    //                          ShareTypeRenren,
-    //                          nil];
-    
-    
-    
-    
+
     
     //构造分享内容
     
@@ -110,15 +77,6 @@
      *
      *	@return	分享内容对象
      */
-    
-//    id<ISSContent> publishContent = [ShareSDK content:content
-//                                       defaultContent:adefaultContent
-//                                                image:[ShareSDK pngImageWithImage:aimg]//[ShareSDK imageWithUrl:imagePath]//
-//                                                title:atitle
-//                                                  url:aurl
-//                                          description:adescription
-//                                            mediaType:SSPublishContentMediaTypeNews];
-
     
     id<ISSContent> publishContent = [ShareSDK content:content
                                        defaultContent:adefaultContent
@@ -161,6 +119,41 @@
                                 
                                 if (state == SSResponseStateSuccess)
                                 {
+                                    
+#warning ------- 还没分享 埋点
+                                    
+//                                    NSString *strtype = @"";
+//                                    
+//                                    switch (type) {
+//                                        case ShareTypeSinaWeibo:
+//                                            strtype = @"新浪微博";
+//                                            break;
+//                                        case ShareTypeQQSpace:
+//                                            strtype = @"QQ空间";
+//                                            break;
+//                                        case ShareTypeQQ:
+//                                            strtype = @"QQ好友";
+//                                            break;
+//                                        case ShareTypeWeixiSession:
+//                                            strtype = @"微信好友";
+//                                            break;
+//                                        case ShareTypeDouBan:
+//                                            strtype = @"豆瓣";
+//                                            break;
+//                                        case ShareTypeRenren:
+//                                            strtype = @"人人";
+//                                            break;
+//                                            
+//                                        default:
+//                                            strtype = @"微信朋友圈";
+//                                            break;
+//                                    }
+//                                    
+//                                    [DplusMobClick track:@"分享" property:@{@"分享类型":strtype,
+//                                                                          @"商品ID":}];
+                                    
+                                    
+                                    
                                     [MYCommentAlertView showMessage:@"分享成功" target:nil];
                                     NSLog(@"分享成功");
                                 }

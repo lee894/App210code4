@@ -382,9 +382,19 @@
         }
     }
     NSLog(@"suitString:%@", suitString);
+    
+    
     [mainSer getAddsuittocar:self.suitListModel.suitid andSuitid:suitString];
     
     [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
+    
+    //套装
+    
+    [DplusMobClick track:@"加入购物车/套装" property:@{@"加入类型":@"套装",
+                                                @"商品id":self.suitListModel.suitid,
+                                                @"商品Sku":suitString,
+                                                @"商品名称":@"套装详情",
+                                                @"商品数量":@"1"}];
 }
 
 

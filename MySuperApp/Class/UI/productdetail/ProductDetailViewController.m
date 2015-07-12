@@ -148,6 +148,9 @@
         str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
     }
     [BfdAgent visit:self itemId:self.thisProductId options:@{@"uid":str}];
+    
+    [DplusMobClick track:@"商品详情" property:@{@"商品ID":self.thisProductId,
+                                            @"商品名称":self.thisProductId}];
 }
 
 -(NSArray*)viewConstraints
@@ -1098,6 +1101,14 @@
 -(void)loadAddCar{
     
     NSString *sku=[NSString stringWithFormat:@"%@:%@:product",self.product_id,buttonForNum.text];
+
+    [DplusMobClick track:@"加入购物车/单品" property:@{@"加入类型":@"单品",
+                                             @"商品id":self.thisProductId,
+                                             @"商品Sku":sku,
+                                             @"商品名称":self.ThisPorductName,
+                                             @"商品数量":buttonForNum.text}];
+    
+    
     if ([UIApplication sharedApplication].applicationIconBadgeNumber<10000) {
         [mainSev getCar_add:sku];
         [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];

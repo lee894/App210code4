@@ -99,6 +99,8 @@
     PScrollView.pageScrollView.frame = CGRectMake(OneSepWidth*2, 0, (ScreenWidth - OneSepWidth*4) , ScreenHeight -130);
     [PScrollView.pageScrollView reloadData];
     [self.view addSubview:PScrollView];
+    
+    [DplusMobClick track:@"专辑详情/横版" property:@{@"专辑ID":self.strMaginzeId,@"专辑名称":self.strname}];
 }
 
 

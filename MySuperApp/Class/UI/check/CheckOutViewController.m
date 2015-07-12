@@ -89,6 +89,13 @@
 	[self createOtherCells];
 	[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(poptdo) name:@"ISLOGIN" object:nil];
     
+    
+    
+    // 防止最后一行地址不好操作
+//    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+//    [footerView setBackgroundColor:[UIColor blueColor]];
+//    chectOutTable.tableFooterView = footerView;
+    
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -290,7 +297,7 @@
 
 - (void)createHeaderAndFooter{
     //ADD FootView:
-	UIView* footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 240)];
+	UIView* footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 250)];
 	footView.backgroundColor = [UIColor clearColor];
     
     
@@ -1287,12 +1294,12 @@ NSLog(@"createOtherCells  come out");
     }else{
         
         if (section - 6 < suitCount) {
-            //lee999  这个地方是套装的cell  +1 为了加上分割线
-            return [(NSMutableArray*)[suitlistcell objectAtIndex:section-6 isArray:nil] count] + 1;
+            //lee999  这个地方是套装的cell
+            return [(NSMutableArray*)[suitlistcell objectAtIndex:section-6 isArray:nil] count];
             
         }else if (section -6 -suitCount < packageCount){
-            //lee999  这个地方是礼包的cell +1 为了加上分割线
-            return [(NSMutableArray*)[packagelistcell objectAtIndex:section-6-suitCount isArray:nil] count] + 1;
+            //lee999  这个地方是礼包的cell
+            return [(NSMutableArray*)[packagelistcell objectAtIndex:section-6-suitCount isArray:nil] count];
         }else{
             //lee999  这个地方是普通商品的cell
             return [tableCells count];
@@ -1396,7 +1403,7 @@ NSLog(@"createOtherCells  come out");
     if (section == 1 ||section == 2 ||section == 3 ||section == 4) {
         return 0.5;
     }
-    return 0.5;
+    return 8;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView *fv = [[UIView alloc] init];
