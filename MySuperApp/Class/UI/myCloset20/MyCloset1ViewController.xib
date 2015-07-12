@@ -16,6 +16,7 @@
                 <outlet property="namebtn2" destination="Biw-n1-Dtz" id="GQx-d3-BAa"/>
                 <outlet property="namebtn3" destination="W0w-Jw-TRc" id="KvI-LQ-xZ8"/>
                 <outlet property="namebtn4" destination="xPv-6r-hgz" id="y4G-30-YJ8"/>
+                <outlet property="titlenameLab" destination="3cP-yr-2Ca" id="KNC-Hx-IU4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

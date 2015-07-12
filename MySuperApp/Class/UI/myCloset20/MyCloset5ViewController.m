@@ -155,9 +155,6 @@
 //跳过直接进入 衣橱
 - (IBAction)gotoClosetListAction:(id)sender {
     
-    if (![self isSelectFrequence]) {
-        return;
-    }
     
     NSString *size = [self.arr_selectSize componentsJoinedByString:@","];
     NSString *style = [self.arr_selectStyle componentsJoinedByString:@","];

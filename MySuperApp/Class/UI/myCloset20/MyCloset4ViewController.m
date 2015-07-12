@@ -156,11 +156,7 @@
 // 跳过===  去衣橱了！！！
 - (IBAction)gotoClosetListAction:(id)sender {
 
-    if (![self selectMySize]) {
-        return;
-    }
-    
-    
+
     NSString *size = [arr_selectSize componentsJoinedByString:@","];
     NSString *style = [self.arr_selectStyle componentsJoinedByString:@","];
 

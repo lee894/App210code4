@@ -577,6 +577,7 @@
 		968AE8A51B25615B004A1A85 /* sryc_laber_class_big_arrow_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 968AE8A31B25615B004A1A85 /* sryc_laber_class_big_arrow_normal@2x.png */; };
 		968B93591B5253F600F7AECD /* btn_red_a_hover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 968B93571B5253F600F7AECD /* btn_red_a_hover@2x.png */; };
 		968B935A1B5253F600F7AECD /* btn_red_a_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 968B93581B5253F600F7AECD /* btn_red_a_normal@2x.png */; };
+		968B935E1B525A4100F7AECD /* Dplus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 968B935C1B525A4100F7AECD /* Dplus.a */; };
 		968C290A1AE17D7300D1ABFD /* LCommentAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 968C29091AE17D7300D1ABFD /* LCommentAlertView.m */; };
 		968C290D1AE17E0E00D1ABFD /* DSURLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 968C290C1AE17E0E00D1ABFD /* DSURLView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		968C29101AE17E5000D1ABFD /* DSURLLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 968C290F1AE17E5000D1ABFD /* DSURLLabel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1850,6 +1851,8 @@
 		968AE8A31B25615B004A1A85 /* sryc_laber_class_big_arrow_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sryc_laber_class_big_arrow_normal@2x.png"; sourceTree = "<group>"; };
 		968B93571B5253F600F7AECD /* btn_red_a_hover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_red_a_hover@2x.png"; sourceTree = "<group>"; };
 		968B93581B5253F600F7AECD /* btn_red_a_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_red_a_normal@2x.png"; sourceTree = "<group>"; };
+		968B935C1B525A4100F7AECD /* Dplus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = Dplus.a; sourceTree = "<group>"; };
+		968B935D1B525A4100F7AECD /* DplusMobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DplusMobClick.h; sourceTree = "<group>"; };
 		968C29081AE17D7300D1ABFD /* LCommentAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCommentAlertView.h; sourceTree = "<group>"; };
 		968C29091AE17D7300D1ABFD /* LCommentAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCommentAlertView.m; sourceTree = "<group>"; };
 		968C290B1AE17E0E00D1ABFD /* DSURLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSURLView.h; sourceTree = "<group>"; };
@@ -3033,6 +3036,7 @@
 				969542631B25F7C500206FAB /* libzbar.a in Frameworks */,
 				9BB002A8198E818F0073992C /* libUPPayPlugin.a in Frameworks */,
 				9BE4C409192CE6C900E6FA21 /* AdSupport.framework in Frameworks */,
+				968B935E1B525A4100F7AECD /* Dplus.a in Frameworks */,
 				9BD90BCB18C4986700582602 /* CoreTelephony.framework in Frameworks */,
 				96CD7C181AF7C73400831E3F /* AGCommon.framework in Frameworks */,
 				96FF99F81B268CE400AA82BF /* libWeiboSDK.a in Frameworks */,
@@ -3974,6 +3978,15 @@
 			children = (
 			);
 			path = pickerView;
+			sourceTree = "<group>";
+		};
+		968B935B1B525A4100F7AECD /* Dplus */ = {
+			isa = PBXGroup;
+			children = (
+				968B935C1B525A4100F7AECD /* Dplus.a */,
+				968B935D1B525A4100F7AECD /* DplusMobClick.h */,
+			);
+			path = Dplus;
 			sourceTree = "<group>";
 		};
 		969541B71B25F63E00206FAB /* openssl */ = {
@@ -5639,6 +5652,7 @@
 		9BD58AE518E40D56008CD881 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				968B935B1B525A4100F7AECD /* Dplus */,
 				96FE585B1B501E6400AAE650 /* CCMPlayNDropView */,
 				9657A2C61B48B6110070612B /* WPAttributedMarkup */,
 				9629ED7F1B478E7900F61EE2 /* XinGepush */,
@@ -7645,6 +7659,7 @@
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/Alipay",
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/Baifendian",
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/XinGepush",
+					"$(PROJECT_DIR)/MySuperApp/Class/Other/Dplus",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -7706,6 +7721,7 @@
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/Alipay",
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/Baifendian",
 					"$(PROJECT_DIR)/MySuperApp/Class/Other/XinGepush",
+					"$(PROJECT_DIR)/MySuperApp/Class/Other/Dplus",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (

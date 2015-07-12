@@ -8,12 +8,13 @@
 
 #import "MyCloset6ViewController.h"
 #import "MyCloset7ViewController.h"
+#import "YKCanReuse_webViewController.h"
+#import "ProductlistViewController.h"
+
 
 @interface MyCloset6ViewController ()
 {
     IBOutlet UIScrollView *myScrollV;
-
-
 }
 @end
 
@@ -56,5 +57,27 @@
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark--- 我有软尺
+- (IBAction)HasRuanchiAction:(id)sender {
+    
+    YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
+    webView.strURL = HasRuanchiUrl;
+    webView.strTitle = @"我有软尺";
+    [self.navigationController pushViewController:webView animated:YES];
+}
+
+#pragma mark--- 换购软尺
+- (IBAction)buyTapeAction:(id)sender {
+ 
+    ProductlistViewController *jumpVC = [[ProductlistViewController alloc] init];
+    [SingletonState sharedStateInstance].productlistType = 1;
+    jumpVC.params = @":3564";
+    jumpVC.titleName = @"换购软尺";
+    jumpVC.isHiddenFilerbtn = YES;  //隐藏筛选按钮。  轮播不需要增加筛选按钮
+    [self.navigationController pushViewController:jumpVC animated:YES];
+    
+}
+
+
 
 @end

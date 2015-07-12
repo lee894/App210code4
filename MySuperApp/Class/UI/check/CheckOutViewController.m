@@ -1287,12 +1287,12 @@ NSLog(@"createOtherCells  come out");
     }else{
         
         if (section - 6 < suitCount) {
-            //lee999  这个地方是套装的cell
-            return [(NSMutableArray*)[suitlistcell objectAtIndex:section-6 isArray:nil] count];
+            //lee999  这个地方是套装的cell  +1 为了加上分割线
+            return [(NSMutableArray*)[suitlistcell objectAtIndex:section-6 isArray:nil] count] + 1;
             
         }else if (section -6 -suitCount < packageCount){
-            //lee999  这个地方是礼包的cell
-            return [(NSMutableArray*)[packagelistcell objectAtIndex:section-6-suitCount isArray:nil] count];
+            //lee999  这个地方是礼包的cell +1 为了加上分割线
+            return [(NSMutableArray*)[packagelistcell objectAtIndex:section-6-suitCount isArray:nil] count] + 1;
         }else{
             //lee999  这个地方是普通商品的cell
             return [tableCells count];
@@ -1362,6 +1362,11 @@ NSLog(@"createOtherCells  come out");
                 if (indexPath.row == 0) {
                     return 66;
                 }
+//                //+1 lee9 为了加上分割线
+//                else if (indexPath.row == [(NSMutableArray*)[suitlistcell objectAtIndex:section-6 isArray:nil] count])
+//                {
+//                    return 8;
+//                }
                 return lee1fitAllScreen(116);
                 
             }else if (section -6 -suitCount < packageCount){
@@ -1369,6 +1374,11 @@ NSLog(@"createOtherCells  come out");
                 if (indexPath.row == 0) {
                     return 66;
                 }
+//                //+1 为了加上分割线
+//                else if (indexPath.row == [(NSMutableArray*)[packagelistcell objectAtIndex:section-6-suitCount isArray:nil] count])
+//                {
+//                    return 8;
+//                }
                 return lee1fitAllScreen(116);
                 
             }else{
@@ -1382,13 +1392,11 @@ NSLog(@"createOtherCells  come out");
 }
 
 
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (section == 1 ||section == 2 ||section == 3 ||section == 4) {
         return 0.5;
     }
-    return 8.;
+    return 0.5;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView *fv = [[UIView alloc] init];

@@ -38,7 +38,22 @@
 }
 @end
 
+
+
 @implementation MyCloset1ViewController
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        
+         arr_selecttype = [[NSMutableArray alloc] initWithCapacity:0];
+        
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,6 +68,9 @@
 
     arr_selecttype = [self.strselecttype componentsSeparatedByString:@","];
     
+    if ([arr_selecttype count] == 0) {
+        titlenameLab.text = @"您好，请选择";
+    }
     
     
 }

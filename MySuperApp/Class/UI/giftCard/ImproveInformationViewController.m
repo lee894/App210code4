@@ -74,6 +74,7 @@
     
     mainSer = [[MainpageServ alloc] init];
     mainSer.delegate = self;
+    [self NewHiddenTableBarwithAnimated:YES];
     
     scrollView.frame = CGRectMake(0, 0, 320, NowViewsHight);
     

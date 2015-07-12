@@ -341,6 +341,11 @@
                 [self.navbtnRight setTitle:@"筛选" forState:UIControlStateSelected];
                 //                }
                 
+                if (self.isHiddenFilerbtn) {
+                    [self.navbtnRight setHidden:YES];
+                }
+                
+                
                 if (self.isSearch&&productListModel.recordCount == 0) {
                     [SBPublicAlert showMBProgressHUD:@"没有查到此商品" andWhereView:self.view hiddenTime:0.6];
                     return;

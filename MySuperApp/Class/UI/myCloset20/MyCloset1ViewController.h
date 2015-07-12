@@ -11,6 +11,9 @@
 @interface MyCloset1ViewController : LBaseViewController
 {
 
+    __weak IBOutlet UILabel *titlenameLab;
+    
+    
     __weak IBOutlet UIButton *nextBtn;
 }
 

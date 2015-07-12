@@ -179,7 +179,8 @@
 #define SPlashViewUrl @"http://m.aimer.com.cn/method/appslogoios"
 //联系客服 的url
 #define kefuUrl       @"http://m.aimer.com.cn//index/talker"
-
+//我有软尺：
+#define HasRuanchiUrl    @"http://m.aimer.com.cn/method/measuresize"
 
 //API的host路径
 #define OFFICIALDOMAIN @"http://mobiletest.aimer.com.cn:8888/mobile/"

@@ -10,4 +10,8 @@
 
 @interface MyCloset6ViewController : LBaseViewController
 
+
+- (IBAction)HasRuanchiAction:(id)sender;
+- (IBAction)buyTapeAction:(id)sender;
+
 @end

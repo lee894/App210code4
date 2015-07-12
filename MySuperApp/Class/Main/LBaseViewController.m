@@ -372,6 +372,7 @@
                 jumpVC.suitname = [array objectAtIndex:1 isArray:nil];
                 jumpVC.titleName = atitle;
                 jumpVC.isFromRight = right;
+                jumpVC.isHiddenFilerbtn = YES;
                 return jumpVC;
             }
         }
