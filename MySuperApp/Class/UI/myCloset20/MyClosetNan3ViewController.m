@@ -18,6 +18,11 @@
     NSString *str1;
     NSString *str2;
     
+    
+    
+    ZHPickView* _pickview1;
+    ZHPickView* _pickview2;
+    
     NSInteger selectIndex;
     MainpageServ *mainSev;
 
@@ -54,6 +59,12 @@
 }
 
 
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [_pickview1 remove];
+    [_pickview2 remove];
+}
+
 
 - (IBAction)typeSelectAction:(id)sender {
     UIButton *btn = (UIButton*)sender;
@@ -64,16 +75,20 @@
     if (btn.tag == 1) {
         //支持自定义数组： 男  内裤
         NSArray *array=@[@[@"165",@"170",@"175",@"180",@"185",@"190"]];
-       ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
-        _pickview.delegate = self;
-        [_pickview show];
+        if (!_pickview1) {
+            _pickview1=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
+        }
+        _pickview1.delegate = self;
+        [_pickview1 show];
     }
    else if (btn.tag == 2) {
         //支持自定义数组：
        NSArray *array=@[@[@"165",@"170",@"175",@"180",@"185",@"190"]];
-        ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
-       _pickview.delegate = self;
-        [_pickview show];
+       if (!_pickview2) {
+           _pickview2=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
+       }
+       _pickview2.delegate = self;
+        [_pickview2 show];
     }
 }
 
@@ -118,6 +133,8 @@
                           andsize:size
                          andprops:style
                           andtype:@"man"];
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
 }
 
 

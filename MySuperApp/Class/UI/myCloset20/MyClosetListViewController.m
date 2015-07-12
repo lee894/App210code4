@@ -31,7 +31,7 @@
     
     
     [self setTitle:@"私人衣橱列表"];
-    [self createBackBtnWithType:0];
+    [self createBackBtnWithType:997];
     [self NewHiddenTableBarwithAnimated:YES];
 
     

@@ -23,6 +23,10 @@
     MainpageServ *mainSev;
     MyClosetInfo *_closetinfo;
     
+    
+    ZHPickView* _pickview1;
+    ZHPickView* _pickview2;
+    
     IBOutlet UIButton *btn1;
     IBOutlet UIButton *btn2;
     
@@ -65,6 +69,12 @@
 }
 
 
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [_pickview1 remove];
+    [_pickview2 remove];
+}
+
 
 - (IBAction)typeSelectAction:(id)sender {
     UIButton *btn = (UIButton*)sender;
@@ -75,16 +85,20 @@
     if (btn.tag == 1) {
         //支持自定义数组：
         NSArray *array=@[@[@"三个月",@"半年（建议）",@"一年"]];
-        ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
-        _pickview.delegate = self;
-        [_pickview show];
+        if (!_pickview1) {
+            _pickview1=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
+        }
+        _pickview1.delegate = self;
+        [_pickview1 show];
     }
     else if (btn.tag == 2) {
         //支持自定义数组：
         NSArray *array=@[@[@"一个月",@"三个月（建议）",@"半年"]];
-        ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
-        _pickview.delegate = self;
-        [_pickview show];
+        if (!_pickview2) {
+            _pickview2=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
+        }
+        _pickview2.delegate = self;
+        [_pickview2 show];
     }
 }
 
@@ -166,6 +180,8 @@
                           andsize:size
                          andprops:style
                           andtype:@"woman"];
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
 }
 
 

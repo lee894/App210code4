@@ -9,6 +9,7 @@
 #import "MyCloset7ViewController.h"
 #import "MyButton.h"
 #import "ZHPickView.h"
+#import "BindPhoneViewController.h"
 
 @interface MyCloset7ViewController ()<ZHPickViewDelegate,ServiceDelegate>
 {
@@ -22,6 +23,10 @@
 
     NSString *selectStore;
     NSString *selecttime;
+    
+    
+    ZHPickView* _pickview1;
+    ZHPickView* _pickview2;
 
 }
 
@@ -48,6 +53,13 @@
 
     
     [myScrollV addSubview:[self createCellView:@[@"门店",@"时间"]]];
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [_pickview1 remove];
+    [_pickview2 remove];
 }
 
 
@@ -133,10 +145,12 @@
         btn1.selected = YES;
         
         NSArray *array= @[arr];
-        ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
-        _pickview.delegate = self;
-        _pickview.tag = btn.tag;
-        [_pickview show];
+        if (!_pickview1) {
+            _pickview1=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
+        }
+        _pickview1.delegate = self;
+        _pickview1.tag = btn.tag;
+        [_pickview1 show];
     }
     else if (btn.tag == 2) {
         //支持自定义数组：
@@ -148,10 +162,12 @@
         
         //将时间字符串转换成NSDate类型的时间。dateFromString方法。
         NSDate *tempDate = [NSDate date];
-        ZHPickView *_pickview=[[ZHPickView alloc] initDatePickWithDate:tempDate datePickerMode:UIDatePickerModeDate isHaveNavControler:NO];
-        _pickview.delegate = self;
-        _pickview.tag = btn.tag;
-        [_pickview show];
+        if (!_pickview2) {
+            _pickview2=[[ZHPickView alloc] initDatePickWithDate:tempDate datePickerMode:UIDatePickerModeDate isHaveNavControler:NO];
+        }
+        _pickview2.delegate = self;
+        _pickview2.tag = btn.tag;
+        [_pickview2 show];
         
         btn2.selected = YES;
     }
@@ -208,6 +224,12 @@
 -(void)serviceFailed:(ServiceType)aHandle{
     [SBPublicAlert hideMBprogressHUD:self.view];
     
+    if (aHandle == ENeedbindPhone) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"预约测体需要您先绑定手机" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"绑定", nil];
+        alert.delegate = self;
+        alert.tag = 1099;
+        [alert show];
+    }
 }
 
 -(void)serviceFinished:(ServiceType)aHandle withmodel:(id)amodel{
@@ -229,6 +251,19 @@
             }
             default:
                 break;
+        }
+    }
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (alertView.tag == 1099) {
+        if (buttonIndex == 1) {
+            
+            //绑定手机
+            BindPhoneViewController *tempBindPhone = [[BindPhoneViewController alloc] initWithNibName:@"BindPhoneViewController" bundle:nil];
+            [self.navigationController  pushViewController:tempBindPhone animated:YES];
+            
         }
     }
 }

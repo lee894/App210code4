@@ -17,6 +17,10 @@
     IBOutlet UIButton* dibtn;
     IBOutlet UIButton* fubtn;
     IBOutlet UIButton* fubtn3;
+    
+    ZHPickView* _pickview1;
+    ZHPickView* _pickview2;
+    ZHPickView* _pickview3;
 
     MainpageServ *mainSev;
     NSInteger selectIndex;
@@ -47,6 +51,14 @@
 }
 
 
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [_pickview1 remove];
+    [_pickview2 remove];
+    [_pickview3 remove];
+}
+
+
 - (IBAction)typeSelectAction:(id)sender {
     UIButton *btn = (UIButton*)sender;
     btn.selected = YES;
@@ -56,23 +68,29 @@
     if (btn.tag == 1) {
         //支持自定义数组：  女孩文胸
         NSArray *array=@[@[@"A65",@"B65",@"C65",@"A70",@"B70",@"C70",@"A75",@"B75",@"C75",@"A80",@"B80",@"C80",@"100",@"110",@"120",@"130",@"140",@"150",@"160",@"170"]];
-       ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
-        _pickview.delegate = self;
-        [_pickview show];
+        if (!_pickview1) {
+            _pickview1=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
+        }
+        _pickview1.delegate = self;
+        [_pickview1 show];
     }
    else if (btn.tag == 2) {
         //支持自定义数组： 女孩底裤
         NSArray *array=@[@[@"100",@"110",@"120",@"130",@"140",@"150",@"160",@"170"]];
-        ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
-       _pickview.delegate = self;
-        [_pickview show];
+       if (!_pickview2) {
+           _pickview2=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
+       }
+       _pickview2.delegate = self;
+        [_pickview2 show];
     }
    else if (btn.tag == 3) {
        //支持自定义数组：女孩睡衣
        NSArray *array=@[@[@"100",@"110",@"120",@"130",@"140",@"150",@"160",@"170"]];
-       ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
-       _pickview.delegate = self;
-       [_pickview show];
+       if (!_pickview3) {
+           _pickview3=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO]; 
+       }
+       _pickview3.delegate = self;
+       [_pickview3 show];
    }
 }
 
@@ -133,6 +151,8 @@
                               andsize:size
                              andprops:@""
                               andtype:@"lass"];
+        [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
         
     }else{
     

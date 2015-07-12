@@ -242,7 +242,6 @@
             break;
             
         case 4:
-#warning -----
             strtype = @"";
 
             break;

@@ -9,6 +9,7 @@
 #import "MyClosetMade2ViewController.h"
 #import "YKCanReuse_webViewController.h"
 #import "MyClosetMade3ViewController.h"
+#import "MyCloset7ViewController.h"
 
 @interface MyClosetMade2ViewController ()
 {
@@ -48,6 +49,10 @@
 
 
 - (IBAction)yuyueAction:(id)sender {
+ 
+    
+    MyCloset7ViewController *clv2 = [[MyCloset7ViewController alloc] initWithNibName:@"MyCloset7ViewController" bundle:nil];
+    [self.navigationController pushViewController:clv2 animated:YES];
     
 }
 

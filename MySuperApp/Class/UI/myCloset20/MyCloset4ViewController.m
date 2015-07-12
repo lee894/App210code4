@@ -21,6 +21,10 @@
     IBOutlet UIButton* btn1;
     IBOutlet UIButton* btn2;
     IBOutlet UIButton* btn3;
+    
+    ZHPickView* _pickview1;
+    ZHPickView* _pickview2;
+    ZHPickView* _pickview3;
 
     NSInteger selectIndex;
     
@@ -28,11 +32,9 @@
     NSString *str2;
     NSString *str3;
 
-    
     NSMutableArray *arr_selectSize;
-
-
 }
+
 @end
 
 @implementation MyCloset4ViewController
@@ -64,6 +66,14 @@
     mainSev.delegate = self;
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+
+    [_pickview1 remove];
+    [_pickview2 remove];
+    [_pickview3 remove];
+    
+}
+
 
 - (IBAction)typeSelectAction:(id)sender {
     UIButton *btn = (UIButton*)sender;
@@ -74,23 +84,29 @@
     if (btn.tag == 1) {
         //支持自定义数组：  女  文胸
         NSArray *array=@[@[@"A65",@"B65",@"C65",@"A70",@"B70",@"C70",@"D70",@"E70",@"F70",@"A75",@"B75",@"C75",@"D75",@"E75",@"F75",@"A80",@"B80",@"C80",@"D80",@"E80",@"F80",@"A85",@"B85",@"C85",@"D85",@"E85",@"F85",@"A90",@"B90",@"C90",@"D90",@"E90",@"F90",@"A100",@"B100",@"C100",@"D100",@"E100",@"F100"]];
-        ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
-        _pickview.delegate = self;
-        [_pickview show];
+        if (!_pickview1) {
+            _pickview1 =[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
+        }
+        _pickview1.delegate = self;
+        [_pickview1 show];
     }
     else if (btn.tag == 2) {
         //支持自定义数组： 女  底裤
         NSArray *array=@[@[@"64",@"70",@"76",@"82",@"90",@"95",@"100",@"110",@"155",@"160",@"165",@"170",@"175"]];
-        ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
-        _pickview.delegate = self;
-        [_pickview show];
+        if (!_pickview2) {
+            _pickview2=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
+        }
+        _pickview2.delegate = self;
+        [_pickview2 show];
     }
     else if (btn.tag == 3) {
         //支持自定义数组：女睡衣
         NSArray *array=@[@[@"155",@"160",@"165",@"170",@"175",@"180"]];
-        ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
-        _pickview.delegate = self;
-        [_pickview show];
+        if (!_pickview3) {
+            _pickview3=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
+        }
+        _pickview3.delegate = self;
+        [_pickview3 show];
     }
 }
 
@@ -157,15 +173,20 @@
 - (IBAction)gotoClosetListAction:(id)sender {
 
 
-    NSString *size = [arr_selectSize componentsJoinedByString:@","];
-    NSString *style = [self.arr_selectStyle componentsJoinedByString:@","];
-
-    [mainSev getaddwardrobeupdata:@"女士"
-                         andcrowd:@"女士"
-                     andfrequency:@""
-                          andsize:size
-                         andprops:style
-                          andtype:@"woman"];
+    
+    MyCloset5ViewController *clv2 = [[MyCloset5ViewController alloc] initWithNibName:@"MyCloset5ViewController" bundle:nil];
+    [clv2.arr_selectStyle addObjectsFromArray:self.arr_selectStyle];
+    [self.navigationController pushViewController:clv2 animated:YES];
+    
+//    NSString *size = [arr_selectSize componentsJoinedByString:@","];
+//    NSString *style = [self.arr_selectStyle componentsJoinedByString:@","];
+//
+//    [mainSev getaddwardrobeupdata:@"女士"
+//                         andcrowd:@"女士"
+//                     andfrequency:@""
+//                          andsize:size
+//                         andprops:style
+//                          andtype:@"woman"];
     
 }
 
