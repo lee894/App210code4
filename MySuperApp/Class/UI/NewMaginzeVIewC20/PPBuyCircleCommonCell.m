@@ -71,7 +71,7 @@
         
         
         
-        if (self.item.title.length<1 || self.item.subtitle.length < 1) {
+        if ([self.item.title description].length<1 || [self.item.subtitle description].length < 1) {
             _textBackGroundView.hidden = YES;
         }else{
             _textBackGroundView.hidden = NO;

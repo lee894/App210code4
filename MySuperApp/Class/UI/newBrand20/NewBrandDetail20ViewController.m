@@ -54,7 +54,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-//    self.title = self.brandname;
     [self createBackBtnWithType:0];
     
     brandID = 0;
@@ -157,9 +156,21 @@
     
     SGFocusImageFrame *banner = [[SGFocusImageFrame alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth - 28,bannerView.frame.size.height) delegate:self imageItems:itemArray isAuto:YES];
     [bannerView addSubview:banner];
-
+    
+    NSInteger hihg1 = 220 + 85 + 20;//banner.frame.origin.y + banner.frame.size.height + 80;
+    
+    CGRect oldRect = self.chaoliuxinpV1.frame;
+    oldRect.origin.y = hihg1;
+    
     [myScrollV addSubview:bannerView];
     
+    
+    CGRect oldRect2 = self.chanpinmuluV2.frame;
+    oldRect2.origin.y = hihg1;
+
+    
+    [self.chaoliuxinpV1 setFrame:oldRect];
+    [self.chanpinmuluV2 setFrame:oldRect2];
 }
 
 

@@ -579,13 +579,13 @@
                 [TalkingData trackEvent:@"1002" label:@"商品详情" parameters:dic2];
                 
                 
-                //lee999 150711 修改商品已下架的提示
-                if (!productModel.is_valid) {
-                    [ESToast showDelayToastWithText:@"该商品已失效"];
-                    [self.navigationController popViewControllerAnimated:YES];
-                    return;
-                }
-                //end
+//                //lee999 150711 修改商品已下架的提示
+//                if (!productModel.is_valid) {
+//                    [ESToast showDelayToastWithText:@"该商品已失效"];
+//                    [self.navigationController popViewControllerAnimated:YES];
+//                    return;
+//                }
+//                //end
                 
                 if ([[productModel.detailSuper ProductdetailSuperDetail] count]==0) {
                     
@@ -1869,7 +1869,7 @@
 #pragma mark 尺寸对照按钮事件的
 - (void)sizeButActionChick:(UIButton *)sender {
         
-    if (productModel.size_url.length<1) {
+    if ([productModel.size_url description].length<1) {
         [SBPublicAlert showMBProgressHUD:@"此分类暂无尺码表" andWhereView:self.view hiddenTime:0.6];
     }else {
         

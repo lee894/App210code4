@@ -293,17 +293,17 @@
 //    if (![textFieldName.text isEqualToString:@""] && ![labelCity.text isEqualToString:@""] && ![textFieldDetail.text isEqualToString:@""] && ![textFieldPhone.text isEqualToString:@""]) {
     
     
-        if (textFieldName.text.length<1) {
+        if ([textFieldName.text description].length<1) {
             [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"请您输入收货人姓名"];
             return;
         }
         
-        if (labelCity.text.length<5) {
+        if ([labelCity.text description].length<5) {
             [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"请您选择省市区"];
             return;
         }
         
-        if (textFieldDetail.text.length<1) {
+        if ([textFieldDetail.text description].length<1) {
             [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"请您输入详细地址"];
             return;
         }

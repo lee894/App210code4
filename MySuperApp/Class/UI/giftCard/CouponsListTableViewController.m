@@ -376,7 +376,7 @@
             [but setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [but setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
             but.titleLabel.font = [UIFont systemFontOfSize:17.0];
-            [but addTarget:self action:@selector(btnBindClicked:) forControlEvents:UIControlEventTouchUpInside];
+            [but addTarget:self action:@selector(howToAddClubAction) forControlEvents:UIControlEventTouchUpInside];
             [Cell addSubview:but];
             return Cell;
             
@@ -663,6 +663,18 @@
 //        [SBPublicAlert showMBProgressHUD:@"请输入正确的优惠劵号码" andWhereView:self.view hiddenTime:1.];
 //    }
     
+}
+
+
+#pragma mark---- 如何入会
+-(void)howToAddClubAction{
+
+    
+    YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
+    webView.strURL = @"http://m.aimer.com.cn/method/v6codeinfo";
+    webView.strTitle = @"会员卡会员";
+    [self.navigationController pushViewController:webView animated:YES];
+
 }
 
 

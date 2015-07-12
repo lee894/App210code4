@@ -16,6 +16,9 @@
 @interface NewBrandDetail20ViewController : LBaseViewController<UIScrollViewDelegate,ServiceDelegate,SGFocusImageFrameDelegate>
 
 
+@property (weak, nonatomic) IBOutlet UIView *chaoliuxinpV1;
+@property (weak, nonatomic) IBOutlet UIView *chanpinmuluV2;
+
 @property(nonatomic,retain)NSString *brandname;
 
 @end

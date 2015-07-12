@@ -668,7 +668,7 @@
                 messageCellhead.labordertime.text = orderDetail.orderdetailInfo.ordertime;
                 NSString *sendtype = orderDetail.orderdetailInfo.expresscorn;
                 messageCellhead.labsendtype.text = orderDetail.orderdetailInfo.expresscorn;
-                if (sendtype.length<1) {
+                if ([sendtype description].length<1) {
                    messageCellhead.labsendtype.text = @"无";
                 }
                 messageCellhead.laborderallprice.text = [NSString stringWithFormat:@"￥%@",orderDetail.orderdetailInfo.co_price];

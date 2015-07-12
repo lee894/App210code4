@@ -99,7 +99,7 @@
 -(BOOL)selectMySize{
     
     
-    if (str1.length<1 || str2.length<1  || str3.length<1 ) {
+    if ([str1 description].length<1 || [str2 description].length<1  || [str3 description].length<1 ) {
         [SBPublicAlert showMBProgressHUD:@"请您选择完您的尺码" andWhereView:self.view hiddenTime:AlertShowTime];
         return NO;
     }

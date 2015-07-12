@@ -576,7 +576,7 @@
         cell.delegate = self;
 
         //lee999 增加判断，么有输入手机号的时候，提示输入手机号。
-        if (telephoneLabel.text.length<1) {
+        if ([telephoneLabel.text description].length<1) {
             [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"请您输入手机号码"];
             return;
         }//end

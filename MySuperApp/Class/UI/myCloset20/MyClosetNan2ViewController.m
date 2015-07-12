@@ -16,6 +16,7 @@
     
     NSString *str_selectStyle; //已选中的穿衣之道。
     NSMutableArray *arr_btnStyle; //已选中的穿衣之道。
+    NSMutableArray *arr_Style; //已选中的穿衣之道。
 
 }
 @end
@@ -38,9 +39,9 @@
     [self createBackBtnWithType:0];
     [self NewHiddenTableBarwithAnimated:YES];
     
+    arr_Style = [[NSMutableArray alloc] initWithCapacity:0];
     arr_btnStyle = [[NSMutableArray alloc] initWithCapacity:0];
-    
-    
+
     NSLog(@"--%@---%@",self.closetinfo.style,self.closetinfo.chuanyizhidao);
     
     
@@ -134,10 +135,10 @@
         [SBPublicAlert showMBProgressHUD:@"请先选择您的穿衣之道" andWhereView:self.view hiddenTime:AlertShowTime];
         return;
     }
-    [arr_btnStyle addObject:str_selectStyle];
+    [arr_Style addObject:str_selectStyle];
     
     MyClosetNan3ViewController *nan3vc = [[MyClosetNan3ViewController alloc] initWithNibName:@"MyClosetNan3ViewController" bundle:nil];
-    [nan3vc.arr_selectStyle addObjectsFromArray:arr_btnStyle];
+    [nan3vc.arr_selectStyle addObjectsFromArray:arr_Style];
     [self.navigationController pushViewController:nan3vc animated:YES];
     
 }

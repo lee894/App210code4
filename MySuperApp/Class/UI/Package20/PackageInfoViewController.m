@@ -617,6 +617,7 @@
     [_tbPackage setShowsVerticalScrollIndicator:NO];
     [_tbPackage setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [_tbPackage setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [_tbPackage setBackgroundColor:[UIColor colorWithHexString:tableViewBGC]];
     return _tbPackage;
 }
 
@@ -840,6 +841,7 @@
 {
     UIView* v = [[UIView alloc] init];  
     UITableViewCell* cell = [[UITableViewCell alloc] init];
+    cell.backgroundColor = [UIColor clearColor];
     NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods.count;
     CGFloat height = 0;
     UIView* vGroup = nil;
@@ -896,7 +898,7 @@
     if (((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).isOpen) {
         for (NSInteger i = 0; i < ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count; ++i) {
             PackageGoodsInfo* pgi = [((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods objectAtIndex:i];
-            UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(15 + (i % 2) * (lee1fitAllScreen(140) + 10), (i / 2) * (lee1fitAllScreen((180 + 90))), lee1fitAllScreen(140), lee1fitAllScreen((180 + 90)))];
+            UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(15 + (i % 2) * (lee1fitAllScreen(140) + 15), (i / 2) * (lee1fitAllScreen((180 + 90))), lee1fitAllScreen(140), lee1fitAllScreen((180 + 90)))];
             UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
             [uiv setImageWithURL:[NSURL URLWithString:pgi.image_url] placeholderImage:nil];
             [vUnit addSubview:uiv];
@@ -906,7 +908,7 @@
             [lblName setLineBreakMode:NSLineBreakByTruncatingTail];
             NSMutableParagraphStyle* mps = [[NSMutableParagraphStyle alloc] init];
             [mps setLineBreakMode:NSLineBreakByCharWrapping];
-            [mps setLineSpacing:6];
+//            [mps setLineSpacing:6];
             
             NSMutableAttributedString* maStr = [[NSMutableAttributedString alloc] initWithString:pgi.name];
             NSUInteger nLen = pgi.name.length;
@@ -1108,7 +1110,6 @@
     
     UrlImageView* iv = [[UrlImageView alloc] init];
     [vInfo addSubview:iv];
-//    [iv setImageWithURL:[NSURL URLWithString:_pInfo.packageinfo.image_file_path] placeholderImage:nil];
     __block UrlImageView* blockuiv = iv;
     [iv setImageWithURL:[NSURL URLWithString:_pInfo.packageinfo.image_file_path] placeholderImage:nil afterDownload:^(UIImage *image) {
         [blockuiv setFrame:CGRectMake(0, 0, image.size.width / 2, image.size.height / 2)];
