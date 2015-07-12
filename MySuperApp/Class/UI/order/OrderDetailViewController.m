@@ -508,6 +508,21 @@
 }
 
 
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+//
+//    return 8;
+//}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//
+//    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 8)];
+//    [v setBackgroundColor:[UIColor clearColor]];
+//    return v;
+//    
+//}
+
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     {
@@ -910,7 +925,8 @@
 
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
-                return 23;
+                //订单信息的标题
+                return 25;
             }else
             {
                 //lee999 新增高度  修改订单信息cell的高度  ordermessagecell
@@ -922,7 +938,8 @@
             return 10;
         }else if (indexPath.section == 2) {
             if (indexPath.row == 0) {
-                return 23;
+                //“商品清单”的标题
+                return 28;
             }else{
                 //这里是普通的商品列表
                 return 160;
@@ -930,6 +947,7 @@
 
         }else if (indexPath.section == four) {
             if (indexPath.row == 0) {
+                
                 return 23;
             }else
             {
@@ -939,7 +957,8 @@
         }else if (indexPath.section == five) {
             //订单留言
             if (indexPath.row == 0) {
-                return 23;
+            //"订单留言"的标题
+                return 25;
             }else
             {
                 return 80;
@@ -953,13 +972,21 @@
                 return 53;
             }
         }else if (indexPath.section >=3&&indexPath.section <four) {
-//            //lee999
-            YKSuitListItem *suitListItem = (YKSuitListItem *)[orderDetail.itemSuit objectAtIndex:indexPath.section-3];
-            if (indexPath.row == [[suitListItem suits] count]) {
+            
+            if (indexPath.row == 0) {
                 return 60;
+            }else{
+                return 160;
             }
-//            //end
-            return 160;
+            
+//            //lee999
+//            YKSuitListItem *suitListItem = (YKSuitListItem *)[orderDetail.itemSuit objectAtIndex:indexPath.section-3];
+            
+            
+//            if (indexPath.row == [[suitListItem suits] count]) {
+//                return 60;
+//            }
+//            return 160;
         }
 
     }
@@ -1028,6 +1055,81 @@
         
         NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:1];
         
+        
+        static NSString	*CellSuitlist3 = @"Cell3";
+        UITableViewCell *viewSuitlistCell3 = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellSuitlist3];
+        viewSuitlistCell3.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
+        UIImageView *buttom = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, ScreenWidth-20,0.5)];
+        [buttom setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+        [viewSuitlistCell3.contentView addSubview:buttom];
+        
+        
+        UIFont *font = [UIFont systemFontOfSize:13];
+        int xOffset = 15;
+        int yOffset = 15;
+        int height = (70-yOffset-10)/2;
+        
+        UILabel* desc = [[UILabel alloc] init];
+        desc.backgroundColor = [UIColor clearColor];
+        NSString *str = @"";
+        if (item.packageid) {
+            str = @"礼包: ";
+        }else if(item.suitid)
+        {
+            str = @"套装: ";
+        }
+        desc.text = [NSString stringWithFormat:@"%@%@", str, item.name];
+        desc.font = [UIFont systemFontOfSize:LabSmallSize];
+        desc.textColor = UIColorFromRGB(0x181818);
+        CGRect rc = [desc.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : desc.font} context:nil];
+        [desc setFrame:CGRectMake(xOffset, yOffset, rc.size.width, rc.size.height)];
+        [viewSuitlistCell3.contentView addSubview:desc];
+        
+        desc = [[UILabel alloc] init];
+        desc.backgroundColor = [UIColor clearColor];
+        desc.text = [NSString stringWithFormat:@"数量: %d", item.number];
+        desc.font = [UIFont systemFontOfSize:LabSmallSize];
+        desc.textColor = UIColorFromRGB(0x666666);
+        rc = [desc.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : desc.font} context:nil];
+        [desc setFrame:CGRectMake(170 , yOffset, rc.size.width, rc.size.height)];
+        [viewSuitlistCell3.contentView addSubview:desc];
+        
+        if (item.packageid) {
+            str = @"套装价: ";
+        }else if(item.suitid)
+        {
+            str = @"礼包价: ";
+        }
+        int strWidth = [str sizeWithFont:font].width;
+        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset+height, strWidth, height)];
+        desc.backgroundColor = [UIColor clearColor];
+        desc.text = str;
+        desc.font = [UIFont systemFontOfSize:LabSmallSize];
+        desc.textColor = UIColorFromRGB(0xB90023);/*UIColorFromRGB(0x666666)*/
+        [viewSuitlistCell3.contentView addSubview:desc];
+        xOffset += strWidth;
+        
+        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset+height, 90, height)];
+        desc.backgroundColor = [UIColor clearColor];
+        desc.text = [NSString stringWithFormat:@"￥%.2f", item.price];
+        desc.font = [UIFont systemFontOfSize:16];
+        desc.textColor = UIColorFromRGB(0xB90023);
+        [viewSuitlistCell3.contentView addSubview:desc];
+        xOffset = 170;
+        
+        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset+height, 110, height)];
+        desc.backgroundColor = [UIColor clearColor];
+        desc.text = [NSString stringWithFormat:@"优惠: ￥%.2f", item.save];
+        desc.font = [UIFont systemFontOfSize:LabSmallSize];
+        desc.textColor = UIColorFromRGB(0x666666);
+        [viewSuitlistCell3.contentView addSubview:desc];
+        
+        [array addObject:viewSuitlistCell3];
+
+        
+        
         for (int k = 0; k<[item.suits count]; k++) {
             static NSString	*CellIdentifier2 = @"Cell2";
             UITableViewCell *Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
@@ -1079,7 +1181,7 @@
                 desc.backgroundColor = [UIColor clearColor];
                 desc.text = pItem.stock;
                 desc.font = [UIFont systemFontOfSize:12];
-                desc.textColor = [UIColor redColor];
+                desc.textColor = [UIColor colorWithHexString:@"181818"];
                 [Cell.contentView addSubview:desc];
                 
                 yOffset += 8;
@@ -1109,125 +1211,25 @@
             priceValue.textColor = UIColorFromRGB(0xB90023);
             [Cell.contentView addSubview:priceValue];
             
-            [array addObject:Cell];
-
+            if (k == [item.suits count]-1) {
+                
+                UIImageView *buttom = [[UIImageView alloc] initWithFrame:CGRectMake(0, 160-8, ScreenWidth,8)];
+                [buttom setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+                [Cell.contentView addSubview:buttom];
+            }
             
+            [array addObject:Cell];
         }
-        
-        static NSString	*CellSuitlist3 = @"Cell3";
-        UITableViewCell *viewSuitlistCell3 = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellSuitlist3];
-        viewSuitlistCell3.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        
-        UIImageView *buttom = [[UIImageView alloc] initWithFrame:CGRectMake(10, -8, ScreenWidth-20,0.5)];
-        [buttom setBackgroundColor:[UIColor colorWithHexString:@"ff0000"]];
-        [viewSuitlistCell3.contentView addSubview:buttom];
-        
-        
-        UIFont *font = [UIFont systemFontOfSize:13];
-        int xOffset = 15;
-        int yOffset = 0;
-        int height = (70-yOffset-10)/2;
-        
-        UILabel* desc = [[UILabel alloc] init];
-        desc.backgroundColor = [UIColor clearColor];
-        NSString *str = @"";
-        if (item.packageid) {
-            str = @"礼包: ";
-        }else if(item.suitid)
-        {
-            str = @"套装: ";
-        }
-        desc.text = [NSString stringWithFormat:@"%@%@", str, item.name];
-        desc.font = [UIFont systemFontOfSize:13];
-        desc.textColor = UIColorFromRGB(0xc8002c);
-        CGRect rc = [desc.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : desc.font} context:nil];
-        [desc setFrame:CGRectMake(xOffset, yOffset, rc.size.width, rc.size.height)];
-        [viewSuitlistCell3.contentView addSubview:desc];
-        
-        desc = [[UILabel alloc] init];//WithFrame:CGRectMake(xOffset, yOffset, 200, height)];
-        desc.backgroundColor = [UIColor clearColor];
-//        desc.lineBreakMode = UILineBreakModeMiddleTruncation;
-        desc.text = [NSString stringWithFormat:@"数量: %d", item.number];
-        desc.font = [UIFont systemFontOfSize:13];
-        desc.textColor = UIColorFromRGB(0x666666);
-        rc = [desc.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : desc.font} context:nil];
-        [desc setFrame:CGRectMake(ScreenWidth - 20 - rc.size.width, yOffset, rc.size.width, rc.size.height)];
-        [viewSuitlistCell3.contentView addSubview:desc];
-        
-        if (item.packageid) {
-            str = @"套装价: ";
-        }else if(item.suitid)
-        {
-            str = @"礼包价: ";
-        }
-        int strWidth = [str sizeWithFont:font].width;
-        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset+height-10, strWidth, height)];
-        desc.backgroundColor = [UIColor clearColor];
-        desc.text = str;
-        desc.font = [UIFont systemFontOfSize:13];
-        desc.textColor = UIColorFromRGB(0xB90023);/*UIColorFromRGB(0x666666)*/
-        [viewSuitlistCell3.contentView addSubview:desc];
-        xOffset += strWidth;
-        
-        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset+height-10, 90, height)];
-        desc.backgroundColor = [UIColor clearColor];
-        desc.text = [NSString stringWithFormat:@"￥%.2f", item.price];
-        desc.font = [UIFont systemFontOfSize:16];
-        desc.textColor = UIColorFromRGB(0xB90023);
-        [viewSuitlistCell3.contentView addSubview:desc];
-        xOffset = 170;
-        
-        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset+height-10, 110, height)];
-        desc.backgroundColor = [UIColor clearColor];
-//        desc.lineBreakMode = UILineBreakModeMiddleTruncation;
-        desc.text = [NSString stringWithFormat:@"优惠: ￥%.2f", item.save];
-        desc.font = [UIFont systemFontOfSize:13];
-        desc.textColor = UIColorFromRGB(0x666666);
-        [viewSuitlistCell3.contentView addSubview:desc];
-        
-        
-//        desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset, 110, height)];
-//        desc.backgroundColor = [UIColor clearColor];
-//        desc.lineBreakMode = UILineBreakModeMiddleTruncation;
-//        desc.text = [NSString stringWithFormat:@"积分: %d", item.suit_score];
-//        desc.font = [UIFont systemFontOfSize:13];
-//        desc.textColor = UIColorFromRGB(0x666666);
-//        [viewSuitlistCell3.contentView addSubview:desc];
-        
-        [array addObject:viewSuitlistCell3];
         
         [self.suitlistcell addObject:array];
     }
 }
 
 
-
-#pragma mark -- 屏幕旋转
-//iOS 5
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-	return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
-}
-//iOS 6
-- (BOOL)shouldAutorotate
-{
-	return NO;
-}
-- (NSUInteger)supportedInterfaceOrientations
-{
-	return UIInterfaceOrientationMaskPortrait;
-}
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-	return UIInterfaceOrientationPortrait;
-}
-
 @end
 
 
-
-#pragma mark-- 我要评价
+//#pragma mark-- 我要评价
 //- (void)evaluateProduct:(UIButton *)sender
 //{
 //    AccessViewController *accessV = [[AccessViewController alloc] initWithNibName:@"AccessViewController" bundle:nil];

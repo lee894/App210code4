@@ -579,7 +579,7 @@
     [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_normal"] forState:UIControlStateSelected];
     [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_hoverl"] forState:UIControlStateHighlighted];
     [btnCheckOut setTitle:[NSString stringWithFormat:@"结算(%@)", _carModel.itemNumber] forState:UIControlStateNormal];
-    [btnCheckOut setTitle:@" " forState:UIControlStateHighlighted];
+    [btnCheckOut setTitle:@"    " forState:UIControlStateHighlighted];
     [btnCheckOut setTitle:[NSString stringWithFormat:@"删除(%@)", _carModel.itemNumber] forState:UIControlStateSelected];
     [btnCheckOut addTarget:self action:@selector(gotoChectViewC:) forControlEvents:UIControlEventTouchUpInside];
     [vToolbar addSubview:btnCheckOut];

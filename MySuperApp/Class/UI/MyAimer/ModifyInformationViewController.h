@@ -35,7 +35,7 @@
     IBOutlet UIButton *underwearBtn;
     IBOutlet UIButton *underpantsBtn;
     IBOutlet UIButton *adultBtn;
-     int currentData;
+     NSInteger currentData;
 //    UIActionSheet * actionSheet;
     NSMutableArray * dataArray;
     NSMutableArray * lastSelectArray;
@@ -43,11 +43,11 @@
     UITableView * mytableView;
     NSMutableArray * tableViewDataArray;
     IBOutlet UIButton *confirmBtn;
-     int deleteRow;
+     NSInteger deleteRow;
      float lastOffset;
      BOOL isCellOffset;
     
-     int children;    
+     NSInteger children;
 }
 
 - (IBAction)btnClick:(id)sender;

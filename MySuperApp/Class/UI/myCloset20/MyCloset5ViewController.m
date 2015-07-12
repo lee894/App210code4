@@ -55,7 +55,7 @@
     selectBra = @"";
     selectUnderpants = @"";
     
-    [self setTitle:@"私人衣橱5"];
+    [self setTitle:@"私人衣橱"];
     [self createBackBtnWithType:0];
     
     mainSev = [[MainpageServ alloc] init];

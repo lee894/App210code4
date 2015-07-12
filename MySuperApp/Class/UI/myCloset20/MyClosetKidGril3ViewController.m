@@ -62,14 +62,14 @@
     }
    else if (btn.tag == 2) {
         //支持自定义数组： 女孩底裤
-        NSArray *array=@[@[@[@"100",@"110",@"120",@"130",@"140",@"150",@"160",@"170"]]];
+        NSArray *array=@[@[@"100",@"110",@"120",@"130",@"140",@"150",@"160",@"170"]];
         ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
        _pickview.delegate = self;
         [_pickview show];
     }
    else if (btn.tag == 3) {
        //支持自定义数组：女孩睡衣
-       NSArray *array=@[@[@[@"100",@"110",@"120",@"130",@"140",@"150",@"160",@"170"]]];
+       NSArray *array=@[@[@"100",@"110",@"120",@"130",@"140",@"150",@"160",@"170"]];
        ZHPickView* _pickview=[[ZHPickView alloc] initPickviewWithArray:array isHaveNavControler:NO];
        _pickview.delegate = self;
        [_pickview show];

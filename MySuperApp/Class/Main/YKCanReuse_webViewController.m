@@ -65,7 +65,7 @@
     
     
     //lee999 修改bug   点我为什么要入会——进去页面点返回，后应该记住上一步弹框，不然顾客怎么入会呢
-    if ([strTitle isEqualToString:@"会员卡会员"]) {
+    if ([strTitle isEqualToString:@"尊享卡会员"]) {
         isshowZunxiangKaAlert = YES;
     }else{
         isshowZunxiangKaAlert = NO;

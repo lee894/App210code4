@@ -15,7 +15,7 @@
 
 CGFloat RowHeight = 165;
 CGFloat Margin = 9;
-CGFloat InnerMargin = 4;
+CGFloat InnerMargin = 10;
 
 + (CGFloat)heightForDatas:(NSArray *)datas type:(NSInteger)theType
 {
@@ -61,10 +61,9 @@ CGFloat InnerMargin = 4;
         NSInteger row = i/3;
         //NSLog(@"%d %d", i, column);
        // NSLog(@"----%f", Margin + width * column);
-        UIImageView *imvBg = [[UIImageView alloc] initWithFrame:CGRectMake(Margin + width * column , row * RowHeight, width, 120)];
-        imvBg.image = [UIImage imageNamed:@"same_pic_bg"];
-
-        [self addSubview:imvBg];
+//        UIImageView *imvBg = [[UIImageView alloc] initWithFrame:CGRectMake(Margin + width * column , row * RowHeight, width, 120)];
+//        imvBg.image = [UIImage imageNamed:@"same_pic_bg"];
+//        [self addSubview:imvBg];
 
         
         UrlImageButton *btn = [[UrlImageButton alloc] initWithFrame:CGRectMake(Margin + InnerMargin + width * column , row * RowHeight + InnerMargin, width - InnerMargin * 2, 120 - 2 * InnerMargin)];
@@ -72,8 +71,6 @@ CGFloat InnerMargin = 4;
         [btn addTarget:self action:@selector(btnsTapped:) forControlEvents:UIControlEventTouchUpInside];
         [btn setImageWithURL:[NSURL URLWithString:nogifts.img_url] placeholderImage:nil];
         [self addSubview:btn];
-        [btn setBackgroundColor:[UIColor clearColor]];
-
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(14 + width * column, row * RowHeight +  131, 88, 28)];
         label.text = nogifts.goos_name;//@"爱慕梦幻水晶1/2中模杯。。。。。。。。";

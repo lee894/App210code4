@@ -689,9 +689,6 @@
         //  月收入  职业  内衣尺码  底裤尺码  成衣尺码
         currentData = btn.tag - 27;
         
-        
-//        [actionSheet showInView:scrollView];
-        
         toolbar.frame=CGRectMake(0, ScreenHeight-216-44, 320, 44);
         
         [pickerView reloadAllComponents];
@@ -851,23 +848,6 @@
     }
 }
 
-//iOS 5
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-	return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
-}
-//iOS 6
-- (BOOL)shouldAutorotate
-{
-	return NO;
-}
-- (NSUInteger)supportedInterfaceOrientations
-{
-	return UIInterfaceOrientationMaskPortrait;
-}
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-	return UIInterfaceOrientationPortrait;
-}
+
 
 @end

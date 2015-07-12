@@ -7,6 +7,7 @@
 //
 #define ZHToobarHeight 40
 #import "ZHPickView.h"
+#import "UIColorAdditions.h"
 
 @interface ZHPickView ()<UIPickerViewDelegate,UIPickerViewDataSource>
 @property(nonatomic,copy)NSString *plistName;
@@ -175,6 +176,9 @@
     
     UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"确定   " style:UIBarButtonItemStylePlain target:self action:@selector(doneClick)];
     toolbar.items=@[lefttem,centerSpace,right];
+    
+    [toolbar setBackgroundColor:[UIColor colorWithHexString:@"5A4E51"]];
+    
     return toolbar;
 }
 -(void)setToolbarWithPickViewFrame{

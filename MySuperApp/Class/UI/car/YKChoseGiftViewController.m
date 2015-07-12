@@ -490,7 +490,6 @@
           UrlImageView* shoppingImg = [[UrlImageView alloc] init];
           [shoppingImg setImageFromUrl:YES withUrl:url];
           shoppingImg.frame = CGRectMake(160, 5, 30, 30);
-          shoppingImg.backgroundColor = [UIColor clearColor];
           [titleLabel addSubview:shoppingImg];
      }
    return titleLabel; 
@@ -640,7 +639,7 @@
         picsView.tag = 120;
         [cell addSubview:picsView];
         picsView.delegate = self;
-        picsView.frame = CGRectMake(0, 0, 320, [PicsView heightForDatas:array type:states]);
+        picsView.frame = CGRectMake(0, 0, ScreenWidth, [PicsView heightForDatas:array type:states]);
         return cell;
     }
         return nil;

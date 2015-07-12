@@ -136,7 +136,7 @@
             } else {
                 
                 if (!self.phoneNum) {
-                    [SBPublicAlert showMBProgressHUD:@"暂无法使用会员卡" andWhereView:self.view hiddenTime:0.6];
+                    [ESToast showDelayToastWithText:@"暂无法使用会员卡"];
                     return;
                 }
                 

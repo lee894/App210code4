@@ -41,11 +41,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (isIOS7up) {
-        scrollView.frame = CGRectMake(0, -30, ScreenWidth, NowViewsHight+30);
-    }else{
-        scrollView.frame = CGRectMake(0, 0, ScreenWidth, NowViewsHight);
-    }
+    scrollView.frame = CGRectMake(0, 0, ScreenWidth, NowViewsHight);
+    
     scrollView.contentSize = CGSizeMake(320, 1060);
 }
 
@@ -77,11 +74,10 @@
     
     scrollView.userInteractionEnabled = YES;
     scrollView.delegate = self;
-    
+    [self NewHiddenTableBarwithAnimated:YES];
+
     
     nameLabel.delegate = self;
-
-//    birthdayLabel.delegate = self;
     telephoneLabel.delegate = self;
     nicknameTField.delegate = self;
     addressTField.delegate = self;
@@ -467,7 +463,7 @@
 
 - (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 250;
+    return 250.00;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -482,7 +478,7 @@
     
     NSDictionary *dic = [tableViewDataArray objectAtIndex:indexPath.row];
     
-    cell.headlineLabel.text = [NSString stringWithFormat:@"儿童信息%d",indexPath.row+1];
+    cell.headlineLabel.text = [NSString stringWithFormat:@"儿童信息%ld",indexPath.row+1];
     cell.nameLabel.text = [dic objectForKey:@"name"];
     
     if ([[dic objectForKey:@"sex"] isEqualToString:@"f"]) {
@@ -560,7 +556,6 @@
     } else if (btn.tag >= 23 && btn.tag <= 27) {
         //  月收入  职业  内衣尺码  底裤尺码  成衣尺码
         currentData = btn.tag - 23;
-//        [actionSheet showInView:scrollView];
         mytoolbar.frame = CGRectMake(0, ScreenHeight-216-44, 320, 44);
         
         [mypickerView reloadAllComponents];
@@ -747,7 +742,7 @@
                     //                [lastSelectArray addObject:infoModel.brasize];
                     //                [lastSelectArray addObject:infoModel.underpants];
                     //                [lastSelectArray addObject:infoModel.clothsize];
-                    int i = 0;
+                    NSInteger i = 0;
                     for (NSString *temStr in infoModel.marriageArr) {
                         
                         if ([temStr isEqualToString: infoModel.income]) {
@@ -765,7 +760,7 @@
                 if (!infoModel.profession) {
                     [professionBtn setTitle:@"请选择" forState:UIControlStateNormal];
                 } else {
-                    int i = 0;
+                    NSInteger i = 0;
                     for (NSString *temStr in infoModel.position) {
                         
                         if ([temStr isEqualToString:infoModel.profession]) {
@@ -782,7 +777,7 @@
                 if (!infoModel.brasize) {
                     [underwearBtn setTitle:@"请选择" forState:UIControlStateNormal];
                 } else {
-                    int i = 0;
+                    NSInteger i = 0;
                     for (NSString *temStr in infoModel.brasizes) {
                         
                         if ([temStr isEqualToString:infoModel.brasize ]) {
@@ -800,7 +795,7 @@
                 if (!infoModel.underpants) {
                     [underpantsBtn setTitle:@"请选择" forState:UIControlStateNormal];
                 } else {
-                    int i = 0;
+                    NSInteger i = 0;
                     for (NSString *temStr in infoModel.underpant) {
                         
                         if ([temStr isEqualToString:infoModel.underpants]) {
@@ -818,7 +813,7 @@
                 if (!infoModel.clothsize) {
                     [adultBtn setTitle:@"请选择" forState:UIControlStateNormal];
                 } else {
-                    int i = 0;
+                    NSInteger i = 0;
                     for (NSString *temStr in infoModel.clothsizes) {
                         
                         if ([temStr isEqualToString:infoModel.clothsize]) {
@@ -904,8 +899,6 @@
 
     [self.view endEditing:YES];
     
-    NSLog(@"index----%d",index);
-    
     ModifyCell *cell2 = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     cell2.delegate = self;
 //    if (index== 106) {
@@ -927,24 +920,7 @@
 
 }
 
-//iOS 5
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-	return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
-}
-//iOS 6
-- (BOOL)shouldAutorotate
-{
-	return NO;
-}
-- (NSUInteger)supportedInterfaceOrientations
-{
-	return UIInterfaceOrientationMaskPortrait;
-}
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-	return UIInterfaceOrientationPortrait;
-}
+
 
 - (void)didReceiveMemoryWarning
 {

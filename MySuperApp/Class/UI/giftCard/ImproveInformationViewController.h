@@ -39,14 +39,14 @@
     IBOutlet UIButton *confirmBtn;
     IBOutlet UILabel *remarkLabel;
 
-    int currentData;
-//    UIActionSheet * actionSheet;
+    NSInteger currentData;
+
     NSMutableArray * dataArray;
     NSMutableArray * lastSelectArray;
     NSString * gender;
     UITableView * mytableView;
-    int children;
-    int deleteRow;
+    NSInteger children;
+    NSInteger deleteRow;
     
     NSMutableArray * tableViewDataArray;
 }

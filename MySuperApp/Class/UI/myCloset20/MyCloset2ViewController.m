@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setTitle:@"私人衣橱2"];
+    [self setTitle:@"私人衣橱"];
     [self createBackBtnWithType:0];
     
     arr_selectStyle = [[NSMutableArray alloc] initWithCapacity:0];

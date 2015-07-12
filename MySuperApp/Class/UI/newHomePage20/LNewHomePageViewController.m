@@ -25,7 +25,9 @@
 #import "BfdAgent.h"
 #import "YKStrikePriceLabel.h"
 
-
+//test
+#import "ModifyInformationViewController.h"
+#import "ImproveInformationViewController.h"
 #import "YKReferOrderViewController.h"
 
 
@@ -928,10 +930,15 @@
 //搜索
 -(void)gotoSearchViewC{
     
+//#warning ----test lee999   
+//    
+//    //    ImproveInformationViewController *iivc = [[ImproveInformationViewController alloc] init];
+//    ModifyInformationViewController * iivc = [[ModifyInformationViewController alloc] init];
+//    [self.navigationController pushViewController:iivc animated:YES];
+//    
+//    return;
+
     
-    
-    
-//#warning ----test lee999    
 //    YKReferOrderViewController * refer = [[YKReferOrderViewController alloc] init];
 //    refer.dicID = [NSDictionary dictionaryWithObjectsAndKeys:@"1",@"1", nil];//self.dicTD;
 //    refer.price     =  @"123";//[priceModel value];

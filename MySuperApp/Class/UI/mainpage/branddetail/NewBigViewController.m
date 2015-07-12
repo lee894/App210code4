@@ -36,6 +36,7 @@
     [myImageScroll setDelegate:self];
     [myImageScroll setMaximumZoomScale:3.0];
     [bigImageV setImageFromUrl:YES withUrl:self.imagePath];
+//    [bigImageV setImageFromUrl:YES withUrl:[self ImageSize:self.imagePath Size:@"640x853"]];
     [bigImageV setTag:9712];
 }
 

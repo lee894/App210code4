@@ -1457,12 +1457,16 @@ NSLog(@"createOtherCells  come out");
     
     else if (section == 3) {
         //优惠券
+        
+        
+        if ([self.usev6useCardId description].length>0) {
+            [ESToast showDelayToastWithText:@"优惠券和电子券不能同时使用"];
+            return;
+        }
+        
         if (mycheckOutModel.checkout_usecouponcard || ![self.useCouponcardId isEqualToString:@""])
         {//已使用
-            
         } else {
-            
-            
             if ([mycheckOutModel.arrCheckout_couponcard count] == 0) {
                 return;
             }
@@ -1477,7 +1481,12 @@ NSLog(@"createOtherCells  come out");
         }
     }else if (section ==4)
     {
-    //会员卡
+    //电子券
+        
+        if ([self.useCouponcardId description].length>0) {
+            [ESToast showDelayToastWithText:@"优惠券和电子券不能同时使用"];
+            return;
+        }
         
         if ([mycheckOutModel.checkoutV6cards count] == 0) {
             return;

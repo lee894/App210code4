@@ -175,8 +175,10 @@
 // 用途: 相关接口  API的host路径
 //====================================================
 
-#define SPlashViewUrl @"http://mtest.aimer.com.cn:8888/method/appslogoios"
-#define kefuUrl @"http://m.aimer.com.cn//index/talker"
+//第二张广告图
+#define SPlashViewUrl @"http://m.aimer.com.cn/method/appslogoios"
+//联系客服 的url
+#define kefuUrl       @"http://m.aimer.com.cn//index/talker"
 
 
 //API的host路径

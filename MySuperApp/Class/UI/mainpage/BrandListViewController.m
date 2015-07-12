@@ -19,7 +19,6 @@
 #import "ZBWaterView.h"
 
 @interface BrandListViewController ()<ZBWaterViewDatasource,ZBWaterViewDelegate>
-//<UITableViewDataSource,UITableViewDelegate>
 {
     //UITableView *brandtableView;// 品牌馆
     
@@ -118,12 +117,9 @@
 
 - (ZBFlowView *)waterView:(ZBWaterView *)waterView flowViewAtIndex:(NSInteger)index
 {
-    //TestData *data = [_testDataArr objectAtIndex:index];
     ZBFlowView *flowView = [waterView dequeueReusableCellWithIdentifier:@"cell"];
-//    if (flowView == nil) {
     flowView = [[ZBFlowView alloc] initWithFrame:CGRectZero];
     flowView.reuseIdentifier = @"cell";
-//    }
     flowView.index = index;
     
     if (index == 1) {
@@ -200,65 +196,6 @@
         [self.navigationController pushViewController:brandvc animated:YES];
     }
 }
-
-
-
-
-////品牌馆视图
-//-(void)createBrandView{
-//    
-//    brandtableView = [[UITableView alloc] init];
-//    //判断是不是iphone5
-//    [brandtableView setFrame:CGRectMake(2, 10,ScreenWidth- 5, ScreenHeight-60)];
-//    brandtableView.backgroundView = nil;
-//    brandtableView.backgroundColor = [UIColor clearColor];
-//    brandtableView.dataSource = self;
-//    brandtableView.delegate = self;
-//    [self.view addSubview:brandtableView];
-//}
-//
-//
-//- (IBAction)changebrandView:(UIButton *)sender{
-//    
-//    BrandsWall *wallModel = [self.brandModel.brandsWall objectAtIndex:sender.tag-10];
-//    NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:wallModel.brandsWallIdentifier, @"BrandID",wallModel.name, @"Brandname",nil];
-//    
-//    //lee999埋点
-//    [TalkingData trackEvent:@"5003" label:@"点击品牌馆" parameters:dic1];
-//    [TalkingData trackEvent:@"5004" label:@"点击品牌详情" parameters:dic1];
-//    
-//    
-//    NewBrandDetail20ViewController *brandvc = [[NewBrandDetail20ViewController alloc] initWithNibName:@"NewBrandDetail20ViewController" bundle:nil];
-//    brandvc.brandname = wallModel.name;
-//    [self.navigationController pushViewController:brandvc animated:YES];
-//}
-//
-//
-//
-//#pragma mark-
-//#pragma mark--- TableView
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
-//{
-//    return 120;
-//}
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return ceilf(self.brandModel.brandsWall.count/BrandCellNum);
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *identifier = @"cellIdentifier";
-//    BrandCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    if (cell == nil) {
-//        cell = [[[NSBundle mainBundle] loadNibNamed:@"BrandCell" owner:self options:nil] lastObject];
-//        cell.backgroundColor = [UIColor clearColor];
-//    }
-//    [cell setBackgroundImage:indexPath.row withArray:self.brandModel];
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    return cell;
-//}
 
 
 - (void)didReceiveMemoryWarning

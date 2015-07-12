@@ -118,7 +118,7 @@
         isNotGoBacktoRootCar = YES;
         //end
         
-        BlockAlertView *alert = [[BlockAlertView alloc]initWithTitle:@"爱慕提示" message:@"此次购物完成后可以成为爱慕集团会员卡会员，请问您是否愿意加入？"];
+        BlockAlertView *alert = [[BlockAlertView alloc]initWithTitle:@"爱慕提示" message:@"此次购物完成后可以成为爱慕集团尊享卡会员，请问您是否愿意加入？"];
         alert.isTag = YES;
         [alert setDestructiveButtonWithTitle:@"我为什么要入会？>" block:^(void) {
             
@@ -126,7 +126,7 @@
             
             YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
             webView.strURL = @"http://m.aimer.com.cn/method/v6codeinfo";
-            webView.strTitle = @"会员卡会员";
+            webView.strTitle = @"尊享卡会员";
             [self.navigationController pushViewController:webView animated:YES];
         }];
         

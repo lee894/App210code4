@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setTitle:@"私人衣橱6"];
+    [self setTitle:@"私人衣橱"];
     [self createBackBtnWithType:0];
     
     // Do any additional setup after loading the view from its nib.

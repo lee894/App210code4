@@ -672,7 +672,7 @@
     
     YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
     webView.strURL = @"http://m.aimer.com.cn/method/v6codeinfo";
-    webView.strTitle = @"会员卡会员";
+    webView.strTitle = @"尊享卡会员";
     [self.navigationController pushViewController:webView animated:YES];
 
 }

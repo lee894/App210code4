@@ -82,7 +82,13 @@
         if (isopened) {
             grayLine.transform = CGAffineTransformMakeRotation(M_PI/2);
         }
+        
+        UIView *splineV = [[UIView alloc] initWithFrame:CGRectMake(0, 43.5, ScreenWidth, 0.5)];
+        [splineV setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+        [self addSubview:splineV];
+        
     }
+    
     return self;
 }
 

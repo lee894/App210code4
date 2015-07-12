@@ -46,7 +46,7 @@
     arraySecond = [[NSMutableArray alloc] init];
     
     NSMutableArray *arr = [[NSMutableArray alloc] init];
-    for (int i = 1; i<= 13; i++) {
+    for (int i = 1; i<= 14; i++) {
         if (i >= 10) {//@"brand_%@_s.png"
             [arr addObject:[NSString stringWithFormat:@"brand_%d_pic_02.png",i]];
         }else {
@@ -97,7 +97,7 @@
                     object.width = [NSString stringWithFormat:@"%f",TableViewOneWidth];
                     object.height = [NSString stringWithFormat:@"%f",30.0];
                     
-                    NSString *str = [arrIcon objectAtIndex:self.index-1 isArray:nil];//[NSString stringWithFormat:@"fashion_brand_logo_%d.png",self.index];//[[NSBundle mainBundle] pathForResource:[arrIcon objectAtIndex:index] ofType:@"png"];
+                    NSString *str = [arrIcon objectAtIndex:self.index-1 isArray:nil];
                     
                     object.imgPath = str;
                 }else {

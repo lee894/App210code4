@@ -57,14 +57,6 @@
     bgimageV = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight)];
     [self.view addSubview:bgimageV];
     
-    
-    //增加向右箭头
-//    UIImage*img = [UIImage imageNamed:@"dl_zc_arrow.png"];
-//    UIImageView*imageV = [[UIImageView alloc] initWithFrame:CGRectMake(ScreenWidth-5-img.size.width, 250, img.size.width, img.size.height)];
-//    [imageV setImage:img];
-//    [self.view addSubview:imageV];
-    
-    
     //收藏按钮
     //创建右边按钮
     
@@ -107,13 +99,6 @@
     PScrollView.pageScrollView.frame = CGRectMake(OneSepWidth*2, 0, (ScreenWidth - OneSepWidth*4) , ScreenHeight -130);
     [PScrollView.pageScrollView reloadData];
     [self.view addSubview:PScrollView];
-    
-    
-//    scrollView = [[UIScrollView alloc] init];
-//    [scrollView setFrame:CGRectMake(20, 10, ScreenWidth-40, ScreenHeight -130)];
-//    scrollView.delegate = self;
-//    [self.view addSubview:scrollView];
-
 }
 
 
@@ -123,12 +108,6 @@
     if (![SingletonState sharedStateInstance].userHasLogin) {
 
         [self changeToMyaimer];
-
-//        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"请先登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"登录",nil];
-//        alert.tag = 10000000;
-//        alert.delegate = self;
-//        [alert show];
-        
         return;
     }
     
@@ -196,14 +175,22 @@
 
 #pragma mark--- pageScrollView代理
 - (NSInteger)numberOfPageInPageScrollView:(OTPageScrollView*)pageScrollView{
+    
+    NSString *brandstr = _mdetailinfo.magazine_info_b.info_footer.brand_name;
+    NSString *imagestr = _mdetailinfo.magazine_info_b.info_footer.img_path;
+
+    if ([brandstr isEqualToString:@""] && [imagestr isEqualToString:@""]) {
+        return [arr_maginzelist count] -1;
+    }
+    
     return [arr_maginzelist count];
 }
 
 - (UIView*)pageScrollView:(OTPageScrollView*)pageScrollView viewForRowAtIndex:(int)index{
     
-    NewMaginzeDetailInfo_dataB* dataB = [arr_maginzelist objectAtIndex:index isArray:nil];
-    UIView *cell = [self createCardWithobject:dataB andIndex:index];
-    
+        NewMaginzeDetailInfo_dataB* dataB = [arr_maginzelist objectAtIndex:index isArray:nil];
+        UIView *cell = [self createCardWithobject:dataB andIndex:index];
+        
     return cell;
 }
 
@@ -213,13 +200,10 @@
 }
 
 - (void)pageScrollView:(OTPageScrollView *)pageScrollView didTapPageAtIndex:(NSInteger)index{
-//    NSLog(@"click cell at %d",index);
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    //NSInteger index = scrollView.contentOffset.x / scrollView.frame.size.width;
-    //NSLog(@"click cell at %d",index);
 }
 
 
@@ -230,9 +214,6 @@
     CGFloat height = CGRectGetHeight(PScrollView.pageScrollView.frame);
     
     
-//    CGFloat x = scrollView.subviews.count * width;
-    
-//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(x, 0, width, height)];
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, (ScreenWidth - OneSepWidth*4), height)];
     view.backgroundColor = [UIColor clearColor];
     view.layer.cornerRadius = 8.;
@@ -242,9 +223,6 @@
     [view addGestureRecognizer:gr];
     
     
-//    [scrollView addSubview:view];
-//    scrollView.contentSize = CGSizeMake(x + width, height);
-//    scrollView.contentSize = CGSizeMake(x + width, 0);
     if ([arr_maginzelist count] < 1) {
         return view;
     }
@@ -305,23 +283,6 @@
         [view addSubview:buynowV];
         
         
-        NSString *brandstr = _mdetailinfo.magazine_info_b.info_footer.brand_name;
-        NSArray *arr1 = [brandstr componentsSeparatedByString:@","];
-        
-        //判断如果多品牌的话，不显示品牌馆，而是显示一张图片
-        if (arr1 && [arr1 respondsToSelector:@selector(objectAtIndex:)] && [arr1 count] > 1) {
-            {
-                
-                UrlImageView *bgimageV2 = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
-                [bgimageV2 setImageFromUrl:NO withUrl:[_mdetailinfo.magazine_info_b.info_footer.img_path description]];
-                //lee999 这个地方很重要，为了图片偏移
-                [bgimageV2 setContentScaleFactor:[[UIScreen mainScreen] scale]];
-                bgimageV2.contentMode =  UIViewContentModeScaleAspectFill;
-                bgimageV2.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-                bgimageV2.clipsToBounds  = YES;
-                [view addSubview:bgimageV2];
-            }
-        }else{
             MyButton *okbtn = [MyButton buttonWithType:UIButtonTypeCustom];
             [okbtn setFrame:CGRectMake( 0, height - 64 , width , 64)];
             [okbtn setBackgroundColor:[UIColor colorWithHexString:@"cfcfc7"]];
@@ -333,7 +294,6 @@
             okbtn.tag = 1111;
             
             [view addSubview:okbtn];
-        }
         
     }else{
         //中间页
@@ -362,6 +322,11 @@
         threelab.font = [UIFont systemFontOfSize:LabSmallSize];
         [threelab setTextColor:[UIColor colorWithHexString:@"#444444"]];
         [view addSubview:threelab];
+        
+        if ([[sender.content description] isEqualToString:@""]) {
+            [bgV setHidden:YES];
+        }
+        
     }
     
     return view;
@@ -469,21 +434,11 @@
         
         //lee999 这个地方很重要，毛玻璃效果
         [bgimageV setImage:[bgimageV.image applyBlurWithRadius:5 tintColor:[UIColor colorWithWhite:1 alpha:0.2] saturationDeltaFactor:1.8 maskImage:nil]];
-        
     }
     
     
     [PScrollView.pageScrollView reloadData];
 
-    
-//    for (int i = 0; i<[arr_maginzelist count]; i++) {
-//        
-//        NSLog(@"---%d-----count:%d",i,[arr_maginzelist count]);
-//        
-//        
-//        NewMaginzeDetailInfo_dataB* dataB = [arr_maginzelist objectAtIndex:i isArray:nil];
-//        [self createCardWithobject:dataB andIndex:i];
-//    }
 }
 
 #pragma mark--- 进入品牌馆

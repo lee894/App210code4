@@ -34,16 +34,10 @@
         row--;
     }
     
-//    //lee999
-//    if (section == 999222) {
-//        return;
-//    }
-//    //end
-    
     if (section == row+suitCount) {
         
-        [self.buttonLogistics setBackgroundImage:[UIImage imageNamed:@"button_gray.png"] forState:UIControlStateNormal];
-        [self.buttonLogistics setBackgroundImage:[UIImage imageNamed:@"button_gray_press.png"] forState:UIControlStateHighlighted];
+        [self.buttonLogistics setBackgroundImage:[UIImage imageNamed:@"add_like_btn.png"] forState:UIControlStateNormal];
+        [self.buttonLogistics setBackgroundImage:[UIImage imageNamed:@"add_like_btn_press.png"] forState:UIControlStateHighlighted];
         [self.buttonLogistics setTitleColor:[UIColor colorWithRed:99.0/255.0 green:99.0/255.0 blue:99.0/255.0 alpha:1] forState:UIControlStateNormal];
         [self.buttonLogistics setTitleColor:[UIColor colorWithRed:99.0/255.0 green:99.0/255.0 blue:99.0/255.0 alpha:1] forState:UIControlStateHighlighted];
         [self.buttonLogistics setTitle:@"取消订单" forState:UIControlStateNormal];
@@ -55,8 +49,8 @@
 
         [self.buttonLogistics setTitle:@"立即支付" forState:UIControlStateNormal];
         [self.buttonLogistics setTitle:@"立即支付" forState:UIControlStateHighlighted];
-        [self.buttonLogistics setBackgroundImage:[UIImage imageNamed:@"button_red.png"] forState:UIControlStateNormal];
-        [self.buttonLogistics setBackgroundImage:[UIImage imageNamed:@"button_red_press.png"] forState:UIControlStateHighlighted];
+        [self.buttonLogistics setBackgroundImage:[UIImage imageNamed:@"btn_red_a_normal.png"] forState:UIControlStateNormal];
+        [self.buttonLogistics setBackgroundImage:[UIImage imageNamed:@"btn_red_a_hover.png"] forState:UIControlStateHighlighted];
         [self.buttonLogistics setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.buttonLogistics setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         self.buttonLogistics.tag = 5;
@@ -64,8 +58,8 @@
     
     if (section == 999222){
 
-        [self.buttonLogistics setBackgroundImage:[UIImage imageNamed:@"button_red.png"] forState:UIControlStateNormal];
-        [self.buttonLogistics setBackgroundImage:[UIImage imageNamed:@"button_red_press.png"] forState:UIControlStateHighlighted];
+        [self.buttonLogistics setBackgroundImage:[UIImage imageNamed:@"btn_red_a_normal.png"] forState:UIControlStateNormal];
+        [self.buttonLogistics setBackgroundImage:[UIImage imageNamed:@"btn_red_a_hover.png"] forState:UIControlStateHighlighted];
         [self.buttonLogistics setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.buttonLogistics setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         [self.buttonLogistics setTitle:@"查看物流" forState:UIControlStateNormal];
