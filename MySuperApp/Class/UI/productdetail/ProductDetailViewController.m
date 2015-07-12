@@ -553,7 +553,8 @@
                              img:shareImgV.image
                              url:productModel.product_share_url
                      description:str_share
-                        imageUrl:@""];
+                        imageUrl:@""
+                      statistics:@[@"商品详情",self.thisProductId,productModel.prodcutName] ];
 }
 
 
@@ -1105,7 +1106,7 @@
     [DplusMobClick track:@"加入购物车/单品" property:@{@"加入类型":@"单品",
                                              @"商品id":self.thisProductId,
                                              @"商品Sku":sku,
-                                             @"商品名称":self.ThisPorductName,
+                                             @"商品名称":productModel.prodcutName,
                                              @"商品数量":buttonForNum.text}];
     
     

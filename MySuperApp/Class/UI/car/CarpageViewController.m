@@ -24,9 +24,6 @@
     BOOL isEditing; //是否编辑状态
     UIView* vToolbar;
     UIButton* btnCheckOut;
-    
-    
-    
 }
 @property (nonatomic, retain) NSMutableArray* selectedList;
 @property (nonatomic, retain) UIButton* btnCheckBox;
@@ -579,6 +576,8 @@
     vToolbar = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - lee1fitAllScreen(60), ScreenWidth, lee1fitAllScreen(60))];
     [vToolbar setBackgroundColor:[UIColor colorWithHexString:@"#f8f8f8"]];
     [vToolbar setAlpha:0.9];
+    
+    
     btnCheckOut = [UIButton buttonWithType:UIButtonTypeCustom];
     [btnCheckOut setFrame:CGRectMake(vToolbar.frame.size.width - 10 - lee1fitAllScreen(90), (vToolbar.frame.size.height - lee1fitAllScreen(44)) / 2, lee1fitAllScreen(90), lee1fitAllScreen(44))];
     [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_normal"] forState:UIControlStateNormal];
@@ -590,11 +589,13 @@
     [btnCheckOut setTitle:@"" forState:UIControlStateDisabled];
 
     [btnCheckOut addTarget:self action:@selector(gotoChectViewC:) forControlEvents:UIControlEventTouchUpInside];
+    
     [vToolbar addSubview:btnCheckOut];
     
     if(self.navbtnRight)
     {
         if ([[self.navbtnRight titleForState:UIControlStateNormal] isEqualToString:@"完成"]) {
+            
             [btnCheckOut setSelected:YES];
         }
     }
@@ -956,6 +957,10 @@
     if (btnCheckOut) {
         [btnCheckOut setSelected:YES];
     }
+    
+    [btnCheckOut setTitle:@"" forState:UIControlStateNormal];
+
+    
     if(vToolbar)
     {
         for (id v in vToolbar.subviews) {

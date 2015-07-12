@@ -16,14 +16,6 @@
 
 @implementation ShareUnit
 
-+(NSString *)shareName:(NSString *)name{
-    return name;
-}
-
-+(NSString *)shareproductID:(NSString *)pid{
-    return pid;
-}
-
 
 +(void)ShareSDKwithTitle:(NSString*)atitle
                  content:(NSString*)content
@@ -32,6 +24,7 @@
                      url:(NSString*)aurl
              description:(NSString*)adescription
                 imageUrl:(NSString*)aimageURl
+              statistics:(NSArray*)arr
 {
     
     [SingletonState sharedStateInstance].isShareSDK = YES;
@@ -120,37 +113,44 @@
                                 if (state == SSResponseStateSuccess)
                                 {
                                     
-#warning ------- 还没分享 埋点
                                     
-//                                    NSString *strtype = @"";
-//                                    
-//                                    switch (type) {
-//                                        case ShareTypeSinaWeibo:
-//                                            strtype = @"新浪微博";
-//                                            break;
-//                                        case ShareTypeQQSpace:
-//                                            strtype = @"QQ空间";
-//                                            break;
-//                                        case ShareTypeQQ:
-//                                            strtype = @"QQ好友";
-//                                            break;
-//                                        case ShareTypeWeixiSession:
-//                                            strtype = @"微信好友";
-//                                            break;
-//                                        case ShareTypeDouBan:
-//                                            strtype = @"豆瓣";
-//                                            break;
-//                                        case ShareTypeRenren:
-//                                            strtype = @"人人";
-//                                            break;
-//                                            
-//                                        default:
-//                                            strtype = @"微信朋友圈";
-//                                            break;
-//                                    }
-//                                    
-//                                    [DplusMobClick track:@"分享" property:@{@"分享类型":strtype,
-//                                                                          @"商品ID":}];
+                                    NSString *strtype = @"";
+                                    
+                                    switch (type) {
+                                        case ShareTypeSinaWeibo:
+                                            strtype = @"新浪微博";
+                                            break;
+                                        case ShareTypeQQSpace:
+                                            strtype = @"QQ空间";
+                                            break;
+                                        case ShareTypeQQ:
+                                            strtype = @"QQ好友";
+                                            break;
+                                        case ShareTypeWeixiSession:
+                                            strtype = @"微信好友";
+                                            break;
+                                        case ShareTypeDouBan:
+                                            strtype = @"豆瓣";
+                                            break;
+                                        case ShareTypeRenren:
+                                            strtype = @"人人";
+                                            break;
+                                            
+                                        default:
+                                            strtype = @"微信朋友圈";
+                                            break;
+                                    }
+                                    
+
+                                    NSString* str1 = [arr objectAtIndex:0 isArray:nil]; //什么分享
+                                    NSString* str2 = [arr objectAtIndex:1 isArray:nil]; // 商品id
+                                    NSString* str3 = [arr objectAtIndex:2 isArray:nil]; // 商品名称
+
+                                    [DplusMobClick track:@"分享" property:@{
+                                                                          @"分享来源":str1,
+                                                                          @"分享类型":strtype,
+                                                                          @"商品ID":str2,
+                                                                          @"商品名称":str3}];
                                     
                                     
                                     

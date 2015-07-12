@@ -154,7 +154,8 @@
                              img:buynowV.image
                              url:@"http://m.aimer.com.cn/method/xiazai"
                      description:shareContent
-                        imageUrl:imageurl];
+                        imageUrl:imageurl
+                      statistics:@[@"专辑分享",self.strMaginzeId,sharetitle]];
 }
 
 

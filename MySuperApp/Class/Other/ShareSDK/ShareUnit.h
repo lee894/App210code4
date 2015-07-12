@@ -11,16 +11,13 @@
 
 @interface ShareUnit : NSObject
 
-+(NSString *)shareName:(NSString *)name;
-+(NSString *)shareproductID:(NSString *)pid;
-
-
 +(void)ShareSDKwithTitle:(NSString*)atitle
                  content:(NSString*)content
           defaultContent:(NSString*)acontent
                      img:(UIImage*)aimg
                      url:(NSString*)aurl
              description:(NSString*)adescription
-                imageUrl:(NSString*)aimageURl;
+                imageUrl:(NSString*)aimageURl
+              statistics:(NSArray*)arr; //分享的统计  0 类型   1，名字  2，id
 
 @end
