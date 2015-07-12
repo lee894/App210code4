@@ -212,8 +212,6 @@
             btnUse.hidden = YES;
         }
     }
-//    [btnUse setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_normal_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateNormal];
-//    [btnUse setBackgroundImage:[[UIImage imageNamed:@"yhq_btn_hover_s"] resizableImageWithCapInsets:UIEdgeInsetsMake(18, 57.5, 18, 57.5) resizingMode:UIImageResizingModeStretch] forState:UIControlStateHighlighted];
     [btnUse setBackgroundColor:textColor];
     [btnUse.layer setCornerRadius:btnUse.frame.size.height / 2];
     [btnUse.layer setMasksToBounds:YES];

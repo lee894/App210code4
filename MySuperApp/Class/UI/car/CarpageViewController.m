@@ -680,6 +680,13 @@
     }
     [self.view addSubview:vToolbar];
     [self.view bringSubviewToFront:vToolbar];
+    
+    if ([_carModel.selectedItemCount floatValue] == 0) {
+        btnCheckOut.enabled = NO;
+    }else{
+        btnCheckOut.enabled = YES;
+    }
+    
 }
 
 -(void)creatHeadView{
@@ -1087,14 +1094,6 @@
     }
     
     
-//    [self creatFootView];
-
-//    [self editCarNumber];
-    
-//    [shoppingCarTab setEditing:!isEditing animated:YES];
-//    [shoppingCarTab setEditing:NO animated:YES];
-
-    
     if ([textproductNumArray count] > 0) {
         NSMutableString * sku = [NSMutableString string];
         for (int i=0; i<[textproductNumArray count]; i++) {
@@ -1113,10 +1112,10 @@
                 return;
             }
             //获取库存 和当前数量进行比对
-            if (number > item.count) {
+            if (number > item.count && item.is_valid) {
                 [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"您有商品库存不足！"];
                 //isEditing = !isEditing;
-                textfield.text = [NSString stringWithFormat:@"%@",item.number];//textfield.text;//[NSString stringWithFormat:@"%d",item.count];
+                textfield.text = [NSString stringWithFormat:@"%@",item.number];
                 isEditing = NO;
                 return;
                 

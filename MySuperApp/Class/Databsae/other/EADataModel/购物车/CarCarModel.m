@@ -58,6 +58,10 @@
         [[NSUserDefaults standardUserDefaults]setObject:[array_NUM objectAtIndex:1] forKey:@"totalNUM"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"TotleNumber" object:nil];
 
+        
+        NSMutableArray *arrOK = [[NSMutableArray alloc] initWithCapacity:0];
+        NSMutableArray *arrfail = [[NSMutableArray alloc] initWithCapacity:0];
+        
         for (int i = 0; i < [array count]; i++) {
             NSDictionary* dic = (NSDictionary*)[array objectAtIndex:i];
             YKItem* item = [[YKItem alloc] init];
@@ -77,8 +81,19 @@
             item.uk = [dic objectForKey:@"uk"];
             item.selected = [[dic objectForKey:@"selected"] boolValue];
             item.is_valid = [[dic objectForKey:@"is_valid" isDictionary:nil] boolValue];
-            [self.carProductlist addObject:item];
+            
+            if (item.is_valid) {
+                [arrOK addObject:item];
+            }else{
+                [arrfail addObject:item];
+            }
+            
         }
+        
+        [self.carProductlist addObjectsFromArray:arrOK];
+        [self.carProductlist addObjectsFromArray:arrfail];
+
+        
         self.selectedItemCount = [json objectForKey:@"itemprice"];
         NSString* car_statistics = [json objectForKey:@"car_statistics"];
         NSArray* array1 = [car_statistics componentsSeparatedByString:@"|"];

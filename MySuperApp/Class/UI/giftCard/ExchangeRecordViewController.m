@@ -27,9 +27,9 @@
     
     _arrData = [[NSMutableArray alloc] init];
     
-    _tableView = [[PullToRefreshTableView alloc] initWithFrame:CGRectMake(0, 0, 320, NowViewsHight-20)];
+    _tableView = [[PullToRefreshTableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, NowViewsHight-20)];
     if (isIOS7up) {
-        _tableView.frame = CGRectMake(0, new20ViewY, 320, self.view.frame.size.height-new20ViewY);
+        _tableView.frame = CGRectMake(0, new20ViewY, ScreenWidth, self.view.frame.size.height-new20ViewY);
     }
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -124,17 +124,23 @@
     if (!cell) {
         
         if (indexPath.row == 0) {
+            
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifierFirstRow];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 82/2+20)];
             view.backgroundColor = [UIColor clearColor];
             
+            UIView *splineV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 0.5)];
+            [splineV setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+            [view addSubview:splineV];
+            
+            
             UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exchange_history_list_02"]];
-            imgView.frame = CGRectMake(10, 20, 300, 82/2);
+            imgView.frame = CGRectMake(0, 0, ScreenWidth, 82/2);
             [view addSubview:imgView];
 
             
-            UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 20+10, 80, 21)];
+            UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 0+10, 80, 21)];
             label1.backgroundColor = [UIColor clearColor];
             label1.font = [UIFont systemFontOfSize:15.0f];
             label1.textColor = [UIColor redColor];
@@ -150,7 +156,7 @@
             [view addSubview:label2];
 
             
-            UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(label2.frame.origin.x+label2.frame.size.width+10, label1.frame.origin.y, 100, label1.frame.size.height)];
+            UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(label2.frame.origin.x+label2.frame.size.width+20, label1.frame.origin.y, 100, label1.frame.size.height)];
             label3.backgroundColor = [UIColor clearColor];
             label3.font = [UIFont systemFontOfSize:15.0f];
             label3.textColor = [UIColor redColor];
@@ -164,12 +170,12 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exchange_history_list_02"]];
-            imgView.frame = CGRectMake(10, 0, 300, 98/2);
+            imgView.frame = CGRectMake(0, 0, ScreenWidth, 98/2);
             imgView.tag = 4;
             [cell addSubview:imgView];
 
             
-            UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 0+4, 80, 40)];
+            UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(12, 0+4, 80, 40)];
             label1.backgroundColor = [UIColor clearColor];
             label1.font = [UIFont systemFontOfSize:15.0f];
             label1.numberOfLines = 0;
@@ -177,14 +183,14 @@
      
             [cell addSubview:label1];
             
-            UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(label1.frame.origin.x+label1.frame.size.width+30, 14, 80, 21)];
+            UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(label1.frame.origin.x+label1.frame.size.width+24, 14, 80, 21)];
             label2.backgroundColor = [UIColor clearColor];
             label2.font = [UIFont systemFontOfSize:15.0f];
             label2.tag = 2;
       
             [cell addSubview:label2];
             
-            UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(label2.frame.origin.x+label2.frame.size.width+10, label2.frame.origin.y, 100, label2.frame.size.height)];
+            UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(label2.frame.origin.x+label2.frame.size.width+20, label2.frame.origin.y, 100, label2.frame.size.height)];
             label3.backgroundColor = [UIColor clearColor];
             label3.font = [UIFont systemFontOfSize:15.0f];
             label3.tag = 3;
@@ -196,24 +202,30 @@
         return cell;
     } else if (indexPath.row == [_arrData count]) {//最后一行
         UIImageView *imgView = (UIImageView *)[cell viewWithTag:4];
-        imgView.frame = CGRectMake(10, 0, 300, 100/2);
+        imgView.frame = CGRectMake(0, 0, ScreenWidth, 100/2);
         imgView.image = [UIImage imageNamed:@"exchange_history_list_02"];
     } else {
         UIImageView *imgView = (UIImageView *)[cell viewWithTag:4];
-        imgView.frame = CGRectMake(10, 0, 300, 98/2);
+        imgView.frame = CGRectMake(0, 0, ScreenWidth, 98/2);
         imgView.image = [UIImage imageNamed:@"exchange_history_list_02"];
         
     }
     GetexchangescorerecordRecord *record = [_arrData objectAtIndex:indexPath.row-1];
     UILabel *label1 = (UILabel *)[cell viewWithTag:1];
     label1.text = record.createTime;
+    [label1 setTextAlignment:NSTextAlignmentCenter];
+    
     UILabel *label2 = (UILabel *)[cell viewWithTag:2];
     label2.text = record.userChangeScore;
+    [label2 setTextAlignment:NSTextAlignmentCenter];
+
     UILabel *label3 = (UILabel *)[cell viewWithTag:3];
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:[record.userChangeTicket floatValue]]];
     label3.text = [NSString stringWithFormat:@"￥%@",formattedNumberString];
+    [label3 setTextAlignment:NSTextAlignmentCenter];
+
     return cell;
 }
 
@@ -228,7 +240,7 @@
         return 0;
     }
     return 0;
-    return 82/2+20;
+    return 82/2+0;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -237,15 +249,15 @@
             return nil;
         }
         
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 82/2+20)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 82/2)];
         view.backgroundColor = [UIColor clearColor];
         
         UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exchange_history_list_02"]];
-        imgView.frame = CGRectMake(10, 20, 300, 82/2);
+        imgView.frame = CGRectMake(0, 0, ScreenWidth, 82/2);
         [view addSubview:imgView];
 
         
-        UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 20+10, 80, 21)];
+        UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 0+10, 80, 21)];
         label1.backgroundColor = [UIColor clearColor];
         label1.font = [UIFont systemFontOfSize:15.0f];
         label1.textColor = [UIColor redColor];
@@ -277,7 +289,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return ((indexPath.row == [_arrData count])? 100/2 : (indexPath.row==0 ? 82/2+20 : 98/2));
+    return ((indexPath.row == [_arrData count])? 100/2 : (indexPath.row==0 ? 82/2 : 98/2));
 }
 - (BOOL)shouldAutorotate
 {

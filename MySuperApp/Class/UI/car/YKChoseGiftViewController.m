@@ -611,8 +611,8 @@
                 [addCartButton setEnabled:YES];
             }
             [addCartButton addTarget:self action:@selector(addCarAction:) forControlEvents:UIControlEventTouchUpInside];
-            [addCartButton setBackgroundImage:[UIImage imageNamed:@"login_btn.png"] forState:UIControlStateNormal];
-            [addCartButton setBackgroundImage:[UIImage imageNamed:@"login_btn_press.png"] forState:UIControlStateHighlighted];
+            [addCartButton setBackgroundImage:[UIImage imageNamed:@"big_btn_r_normal.png"] forState:UIControlStateNormal];
+            [addCartButton setBackgroundImage:[UIImage imageNamed:@"big_btn_r_hover.png"] forState:UIControlStateHighlighted];
             [addCartButton setHidden:NO];
         } else {
             if (addCartButton) {
