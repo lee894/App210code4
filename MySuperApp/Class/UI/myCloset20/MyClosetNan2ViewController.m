@@ -38,6 +38,8 @@
     [self createBackBtnWithType:0];
     [self NewHiddenTableBarwithAnimated:YES];
     
+    arr_btnStyle = [[NSMutableArray alloc] initWithCapacity:0];
+    
     
     NSLog(@"--%@---%@",self.closetinfo.style,self.closetinfo.chuanyizhidao);
     
