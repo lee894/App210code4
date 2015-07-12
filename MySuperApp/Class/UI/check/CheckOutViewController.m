@@ -167,13 +167,37 @@
                 [self.navigationController pushViewController:refer animated:YES];
                 
                 [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+                
+//                [mainSev getSubmitorder:self.straddressID andCouponcard:self.useCouponcardId andPayway:self.m_strPayMethod andPayprice:str1 andRemarkmsg:self.postText andCard_id:card_id andfreepostcard:self.usefreepostcardId];
+
+                [DplusMobClick track:@"提交订单成功" property:@{@"地址编号":self.straddressID,
+                                                          @"使用优惠券":self.useCouponcardId,
+                                                          @"使用电子券":self.usev6useCardId,
+                                                          @"使用包邮卡":self.usefreepostcardId,
+                                                          @"订单留言":self.postText,
+                                                          @"支付方式":self.m_strPayMethod,
+                                                          @"订单金额":[priceModel value],
+                                                          @"订单编号":submitOrderModel.orderid
+                                                          }];
+                
 
             } else {
                 
                 NSDate *time = [NSDate date];
                 NSMutableDictionary *dic1  = [NSMutableDictionary dictionaryWithObjectsAndKeys:model.errorMessage, @"Reason",self.m_strPayMethod, @"Payment",self.province, @"Province", @"Ordergoodsnum",time, @"OrdernoTime",nil];
                 [dic1 addEntriesFromDictionary:self.dicTD];
-                [TalkingData trackEvent:@"1009" label:@"提交订单成功" parameters:dic1];
+                [TalkingData trackEvent:@"1009" label:@"提交订单失败" parameters:dic1];
+                
+                
+                [DplusMobClick track:@"提交订单成功" property:@{@"地址编号":self.straddressID,
+                                                          @"使用优惠券":self.useCouponcardId,
+                                                          @"使用电子券":self.usev6useCardId,
+                                                          @"使用包邮卡":self.usefreepostcardId,
+                                                          @"订单留言":self.postText,
+                                                          @"支付方式":self.m_strPayMethod,
+                                                          @"失败原因":model.errorMessage
+                                                          }];
+                
                 
                 UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:model.errorMessage delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
                 [alert show];

@@ -365,9 +365,16 @@
         if (!favbtn.selected) {
             //未中状态 添加收藏
             [mainSer getFavoriteadd:self.store.storeid andType:@"store" anduk:@""];
+            
+            [DplusMobClick track:@"门店收藏" property:@{@"门店ID":self.store.storeid}];
+
+            
         }else{
             //选中状态 取消收藏
             [mainSer getFavoritedel:self.store.storeid andType:@"store"];
+            
+            [DplusMobClick track:@"门店取消收藏" property:@{@"门店ID":self.store.storeid}];
+
         }
         
     }else if (btn.tag == 1010) {

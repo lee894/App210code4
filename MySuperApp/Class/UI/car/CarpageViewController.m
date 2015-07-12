@@ -145,21 +145,36 @@
     if (sender && sender.selected) {
         //删除
         NSMutableArray* marrUks = [[NSMutableArray alloc] initWithCapacity:1];
+        NSMutableArray* marrUksname = [[NSMutableArray alloc] initWithCapacity:1];
+        NSMutableArray* marrUksnum = [[NSMutableArray alloc] initWithCapacity:1];
+
         for (YKItem* item in _carModel.carProductlist) {
             if (item.selected) {
                 [marrUks addObject:item.uk];
+                [marrUksname addObject:item.name];
+                [marrUksnum addObject:item.number];
             }
         }
         for (YKSuitListItem* item in _carModel.suitlist) {
             if (item.selected) {
                 [marrUks addObject:item.uk];
+                [marrUksname addObject:item.name];
+                [marrUksnum addObject:@"1"];
+
             }
         }
         for (YKSuitListItem* item in _carModel.packagelist) {
             if (item.selected) {
                 [marrUks addObject:item.uk];
+                [marrUksname addObject:item.name];
+                [marrUksnum addObject:@"1"];
             }
         }
+        
+        [DplusMobClick track:@"移出购物车" property:@{@"商品Sku":[marrUks componentsJoinedByString:@"|"],
+                                                 @"商品名称":[marrUksname componentsJoinedByString:@"|"],
+                                                 @"商品数量":[marrUksnum componentsJoinedByString:@"|"]}];
+        
         [mainSer getDelcar:[marrUks componentsJoinedByString:@"|"]];
         [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 
@@ -494,6 +509,11 @@
                 NSString* strUk = [((CommModel*)model).jsonDic objectForKey:@"uk" isDictionary:nil];
                 
                 //将下架商品，添加收藏，并且移除购物车
+                
+                
+                
+                [DplusMobClick track:@"移出购物车" property:@{@"商品Sku":strUk,
+                                                         @"商品名称":@"下架商品"}];
                 
                 [mainSer getDelcar:[NSString stringWithFormat:@"%@:product", strUk]];
                 [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
@@ -1216,6 +1236,11 @@
         [mainSer getDeletesuittocar:item.suitid];
         [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
         
+        
+        [DplusMobClick track:@"移出购物车" property:@{@"商品Sku":item.suitid,
+                                                 @"商品名称":item.name,
+                                                 @"商品类型":@"套装"}];
+        
     }
     else if (indexPath.section - suitCount < packageCount) {
         if ([indexPath section] < 0) {
@@ -1224,6 +1249,13 @@
         YKSuitListItem *item = [self.carModel.packagelist objectAtIndex:[indexPath section] - suitCount  isArray:nil];
         [mainSer getDelcar:item.uk];
         [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
+        
+        
+        [DplusMobClick track:@"移出购物车" property:@{@"商品Sku":item.uk,
+                                                    @"商品名称":item.name,
+                                                    @"商品类型":@"礼包"}];
+        
+        
         //删除套装
         //....
 //        [mainSer getDeletesuittocar:item.suitid];
@@ -1243,6 +1275,13 @@
         [TalkingData trackEvent:@"1007" label:@"从购物车删除" parameters:dic1];
         
         [mainSer getDelcar:sku];
+    
+        
+        
+        [DplusMobClick track:@"移出购物车" property:@{@"商品Sku":sku,
+                                                 @"商品名称":item.name,
+                                                 @"商品类型":@"单品"}];
+        
         [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
         
     } else {
@@ -1261,6 +1300,12 @@
             
             [mainSer getDelcar:sku];
             [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
+            
+            
+            
+            [DplusMobClick track:@"移出购物车" property:@{@"商品Sku":sku,
+                                                     @"商品名称":item.name,
+                                                     @"商品类型":@"赠品"}];
         }
     }
 }

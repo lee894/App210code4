@@ -1070,6 +1070,9 @@
                 NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:self.thisProductId, @"GoodsID",productModel.prodcutName, @"GoodsName",nil];
                 [TalkingData trackEvent:@"1006" label:@"加入收藏夹" parameters:dic1];
                 
+                
+                [DplusMobClick track:@"商品加入收藏" property:@{@"商品ID":self.thisProductId,@"商品名称":productModel.prodcutName}];
+                
                 [mainSev getFavoriteadd:self.thisProductId andType:@"goods" anduk:@""];
                 [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
                 

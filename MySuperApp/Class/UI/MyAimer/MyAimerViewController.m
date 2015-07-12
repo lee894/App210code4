@@ -553,7 +553,6 @@
                 [BfdAgent addUser:self userId:str options:nil];
                 //end
                 
-                
                 //lee999 new
                 [SingletonState sharedStateInstance].userHasLogin = YES;
 
