@@ -28,9 +28,9 @@
     UILabel* labelok = [[UILabel alloc] initWithFrame:CGRectMake(10, spH, 300, 30)];
     labelok.textAlignment = UITextAlignmentCenter;
     labelok.backgroundColor = [UIColor clearColor];
-    labelok.font = [UIFont systemFontOfSize:22];
-    labelok.textColor =  [UIColor colorWithHexString:@"777777"];
-    labelok.text = @"礼品卡兑换已提交!";
+    labelok.font = [UIFont systemFontOfSize:20];
+    labelok.textColor =  [UIColor colorWithHexString:@"000000"];
+    labelok.text = @"礼品卡兑换成功!";
     [self.view addSubview:labelok];
     
     spH += 40;
@@ -40,10 +40,10 @@
     lblOrderTitle.textAlignment = UITextAlignmentCenter;
     [lblOrderTitle setText:[NSString stringWithFormat:@"订单号：%@",self.orderId]];
     lblOrderTitle.font = [UIFont systemFontOfSize:LabMidSize];
-    lblOrderTitle.textColor =  [UIColor colorWithHexString:@"777777"];
+    lblOrderTitle.textColor =  [UIColor colorWithHexString:@"000000"];
     [self.view addSubview:lblOrderTitle];
     
-    spH += 40;
+    spH += 100;
 
     
     UIButton *nextbtn = [UIButton buttonWithType:UIButtonTypeCustom];

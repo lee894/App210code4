@@ -13,7 +13,7 @@
 
 //lee999 新增套装的积分
 @synthesize suit_score;
-
+@synthesize is_valid;
 -(id)init
 {
     if (self = [super init]) {

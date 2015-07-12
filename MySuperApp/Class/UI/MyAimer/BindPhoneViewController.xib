@@ -67,7 +67,7 @@
                             </connections>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="QRF-RF-NLX">
-                            <rect key="frame" x="50" y="74" width="220" height="37"/>
+                            <rect key="frame" x="20" y="74" width="280" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="发送验证码" backgroundImage="big_btn_w_mormal.png">

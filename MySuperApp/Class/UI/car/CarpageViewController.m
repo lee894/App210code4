@@ -510,13 +510,12 @@
             break;
     }
     
-    //lee999 设置气泡
-#warning ---- 修改购物车 气泡的需求
+    //lee999 150711 设置气泡
     NSString *strbadge = @"0";
-    if ([_carModel.itemNumber integerValue] == 0) {
-        strbadge = _carModel.itemNumber;
+    if ([_carModel.bubble_count integerValue] == 0) {
+        strbadge = _carModel.bubble_count;
     }else{
-        strbadge = _carModel.itemNumber;
+        strbadge = _carModel.bubble_count;
     }
     //end
     

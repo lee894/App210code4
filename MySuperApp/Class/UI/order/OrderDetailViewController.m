@@ -114,15 +114,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideSeeButPay:) name:@"alipayOKanjumptoOrderDetail" object:nil];
     [SingletonState sharedStateInstance].alipayisShowAlert = YES;
-    
-//    if (isIOS7up) {
-//        [tableList setFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height)];
-//    }
-    
+
     //lee999
     if ([SingletonState sharedStateInstance].isFromCheckOKView == YES) {
-//        AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//        [app.aktabBarVerticalController hideTabBar:AKShowHideFromLeft animated:YES];
     }
     //end
     
@@ -136,28 +130,8 @@
     
     isAddNotification = NO;
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"alipayOKanjumptoOrderDetail" object:nil];
-    
-    
-    //lee999recode增加了|| !isHiddenBar
-    //lee999recode
-//    if (isFromCheckOKView || !isHiddenBar) {
-//    AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//    [app.aktabBarVerticalController showTabBar:AKShowHideFromLeft animated:YES];
-//    }
+
 }
-
-#pragma mark -- 按钮事件  银联支付后的回调
-
-//银联支付后的回调
-//- (void)onPayResult:(NSString*)orderId resultCode:(NSString*)resultCode resultMessage:(NSString*)resultMessage{
-//    //支付成功后 调用客户端服务器 提示服务器支付成功的信息
-//
-//    if ([resultCode isEqualToString:@"0000"]) {
-//        [mainSev getLinkageconfirmpay:self.orderID];
-//    }else {
-//        [SBPublicAlert showAlertTitle:@"爱慕提示" Message:resultMessage];
-//    }
-//}
 
 #pragma mark--  立即支付
 -(void)rightButAction//立即支付
@@ -198,7 +172,6 @@
                                                    reuseIdentifier:identifier];
     
     YKAllowPayType *type = [orderDetail.itemAllowpaytype objectAtIndex:indexPath.row];
-//    cell.textLabel.text = type.paytypeDesc;
     
     //lee999 150503 增加icon
     UIImage *img = [UIImage imageNamed:@"zf_cxk_.png"];
@@ -272,7 +245,6 @@
         
         if (!isAddNotification) {
             isAddNotification  = YES;
-//            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideSeeButPay:) name:@"alipayOKanjumptoOrderDetail" object:nil];
         }
         
         [AlipayHelper alipayActionwithPrice:orderDetail.orderdetailInfo.price
@@ -284,7 +256,6 @@
         
         if (!isAddNotification) {
             isAddNotification = YES;
-//            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideSeeButPay:) name:@"alipayOKanjumptoOrderDetail" object:nil];
             }
         
         if (![WXApi isWXAppInstalled]) {
@@ -336,18 +307,7 @@
 - (void)hideSeeButPay:(NSNotification *)notion {
     
     [mainSev getConfim_alipay:self.orderID];
-    
-    
-    
-    //lee999 支付成功之后 刷新界面，
-//    isMakesureGetgood = YES;
-    
-    
-//    if (isFromCheckOKView) {
-//        [self.navigationController popToRootViewControllerAnimated:YES];
-//    }else{
-    
-    //
+
     
     if ([SingletonState sharedStateInstance].alipayisShowAlert == YES && [SingletonState sharedStateInstance].isInCheckOKView == NO ) {
         [SingletonState sharedStateInstance].alipayisShowAlert = NO;
@@ -355,9 +315,6 @@
         alertV.tag = 19998;
         [alertV show];
     }
-        
-    
-//    }
 }
 
 #pragma mark-- 取消订单 & 物流查询 & 支付订单 & 评价订单
@@ -419,37 +376,7 @@
         
         [SingletonState sharedStateInstance].isNewHomePageScrollToTop = YES;
         [self changetableBarto:0];
-        
-//        isGetNotice = NO;
-//        if ([SingletonState sharedStateInstance].isFromCheckOKView == YES) {
-//            
-//            [self.navigationController popToRootViewControllerAnimated:NO];
-//            
-//            
-//            AppDelegate* app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-//            [app.aktabBarVerticalController showTabBar:AKShowHideFromLeft animated:NO];
-//            [SingletonState sharedStateInstance].isFromCheckOKView = NO;
-//            
-//            UIViewController *vc4 = [app.aktabBarVerticalController.viewControllers objectAtIndex:4];
-//            if (app.aktabBarVerticalController.selectedViewController != vc4)
-//            {
-//                if ([vc4 isKindOfClass:[UINavigationController class]])
-//                    [(UINavigationController *)vc4 popToRootViewControllerAnimated:NO];
-//            }
-//            
-//            UIViewController *vc = [app.aktabBarVerticalController.viewControllers objectAtIndex:0];
-//            if (app.aktabBarVerticalController.selectedViewController != vc)
-//            {
-//                if ([vc isKindOfClass:[UINavigationController class]])
-//                    [(UINavigationController *)vc popToRootViewControllerAnimated:NO];
-//            }
-//            
-//            [self changetableBarto:0];
-//        }else{
-//            [self changeToShop];
-//        }
     }
-    
 }
 
 
@@ -472,10 +399,7 @@
     }
     if ([orderDetail.orderdetailInfo.orer_status isEqualToString:@"评价"]) {
         endCell2.buttonLogistics.tag = 1000002;
-        
-//        //lee999 注释掉，这个地方不用评论
-//        endCell2.buttonLogistics.hidden = YES;
-//        //end
+
         
         [endCell2.buttonLogistics setTitle:@"评价" forState:UIControlStateNormal];
         [endCell2.buttonLogistics setTitle:@"评价" forState:UIControlStateHighlighted];
@@ -533,13 +457,8 @@
 
                 NSLog(@"---expressid:--------%lu",(unsigned long)orderDetail.orderdetailInfo.expressid.length);
                 
-                
                 [tableList reloadData];
-                
-                //lee999 创建浮动条
-//                if (endCell2) {
-//                    [endCell2 removeFromSuperview];
-//                }
+
                 [self createPayBar];
                 //end
                 
@@ -578,9 +497,7 @@
 #pragma mark --  UITableView delegate and datesource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//    if (isUnAccess) {
-//            return orderDetail.itemSuit.count+1;
-//    }else
+
     {
         if (orderDetail.iscancle) {
             return 8+orderDetail.itemSuit.count +1; //lee999 在这个地方加1，为了在最后显示 查看物流按钮
@@ -593,14 +510,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    if (isUnAccess) {
-//        if (0 == section) {
-//            return orderDetail.itemList.count;
-//        }else {
-//            YKSuitListItem *suitListItem = (YKSuitListItem *)[orderDetail.itemSuit objectAtIndex:section-1];
-//            return  [[suitListItem suits] count] +1; //lee999 加了1 为了显示套装的总计信息
-//        }
-//    }else
     {
         
         if (orderDetail.itemSuit.count == 0) {
@@ -997,24 +906,6 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (isUnAccess) {
-//        if (indexPath.section == 0) {
-//            if (orderDetail.itemList == 0) {
-//                return 0;
-//            }
-//        }else {
-//            //lee999
-//            YKSuitListItem *suitListItem = (YKSuitListItem *)[orderDetail.itemSuit objectAtIndex:indexPath.section-1];
-//            if (indexPath.row == [[suitListItem suits] count] +1) {
-//                return 60;
-//            }
-//            //end
-//            //商品列表
-//            return 160;
-//        }
-//        
-//        return 160;
-//    }else
     {
 
         if (indexPath.section == 0) {
@@ -1029,9 +920,6 @@
         }else if (indexPath.section == 1) {
             //lee999 将查看物流按钮放在最下面了
             return 10;
-//            if (orderDetail.orderdetailInfo.expressid.length>1) {
-//                return 53;
-//            }
         }else if (indexPath.section == 2) {
             if (indexPath.row == 0) {
                 return 23;
@@ -1104,14 +992,6 @@
     }else if (indexPath.section >2&&indexPath.section < four){
         if (orderDetail.itemSuit.count > 0) {
             
-//            YKSuitListItem *suitListItem = (YKSuitListItem *)[orderDetail.itemSuit objectAtIndex:indexPath.section-3];
-//            YKPreferentialSuit *controller = [[YKPreferentialSuit alloc] init];
-//            controller.strStuit = suitListItem.suitid;
-//            controller.isFromMyAimer = YES;
-//           [self.navigationController pushViewController:controller animated:YES];
-            
-            
-            
             //lee999小莹要求 套装也要到商品详情界面
             YKSuitListItem *suitListItem = (YKSuitListItem *)[orderDetail.itemSuit objectAtIndex:indexPath.section-3];
             YKItem *item = (YKItem *)[suitListItem.suits objectAtIndex:indexPath.row];
@@ -1154,21 +1034,14 @@
                                                            reuseIdentifier:CellIdentifier2];
             Cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
-//            UIImageView *icon = nil;
             if (k==0) {
                 
-                UIImageView *topImageV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300, 160)];
-                [topImageV setImage:[[UIImage imageNamed:@"list_bg_01.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(16, 14, 250, 100)]];
-                
+                UIImageView *topImageV = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, ScreenWidth-20, 0.5)];
+                [topImageV setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
                 [Cell.contentView addSubview:topImageV];
-                
-//                icon  = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 21, 38)];
-//                [icon setImage:[UIImage imageNamed:@"icon_suit.png"]];
-//                [Cell.contentView addSubview:icon];
-                
             }else {
-                UIImageView *modile = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 300, 160)];
-                [modile setImage:[[UIImage imageNamed:@"list_bg_02.png"]resizableImageWithCap:UIEdgeInsetsMake(5, 5, 0, 0)]];
+                UIImageView *modile = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, ScreenWidth-20, 0.5)];
+                [modile setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
                 [Cell.contentView addSubview:modile];
             }
             
@@ -1182,7 +1055,6 @@
             UrlImageView* shoppingImg = [[UrlImageView alloc] init];
             [shoppingImg setImageFromUrl:YES withUrl:pItem.pic];
             shoppingImg.frame = CGRectMake(16, 25, 84, 103);
-            shoppingImg.backgroundColor = [UIColor clearColor];
             [Cell.contentView addSubview:shoppingImg];
             
             int yOffset = 6;
@@ -1195,7 +1067,6 @@
             UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, yOffset, 190, nameHeight)];
             shoppingName.backgroundColor = [UIColor clearColor];
             shoppingName.numberOfLines = 2;
-//            shoppingName.lineBreakMode = UILineBreakModeWordWrap;
             shoppingName.text = [NSString stringWithFormat:@"%@\n",pItem.name];
             shoppingName.font = [UIFont systemFontOfSize:13];
             shoppingName.textColor = [UIColor blackColor];
@@ -1216,7 +1087,6 @@
             
             UILabel* colorName = [[UILabel alloc] initWithFrame:CGRectMake(110, yOffset,170, 30)];
             colorName.backgroundColor = [UIColor clearColor];
-//            colorName.lineBreakMode = UILineBreakModeMiddleTruncation;
             colorName.text = [NSString stringWithFormat:@"颜色: %@    尺码: %@", pItem.color, pItem.size];
             colorName.font = [UIFont systemFontOfSize:13];
             colorName.textColor = UIColorFromRGB(0x666666);
@@ -1239,31 +1109,6 @@
             priceValue.textColor = UIColorFromRGB(0xB90023);
             [Cell.contentView addSubview:priceValue];
             
-//            [Cell.contentView bringSubviewToFront:icon];
-            
-            
-            //lee999
-            
-//            UIButton *buttonAccess = [UIButton buttonWithType:UIButtonTypeCustom];
-//            [buttonAccess setFrame:CGRectMake(215, 114, 85, 32)];
-//            [buttonAccess setTitle:@"评价" forState:UIControlStateNormal];
-//            [buttonAccess setTitle:@"评价" forState:UIControlStateHighlighted];
-//            [buttonAccess setBackgroundImage:[UIImage imageNamed:@"button_red.png"] forState:UIControlStateNormal];
-//            [buttonAccess  setBackgroundImage:[UIImage imageNamed:@"button_red.png"] forState:UIControlStateHighlighted];
-////            [buttonAccess addTarget:self action:@selector(evaluateProduct:) forControlEvents:UIControlEventTouchUpInside];
-//            buttonAccess.titleLabel.font = [UIFont systemFontOfSize:14.0];
-//            buttonAccess.tag = j+5000;
-//
-////            if (pItem.rate_flag) {
-////                buttonAccess.hidden = NO;
-////            }else{
-////                buttonAccess.hidden = YES;
-////            }
-//            
-//            [Cell.contentView addSubview:buttonAccess];
-
-            //end
-            
             [array addObject:Cell];
 
             
@@ -1272,11 +1117,12 @@
         static NSString	*CellSuitlist3 = @"Cell3";
         UITableViewCell *viewSuitlistCell3 = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellSuitlist3];
         viewSuitlistCell3.selectionStyle = UITableViewCellSelectionStyleNone;
+
         
-        UIImageView *buttom = [[UIImageView alloc] initWithFrame:CGRectMake(10, -8, 300, 60)];
-        
-        [buttom setImage:[[UIImage imageNamed:@"list_bg_03.png"] resizableImageWithCap:UIEdgeInsetsMake(5, 5, 0, 0)]];
+        UIImageView *buttom = [[UIImageView alloc] initWithFrame:CGRectMake(10, -8, ScreenWidth-20,0.5)];
+        [buttom setBackgroundColor:[UIColor colorWithHexString:@"ff0000"]];
         [viewSuitlistCell3.contentView addSubview:buttom];
+        
         
         UIFont *font = [UIFont systemFontOfSize:13];
         int xOffset = 15;

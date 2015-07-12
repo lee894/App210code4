@@ -41,7 +41,7 @@
     mainSer.delegate = self;
     
     if (isIOS7up) {
-        [myallscrollView setFrame:CGRectMake(0, new20ViewY, 320, self.view.frame.size.height-new20ViewY)];
+        [myallscrollView setFrame:CGRectMake(0, new20ViewY, ScreenWidth, self.view.frame.size.height-new20ViewY)];
     }
     
     [myallscrollView setContentSize:CGSizeMake(0, 680)];
@@ -51,8 +51,6 @@
 
 - (IBAction)submit:(id)sender//提交
 {
-    
-//    
 //#warning ---  测试
 //    
 //    GiftCheckOutFinishViewController* gcovc = [[GiftCheckOutFinishViewController alloc] init];
@@ -138,12 +136,15 @@
 - (IBAction)choosePicker:(id)sender//PickerView弹出
 {
     [self.view endEditing:YES];
-    viewPicker = [[[NSBundle mainBundle] loadNibNamed:@"PickerView" owner:self options:nil] lastObject];
-    [viewPicker setOrigin:CGPointMake(0, self.view.frame.size.height)];
-    [UIView animateWithDuration:0.3 animations:^{
-        [viewPicker setOrigin:CGPointMake(0, self.view.frame.size.height - 262)];
-        [self.view addSubview:viewPicker];
-    }];
+    
+    if (!viewPicker) {
+        viewPicker = [[[NSBundle mainBundle] loadNibNamed:@"PickerView" owner:self options:nil] lastObject];
+        [viewPicker setOrigin:CGPointMake(0, self.view.frame.size.height)];
+        [UIView animateWithDuration:0.3 animations:^{
+            [viewPicker setOrigin:CGPointMake(0, self.view.frame.size.height - 262)];
+            [self.view addSubview:viewPicker];
+        }];
+    }
 }
 
 - (IBAction)confirmOrCancel:(UIButton *)sender//pickerView 确认取消
@@ -179,8 +180,6 @@
     [UIView animateWithDuration:0.2 animations:^{
         
         [myallscrollView setContentOffset:CGPointMake(0, 130) animated:YES];
-//        [myallView setFrame:CGRectMake(0, -130, 320, self.view.frame.size.height-new20ViewY)];
-//        self.view.frame = CGRectMake(0, -150, 320, self.view.frame.size.height);
     }];
 }
 
@@ -189,11 +188,6 @@
     [UIView animateWithDuration:0.2 animations:^{
         
         [myallscrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-
-        
-//        self.view.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
-//        [myallView setFrame:CGRectMake(0, new20ViewY, 320, self.view.frame.size.height-new20ViewY)];
-
     }];
     
     if (![NSString isValidTelephoneNum2:textFieldPhone.text]) {
@@ -210,8 +204,6 @@
     [UIView animateWithDuration:0.2 animations:^{
         
         [myallscrollView setContentOffset:CGPointMake(0, 50) animated:YES];
-
-//        self.view.frame = CGRectMake(0, -30, 320, self.view.frame.size.height);
     }];
     labelContent.hidden = YES;
 }

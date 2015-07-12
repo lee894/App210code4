@@ -39,46 +39,7 @@
 - (id)initWithDictionary:(NSDictionary *)json
 {
     self = [super init];
-    /*
-     // This check serves to make sure that a non-NSDictionary object
-     // passed into the model class doesn't break the parsing.
-     if(self && [dict isKindOfClass:[NSDictionary class]]) {
-     self.notice = [CarNotice modelObjectWithDictionary:[dict objectForKey:@"notice"]];
-     self.showwarn = [[dict objectForKey:@"showwarn"] boolValue];
-     NSObject *receivedCarHotlist = [dict objectForKey:@"hotlist"];
-     NSMutableArray *parsedCarHotlist = [NSMutableArray array];
-     if ([receivedCarHotlist isKindOfClass:[NSArray class]]) {
-     for (NSDictionary *item in (NSArray *)receivedCarHotlist) {
-     if ([item isKindOfClass:[NSDictionary class]]) {
-     [parsedCarHotlist addObject:[CarHotlist modelObjectWithDictionary:item]];
-     }
-     }
-     } else if ([receivedCarHotlist isKindOfClass:[NSDictionary class]]) {
-     [parsedCarHotlist addObject:[CarHotlist modelObjectWithDictionary:(NSDictionary *)receivedCarHotlist]];
-     }
-     
-     self.hotlist = [NSArray arrayWithArray:parsedCarHotlist];
-     self.warn = [self objectOrNilForKey:@"warn" fromDictionary:dict];
-     self.suitlist = [self objectOrNilForKey:@"suitlist" fromDictionary:dict];
-     self.carStatistics = [self objectOrNilForKey:@"car_statistics" fromDictionary:dict];
-     self.response = [self objectOrNilForKey:@"response" fromDictionary:dict];
-     NSObject *receivedCarCarProductlist = [dict objectForKey:@"car_productlist"];
-     NSMutableArray *parsedCarCarProductlist = [NSMutableArray array];
-     if ([receivedCarCarProductlist isKindOfClass:[NSArray class]]) {
-     for (NSDictionary *item in (NSArray *)receivedCarCarProductlist) {
-     if ([item isKindOfClass:[NSDictionary class]]) {
-     [parsedCarCarProductlist addObject:[CarCarProductlist modelObjectWithDictionary:item]];
-     }
-     }
-     } else if ([receivedCarCarProductlist isKindOfClass:[NSDictionary class]]) {
-     [parsedCarCarProductlist addObject:[CarCarProductlist modelObjectWithDictionary:(NSDictionary *)receivedCarCarProductlist]];
-     }
-     
-     self.carProductlist = [NSArray arrayWithArray:parsedCarCarProductlist];
-     
-     }
-     */
-    
+
     _carProductlist = [[NSMutableArray alloc] init];
     _gifts = [[NSMutableArray alloc] init];
     _suitlist = [[NSMutableArray alloc] init];
@@ -117,7 +78,6 @@
             item.selected = [[dic objectForKey:@"selected"] boolValue];
             item.is_valid = [[dic objectForKey:@"is_valid" isDictionary:nil] boolValue];
             [self.carProductlist addObject:item];
-//            [item release];
         }
         self.selectedItemCount = [json objectForKey:@"itemprice"];
         NSString* car_statistics = [json objectForKey:@"car_statistics"];
@@ -129,6 +89,10 @@
             self.itemPrice = [priceArray objectAtIndex:1];
         }
    
+        //购物车气泡 lee999 新增显示购物车的气泡
+        self.bubble_count = [json objectForKey:@"bubble_count"];
+
+        
         //选择赠品
 		
         [self.gifts removeAllObjects];
@@ -170,7 +134,6 @@
                 item.color = [valueDic objectForKey:colorid];
                 item.size = [valueDic objectForKey:sizeid];
                 [valueids addObject:item];
-//                [item release];
             }
             NSMutableArray *array_product=[[NSMutableArray alloc]init];
             NSString *str_record=[[NSString alloc]init];
@@ -179,7 +142,6 @@
                 [array_product addObject:[[[pro_array objectAtIndex:0] objectForKey:@"_spec_value_ids"] objectForKey:@"1"]];
             }
             for (int i=0; i<[pro_array count]; i++) {
-                // NSLog(@"%@",[[[pro_array objectAtIndex:i] objectForKey:@"_spec_value_ids"]objectForKey:@"1"]);
                 if (![[[[pro_array objectAtIndex:i] objectForKey:@"_spec_value_ids"]objectForKey:@"1"]isEqualToString:str_record]) {
                     [array_product addObject:[[[pro_array objectAtIndex:i] objectForKey:@"_spec_value_ids"]objectForKey:@"1"]];
                     str_record=[[[pro_array objectAtIndex:i] objectForKey:@"_spec_value_ids"]objectForKey:@"1"];
@@ -187,7 +149,6 @@
             }
             NSDictionary* valueDic = [giftDic objectForKey:@"spec_values"];
             NSArray* keyArray = [valueDic allKeys];
-            // NSLog(@"------------------------&&&&&&&&&&&&&&&&&&&&&&%@:%@",colorid,sizeid);
             for (int k = 0; k < [keyArray count]; k ++) {
                 NSDictionary* specDic = [valueDic objectForKey:[keyArray objectAtIndex:k]];
                 YKSpecitem* specitem = [[YKSpecitem alloc] init];
@@ -201,12 +162,10 @@
                     if ([array_product indexOfObject:[specitem productid]]!=2147483647) {
                         [colorArray addObject:specitem];
                     }
-                    //[colorArray addObject:specitem];
                 }
                 if([specStr isEqualToString:sizeid]){
                     [sizeArray addObject:specitem];
                 }
-//                [specitem release];
             }
             YKGiftItem* giftitem = [[YKGiftItem alloc] init];
             giftitem.productname = [giftDic objectForKey:@"productname"];
@@ -258,8 +217,7 @@
             item.suitid = [dicdate objectForKey:@"suitid"];
             item.selected = [[dicdate objectForKey:@"selected"] boolValue];
             item.uk = [dicdate objectForKey:@"uk"];
-            item.is_valid = [dicdate objectForKey:@"@is_valid"];
-            NSLog(@"arrSuit:%@",item);
+            item.is_valid = [[dicdate objectForKey:@"is_valid"] boolValue];
             [self.suitlist addObject:item];
 
         }
@@ -290,7 +248,6 @@
             item.selected = [[dicdate objectForKey:@"selected"] boolValue];
             item.uk = [dicdate objectForKey:@"uk"];
             item.is_valid = [[dicdate objectForKey:@"is_valid"] boolValue];
-            NSLog(@"arrSuit:%@",item);
             [self.packagelist addObject:item];
             
         }
@@ -315,94 +272,5 @@
     return self;
     
 }
-//
-//- (NSDictionary *)dictionaryRepresentation
-//{
-//    NSMutableDictionary *mutableDict = [NSMutableDictionary dictionary];
-//    [mutableDict setValue:[self.notice dictionaryRepresentation] forKey:@"notice"];
-//    [mutableDict setValue:[NSNumber numberWithBool:self.showwarn] forKey:@"showwarn"];
-//NSMutableArray *tempArrayForHotlist = [NSMutableArray array];
-//    for (NSObject *subArrayObject in self.hotlist) {
-//        if([subArrayObject respondsToSelector:@selector(dictionaryRepresentation)]) {
-//            // This class is a model object
-//            [tempArrayForHotlist addObject:[subArrayObject performSelector:@selector(dictionaryRepresentation)]];
-//        } else {
-//            // Generic object
-//            [tempArrayForHotlist addObject:subArrayObject];
-//        }
-//    }
-//    [mutableDict setValue:[NSArray arrayWithArray:tempArrayForHotlist] forKey:@"hotlist"];
-//    [mutableDict setValue:self.warn forKey:@"warn"];
-//NSMutableArray *tempArrayForSuitlist = [NSMutableArray array];
-//    for (NSObject *subArrayObject in self.suitlist) {
-//        if([subArrayObject respondsToSelector:@selector(dictionaryRepresentation)]) {
-//            // This class is a model object
-//            [tempArrayForSuitlist addObject:[subArrayObject performSelector:@selector(dictionaryRepresentation)]];
-//        } else {
-//            // Generic object
-//            [tempArrayForSuitlist addObject:subArrayObject];
-//        }
-//    }
-//    [mutableDict setValue:[NSArray arrayWithArray:tempArrayForSuitlist] forKey:@"suitlist"];
-//    [mutableDict setValue:self.carStatistics forKey:@"car_statistics"];
-//    [mutableDict setValue:self.response forKey:@"response"];
-//NSMutableArray *tempArrayForCarProductlist = [NSMutableArray array];
-//    for (NSObject *subArrayObject in self.carProductlist) {
-//        if([subArrayObject respondsToSelector:@selector(dictionaryRepresentation)]) {
-//            // This class is a model object
-//            [tempArrayForCarProductlist addObject:[subArrayObject performSelector:@selector(dictionaryRepresentation)]];
-//        } else {
-//            // Generic object
-//            [tempArrayForCarProductlist addObject:subArrayObject];
-//        }
-//    }
-//    [mutableDict setValue:[NSArray arrayWithArray:tempArrayForCarProductlist] forKey:@"car_productlist"];
-//
-//    return [NSDictionary dictionaryWithDictionary:mutableDict];
-//}
-//
-//- (NSString *)description
-//{
-//    return [NSString stringWithFormat:@"%@", [self dictionaryRepresentation]];
-//}
-//
-//#pragma mark - Helper Method
-//- (id)objectOrNilForKey:(id)aKey fromDictionary:(NSDictionary *)dict
-//{
-//    id object = [dict objectForKey:aKey];
-//    return [object isEqual:[NSNull null]] ? nil : object;
-//}
-//
-//
-//#pragma mark - NSCoding Methods
-//
-//- (id)initWithCoder:(NSCoder *)aDecoder
-//{
-//    self = [super init];
-//
-//    self.notice = [aDecoder decodeObjectForKey:@"notice"];
-//    self.showwarn = [aDecoder decodeBoolForKey:@"showwarn"];
-//    self.hotlist = [aDecoder decodeObjectForKey:@"hotlist"];
-//    self.warn = [aDecoder decodeObjectForKey:@"warn"];
-//    self.suitlist = [aDecoder decodeObjectForKey:@"suitlist"];
-//    self.carStatistics = [aDecoder decodeObjectForKey:@"carStatistics"];
-//    self.response = [aDecoder decodeObjectForKey:@"response"];
-//    self.carProductlist = [aDecoder decodeObjectForKey:@"carProductlist"];
-//    return self;
-//}
-//
-//- (void)encodeWithCoder:(NSCoder *)aCoder
-//{
-//
-//    [aCoder encodeObject:_notice forKey:@"notice"];
-//    [aCoder encodeBool:_showwarn forKey:@"showwarn"];
-//    [aCoder encodeObject:_hotlist forKey:@"hotlist"];
-//    [aCoder encodeObject:_warn forKey:@"warn"];
-//    [aCoder encodeObject:_suitlist forKey:@"suitlist"];
-//    [aCoder encodeObject:_carStatistics forKey:@"carStatistics"];
-//    [aCoder encodeObject:_response forKey:@"response"];
-//    [aCoder encodeObject:_carProductlist forKey:@"carProductlist"];
-//}
-
 
 @end

@@ -854,7 +854,7 @@
                            @"订单附言",
                            @"支付方式",
                            @"使用优惠券",
-                           @"使用会员卡",
+                           @"使用电子券",
                            @"使用包邮卡",
                            nil];
     static NSString	* CellIdentifier = @"Cell";
@@ -945,7 +945,7 @@
 				
                 height_d = 0;// 地址没有信息
              
-                name2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, ScreenWidth-20, 30)];
+                name2 = [[UILabel alloc] initWithFrame:CGRectMake(10, 7, ScreenWidth-20, 30)];
 				name2.text = [titleArray objectAtIndex:i];
 				name2.backgroundColor = [UIColor clearColor];
 				name2.font = [UIFont systemFontOfSize:LabMidSize];
@@ -1109,9 +1109,9 @@
                 if (mycheckOutModel.checkoutCountv6 >0) {
                     NSArray *arr = mycheckOutModel.checkoutV6cards;
                     
-                    name2.text = [NSString stringWithFormat:@"您有%@元会员卡可用",[[arr objectAtIndex:0]objectForKey:@"balance" isDictionary:nil]];
+                    name2.text = [NSString stringWithFormat:@"您有%@元电子券可用",[[arr objectAtIndex:0]objectForKey:@"balance" isDictionary:nil]];
                 }else{
-                    name2.text = [NSString stringWithFormat:@"您没有可用的会员卡"];
+                    name2.text = [NSString stringWithFormat:@"您没有可用的电子券"];
                 }
                 name2.backgroundColor = [UIColor clearColor];
                 name2.font = [UIFont systemFontOfSize:LabSmallSize];

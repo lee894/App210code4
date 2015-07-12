@@ -142,6 +142,7 @@
     
     recordNUM=1;
     
+    //商品详情，点击的时候，上传 商品编号
     NSString *str = @"";
     if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"]) {
         str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];

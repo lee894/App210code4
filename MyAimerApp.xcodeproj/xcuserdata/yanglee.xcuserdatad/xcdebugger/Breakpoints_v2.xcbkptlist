@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MySuperApp/Class/UI/car/CarpageViewController.m"
-            timestampString = "458295034.014724"
+            timestampString = "458296028.957214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2373"
-            endingLineNumber = "2373"
+            startingLineNumber = "2372"
+            endingLineNumber = "2372"
             landmarkName = "-simpleProductAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MySuperApp/Class/UI/car/CarpageViewController.m"
-            timestampString = "458295034.014724"
+            timestampString = "458296028.957214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2402"
-            endingLineNumber = "2402"
+            startingLineNumber = "2401"
+            endingLineNumber = "2401"
             landmarkName = "-simpleProductAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MySuperApp/Class/UI/car/CarpageViewController.m"
-            timestampString = "458295034.014724"
+            timestampString = "458296028.957214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1224"
-            endingLineNumber = "1224"
+            startingLineNumber = "1223"
+            endingLineNumber = "1223"
             landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -131,12 +131,44 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MySuperApp/Class/Databsae/other/EADataModel/&#x8d2d;&#x7269;&#x8f66;/CarCarModel.m"
-            timestampString = "458292345.900317"
+            filePath = "MySuperApp/Class/UI/car/CarpageViewController.m"
+            timestampString = "458361501.448823"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
+            startingLineNumber = "1572"
+            endingLineNumber = "1572"
+            landmarkName = "-createSuitlistcells"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MySuperApp/Class/Databsae/other/EADataModel/&#x8d2d;&#x7269;&#x8f66;/CarCarModel.m"
+            timestampString = "458361602.345938"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
+            landmarkName = "-initWithDictionary:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MySuperApp/Class/Databsae/other/EADataModel/&#x8d2d;&#x7269;&#x8f66;/CarCarModel.m"
+            timestampString = "458361607.13071"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "-initWithDictionary:"
             landmarkType = "5">
          </BreakpointContent>

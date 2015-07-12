@@ -134,8 +134,14 @@
     
     
     // lee999 修改文字跳动
+    buttonCode.titleLabel.textAlignment = UITextAlignmentCenter;
     buttonCode.titleLabel.text = [NSString stringWithFormat:@"发送验证码（%ld）", (long)count];
     [buttonCode setTitle:[NSString stringWithFormat:@"发送验证码（%ld）", (long)count] forState:UIControlStateNormal];
+    [buttonCode setTitle:[NSString stringWithFormat:@"发送验证码（%ld）", (long)count] forState:UIControlStateHighlighted];
+    [buttonCode setTitle:[NSString stringWithFormat:@"发送验证码（%ld）", (long)count] forState:UIControlStateDisabled];
+
+    
+    
 //    如果单独设置_timerBtn.titleLabel.text = [NSString stringWithFormat:@"%ld秒",scondes];赋值,label是不显示文字的.如果只设置[_timerBtn setTitle:[NSString stringWithFormat:@"%ld秒",scondes] forState:UIControlStateNormal];这个的话,就会出现闪动的效果..后来经过尝试,发现必须两个都存在,而且_timerBtn.titleLabel.text = [NSString stringWithFormat:@"%ld秒",scondes];这个要放在[_timerBtn setTitle:[NSString stringWithFormat:@"%ld秒",scondes] forState:UIControlStateNormal];前边,至于为什么这么做我也没找到合适的解释...
     
     

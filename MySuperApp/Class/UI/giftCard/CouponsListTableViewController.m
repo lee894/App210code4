@@ -621,6 +621,17 @@
                 [ivBg addSubview:btnAction];
             }
         }
+        
+        //lee999 150712 新增包邮卡判断数量为0  如果使用次数==总次数 显示为已用完
+        if([data class] == [FreePostCardInfo class] &&
+           [((FreePostCardInfo*)data).total_times integerValue] == [((FreePostCardInfo*)data).used_times integerValue]){
+            iBg = [UIImage imageNamed:@"laber_byk_use"];
+            [ivState setImage:[UIImage imageNamed:@"yhq_use_laber"]];
+            [ivState setFrame:CGRectMake(ivState.frame.origin.x, 11, lee1fitAllScreen(55), lee1fitAllScreen(55))];
+        }
+        //end
+        
+        
         [ivBg setImage:iBg];
         [ivBg setUserInteractionEnabled:YES];
         [lblPrice setText:strPrice];

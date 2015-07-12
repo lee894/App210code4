@@ -129,7 +129,7 @@
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 82/2+20)];
             view.backgroundColor = [UIColor clearColor];
             
-            UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exchange_history_list_01"]];
+            UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exchange_history_list_02"]];
             imgView.frame = CGRectMake(10, 20, 300, 82/2);
             [view addSubview:imgView];
 
@@ -197,7 +197,7 @@
     } else if (indexPath.row == [_arrData count]) {//最后一行
         UIImageView *imgView = (UIImageView *)[cell viewWithTag:4];
         imgView.frame = CGRectMake(10, 0, 300, 100/2);
-        imgView.image = [UIImage imageNamed:@"exchange_history_list_03"];
+        imgView.image = [UIImage imageNamed:@"exchange_history_list_02"];
     } else {
         UIImageView *imgView = (UIImageView *)[cell viewWithTag:4];
         imgView.frame = CGRectMake(10, 0, 300, 98/2);
@@ -240,7 +240,7 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 82/2+20)];
         view.backgroundColor = [UIColor clearColor];
         
-        UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exchange_history_list_01"]];
+        UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"exchange_history_list_02"]];
         imgView.frame = CGRectMake(10, 20, 300, 82/2);
         [view addSubview:imgView];
 

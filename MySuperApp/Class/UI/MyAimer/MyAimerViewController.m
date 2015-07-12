@@ -545,7 +545,7 @@
             
                 //end
                 
-                //lee999 150708 设置百分点登录状态
+                //lee999 150708 登录的时候 上传uid 设置百分点登录状态
                 NSString *str = @"";
                 if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"]) {
                     str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
