@@ -828,7 +828,13 @@
             [pricelab setTextColor:[UIColor colorWithHexString:@"#C70000"]];
             [sortV addSubview:pricelab];
             
-           CGSize pricelab2Size  = [[NSString stringWithFormat:@"￥%.2f",[[itemdic objectForKey:@"mktp" isDictionary:nil] floatValue]] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 15)];
+            CGSize pricelab2Size;
+            if (isRecommend) {
+
+                pricelab2Size = [[NSString stringWithFormat:@"￥%.2f",[[itemdic objectForKey:@"mktp" isDictionary:nil] floatValue]] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 15)];
+            }else{
+                pricelab2Size = [[NSString stringWithFormat:@"￥%.2f",[item.price.value floatValue]] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 15)];
+            }
 
             YKStrikePriceLabel *pricelab2 = [[YKStrikePriceLabel alloc] initWithFrame:CGRectMake(pW- pricelab2Size.width-10, imgH+45, pricelab2Size.width, 26)];
             [pricelab2 setNumberOfLines:1];
