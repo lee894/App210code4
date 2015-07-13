@@ -583,10 +583,14 @@
     }
     
     //套装
+    NSMutableArray* marrData = [NSMutableArray arrayWithCapacity:1];
+    for (NSDictionary* dic in _marrGoods) {
+        [marrData addObject:[[dic allKeys] firstObject]];
+    }
     
     [DplusMobClick track:@"加入购物车/礼包" property:@{@"加入类型":@"礼包",
                                                 @"商品id":self.pid,
-                                                @"商品Sku":_marrGoods,
+                                                @"商品Sku":[marrData componentsJoinedByString:@"|"],
                                                 @"商品名称":self.pInfo.packageinfo.name,
                                                 @"商品数量":@"1"}];
     
@@ -849,7 +853,7 @@
 {
     UIView* v = [[UIView alloc] init];  
     UITableViewCell* cell = [[UITableViewCell alloc] init];
-    cell.backgroundColor = [UIColor clearColor];
+//    cell.backgroundColor = [UIColor clearColor];
     NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods.count;
     CGFloat height = 0;
     UIView* vGroup = nil;
@@ -910,6 +914,11 @@
             UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
             [uiv setImageWithURL:[NSURL URLWithString:pgi.image_url] placeholderImage:nil];
             [vUnit addSubview:uiv];
+            [vUnit setTag:indexPath.row * 10000 + i];
+            
+//            UITapGestureRecognizer*tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectGoods:)];
+//            [vUnit addGestureRecognizer:tapGesture];
+            
             
             UILabel* lblName = [[UILabel alloc] init];
             [lblName setNumberOfLines:2];
@@ -938,7 +947,7 @@
             [vUnit addSubview:lblPrice];
             
             UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btn setFrame:CGRectMake(0, 0, vUnit.frame.size.width, vUnit.frame.size.height)];
+            [btn setFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
             [btn addTarget:self action:@selector(selectGoods:) forControlEvents:UIControlEventTouchUpInside];
             [btn setTag:indexPath.row * 10000 + i];
             [vUnit addSubview:btn];
@@ -967,7 +976,9 @@
     }
     if (((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).isOpen) {
         NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count;
-        height += lee1fitAllScreen((285-15)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2));
+        height += lee1fitAllScreen((270)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2));
+        
+        height = 3000;
     }
     return height;
 }

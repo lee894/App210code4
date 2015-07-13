@@ -279,6 +279,7 @@
             cell.parent = self;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        cell.V6cardlabelTitle.hidden = YES;
         NSDictionary* dic = [self.contentArr objectAtIndex:indexPath.row isArray:nil];
         cell.labelTitle.text = [NSString stringWithFormat:@"%@",LegalObject([dic objectForKey:@"name"],[NSString class])];
         cell.labelId.text = [NSString stringWithFormat:@"NO. %@",[dic objectForKey:@"card_id"]];

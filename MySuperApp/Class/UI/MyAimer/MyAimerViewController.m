@@ -357,6 +357,8 @@
         case 51://qq
         {
         
+            [DplusMobClick track:@"QQ联合登录"];
+            
             [TalkingData trackEvent:@"5009" label:@"QQ快捷登录" parameters:nil];
             //qq联合登录
             if (!tencentOAuth) {
@@ -367,6 +369,8 @@
         }
             break;
         case 52://sina
+            
+            [DplusMobClick track:@"新浪联合登录"];
             
             if ([WeiboSDK isWeiboAppInstalled]) {
                 [self ssoButtonPressed];
@@ -380,6 +384,9 @@
             break;
         case 53://支付宝
         {
+            
+            [DplusMobClick track:@"支付宝联合登录"];
+
             [self trustload];
         }
             break;
@@ -392,6 +399,8 @@
                 return;
             }
             
+            [DplusMobClick track:@"微信联合登录"];
+
             [self WXsendAuthRequest];
         }
             break;
@@ -532,7 +541,7 @@
                 
                 [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%.f",[loginModel shopcartcount]] forKey:@"totalNUM"];
                 
-                [UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
+                //[UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TotleNumber" object:nil];
                 

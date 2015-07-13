@@ -219,6 +219,7 @@
     NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];
     return [self attributeForKey:[str substringToIndex:str.length - 1]];
 }
+
 -(NSString*)need_select_count
 {
     NSString* str = [[[NSString stringWithCString:__FUNCTION__ encoding:NSUTF8StringEncoding] componentsSeparatedByString:@" "] lastObject];

@@ -134,7 +134,7 @@
                 [[NSUserDefaults standardUserDefaults]setObject:strInfo forKey:@"totalNUM"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TotleNumber" object:nil];
 
-                [UIApplication sharedApplication].applicationIconBadgeNumber = [[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"] intValue];
+                //[UIApplication sharedApplication].applicationIconBadgeNumber = [[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"] intValue];
                 
                 UIAlertView *someError = [[UIAlertView alloc] initWithTitle: @"提醒" message: @"成功加入购物车" delegate: self cancelButtonTitle: @"去购物车" otherButtonTitles: @"继续购物",nil];
                 someError.tag = 110011;

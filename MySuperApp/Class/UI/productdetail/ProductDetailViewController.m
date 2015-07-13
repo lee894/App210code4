@@ -780,7 +780,7 @@
                 
                 [SBPublicAlert hideMBprogressHUD:self.view];
                 
-                [UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
+                //[UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TotleNumber" object:nil];
                 

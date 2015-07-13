@@ -418,7 +418,7 @@
         nametextfield.backgroundColor = [UIColor whiteColor];
         nametextfield.placeholder = @"请输入您的优惠券号";
         nametextfield.font = [UIFont systemFontOfSize:17];
-        nametextfield.keyboardType = UIKeyboardTypeNumberPad;
+        nametextfield.keyboardType = UIKeyboardTypeDefault;
         [Cell.contentView addSubview:nametextfield];
         [nametextfield.layer setBorderColor:[UIColor colorWithHexString:@"#d0d0d0"].CGColor];
         [nametextfield.layer setBorderWidth:0.5];
@@ -703,9 +703,13 @@
         case 2:
         {
             id data = [self.contentArr objectAtIndex:indexPath.row isArray:nil];
+            
+            NSString * strStatus = @"";
+            
             CouponDetail20ViewController* cdvc = [[CouponDetail20ViewController alloc] init];
             if ([data class] == [CouponInfo class]) {
                 NSString* type = ((CouponInfo*)data).type;
+                strStatus = ((CouponInfo*)data).stuatus;
                 if ([type isEqualToString:@"o2o"])
                 {
                     cdvc.dType = kO2O;
@@ -721,8 +725,20 @@
             }
             else if ([data class] == [FreePostCardInfo class])
             {
+                strStatus = ((FreePostCardInfo*)data).status;
                 cdvc.dType = kFreePost;
             }
+            
+            //lee999 1、已使用，已过期的优惠券，包邮卡，礼品码不能点击进去到详情页。
+            if ([strStatus isEqualToString:@"已过期优惠劵"] ||
+                [strStatus isEqualToString:@"已过期优惠劵状态"] ||
+                [strStatus isEqualToString:@"无效"] ||
+                [strStatus isEqualToString:@"已使用"])
+            {
+                return;
+            }
+            
+            
             cdvc.data = data;
             [self.navigationController pushViewController:cdvc animated:YES];
         }

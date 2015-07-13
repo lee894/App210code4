@@ -543,7 +543,7 @@
     //end
     
     [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%.f",[strbadge floatValue]] forKey:@"totalNUM"];
-    [UIApplication sharedApplication].applicationIconBadgeNumber = [[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
+//    [UIApplication sharedApplication].applicationIconBadgeNumber = [[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
     
     if ([[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue] > 0) {
         AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -603,10 +603,14 @@
     [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_normal"] forState:UIControlStateNormal];
     [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_normal"] forState:UIControlStateSelected];
     [btnCheckOut setBackgroundImage:[UIImage imageNamed:@"btn_shop_a_hoverl"] forState:UIControlStateHighlighted];
-    [btnCheckOut setTitle:[NSString stringWithFormat:@"结算(%@)", _carModel.itemNumber] forState:UIControlStateNormal];
+    
+    if (!isEditing) {
+        [btnCheckOut setTitle:[NSString stringWithFormat:@"结算(%@)", _carModel.itemNumber] forState:UIControlStateNormal];
+    }else{
+        [btnCheckOut setTitle:[NSString stringWithFormat:@"删除(%@)", _carModel.itemNumber] forState:UIControlStateNormal];
+    }
     [btnCheckOut setTitle:@"" forState:UIControlStateHighlighted];
     [btnCheckOut setTitle:[NSString stringWithFormat:@"删除(%@)", _carModel.itemNumber] forState:UIControlStateSelected];
-    [btnCheckOut setTitle:@"" forState:UIControlStateDisabled];
 
     [btnCheckOut addTarget:self action:@selector(gotoChectViewC:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -672,7 +676,7 @@
     [vToolbar addSubview:lbl];
     
     lbl = [[UILabel alloc] init];
-    [lbl setText:[NSString stringWithFormat:@"%.0f元", [_carModel.selectedItemCount floatValue]]];
+    [lbl setText:[NSString stringWithFormat:@"%.2f元", [_carModel.selectedItemCount floatValue]]];
     [lbl setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
     [lbl setFont:[UIFont systemFontOfSize:17]];
     rc = [lbl.text boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : lbl.font} context:nil];
@@ -854,27 +858,28 @@
         
         UILabel* lblPrice = [[UILabel alloc] init];
         [lblPrice setTextColor:[UIColor colorWithHexString:@"#c8002c"]];
-        [lblPrice setText:[NSString stringWithFormat:@"￥%.0f", [item.strdiscountprice floatValue]]];
+        [lblPrice setText:[NSString stringWithFormat:@"￥%.2f", [item.strdiscountprice floatValue]]];
         [lblPrice setFont:[UIFont systemFontOfSize:12]];
         [lblPrice setFrame:CGRectMake(0, uiv.frame.size.height + uiv.frame.origin.y + 45, unitWidth, 13)];
         [vUnit addSubview:lblPrice];
-        
-        if([item.strdiscountprice floatValue] != [item.price floatValue])
-        {
-            UILabel* lblMPrice = [[UILabel alloc] init];
-            [lblMPrice setTextColor:[UIColor colorWithHexString:@"#888888"]];
-            [lblMPrice setFont:[UIFont systemFontOfSize:12]];
-            [lblMPrice setTextAlignment:NSTextAlignmentRight];
-            NSString* str = [NSString stringWithFormat:@"￥%.0f", [item.price floatValue]];
-            NSMutableAttributedString* mattStr = [[NSMutableAttributedString alloc] initWithString:str];
-            [mattStr addAttribute:NSStrikethroughColorAttributeName value:lblMPrice.textColor range:NSMakeRange(0, str.length)];
-            [mattStr addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInteger:1] range:NSMakeRange(0, str.length)];
-            [mattStr addAttribute:NSForegroundColorAttributeName value:lblMPrice.textColor range:NSMakeRange(0, str.length)];
-            [mattStr addAttribute:NSFontAttributeName value:lblMPrice.font range:NSMakeRange(0, str.length)];
-            [lblMPrice setAttributedText:mattStr];
-            [lblMPrice setFrame:CGRectMake(0, uiv.frame.size.height + uiv.frame.origin.y + 45, unitWidth, 13)];
-            [vUnit addSubview:lblMPrice];
-        }
+  
+        //lee999 150713 注释掉 原价，省的有冲突
+//        if([item.strdiscountprice floatValue] != [item.price floatValue])
+//        {
+//            UILabel* lblMPrice = [[UILabel alloc] init];
+//            [lblMPrice setTextColor:[UIColor colorWithHexString:@"#888888"]];
+//            [lblMPrice setFont:[UIFont systemFontOfSize:12]];
+//            [lblMPrice setTextAlignment:NSTextAlignmentRight];
+//            NSString* str = [NSString stringWithFormat:@"￥%.2f", [item.price floatValue]];
+//            NSMutableAttributedString* mattStr = [[NSMutableAttributedString alloc] initWithString:str];
+//            [mattStr addAttribute:NSStrikethroughColorAttributeName value:lblMPrice.textColor range:NSMakeRange(0, str.length)];
+//            [mattStr addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInteger:1] range:NSMakeRange(0, str.length)];
+//            [mattStr addAttribute:NSForegroundColorAttributeName value:lblMPrice.textColor range:NSMakeRange(0, str.length)];
+//            [mattStr addAttribute:NSFontAttributeName value:lblMPrice.font range:NSMakeRange(0, str.length)];
+//            [lblMPrice setAttributedText:mattStr];
+//            [lblMPrice setFrame:CGRectMake(0, uiv.frame.size.height + uiv.frame.origin.y + 45, unitWidth, 13)];
+//            [vUnit addSubview:lblMPrice];
+//        }
         
         [footView addSubview:vUnit];
         
@@ -961,16 +966,18 @@
 {
     if (isEditing) {
         [self finishEditCar];
+        isEditing = NO;
+
     }else
     {
         [self editCarNumber];
+        isEditing = YES;
     }
 }
 
 #pragma mark---- 编辑按钮的Action  转为编辑状态
 -(void)editCarNumber{
     
-    isEditing = YES;
     [shoppingCarTab reloadData];
 //    [shoppingCarTab setEditing:isEditing animated:YES];
     
@@ -1096,10 +1103,13 @@
     
 //    sku :   货品ID:数量:类型(product、gift)|货品ID:数量:类型(product、gift)  如果是赠品：11052064707566:1:gift:549 549为赠品活动的id
     
-    isEditing = NO;
     if (btnCheckOut) {
         [btnCheckOut setSelected:NO];
     }
+    
+    [btnCheckOut setTitle:[NSString stringWithFormat:@"结算(%@)", _carModel.itemNumber] forState:UIControlStateNormal];
+
+    
     if(vToolbar)
     {
         for (UIView* v in vToolbar.subviews) {
@@ -2027,17 +2037,26 @@
     }
 }
 
-#pragma mark--- CheckBoxAction
+#pragma mark--- CheckBoxAction 全选
 
 -(void)checkBoxAction:(UIButton*)sender
 {
     if(_btnCheckBox)
     {
         if (_btnCheckBox.selected) {
+            
+            //全部取消选中
+            if (isEditing) {
+                //正在编辑
+            }else{
+                //编辑完成
+            }
+            
             [mainSer PartChangeItemWithUk:@"" andType:@"no"];
             [SBPublicAlert showMBProgressHUD:@"正在请求" andWhereView:self.view states:NO];
         }else
         {
+            //全部选中
             
             NSMutableArray* marrUks = [[NSMutableArray alloc] initWithCapacity:1];
             for (YKItem* item in _carModel.carProductlist) {

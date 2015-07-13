@@ -59,7 +59,7 @@
     [self NewHiddenTableBarwithAnimated:YES];
     
     
-    contentArr = [[NSMutableArray alloc] initWithCapacity:0];
+    contentArr  = [[NSMutableArray alloc] initWithCapacity:0];
     
     [self createBackBtnWithType:0];
     mainSev = [[MainpageServ alloc] init];
@@ -152,7 +152,7 @@
 
     
     //lee 150701 判断有数据的话，就不在请求了
-    if (contentArr.count < 1) {
+    if (contentArr .count < 1) {
         UIButton *tmpBut = nil;
         if (self.isHot) {
             tmpBut = (UIButton *)[viewbtns viewWithTag:101];
@@ -286,8 +286,8 @@
 -(void)headerRereshingProductList{
     
     current = 1;
-    if (contentArr && contentArr.count >0) {
-        [contentArr removeAllObjects];
+    if (contentArr  && contentArr .count >0) {
+        [contentArr  removeAllObjects];
     }
     
     [mainSev getProductlist:self.params andOrder:self.orderStr andKeyword:@"" andPage:[NSString stringWithFormat:@"%ld",(long)current] andPer_page:@"10"];
@@ -335,7 +335,7 @@
                 
                 
                 //lee999 200版本 新增筛选界面  修改为  ios，搜索结果不存在，也要有筛选按钮
-                //                if (!self.isHiddenFilerbtn && [contentArr count]> 0) {
+                //                if (!self.isHiddenFilerbtn && [contentArr  count]> 0) {
                 [self createRightBtn];
                 [self.navbtnRight setTitle:@"筛选" forState:UIControlStateNormal];
                 [self.navbtnRight setTitle:@"筛选" forState:UIControlStateSelected];
@@ -351,17 +351,17 @@
                     return;
                 }
                 if (current == 1) {
-                    if (contentArr && contentArr.count >0) {
-                        [contentArr removeAllObjects];
+                    if (contentArr  && contentArr .count >0) {
+                        [contentArr  removeAllObjects];
                     }
-                    [contentArr addObjectsFromArray:(NSMutableArray *)productListModel.productlistPictext];
+                    [contentArr  addObjectsFromArray:(NSMutableArray *)productListModel.productlistPictext];
                 }else {
-                    [contentArr addObjectsFromArray:(NSMutableArray *)productListModel.productlistPictext];
+                    [contentArr  addObjectsFromArray:(NSMutableArray *)productListModel.productlistPictext];
                 }
                 totalCount = productListModel.recordCount;
                 [producttabV reloadData];
                 
-                //[self updateTableViewCount:contentArr.count];
+                //[self updateTableViewCount:contentArr .count];
 
                 
             }else {
@@ -371,7 +371,7 @@
                     current--;
                 }
                 [SBPublicAlert hideMBprogressHUD:self.view];
-                //[self updateTableViewCount:contentArr.count];
+                //[self updateTableViewCount:contentArr .count];
             }            
         }
             break;
@@ -379,7 +379,11 @@
         {
             if (!model.errorMessage) {
                 [SBPublicAlert hideMBprogressHUD:self.view];
-                contentArr = (NSMutableArray *)[(SuitListSuitListModel *)model suitlist];
+                contentArr  = (NSMutableArray *)[(SuitListSuitListModel *)model suitlist];
+                
+                [producttabV removeHeader];
+                [producttabV removeFooter];
+                
                 [producttabV reloadData];
                 
             }else{
@@ -403,7 +407,7 @@
         }
         default:
             [SBPublicAlert showMBProgressHUD:model.errorMessage andWhereView:self.view hiddenTime:0.6];
-            //[self updateTableViewCount:contentArr.count];
+            //[self updateTableViewCount:contentArr .count];
             break;
     }
 }
@@ -414,7 +418,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return ceil(contentArr.count/2.0);
+    return ceil(contentArr .count/2.0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -427,7 +431,7 @@
         cell=[[[NSBundle mainBundle] loadNibNamed:@"CollectCell" owner:nil options:nil] objectAtIndex:0];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    [cell setImageData:row withArray:contentArr];
+    [cell setImageData:row withArray:contentArr ];
     cell.delegate = self;
     [cell setbuttonCancel:YES];
     

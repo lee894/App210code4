@@ -166,7 +166,7 @@
                 //end
                 [self.navigationController pushViewController:refer animated:YES];
                 
-                [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+//                [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
                 
 //                [mainSev getSubmitorder:self.straddressID andCouponcard:self.useCouponcardId andPayway:self.m_strPayMethod andPayprice:str1 andRemarkmsg:self.postText andCard_id:card_id andfreepostcard:self.usefreepostcardId];
 
@@ -321,7 +321,7 @@
 
 - (void)createHeaderAndFooter{
     //ADD FootView:
-	UIView* footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 250)];
+	UIView* footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 260)];
 	footView.backgroundColor = [UIColor clearColor];
     
     
@@ -445,7 +445,7 @@
                                      @"bold":[UIFont fontWithName:@"HelveticaNeue-Bold" size:14],
                                      @"red": [UIColor redColor]};
             
-            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, ScreenWidth-105, 45)];
+            UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, ScreenWidth-120, 45)];
             shoppingName.backgroundColor = [UIColor clearColor];
             shoppingName.numberOfLines = 0;
             shoppingName.lineBreakMode = UILineBreakModeWordWrap;
@@ -455,7 +455,7 @@
             [Cell.contentView addSubview:shoppingName];
 
         }else{
-        UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, ScreenWidth-105, 45)];
+        UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, 15, ScreenWidth-120, 45)];
 		shoppingName.backgroundColor = [UIColor clearColor];
 		shoppingName.numberOfLines = 0;
 		shoppingName.lineBreakMode = UILineBreakModeWordWrap;

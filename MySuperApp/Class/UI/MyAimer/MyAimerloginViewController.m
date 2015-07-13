@@ -134,6 +134,9 @@
             NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
             [TalkingData trackEvent:@"5010" label:@"待付款" parameters:dic1];
             
+            [DplusMobClick track:@"待付款" property:dic1];
+
+            
             OrderViewController *tempOrder = [[OrderViewController alloc] initWithNibName:@"OrderViewController" bundle:nil];
             tempOrder.ishowHeadView = NO;
             tempOrder.howEnter = 4;
@@ -145,6 +148,9 @@
             NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
             [TalkingData trackEvent:@"5010" label:@"待处理" parameters:dic1];
             
+            [DplusMobClick track:@"待处理" property:dic1];
+
+            
             OrderViewController *tempOrder = [[OrderViewController alloc] initWithNibName:@"OrderViewController" bundle:nil];
             tempOrder.ishowHeadView = NO;
             tempOrder.howEnter = 2;
@@ -155,6 +161,9 @@
         {
             NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
             [TalkingData trackEvent:@"5010" label:@"待评价" parameters:dic1];
+            
+            [DplusMobClick track:@"待评价" property:dic1];
+
             
             OrderViewController *tempOrder = [[OrderViewController alloc] initWithNibName:@"OrderViewController" bundle:nil];
             tempOrder.howEnter = 3;
@@ -171,6 +180,11 @@
 #pragma mark -- 打电话
 - (IBAction)makeCall:(id)sender//拨打电话
 {
+    
+    
+    NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
+    [DplusMobClick track:@"拨打电话" property:dic1];
+    
     NSURL *phoneNumberURL = [NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", @"4000602008"]];
     [[UIApplication sharedApplication] openURL:phoneNumberURL];
 }
@@ -198,7 +212,7 @@
                 myAimerInfo = [[MyAimerParser alloc] parsemyAimerInfo:amodel];
                 
                 [[NSUserDefaults standardUserDefaults]setObject:[NSString stringWithFormat:@"%@",[[myAimerInfo userinfo] shopcartcount]] forKey:@"totalNUM"];
-                [UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
+                //[UIApplication sharedApplication].applicationIconBadgeNumber=[[[NSUserDefaults standardUserDefaults]objectForKey:@"totalNUM"]intValue];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TotleNumber" object:nil];
                 
                 //lee999 设置气泡
@@ -215,6 +229,9 @@
                 
                 NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
                 [TalkingData trackEvent:@"5010" label:@"我的爱慕" parameters:dic1];
+                
+                [DplusMobClick track:@"我的爱慕" property:dic1];
+
                 
                 [_tableList reloadData];
             }
@@ -240,7 +257,7 @@
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"usersession"];
                 
                 //退出登录，修改icon上的气泡数字
-                [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+                //[UIApplication sharedApplication].applicationIconBadgeNumber = 0;
                 
                 
                 //lee999 设置气泡  退出登录  清空气泡
@@ -661,6 +678,9 @@
         {
             //积分优惠
             [self jifenYouHui];
+            
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
+            [DplusMobClick track:@"我的优惠" property:dic1];
         }
             break;
         case 1:
@@ -671,6 +691,10 @@
             ctrl.isAimer = YES;
             ctrl.clType = EV6Card;
             [self.navigationController pushViewController:ctrl animated:YES];
+            
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
+            [DplusMobClick track:@"会员卡" property:dic1];
+            
             return;
             
             /*
@@ -683,20 +707,27 @@
             break;
         case 2:
         {
+            MyFavAll20ViewController *favvc = [[MyFavAll20ViewController alloc] init];
+            [self.navigationController pushViewController:favvc animated:YES];
+         
             //我的收藏
             NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
             [TalkingData trackEvent:@"5010" label:@"收藏" parameters:dic1];
             
-            MyFavAll20ViewController *favvc = [[MyFavAll20ViewController alloc] init];
-            [self.navigationController pushViewController:favvc animated:YES];
+            [DplusMobClick track:@"我的收藏" property:dic1];
+            
         }
             break;
         case 3:
         {
+ 
             //地址列表
             AddressViewController *tempAddress = [[AddressViewController alloc] initWithNibName:@"AddressViewController" bundle:nil];
             tempAddress.isCar = NO;
             [self.navigationController pushViewController:tempAddress animated:YES];
+            
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
+            [DplusMobClick track:@"地址列表" property:dic1];
         }
             break;
         case 4:
@@ -704,6 +735,9 @@
             //服务中心
             AMServerCenterViewController *tempService = [[AMServerCenterViewController alloc] initWithNibName:@"AMServerCenterViewController" bundle:nil];
             [self.navigationController pushViewController:tempService animated:YES];
+            
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
+            [DplusMobClick track:@"服务中心" property:dic1];
         }
             break;
         case 5:
@@ -711,6 +745,9 @@
             //品牌馆
             BrandListViewController *barnvc = [[BrandListViewController alloc] init];
             [self.navigationController pushViewController:barnvc animated:YES];
+            
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
+            [DplusMobClick track:@"品牌馆" property:dic1];
             
         }
             break;
@@ -727,6 +764,11 @@
                 vc1.strselectStr = myAimerInfo.userinfo.is_wardrobe;
                 [self.navigationController pushViewController:vc1 animated:YES];
             }
+            
+            
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
+            [DplusMobClick track:@"私人衣橱" property:dic1];
+            
         }
             break;
         case 7:
@@ -737,6 +779,10 @@
             webView.strURL = @"http://xiaoqu.qq.com/mobile/barindex.html?_bid=128&_wv=1027&bid=51413";
             webView.strTitle = @"微社区";
             [self.navigationController pushViewController:webView animated:YES];
+            
+            
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
+            [DplusMobClick track:@"微社区" property:dic1];
             
         }
             break;
@@ -763,6 +809,10 @@
             tempOrder.bandgeNum2 = [NSString stringWithFormat:@"%d",noaccess];
             //end
             [self.navigationController pushViewController:tempOrder animated:YES];
+            
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
+            [DplusMobClick track:@"全部订单" property:dic1];
+
         }
             break;
         case 4:
@@ -770,6 +820,10 @@
             //@"修改密码";
             ChangePwdViewController *updatePwdVC = [[ChangePwdViewController alloc] initWithNibName:@"ChangePwdViewController" bundle:nil];
             [self.navigationController pushViewController:updatePwdVC animated:YES];
+            
+            
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
+            [DplusMobClick track:@"修改密码" property:dic1];
         }
             break;
         case 5:
@@ -781,6 +835,7 @@
                 
                 BindPhoneViewController *tempBindPhone = [[BindPhoneViewController alloc] initWithNibName:@"BindPhoneViewController" bundle:nil];
                 [self.navigationController  pushViewController:tempBindPhone animated:YES];
+                
             }else{
             
                 //已绑定手机
@@ -794,6 +849,9 @@
                 tempBindPhone.strLab = [NSString stringWithFormat:@"已绑定：  %@",strphone];
                 [self.navigationController  pushViewController:tempBindPhone animated:YES];
             }
+            
+            NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
+            [DplusMobClick track:@"绑定手机" property:dic1];
         }
             break;
         case 6:
@@ -835,6 +893,10 @@
     
     NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:myAimerInfo.userinfo.username, @"UserName",nil];
     [TalkingData trackEvent:@"5010" label:@"积分优惠" parameters:dic1];
+    
+    
+    [DplusMobClick track:@"积分优惠" property:dic1];
+
     
     BonusTableViewController *ctrl = [[BonusTableViewController alloc] init];
     ctrl.isAimer = YES;

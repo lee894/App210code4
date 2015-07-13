@@ -130,6 +130,8 @@
     NSDictionary *dic2 = [NSDictionary dictionaryWithObjectsAndKeys:self.userName, @"UserName",self.orderid, @"CoId",str,@"Reason",self.payWay,@"Payment",nil];
     [TalkingData trackEvent:@"5011" label:@"取消订单" parameters:dic2];
     
+    [DplusMobClick track:@"取消订单" property:dic2];
+    
     NSLog(@"退款原因：--%@",str);
     
     [mainSev getCancelorder:self.orderid andReason:@""];
@@ -176,25 +178,5 @@
     [self popBackAnimate:nil];
 }
 
-
-#pragma mark -- 屏幕旋转
-//iOS 5
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-	return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
-}
-//iOS 6
-- (BOOL)shouldAutorotate
-{
-	return NO;
-}
-- (NSUInteger)supportedInterfaceOrientations
-{
-	return UIInterfaceOrientationMaskPortrait;
-}
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-	return UIInterfaceOrientationPortrait;
-}
 
 @end

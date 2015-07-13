@@ -132,6 +132,9 @@
     
     NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:textFieldUser.text, @"UserName",nil];
     [TalkingData trackEvent:@"5009" label:@"注册" parameters:dic1];
+    
+    
+    [DplusMobClick track:@"注册" property:dic1];
 }
 
 - (void)textOfTextFieldDidChange:(NSNotification *)notification{

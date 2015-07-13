@@ -150,6 +150,7 @@
                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
             </tableViewCellContentView>
             <connections>
+                <outlet property="V6cardlabelTitle" destination="3" id="ULW-GK-Tuq"/>
                 <outlet property="btnCard" destination="28" id="29"/>
                 <outlet property="btnExchange" destination="9" id="27"/>
                 <outlet property="btnExchangeRecord" destination="16" id="26"/>

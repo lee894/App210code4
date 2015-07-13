@@ -43,7 +43,7 @@
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-	[UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+	//[UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[NSUserDefaults standardUserDefaults]setObject:@"0" forKey:@"totalNUM"];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TotleNumber" object:nil];
     

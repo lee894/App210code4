@@ -795,6 +795,8 @@
             buynowV.layer.borderColor = [[UIColor colorWithHexString:@"e2e2e2"] CGColor];
             [sortV addSubview:buynowV];
             
+            
+            
             UILabel *namelab = [[UILabel alloc] initWithFrame:CGRectMake(0, imgH+5, pW, 40)];
             [namelab setNumberOfLines:2];
             [namelab setTextAlignment:NSTextAlignmentLeft];
@@ -808,7 +810,7 @@
             [sortV addSubview:namelab];
             
             
-            UIFont *font = [UIFont systemFontOfSize:LabMidSize];
+            UIFont *font = [UIFont systemFontOfSize:LablitileSmallSize];
             CGSize pricelabSize ;
             if (isRecommend) {
                 pricelabSize = [[NSString stringWithFormat:@"￥%.2f",[[itemdic objectForKey:@"price" isDictionary:nil] floatValue]] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
@@ -824,7 +826,7 @@
             }else{
                 pricelab.text = [NSString stringWithFormat:@"￥%.2f",[item.price.value floatValue]];
             }
-            pricelab.font = [UIFont systemFontOfSize:LabMidSize];
+            pricelab.font = [UIFont systemFontOfSize:LablitileSmallSize];
             [pricelab setTextColor:[UIColor colorWithHexString:@"#C70000"]];
             [sortV addSubview:pricelab];
             
@@ -844,7 +846,7 @@
             }else{
                 pricelab2.text = [NSString stringWithFormat:@"￥%.2f",[item.price1.value floatValue]];
             }
-            pricelab2.font = [UIFont systemFontOfSize:LabMidSize];
+            pricelab2.font = [UIFont systemFontOfSize:LablitileSmallSize];
             [pricelab2 setTextColor:[UIColor colorWithHexString:@"#888888"]];
             [sortV addSubview:pricelab2];
             
@@ -939,10 +941,9 @@
 //搜索
 -(void)gotoSearchViewC{
     
-//#warning ----test lee999   
-//    
-//    //    ImproveInformationViewController *iivc = [[ImproveInformationViewController alloc] init];
-//    ModifyInformationViewController * iivc = [[ModifyInformationViewController alloc] init];
+//#warning ----test lee999
+//        ImproveInformationViewController *iivc = [[ImproveInformationViewController alloc] init];
+////    ModifyInformationViewController * iivc = [[ModifyInformationViewController alloc] init];
 //    [self.navigationController pushViewController:iivc animated:YES];
 //    
 //    return;

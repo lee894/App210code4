@@ -57,8 +57,9 @@
     
     UIImageView * statureImageView2 = [[UIImageView alloc] init];//WithImage:[UIImage imageNamed:@"list_input.png"]
     //lee给view设置为圆角，不再使用图片了。 -140512
-    [SingletonState setViewRadioSider:statureImageView2];
-    statureImageView2.frame = CGRectMake(110, 41, 200, 40);
+    [statureImageView2 setBackgroundColor:[UIColor whiteColor]];
+//    [SingletonState setViewRadioSider:statureImageView2];
+    statureImageView2.frame = CGRectMake(105, 41, 195, 40);
     [self addSubview:statureImageView2];
     
     _nameLabel = [[UITextField alloc] initWithFrame:CGRectMake(125, 41, 150, 40)];
@@ -77,7 +78,7 @@
     UIButton * boyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     boyBtn.frame = CGRectMake(115, 100, 22, 22);
     boyBtn.tag = 21;
-    [boyBtn setImage:[UIImage imageNamed:@"radio_btn_checked.png"] forState:UIControlStateNormal];
+    [boyBtn setImage:[UIImage imageNamed:@"choice_checked.png"] forState:UIControlStateNormal];
     [boyBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:boyBtn];
     
@@ -90,7 +91,7 @@
     UIButton * girlBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     girlBtn.frame = CGRectMake(214, 100, 22, 22);
     girlBtn.tag = 22;
-    [girlBtn setImage:[UIImage imageNamed:@"radio_btn_unchecked.png"] forState:UIControlStateNormal];
+    [girlBtn setImage:[UIImage imageNamed:@"choice_unchecked.png"] forState:UIControlStateNormal];
     [girlBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:girlBtn];
     
@@ -108,8 +109,9 @@
     
     UIImageView * statureImageView1 = [[UIImageView alloc] init];//WithImage:[UIImage imageNamed:@"list_input.png"]
     //lee给view设置为圆角，不再使用图片了。 -140512
-    [SingletonState setViewRadioSider:statureImageView1];
-    statureImageView1.frame = CGRectMake(110, 141, 200, 40);
+//    [SingletonState setViewRadioSider:statureImageView1];
+    [statureImageView1 setBackgroundColor:[UIColor whiteColor]];
+    statureImageView1.frame = CGRectMake(105, 141, 195, 40);
     [self addSubview:statureImageView1];
     
     _birthdayLabelBtn = [[UIButton alloc] initWithFrame:CGRectMake(125, 141, 150, 40)];
@@ -129,8 +131,9 @@
     
     UIImageView * statureImageView = [[UIImageView alloc] init];//WithImage:[UIImage imageNamed:@"list_input.png"]
     //lee给view设置为圆角，不再使用图片了。 -140512
-    [SingletonState setViewRadioSider:statureImageView];
-    statureImageView.frame = CGRectMake(110, 190, 200, 40);
+//    [SingletonState setViewRadioSider:statureImageView];
+    statureImageView.frame = CGRectMake(105, 190, 170, 40);
+    [statureImageView setBackgroundColor:[UIColor whiteColor]];
     [self addSubview:statureImageView];
     
     _statureTfield = [[UITextField alloc] initWithFrame:CGRectMake(115, 190, 190, 40)];
@@ -191,13 +194,13 @@
     UIButton * btn = (UIButton *)sender;
     if (btn.tag == 21) {
         UIButton * girlBtn = (UIButton *)[self viewWithTag:22];
-        [btn setImage:[UIImage imageNamed:@"radio_btn_checked.png"] forState:UIControlStateNormal];
-        [girlBtn setImage:[UIImage imageNamed:@"radio_btn_unchecked.png"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"choice_checked.png"] forState:UIControlStateNormal];
+        [girlBtn setImage:[UIImage imageNamed:@"choice_unchecked.png"] forState:UIControlStateNormal];
         self.gender = @"m";
     } else if (btn.tag == 22) {
         UIButton * boyBtn = (UIButton *)[self viewWithTag:21];
-        [btn setImage:[UIImage imageNamed:@"radio_btn_checked.png"] forState:UIControlStateNormal];
-        [boyBtn setImage:[UIImage imageNamed:@"radio_btn_unchecked.png"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"choice_checked.png"] forState:UIControlStateNormal];
+        [boyBtn setImage:[UIImage imageNamed:@"choice_unchecked.png"] forState:UIControlStateNormal];
         self.gender = @"f";
     }else {
         

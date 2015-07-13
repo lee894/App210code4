@@ -35,6 +35,9 @@
     
     self.title = @"门店会员激活";
     
+
+    [DplusMobClick track:@"门店会员激活"];
+
     
     mainSer = [[MainpageServ alloc] init];
     mainSer.delegate = self;

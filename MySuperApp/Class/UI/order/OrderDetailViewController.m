@@ -451,6 +451,10 @@
                 
                 NSDictionary *dic1  = [NSDictionary dictionaryWithObjectsAndKeys:orderDetail.orderdetailReceiveinfo.name, @"UserName",self.orderID, @"CoId",orderDetail.orderdetailInfo.price, @"Coprice",orderDetail.orderdetailInfo.payway, @"Payment",[NSNumber numberWithInteger:[orderDetail.itemList count] + [orderDetail.itemSuit count]], @"Number",nil];
                 [TalkingData trackEvent:@"5011" label:@"订单详情" parameters:dic1];
+                
+                
+                [DplusMobClick track:@"订单详情" property:dic1];
+                
 
                 //lee999 创建套装cell
                 [self createSuitlistcells];
@@ -837,7 +841,13 @@
             if (indexPath.row != 0) {
                 
                 UITableViewCell *messageCell =[[[NSBundle mainBundle] loadNibNamed:@"MessageCell" owner:self options:nil] lastObject];
+                
                 textViewLeaveWords.text = orderDetail.orderdetailInfo.remarskmsg;
+                
+                if ( [orderDetail.orderdetailInfo.remarskmsg description].length < 2) {
+                    textViewLeaveWords.text = @"无";
+                }
+                
                 messageCell.selectionStyle = UITableViewCellSelectionStyleNone;
                 return messageCell;
             }else {

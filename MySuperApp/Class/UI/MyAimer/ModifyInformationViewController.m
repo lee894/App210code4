@@ -545,13 +545,13 @@
     UIButton * btn = (UIButton *)sender;
     if (btn.tag == 21) {
         UIButton * gentlemanBtn2 = (UIButton *)[self.view viewWithTag:22];
-        [btn setImage:[UIImage imageNamed:@"radio_btn_checked.png"] forState:UIControlStateNormal];
-        [gentlemanBtn2 setImage:[UIImage imageNamed:@"radio_btn_unchecked.png"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"choice_checked.png"] forState:UIControlStateNormal];
+        [gentlemanBtn2 setImage:[UIImage imageNamed:@"choice_unchecked.png"] forState:UIControlStateNormal];
         gender = @"f";
     } else if (btn.tag == 22) {
         UIButton * ladyBtn2 = (UIButton *)[self.view viewWithTag:21];
-        [btn setImage:[UIImage imageNamed:@"radio_btn_checked.png"] forState:UIControlStateNormal];
-        [ladyBtn2 setImage:[UIImage imageNamed:@"radio_btn_unchecked.png"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"choice_checked.png"] forState:UIControlStateNormal];
+        [ladyBtn2 setImage:[UIImage imageNamed:@"choice_unchecked.png"] forState:UIControlStateNormal];
         gender = @"m";
     } else if (btn.tag >= 23 && btn.tag <= 27) {
         //  月收入  职业  内衣尺码  底裤尺码  成衣尺码

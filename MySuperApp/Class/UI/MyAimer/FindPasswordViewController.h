@@ -11,6 +11,8 @@
 @interface FindPasswordViewController : LBaseViewController <UITextFieldDelegate,ServiceDelegate>
 {
     
+    IBOutlet UIScrollView *myallScrollV;
+    
     MainpageServ *mainSer;
     IBOutlet UITextField *textFieldCode;//验证码
     IBOutlet UITextField *textFieldNew;//新密码

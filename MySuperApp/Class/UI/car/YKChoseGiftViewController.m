@@ -448,12 +448,14 @@
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 200, 35)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(150, 0, 220, 44)];
     titleLabel.textAlignment = UITextAlignmentCenter;
 
 	NSString *pickerText = @"";
 	NSString *url = @"";
 	if (tagnumber > ChimaNum) {
+        
+        //选择 尺码
         
         NSInteger section = (tagnumber - ChimaNum) / 100 - 1;
         NSInteger index = (tagnumber - ChimaNum) % 100;
@@ -487,9 +489,13 @@
      if (tagnumber > ChimaNum) {
          
      }else if (tagnumber < ChimaNum && tagnumber > ColorNum) {
+         
+         //选择颜色
+         titleLabel.textAlignment = UITextAlignmentLeft;
+
           UrlImageView* shoppingImg = [[UrlImageView alloc] init];
           [shoppingImg setImageFromUrl:YES withUrl:url];
-          shoppingImg.frame = CGRectMake(160, 5, 30, 30);
+          shoppingImg.frame = CGRectMake(130, 5, 50, 44);
           [titleLabel addSubview:shoppingImg];
      }
    return titleLabel; 

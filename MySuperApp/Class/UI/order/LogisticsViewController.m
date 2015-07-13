@@ -97,6 +97,12 @@
                 checkDetail = modelCheck.details;
                 labelDelivery.text = modelCheck.delivery_type;//快递公司名字
 
+                
+                [DplusMobClick track:@"查看物流" property:@{@"订单号": self.expressid,
+                                                        @"快递公司":self.delivery_type}];
+
+                
+                
                 if (!checkDetail.details) {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"暂无此物流" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:nil, nil];
                     [alert show];

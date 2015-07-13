@@ -41,17 +41,13 @@
     mainSer = [[MainpageServ alloc] init];
     mainSer.delegate = self;
     
+    [myallScrollV setContentSize:CGSizeMake(ScreenWidth, 650)];
+    
     
     textFieldCode.clearButtonMode = UITextFieldViewModeWhileEditing;
     textFieldNew.clearButtonMode = UITextFieldViewModeWhileEditing;
     textFieldComfirmNew.clearButtonMode = UITextFieldViewModeWhileEditing;
 
-    
-    //创建右边按钮  lee999小莹让去掉关闭按钮
-//    [self createRightBtn];
-//    [self.navbtnRight setTitle:@"关闭" forState:UIControlStateNormal];
-//    [self.navbtnRight setTitle:@"关闭" forState:UIControlStateHighlighted];
-//    [self.navbtnRight setFrame:CGRectMake(242, 7, 66, 32)];
     
     labelTitle.text = topic;
     labelPhone.text = phoneNum;
@@ -59,9 +55,6 @@
     count = 120;
     timerCode = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(countDown:) userInfo:nil repeats:YES];
     
-    if (isIOS7up) {
-        [myallView setFrame:CGRectMake(0, new20ViewY, 320, self.view.frame.size.height-new20ViewY)];
-    }
 }
 
 -(void)rightButAction{
@@ -172,7 +165,7 @@
 {
     if (textField == textFieldNew || textField == textFieldComfirmNew) {
         [UIView animateWithDuration:0.3 animations:^{
-            [self.view setFrame:CGRectMake(0, -110, ScreenWidth, NowViewsHight)];
+//            [self.view setFrame:CGRectMake(0, -110, ScreenWidth, NowViewsHight)];
         }];
     }
 }
@@ -180,7 +173,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     [UIView animateWithDuration:0.3 animations:^{
-        [self.view setFrame:CGRectMake(0, 0, ScreenWidth, NowViewsHight)];
+//        [self.view setFrame:CGRectMake(0, 0, ScreenWidth, NowViewsHight)];
     }];
 }
 

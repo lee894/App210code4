@@ -10,6 +10,9 @@
 #import "BaseCell.h"
 @interface BonusCardCell : BaseCell
 
+@property (nonatomic, retain) IBOutlet UILabel *V6cardlabelTitle;
+
+
 @property (nonatomic, retain) IBOutlet UILabel *labelTitle;
 @property (nonatomic, retain) IBOutlet UILabel *labelId;
 @property (nonatomic, retain) IBOutlet UILabel *labelBalance;
