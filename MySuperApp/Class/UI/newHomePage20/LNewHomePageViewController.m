@@ -811,32 +811,32 @@
             UIFont *font = [UIFont systemFontOfSize:LabMidSize];
             CGSize pricelabSize ;
             if (isRecommend) {
-                pricelabSize = [[NSString stringWithFormat:@"￥%@",[itemdic objectForKey:@"price" isDictionary:nil]] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
+                pricelabSize = [[NSString stringWithFormat:@"￥%.2f",[[itemdic objectForKey:@"price" isDictionary:nil] floatValue]] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
             }else{
-                pricelabSize = [[NSString stringWithFormat:@"￥%@",item.price.value] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
+                pricelabSize = [[NSString stringWithFormat:@"￥%.2f",[item.price.value floatValue]] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 30)];
             }
         
             UILabel *pricelab = [[UILabel alloc] initWithFrame:CGRectMake(0, imgH+45, pricelabSize.width, 26)];
             [pricelab setNumberOfLines:1];
             [pricelab setTextAlignment:NSTextAlignmentLeft];
             if (isRecommend) {
-                pricelab.text = [NSString stringWithFormat:@"￥%@",[itemdic objectForKey:@"price" isDictionary:nil]];
+                pricelab.text = [NSString stringWithFormat:@"￥%.2f",[[itemdic objectForKey:@"price" isDictionary:nil] floatValue]];
             }else{
-                pricelab.text = [NSString stringWithFormat:@"￥%@",item.price.value];
+                pricelab.text = [NSString stringWithFormat:@"￥%.2f",[item.price.value floatValue]];
             }
             pricelab.font = [UIFont systemFontOfSize:LabMidSize];
             [pricelab setTextColor:[UIColor colorWithHexString:@"#C70000"]];
             [sortV addSubview:pricelab];
             
-           CGSize pricelab2Size  = [[NSString stringWithFormat:@"￥%@",[itemdic objectForKey:@"mktp" isDictionary:nil]] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 15)];
+           CGSize pricelab2Size  = [[NSString stringWithFormat:@"￥%.2f",[[itemdic objectForKey:@"mktp" isDictionary:nil] floatValue]] sizeWithFont:font constrainedToSize:CGSizeMake(MAXFLOAT, 15)];
 
             YKStrikePriceLabel *pricelab2 = [[YKStrikePriceLabel alloc] initWithFrame:CGRectMake(pW- pricelab2Size.width-10, imgH+45, pricelab2Size.width, 26)];
             [pricelab2 setNumberOfLines:1];
             [pricelab2 setTextAlignment:NSTextAlignmentRight];
             if (isRecommend) {
-                pricelab2.text = [NSString stringWithFormat:@"￥%@",[itemdic objectForKey:@"mktp" isDictionary:nil]];
+                pricelab2.text = [NSString stringWithFormat:@"￥%.2f",[[itemdic objectForKey:@"mktp" isDictionary:nil] floatValue]];
             }else{
-                pricelab2.text = [NSString stringWithFormat:@"￥%@",item.price1.value];
+                pricelab2.text = [NSString stringWithFormat:@"￥%.2f",[item.price1.value floatValue]];
             }
             pricelab2.font = [UIFont systemFontOfSize:LabMidSize];
             [pricelab2 setTextColor:[UIColor colorWithHexString:@"#888888"]];
