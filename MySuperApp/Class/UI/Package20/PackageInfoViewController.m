@@ -66,6 +66,9 @@
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 
     
+    
+    
+    
     isAddtoCar = NO;
     
     currentColor = 0;
@@ -291,6 +294,9 @@
     [vGoods removeFromSuperview];
     vGoods = nil;
 }
+
+
+
 
 -(void)selectGoods:(UIButton*)sender
 {
@@ -851,10 +857,18 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     UIView* v = [[UIView alloc] init];  
     UITableViewCell* cell = [[UITableViewCell alloc] init];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //    cell.backgroundColor = [UIColor clearColor];
-    NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods.count;
+    
+    //NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups firstObject]).goods.count;
+
+    NSInteger totalnum = ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:[indexPath row]]).goods.count;
+    
+    
     CGFloat height = 0;
     UIView* vGroup = nil;
     if (_pInfo.packageinfo.groups.count > 1) {
@@ -910,16 +924,16 @@
     if (((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).isOpen) {
         for (NSInteger i = 0; i < ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count; ++i) {
             PackageGoodsInfo* pgi = [((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods objectAtIndex:i];
-            UIView* vUnit = [[UIView alloc] initWithFrame:CGRectMake(15 + (i % 2) * (lee1fitAllScreen(140) + 15), (i / 2) * (lee1fitAllScreen((180 + 90))), lee1fitAllScreen(140), lee1fitAllScreen((180 + 90)))];
+            UIView* vUnit = [[UIView alloc] initWithFrame:
+                             CGRectMake(15 + (i % 2) * (lee1fitAllScreen(140) + 15),
+                                        (i / 2) * (lee1fitAllScreen((180 + 90))),
+                                        lee1fitAllScreen(140),
+                                        lee1fitAllScreen((180 + 90)))];
             UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
             [uiv setImageWithURL:[NSURL URLWithString:pgi.image_url] placeholderImage:nil];
             [vUnit addSubview:uiv];
             [vUnit setTag:indexPath.row * 10000 + i];
-            
-//            UITapGestureRecognizer*tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectGoods:)];
-//            [vUnit addGestureRecognizer:tapGesture];
-            
-            
+
             UILabel* lblName = [[UILabel alloc] init];
             [lblName setNumberOfLines:2];
             [lblName setLineBreakMode:NSLineBreakByTruncatingTail];
@@ -946,13 +960,17 @@
             [lblPrice setFrame:CGRectMake(lblName.frame.origin.x, lblName.frame.size.height + lblName.frame.origin.y + 10 - (rcPrice.size.height - lblPrice.font.pointSize), rcPrice.size.width, rcPrice.size.height)];
             [vUnit addSubview:lblPrice];
             
+
             UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btn setFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
+            [btn setFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen((180 + 90 -16)))];
             [btn addTarget:self action:@selector(selectGoods:) forControlEvents:UIControlEventTouchUpInside];
             [btn setTag:indexPath.row * 10000 + i];
             [vUnit addSubview:btn];
+            vUnit.userInteractionEnabled = YES;
+            
             
             [v addSubview:vUnit];
+            
             
             if (i % 2 == 1) {
                 UILabel* lblSep = [[UILabel alloc] initWithFrame:CGRectMake(15, vUnit.frame.origin.y + vUnit.frame.size.height, [UIScreen mainScreen].bounds.size.width - 30, 0.5)];
@@ -960,7 +978,8 @@
                 [v addSubview:lblSep];
             }
         }
-        [v setFrame:CGRectMake(0, height, SCREEN_WIDTH, lee1fitAllScreen((285-15)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2)))];
+        [v setFrame:CGRectMake(0, height, SCREEN_WIDTH, lee1fitAllScreen((285-15)) * (totalnum % 2 > 0 ? (totalnum / 2 + 1) : (totalnum / 2)))];
+        v.userInteractionEnabled = YES;
     }
     [cell setFrame:CGRectMake(0, 0, v.frame.size.width, v.frame.size.height + height)];
     [cell addSubview:v];
@@ -977,8 +996,6 @@
     if (((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).isOpen) {
         NSInteger total = ((PackageGroupInfo*)[_pInfo.packageinfo.groups objectAtIndex:indexPath.row isArray:nil]).goods.count;
         height += lee1fitAllScreen((270)) * (total % 2 > 0 ? (total / 2 + 1) : (total / 2));
-        
-        height = 3000;
     }
     return height;
 }
