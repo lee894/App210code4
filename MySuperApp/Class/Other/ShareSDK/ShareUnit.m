@@ -12,7 +12,7 @@
 #import "SingletonState.h"
 #import "UrlImageView.h"
 #import "WeixinManager.h"
-
+#import <TencentOpenAPI/TencentOAuth.h>
 
 @implementation ShareUnit
 
@@ -43,17 +43,28 @@
                                                                         
                                                                     }];
     
-    NSArray *shareList = [ShareSDK customShareListWithType:
+    
+    
+    //NSMutableArray *shareList = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    NSArray* shareList = [ShareSDK customShareListWithType:
                           SHARE_TYPE_NUMBER(ShareTypeSinaWeibo),
-                          SHARE_TYPE_NUMBER(ShareTypeQQSpace),
-                          SHARE_TYPE_NUMBER(ShareTypeQQ),
-                          SHARE_TYPE_NUMBER(ShareTypeWeixiSession),
-                          myItem,
+                          [TencentOAuth iphoneQQSupportSSOLogin]?SHARE_TYPE_NUMBER(ShareTypeQQSpace):@"",
+                          [TencentOAuth iphoneQQSupportSSOLogin]?SHARE_TYPE_NUMBER(ShareTypeQQ):@"",
+                          [WXApi isWXAppInstalled]?SHARE_TYPE_NUMBER(ShareTypeWeixiSession):@"",
+                          [WXApi isWXAppInstalled]?myItem:@"",
                           SHARE_TYPE_NUMBER(ShareTypeDouBan),
                           SHARE_TYPE_NUMBER(ShareTypeRenren),
                           nil];
     
-
+//    //判断qq是否安装
+//    if (![TencentOAuth iphoneQQSupportSSOLogin]) {
+//        
+//    }
+//    //判断微信是否安装
+//    if (![WXApi isWXAppInstalled]) {
+//        
+//    }
     
     //构造分享内容
     
