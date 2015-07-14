@@ -391,7 +391,7 @@
     [endCell2 setFrame:oldframe];
     
     CGRect oldframe2 = CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height);
-    oldframe2.size.height = oldframe2.size.height - endCell2.frame.size.height;
+    oldframe2.size.height = oldframe2.size.height - endCell2.frame.size.height + 3;
     [tableList setFrame:oldframe2];
     
     if ([orderDetail.orderdetailInfo.orer_status isEqualToString:@"立即支付"]) {
@@ -789,6 +789,15 @@
                     productCell.buttonAccess.tag = indexPath.row+5000;
 //                    [productCell.buttonAccess addTarget:self action:@selector(evaluateProduct:) forControlEvents:UIControlEventTouchUpInside];//我要评价
                     productCell.buttonAccess.hidden = YES;
+                    
+                    //lee999 150713 增加商品和套装之间的分割线
+                    if ([indexPath row] == orderDetail.itemList.count) {
+                        
+                        UIImageView *buttom = [[UIImageView alloc] initWithFrame:CGRectMake(0, 160-8, ScreenWidth,8)];
+                        [buttom setBackgroundColor:[UIColor colorWithHexString:splineBGC]];
+                        [productCell.contentView addSubview:buttom];
+                    }
+                    
 
                 }
             
@@ -1094,7 +1103,7 @@
         desc.font = [UIFont systemFontOfSize:LabSmallSize];
         desc.textColor = UIColorFromRGB(0x181818);
         CGRect rc = [desc.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : desc.font} context:nil];
-        [desc setFrame:CGRectMake(xOffset, yOffset, rc.size.width, rc.size.height)];
+        [desc setFrame:CGRectMake(xOffset, yOffset, 150, rc.size.height)];
         [viewSuitlistCell3.contentView addSubview:desc];
         
         desc = [[UILabel alloc] init];
@@ -1103,7 +1112,7 @@
         desc.font = [UIFont systemFontOfSize:LabSmallSize];
         desc.textColor = UIColorFromRGB(0x666666);
         rc = [desc.text boundingRectWithSize:CGSizeMake(ScreenWidth, MAXFLOAT) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : desc.font} context:nil];
-        [desc setFrame:CGRectMake(170 , yOffset, rc.size.width, rc.size.height)];
+        [desc setFrame:CGRectMake(170 , yOffset, 100, rc.size.height)];
         [viewSuitlistCell3.contentView addSubview:desc];
         
         if (item.packageid) {
@@ -1179,7 +1188,7 @@
             UILabel* shoppingName = [[UILabel alloc] initWithFrame:CGRectMake(110, yOffset, 190, nameHeight)];
             shoppingName.backgroundColor = [UIColor clearColor];
             shoppingName.numberOfLines = 2;
-            shoppingName.text = [NSString stringWithFormat:@"%@\n",pItem.name];
+            shoppingName.text = [NSString stringWithFormat:@"%@",pItem.name];
             shoppingName.font = [UIFont systemFontOfSize:13];
             shoppingName.textColor = [UIColor blackColor];
             [Cell.contentView addSubview:shoppingName];

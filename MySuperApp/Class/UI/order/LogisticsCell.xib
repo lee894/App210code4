@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1296</int>
-		<string key="IBDocument.SystemVersion">14D136</string>
+		<string key="IBDocument.SystemVersion">14E46</string>
 		<string key="IBDocument.InterfaceBuilderVersion">7706</string>
-		<string key="IBDocument.AppKitVersion">1347.57</string>
+		<string key="IBDocument.AppKitVersion">1348.17</string>
 		<string key="IBDocument.HIToolboxVersion">758.70</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -33,7 +33,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUITableViewCell" id="196769720">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="88795696">
@@ -134,6 +134,7 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 88}</string>
+				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="88795696"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -219,7 +220,7 @@
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="2.CustomClassName">LogisticsCell</string>
-				<string key="2.IBPersistedLastKnownCanvasPosition">{156, 262}</string>
+				<string key="2.IBPersistedLastKnownCanvasPosition">{-86, 294}</string>
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
