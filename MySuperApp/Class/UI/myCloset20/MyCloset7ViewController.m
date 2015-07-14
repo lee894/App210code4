@@ -58,8 +58,17 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     
-    [_pickview1 remove];
-    [_pickview2 remove];
+    [self removePicker];
+    
+}
+
+-(void)removePicker{
+    if (_pickview1) {
+        [_pickview1 remove];
+    }
+    if (_pickview2) {
+        [_pickview2 remove];
+    }
 }
 
 
@@ -133,6 +142,9 @@
 -(void)typeAction:(id)sender{
 
     MyButton*btn = (MyButton*)sender;
+    
+    [self removePicker];
+
     
     if (btn.tag == 1) {
         //支持自定义数组：
