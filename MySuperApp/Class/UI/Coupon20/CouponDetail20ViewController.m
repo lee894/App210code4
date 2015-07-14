@@ -114,12 +114,15 @@
     [self.view addSubview:lblTime];
     
     if (ci) {
-        lblTitle.text = ci.desc;
+        //lblTitle.text = ci.desc;
+        lblTitle.text = ci.title;
         lblTime.text = [NSString stringWithFormat:@"有效期至%@", ci.failtime];
     }
     else if (fpci)
     {
-        lblTitle.text = fpci.desc;
+       // lblTitle.text = fpci.desc;
+        lblTitle.text = fpci.name;
+
 //        lblTitle.text = [NSString stringWithFormat:@"%@共计%@次", fpci.name, fpci.total_times];
 //        lblTime.text = [NSString stringWithFormat:@"有效期至%@", [[fpci.end_time componentsSeparatedByString:@" "] firstObject]];
         

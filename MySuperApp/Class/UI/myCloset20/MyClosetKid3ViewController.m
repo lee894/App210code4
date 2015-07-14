@@ -104,12 +104,12 @@
 -(void)toobarDonBtnHaveClick:(ZHPickView *)pickView resultString:(NSString *)resultString{
 
     if (selectIndex==1) {
-        [dibtn setTitle:[NSString stringWithFormat:@"底裤尺码 (%@)",resultString] forState:UIControlStateNormal];
+        [dibtn setTitle:[NSString stringWithFormat:@"上衣尺码 (%@)",resultString] forState:UIControlStateNormal];
         str1 = resultString;
     }
     
     if (selectIndex==2) {
-        [fubtn setTitle:[NSString stringWithFormat:@"家居服尺码 (%@)",resultString] forState:UIControlStateNormal];
+        [fubtn setTitle:[NSString stringWithFormat:@"底裤尺码 (%@)",resultString] forState:UIControlStateNormal];
         str2 = resultString;
     }
 }

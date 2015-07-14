@@ -538,13 +538,13 @@
         [lblPrice setTextColor:[UIColor whiteColor]];
         [ivBg addSubview:lblPrice];
         
-        UILabel* lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(72) + 10, 22, lee1fitAllScreen(160), 12)];
+        UILabel* lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(72) + 10, 22, lee1fitAllScreen(150), 12)];
         [lblTitle setFont:[UIFont boldSystemFontOfSize:12]];
         [lblTitle setLineBreakMode:NSLineBreakByTruncatingTail];
         [lblTitle setTextColor:[UIColor colorWithHexString:@"#666666"]];
         [ivBg addSubview:lblTitle];
         
-        UILabel* lblTime = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(72) + 10, lblTitle.frame.size.height + lblTitle.frame.origin.y + 6, lee1fitAllScreen(160), 12)];
+        UILabel* lblTime = [[UILabel alloc] initWithFrame:CGRectMake(lee1fitAllScreen(72) + 10, lblTitle.frame.size.height + lblTitle.frame.origin.y + 6, lee1fitAllScreen(150), 12)];
         [lblTime setFont:[UIFont systemFontOfSize:12]];
         [lblTime setLineBreakMode:NSLineBreakByTruncatingTail];
         [lblTime setTextColor:[UIColor colorWithHexString:@"#666666"]];
@@ -1031,7 +1031,9 @@
     if (alertView.tag == 137) {
         if (buttonIndex==1) {
             [SBPublicAlert showMBProgressHUD:@"正在兑换···" andWhereView:self.view states:NO];
-            [mainSer exchangecoupon:[[self.arrCard objectAtIndex:0 isArray:nil] objectForKey:@"card_id"]];
+            
+            V6CardInfo *v6info = [self.arrCard objectAtIndex:0 isArray:nil];
+            [mainSer exchangecoupon:v6info.card_id];
         }
     }
 }
