@@ -216,7 +216,7 @@
         
     }else {
         [mainSev getSearch];
-        [SBPublicAlert showMBProgressHUD:nil andWhereView:self.view states:NO];
+        [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
     }
 }
 

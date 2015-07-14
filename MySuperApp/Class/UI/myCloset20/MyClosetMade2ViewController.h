@@ -8,6 +8,11 @@
 
 #import "LBaseViewController.h"
 
-@interface MyClosetMade2ViewController : LBaseViewController
+@interface MyClosetMade2ViewController : LBaseViewController<UIScrollViewDelegate>
+{
+    IBOutlet UIScrollView *myscrollV;
+    
+}
+
 
 @end

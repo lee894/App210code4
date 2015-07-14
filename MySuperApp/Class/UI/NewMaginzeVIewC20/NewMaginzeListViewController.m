@@ -161,6 +161,8 @@
     }else{
         [mainSev getMageinzeList20datawithTpye:self.strtitle];
     }
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
 
 }
 
@@ -190,6 +192,8 @@
     [SingletonState sharedStateInstance].productlistType = 0;
     self.params = prama;
     [mainSev getProductlist:self.params andOrder:self.orderStr andKeyword:@"" andPage:[NSString stringWithFormat:@"%d",_currentpage] andPer_page:@"10"];
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
 }
 
 

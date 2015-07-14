@@ -57,7 +57,7 @@
     mainSev = [[MainpageServ alloc] init];
     mainSev.delegate = self;
     [mainSev getMageinzeDetail20data:self.strMaginzeId];
-    
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 
     //收藏按钮
     //创建右边按钮
@@ -109,6 +109,8 @@
     if (!likebtn.selected) {
         //未中状态 添加收藏
         [mainSev getFavoriteadd:self.strMaginzeId andType:@"magazine" anduk:@""];
+        [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
         
         [DplusMobClick track:@"专辑收藏/竖版" property:@{@"专辑ID":self.strMaginzeId,@"专辑名称":self.strname}];
 
@@ -116,6 +118,8 @@
     }else{
         //选中状态 取消收藏
         [mainSev getFavoritedel:self.strMaginzeId andType:@"magazine"];
+        [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
         
         [DplusMobClick track:@"专辑取消收藏/竖版" property:@{@"专辑ID":self.strMaginzeId,@"专辑名称":self.strname}];
 

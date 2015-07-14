@@ -66,6 +66,8 @@
           [tableview_channel reloadData];
      }else{
          [mainSev getChannelcate:self.ThisChannelID];
+         [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
      }
 }
 

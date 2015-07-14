@@ -271,6 +271,8 @@
         
         //lee999
         [mainSev upmpTradno:self.orderID];
+        [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
     }
 }
 
@@ -494,6 +496,8 @@
     //lee999新增刷新界面
     if (isMakesureGetgood) {
         [mainSev getOrderdetail:self.orderID]; //刷新数据
+        [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
         isMakesureGetgood = NO;
     }
 }

@@ -68,16 +68,29 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
 
-    [_pickview1 remove];
-    [_pickview2 remove];
-    [_pickview3 remove];
+    [self removePicker];
     
 }
+
+-(void)removePicker{
+    if (_pickview1) {
+        [_pickview1 remove];
+    }
+    if (_pickview2) {
+        [_pickview2 remove];
+    }
+    if (_pickview3) {
+        [_pickview3 remove];
+    }
+}
+
 
 
 - (IBAction)typeSelectAction:(id)sender {
     UIButton *btn = (UIButton*)sender;
     btn.selected = YES;
+    
+    [self removePicker];
     
     selectIndex = btn.tag;
     

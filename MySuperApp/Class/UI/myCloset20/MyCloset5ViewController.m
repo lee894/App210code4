@@ -143,6 +143,8 @@
     }
 
     [mainSev alertChangeMyClost:selectBra andDown:selectUnderpants];
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
 }
 
 

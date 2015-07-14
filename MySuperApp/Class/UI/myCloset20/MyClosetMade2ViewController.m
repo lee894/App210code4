@@ -30,6 +30,8 @@
     [self createBackBtnWithType:0];
     [self NewHiddenTableBarwithAnimated:YES];
     
+    [myscrollV setContentSize:CGSizeMake(ScreenWidth, 620)];
+    
     // Do any additional setup after loading the view from its nib.
 }
 

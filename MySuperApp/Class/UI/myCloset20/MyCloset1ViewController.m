@@ -256,6 +256,8 @@
     }
     
     [mainSev getCloset2Data:strtype];
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+    
 }
 
 

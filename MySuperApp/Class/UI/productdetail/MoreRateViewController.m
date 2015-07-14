@@ -179,6 +179,7 @@
 //
     [mainSev getShowcomment:self.goodid andPage:PageCurr andPer_page:@"10"];
     
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];    
 }
 
 - (void)updateTableViewCount:(NSInteger)theCount

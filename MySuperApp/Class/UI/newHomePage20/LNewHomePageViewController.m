@@ -89,6 +89,7 @@
     //lee999 增加升级提示的判断。
     [mainSev getappVersion];
     
+    
     [self creatTableView];
     
     

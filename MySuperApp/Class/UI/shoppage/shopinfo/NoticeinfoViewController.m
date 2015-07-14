@@ -36,7 +36,8 @@
     mainSev = [[MainpageServ alloc] init];
     mainSev.delegate = self;
 	[mainSev getNoticelist];
-    
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
     [self NewHiddenTableBarwithAnimated:YES];
     
     makedonetable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, self.view.frame.size.height) style:UITableViewStylePlain];
