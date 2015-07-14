@@ -222,7 +222,7 @@
 - (void)getAddsuittocar:(NSString *)sku andSuitid:(NSString *)suitid;
 
 //绑定优惠券
-- (void)addCouponcard:(NSString *)card_id;
+- (void)addCouponcard:(NSString *)card_id andtype:(NSString *)atype;
 
 //积分兑换记录
 - (void)getexchangescorerecord:(NSString *)card_id;

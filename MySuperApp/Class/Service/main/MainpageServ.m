@@ -726,10 +726,12 @@
 }
 
 //绑定优惠券
-- (void)addCouponcard:(NSString *)card_id
+- (void)addCouponcard:(NSString *)card_id andtype:(NSString *)atype
 {
     [self sendPostWithURL:ADDCOUPONCARD tag:Http_addCouponcard_Tag beforeRequest:^{
         [self addParam:@"couponcard" withValue:card_id];
+        [self addParam:@"type" withValue:atype];
+
     }];
 }
 

@@ -169,6 +169,8 @@
     NSRange numRange = NSMakeRange(self.phoneNum.length-12, 11);;
     //发送验证码
     [mainSer getProveMobile:[self.phoneNum substringWithRange:numRange] andType:@"v6card"];
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
 }
 
 -(void)action:(UIButton*)sender
@@ -657,7 +659,14 @@
         self.checkOutViewCtrl.useCouponcardId = nametextfield.text;
         
         [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
-        [mainSer addCouponcard:nametextfield.text];
+    
+    NSString *strtype2 = @"";
+    if ([self.strType isEqualToString:@"f"]) {
+        strtype2 = @"freepostcard";
+    }else{
+        strtype2 = @"coupon";
+    }
+        [mainSer addCouponcard:nametextfield.text andtype:strtype2];
     
 //    }else {
 //        [SBPublicAlert showMBProgressHUD:@"请输入正确的优惠劵号码" andWhereView:self.view hiddenTime:1.];
@@ -819,6 +828,8 @@
     current = 1;
     NSString *PageCurr = [[NSNumber numberWithInteger:current] description];
     [mainSer getCouponcardList20WithPage:PageCurr andPer_page:Per_Page andType:_strType];
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
 }
 
 #pragma mark 加载
@@ -827,6 +838,8 @@
     current ++;
     NSString *PageCurr = [[NSNumber numberWithInteger:current] description];
     [mainSer getCouponcardList20WithPage:PageCurr andPer_page:Per_Page andType:_strType];
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+
 }
 
 - (void)updateTableView

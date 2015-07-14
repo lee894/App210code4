@@ -185,24 +185,24 @@
 
     return cell;
 }
-#pragma mark -- 屏幕旋转
-//iOS 5
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-	return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
-}
-//iOS 6
-- (BOOL)shouldAutorotate
-{
-	return NO;
-}
-- (NSUInteger)supportedInterfaceOrientations
-{
-	return UIInterfaceOrientationMaskPortrait;
-}
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-	return UIInterfaceOrientationPortrait;
-}
+//#pragma mark -- 屏幕旋转
+////iOS 5
+//- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+//{
+//	return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
+//}
+////iOS 6
+//- (BOOL)shouldAutorotate
+//{
+//	return NO;
+//}
+//- (NSUInteger)supportedInterfaceOrientations
+//{
+//	return UIInterfaceOrientationMaskPortrait;
+//}
+//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+//{
+//	return UIInterfaceOrientationPortrait;
+//}
 
 @end

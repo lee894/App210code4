@@ -61,7 +61,7 @@
         return;
     }
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
-    [mainSer addCouponcard:bindtextField.text];
+    [mainSer addCouponcard:bindtextField.text andtype:@"coupon"];
 }
 
 #pragma mark -- NETrequest delegate

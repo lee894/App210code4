@@ -420,7 +420,14 @@
 //    self.checkOutViewCtrl.vouId = nametextfield.text;
     
     [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
-    [mainSer addCouponcard:nametextfield.text];
+    
+    NSString *strtype2 = @"";
+    if ((self.selectType == 3)) {
+        strtype2 = @"freepostcard";
+    }else{
+        strtype2 = @"coupon";
+    }
+    [mainSer addCouponcard:nametextfield.text andtype:strtype2];
 }
 
 
@@ -505,29 +512,29 @@
     [super didReceiveMemoryWarning];
 }
 
--(void)toFreeShippingCard:(UIButton*)sender
-{
-    [selectedBtn setSelected:NO];
-    selectedBtn = sender;
-    [sender setSelected:YES];
-    if (vCouponMenu) {
-        [vCouponMenu removeFromSuperview];
-        vCouponMenu = nil;
-    }
-    _strType = @"f";
-}
-
--(void)toGiftCard:(UIButton*)sender
-{
-    [selectedBtn setSelected:NO];
-    selectedBtn = sender;
-    [sender setSelected:YES];
-    if (vCouponMenu) {
-        [vCouponMenu removeFromSuperview];
-        vCouponMenu = nil;
-    }
-    _strType = @"g";
-}
+//-(void)toFreeShippingCard:(UIButton*)sender
+//{
+//    [selectedBtn setSelected:NO];
+//    selectedBtn = sender;
+//    [sender setSelected:YES];
+//    if (vCouponMenu) {
+//        [vCouponMenu removeFromSuperview];
+//        vCouponMenu = nil;
+//    }
+//    _strType = @"f";
+//}
+//
+//-(void)toGiftCard:(UIButton*)sender
+//{
+//    [selectedBtn setSelected:NO];
+//    selectedBtn = sender;
+//    [sender setSelected:YES];
+//    if (vCouponMenu) {
+//        [vCouponMenu removeFromSuperview];
+//        vCouponMenu = nil;
+//    }
+//    _strType = @"g";
+//}
 
 -(NSArray*)viewConstraints
 {
