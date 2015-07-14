@@ -52,7 +52,7 @@
         [self addSubview:sectionLable];
        
         
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionLable.frame.origin.x + sectionLable.frame.size.width + 10, 0, 300 - (sectionLable.frame.origin.x + sectionLable.frame.size.width - 10), frame.size.height)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(sectionLable.frame.origin.x + sectionLable.frame.size.width + 10, 0, 280 - (sectionLable.frame.origin.x + sectionLable.frame.size.width - 10), frame.size.height)];
         [titleLabel setTextColor:[UIColor blackColor]];
         [titleLabel setBackgroundColor:[UIColor clearColor]];
         [titleLabel setFont:[UIFont systemFontOfSize:fontSize]];

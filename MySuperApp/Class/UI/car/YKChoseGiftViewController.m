@@ -679,7 +679,7 @@
 {
       NSDictionary *dic = [resultsArray objectAtIndex:section isArray:nil];
     BOOL states = [[dic objectForKey:@"isopen"] boolValue];
-    ButtonInSection *titleForTb = [[ButtonInSection alloc]initWithFrame:CGRectMake(0, 0, 320, 44)
+    ButtonInSection *titleForTb = [[ButtonInSection alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, 44)
             title:dic
           section:section
            opened: states

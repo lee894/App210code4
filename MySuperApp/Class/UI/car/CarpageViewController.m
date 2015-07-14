@@ -984,8 +984,21 @@
     if (btnCheckOut) {
         [btnCheckOut setSelected:YES];
     }
-    
+  
+    //lee999 150715 关于购物车 删除和结算完成的按钮修改 最后一次修改如果不行，就还原这个地方  我也无语了
     [btnCheckOut setTitle:@"" forState:UIControlStateNormal];
+//    if (!isEditing) {
+//        [btnCheckOut setTitle:[NSString stringWithFormat:@"结算(%@)", _carModel.itemNumber] forState:UIControlStateNormal];
+//    }else{
+//        [btnCheckOut setTitle:[NSString stringWithFormat:@"删除(%@)", _carModel.itemNumber] forState:UIControlStateNormal];
+//    }
+//
+////    if (isEditing) {
+////        [btnCheckOut setTitle:@"" forState:UIControlStateNormal];
+////    }else{
+////        [btnCheckOut setTitle:@"" forState:UIControlStateNormal];
+////    }
+    //end
 
     
     if(vToolbar)
