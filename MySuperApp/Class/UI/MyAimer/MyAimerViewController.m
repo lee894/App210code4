@@ -92,10 +92,16 @@
     //lee999
     if (![TencentOAuth iphoneQQSupportSSOLogin]) {
         qqloginBtn.hidden = YES;
+        qqloginLab.hidden = YES;
         
         CGRect oldF = weibologinBtn.frame;
         oldF.origin.x = 21.0;
         [weibologinBtn setFrame:oldF];
+        
+        
+        CGRect oldF2 = weibologinLab.frame;
+        oldF2.origin.x = 21.0;
+        [weibologinLab setFrame:oldF2];
     }
     
     if (isIOS7up) {
