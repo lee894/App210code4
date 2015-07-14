@@ -33,7 +33,7 @@
     IBOutlet UIButton *namebtn3;
     IBOutlet UIButton *namebtn4;
     
-    NSArray *arr_selecttype;
+    NSMutableArray *arr_selecttype;
     
 }
 @end
@@ -66,7 +66,21 @@
     mainSev = [[MainpageServ alloc] init];
     mainSev.delegate = self;
 
-    arr_selecttype = [self.strselecttype componentsSeparatedByString:@","];
+    
+    
+    [arr_selecttype addObjectsFromArray:[[SingletonState sharedStateInstance].str_wardrobe componentsSeparatedByString:@","]];
+    
+    NSLog(@"---%@",arr_selecttype);
+
+    
+    for (NSString *str in arr_selecttype) {
+        if ([str isEqualToString:@""]) {
+            [arr_selecttype removeObject:str];
+        }
+    }
+    
+    NSLog(@"====%@",arr_selecttype);
+
     
     if ([arr_selecttype count] == 0) {
         titlenameLab.text = @"您好，请选择";
@@ -303,7 +317,7 @@
             }
             
             
-            //去女士~~
+            //去女士~
             MyCloset2ViewController *clv2 = [[MyCloset2ViewController alloc] initWithNibName:@"MyCloset2ViewController" bundle:nil];
             clv2.selectType = selectTag;
             clv2.closetinfo = _closetinfo;

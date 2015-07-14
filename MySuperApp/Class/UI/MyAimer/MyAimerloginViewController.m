@@ -760,8 +760,11 @@
                 [self.navigationController pushViewController:vc1 animated:YES];
             }else{
                 
+                [SingletonState sharedStateInstance].str_wardrobe  = myAimerInfo.userinfo.is_wardrobe ;
+
+                
                 MyClosetListViewController *vc1 = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
-                vc1.strselectStr = myAimerInfo.userinfo.is_wardrobe;
+                //vc1.strselectStr = myAimerInfo.userinfo.is_wardrobe;
                 [self.navigationController pushViewController:vc1 animated:YES];
             }
             

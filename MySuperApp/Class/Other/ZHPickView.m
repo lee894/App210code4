@@ -153,6 +153,29 @@
     datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
     datePicker.datePickerMode = datePickerMode;
     datePicker.backgroundColor=[UIColor lightGrayColor];
+    
+    //lee999 新增时间显示范围
+    NSDate *mydate = [NSDate date];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = nil;
+    comps = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:mydate];
+    NSDateComponents *adcomps = [[NSDateComponents alloc] init];
+    [adcomps setYear:0];
+    [adcomps setMonth:0];
+    [adcomps setDay:+7];
+    
+    NSDate * originalDate = [NSDate date];
+    NSTimeInterval interval = 60*60*24*7;
+    NSDate * futureDate = [originalDate dateByAddingTimeInterval:interval];
+    
+    NSTimeInterval interval2 = 60*60*24*31;
+    NSDate * futureDate2 = [originalDate dateByAddingTimeInterval:interval2];
+    
+    
+    datePicker.minimumDate = futureDate;
+    datePicker.maximumDate = futureDate2;
+    
+    
     if (_defaulDate) {
         [datePicker setDate:_defaulDate];
     }

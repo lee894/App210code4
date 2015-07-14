@@ -19,6 +19,9 @@
     
 }
 
+@property(nonatomic,retain)NSString *str_wardrobe; //已选中衣橱的内容
+
+
 @property(nonatomic, assign) BOOL userHasLogin;
 //屏幕是否横向
 //@property(nonatomic, assign) BOOL isSrceenRight;

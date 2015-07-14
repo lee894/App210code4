@@ -177,6 +177,7 @@
         if (!_pickview2) {
             _pickview2=[[ZHPickView alloc] initDatePickWithDate:tempDate datePickerMode:UIDatePickerModeDate isHaveNavControler:NO];
         }
+        
         _pickview2.delegate = self;
         _pickview2.tag = btn.tag;
         [_pickview2 show];
@@ -259,8 +260,13 @@
                 
             case Http_bespeakup20_Tag:
             {
-                [MYCommentAlertView showMessage:@"恭喜您预约成功" target:nil];
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"恭喜您预约成功" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+                alert.delegate = self;
+                alert.tag = 1098;
+                [alert show];
             }
+                
             default:
                 break;
         }
@@ -269,6 +275,10 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
+    if (alertView.tag == 1098) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
     if (alertView.tag == 1099) {
         if (buttonIndex == 1) {
             
@@ -276,6 +286,8 @@
             BindPhoneViewController *tempBindPhone = [[BindPhoneViewController alloc] initWithNibName:@"BindPhoneViewController" bundle:nil];
             [self.navigationController  pushViewController:tempBindPhone animated:YES];
             
+        }else{
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }

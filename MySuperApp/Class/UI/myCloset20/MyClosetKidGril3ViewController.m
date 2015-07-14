@@ -210,6 +210,14 @@
 
 -(void)gotoClosetList{
     
+    if ([[SingletonState sharedStateInstance].str_wardrobe hasSuffix:@","]) {
+        
+        [SingletonState sharedStateInstance].str_wardrobe = [NSString stringWithFormat:@"%@%@",[SingletonState sharedStateInstance].str_wardrobe,@"3"];
+    }else{
+        [SingletonState sharedStateInstance].str_wardrobe = [NSString stringWithFormat:@"%@,%@",[SingletonState sharedStateInstance].str_wardrobe,@"3"];
+    }
+    
+    
     MyClosetListViewController *lstvc = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
     [self.navigationController pushViewController:lstvc animated:YES];
 }
