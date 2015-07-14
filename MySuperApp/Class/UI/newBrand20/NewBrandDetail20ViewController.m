@@ -271,6 +271,11 @@
 
 //产品类目
 - (IBAction)goodlistAction:(id)sender {
+    
+    if ([_detailinfo.brand_zixun.params description].length < 1) {
+        [ESToast showDelayToastWithText:@"暂无商品"];
+        return;
+    }
 
     ProductlistViewController *hotVC = [[ProductlistViewController alloc] init];
     [SingletonState sharedStateInstance].productlistType = 0;
