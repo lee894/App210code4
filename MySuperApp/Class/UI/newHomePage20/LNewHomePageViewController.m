@@ -99,6 +99,8 @@
     }
 }
 
+
+
 -(void)success{
 
     [LCommentAlertView showMessage:@"123123" target:nil];
@@ -126,6 +128,13 @@
     myTableV.scrollEnabled = YES;
     
     [self NewSHowTableBarwithAnimated:YES];
+    
+    
+    AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (app.splashView) {
+        [app.splashView removeFromSuperview];
+    }
+    
 }
 
 -(void)createNavItem{
@@ -246,8 +255,19 @@
     [[NSUserDefaults standardUserDefaults] setObject:amodel forKey:@"homepagedata"];
     //end
     
+    [SingletonState sharedStateInstance].str_wardrobe = @"";
+    
     _homeinfo = [[NewHomeParser alloc] parseNewHomeInfo:amodel];
     
+    
+    
+    if ([_homeinfo.is_wardrobe isEqualToString:@""]) {
+        [SingletonState sharedStateInstance].str_wardrobe = @"";
+    }else{
+        [SingletonState sharedStateInstance].str_wardrobe = _homeinfo.is_wardrobe;
+    }
+    
+
     
     //lee999 百分点
     
@@ -1347,14 +1367,12 @@
         
         if ([SingletonState sharedStateInstance].userHasLogin) {
             
-            if ([_homeinfo.is_wardrobe isEqualToString:@""]) {
+            if ([[SingletonState sharedStateInstance].str_wardrobe isEqualToString:@""]) {
                 
                 MyCloset1ViewController *vc1 = [[MyCloset1ViewController alloc] initWithNibName:@"MyCloset1ViewController" bundle:nil];
                 [self.navigationController pushViewController:vc1 animated:YES];
             }else{
-                
-                [SingletonState sharedStateInstance].str_wardrobe  = _homeinfo.is_wardrobe ;
-                
+                                
                 MyClosetListViewController *vc1 = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];
                 //vc1.strselectStr = _homeinfo.is_wardrobe;
                 [self.navigationController pushViewController:vc1 animated:YES];

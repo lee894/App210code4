@@ -120,7 +120,7 @@
     [cell addSubview:label1];
     
     NoticeListNotice *a;
-    a = [noticeModel.notice objectAtIndex:indexPath.section];
+    a = [noticeModel.notice objectAtIndex:indexPath.row];
     label.text = a.time;
     label1.text = a.title;
     
@@ -156,7 +156,7 @@
 - (CGFloat)tableView:(UITableView *)atableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NoticeListNotice *a = [noticeModel.notice objectAtIndex:indexPath.section];
+    NoticeListNotice *a = [noticeModel.notice objectAtIndex:indexPath.row];
     NSString *content = a.content;
     
     SHLUILabel *namelab = [[SHLUILabel alloc] initWithFrame:CGRectMake(0, 10, ScreenWidth-30, 20)];
@@ -171,7 +171,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NoticeListNotice *aasd = [noticeModel.notice objectAtIndex:indexPath.section];
+    NoticeListNotice *aasd = [noticeModel.notice objectAtIndex:indexPath.row];
     NoticeListViewController *noticeDetil = [[NoticeListViewController alloc] init];
     noticeDetil.noticeID = aasd.noticeIdentifier;
     [self.navigationController pushViewController:noticeDetil animated:YES];

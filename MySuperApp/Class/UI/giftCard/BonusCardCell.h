@@ -24,6 +24,9 @@
 @property (nonatomic, retain) IBOutlet UIButton *btnIntegralHelp;//积分说明
 @property (nonatomic, retain) IBOutlet UIButton *btnExchangeRecord;//自助兑换记录
 
+@property (nonatomic, retain) IBOutlet UILabel *labelcardState;// 积分卡的状态
+
+
 
 
 

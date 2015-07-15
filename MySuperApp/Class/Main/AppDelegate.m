@@ -477,6 +477,7 @@
     
     [self.window setRootViewController:self.viewController];
     
+    [self.splashView removeFromSuperview];
 }
 
 

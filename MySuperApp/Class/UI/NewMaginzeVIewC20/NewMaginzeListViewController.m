@@ -183,9 +183,13 @@
 }
 
 
+#pragma mark--- 筛选结果
+
 -(void)sureFilter:(NSString *)prama{
     NSLog(@"---%@",prama);
 
+    self.title = @"筛选结果";
+    
     _currentpage = 1;
     [contentdataArr removeAllObjects];
     

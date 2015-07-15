@@ -27,6 +27,9 @@
     
     ZHPickView* _pickview1;
     ZHPickView* _pickview2;
+    
+    
+    BOOL isshowPicker;
 
 }
 
@@ -41,6 +44,8 @@
     
     [self setTitle:@"预约测体"];
     [self createBackBtnWithType:0];
+    
+    isshowPicker = NO;
     
     selectStore = @"";
     selecttime = @"";
@@ -144,7 +149,16 @@
     MyButton*btn = (MyButton*)sender;
     
     [self removePicker];
-
+    
+    
+    [mainSev getbespeak];
+    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
+    
+    
+    if (!isshowPicker) {
+        return;
+    }
+    
     
     if (btn.tag == 1) {
         //支持自定义数组：
@@ -173,9 +187,9 @@
         [dateFormatter setDateFormat:@"yyyy年MM月dd日 HH:mm"];
         
         //将时间字符串转换成NSDate类型的时间。dateFromString方法。
-        NSDate *tempDate = [NSDate date];
+//        NSDate *tempDate = [NSDate date];
         if (!_pickview2) {
-            _pickview2=[[ZHPickView alloc] initDatePickWithDate:tempDate datePickerMode:UIDatePickerModeDate isHaveNavControler:NO];
+            _pickview2=[[ZHPickView alloc] initDatePickWithDate:nil datePickerMode:UIDatePickerModeDate isHaveNavControler:NO];
         }
         
         _pickview2.delegate = self;
@@ -237,6 +251,8 @@
 -(void)serviceFailed:(ServiceType)aHandle{
     [SBPublicAlert hideMBprogressHUD:self.view];
     
+    isshowPicker = NO;
+    
     if (aHandle == ENeedbindPhone) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"爱慕提示" message:@"预约测体需要您先绑定手机" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"绑定", nil];
         alert.delegate = self;
@@ -254,6 +270,8 @@
             case Http_bespeak20_Tag:
             {
                 bespeakInfo = [[[MybespeakParser alloc] init] parsebespeakInfo:amodel];
+                
+                isshowPicker = YES;
                 
             }
                 break;

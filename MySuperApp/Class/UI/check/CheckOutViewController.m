@@ -1506,9 +1506,11 @@ NSLog(@"createOtherCells  come out");
         if (mycheckOutModel.checkout_usecouponcard || ![self.useCouponcardId isEqualToString:@""])
         {//已使用
         } else {
-            if ([mycheckOutModel.arrCheckout_couponcard count] == 0) {
-                return;
-            }
+            
+            
+            //if ([mycheckOutModel.arrCheckout_couponcard count] == 0) {
+            //return;
+            //}
 
             //进入优惠券列表页
             SelectCouponTableViewController *ctrl = [[SelectCouponTableViewController alloc] init];
@@ -1521,6 +1523,11 @@ NSLog(@"createOtherCells  come out");
     }else if (section ==4)
     {
     //电子券
+        
+        if ([mycheckOutModel.checkoutV6cards count] == 0) {
+            return;
+        }
+        
         
         if ([self.useCouponcardId description].length>0) {
             [ESToast showDelayToastWithText:@"优惠券和电子券不能同时使用"];

@@ -316,6 +316,11 @@
                 return;
             }
             
+            if (!self.isaddPeople && ![arr_selecttype containsObject:@"1"]) {
+                [SBPublicAlert showMBProgressHUD:@"您还未添加女士，请添加" andWhereView:self.view hiddenTime:AlertShowTime];
+                return;
+            }
+            
             
             //去女士~
             MyCloset2ViewController *clv2 = [[MyCloset2ViewController alloc] initWithNibName:@"MyCloset2ViewController" bundle:nil];
@@ -332,6 +337,11 @@
                 return;
             }
             
+            if (!self.isaddPeople && ![arr_selecttype containsObject:@"2"]) {
+                [SBPublicAlert showMBProgressHUD:@"您还未添加男士，请添加" andWhereView:self.view hiddenTime:AlertShowTime];
+                return;
+            }
+            
             //去男士~
             MyClosetNan2ViewController *clv2 = [[MyClosetNan2ViewController alloc] initWithNibName:@"MyClosetNan2ViewController" bundle:nil];
             clv2.closetinfo = _closetinfo;
@@ -342,10 +352,16 @@
             
         case 3:
         {
-            if ([arr_selecttype containsObject:@"3"]&& self.isaddPeople) {
+            if (([arr_selecttype containsObject:@"3"] || [arr_selecttype containsObject:@"4"] || [arr_selecttype containsObject:@"5"]) && self.isaddPeople) {
                 [SBPublicAlert showMBProgressHUD:@"您已添加过儿童，请添加其他成员" andWhereView:self.view hiddenTime:AlertShowTime];
                 return;
             }
+            
+            if (!self.isaddPeople && (![arr_selecttype containsObject:@"3"] && ![arr_selecttype containsObject:@"4"] && ![arr_selecttype containsObject:@"5"])) {
+                [SBPublicAlert showMBProgressHUD:@"您还未添加儿童，请添加" andWhereView:self.view hiddenTime:AlertShowTime];
+                return;
+            }
+            
             //去儿童！
             MyClosetKid2ViewController *clv2 = [[MyClosetKid2ViewController alloc] initWithNibName:@"MyClosetKid2ViewController" bundle:nil];
             [self.navigationController pushViewController:clv2 animated:YES];

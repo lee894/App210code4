@@ -1042,13 +1042,17 @@
     }else if (indexPath.section >2&&indexPath.section < four){
         if (orderDetail.itemSuit.count > 0) {
             
+//            YKSuitListItem* item = [orderDetail.itemSuit objectAtIndex:j];
+//            YKProductsItem *pItem = [item.suits objectAtIndex:k];
+
             //lee999小莹要求 套装也要到商品详情界面
-            YKSuitListItem *suitListItem = (YKSuitListItem *)[orderDetail.itemSuit objectAtIndex:indexPath.section-3];
-            YKItem *item = (YKItem *)[suitListItem.suits objectAtIndex:indexPath.row];
+            YKSuitListItem *suitListItem = (YKSuitListItem *)[orderDetail.itemSuit objectAtIndex:indexPath.section-3 isArray:nil];
+            
+            YKProductsItem *item = (YKProductsItem *)[suitListItem.suits objectAtIndex:indexPath.row-1 isArray:nil];
             ProductDetailViewController* detail = [[ProductDetailViewController alloc] init];
-            detail.thisProductId = item.goodsid;
             detail.ThisPorductName=item.name;
             detail.isPush = YES;
+            detail.thisProductId = item.goodsid;
             detail.isHiddenBar = self.isHiddenBar;
             detail.isFromCar = isFromCar;  //lee999recode来自car了
             //lee999recode
@@ -1120,10 +1124,10 @@
         [viewSuitlistCell3.contentView addSubview:desc];
         
         if (item.packageid) {
-            str = @"套装价: ";
+            str = @"礼包价: ";
         }else if(item.suitid)
         {
-            str = @"礼包价: ";
+            str = @"套装价: ";
         }
         int strWidth = [str sizeWithFont:font].width;
         desc = [[UILabel alloc] initWithFrame:CGRectMake(xOffset, yOffset+height, strWidth, height)];
@@ -1170,7 +1174,7 @@
                 [Cell.contentView addSubview:modile];
             }
             
-            YKProductsItem *pItem = [item.suits objectAtIndex:k];
+            YKProductsItem *pItem = [item.suits objectAtIndex:k isArray:nil];
             BOOL showStock = NO;
             if (pItem.stock && ![pItem.stock isKindOfClass:[NSNull class]] && ![pItem.stock isEqualToString:@""]) {
                 showStock = YES;

@@ -399,6 +399,8 @@
             cell.labelBalance.text = dic.balance;
             cell.labelFrozenBalance.text = [NSString stringWithFormat:@"%@",dic.frozenBalance];
             cell.labelIntegral.text = [NSString stringWithFormat:@" 冻结%@   可用 %@",[dic.frozenScore description],[dic.canUseScore description]];
+            cell.labelcardState.text = [NSString stringWithFormat:@"%@",dic.card_status];
+
             
             if ([dic.canUseScore integerValue] < 2000) {
                 [cell.btnExchange setEnabled:NO];

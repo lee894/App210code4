@@ -662,9 +662,15 @@
     }
     YKSuitItem *item = [self.suitListModel.suitArray objectAtIndex:currentSelectRow];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 0, 240, 44) ];
+    titleLabel.textAlignment = UITextAlignmentCenter;
+    
     NSString *pickerText=@"";
     UrlImageView *image=[[UrlImageView alloc]init];
+    
     if (pickerView==pickerForSelectColor) {
+        
+        titleLabel.textAlignment = UITextAlignmentLeft;
+        [titleLabel setFrame:CGRectMake(100, 0, 240, 44)];
         pickerText= [[item.colorlist objectAtIndex:row] Spec_alias];
         [image setImageWithURL:[NSURL URLWithString:[[item.colorlist objectAtIndex:row] ImageUrl]]];
     }else{
@@ -672,7 +678,6 @@
       pickerText= [[[[item.array_size objectAtIndex:item.currentColor] objectForKey:[[item.colorlist objectAtIndex:item.currentColor] ID]] objectAtIndex:row]objectForKey:@"spec_alias"];
     }
     titleLabel.text = pickerText;
-    titleLabel.textAlignment = UITextAlignmentCenter;
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = [ UIFont boldSystemFontOfSize:18];;
     titleLabel.opaque = NO;

@@ -138,7 +138,7 @@
     [self loadData1];
 
     
-    _product_id=[[NSString alloc]init];
+    _product_id=[[[NSString alloc]init] description];
     
     recordNUM=1;
     
@@ -149,8 +149,8 @@
     }
     [BfdAgent visit:self itemId:self.thisProductId options:@{@"uid":str}];
     
-    [DplusMobClick track:@"商品详情" property:@{@"商品ID":self.thisProductId,
-                                            @"商品名称":self.thisProductId}];
+    [DplusMobClick track:@"商品详情" property:@{@"商品ID":[self.thisProductId description],
+                                            @"商品名称":[self.thisProductId description]}];
 }
 
 -(NSArray*)viewConstraints

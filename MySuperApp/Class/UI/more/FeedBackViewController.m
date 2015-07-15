@@ -139,12 +139,13 @@
     
     if (!viewPicker) {
         viewPicker = [[[NSBundle mainBundle] loadNibNamed:@"PickerView" owner:self options:nil] lastObject];
+    }
+
         [viewPicker setOrigin:CGPointMake(0, self.view.frame.size.height)];
         [UIView animateWithDuration:0.3 animations:^{
             [viewPicker setOrigin:CGPointMake(0, self.view.frame.size.height - 262)];
             [self.view addSubview:viewPicker];
         }];
-    }
 }
 
 - (IBAction)confirmOrCancel:(UIButton *)sender//pickerView 确认取消
