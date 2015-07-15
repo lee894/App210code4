@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MySuperApp/Class/UI/car/CarpageViewController.m"
-            timestampString = "458495433.813263"
+            timestampString = "458655173.739543"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "954"
-            endingLineNumber = "954"
+            startingLineNumber = "956"
+            endingLineNumber = "956"
             landmarkName = "-setNavRightOK"
             landmarkType = "5">
          </BreakpointContent>
@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MySuperApp/Class/UI/car/CarpageViewController.m"
-            timestampString = "458495433.813263"
+            timestampString = "458655173.739543"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "940"
-            endingLineNumber = "940"
+            startingLineNumber = "942"
+            endingLineNumber = "942"
             landmarkName = "-setNavRightEdit"
             landmarkType = "5">
          </BreakpointContent>
@@ -132,11 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MySuperApp/Class/UI/car/CarpageViewController.m"
-            timestampString = "458580659.119777"
+            timestampString = "458655173.739543"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1117"
-            endingLineNumber = "1117"
+            startingLineNumber = "1119"
+            endingLineNumber = "1119"
             landmarkName = "-finishEditCar"
             landmarkType = "5">
          </BreakpointContent>
@@ -148,11 +148,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MySuperApp/Class/UI/car/CarpageViewController.m"
-            timestampString = "458580500.87154"
+            timestampString = "458655173.739543"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "981"
-            endingLineNumber = "981"
+            startingLineNumber = "983"
+            endingLineNumber = "983"
             landmarkName = "-editCarNumber"
             landmarkType = "5">
          </BreakpointContent>
@@ -179,14 +179,62 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MySuperApp/Class/UI/check/CheckOutViewController.m"
-            timestampString = "458620439.838261"
+            filePath = "MySuperApp/Class/UI/giftCard/ImproveInformationViewController.m"
+            timestampString = "458655442.742936"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "-serviceFinished:withmodel:"
+            startingLineNumber = "764"
+            endingLineNumber = "764"
+            landmarkName = "-btnClick:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MySuperApp/Class/Service/main/MainpageServ.m"
+            timestampString = "458655464.387147"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "785"
+            endingLineNumber = "785"
+            landmarkName = "-getDealapplyZunxiang:andKey:andName:andSex:andNick_Name:andMobile:andAk_Height_1:andAk_Height_2:andCheckcode:andAk1_Year:andAk1_Month:andAk1_Day:andAk2_Year:andAk2_Month:andAk2_Day:andAk_Name_1:andAk_Name_2:andV6User_Year:andV6User_Month:andV6User_Day:andAk_Sex_1:andAk_Sex_2:andAddress:andEmail:andZipcode:andAge:andIncome:andProfession:andBrasize:andUnderpants:andClothsize:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MainpageServ getDealapplyZunxiang:andKey:andName:andSex:andNick_Name:andMobile:andAk_Height_1:andAk_Height_2:andCheckcode:andAk1_Year:andAk1_Month:andAk1_Day:andAk2_Year:andAk2_Month:andAk2_Day:andAk_Name_1:andAk_Name_2:andV6User_Year:andV6User_Month:andV6User_Day:andAk_Sex_1:andAk_Sex_2:andAddress:andEmail:andZipcode:andAge:andIncome:andProfession:andBrasize:andUnderpants:andClothsize:]"
+                  moduleName = "MyAimerApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yanglee/Desktop/App210code4/MySuperApp/Class/Service/main/MainpageServ.m"
+                  timestampString = "458656227.053033"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "785"
+                  endingLineNumber = "785"
+                  offsetFromSymbolStart = "592">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__392-[MainpageServ getDealapplyZunxiang:andKey:andName:andSex:andNick_Name:andMobile:andAk_Height_1:andAk_Height_2:andCheckcode:andAk1_Year:andAk1_Month:andAk1_Day:andAk2_Year:andAk2_Month:andAk2_Day:andAk_Name_1:andAk_Name_2:andV6User_Year:andV6User_Month:andV6User_Day:andAk_Sex_1:andAk_Sex_2:andAddress:andEmail:andZipcode:andAge:andIncome:andProfession:andBrasize:andUnderpants:andClothsize:]_block_invoke"
+                  moduleName = "MyAimerApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yanglee/Desktop/App210code4/MySuperApp/Class/Service/main/MainpageServ.m"
+                  timestampString = "458656227.053147"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "785"
+                  endingLineNumber = "785"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

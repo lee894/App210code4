@@ -792,7 +792,8 @@
                         andProfession:professionBtn.titleLabel.text
                            andBrasize:underwearBtn.titleLabel.text
                         andUnderpants:underpantsBtn.titleLabel.text
-                         andClothsize:adultBtn.titleLabel.text];
+                         andClothsize:adultBtn.titleLabel.text
+         ];
         [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
 
     }

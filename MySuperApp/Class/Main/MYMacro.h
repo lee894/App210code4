@@ -183,8 +183,8 @@
 #define HasRuanchiUrl    @"http://m.aimer.com.cn/method/measuresize"
 
 //API的host路径
-//#define OFFICIALDOMAIN @"http://mobiletest.aimer.com.cn:8888/mobile/"
-#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobile/"
+#define OFFICIALDOMAIN @"http://mobiletest.aimer.com.cn:8888/mobile/"
+//#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobile/"
 //#define OFFICIALDOMAIN @"http://124.207.152.104/mobile/"
 //#define OFFICIALDOMAIN @"http://www.aimer.com.cn/mobiletest/"
 //#define OFFICIALDOMAIN @"http://124.207.72.140:8888/mobiletest/"

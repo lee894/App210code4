@@ -784,6 +784,7 @@
 
     [self sendPostWithURL:Dealapply_API tag:Http_Dealapply_Tag beforeRequest:^{
         [self addParam:@"zunxiang" withValue:zunxiang];
+        [self addParam:@"mobile" withValue:mobile];
         [self addParam:@"key" withValue:key];
         [self addParam:@"name" withValue:name];
         [self addParam:@"sex" withValue:sex];
