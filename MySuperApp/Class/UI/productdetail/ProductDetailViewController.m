@@ -144,8 +144,8 @@
     
     //商品详情，点击的时候，上传 商品编号
     NSString *str = @"";
-    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"]) {
-        str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersessionUserid"]) {
+        str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersessionUserid"];
     }
     [BfdAgent visit:self itemId:self.thisProductId options:@{@"uid":str}];
     

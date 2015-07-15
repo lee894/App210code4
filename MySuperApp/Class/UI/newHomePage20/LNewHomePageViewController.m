@@ -252,8 +252,8 @@
     //lee999 百分点
     
     NSString *str = @"";
-    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"]) {
-        str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersessionUserid"]) {
+        str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersessionUserid"];
     }
     
     [BfdAgent recommend:self recommendId:@"rec_2142096B_FB0B_FCD1_8DD8_0D235639F12F" options:@{@"uid":str}];
@@ -906,8 +906,8 @@
 -(void)gotoProductDetailViewAciton:(MyButton*)btn{
 
     NSString *str = @"";
-    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"]) {
-        str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersessionUserid"]) {
+        str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersessionUserid"];
     }
     [BfdAgent feedback:self recommendId:@"rec_2142096B_FB0B_FCD1_8DD8_0D235639F12F" itemId:btn.addstring options:@{@"uid":str}];
     

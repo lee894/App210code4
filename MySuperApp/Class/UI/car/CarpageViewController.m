@@ -429,10 +429,10 @@
                     striid = [arrItemiid componentsJoinedByString:@"|"];
                 }
                 
-
+                //usersessionUserid  150715 usersession 改为  uid  @"usersession"
                 NSString *str = @"";
-                if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"]) {
-                    str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+                if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersessionUserid"]) {
+                    str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersessionUserid"];
                 }
                 [BfdAgent recommend:self recommendId:@"rec_FDFEE10D_5A29_BE14_3808_3C336BA76303" options:@{@"ids":strids,@"iid":striid,@"uid":str}];
             }
@@ -787,9 +787,11 @@
     //lee999 新增百分点
     if (tap.view.tag < 3) {
 
+        
+        //lee9999 修改 百分点的唯一标示  @“usersession”
         NSString *str = @"";
-        if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"]) {
-            str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+        if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersessionUserid"]) {
+            str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersessionUserid"];
         }
 
         [BfdAgent feedback:self recommendId:@"rec_FDFEE10D_5A29_BE14_3808_3C336BA76303" itemId:item.productid options:@{@"uid":str}];

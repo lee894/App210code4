@@ -551,7 +551,10 @@
 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TotleNumber" object:nil];
                 
+//#warning ----- 将userssion 改为  userid
                 [[NSUserDefaults standardUserDefaults] setObject:loginModel.userssion forKey:@"usersession"];
+                [[NSUserDefaults standardUserDefaults] setObject:loginModel.userid forKey:@"usersessionUserid"];
+
                 //登录成功
                 [SingletonState sharedStateInstance].userHasLogin = YES;
                 [[NSUserDefaults standardUserDefaults] synchronize];
@@ -562,8 +565,8 @@
                 
                 //lee999 150708 登录的时候 上传uid 设置百分点登录状态
                 NSString *str = @"";
-                if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"]) {
-                    str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersession"];
+                if ([[NSUserDefaults standardUserDefaults]objectForKey:@"usersessionUserid"]) {
+                    str = [[NSUserDefaults standardUserDefaults]objectForKey:@"usersessionUserid"];
                 }
                 [BfdAgent addUser:self userId:str options:nil];
                 //end

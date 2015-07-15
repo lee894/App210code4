@@ -173,6 +173,7 @@
                 LoginLoginModel *registerModel = (LoginLoginModel *)model;
                 
                 [[NSUserDefaults standardUserDefaults] setObject:registerModel.userssion forKey:@"usersession"];
+                [[NSUserDefaults standardUserDefaults] setObject:registerModel.userid forKey:@"usersessionUserid"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
 
 //                MyAimerloginViewController *loginaimVC = [[MyAimerloginViewController alloc] initWithNibName:@"MyAimerloginViewController" bundle:nil];

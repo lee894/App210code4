@@ -256,6 +256,8 @@
                 
                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"usersession"];
                 
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"usersessionUserid"];
+                
                 //退出登录，修改icon上的气泡数字
                 //[UIApplication sharedApplication].applicationIconBadgeNumber = 0;
                 
