@@ -758,11 +758,14 @@
             //私人衣橱
             if ([myAimerInfo.userinfo.is_wardrobe isEqualToString:@""]) {
                 
+                [SingletonState sharedStateInstance].str_wardrobe = @"";
+                
                 MyCloset1ViewController *vc1 = [[MyCloset1ViewController alloc] initWithNibName:@"MyCloset1ViewController" bundle:nil];
+                vc1.isaddPeople = YES;
                 [self.navigationController pushViewController:vc1 animated:YES];
             }else{
                 
-                [SingletonState sharedStateInstance].str_wardrobe  = myAimerInfo.userinfo.is_wardrobe ;
+                [SingletonState sharedStateInstance].str_wardrobe = myAimerInfo.userinfo.is_wardrobe ;
 
                 
                 MyClosetListViewController *vc1 = [[MyClosetListViewController alloc] initWithNibName:@"MyClosetListViewController" bundle:nil];

@@ -871,6 +871,13 @@
             [pricelab2 setTextColor:[UIColor colorWithHexString:@"#888888"]];
             [sortV addSubview:pricelab2];
             
+            
+            //lee999 新增如果两个价钱一样，就不显示
+            if ([pricelab2.text isEqualToString:pricelab.text]) {
+                [pricelab setHighlighted:YES];
+            }
+            
+            
             //价格上的划线
 //            CGSize pricelab2Size;
 //            if (isRecommend) {
@@ -1370,6 +1377,7 @@
             if ([[SingletonState sharedStateInstance].str_wardrobe isEqualToString:@""]) {
                 
                 MyCloset1ViewController *vc1 = [[MyCloset1ViewController alloc] initWithNibName:@"MyCloset1ViewController" bundle:nil];
+                vc1.isaddPeople = YES;
                 [self.navigationController pushViewController:vc1 animated:YES];
             }else{
                                 

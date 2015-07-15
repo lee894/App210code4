@@ -1832,7 +1832,7 @@
             
             UILabel* priceName = [[UILabel alloc] initWithFrame:CGRectMake(shoppingImg.frame.origin.x + shoppingImg.frame.size.width + 16, 89, fTextWidth, 13)];
             priceName.backgroundColor = [UIColor clearColor];
-            priceName.text = [NSString stringWithFormat:@"单价: ￥%.2f", pItem.price];
+            priceName.text = [NSString stringWithFormat:@"单价: ￥%.2f", pItem.mkt_price];
             priceName.font = [UIFont systemFontOfSize:13];
             priceName.textColor = UIColorFromRGB(0x666666);
             [Cell addSubview:priceName];
@@ -2025,7 +2025,7 @@
             
             UILabel* priceName = [[UILabel alloc] initWithFrame:CGRectMake(shoppingImg.frame.origin.x + shoppingImg.frame.size.width + 16, 89, fTextWidth, 13)];
             priceName.backgroundColor = [UIColor clearColor];
-            priceName.text = [NSString stringWithFormat:@"单价: ￥%.2f", pItem.price];
+            priceName.text = [NSString stringWithFormat:@"单价: ￥%.2f", pItem.mkt_price];
             priceName.font = [UIFont systemFontOfSize:13];
             priceName.textColor = UIColorFromRGB(0x666666);
             [Cell addSubview:priceName];

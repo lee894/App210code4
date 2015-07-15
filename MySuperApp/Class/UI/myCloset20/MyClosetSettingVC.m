@@ -56,7 +56,7 @@
     
     MyCloset1ViewController *vc1 = [[MyCloset1ViewController alloc] initWithNibName:@"MyCloset1ViewController" bundle:nil];
     vc1.isaddPeople = YES;
-    vc1.strselecttype  =self.strselecttype;
+    //vc1.strselecttype  =self.strselecttype;
     [self.navigationController pushViewController:vc1 animated:YES];
 }
 
@@ -64,7 +64,7 @@
     
     MyCloset1ViewController *vc1 = [[MyCloset1ViewController alloc] initWithNibName:@"MyCloset1ViewController" bundle:nil];
     vc1.isaddPeople = NO;
-    vc1.strselecttype  =self.strselecttype;
+    //vc1.strselecttype  =self.strselecttype;
     [self.navigationController pushViewController:vc1 animated:YES];
     
 }

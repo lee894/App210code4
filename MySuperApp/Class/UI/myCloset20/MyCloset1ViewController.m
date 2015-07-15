@@ -66,11 +66,8 @@
     mainSev = [[MainpageServ alloc] init];
     mainSev.delegate = self;
 
-    
-    
+
     [arr_selecttype addObjectsFromArray:[[SingletonState sharedStateInstance].str_wardrobe componentsSeparatedByString:@","]];
-    
-    NSLog(@"---%@",arr_selecttype);
 
     
     for (NSString *str in arr_selecttype) {
@@ -79,14 +76,10 @@
         }
     }
     
-    NSLog(@"====%@",arr_selecttype);
-
     
     if ([arr_selecttype count] == 0) {
         titlenameLab.text = @"您好，请选择";
     }
-    
-    
 }
 
 
