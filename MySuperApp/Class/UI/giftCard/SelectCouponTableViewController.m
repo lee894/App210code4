@@ -290,7 +290,7 @@
         cell.V6cardlabelTitle.hidden = YES;
         NSDictionary* dic = [self.contentArr objectAtIndex:indexPath.row isArray:nil];
         cell.labelTitle.text = [NSString stringWithFormat:@"%@",LegalObject([dic objectForKey:@"name"],[NSString class])];
-        cell.labelcardState.text = [NSString stringWithFormat:@"%@",[dic objectForKey:@"card_status"]];
+        cell.labelcardState.text = [NSString stringWithFormat:@"（%@）",[dic objectForKey:@"card_status"]];
         cell.labelId.text = [NSString stringWithFormat:@"NO. %@",[dic objectForKey:@"card_id"]];
         cell.labelBalance.text = [dic objectForKey:@"balance"];
         cell.labelFrozenBalance.text = [NSString stringWithFormat:@"%@",LegalObject([dic objectForKey:@"frozenBalance"],[NSNumber class])];

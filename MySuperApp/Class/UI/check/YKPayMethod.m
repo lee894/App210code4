@@ -34,8 +34,14 @@
     
     //支付方式
     for (NSDictionary * aD in data) {
+        
         NSDictionary * a = [[NSDictionary alloc] initWithDictionary:aD];
-        [self.m_payMethod addObject:a];
+        if (![WXApi isWXAppInstalled] &&
+            [[[a objectForKey:@"id"] description] isEqualToString:@"4"]) {
+            
+        }else{
+            [self.m_payMethod addObject:a];
+        }
     }
     
     
@@ -141,6 +147,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+//    if ([WXApi isWXAppInstalled]) {
+//        return [m_payMethod count]-1;
+//    }
+    
     return [m_payMethod count];
 }
 

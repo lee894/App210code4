@@ -69,12 +69,19 @@
 
     [arr_selecttype addObjectsFromArray:[[SingletonState sharedStateInstance].str_wardrobe componentsSeparatedByString:@","]];
 
-    
-    for (NSString *str in arr_selecttype) {
+    for (int i = 0; i<[arr_selecttype count]; i++) {
+        NSString *str = [NSString stringWithFormat:@"%@",[[arr_selecttype objectAtIndex:i isArray:nil] description]];
+        
         if ([str isEqualToString:@""]) {
             [arr_selecttype removeObject:str];
         }
     }
+    
+//    for (NSString *str in arr_selecttype) {
+//        if ([str isEqualToString:@""]) {
+//            [arr_selecttype removeObject:str];
+//        }
+//    }
     
     
     if ([arr_selecttype count] == 0) {
