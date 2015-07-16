@@ -616,7 +616,13 @@
                 {
                     iBg = [UIImage imageNamed:@"laber_lpk"];
                     [btnAction setTitleColor:[UIColor colorWithHexString:@"#ff6767"] forState:UIControlStateNormal];
+                }else{
+                    //增加备选情况，省的不显示
+                    iBg = [UIImage imageNamed:@"laber_yh"];
+                    [btnAction setTitleColor:[UIColor colorWithHexString:@"#c8002c"] forState:UIControlStateNormal];
                 }
+                
+                
                 [btnAction setTitle:@"使用" forState:UIControlStateNormal];
                 [btnAction.titleLabel setFont:[UIFont systemFontOfSize:14]];
                 [btnAction setFrame:CGRectMake(ivState.frame.origin.x, 0, lee1fitAllScreen(63), ivBg.frame.size.height)];

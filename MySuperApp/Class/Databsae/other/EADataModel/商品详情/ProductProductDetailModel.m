@@ -30,8 +30,6 @@
 {
     self = [super init];
     
-    
-    
     // This check serves to make sure that a non-NSDictionary object
     // passed into the model class doesn't break the parsing.
     if(self && [json isKindOfClass:[NSDictionary class]]) {
@@ -92,8 +90,8 @@
         NSMutableArray *pro_array=[[NSMutableArray alloc]init];
         for (id pro in success_products) {
             if (![[pro objectForKey:@"count"] isEqualToNumber:[NSNumber numberWithInt:0]]) {
-//            if ([[pro objectForKey:@"count"] intValue] != 0) {
-
+                //            if ([[pro objectForKey:@"count"] intValue] != 0) {
+                
                 [pro_array addObject:pro];
                 //                self.productId = [pro objectForKey:@"id"];
             }
@@ -111,11 +109,11 @@
         }
         for (int i=0; i<[pro_array count]; i++) {
             if ([[[pro_array objectAtIndex:0] objectForKey:@"_spec_value_ids"] objectForKey:@"1"] != nil) {
-
-            if (![[[[pro_array objectAtIndex:i] objectForKey:@"_spec_value_ids"]objectForKey:@"1"]isEqualToString:str_record]) {
-                [array_product addObject:[[[pro_array objectAtIndex:i] objectForKey:@"_spec_value_ids"]objectForKey:@"1"]];
-                str_record=[[[pro_array objectAtIndex:i] objectForKey:@"_spec_value_ids"]objectForKey:@"1"];
-            }
+                
+                if (![[[[pro_array objectAtIndex:i] objectForKey:@"_spec_value_ids"]objectForKey:@"1"]isEqualToString:str_record]) {
+                    [array_product addObject:[[[pro_array objectAtIndex:i] objectForKey:@"_spec_value_ids"]objectForKey:@"1"]];
+                    str_record=[[[pro_array objectAtIndex:i] objectForKey:@"_spec_value_ids"]objectForKey:@"1"];
+                }
             }
         }
 #pragma mark 有货品的对象
@@ -126,7 +124,7 @@
                 [product setAttribute:[products objectForKey:key] forKey:key];
             } // end for
             [self.productlist addProdcut:product];
-//            [product release];
+            //            [product release];
         } // end for
         [self.array_color_size removeAllObjects];
         for (int i=0; i<[self.productlist count];i++ ) {
@@ -143,7 +141,7 @@
                 }
             }
             [self.array_color_size addObject:str_size_color];
-//            [str_size_color release];
+            //            [str_size_color release];
         }
         //NSLog(@"######################%@",array_color_size);
         
@@ -178,19 +176,22 @@
                 }
             }
 #pragma mark_colorlist
+            //NSLog(@"~~~~~~~~~~~~~~~~~~~~%@~~~~~~~%@",[iSize objectForKey:@"spec_id"],colorid);
             if([[iSize objectForKey:@"spec_id"] isEqual:colorid]) {
-               // NSLog(@"~~~~~~~~~~~~~~~~~~~~%d",[array_product indexOfObject:[sizeitem ID]]);
-                if ([array_product indexOfObject:[sizeitem ID]]!=2147483647) {
+                
+//                if ([array_product indexOfObject:[sizeitem ID]]!=2147483647) {
+                if ([array_product containsObject:[sizeitem ID]]) {
                     [self.colorlist addSize:sizeitem];
+                    //NSLog(@"color------%@",self.colorlist);
+                    
                 }
-//                [sizeitem release];
             }
             if ([[iSize objectForKey:@"spec_id"]isEqual:sizeid]) {
                 [self.sizelist addSize:sizeitem];
-//                [sizeitem release];
             }
             
         }
+        
         [self.array_size removeAllObjects];
         
         for (int j = 0; j< self.colorlist.count; j++) {

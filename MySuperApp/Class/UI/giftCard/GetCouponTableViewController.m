@@ -186,6 +186,10 @@
         {
             iBg = [UIImage imageNamed:@"laber_lpk"];
             [btnAction setTitleColor:[UIColor colorWithHexString:@"#ff6767"] forState:UIControlStateNormal];
+        }else{
+        //增加备选情况，省的不显示
+            iBg = [UIImage imageNamed:@"laber_yh"];
+            [btnAction setTitleColor:[UIColor colorWithHexString:@"#c8002c"] forState:UIControlStateNormal];
         }
         
         [btnAction setTitle:@"领取" forState:UIControlStateNormal];

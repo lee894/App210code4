@@ -100,11 +100,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MySuperApp/Class/UI/giftCard/CouponsListTableViewController.m"
-            timestampString = "458660714.192988"
+            timestampString = "458751513.374665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "659"
-            endingLineNumber = "659"
+            startingLineNumber = "665"
+            endingLineNumber = "665"
             landmarkName = "-btnBindClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -148,11 +148,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MySuperApp/Class/UI/giftCard/ImproveInformationViewController.m"
-            timestampString = "458655442.742936"
+            timestampString = "458727463.760899"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "764"
-            endingLineNumber = "764"
+            startingLineNumber = "770"
+            endingLineNumber = "770"
             landmarkName = "-btnClick:"
             landmarkType = "5">
          </BreakpointContent>
@@ -180,12 +180,12 @@
                   moduleName = "MyAimerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yanglee/Desktop/App210code4/MySuperApp/Class/Service/main/MainpageServ.m"
-                  timestampString = "458720074.972707"
+                  timestampString = "458754745.001982"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "785"
                   endingLineNumber = "785"
-                  offsetFromSymbolStart = "592">
+                  offsetFromSymbolStart = "1284">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -195,12 +195,12 @@
                   moduleName = "MyAimerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yanglee/Desktop/App210code4/MySuperApp/Class/Service/main/MainpageServ.m"
-                  timestampString = "458720074.972822"
+                  timestampString = "458754745.0021"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "785"
                   endingLineNumber = "785"
-                  offsetFromSymbolStart = "40">
+                  offsetFromSymbolStart = "36">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -403,38 +403,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MySuperApp/Class/UI/productdetail/ProductDetailViewController.m"
-            timestampString = "458666982.105755"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1203"
-            endingLineNumber = "1203"
-            landmarkName = "-pickerView:viewForRow:forComponent:reusingView:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MySuperApp/Class/UI/productdetail/ProductDetailViewController.m"
-            timestampString = "458666983.171184"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1190"
-            endingLineNumber = "1190"
-            landmarkName = "-pickerView:numberOfRowsInComponent:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MySuperApp/Class/UI/newHomePage20/LNewHomePageViewController.m"
             timestampString = "458667700.509053"
             startingColumnNumber = "9223372036854775807"
@@ -457,7 +425,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "307"
             endingLineNumber = "307"
-            landmarkName = "-jumpNextPage"
+            landmarkName = "-serviceFinished:withmodel:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -474,6 +442,22 @@
             startingLineNumber = "59"
             endingLineNumber = "59"
             landmarkName = "-addpeopleAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MySuperApp/Class/Databsae/other/EADataModel/&#x5546;&#x54c1;&#x8be6;&#x60c5;/ProductProductDetailModel.m"
+            timestampString = "458754817.270039"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "-initWithDictionary:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
