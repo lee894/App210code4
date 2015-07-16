@@ -43,7 +43,7 @@
     
     scrollView.frame = CGRectMake(0, 0, ScreenWidth, NowViewsHight);
     
-    scrollView.contentSize = CGSizeMake(320, 1060);
+    scrollView.contentSize = CGSizeMake(320, 770);
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -96,13 +96,13 @@
     [tableViewDataArray addObject:dic1];
 
     //儿童信息的tableView
-    mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 680, 320, 250 * tableViewDataArray.count) style:UITableViewStylePlain];
-    mytableView.backgroundColor = [UIColor clearColor];
-    mytableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    mytableView.bounces = NO;
-    mytableView.delegate = self;
-    mytableView.dataSource = self;
-    [scrollView addSubview:mytableView];
+//    mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 680, 320, 250 * tableViewDataArray.count) style:UITableViewStylePlain];
+//    mytableView.backgroundColor = [UIColor clearColor];
+//    mytableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    mytableView.bounces = NO;
+//    mytableView.delegate = self;
+//    mytableView.dataSource = self;
+//    [scrollView addSubview:mytableView];
     
     //用于选择  职业，内衣尺码  等效果
     [self createUserInfoPicker];
@@ -110,20 +110,20 @@
     //创建日期picker
     [self createDatePicker];
     
-    children = 1;
-    
-    addChildrenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addChildrenBtn setTitle:@"增加一个儿童信息" forState:UIControlStateNormal];
-    [addChildrenBtn setTitleColor:[UIColor colorWithHexString:@"0xB90023"] forState:UIControlStateNormal];
-    [addChildrenBtn setTitleColor:[UIColor colorWithHexString:@"0xB90023"] forState:UIControlStateHighlighted];
-    addChildrenBtn.frame = CGRectMake(25,children * 270 + 660, 150, 30);
-
-    addChildrenBtn.tag = 50;
-    [addChildrenBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [scrollView addSubview:addChildrenBtn];
-    
-    [confirmBtn setY:addChildrenBtn.frame.origin.y + addChildrenBtn.frame.size.height];
-    scrollView.contentSize = CGSizeMake(320, confirmBtn.frame.origin.y + confirmBtn.frame.size.height + 30);
+//    children = 1;
+//    
+//    addChildrenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [addChildrenBtn setTitle:@"增加一个儿童信息" forState:UIControlStateNormal];
+//    [addChildrenBtn setTitleColor:[UIColor colorWithHexString:@"0xB90023"] forState:UIControlStateNormal];
+//    [addChildrenBtn setTitleColor:[UIColor colorWithHexString:@"0xB90023"] forState:UIControlStateHighlighted];
+//    addChildrenBtn.frame = CGRectMake(25,children * 270 + 660, 150, 30);
+//
+//    addChildrenBtn.tag = 50;
+//    [addChildrenBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+//    [scrollView addSubview:addChildrenBtn];
+//    
+//    [confirmBtn setY:addChildrenBtn.frame.origin.y + addChildrenBtn.frame.size.height];
+//    scrollView.contentSize = CGSizeMake(320, confirmBtn.frame.origin.y + confirmBtn.frame.size.height + 30);
 }
 
 
@@ -165,9 +165,6 @@
 }
 
 -(void)BarButtonClick:(UIBarButtonItem *)barButton{
-    //	toolBarForPicker.hidden=YES;
-    //	pickerForSelectColor.hidden=YES;
-    //实例化一个NSDateFormatter对象
     
     if (barButton.tag == 105) {
         
@@ -180,22 +177,21 @@
         NSLog(@"currentDateStr:------%@",currentDateStr);
         if (pickerForSelectColor.tag == 40) {
             [birthdayLabelBtn setTitle:currentDateStr forState:UIControlStateNormal];
-//            birthdayLabelBtn.titleLabel.text = ;
         }else if (pickerForSelectColor.tag == 102) {
             
-            //儿童信息1
-            ModifyCell *cell = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            cell.delegate = self;
-            [cell.birthdayLabelBtn setTitle:currentDateStr forState:UIControlStateNormal];
-//            cell.birthdayLabel.text = currentDateStr;
-        }else if (pickerForSelectColor.tag == 106) {
-            
-            //儿童信息2
-            ModifyCell *cell = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-            cell.delegate = self;
-            [cell.birthdayLabelBtn setTitle:currentDateStr forState:UIControlStateNormal];
-//            cell.birthdayLabel.text = currentDateStr;
         }
+        
+//            //儿童信息1
+//            ModifyCell *cell = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+//            cell.delegate = self;
+//            [cell.birthdayLabelBtn setTitle:currentDateStr forState:UIControlStateNormal];
+//        }else if (pickerForSelectColor.tag == 106) {
+//            
+//            //儿童信息2
+//            ModifyCell *cell = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+//            cell.delegate = self;
+//            [cell.birthdayLabelBtn setTitle:currentDateStr forState:UIControlStateNormal];
+//        }
     }
     
     [UIView beginAnimations:nil context:nil];
@@ -212,10 +208,6 @@
 #pragma mark  选择职业，内衣大小的picker
 
 -(void)createUserInfoPicker{
-    
-//    actionSheet = [[UIActionSheet alloc]initWithTitle:@"\n\n\n\n\n\n\n\n\n\n" delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-//    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-    
     
     mytoolbar = [[UIToolbar alloc]init];
     mytoolbar.frame = CGRectMake(0, ScreenHeight+20, 320, 40);
@@ -259,8 +251,6 @@
         
         [btn setTitle:[[dataArray objectAtIndex:currentData] objectAtIndex:[[lastSelectArray objectAtIndex:currentData] intValue]] forState:UIControlStateNormal];
     }
-//    [actionSheet dismissWithClickedButtonIndex:0 animated:YES];
-    
     mypickerView.frame = CGRectMake(0, ScreenHeight, 320, 160);
     mytoolbar.frame = CGRectMake(0, ScreenHeight+20, 320, 40);
 
@@ -268,8 +258,6 @@
 
 //lee999recode
 -(void)hiddenBarAndSheet{
-//    [actionSheet dismissWithClickedButtonIndex:0 animated:YES];
-    
     mypickerView.frame = CGRectMake(0, ScreenHeight, 320, 160);
     mytoolbar.frame = CGRectMake(0, ScreenHeight+20, 320, 40);
 }
@@ -278,8 +266,6 @@
 #pragma mark textField
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    
-    
     mypickerView.frame = CGRectMake(0, ScreenHeight, 320, 160);
     mytoolbar.frame = CGRectMake(0, ScreenHeight+20, 320, 40);
     toolBarForPicker.frame = CGRectMake(0, ScreenHeight+20, 320, 44);
@@ -292,16 +278,12 @@
     
     if (textField.tag == 38) {
         //填写姓名
-//        [scrollView setContentOffset:CGPointMake(0, 200) animated:YES];
+        // [scrollView setContentOffset:CGPointMake(0, 200) animated:YES];
     } else if (textField.tag == 39) {
         //昵称
-//        [scrollView setContentOffset:CGPointMake(0, 200) animated:YES];
+        //[scrollView setContentOffset:CGPointMake(0, 200) animated:YES];
     } else if (textField.tag == 40) {
         [self.view endEditing:YES];
-//        [textField resignFirstResponder];
-//        [self hiddenKeyBoard];
-//        [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
-//        [scrollView setContentOffset:CGPointMake(0, 200) animated:YES];
         
         //创建toolbar
         pickerForSelectColor.tag = textField.tag;
@@ -313,7 +295,7 @@
   
     } else if (textField.tag == 41) {
         //手机号码
-//        [scrollView setContentOffset:CGPointMake(0, hight) animated:YES];
+        //[scrollView setContentOffset:CGPointMake(0, hight) animated:YES];
     } else if (textField.tag == 42) {
         //邮寄地址
         [scrollView setContentOffset:CGPointMake(0, hight) animated:YES];
@@ -328,7 +310,6 @@
         if (textField.tag<104) {
             if (textField.tag == 102) {
                 [self.view endEditing:YES];
-                
                 
                 pickerForSelectColor.tag = textField.tag;
                 [textField resignFirstResponder];
@@ -451,85 +432,83 @@
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return tableViewDataArray.count;
-}
-
-- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 250.00;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    
-    ModifyCell * cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
-    cell.delegate = self;
-    if (!cell) {
-        cell = [[ModifyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"myCell"];
-    }
-    
-    NSDictionary *dic = [tableViewDataArray objectAtIndex:indexPath.row];
-    
-    cell.headlineLabel.text = [NSString stringWithFormat:@"儿童信息%ld",indexPath.row+1];
-    cell.nameLabel.text = [dic objectForKey:@"name"];
-    
-    if ([[dic objectForKey:@"sex"] isEqualToString:@"f"]) {
-        [cell btnClick:[cell viewWithTag:22]];
-    }else {
-        [cell btnClick:[cell viewWithTag:21]];
-    }
-    
-//    cell.birthdayLabelBtn.text = [dic objectForKey:@"Birthday"];
-    [cell.birthdayLabelBtn setTitle:[dic objectForKey:@"Birthday"] forState:UIControlStateNormal];
-
-    cell.statureTfield.text = [dic objectForKey:@"height"];
-    deleteRow = indexPath.row;
-    [cell.deleteBtn addTarget:self action:@selector(deleteBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    cell.statureTfield.delegate = self;
-    cell.nameLabel.delegate = self;
-//    cell.birthdayLabel.delegate = self;
-    cell.nameLabel.tag = 101+indexPath.row*4;
-    cell.birthdayLabelBtn.tag = 102+indexPath.row*4;
-    cell.statureTfield.tag = 103+indexPath.row*4;
-
-
-    cell.tag = 100+indexPath.row;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    cell.deleteChirder = ^(NSInteger index){
-        children --;
-        //只有一个，或者没有孩子的信息
-        //        [tableViewDataArray removeObjectAtIndex:self.children-1];
-        [addChildrenBtn setY:children * 260 + 660];
-        [confirmBtn setY:addChildrenBtn.frame.origin.y + addChildrenBtn.frame.size.height];
-        scrollView.contentSize = CGSizeMake(320, confirmBtn.frame.origin.y + confirmBtn.frame.size.height +30);
-        
-        [addChildrenBtn setHidden:NO];
-        
-        [tableView reloadData];
-    };
-    
-    return cell;
-}
-
-- (void)deleteBtnClick
-{
-    [tableViewDataArray removeObjectAtIndex:deleteRow];
-    [mytableView reloadData];
-    
-    [addChildrenBtn setY:children * 260 + 660];
-    [mytableView setHeight:250 * tableViewDataArray.count];
-    [confirmBtn setY:mytableView.frame.origin.y + mytableView.frame.size.height + 20];
-    scrollView.contentSize = CGSizeMake(320, confirmBtn.frame.origin.y + confirmBtn.frame.size.height + 30);
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    return 1;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return tableViewDataArray.count;
+//}
+//
+//- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return 250.00;
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    
+//    
+//    ModifyCell * cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
+//    cell.delegate = self;
+//    if (!cell) {
+//        cell = [[ModifyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"myCell"];
+//    }
+//    
+//    NSDictionary *dic = [tableViewDataArray objectAtIndex:indexPath.row];
+//    
+//    cell.headlineLabel.text = [NSString stringWithFormat:@"儿童信息%ld",indexPath.row+1];
+//    cell.nameLabel.text = [dic objectForKey:@"name"];
+//    
+//    if ([[dic objectForKey:@"sex"] isEqualToString:@"f"]) {
+//        [cell btnClick:[cell viewWithTag:22]];
+//    }else {
+//        [cell btnClick:[cell viewWithTag:21]];
+//    }
+//    
+//    [cell.birthdayLabelBtn setTitle:[dic objectForKey:@"Birthday"] forState:UIControlStateNormal];
+//
+//    cell.statureTfield.text = [dic objectForKey:@"height"];
+//    deleteRow = indexPath.row;
+//    [cell.deleteBtn addTarget:self action:@selector(deleteBtnClick) forControlEvents:UIControlEventTouchUpInside];
+//    cell.statureTfield.delegate = self;
+//    cell.nameLabel.delegate = self;
+//    cell.nameLabel.tag = 101+indexPath.row*4;
+//    cell.birthdayLabelBtn.tag = 102+indexPath.row*4;
+//    cell.statureTfield.tag = 103+indexPath.row*4;
+//
+//
+//    cell.tag = 100+indexPath.row;
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    
+//    cell.deleteChirder = ^(NSInteger index){
+//        children --;
+//        //只有一个，或者没有孩子的信息
+//        //        [tableViewDataArray removeObjectAtIndex:self.children-1];
+//        [addChildrenBtn setY:children * 260 + 660];
+//        [confirmBtn setY:addChildrenBtn.frame.origin.y + addChildrenBtn.frame.size.height];
+//        scrollView.contentSize = CGSizeMake(320, confirmBtn.frame.origin.y + confirmBtn.frame.size.height +30);
+//        
+//        [addChildrenBtn setHidden:NO];
+//        
+//        [tableView reloadData];
+//    };
+//    
+//    return cell;
+//}
+//
+//- (void)deleteBtnClick
+//{
+//    [tableViewDataArray removeObjectAtIndex:deleteRow];
+//    [mytableView reloadData];
+//    
+//    [addChildrenBtn setY:children * 260 + 660];
+//    [mytableView setHeight:250 * tableViewDataArray.count];
+//    [confirmBtn setY:mytableView.frame.origin.y + mytableView.frame.size.height + 20];
+//    scrollView.contentSize = CGSizeMake(320, confirmBtn.frame.origin.y + confirmBtn.frame.size.height + 30);
+//}
 
 
 -(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
@@ -565,10 +544,10 @@
         
     }else if (btn.tag == 28){ //提交按钮
         
-        ModifyCell *cell = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        cell.delegate = self;
-        ModifyCell *cell2 = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-        cell.delegate = self;
+//        ModifyCell *cell = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+//        cell.delegate = self;
+//        ModifyCell *cell2 = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+//        cell.delegate = self;
 
         //lee999 增加判断，么有输入手机号的时候，提示输入手机号。
         if ([telephoneLabel.text description].length<1) {
@@ -580,12 +559,6 @@
             [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"请输入正确的手机号码"];
             return;
         }
-        
-//        if (![NSString isValidateEmail:emailTField.text]) {
-//            [SBPublicAlert showAlertTitle:@"爱慕提示" Message:@"请输入正确的邮箱"];
-//            return;
-//        }
-        
         //lee999增加邮编的判断
         if (postcodeTField.text.length != 0) {
             if (postcodeTField.text.length != 6) {
@@ -609,15 +582,17 @@
                             andEmail:emailTField.text
                        andProfession:professionBtn.titleLabel.text
                            andIncome:incomeBtn.titleLabel.text
-                  andChild1_Birthday:cell.birthdayLabelBtn.titleLabel.text
-                        andAk_Name_1:cell.nameLabel.text
-                        andAk_Name_2:cell2.nameLabel.text
-                         andAk_Sex_1:cell.gender
-                         andAk_Sex_2:cell2.gender
-                          andChild1H:cell.statureTfield.text
-                          andChild2H:cell2.statureTfield.text
+                  andChild1_Birthday:@""//cell.birthdayLabelBtn.titleLabel.text
+                        andAk_Name_1:@""//cell.nameLabel.text
+                        andAk_Name_2:@""//cell2.nameLabel.text
+                         andAk_Sex_1:@""//cell.gender
+                         andAk_Sex_2:@""//cell2.gender
+                          andChild1H:@""//cell.statureTfield.text
+                          andChild2H:@""//cell2.statureTfield.text
                           andZipcode:postcodeTField.text
-                  andChild2_Birthday:cell2.birthdayLabelBtn.titleLabel.text];
+                  andChild2_Birthday:@""//cell2.birthdayLabelBtn.titleLabel.text
+         
+         ];
         
         
         
@@ -635,7 +610,7 @@
         
         [addChildrenBtn setY:children * 270 + 640];
         [confirmBtn setY:addChildrenBtn.frame.origin.y + addChildrenBtn.frame.size.height];
-        scrollView.contentSize = CGSizeMake(320, confirmBtn.frame.origin.y + confirmBtn.frame.size.height+ 60);
+//        scrollView.contentSize = CGSizeMake(320, confirmBtn.frame.origin.y + confirmBtn.frame.size.height+ 60);
         
         if (children == 2) {
             addChildrenBtn.hidden = YES;
@@ -680,7 +655,6 @@
                 
                 nameLabel.text = infoModel.realname;
                 [birthdayLabelBtn setTitle:infoModel.birthday forState:UIControlStateNormal];
-//                birthdayLabelBtn.titleLabel.text = infoModel.birthday;
                 telephoneLabel.text = infoModel.mobile;
                 emailTField.text = infoModel.email;
                 addressTField.text = infoModel.address;
@@ -725,7 +699,7 @@
                     
                     [addChildrenBtn setY:children * 260 + 660 +10];
                     [confirmBtn setY:addChildrenBtn.frame.origin.y + addChildrenBtn.frame.size.height];
-                    scrollView.contentSize = CGSizeMake(320, confirmBtn.frame.origin.y + confirmBtn.frame.size.height +30);
+                    //scrollView.contentSize = CGSizeMake(320, confirmBtn.frame.origin.y + confirmBtn.frame.size.height +30);
                     
                     [addChildrenBtn setHidden:YES];
                 }
@@ -737,11 +711,6 @@
                 if (!infoModel.income) {
                     [incomeBtn setTitle:@"请选择" forState:UIControlStateNormal];
                 } else {
-                    //                [lastSelectArray addObject:infoModel.income];
-                    //                [lastSelectArray addObject:infoModel.profession];
-                    //                [lastSelectArray addObject:infoModel.brasize];
-                    //                [lastSelectArray addObject:infoModel.underpants];
-                    //                [lastSelectArray addObject:infoModel.clothsize];
                     NSInteger i = 0;
                     for (NSString *temStr in infoModel.marriageArr) {
                         
@@ -838,10 +807,6 @@
         {
             if (!model.errorMessage) {
                 
-//                [SBPublicAlert showMBProgressHUD:[(ChengeMyInfo *)model res] andWhereView:self.view hiddenTime:1.];
-//                [SBPublicAlert showMBProgressHUD:@"恭喜您，修改成功" andWhereView:self.view hiddenTime:0.6];
-//                [self.navigationController popViewControllerAnimated:YES];
-                
                 UIAlertView *alertv = [[UIAlertView alloc]initWithTitle:@"爱慕提示" message:@"恭喜您修改成功" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
                 alertv.tag = 100098;
                 [alertv show];
@@ -896,28 +861,25 @@
 }
 
 -(void)changeChildBirthday:(NSInteger)index{
-
+    
     [self.view endEditing:YES];
     
-    ModifyCell *cell2 = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    cell2.delegate = self;
-//    if (index== 106) {
+//    ModifyCell *cell2 = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+//    cell2.delegate = self;
+//    pickerForSelectColor.tag = index;
+//    
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:0.3];
+//    
+//    toolBarForPicker.frame = CGRectMake(0, ScreenHeight-216-44, 320, 44);
+//    
+//    pickerForSelectColor.frame = CGRectMake(0, ScreenHeight-216, 320, 216);
+//    
+//    [UIView commitAnimations];
+//    [scrollView setContentOffset:CGPointMake(0, cell2.frame.origin.y + (index - 99) * 100) animated:YES];
+//    lastOffset =  cell2.frame.origin.y + (index - 99) * 100;
+//    isCellOffset = YES;
     
-        pickerForSelectColor.tag = index;
-
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.3];
-        
-        toolBarForPicker.frame = CGRectMake(0, ScreenHeight-216-44, 320, 44);
-        
-        pickerForSelectColor.frame = CGRectMake(0, ScreenHeight-216, 320, 216);
-        
-        [UIView commitAnimations];
-//    }
-    [scrollView setContentOffset:CGPointMake(0, cell2.frame.origin.y + (index - 99) * 100) animated:YES];
-    lastOffset =  cell2.frame.origin.y + (index - 99) * 100;
-    isCellOffset = YES;
-
 }
 
 

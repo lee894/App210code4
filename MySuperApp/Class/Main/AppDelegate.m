@@ -170,6 +170,9 @@
 
     // Required
     
+    
+    [self.window makeKeyAndVisible];
+
     return YES;
 }
 
@@ -357,39 +360,23 @@
 
 -(void)loadMainView
 {
-    
-    YKSplashView *gudeView = [[YKSplashView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
-    self.splashView = gudeView;
+    self.splashView = [[YKSplashView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth,ScreenHeight)];
+    //self.splashView = gudeView;
+    [splashView setBackgroundColor:[UIColor greenColor]];
     [self.window addSubview:self.splashView];
-    [self.window makeKeyAndVisible];
-    
-//    //先判断是否是第一次使用
-//    if (![YKSplashView getIsOpenGuideView]) {
-//        [self loadSplashView]; //加载引导图
-//    }else{
-//        [self createAKtableBar];
-//    }
-}
-
-//加载引导图
--(void)loadSplashView
-{
-    NSLog(@"ScreenWidth:%f--ScreenHeight:%f",ScreenWidth,ScreenHeight);
-    
-    mainpageVC = [[MainpageViewController alloc] init];
-    [self.window addSubview:mainpageVC.view];
-    
     [self.window makeKeyAndVisible];
 }
 
 -(void)createAKtableBar{
     
-    //创建首页
-    //[self createShopMallView];
-    //[self createHomepageView];
-    [self createNewHomepageView];
+    if (self.splashView &&self.splashView.superview) {
+        [self.splashView removeFromSuperview];
+    }
     
-    [self.window makeKeyAndVisible];
+    [self.splashView removeFromSuperview];
+    [self.window sendSubviewToBack:self.splashView];
+    //创建首页
+    [self createNewHomepageView];
 }
 
 //创建新首页视图
@@ -422,7 +409,6 @@
     self.viewController = self.mytabBarController;
     
     [self customizeTabBarForController:self.mytabBarController];
- 
     [self customizeInterface];
 
 }
@@ -476,8 +462,6 @@
     [navigationBarAppearance setTitleTextAttributes:textAttributes];
     
     [self.window setRootViewController:self.viewController];
-    
-    [self.splashView removeFromSuperview];
 }
 
 

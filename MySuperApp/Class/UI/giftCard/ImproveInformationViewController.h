@@ -12,7 +12,7 @@
 #import "ModifyCell.h"
 #import "LBaseViewController.h"
 
-@interface ImproveInformationViewController : LBaseViewController <UITextFieldDelegate,UIScrollViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDelegate,UITableViewDataSource,ServiceDelegate,ModifyCellDelegate>
+@interface ImproveInformationViewController : LBaseViewController <UITextFieldDelegate,UIScrollViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,ServiceDelegate,ModifyCellDelegate>//,UITableViewDelegate,UITableViewDataSource
 {
     
     MainpageServ *mainSer;

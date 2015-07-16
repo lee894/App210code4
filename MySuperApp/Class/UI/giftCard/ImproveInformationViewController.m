@@ -113,7 +113,7 @@
     [toolBarForNumber setItems:[NSArray arrayWithObjects:buttonForCancel_Number,buttonForFix_Number,buttonForDone_Number,nil]];
     
     
-    scrollView.contentSize = CGSizeMake(320, 1520);
+    scrollView.contentSize = CGSizeMake(320, 1070);
     scrollView.userInteractionEnabled = YES;
     scrollView.delegate = self;
     
@@ -175,26 +175,28 @@
     lastSelectArray = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0",@"0",@"0", nil];
 
     
-    mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 930, 320, 260 *children) style:UITableViewStylePlain];
-    mytableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    mytableView.backgroundColor = [UIColor clearColor];
-    mytableView.bounces = NO;
-    mytableView.delegate = self;
-    mytableView.dataSource = self;
-    [scrollView addSubview:mytableView];
+//    mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 930, 320, 260 *children) style:UITableViewStylePlain];
+//    mytableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    mytableView.backgroundColor = [UIColor clearColor];
+//    mytableView.bounces = NO;
+//    mytableView.delegate = self;
+//    mytableView.dataSource = self;
+//    [scrollView addSubview:mytableView];
     
-    addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addBtn setTitleColor:UIColorFromRGB(0xB90023) forState:UIControlStateNormal];
-    [addBtn setTitleColor:UIColorFromRGB(0xB90023) forState:UIControlStateHighlighted];
-    [addBtn setTitle:@"增加一个儿童信息" forState:UIControlStateNormal];
-    addBtn.backgroundColor = [UIColor clearColor];
-    addBtn.frame = CGRectMake(25,children * 260 + 930, 150, 30);
-    addBtn.tag = 50;
-    [addBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [scrollView addSubview:addBtn];
     
-    [confirmBtn setY:addBtn.frame.origin.y + addBtn.frame.size.height + 20];
-    [remarkLabel setY:confirmBtn.frame.origin.y + confirmBtn.frame.size.height + 20];
+    //lee999 150716 妹妹不让显示儿童信息了
+//    addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [addBtn setTitleColor:UIColorFromRGB(0xB90023) forState:UIControlStateNormal];
+//    [addBtn setTitleColor:UIColorFromRGB(0xB90023) forState:UIControlStateHighlighted];
+//    [addBtn setTitle:@"增加一个儿童信息" forState:UIControlStateNormal];
+//    addBtn.backgroundColor = [UIColor clearColor];
+//    addBtn.frame = CGRectMake(25,children * 260 + 930, 150, 30);
+//    addBtn.tag = 50;
+//    [addBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+//    [scrollView addSubview:addBtn];
+    
+//    [confirmBtn setY:addBtn.frame.origin.y + addBtn.frame.size.height + 20];
+//    [remarkLabel setY:confirmBtn.frame.origin.y + confirmBtn.frame.size.height + 20];
 }
 
 - (void)BarButtonClick:(UIBarButtonItem *)sender {
@@ -239,55 +241,55 @@
                 [monthBtn setTitle:monthStr forState:UIControlStateNormal];
                 [dayBtn setTitle:dayStr forState:UIControlStateNormal];
             }else if (datepicker.tag == PicekTagCellOne) {
-                [UIView commitAnimations];
-                [UIView beginAnimations:nil context:nil];
-                [UIView setAnimationDuration:0.3];
-                datepicker.frame=CGRectMake(0-5.5, ScreenHeight, 320, 216);
-                toolBarForNumber.frame=CGRectMake(0, ScreenHeight+20, 320, 44)
-                ;
-                [UIView setAnimationDidStopSelector:@selector(hiddleAllshowView)];
-                [UIView commitAnimations];
-                NSDateFormatter*formatter = [[NSDateFormatter alloc] init];
-                [formatter setDateFormat:@"yyyy"];
-                NSString *yearStr = [formatter stringFromDate:datepicker.date];
-                
-                [formatter setDateFormat:@"MM"];
-                NSString *monthStr = [formatter stringFromDate:datepicker.date];
-                
-                [formatter setDateFormat:@"dd"];
-                NSString *dayStr = [formatter stringFromDate:datepicker.date];
-                
-                
-                ModifyCell *cell = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-                cell.delegate = self;
-//                cell.birthdayLabel.text = [NSString stringWithFormat:@"%@-%@-%@",yearStr,monthStr,dayStr];
-                [cell.birthdayLabelBtn setTitle:[NSString stringWithFormat:@"%@-%@-%@",yearStr,monthStr,dayStr] forState:UIControlStateNormal];
+//                [UIView commitAnimations];
+//                [UIView beginAnimations:nil context:nil];
+//                [UIView setAnimationDuration:0.3];
+//                datepicker.frame=CGRectMake(0-5.5, ScreenHeight, 320, 216);
+//                toolBarForNumber.frame=CGRectMake(0, ScreenHeight+20, 320, 44)
+//                ;
+//                [UIView setAnimationDidStopSelector:@selector(hiddleAllshowView)];
+//                [UIView commitAnimations];
+//                NSDateFormatter*formatter = [[NSDateFormatter alloc] init];
+//                [formatter setDateFormat:@"yyyy"];
+//                NSString *yearStr = [formatter stringFromDate:datepicker.date];
+//                
+//                [formatter setDateFormat:@"MM"];
+//                NSString *monthStr = [formatter stringFromDate:datepicker.date];
+//                
+//                [formatter setDateFormat:@"dd"];
+//                NSString *dayStr = [formatter stringFromDate:datepicker.date];
+//                
+//                
+//                ModifyCell *cell = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+//                cell.delegate = self;
+////                cell.birthdayLabel.text = [NSString stringWithFormat:@"%@-%@-%@",yearStr,monthStr,dayStr];
+//                [cell.birthdayLabelBtn setTitle:[NSString stringWithFormat:@"%@-%@-%@",yearStr,monthStr,dayStr] forState:UIControlStateNormal];
               
             }else if (datepicker.tag == PicekTagCellTwo) {
+//                
+//                [UIView commitAnimations];
+//                [UIView beginAnimations:nil context:nil];
+//                [UIView setAnimationDuration:0.3];
+//                datepicker.frame=CGRectMake(0-5.5, ScreenHeight, 320, 216);
+//                toolBarForNumber.frame=CGRectMake(0, ScreenHeight+20, 320, 44)
+//                ;
+//                [UIView setAnimationDidStopSelector:@selector(hiddleAllshowView)];
+//                [UIView commitAnimations];
+//                NSDateFormatter*formatter = [[NSDateFormatter alloc] init];
+//                [formatter setDateFormat:@"yyyy"];
+//                NSString *yearStr = [formatter stringFromDate:datepicker.date];
+//                
+//                [formatter setDateFormat:@"MM"];
+//                NSString *monthStr = [formatter stringFromDate:datepicker.date];
+//                
+//                [formatter setDateFormat:@"dd"];
+//                NSString *dayStr = [formatter stringFromDate:datepicker.date];
                 
-                [UIView commitAnimations];
-                [UIView beginAnimations:nil context:nil];
-                [UIView setAnimationDuration:0.3];
-                datepicker.frame=CGRectMake(0-5.5, ScreenHeight, 320, 216);
-                toolBarForNumber.frame=CGRectMake(0, ScreenHeight+20, 320, 44)
-                ;
-                [UIView setAnimationDidStopSelector:@selector(hiddleAllshowView)];
-                [UIView commitAnimations];
-                NSDateFormatter*formatter = [[NSDateFormatter alloc] init];
-                [formatter setDateFormat:@"yyyy"];
-                NSString *yearStr = [formatter stringFromDate:datepicker.date];
-                
-                [formatter setDateFormat:@"MM"];
-                NSString *monthStr = [formatter stringFromDate:datepicker.date];
-                
-                [formatter setDateFormat:@"dd"];
-                NSString *dayStr = [formatter stringFromDate:datepicker.date];
-                
-              ModifyCell *cell2 = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-                cell2.delegate = self;
-//                cell2.birthdayLabel.text = [NSString stringWithFormat:@"%@-%@-%@",yearStr,monthStr,dayStr];
-                
-                [cell2.birthdayLabelBtn setTitle:[NSString stringWithFormat:@"%@-%@-%@",yearStr,monthStr,dayStr] forState:UIControlStateNormal];
+//              ModifyCell *cell2 = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+//                cell2.delegate = self;
+////                cell2.birthdayLabel.text = [NSString stringWithFormat:@"%@-%@-%@",yearStr,monthStr,dayStr];
+//                
+//                [cell2.birthdayLabelBtn setTitle:[NSString stringWithFormat:@"%@-%@-%@",yearStr,monthStr,dayStr] forState:UIControlStateNormal];
             }
         }
             break;
@@ -314,18 +316,18 @@
     [postcodeTField resignFirstResponder];
     [emailTField resignFirstResponder];
     
-    
-    ModifyCell *cell = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.delegate = self;
-//    NSArray *arrCell2 = [cell2.birthdayLabel.text componentsSeparatedByString:@"-"];
-    [cell.statureTfield resignFirstResponder];
-    [cell.nameLabel resignFirstResponder];
-    
-    ModifyCell *cell2 = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-    cell2.delegate = self;
-//    NSArray *arrCell2 = [cell2.birthdayLabel.text componentsSeparatedByString:@"-"];
-    [cell2.statureTfield resignFirstResponder];
-    [cell2.nameLabel resignFirstResponder];
+//    
+//    ModifyCell *cell = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+//    cell.delegate = self;
+////    NSArray *arrCell2 = [cell2.birthdayLabel.text componentsSeparatedByString:@"-"];
+//    [cell.statureTfield resignFirstResponder];
+//    [cell.nameLabel resignFirstResponder];
+//    
+//    ModifyCell *cell2 = (ModifyCell *)[mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+//    cell2.delegate = self;
+////    NSArray *arrCell2 = [cell2.birthdayLabel.text componentsSeparatedByString:@"-"];
+//    [cell2.statureTfield resignFirstResponder];
+//    [cell2.nameLabel resignFirstResponder];
 }
 
 
@@ -564,65 +566,68 @@
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    return 1;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return tableViewDataArray.count;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return 260.;
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return tableViewDataArray.count;
-}
-
-- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 260;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+//    ModifyCell * cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
+//    if (!cell) {
+//        cell = [[ModifyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"myCell"];
+//    }
+//    cell.delegate = self;
     
-    ModifyCell * cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
-    if (!cell) {
-        cell = [[ModifyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"myCell"];
-    }
-    cell.delegate = self;
+    //lee999 150716 妹妹不让显示儿童信息了
     
-    if (tableViewDataArray.count > 0) {
-        NSDictionary *dic = [tableViewDataArray objectAtIndex:indexPath.row];
-        
-        cell.headlineLabel.text = [NSString stringWithFormat:@"儿童信息%d",indexPath.row+1];
-        //姓名
-        cell.nameLabel.text = ([cell.nameLabel.text isEqualToString:@""]?[dic objectForKey:@"name"]:cell.nameLabel.text);
-        cell.nameLabel.tag = 100086;
-        
-        cell.gender = ([cell.gender isEqualToString:@""]?[dic objectForKey:@"sex"]:cell.gender);
-        //年纪
-        cell.birthdayLabelBtn.tag = 1000+indexPath.row;
-//        cell.birthdayLabel.text = ([cell.birthdayLabel.text isEqualToString:@""]?[dic objectForKey:@"Birthday"]:cell.birthdayLabel.text);
-        NSString *strl = ([cell.birthdayLabelBtn.titleLabel.text isEqualToString:@""]?[dic objectForKey:@"Birthday"]:cell.birthdayLabelBtn.titleLabel.text);
-        
-        [cell.birthdayLabelBtn setTitle:strl forState:UIControlStateNormal];
-        
-        cell.statureTfield.text = ([cell.statureTfield.text isEqualToString:@""]?[dic objectForKey:@"height"]:cell.statureTfield.text);
-        deleteRow = indexPath.row;
-        [cell.deleteBtn addTarget:self action:@selector(deleteBtnClick) forControlEvents:UIControlEventTouchUpInside];
-        cell.statureTfield.delegate = self;
-        cell.statureTfield.tag = 101+indexPath.row;
-        cell.tag = 100+indexPath.row;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        cell.deleteChirder = ^(NSInteger index){
-            children --;
-            NSLog(@"进入了块，运行了块");
-            [addBtn setY:children * 260 + 920];
-            [addBtn setHidden:NO];
-            
-            [mytableView reloadData];
-        };
-    };
-    return cell;
-}
+//    if (tableViewDataArray.count > 0) {
+//        NSDictionary *dic = [tableViewDataArray objectAtIndex:indexPath.row];
+//        
+//        cell.headlineLabel.text = [NSString stringWithFormat:@"儿童信息%d",indexPath.row+1];
+//        //姓名
+//        cell.nameLabel.text = ([cell.nameLabel.text isEqualToString:@""]?[dic objectForKey:@"name"]:cell.nameLabel.text);
+//        cell.nameLabel.tag = 100086;
+//        
+//        cell.gender = ([cell.gender isEqualToString:@""]?[dic objectForKey:@"sex"]:cell.gender);
+//        //年纪
+//        cell.birthdayLabelBtn.tag = 1000+indexPath.row;
+////        cell.birthdayLabel.text = ([cell.birthdayLabel.text isEqualToString:@""]?[dic objectForKey:@"Birthday"]:cell.birthdayLabel.text);
+//        NSString *strl = ([cell.birthdayLabelBtn.titleLabel.text isEqualToString:@""]?[dic objectForKey:@"Birthday"]:cell.birthdayLabelBtn.titleLabel.text);
+//        
+//        [cell.birthdayLabelBtn setTitle:strl forState:UIControlStateNormal];
+//        
+//        cell.statureTfield.text = ([cell.statureTfield.text isEqualToString:@""]?[dic objectForKey:@"height"]:cell.statureTfield.text);
+//        deleteRow = indexPath.row;
+//        [cell.deleteBtn addTarget:self action:@selector(deleteBtnClick) forControlEvents:UIControlEventTouchUpInside];
+//        cell.statureTfield.delegate = self;
+//        cell.statureTfield.tag = 101+indexPath.row;
+//        cell.tag = 100+indexPath.row;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        
+//        cell.deleteChirder = ^(NSInteger index){
+//            children --;
+//            NSLog(@"进入了块，运行了块");
+//            [addBtn setY:children * 260 + 920];
+//            [addBtn setHidden:NO];
+//            
+//            [mytableView reloadData];
+//        };
+//    };
+    
+//    return cell;
+//}
 
 
 - (void)selectReceiveview:(NSInteger)index{
