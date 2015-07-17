@@ -641,7 +641,7 @@
     if ([tableView tag] == 1001) {
         return lee1fitAllScreen(325); //+15 为中间间距
     }
-    return lee1fitAllScreen(270);
+    return  lee1fitAllScreen(250);//lee1fitAllScreen();
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
