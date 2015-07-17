@@ -12,6 +12,8 @@
 #import "JSON.h"
 
 
+#define splashViewNum 4
+
 
 @implementation YKSplashView
 
@@ -159,7 +161,7 @@
 {
     theImgView.userInteractionEnabled = YES;
     
-    if (index == 2) {//最后一页
+    if (index == splashViewNum -1) {//最后一页
         
         UIButton *clickBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [clickBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
@@ -186,7 +188,7 @@
 
 - (void)loadView
 {
-    int num = 3;
+    int num = splashViewNum;
     [_pageControl setNumberOfPages:num];
     [_pageControl setCurrentPage:0];
     

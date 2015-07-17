@@ -180,7 +180,7 @@
                   moduleName = "MyAimerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yanglee/Desktop/App210code4/MySuperApp/Class/Service/main/MainpageServ.m"
-                  timestampString = "458814346.968397"
+                  timestampString = "458842977.267471"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "785"
@@ -195,7 +195,7 @@
                   moduleName = "MyAimerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yanglee/Desktop/App210code4/MySuperApp/Class/Service/main/MainpageServ.m"
-                  timestampString = "458814346.968519"
+                  timestampString = "458842977.267595"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "785"
@@ -426,6 +426,22 @@
             startingLineNumber = "59"
             endingLineNumber = "59"
             landmarkName = "-addpeopleAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MySuperApp/Class/UI/mainpage/YKSplashView.m"
+            timestampString = "458842788.677237"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "+getIsOpenGuideView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
