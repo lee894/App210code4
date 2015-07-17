@@ -579,6 +579,7 @@
         
         else if ([data class] == [FreePostCardInfo class])
         {
+            //type = ((FreePostCardInfo*)data).type;
             strStatus = ((FreePostCardInfo*)data).status;
             strTitle = [NSString stringWithFormat:@"%@共计%@次", ((FreePostCardInfo*)data).name, ((FreePostCardInfo*)data).total_times];
             strPrice = [[NSNumber numberWithInteger:[((FreePostCardInfo*)data).total_times integerValue] - [((FreePostCardInfo*)data).used_times integerValue]] description];
@@ -616,11 +617,12 @@
                 {
                     iBg = [UIImage imageNamed:@"laber_lpk"];
                     [btnAction setTitleColor:[UIColor colorWithHexString:@"#ff6767"] forState:UIControlStateNormal];
-                }else{
-                    //增加备选情况，省的不显示
-                    iBg = [UIImage imageNamed:@"laber_yh"];
-                    [btnAction setTitleColor:[UIColor colorWithHexString:@"#c8002c"] forState:UIControlStateNormal];
                 }
+//                else{
+//                    //增加备选情况，省的不显示
+//                    iBg = [UIImage imageNamed:@"laber_yh"];
+//                    [btnAction setTitleColor:[UIColor colorWithHexString:@"#c8002c"] forState:UIControlStateNormal];
+//                }
                 
                 
                 [btnAction setTitle:@"使用" forState:UIControlStateNormal];

@@ -970,10 +970,10 @@
 -(void)gotoSearchViewC{
     
 //#warning ----test lee999
-        ImproveInformationViewController *iivc = [[ImproveInformationViewController alloc] init];
-//    ModifyInformationViewController * iivc = [[ModifyInformationViewController alloc] init];
-    [self.navigationController pushViewController:iivc animated:YES];
-    return;
+//        ImproveInformationViewController *iivc = [[ImproveInformationViewController alloc] init];
+////    ModifyInformationViewController * iivc = [[ModifyInformationViewController alloc] init];
+//    [self.navigationController pushViewController:iivc animated:YES];
+//    return;
 
     
 //    YKReferOrderViewController * refer = [[YKReferOrderViewController alloc] init];

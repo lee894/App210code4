@@ -105,9 +105,9 @@
                             specitem.imgurl = [specDic objectForKey:@"imgurl"];
                             NSString* specStr = [specDic objectForKey:@"spec_id"];
                             if ([specStr isEqualToString:colorid]) {
-                                if ([array_product indexOfObject:[specitem productid]]!=2147483647) {
-//                                    if (![colorArray containsObject:specitem]) {
-                                        [colorArray addObject:specitem];
+                                //if ([array_product indexOfObject:[specitem productid]]!=2147483647) {
+                                //lee999由于升级了 arm64 ，导致取出来的不是 int的最大值  改为判断是否含有
+                                if ([array_product containsObject:[specitem productid]]) {                                        [colorArray addObject:specitem];
 
 //                                    }
                                 }

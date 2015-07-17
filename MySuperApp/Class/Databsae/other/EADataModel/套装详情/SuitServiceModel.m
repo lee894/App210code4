@@ -212,7 +212,9 @@
                     }
                     //colorlist
                     if([[iSize objectForKey:@"spec_id"] isEqual:item.colorid]) {
-                        if ([array_product indexOfObject:[sizeitem ID]] != 2147483647) {
+                        //if ([array_product indexOfObject:[sizeitem ID]] != 2147483647) {
+                        //lee999由于升级了 arm64 ，导致取出来的不是 int的最大值  改为判断是否含有
+                        if ([array_product containsObject:[sizeitem ID]]) {
                             [item.colorlist addSize:sizeitem];
                         }
                     }
