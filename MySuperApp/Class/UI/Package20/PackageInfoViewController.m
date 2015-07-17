@@ -929,7 +929,9 @@
                                         (i / 2) * (lee1fitAllScreen((180 + 90))),
                                         lee1fitAllScreen(140),
                                         lee1fitAllScreen((180 + 90)))];
-            UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
+            
+            //UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 15, lee1fitAllScreen(140), lee1fitAllScreen(180))];
+            UrlImageView* uiv = [[UrlImageView alloc] initWithFrame:CGRectMake(0, 15, 137,180)];
             [uiv setImageWithURL:[NSURL URLWithString:pgi.image_url] placeholderImage:nil];
             [vUnit addSubview:uiv];
             [vUnit setTag:indexPath.row * 10000 + i];

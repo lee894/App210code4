@@ -1041,7 +1041,7 @@
         {
             //lee999 增加联系客服
             YKCanReuse_webViewController *webView = [[YKCanReuse_webViewController alloc] init];
-            webView.strURL = [NSString stringWithFormat:@"%@?gid=%@",kefuUrl,self.product_id];
+            webView.strURL = [NSString stringWithFormat:@"%@?gid=%@",kefuUrl,self.thisProductId];
             webView.strTitle = @"联系客服";
             [self.navigationController pushViewController:webView animated:YES];
             
