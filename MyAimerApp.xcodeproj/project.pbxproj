@@ -7748,7 +7748,7 @@
 				9BCA822718C47EAF00B81CA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		9BCA822818C47EAF00B81CA5 /* Build configuration list for PBXNativeTarget "MyAimerApp" */ = {
 			isa = XCConfigurationList;
@@ -7757,7 +7757,7 @@
 				9BCA822A18C47EAF00B81CA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
