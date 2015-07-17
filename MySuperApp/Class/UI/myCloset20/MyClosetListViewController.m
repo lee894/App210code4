@@ -253,7 +253,7 @@
         }
     }
     
-    NSInteger H = SP + (pH +SP)* subSortbtnNum  + 10;
+    NSInteger H = SP + (pH +SP)* subSortbtnNum  + 120;
     [bgv setContentSize:CGSizeMake(ScreenWidth, H)];
     
     return bgv;

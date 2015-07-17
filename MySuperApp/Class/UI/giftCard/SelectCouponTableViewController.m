@@ -587,8 +587,6 @@
     
     [nametextfield resignFirstResponder];
     
-    
-#warning -----优惠券绑定成功
     //点击选中礼品卡
     if (self.delegate && [self.delegate respondsToSelector:@selector(SelectCouponIndex:withslelectTag:withCodeValue:)]) {
         
@@ -799,7 +797,6 @@
                 [MYCommentAlertView showMessage:bangModel.res target:nil];
                 
                 
-    #warning -----优惠券绑定成功
                 //点击选中礼品卡
                 if (self.delegate && [self.delegate respondsToSelector:@selector(SelectCouponIndex:withslelectTag:withCodeValue:)]) {
                     
