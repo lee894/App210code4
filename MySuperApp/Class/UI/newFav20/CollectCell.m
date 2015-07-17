@@ -200,9 +200,9 @@
 //lee999 修改商品列表图片为小图
 -(NSString*)changeimageToSmall:(NSString*)aimageStr{
 
-    NSLog(@"剪切后的图片url是：%@",[aimageStr hasSuffix:@".jpg"]?[aimageStr stringByReplacingOccurrencesOfString:@".jpg" withString:@"_169x210.jpg"]:aimageStr);
+    NSLog(@"剪切后的图片url是：%@",[aimageStr hasSuffix:@".jpg"]?[aimageStr stringByReplacingOccurrencesOfString:@".jpg" withString:@"_225x300.jpg"]:aimageStr);
     
-    return [aimageStr hasSuffix:@".jpg"]?[aimageStr stringByReplacingOccurrencesOfString:@".jpg" withString:@"_169x210.jpg"]:aimageStr;
+    return [aimageStr hasSuffix:@".jpg"]?[aimageStr stringByReplacingOccurrencesOfString:@".jpg" withString:@"_225x300.jpg"]:aimageStr;
 }
 
 @end
