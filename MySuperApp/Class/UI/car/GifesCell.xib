@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1296</int>
-		<string key="IBDocument.SystemVersion">14D136</string>
+		<string key="IBDocument.SystemVersion">14E46</string>
 		<string key="IBDocument.InterfaceBuilderVersion">7706</string>
-		<string key="IBDocument.AppKitVersion">1347.57</string>
+		<string key="IBDocument.AppKitVersion">1348.17</string>
 		<string key="IBDocument.HIToolboxVersion">758.70</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -55,10 +55,6 @@
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-										<object class="NSCustomResource" key="IBUIImage">
-											<string key="NSClassName">NSImage</string>
-											<string key="NSResourceName">same_pic_bg.png</string>
-										</object>
 									</object>
 									<object class="IBUIImageView" id="900412369">
 										<reference key="NSNextResponder" ref="465137356"/>
@@ -301,7 +297,7 @@ yjjKt8s2y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{14, 37}, {26, 27}}</string>
 								<reference key="NSSuperview" ref="624757250"/>
-								<reference key="NSNextKeyView"/>
+								<reference key="NSNextKeyView" ref="151768356"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<reference key="IBUIBackgroundColor" ref="642577007"/>
 								<bool key="IBUIOpaque">NO</bool>
@@ -558,7 +554,6 @@ yjjKt8s2y7bMNcy1zTXNtc42zrbPN8+40DnQutE80b7SP9LB00TTxtRJ1MvVTtXR1lXW2Ndc1+DYZNjo
 			<string key="choice_unchecked.png">{28, 28}</string>
 			<string key="lp_option.png">{80, 30}</string>
 			<string key="lp_option_hover.png">{80, 30}</string>
-			<string key="same_pic_bg.png">{200, 246}</string>
 			<string key="signup_btn_press.png">{238, 74}</string>
 		</dictionary>
 	</data>
