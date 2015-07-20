@@ -81,11 +81,11 @@
                     <rect key="frame" x="91" y="364" width="158" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" title="010-62258683" backgroundImage="service_btn.png">
+                    <state key="normal" title="010-62258683" backgroundImage="service_btn2.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <state key="highlighted" backgroundImage="service_btn_press.png">
+                    <state key="highlighted" backgroundImage="service_btn2.png">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -103,8 +103,7 @@
         </view>
     </objects>
     <resources>
-        <image name="service_btn.png" width="560" height="76"/>
-        <image name="service_btn_press.png" width="560" height="76"/>
+        <image name="service_btn2.png" width="239" height="36"/>
         <image name="shop_nav_icon_navigation.png" width="50" height="50"/>
         <image name="shop_nav_icon_navigation_press.png" width="50" height="50"/>
     </resources>
