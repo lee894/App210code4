@@ -151,7 +151,7 @@
                                             strtype = @"微信朋友圈";
                                             break;
                                     }
-                                    
+                                                                    
 
                                     NSString* str1 = [arr objectAtIndex:0 isArray:nil]; //什么分享
                                     NSString* str2 = [arr objectAtIndex:1 isArray:nil]; // 商品id
@@ -162,7 +162,6 @@
                                                                           @"分享类型":strtype,
                                                                           @"商品ID":str2,
                                                                           @"商品名称":str3}];
-                                    
                                     
                                     
                                     [MYCommentAlertView showMessage:@"分享成功" target:nil];
