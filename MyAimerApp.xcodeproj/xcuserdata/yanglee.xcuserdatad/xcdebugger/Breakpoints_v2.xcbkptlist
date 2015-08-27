@@ -180,12 +180,12 @@
                   moduleName = "MyAimerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yanglee/Desktop/App210code4/MySuperApp/Class/Service/main/MainpageServ.m"
-                  timestampString = "458921298.110144"
+                  timestampString = "461506023.645395"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "785"
                   endingLineNumber = "785"
-                  offsetFromSymbolStart = "592">
+                  offsetFromSymbolStart = "1284">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -195,12 +195,12 @@
                   moduleName = "MyAimerApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yanglee/Desktop/App210code4/MySuperApp/Class/Service/main/MainpageServ.m"
-                  timestampString = "458921298.110303"
+                  timestampString = "461506023.645521"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "785"
                   endingLineNumber = "785"
-                  offsetFromSymbolStart = "40">
+                  offsetFromSymbolStart = "36">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -419,29 +419,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MySuperApp/Class/UI/myCloset20/MyClosetSettingVC.m"
-            timestampString = "458667951.963547"
+            filePath = "MySuperApp/Class/UI/newHomePage20/LNewHomePageViewController.m"
+            timestampString = "461750338.908299"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "-addpeopleAction:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MySuperApp/Class/UI/mainpage/YKSplashView.m"
-            timestampString = "458842788.677237"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
-            landmarkName = "+getIsOpenGuideView"
+            startingLineNumber = "879"
+            endingLineNumber = "879"
+            landmarkName = "-createCellView:andisfromReconnend:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

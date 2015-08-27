@@ -874,7 +874,7 @@
             
             //lee999 新增如果两个价钱一样，就不显示
             if ([pricelab2.text isEqualToString:pricelab.text]) {
-                [pricelab setHighlighted:YES];
+                [pricelab setHidden:YES];
             }
             
             

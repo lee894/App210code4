@@ -71,7 +71,10 @@
  
     ProductlistViewController *jumpVC = [[ProductlistViewController alloc] init];
     [SingletonState sharedStateInstance].productlistType = 1;
-    jumpVC.params = @":3564";
+    
+#warning ----- 这里多写了个分号，一定要去掉！！！ （已经去掉）
+    jumpVC.params = @"3564";
+    
     jumpVC.titleName = @"换购软尺";
     jumpVC.isHiddenFilerbtn = YES;  //隐藏筛选按钮。  轮播不需要增加筛选按钮
     [self.navigationController pushViewController:jumpVC animated:YES];

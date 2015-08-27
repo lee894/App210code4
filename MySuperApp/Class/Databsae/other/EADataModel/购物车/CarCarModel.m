@@ -124,9 +124,16 @@
             NSArray* productArray = [giftDic objectForKey:@"products"];
             NSMutableArray *pro_array=[[NSMutableArray alloc]init];
             for (id pro in productArray) {
-                if (![[pro objectForKey:@"count"]isEqualToNumber:[NSNumber numberWithInt:0]]) {
-                    [pro_array addObject:pro];
-                }
+                
+#warning -----这里比对有个崩溃，如果 count 加上“”的话，会招致崩溃   2015-08-06 13:05:07.708 MyAimerApp[11103:5066306] -[__NSCFString isEqualToNumber:]: unrecognized selector sent to instance 0x170a07f0
+                //todo  判断如果是 字符串就不处理
+                
+//                if (![[pro objectForKey:@"count"] isKindOfClass:[NSString class]]) {
+                    if (![[pro objectForKey:@"count"] isEqualToNumber:[NSNumber numberWithInt:0]]) {
+                        [pro_array addObject:pro];
+                    }
+//                }
+
             }
             NSString *colorid=[[NSString alloc]init];
             NSString *sizeid=[[NSString alloc]init];

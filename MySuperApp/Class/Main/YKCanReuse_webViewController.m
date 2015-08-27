@@ -15,6 +15,7 @@
 #import "UrlImageView.h"
 #import "BlockAlertView.h"
 #import "ImproveInformationViewController.h"
+#import "ProductDetailViewController.h"
 
 
 @implementation YKCanReuse_webViewController
@@ -156,9 +157,22 @@
     NSString *urlString = requestUrl.absoluteString;
     NSLog(@"html URL:----------%@", urlString);
 
+    NSString *itemcode;
+    NSRange range = [urlString rangeOfString:@"gid="];//判断字符串是否包含
+    if (range.length >0)//包含
+    {
+        itemcode = [urlString substringFromIndex:range.location +range.length];
+        
+        ProductDetailViewController *jumpVC=[[ProductDetailViewController alloc]init];
+        jumpVC.thisProductId= itemcode;
+        jumpVC.ThisPorductName=@"商品详情";
+        jumpVC.source_id=@"1002";
+        jumpVC.isHiddenBar = YES;
+        [self.navigationController pushViewController:jumpVC animated:YES];
+        
+        return NO;
+    }
     
-//    [SBPublicAlert showMBProgressHUD:@"正在请求···" andWhereView:self.view states:NO];
-
     return YES;
 }
 
@@ -168,9 +182,6 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [SBPublicAlert hideMBprogressHUD:self.view];
-    
-    
-    
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
